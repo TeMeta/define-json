@@ -1,0 +1,939 @@
+id: https://cdisc.org/define-json
+name: Define-JSON
+description: >-
+  Data model for supply and demand data contracts to complement CDISC USDM, ODM, and Dataset-JSON.
+  (This LinkML version includes semantics to act as 'Rosetta Stone' for FHIR and OMOP handling)
+license: MIT
+
+prefixes:
+  linkml: https://w3id.org/linkml/
+  skos: http://www.w3.org/2004/02/skos/core#
+  odm: https://cdisc.org/odm2/
+  usdm: https://cdisc.org/usdm/
+  xsd: http://www.w3.org/2001/XMLSchema#
+  fhir: http://hl7.org/fhir/
+  omop: https://omop.org/omop-cdm/
+default_prefix: odm
+
+imports:
+  - linkml:types
+
+classes:
+  IdentifiableElement:
+    abstract: true
+    attributes:
+      # is there a more conventional local identifier than this? 'id' is used in many places but may be ambiguous
+      OID:
+        description: Local unique identifier
+        required: true
+        identifier: true
+        range: string
+      uuid:
+        description: Universal unique identifier
+        range: string
+      name:
+        description: Short name or identifier
+        range: string
+      description:
+        description: Detailed description
+        range: TranslatableText
+      coding:
+        description: Semantic tags for this element
+        range: Coding
+        multivalued: true
+      label:
+        description: Human-readable label
+        range: TranslatableText
+        exact_mappings:
+          - skos:prefLabel
+      aliases:
+        description: >-
+          Alternative name or identifier for this CodeList.
+        range: TranslatableText
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+        exact_mappings:
+          - skos:altLabel
+      # FHIR-inspired metadata attributes
+      meta:
+        description: >-
+          Metadata about this element, such as version, status, and provenance.
+        range: Metadata
+        inlined: true
+
+  GovernedElement:
+    is_a: IdentifiableElement
+    abstract: true
+    description: >-
+      An element that can be governed by collection rules
+    attributes:
+      mandatory:
+        description: >-
+          Is this element required?
+        range: boolean
+      collectionExceptionCondition:
+        description: >-
+          Condition that defines when collection may be exempted
+        range: Condition
+      comment:
+        description: >-
+          Comment on the element, such as a rationale for its inclusion or exclusion.
+        range: Comment
+        multivalued: true
+      # FHIR-inspired provenance extensions
+      recorded:
+        description: When this definition was created or last modified
+        range: datetime
+      agents:
+        description: People or systems involved in defining this item
+        range: User
+        multivalued: true
+      reason:
+        description: Purpose or rationale for this data element
+        range: TranslatableText
+
+  MetaDataVersion:
+    tree_root: true
+    is_a: GovernedElement
+    description: >-
+      A MetaDataVersion element is the container representing a given version of a specification.
+    close_mappings:
+      - usdm:StudyDesign
+    attributes:
+      documents:
+        description: >-
+          References to documents that describe this version of the metadata.
+        range: DocumentReference
+        multivalued: true
+      conditions:
+        description: >-
+          Conditions that apply to this version of the metadata.
+        range: Condition
+        multivalued: true
+      itemGroups:
+        description: >-
+          Item groups defined in this version of the metadata.
+        range: ItemGroup
+        multivalued: true
+      items:
+        description: >-
+          Items defined in this version of the metadata.
+        range: Item
+        multivalued: true
+      methods:
+        description: >-
+          Methods defined in this version of the metadata.
+        range: Method
+        multivalued: true
+      codeLists:
+        description: >-
+          Code lists defined in this version of the metadata.
+        range: CodeList
+        multivalued: true
+      # Events, Planned Visits, Analyses, and other elements can be added here as needed
+
+  Item:
+    is_a: GovernedElement
+    exact_mappings:
+      - odm:ItemRef
+      - odm:ItemDef
+    close_mappings:
+      - fhir:ElementDefinition
+      - fhir:StructureDefinition/variable
+      - omop:Field
+      - omop:DerivedColumn
+    description: >-
+      An Item element defines a data item in a specific context. Combines functionality of ItemDef and ItemRef.
+    attributes:
+      dataType:
+        description: >-
+          The data type of the item.
+        range: DataType
+        required: true
+      length:
+        description: >-
+          The maximum length of the data item in characters.
+        range: integer
+      codeList:
+        description: >-
+          Reference to the CodeList that constrains the item values.
+        range: CodeList
+      method:
+        description: >-
+          Reference to the Method element that describes how to derive this item's value.
+        range: Method
+      role:
+        description: >-
+          Identifies the role of the item within the containing context, taken from the roleCodeList.
+        range: TranslatableText
+      roleCodeList:
+        description: >-
+          Reference to the CodeList that defines the roles for this item.
+        range: CodeList
+      hasNoData:
+        description: >-
+          Set to Yes if this is a manifest and there is no data for this item.
+        range: boolean
+      rangeChecks:
+        description: Range checks applied to this item
+        range: RangeCheck
+        multivalued: true
+      whereClause:
+        description: Conditions for when this item definition applies
+        range: WhereClause
+      sourceItems:
+        description: Source items used in derivation
+        range: SourceItem
+        multivalued: true
+      origin:
+        description: >-
+          The origin of the data
+        range: Origin
+      # For COSMoS semantics
+      unitsItem:
+        description: >-
+          Reference to the item that defines the units of this item.
+        range: Item
+      # Not as sure about these ones
+      crfCompletionInstructions:
+        range: TranslatableText
+        description: >-
+          CRFCompletionInstructions reference: Instructions for the clinical site on how to enter collected information on the CRF.
+      cdiscNotes:
+        range: TranslatableText
+        description: >-
+          CDISCNotes reference: Explanatory text for the variable
+      implementationNotes:
+        description: >-
+          ImplementationNotes reference: Further information, such as rationale and implementation instructions, on how to implement the CRF data collection fields.
+        range: TranslatableText
+      fractionDigits:
+        description: >-
+          For decimal values, the number of digits after the decimal point.
+        range: integer
+      displayFormat:
+        description: >-
+          A display format for the item.
+        range: string
+      significantDigits:
+        description: >-
+          For numeric values, the number of significant digits.
+      range: integer
+
+  ItemGroup:
+    is_a: GovernedElement
+    exact_mappings:
+      - odm:ItemGroupRef
+      - odm:ItemGroupDef
+    close_mappings:
+      - fhir:StructureDefinition
+      - omop:Table
+    description: >-
+      An ItemGroup element describes a collection of items within a specific context.
+      Uses include 
+       - Table / Dataframe
+       - Object / Profile of a FHIR Resource
+       - Data Specialisation of a Biomedical Concept
+       - Section of a form
+    attributes:
+      domain:
+        description: >-
+          Domain abbreviation for the dataset.
+        range: string
+      structure:
+        description: >-
+          Data structure of the item group, indicating how the records are organized.
+          If this is a FHIR Resource, is it nested or flattened?
+          If this is a structured concept, is it a Biomedical/Derivation/Analysis concept?
+        range: TranslatableText
+      isReferenceData:
+        description: >-
+          Set to Yes if this is a reference item group.
+        range: boolean
+      purpose:
+        description: >-
+          Purpose of the item group
+        range: ItemGroupPurpose
+        multivalued: true
+      items:
+        description: Items in this group
+        range: Item
+        multivalued: true
+        close_mappings:
+          - fhir:StructureDefinition/snapshot
+          - fhir:StructureDefinition/differential
+      children:
+        description: >-
+          Child item groups within this item group.
+        range: ItemGroup
+        multivalued: true
+      biomedicalConcept:
+        description: >-
+          Reference to a biomedical concept topic that this item group is a specialization of
+        range: string
+      whereClause:
+        description: >- 
+          If nested in a parent ItemGroup context,
+          conditions for when this group applies
+        range: WhereClause
+        close_mappings:
+          - fhir:StructureDefinition/context
+
+  Coding:
+    description: Semantic coding reference
+    exact_mappings:
+      - odm:Coding
+      - usdm:Code
+      - fhir:Coding
+    close_mappings:
+      - omop:Concept
+    attributes:
+      code:
+        description: >-
+          The code value.
+        range: string
+        required: true
+      codeSystem:
+        description: >-
+          The code system identifier.
+        range: string
+        required: true
+      codeSystemVersion:
+        description: >-
+          The code system version.
+        range: string
+      decode:
+        description: Human-readable meaning
+        range: TranslatableText
+        exact_mappings:
+          - skos:prefLabel
+      exactMatch: 
+        description: SKOS exact match references
+        range: Coding
+        multivalued: true
+        exact_mappings:
+          - skos:exactMatch
+      closeMatch:
+        description: SKOS close match references
+        range: Coding
+        multivalued: true
+        exact_mappings:
+          - skos:closeMatch
+      narrower:
+        description: SKOS narrower concept references
+        range: Coding
+        multivalued: true
+        exact_mappings:
+          - skos:narrowMatch
+      broader:
+        description: SKOS broader concept references
+        range: Coding
+        multivalued: true
+        exact_mappings:
+          - skos:broadMatch
+      related:
+        description: SKOS related concept references
+        range: Coding
+        multivalued: true
+        exact_mappings:
+          - skos:relatedMatch
+
+  WhereClause:
+    is_a: IdentifiableElement
+    related_mappings:
+      - fhir:StructureDefinition/context
+    description: >-
+      A WhereClause element describes conditions under which the containing context applies.
+      When empty, indicates applicability across the entire parent context.
+    attributes:
+      conditions:
+        description: Logical conditions that apply in this context (combined with OR)
+        range: Condition
+        multivalued: true
+
+  Condition:
+    is_a: GovernedElement
+    related_mappings:
+      - fhir:Expression
+      - usdm:Condition
+    description: >-
+      Reusable logical condition with AND logic between components
+    attributes:
+      rangeChecks:
+        description: Range checks that compose this condition (combined with AND)
+        range: RangeCheck
+        multivalued: true
+      implementsCondition:
+        description: Reference to a external (e.g. USDM) condition definition that this implements
+        range: string
+      variables:
+        description: Variables referenced in this condition
+        range: Item
+        multivalued: true
+      formalExpression:
+        description: >-
+          A formal expression for complex checks
+        range: FormalExpression
+        multivalued: true
+
+  RangeCheck:
+    is_a: GovernedElement
+    description: >-
+      A RangeCheck element describes a simple comparison check resolving as boolean.
+      The referenced item's value is compared against a specified value.
+    attributes:
+      comparator:
+        description: >-
+          The type of comparison to be performed.
+        range: Comparator
+        required: true
+      checkValues:
+        description: Values to compare against
+        range: string
+        multivalued: true
+      softHard:
+        description: >-
+          Indicates whether a validation check is an error ("Hard") or a warning ("Soft").
+        range: SoftHard
+      item:
+        description: >-
+          Reference to the Item element whose value is being checked. If not specified, check applies to the enclosing context.
+        range: Item
+      formalExpression:
+        description: >-
+          A formal expression for complex checks
+        range: FormalExpression
+        multivalued: true
+
+  FormalExpression:
+    is_a: IdentifiableElement
+    exact_mappings:
+      - odm:FormalExpression
+      - odm:FormalExpressionRef
+      - fhir:Expression
+    description: >-
+      A FormalExpression defines the execution of a data derivation in a given context.
+    attributes:
+      context:
+        description: >-
+          The specific context within the containing element to which this formal expression applies.
+        exact_mappings:
+          - fhir:Expression.language 
+        range: string
+      expression:
+        description: >-
+          The actual text of the formal expression (renamed from 'code' for disambiguation).
+        range: string
+        required: true
+      returnType:
+        description: Return type of the expression
+        range: string
+      parameters:
+        description: Parameters used in the expression
+        range: Parameter
+        multivalued: true
+      returnValue:
+        description: Return value details
+        range: ReturnValue
+      externalCodeLibs:
+        description: External code libraries referenced
+        range: ExternalCodeLib
+        multivalued: true
+
+  Method:
+    is_a: GovernedElement
+    exact_mappings:
+      - odm:MethodRef
+      - odm:MethodDef
+    close_mappings:
+      - fhir:Expression
+      - omop:Transformation
+    description: >-
+      A Method element describes a reusable derivation method that can be referenced by Items.
+    attributes:
+      type:
+        description: >-
+          The type of method: Computation, Imputation, or Transformation.
+        range: MethodType
+      formalExpressions:
+        description: >-
+          Formal expressions used by this method
+        range: FormalExpression
+        multivalued: true
+      document:
+        description: >-
+          Reference to a document that describes this method in detail.
+        range: DocumentReference
+
+  SourceItem:
+    is_a: IdentifiableElement
+    description: Source of data for an item
+    attributes:
+      item:
+        description: Reference to an item
+        range: Item
+      resource:
+        description: Path to a resource (e.g. File, FHIR datasource) that is the source of this item
+        range: Resource
+        multivalued: true
+      document:
+        description: Reference to an external document
+        range: DocumentReference
+
+  Parameter:
+    is_a: IdentifiableElement
+    description: >-
+      A Parameter element describes a parameter used in a formal expression.
+    attributes:
+      dataType:
+        description: >-
+          The data type of the parameter.
+        range: DataType
+      codeList:
+        description: >-
+          A list of allowed values for the parameter.
+        range: CodeList
+        multivalued: true
+      value:
+        description: >-
+          A specific value for the parameter.
+        range: string
+      items:
+        description: >-
+          A list of item dependencies for the parameter.
+        range: Item
+        multivalued: true
+
+  ReturnValue:
+    is_a: IdentifiableElement
+    description: Return value details for a formal expression
+    attributes:
+      dataType:
+        description: >-
+          The data type of the return value.
+        range: DataType
+      valueList:
+        description: >-
+          A list of possible return values.
+        range: string
+        multivalued: true
+
+  ExternalCodeLib:
+    is_a: IdentifiableElement
+    description: >-
+      An ExternalCodeLib element describes an external code library referenced by a formal expression.
+    attributes:
+      library:
+        description: >-
+          The name of the external code library.
+        range: string
+        required: true
+      version:
+        description: >-
+          The version of the external code library.
+        range: string
+      location:
+        description: >-
+          The location (URL or other reference) of the external code library.
+        range: string
+
+  Origin:
+    is_a: IdentifiableElement
+    description: >-
+      An Origin element describes the source of data for an item.
+    attributes:
+      type:
+        description: >-
+          The type of origin: CRF, Derived, Protocol, eDT, Predecessor.
+        range: OriginType        
+      source:
+        description: >-
+          The source of the data, such as Investigator, Sponsor, Subject, or Vendor.
+        range: OriginSource
+      sourceItems:
+        description: >-
+          Source items for this origin
+        range: SourceItem
+        multivalued: true
+      document:
+        description: >-
+          Reference to a document that describes this origin in detail.
+        range: DocumentReference
+
+  CodeList:
+    is_a: GovernedElement
+    exact_mappings:
+      - odm:CodeList
+      - omop:Vocabulary
+      - fhir:ValueSet
+    description: >-
+      Defines a discrete set of permissible values for an item. This corresponds to the ODM CodeList construct.
+    attributes:
+      dataType:
+        description: >-
+          The data type for the values in the code list.
+        range: DataType
+      formatName:
+        description: >-
+          Name of a standard format definition.
+        range: string
+      codeListItems:
+        description: >-
+          The individual values that make up this CodeList.
+          The type of CodeListItem included determines its behaviour.
+        range:
+          any_of:
+            - Coding
+            - CodeListItem
+            - TranslatableText
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+      externalCodeList:
+        description: >-
+          Reference to a code list that is defined externally to this study.
+        range: Resource
+
+  CodeListItem:
+    is_a: Coding
+    description: >-
+      A structured CodeList member extending the Coding class in context of a CodeList.
+    exact_mappings:
+      - odm:CodeListItem
+    close_mappings:
+      - usdm:AliasCode
+      - fhir:CodeableConcept
+      - omop:Concept
+    attributes:
+      description:
+        description: >-
+          A detailed description of the code (e.g., for documentation purposes).
+        range: TranslatableText
+      aliases:
+        description: Alternative labels for the code (ODM Alias, skos:altLabel)
+        range: TranslatableText
+        multivalued: true
+      weight:
+        description: Numeric significance of the code (e.g., for scoring)
+        range: decimal
+      other:
+        description: >-
+          Flag to indicate that the term represents "other" content.
+        range: boolean
+
+  Comment:
+    is_a: IdentifiableElement
+    description: >-
+      A Comment element contains a description of a comment
+    attributes:
+      documents:
+        description: >-
+          References to documents that contain or are referenced by this comment.
+        range: DocumentReference
+        multivalued: true
+
+  SiteOrSponsorComment:
+    is_a: IdentifiableElement
+    description: >-
+      A Comment element represents feedback from a site or sponsor.
+      Renamed from Comment to avoid confusion with CommentDef.
+    attributes:
+      text:
+        description: >-
+          The comment text.
+        range: TranslatableText
+        required: true
+      sponsor:
+        description: >-
+          Whether this comment is from a sponsor.
+        range: boolean
+
+Resource:
+  description: Represents a reference to a resource
+  is_a: IdentifiableElement
+  attributes:
+    resourceType:
+      description: Type of resource (e.g., "Patient", "Practitioner", "Organization")"
+      range: string
+      required: false
+    attribute:
+      description: Resource attribute name
+      range: string
+    href:
+      description: Machine-readable instructions to obtain the resource e.g. FHIR path, URL
+      range: string
+      required: false
+      
+DocumentReference:
+  description: A comprehensive reference to an external document, combining elements from ODM and FHIR
+  is_a: IdentifiableElement
+  attributes:
+    # Core document reference attributes
+    title:
+      description: Document title
+      range: string
+    href:
+      description: URL, URI, or relative path to the referenced document
+      range: string
+    pages: 
+      description: Reference to specific pages in a PDF document
+      range: positiveInteger
+      multivalued: true
+      required: false
+      
+    # Content metadata attributes
+    contentType:
+      description: MIME type of the document
+      range: string
+      required: false
+    language:
+      description: The human language of the content
+      range: string
+      required: false
+    size:
+      description: Size of the document in bytes
+      range: integer
+      required: false
+    hash:
+      description: Hash of document content for integrity verification
+      range: string
+      required: false
+    
+    # FHIR compatibility attributes
+    resourceType:
+      description: Indicates the FHIR resource type (typically "DocumentReference")
+      range: string
+      required: false
+    status:
+      description: The status of this document reference (current | superseded | entered-in-error)
+      range: string
+      required: false
+    docStatus:
+      description: Status of the underlying document (preliminary | final | amended | entered-in-error)
+      range: string
+      required: false
+    category:
+      description: Categorization of document (e.g., clinical, administrative)
+      range: string
+      multivalued: true
+      required: false
+    relationship:
+      description: Relationship to the referencing entity
+      range: string
+      required: false
+    description:
+      description: Human-readable description of the document
+      range: string
+      required: false
+    
+    # Authentication and authorship
+    author:
+      description: Who authored the document
+      range: Resource
+      required: false
+      multivalued: true
+    authenticator:
+      description: Who/what authenticated the document
+      range: Resource
+      required: false
+    securityLabel:
+      description: Security classification of the document
+      range: string
+      required: false
+      multivalued: true
+      
+    # Context and timing
+    creationContext:
+      description: Clinical context in which the document was created
+      range: Resource
+      required: false
+    versionIdentifier:
+      description: Version of the referenced document
+      range: string
+      required: false
+    validityPeriod:
+      description: Time period during which the document is valid
+      range: Period
+      required: false
+    creation:
+      description: Document creation date
+      range: dateTime
+      required: false
+
+# New classes for FHIR compatibility
+Period:
+  description: A time period with start and end timestamps
+  is_a: Element
+  attributes:
+    start:
+      description: Start date/time
+      range: dateTime
+      required: false
+    end:
+      description: End date/time
+      range: dateTime
+      required: false
+
+Metadata:
+  description: Container for metadata about an element
+  attributes:
+    versionId:
+      description: Version identifier for this specific version of the resource
+      range: string
+      required: false
+    lastUpdated:
+      description: When the resource was last updated
+      range: dateTime
+      required: false
+    source:
+      description: Source system that created or updated the element
+      range: string
+      required: false
+    profile:
+      description: Profiles this resource claims to conform to
+      range: string
+      multivalued: true
+      required: false
+    security:
+      description: Security tags applied to this resource
+      range: Coding
+      multivalued: true
+      required: false
+    tag:
+      description: Tags applied to this resource
+      range: Coding
+      multivalued: true
+      required: false
+
+  # TODO : New classes added for OMOP compatibility
+
+  # TODO : New classes added for DCAT / DPROD compatibility
+
+types:
+  TranslatableText:
+    description: >-
+      Text that can be represented in multiple languages.
+      Can be either a simple string or a list of translation objects.
+      { "@language": "en", "@value": "Hello" }
+    typeof: string
+    # In practice this would be implemented as a union type of string | TranslationObject[]
+
+enums:
+  Comparator:
+    description: >-
+      The type of comparison for a RangeCheck.
+    permissible_values:
+      LT:
+        description: Less than
+      LE:
+        description: Less than or equal
+      GT:
+        description: Greater than
+      GE:
+        description: Greater than or equal
+      EQ:
+        description: Equal
+      NE:
+        description: Not equal
+      IN:
+        description: In set
+      NOTIN:
+        description: Not in set
+
+  SoftHard:
+    description: >-
+      Indicates whether a validation check is an error or a warning.
+    permissible_values:
+      Soft:
+        description: Warning
+      Hard:
+        description: Error
+
+  MethodType:
+    description: >-
+      The type of method.
+    permissible_values:
+      Computation:
+        description: >-
+          Mathematical computation using values of other items.
+      Imputation:
+        description: >-
+          Assignment of a value based on a estimation (imputation) procedure.
+      Transformation:
+        description: >-
+          Transformation of the item's value according to a standard algorithm, such as a change in units.
+
+  DataType:
+    description: >-
+      The data type for an item.
+    permissible_values:
+      text:
+        description: >-
+          Character text with no length restriction.
+      integer:
+        description: >-
+          Integer numbers.
+      float:
+        description: >-
+          Floating-point numbers (decimals).
+      date:
+        description: >-
+          Calendar date.
+      time:
+        description: >-
+          Time of day.
+      datetime:
+        description: >-
+          Calendar date and time of day.
+      boolean:
+        description: >-
+          Logical values (true/false).
+      double:
+        description: >-
+          Double-precision floating-point numbers.
+      hex:
+        description: >-
+          Hexadecimal number.
+      base64:
+        description: >-
+          Base-64 encoded binary data.
+      hexBinary:
+        description: >-
+          Hexadecimal encoded binary data.
+
+  OriginType:
+    description: >-
+      The type of origin for a data item.
+    permissible_values:
+      CRF:  
+        description: >-
+          Case Report Form.
+      Derived:
+        description: >-
+          Derived from other items.
+      Protocol:
+        description: >-
+          Protocol-defined data.
+      eDT:
+        description: >-
+          Electronic data transfer.
+      Predecessor:
+        description: >-
+          From a predecessor study.
+  
+  OriginSource:
+    description: Enumeration used in source
+    permissible_values:
+      Investigator:
+        text: Investigator
+        meaning: ncit:C25936
+      Sponsor:
+        text: Sponsor
+        meaning: ncit:C70793
+      Subject:
+        text: Subject
+        meaning: ncit:C41189
+      Vendor:
+        text: Vendor
+        meaning: ncit:C68608
