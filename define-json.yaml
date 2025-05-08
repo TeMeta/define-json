@@ -13,6 +13,7 @@ prefixes:
   xsd: http://www.w3.org/2001/XMLSchema#
   fhir: http://hl7.org/fhir/
   omop: https://omop.org/omop-cdm/
+  qb: http://purl.org/linked-data/cube#
 default_prefix: odm
 
 imports:
@@ -98,8 +99,10 @@ classes:
     is_a: GovernedElement
     description: >-
       A MetaDataVersion element is the container representing a given version of a specification.
+      It links to a particular usage context e.g. study, dataset, or a data collection instrument.
     close_mappings:
       - usdm:StudyDesign
+      - qb:Dataset
     attributes:
       documents:
         description: >-
@@ -139,10 +142,16 @@ classes:
       - odm:ItemRef
       - odm:ItemDef
     close_mappings:
+      - qb:ComponentSpecification
       - fhir:ElementDefinition
+    narrow_mappings:
       - fhir:StructureDefinition/variable
       - omop:Field
       - omop:DerivedColumn
+      - qb:MeasureProperty
+      - qb:AttributeProperty
+      - qb:ComponentProperty
+      - usdm:BiomedicalConceptProperty
     description: >-
       An Item element defines a data item in a specific context. Combines functionality of ItemDef and ItemRef.
     attributes:
@@ -190,7 +199,7 @@ classes:
         description: >-
           The origin of the data
         range: Origin
-      # For COSMoS semantics
+      # For COSMoS semantics - this might be superseded by Relationship class
       unitsItem:
         description: >-
           Reference to the item that defines the units of this item.
@@ -208,7 +217,7 @@ classes:
         description: >-
           ImplementationNotes reference: Further information, such as rationale and implementation instructions, on how to implement the CRF data collection fields.
         range: TranslatableText
-      fractionDigits:
+      decimalDigits:
         description: >-
           For decimal values, the number of digits after the decimal point.
         range: integer
@@ -226,9 +235,15 @@ classes:
     exact_mappings:
       - odm:ItemGroupRef
       - odm:ItemGroupDef
-    close_mappings:
+    narrow_mappings:
       - fhir:StructureDefinition
+      - qb:DataStructureDefinition
       - omop:Table
+    related_mappings:
+      - usdm:BiomedicalConcept
+      - usdm:Procedure
+      - usdm:Indication
+      - usdm:Event
     description: >-
       An ItemGroup element describes a collection of items within a specific context.
       Uses include 
@@ -288,6 +303,7 @@ classes:
       - fhir:Coding
     close_mappings:
       - omop:Concept
+      - skos:Concept
     attributes:
       code:
         description: >-
@@ -567,6 +583,9 @@ classes:
       - odm:CodeList
       - omop:Vocabulary
       - fhir:ValueSet
+    close_mappings:
+      - skos:Collection
+      - qb:CodeList
     description: >-
       Defines a discrete set of permissible values for an item. This corresponds to the ODM CodeList construct.
     attributes:
@@ -582,11 +601,10 @@ classes:
         description: >-
           The individual values that make up this CodeList.
           The type of CodeListItem included determines its behaviour.
-        range:
-          any_of:
-            - Coding
-            - CodeListItem
-            - TranslatableText
+        any_of:
+          - range: Coding
+          - range: CodeListItem
+          - range: TranslatableText
         inlined: true
         inlined_as_list: true
         multivalued: true
@@ -627,6 +645,11 @@ classes:
     description: >-
       A Comment element contains a description of a comment
     attributes:
+      text:
+        description: >-
+          The comment text.
+        range: TranslatableText
+        required: true
       documents:
         description: >-
           References to documents that contain or are referenced by this comment.
@@ -649,166 +672,295 @@ classes:
           Whether this comment is from a sponsor.
         range: boolean
 
-Resource:
-  description: Represents a reference to a resource
-  is_a: IdentifiableElement
-  attributes:
-    resourceType:
-      description: Type of resource (e.g., "Patient", "Practitioner", "Organization")"
-      range: string
-      required: false
-    attribute:
-      description: Resource attribute name
-      range: string
-    href:
-      description: Machine-readable instructions to obtain the resource e.g. FHIR path, URL
-      range: string
-      required: false
+  Resource:
+    description: Represents a reference to a resource
+    is_a: IdentifiableElement
+    attributes:
+      resourceType:
+        description: Type of resource (e.g., "Patient", "Practitioner", "Organization")"
+        range: string
+        required: false
+      attribute:
+        description: Resource attribute name
+        range: string
+      href:
+        description: Machine-readable instructions to obtain the resource e.g. FHIR path, URL
+        range: string
+        required: false
       
-DocumentReference:
-  description: A comprehensive reference to an external document, combining elements from ODM and FHIR
-  is_a: IdentifiableElement
-  attributes:
-    # Core document reference attributes
-    title:
-      description: Document title
-      range: string
-    href:
-      description: URL, URI, or relative path to the referenced document
-      range: string
-    pages: 
-      description: Reference to specific pages in a PDF document
-      range: positiveInteger
-      multivalued: true
-      required: false
+  DocumentReference:
+    description: A comprehensive reference to an external document, combining elements from ODM and FHIR
+    is_a: IdentifiableElement
+    attributes:
+      # Core document reference attributes
+      title:
+        description: Document title
+        range: string
+      href:
+        description: URL, URI, or relative path to the referenced document
+        range: string
+      pages: 
+        description: Reference to specific pages in a PDF document
+        range: integer
+        multivalued: true
+        required: false
+        
+      # Content metadata attributes
+      contentType:
+        description: MIME type of the document
+        range: string
+        required: false
+      language:
+        description: The human language of the content
+        range: string
+        required: false
+      size:
+        description: Size of the document in bytes
+        range: integer
+        required: false
+      hash:
+        description: Hash of document content for integrity verification
+        range: string
+        required: false
       
-    # Content metadata attributes
-    contentType:
-      description: MIME type of the document
-      range: string
-      required: false
-    language:
-      description: The human language of the content
-      range: string
-      required: false
-    size:
-      description: Size of the document in bytes
-      range: integer
-      required: false
-    hash:
-      description: Hash of document content for integrity verification
-      range: string
-      required: false
-    
-    # FHIR compatibility attributes
-    resourceType:
-      description: Indicates the FHIR resource type (typically "DocumentReference")
-      range: string
-      required: false
-    status:
-      description: The status of this document reference (current | superseded | entered-in-error)
-      range: string
-      required: false
-    docStatus:
-      description: Status of the underlying document (preliminary | final | amended | entered-in-error)
-      range: string
-      required: false
-    category:
-      description: Categorization of document (e.g., clinical, administrative)
-      range: string
-      multivalued: true
-      required: false
-    relationship:
-      description: Relationship to the referencing entity
-      range: string
-      required: false
-    description:
-      description: Human-readable description of the document
-      range: string
-      required: false
-    
-    # Authentication and authorship
-    author:
-      description: Who authored the document
-      range: Resource
-      required: false
-      multivalued: true
-    authenticator:
-      description: Who/what authenticated the document
-      range: Resource
-      required: false
-    securityLabel:
-      description: Security classification of the document
-      range: string
-      required: false
-      multivalued: true
+      # FHIR compatibility attributes
+      resourceType:
+        description: Indicates the FHIR resource type (typically "DocumentReference")
+        range: string
+        required: false
+      status:
+        description: The status of this document reference (current | superseded | entered-in-error)
+        range: string
+        required: false
+      docStatus:
+        description: Status of the underlying document (preliminary | final | amended | entered-in-error)
+        range: string
+        required: false
+      category:
+        description: Categorization of document (e.g., clinical, administrative)
+        range: string
+        multivalued: true
+        required: false
+      relationship:
+        description: Relationship to the referencing entity
+        range: string
+        required: false
+      description:
+        description: Human-readable description of the document
+        range: string
+        required: false
       
-    # Context and timing
-    creationContext:
-      description: Clinical context in which the document was created
-      range: Resource
-      required: false
-    versionIdentifier:
-      description: Version of the referenced document
-      range: string
-      required: false
-    validityPeriod:
-      description: Time period during which the document is valid
-      range: Period
-      required: false
-    creation:
-      description: Document creation date
-      range: dateTime
-      required: false
+      # Authentication and authorship
+      author:
+        description: Who authored the document
+        range: Resource
+        required: false
+        multivalued: true
+      authenticator:
+        description: Who/what authenticated the document
+        range: Resource
+        required: false
+      securityLabel:
+        description: Security classification of the document
+        range: string
+        required: false
+        multivalued: true
+        
+      # Context and timing
+      creationContext:
+        description: Clinical context in which the document was created
+        range: Resource
+        required: false
+      versionIdentifier:
+        description: Version of the referenced document
+        range: string
+        required: false
+      validityPeriod:
+        description: Time period during which the document is valid
+        range: Period
+        required: false
+      creation:
+        description: Document creation date
+        range: dateTime
+        required: false
 
-# New classes for FHIR compatibility
-Period:
-  description: A time period with start and end timestamps
-  is_a: Element
-  attributes:
-    start:
-      description: Start date/time
-      range: dateTime
-      required: false
-    end:
-      description: End date/time
-      range: dateTime
-      required: false
+  # New classes for Data Cube and Analysis Concept compatibility
+  DataCubeDefinition:
+    is_a: ItemGroup
+    exact_mappings:
+      - qb:DataStructureDefinition
+    description: >-
+      A dataset demanded by a specific Analysis
+    attributes:
+      dimensions:
+        range: DimensionProperty
+        multivalued: true
+      measures:
+        range: MeasureProperty
+        multivalued: true
+      attributes:
+        range: AttributeProperty
+        multivalued: true
 
-Metadata:
-  description: Container for metadata about an element
-  attributes:
-    versionId:
-      description: Version identifier for this specific version of the resource
-      range: string
-      required: false
-    lastUpdated:
-      description: When the resource was last updated
-      range: dateTime
-      required: false
-    source:
-      description: Source system that created or updated the element
-      range: string
-      required: false
-    profile:
-      description: Profiles this resource claims to conform to
-      range: string
-      multivalued: true
-      required: false
-    security:
-      description: Security tags applied to this resource
-      range: Coding
-      multivalued: true
-      required: false
-    tag:
-      description: Tags applied to this resource
-      range: Coding
-      multivalued: true
-      required: false
+  Timing:
+    is_a: IdentifiableElement
+    description: >-
+      A timing element describes the timing of an event or occurrence.
+      It can be absolute (specific date/time), relative (duration), or nominal (event-based).
+    exact_mappings:
+      - usdm:Timing
+    broad_mappings:
+      - fhir:Timing
+    narrow_mappings:
+      - omop:Observation_period
+      - omop:Drug_era
+      - omop:Condition_era
+      - omop:Procedure_era
+      - fhir:Period
+      - fhir:Age
+      - fhir:Duration
+    attributes:
+      type:
+        description: >-
+          The type of timing: Fixed, Before (Relative), or After (Relative).
+        range: TimingType
+        required: true
+      isNominal:
+        description: >-
+          Indicates whether the timing is nominal (event-based) or not.
+        range: boolean
+      value:
+        description: >-
+          The value of the timing, which can be a date/time, duration, or event reference.
+        range: string
+        required: true
+      relativeTo:
+        description: >-
+          Reference to the event or occurrence that this timing is relative to.
+        range: NominalOccurrence
+      relativeFrom:
+        description: >-
+          Reference to the event or occurrence that this timing is relative to.
+        range: NominalOccurrence
+      windowLower:
+        description: Start date/time of the timing
+        range: dateTime
+      windowUpper:
+        description: End date/time of the timing
+        range: dateTime
+      recalled:
+        description: >-
+          Indicates whether the timing is recalled or not (recalled timings are less reliable)
+        range: boolean
+      frequency:
+        description: >-
+          Frequency. Use dose frequency terminology e.g. "BID" if applicable
+        range: string
 
-  # TODO : New classes added for OMOP compatibility
+  NominalOccurrence:
+    is_a: GovernedElement
+    narrow_mappings:
+      - usdm:ScheduledInstance
+      - usdm:Encounter
+      - fhir:PlanDefinition.action
+      - omop:Visit_occurrence
+      - omop:Condition_occurrence
+      - omop:Procedure_occurrence
+    attributes:
+      timing:
+        description: >-
+          A named event reference, that can nest further named timing references
+        range: Timing
+        required: true
+      event:
+        description: >-
+          The ID of the event in a Schedule
+        range: string
+        required: false
+      start:
+        description: >-
+          The start date/time of the occurrence.
+        range: NominalOccurrence
+      condition: 
+        description: >-
+          A condition that must be met for this occurrence to be valid.
+        range: Condition
+        multivalued: true
 
-  # TODO : New classes added for DCAT / DPROD compatibility
+  MeasureProperty:
+    is_a: Item
+    exact_mappings:
+      - qb:MeasureProperty
+    description: >-
+      A MeasureProperty element describes a measure property in a data cube.
+    attributes:
+      missingHandling:
+        description: >-
+          The method for handling missing values in the measure property.
+        range: Method
+      imputation:
+        description: >-
+          The imputation method used for the measure property.
+        range: Method
+
+  DimensionProperty:
+    is_a: Item
+    exact_mappings:
+      - qb:DimensionProperty
+    description: >-
+      A DimensionProperty element describes a dimension property in a data cube.
+    attributes:
+      missingHandling:
+        description: >-
+          The method for handling missing values in the measure property.
+        range: Method
+      imputation:
+        description: >-
+          The imputation method used for the measure property.
+        range: Method
+
+  AttributeProperty:
+    is_a: Item
+    exact_mappings:
+      - qb:AttributeProperty
+    description: >-
+      An AttributeProperty element describes an attribute property in a data cube.
+
+  # New classes for FHIR compatibility
+  Metadata:
+    description: Container for metadata about an element
+    attributes:
+      versionId:
+        description: Version identifier for this specific version of the resource
+        range: string
+        required: false
+      lastUpdated:
+        description: When the resource was last updated
+        range: dateTime
+        required: false
+      source:
+        description: Source system that created or updated the element
+        range: string
+        required: false
+      profile:
+        description: Profiles this resource claims to conform to
+        range: string
+        multivalued: true
+        required: false
+      security:
+        description: Security tags applied to this resource
+        range: Coding
+        multivalued: true
+        required: false
+      tag:
+        description: Tags applied to this resource
+        range: Coding
+        multivalued: true
+        required: false
+
+    # TODO : New classes added for OMOP compatibility
+
+    # TODO : New classes added for DCAT / DPROD compatibility
 
 types:
   TranslatableText:
@@ -937,3 +1089,59 @@ enums:
       Vendor:
         text: Vendor
         meaning: ncit:C68608
+
+  ItemGroupRoles:
+    description: >-
+      The role of an item group within a specific context.
+    permissible_values:
+      Table:
+        description: >-
+          A table or data frame.
+      Object:
+        description: >-
+          An object or profile of a FHIR resource.
+      DataSpecialization:
+        description: >-
+          A data specialization of a biomedical concept.
+      Section:
+        description: >-
+          A section of a form.
+  
+  ItemRoles:
+    description: >-
+      The role of an item within a specific context.
+    permissible_values:
+      Variable:
+        description: >-
+          A variable in a table or data cube.
+        broad_mappings:
+          - qb:MeasureProperty
+      Attribute:
+        description: >-
+          An attribute of an object or resource.
+        exact_mappings:
+          - qb:AttributeProperty
+      Field:
+        description: >-
+          A field in a form or document.
+        broad_mappings:
+          - qb:ComponentProperty
+      Dimension:
+        description: >-
+          A categorical dimension used to slice the dataset.
+        exact_mappings:
+          - qb:DimensionProperty
+
+  TimingType:
+    description: >-
+      CDISC Timing Type values indicating the temporal relationship of an observation to a reference point.
+    permissible_values:
+      After:
+        text: After
+        meaning: ncit:C201356
+      Before:
+        text: Before
+        meaning: ncit:C201357
+      Fixed:
+        text: Fixed
+        meaning: ncit:C201358
