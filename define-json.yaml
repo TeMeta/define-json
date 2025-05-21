@@ -94,6 +94,41 @@ classes:
         description: Purpose or rationale for this data element
         range: TranslatableText
 
+  ReifiedConcept:
+    is_a: GovernedElement
+    description: >-
+      Canonical information layer showing how different data implementations (Items and ItemGroups)
+      represent the same underlying meanings, by making abstract concepts explicit and referenceable.
+      These objects are approximated as star schemas i.e. a central object with multiple properties.
+    narrow_mappings:
+      - usdm:BiomedicalConcept
+      - usdm:AnalysisConcept
+      - usdm:DerivationConcept
+    attributes:
+      properties:
+        description: >-
+          Properties of the reified object, which can be other governed elements or simple values.
+        range: ConceptProperty
+        multivalued: true
+  
+  ConceptProperty:
+    is_a: GovernedElement
+    narrow_mappings:
+      - usdm:BiomedicalConceptProperty
+      - usdm:DerivationConceptProperty
+      - usdm:AnalysisConceptProperty
+    description: >-
+      A reification of a property concept in the context of its containing topic concept.
+    attributes:
+      isEnabled:
+        description: >-
+          Indicates whether this property is enabled for the concept.
+        range: boolean
+      codeList:
+        description: >-
+          Reference to a CodeList that constrains the values of this property.
+        range: CodeList
+
   MetaDataVersion:
     tree_root: true
     is_a: GovernedElement
@@ -151,7 +186,10 @@ classes:
       - qb:MeasureProperty
       - qb:AttributeProperty
       - qb:ComponentProperty
+    related_mappings:
       - usdm:BiomedicalConceptProperty
+      - usdm:DerivationConceptProperty
+      - usdm:AnalysisConceptProperty
     description: >-
       An Item element defines a data item in a specific context. Combines functionality of ItemDef and ItemRef.
     attributes:
@@ -199,6 +237,10 @@ classes:
         description: >-
           The origin of the data
         range: Origin
+      conceptProperty:
+        description: >-
+          Reference to a abstract concept property that this item is a specialization / instance of.
+        range: ConceptProperty
       # For COSMoS semantics - this might be superseded by Relationship class
       unitsItem:
         description: >-
@@ -285,8 +327,8 @@ classes:
         multivalued: true
       biomedicalConcept:
         description: >-
-          Reference to a biomedical concept topic that this item group is a specialization of
-        range: string
+          Reference to a abstract concept topic that this item group is a specialization of
+        range: ReifiedConcept
       whereClause:
         description: >- 
           If nested in a parent ItemGroup context,
@@ -586,6 +628,8 @@ classes:
     close_mappings:
       - skos:Collection
       - qb:CodeList
+    related_mappings:
+      - usdm:BiomedicalConceptProperty/responseCodes
     description: >-
       Defines a discrete set of permissible values for an item. This corresponds to the ODM CodeList construct.
     attributes:
@@ -621,6 +665,7 @@ classes:
       - odm:CodeListItem
     close_mappings:
       - usdm:AliasCode
+      - usdm:ResponseCode
       - fhir:CodeableConcept
       - omop:Concept
     attributes:
@@ -862,7 +907,7 @@ classes:
     narrow_mappings:
       - usdm:ScheduledInstance
       - usdm:Encounter
-      - fhir:PlanDefinition.action
+      - fhir:PlanDefinition/action
       - omop:Visit_occurrence
       - omop:Condition_occurrence
       - omop:Procedure_occurrence
@@ -967,7 +1012,7 @@ types:
     description: >-
       Text that can be represented in multiple languages.
       Can be either a simple string or a list of translation objects.
-      { "@language": "en", "@value": "Hello" }
+      { "@language": "en", "@value": "Hello" } 
     typeof: string
     # In practice this would be implemented as a union type of string | TranslationObject[]
 
