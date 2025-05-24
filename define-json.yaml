@@ -2,15 +2,16 @@ id: https://cdisc.org/define-json
 name: Define-JSON
 description: >-
   Data model for supply and demand data contracts to complement CDISC USDM, ODM, and Dataset-JSON.
-  (This LinkML version includes semantics to act as 'Rosetta Stone' for FHIR and OMOP handling)
+  (This LinkML version includes semantics to act as 'Rosetta Stone' for FHIR, OMOP, RDF, and CDISC)
 license: MIT
 
 prefixes:
   linkml: https://w3id.org/linkml/
   skos: http://www.w3.org/2004/02/skos/core#
+  xsd: http://www.w3.org/2001/XMLSchema#
   odm: https://cdisc.org/odm2/
   usdm: https://cdisc.org/usdm/
-  xsd: http://www.w3.org/2001/XMLSchema#
+  sdtm: https://cdisc.org/cosmos/sdtm_v1.0#
   fhir: http://hl7.org/fhir/
   omop: https://omop.org/omop-cdm/
   qb: http://purl.org/linked-data/cube#
@@ -25,32 +26,36 @@ classes:
     attributes:
       # is there a more conventional local identifier than this? 'id' is used in many places but may be ambiguous
       OID:
-        description: Local unique identifier
-        required: true
+        description: >-
+          Local identifier within this study/context. 
+          Use CDISC OID format for regulatory submissions,
+          or simple strings for internal use.
         identifier: true
         range: string
+        pattern: "^[A-Za-z][A-Za-z0-9._-]*$"
+      # URI vs UUID?
       uuid:
         description: Universal unique identifier
         range: string
       name:
-        description: Short name or identifier
+        description: Short name or identifier, used for field names
         range: string
       description:
-        description: Detailed description
-        range: TranslatableText
+        description: Detailed description, shown in tooltips
+        range: TranslatedText
       coding:
         description: Semantic tags for this element
         range: Coding
         multivalued: true
       label:
-        description: Human-readable label
-        range: TranslatableText
+        description: Human-readable label, shown in UIs
+        range: TranslatedText
         exact_mappings:
           - skos:prefLabel
       aliases:
         description: >-
           Alternative name or identifier for this CodeList.
-        range: TranslatableText
+        range: TranslatedText
         multivalued: true
         inlined: true
         inlined_as_list: true
@@ -92,7 +97,7 @@ classes:
         multivalued: true
       reason:
         description: Purpose or rationale for this data element
-        range: TranslatableText
+        range: TranslatedText
 
   ReifiedConcept:
     is_a: GovernedElement
@@ -135,9 +140,9 @@ classes:
     description: >-
       A MetaDataVersion element is the container representing a given version of a specification.
       It links to a particular usage context e.g. study, dataset, or a data collection instrument.
+      All IdentifiableElements in scope are registered here for reuse
     close_mappings:
       - usdm:StudyDesign
-      - qb:Dataset
     attributes:
       documents:
         description: >-
@@ -148,6 +153,11 @@ classes:
         description: >-
           Conditions that apply to this version of the metadata.
         range: Condition
+        multivalued: true
+      whereClauses:
+        description: >-
+          Data contexts that apply to this version of the metadata.
+        range: WhereClause
         multivalued: true
       itemGroups:
         description: >-
@@ -169,10 +179,28 @@ classes:
           Code lists defined in this version of the metadata.
         range: CodeList
         multivalued: true
-      # Events, Planned Visits, Analyses, and other elements can be added here as needed
+      codings:
+        description: Codings defined in this version of the metadata.
+        range: Coding
+        multivalued: true
+      mappings:
+        description: Coding mappings in this version of the metadata. 
+        range: CodingMapping
+        multivalued: true
+      concepts:
+        description: Structured Concepts defined in this version of the metadata.
+        range: ReifiedConcept
+        multivalued: true
+      relationships:
+        description: >-
+          Relationships between items, item groups, and other elements in this version of the metadata.
+        range: Relationship
+        multivalued: true
 
   Item:
     is_a: GovernedElement
+    description: >-
+      A data item in a specific context.
     exact_mappings:
       - odm:ItemRef
       - odm:ItemDef
@@ -190,8 +218,6 @@ classes:
       - usdm:BiomedicalConceptProperty
       - usdm:DerivationConceptProperty
       - usdm:AnalysisConceptProperty
-    description: >-
-      An Item element defines a data item in a specific context. Combines functionality of ItemDef and ItemRef.
     attributes:
       dataType:
         description: >-
@@ -213,7 +239,7 @@ classes:
       role:
         description: >-
           Identifies the role of the item within the containing context, taken from the roleCodeList.
-        range: TranslatableText
+        range: TranslatedText
       roleCodeList:
         description: >-
           Reference to the CodeList that defines the roles for this item.
@@ -248,17 +274,17 @@ classes:
         range: Item
       # Not as sure about these ones
       crfCompletionInstructions:
-        range: TranslatableText
+        range: TranslatedText
         description: >-
           CRFCompletionInstructions reference: Instructions for the clinical site on how to enter collected information on the CRF.
       cdiscNotes:
-        range: TranslatableText
+        range: TranslatedText
         description: >-
           CDISCNotes reference: Explanatory text for the variable
       implementationNotes:
         description: >-
           ImplementationNotes reference: Further information, such as rationale and implementation instructions, on how to implement the CRF data collection fields.
-        range: TranslatableText
+        range: TranslatedText
       decimalDigits:
         description: >-
           For decimal values, the number of digits after the decimal point.
@@ -270,29 +296,30 @@ classes:
       significantDigits:
         description: >-
           For numeric values, the number of significant digits.
-      range: integer
+        range: integer
 
   ItemGroup:
     is_a: GovernedElement
-    exact_mappings:
-      - odm:ItemGroupRef
-      - odm:ItemGroupDef
-    narrow_mappings:
-      - fhir:StructureDefinition
-      - qb:DataStructureDefinition
-      - omop:Table
-    related_mappings:
-      - usdm:BiomedicalConcept
-      - usdm:Procedure
-      - usdm:Indication
-      - usdm:Event
     description: >-
-      An ItemGroup element describes a collection of items within a specific context.
+      An ItemGroup element describes a specific context as a collection.
       Uses include 
        - Table / Dataframe
        - Object / Profile of a FHIR Resource
        - Data Specialisation of a Biomedical Concept
        - Section of a form
+    exact_mappings:
+      - odm:ItemGroupRef
+      - odm:ItemGroupDef
+    narrow_mappings:
+      - fhir:StructureDefinition
+      - omop:Table
+      - qb:Dataset
+    related_mappings:
+      - usdm:BiomedicalConcept
+      - usdm:Procedure
+      - usdm:Indication
+      - usdm:Event
+      - qb:DataStructureDefinition
     attributes:
       domain:
         description: >-
@@ -303,7 +330,7 @@ classes:
           Data structure of the item group, indicating how the records are organized.
           If this is a FHIR Resource, is it nested or flattened?
           If this is a structured concept, is it a Biomedical/Derivation/Analysis concept?
-        range: TranslatableText
+        range: TranslatedText
       isReferenceData:
         description: >-
           Set to Yes if this is a reference item group.
@@ -325,7 +352,7 @@ classes:
           Child item groups within this item group.
         range: ItemGroup
         multivalued: true
-      biomedicalConcept:
+      implementsConcept:
         description: >-
           Reference to a abstract concept topic that this item group is a specialization of
         range: ReifiedConcept
@@ -346,7 +373,16 @@ classes:
     close_mappings:
       - omop:Concept
       - skos:Concept
-    attributes:
+    # Do we need any of these types of structures in the model?
+    # related_mappings:
+    #   - usdm:AliasCode
+    #   - linkml:StructuredAlias
+    #   - skosxl:Label
+    attributes: 
+      uuid:
+        description: Universal uniq ue identifier
+        range: string
+        identifier: true
       code:
         description: >-
           The code value.
@@ -363,42 +399,33 @@ classes:
         range: string
       decode:
         description: Human-readable meaning
-        range: TranslatableText
+        range: TranslatedText
         exact_mappings:
           - skos:prefLabel
-      exactMatch: 
-        description: SKOS exact match references
-        range: Coding
+      mappings:
+        description: Equivalent codings in other systems
+        range: CodingMapping
         multivalued: true
-        exact_mappings:
-          - skos:exactMatch
-      closeMatch:
-        description: SKOS close match references
-        range: Coding
-        multivalued: true
-        exact_mappings:
-          - skos:closeMatch
-      narrower:
-        description: SKOS narrower concept references
-        range: Coding
-        multivalued: true
-        exact_mappings:
-          - skos:narrowMatch
-      broader:
-        description: SKOS broader concept references
-        range: Coding
-        multivalued: true
-        exact_mappings:
-          - skos:broadMatch
-      related:
-        description: SKOS related concept references
-        range: Coding
-        multivalued: true
-        exact_mappings:
-          - skos:relatedMatch
 
+  CodingMapping:
+    description: Mapping between codings
+    attributes:
+      target:
+        description: Target coding
+        range: Coding
+        required: true
+      relationship:
+        description: Type of mapping relationship
+        range: AliasPredicateEnum
+        required: true
+      confidence:
+        description: Confidence in the mapping (0.0-1.0)
+        range: float
+    
   WhereClause:
     is_a: IdentifiableElement
+    exact_mappings:
+      - qb:Slice
     related_mappings:
       - fhir:StructureDefinition/context
     description: >-
@@ -412,9 +439,11 @@ classes:
 
   Condition:
     is_a: GovernedElement
+    exact_mappings:
+      - odm:ConditionDef
+      - usdm:Condition
     related_mappings:
       - fhir:Expression
-      - usdm:Condition
     description: >-
       Reusable logical condition with AND logic between components
     attributes:
@@ -425,9 +454,11 @@ classes:
       implementsCondition:
         description: Reference to a external (e.g. USDM) condition definition that this implements
         range: string
-      variables:
-        description: Variables referenced in this condition
-        range: Item
+      dimensions:
+        exact_mappings:
+          - qb:SliceKey
+        description: Items referenced in this condition
+        range: DimensionProperty
         multivalued: true
       formalExpression:
         description: >-
@@ -477,7 +508,7 @@ classes:
         description: >-
           The specific context within the containing element to which this formal expression applies.
         exact_mappings:
-          - fhir:Expression.language 
+          - fhir:Expression/language 
         range: string
       expression:
         description: >-
@@ -648,7 +679,7 @@ classes:
         any_of:
           - range: Coding
           - range: CodeListItem
-          - range: TranslatableText
+          - range: TranslatedText
         inlined: true
         inlined_as_list: true
         multivalued: true
@@ -672,10 +703,10 @@ classes:
       description:
         description: >-
           A detailed description of the code (e.g., for documentation purposes).
-        range: TranslatableText
+        range: TranslatedText
       aliases:
         description: Alternative labels for the code (ODM Alias, skos:altLabel)
-        range: TranslatableText
+        range: TranslatedText
         multivalued: true
       weight:
         description: Numeric significance of the code (e.g., for scoring)
@@ -688,12 +719,12 @@ classes:
   Comment:
     is_a: IdentifiableElement
     description: >-
-      A Comment element contains a description of a comment
+      A Comment element contains a description of a comment by the data/metdata handler.
     attributes:
       text:
         description: >-
           The comment text.
-        range: TranslatableText
+        range: TranslatedText
         required: true
       documents:
         description: >-
@@ -704,25 +735,30 @@ classes:
   SiteOrSponsorComment:
     is_a: IdentifiableElement
     description: >-
-      A Comment element represents feedback from a site or sponsor.
+      Feedback from a site or sponsor.
       Renamed from Comment to avoid confusion with CommentDef.
     attributes:
       text:
         description: >-
           The comment text.
-        range: TranslatableText
+        range: TranslatedText
         required: true
-      sponsor:
+      source:
         description: >-
-          Whether this comment is from a sponsor.
-        range: boolean
+          who made the comment, such as Investigator, Sponsor.
+        any_of: 
+          - range: string
+          - range: OriginSource
+          - range: User
 
   Resource:
-    description: Represents a reference to a resource
+    description: >-
+      Describes an external resource used as the source for the parent ItemGroup or Item.
     is_a: IdentifiableElement
     attributes:
       resourceType:
-        description: Type of resource (e.g., "Patient", "Practitioner", "Organization")"
+        description: >-
+          Type of resource (e.g.,  "ODM", "HL7-FHIR", "HL7-CDA", "HL7-v2", "OpenEHR-extract")
         range: string
         required: false
       attribute:
@@ -744,7 +780,7 @@ classes:
       href:
         description: URL, URI, or relative path to the referenced document
         range: string
-      pages: 
+      pages:
         description: Reference to specific pages in a PDF document
         range: integer
         multivalued: true
@@ -830,9 +866,9 @@ classes:
         required: false
 
   # New classes for Data Cube and Analysis Concept compatibility
-  DataCubeDefinition:
+  DataCube:
     is_a: ItemGroup
-    exact_mappings:
+    close_mappings:
       - qb:DataStructureDefinition
     description: >-
       A dataset demanded by a specific Analysis
@@ -888,19 +924,23 @@ classes:
           Reference to the event or occurrence that this timing is relative to.
         range: NominalOccurrence
       windowLower:
-        description: Start date/time of the timing
+        description: Start date/time of the timing.
         range: dateTime
       windowUpper:
-        description: End date/time of the timing
+        description: End date/time of the timing.
         range: dateTime
       recalled:
         description: >-
-          Indicates whether the timing is recalled or not (recalled timings are less reliable)
+          Indicates whether the timing is recalled or not (recalled timings are less reliable).
         range: boolean
       frequency:
         description: >-
-          Frequency. Use dose frequency terminology e.g. "BID" if applicable
+          Frequency. Use dose frequency terminology e.g. "BID" if applicable.
         range: string
+      imputation:
+        description: >-
+          The imputation method used for the Timing.
+        range: Method
 
   NominalOccurrence:
     is_a: GovernedElement
@@ -914,12 +954,12 @@ classes:
     attributes:
       timing:
         description: >-
-          A named event reference, that can nest further named timing references
+          A named event reference, that can nest further named timing references.
         range: Timing
         required: true
       event:
         description: >-
-          The ID of the event in a Schedule
+          The ID of the event in a Schedule.
         range: string
         required: false
       start:
@@ -1003,20 +1043,85 @@ classes:
         multivalued: true
         required: false
 
-    # TODO : New classes added for OMOP compatibility
+  Relationship:
+    is_a: IdentifiableElement
+    from_schema: sdtm
+    description: >-
+      A class to define semantic relationships between elements like Item or ItemGroup,
+      capturing links such as "is the unit for" or "assesses seriousness of."
+    attributes:
+      subject:
+        description: >-
+          The starting element of the relationship (e.g., an Item or ItemGroup).
+        range: IdentifiableElement
+        required: true
+      object:
+        description: >-
+          The ending element of the relationship.
+        range: IdentifiableElement
+        required: true
+      predicateTerm:
+        description: >-
+          Short variable relationship linking phrase for programming purposes.
+        range: PredicateTermEnum
+        required: true
+      linkingPhrase:
+        description: >-
+          Variable relationship descriptive linking phrase.
+        range: LinkingPhraseEnum
+        required: true
+      
+  Translation:
+    description: >-
+      A translation object that can be used to represent text in multiple languages.
+    attributes:
+      "@language":
+        description: The language of the translation.
+        range: string
+        required: true
+      "@value":
+        description: The translated text.
+        range: string
+        required: true
 
-    # TODO : New classes added for DCAT / DPROD compatibility
-
+  TranslationList:
+    attributes:
+      translations:
+        range: Translation
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+        
 types:
-  TranslatableText:
+  TranslatedText:
+    exact_mappings:
+      - odm:TranslatedText
     description: >-
       Text that can be represented in multiple languages.
       Can be either a simple string or a list of translation objects.
-      { "@language": "en", "@value": "Hello" } 
-    typeof: string
-    # In practice this would be implemented as a union type of string | TranslationObject[]
+      { "@language": "en", "@value": "Hello" }
+    union_of:
+      - string
+      - TranslationList[]
 
 enums:
+  AliasPredicateEnum:
+    description: permissible values for the relationship between an element and an alias
+    from_schema: linkml:AliasPredicateEnum
+    permissible_values:
+      EXACT_SYNONYM:
+        description: Codes have identical meaning e.g. "diabetes mellitus" and "DM"
+        meaning: skos:exactMatch
+      RELATED_SYNONYM:
+        description: Codes are related but not equivalent e.g. "diabetes" and "mellitus"
+        meaning: skos:relatedMatch
+      BROAD_SYNONYM:
+        description: Target is broader than source e.g. "diabetes" is broader than "type 2 diabetes"
+        meaning: skos:broaderMatch
+      NARROW_SYNONYM:
+        description: Target is narrower than source e.g. "type 2 diabetes" is narrower than "diabetes"
+        meaning: skos:narrowerMatch
+
   Comparator:
     description: >-
       The type of comparison for a RangeCheck.
@@ -1190,3 +1295,129 @@ enums:
       Fixed:
         text: Fixed
         meaning: ncit:C201358
+
+  LinkingPhraseEnum:
+    from_schema: sdtm
+    description: Variable relationship descriptive linking phrase from COSMoS SDTM BC model.
+    permissible_values:
+      assesses seriousness of:
+      assesses the severity of:
+      associates the tumor identified in:
+      decodes the value in:
+      describes actions taken:
+      describes relationship of:
+      describes the outcome of:
+      further describes the test in:
+      further specifies the anatomical location in:
+      groups tumor assessments used in overall response identified by:
+      groups values in:
+      groups, within an individual subject, values in:
+      identifies a pattern of:
+      identifies an observation described by:
+      identifies overall response supported by tumor assessments identified by:
+      identifies the image from the procedure in:
+      identifies the tumor found by the test in:
+      indicates occurrence of the value in:
+      indicates pre-specification of the value in:
+      indicates severity of:
+      indicates the previous irradiation status of the tumor identified by:
+      indicates the progression status of the previous irradiated tumor identified by:
+      is a dictionary-derived term for the value in:
+      is a dictionary-derived class code for the value in:
+      is a dictionary-derived class name for the value in:
+      is decoded by the value in:
+      is original text for:
+      is the administered amount of the treatment in:
+      is the administration anatomical location for the treatment in:
+      is the aspect of the event used to define the date in:
+      is the clinical significance interpretation for:
+      is the code for the value in:
+      is the dictionary code for the test in:
+      is the dictionary-derived term for the value in:
+      is the dictionary-derived class code for the value in:
+      is the dictionary-derived class name for the value in:
+      is the duration for:
+      is the end date for:
+      is the epoch of the performance of the test in:
+      is the frequency of administration of the amount in:
+      is the identifier for the source data used in the performance of the test in:
+      is the material type of the subject of the activity in:
+      is the medical condition that is the reason for the treatment in:
+      is the method for the test in:
+      is the part of the body through which is administered the treatment in:
+      is the physical form of the product in:
+      is the result of the test in:
+      is the role of the assessor who performed the test in:
+      is the specimen tested in:
+      is the start date for:
+      is the subject position during performance of the test in:
+      is the subject's fasting status during the performance of the test in:
+      is the unit for the value in:
+      is the unit for:
+      specifies the anatomical location in:
+      specifies the anatomical location of:
+      specifies the anatomical location of the performance of the test in:
+      specifies the anatomical location of the tumor identified by:
+      specifies the severity of:
+      values are grouped by:
+      was the subject position during performance of the test in:
+      identifies the reference used in the genomic test in:
+      indicates heritability of the genetic variant in:
+      is an identifier for a published reference for the genetic variant in:
+      is an identifier for the copy, on one of two homologous chromosones, of the genetic variant in:
+      is an identifier for the genetic sequence of the genetic entity represented by:
+      is the chromosome that is the position of the result in:
+      is the clinical trial or treatment setting for:
+      is the date of occurrence:
+      is the date of occurrence for:
+      is the intended disease outcome for:
+      is the method of secondary analysis of results in:
+      is the numeric location, within a chromosone, genetic entity, or genetic sub-region, of the result in:
+      is the symbol for the genomic entity that is the position of the result in:
+      is the type of genomic entity that is the position of the result in:
+      is the genetic sub-location of the result in:
+      is the object of the observation in:
+      is an identifier for the evaluator with the role in:
+      is the severity of the toxicity in:
+      is a grouping of values in:
+      is the textual description of the intended dose regimen for:
+      is the reason for stopping administration of:
+      is the value of the property identified by:
+      is the name of the reference terminology for:
+      is the version of the reference terminology in:
+
+  PredicateTermEnum:
+    from_schema: sdtm
+    description: Short variable relationship linking phrase for programming purposes from COSMoS SDTM BC model.
+    permissible_values:
+      ASSESSES:
+      CLASSIFIES:
+      DECODES:
+      DESCRIBES:
+      GROUPS:
+      GROUPS_BY:
+      IDENTIFIES:
+      IDENTIFIES_OBSERVATION:
+      IDENTIFIES_PRODUCT_IN:
+      IDENTIFIES_TUMOR_IN:
+      INDICATES:
+      IS_ATTRIBUTE_FOR:
+      IS_DECODED_BY:
+      IS_DERIVED_FROM:
+      IS_EPOCH_OF:
+      IS_GROUPED_BY:
+      IS_INDICATOR_FOR:
+      IS_ORIGINAL_TEXT_FOR:
+      IS_POSITION_FOR:
+      IS_REASON_FOR:
+      IS_RESULT_OF:
+      IS_SPECIMEN_TESTED_IN:
+      IS_SUBJECT_STATE_FOR:
+      IS_TIMING_FOR:
+      IS_UNIT_FOR:
+      PERFORMED:
+      PERFORMS:
+      QUALIFIES:
+      SPECIFIES:
+      IS_VALUE_OF:
+      IS_REFERENCE_TERMINOLOGY_FOR:
