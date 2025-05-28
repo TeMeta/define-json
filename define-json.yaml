@@ -380,7 +380,7 @@ classes:
     #   - skosxl:Label
     attributes: 
       uuid:
-        description: Universal uniq ue identifier
+        description: Universal unique identifier
         range: string
         identifier: true
       code:
@@ -402,14 +402,14 @@ classes:
         range: TranslatedText
         exact_mappings:
           - skos:prefLabel
-      mappings:
-        description: Equivalent codings in other systems
-        range: CodingMapping
-        multivalued: true
 
   CodingMapping:
     description: Mapping between codings
     attributes:
+      source:
+        description: Source coding
+        range: Coding
+        required: true
       target:
         description: Target coding
         range: Coding
@@ -751,6 +751,24 @@ classes:
           - range: OriginSource
           - range: User
 
+  User:
+    is_a: IdentifiableElement
+    description: >-
+      Information about a specific user of a clinical data collection or data management system.
+    attributes:
+      userType:
+        description: >-
+          User's role in the study.
+        range: UserType
+      userName:
+        description: >-
+          The username of the user.
+        range: string
+      fullName:
+        description: >-
+          The full name of the user.
+        range: string
+      
   Resource:
     description: >-
       Describes an external resource used as the source for the parent ItemGroup or Item.
@@ -1142,6 +1160,19 @@ enums:
         description: In set
       NOTIN:
         description: Not in set
+
+  name: UserType
+  description: Enumeration used in userType
+  permissible_values:
+    Sponsor:
+    Investigator:
+    Lab:
+    Other:
+    Subject:
+    Monitor:
+    Data analyst:
+    Care provider:
+    Assessor:
 
   SoftHard:
     description: >-
