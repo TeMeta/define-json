@@ -42,20 +42,26 @@ classes:
         range: string
       description:
         description: Detailed description, shown in tooltips
-        range: TranslatedText
+        any_of:
+          - range: string
+          - range: TranslatedText
       coding:
         description: Semantic tags for this element
         range: Coding
         multivalued: true
       label:
         description: Human-readable label, shown in UIs
-        range: TranslatedText
+        any_of:
+          - range: string
+          - range: TranslatedText
         exact_mappings:
           - skos:prefLabel
       aliases:
         description: >-
           Alternative name or identifier for this CodeList.
-        range: TranslatedText
+        any_of:
+          - range: string
+          - range: TranslatedText
         multivalued: true
         inlined: true
         inlined_as_list: true
@@ -97,7 +103,9 @@ classes:
         multivalued: true
       reason:
         description: Purpose or rationale for this data element
-        range: TranslatedText
+        any_of:
+          - range: string
+          - range: TranslatedText
 
   ReifiedConcept:
     is_a: GovernedElement
@@ -144,49 +152,67 @@ classes:
     close_mappings:
       - usdm:StudyDesign
     attributes:
-      documents:
-        description: >-
-          References to documents that describe this version of the metadata.
-        range: DocumentReference
-        multivalued: true
-      conditions:
-        description: >-
-          Conditions that apply to this version of the metadata.
-        range: Condition
-        multivalued: true
-      whereClauses:
-        description: >-
-          Data contexts that apply to this version of the metadata.
-        range: WhereClause
-        multivalued: true
-      itemGroups:
-        description: >-
-          Item groups defined in this version of the metadata.
-        range: ItemGroup
-        multivalued: true
       items:
         description: >-
           Items defined in this version of the metadata.
         range: Item
         multivalued: true
+        inlined: true
+        inlined_as_list: true
+      itemGroups:
+        description: >-
+          Item groups defined in this version of the metadata.
+        range: ItemGroup
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      documents:
+        description: >-
+          References to documents that describe this version of the metadata.
+        range: DocumentReference
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      conditions:
+        description: >-
+          Logical conditions that apply to this version of the metadata.
+        range: Condition
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      whereClauses:
+        description: >-
+          Data contexts that apply to this version of the metadata.
+        range: WhereClause
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
       methods:
         description: >-
           Methods defined in this version of the metadata.
         range: Method
         multivalued: true
+        inlined: true
+        inlined_as_list: true
       codeLists:
         description: >-
           Code lists defined in this version of the metadata.
         range: CodeList
         multivalued: true
+        inlined: true
+        inlined_as_list: true
       codings:
         description: Codings defined in this version of the metadata.
         range: Coding
         multivalued: true
+        inlined: true
+        inlined_as_list: true
       mappings:
         description: Coding mappings in this version of the metadata. 
         range: CodingMapping
         multivalued: true
+        inlined: true
+        inlined_as_list: true
       concepts:
         description: Structured Concepts defined in this version of the metadata.
         range: ReifiedConcept
@@ -196,6 +222,8 @@ classes:
           Relationships between items, item groups, and other elements in this version of the metadata.
         range: Relationship
         multivalued: true
+        inlined: true
+        inlined_as_list: true
 
   Item:
     is_a: GovernedElement
@@ -236,10 +264,41 @@ classes:
         description: >-
           Reference to the Method element that describes how to derive this item's value.
         range: Method
+      rangeChecks:
+        description: Range checks applied to this item (e.g. edit checks, CORE rules)
+        range: RangeCheck
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      whereClause:
+        description: Conditions for when this item definition applies
+        range: WhereClause
+        inlined: false
+        inlined_as_list: true
+      origin:
+        description: >-
+          The origin of the data
+        range: Origin
+      # These could be turned into relationships rather than attributes
+      refersTo:
+        description: >-
+          Reference to another item that this item implements or extends, e.g. a template Item definition.
+        range: Item
+      unitsItem:
+        description: >-
+          Reference to the item that defines the units of this item.
+        range: Item
+      conceptProperty:
+        description: >-
+          Reference to a abstract concept property that this item is a specialization / instance of.
+        range: ConceptProperty
+      # Not as sure about these ones
       role:
         description: >-
           Identifies the role of the item within the containing context, taken from the roleCodeList.
-        range: TranslatedText
+        any_of:
+          - range: string
+          - range: TranslatedText
       roleCodeList:
         description: >-
           Reference to the CodeList that defines the roles for this item.
@@ -248,43 +307,24 @@ classes:
         description: >-
           Set to Yes if this is a manifest and there is no data for this item.
         range: boolean
-      rangeChecks:
-        description: Range checks applied to this item
-        range: RangeCheck
-        multivalued: true
-      whereClause:
-        description: Conditions for when this item definition applies
-        range: WhereClause
-      sourceItems:
-        description: Source items used in derivation
-        range: SourceItem
-        multivalued: true
-      origin:
-        description: >-
-          The origin of the data
-        range: Origin
-      conceptProperty:
-        description: >-
-          Reference to a abstract concept property that this item is a specialization / instance of.
-        range: ConceptProperty
-      # For COSMoS semantics - this might be superseded by Relationship class
-      unitsItem:
-        description: >-
-          Reference to the item that defines the units of this item.
-        range: Item
-      # Not as sure about these ones
       crfCompletionInstructions:
-        range: TranslatedText
+        any_of:
+          - range: string
+          - range: TranslatedText
         description: >-
           CRFCompletionInstructions reference: Instructions for the clinical site on how to enter collected information on the CRF.
       cdiscNotes:
-        range: TranslatedText
+        any_of:
+          - range: string
+          - range: TranslatedText
         description: >-
           CDISCNotes reference: Explanatory text for the variable
       implementationNotes:
         description: >-
           ImplementationNotes reference: Further information, such as rationale and implementation instructions, on how to implement the CRF data collection fields.
-        range: TranslatedText
+        any_of:
+          - range: string
+          - range: TranslatedText
       decimalDigits:
         description: >-
           For decimal values, the number of digits after the decimal point.
@@ -312,6 +352,7 @@ classes:
       - odm:ItemGroupDef
     narrow_mappings:
       - fhir:StructureDefinition
+      - fhir:ViewDefinition
       - omop:Table
       - qb:Dataset
     related_mappings:
@@ -330,7 +371,9 @@ classes:
           Data structure of the item group, indicating how the records are organized.
           If this is a FHIR Resource, is it nested or flattened?
           If this is a structured concept, is it a Biomedical/Derivation/Analysis concept?
-        range: TranslatedText
+        any_of:
+          - range: string
+          - range: TranslatedText
       isReferenceData:
         description: >-
           Set to Yes if this is a reference item group.
@@ -347,6 +390,8 @@ classes:
         close_mappings:
           - fhir:StructureDefinition/snapshot
           - fhir:StructureDefinition/differential
+        inlined: false
+        inlined_as_list: true
       children:
         description: >-
           Child item groups within this item group.
@@ -399,7 +444,9 @@ classes:
         range: string
       decode:
         description: Human-readable meaning
-        range: TranslatedText
+        any_of:
+          - range: string
+          - range: TranslatedText
         exact_mappings:
           - skos:prefLabel
 
@@ -645,6 +692,8 @@ classes:
           Source items for this origin
         range: SourceItem
         multivalued: true
+        inlined: true
+        inlined_as_list: true
       document:
         description: >-
           Reference to a document that describes this origin in detail.
@@ -679,6 +728,8 @@ classes:
         any_of:
           - range: Coding
           - range: CodeListItem
+          - any_of:
+          - range: string
           - range: TranslatedText
         inlined: true
         inlined_as_list: true
@@ -703,10 +754,14 @@ classes:
       description:
         description: >-
           A detailed description of the code (e.g., for documentation purposes).
-        range: TranslatedText
+        any_of:
+          - range: string
+          - range: TranslatedText
       aliases:
         description: Alternative labels for the code (ODM Alias, skos:altLabel)
-        range: TranslatedText
+        any_of:
+          - range: string
+          - range: TranslatedText
         multivalued: true
       weight:
         description: Numeric significance of the code (e.g., for scoring)
@@ -724,7 +779,9 @@ classes:
       text:
         description: >-
           The comment text.
-        range: TranslatedText
+        any_of:
+          - range: string
+          - range: TranslatedText
         required: true
       documents:
         description: >-
@@ -741,7 +798,9 @@ classes:
       text:
         description: >-
           The comment text.
-        range: TranslatedText
+        any_of:
+          - range: string
+          - range: TranslatedText
         required: true
       source:
         description: >-
@@ -768,7 +827,41 @@ classes:
         description: >-
           The full name of the user.
         range: string
-      
+      organization:
+        description: >-
+          The organization the user belongs to.
+        range: Organization
+
+  Organization:
+    is_a: IdentifiableElement
+    description: >-
+      Organization information, such as a site or sponsor.
+    exact_mappings:
+      - odm:Organization
+      - usdm:Organization
+    attributes:
+      role:
+        description: >-
+          The role of the organization in the study.
+        range: string
+      type:
+        description: >-
+          The type of organization (e.g., site, sponsor, vendor).
+        range: OrganizationType
+      location:
+        description: >-
+          The physical location of the organization.
+        range: string
+      address:
+        description: >-
+          The address of the organization.
+        range: string
+      partOfOrganization:
+        description: >-
+          Reference to a parent organization if this organization is part of a larger entity.
+        range: Organization
+
+
   Resource:
     description: >-
       Describes an external resource used as the source for the parent ItemGroup or Item.
@@ -876,11 +969,11 @@ classes:
         required: false
       validityPeriod:
         description: Time period during which the document is valid
-        range: Period
+        range: Timing
         required: false
       creation:
         description: Document creation date
-        range: dateTime
+        range: datetime
         required: false
 
   # New classes for Data Cube and Analysis Concept compatibility
@@ -943,10 +1036,10 @@ classes:
         range: NominalOccurrence
       windowLower:
         description: Start date/time of the timing.
-        range: dateTime
+        range: datetime
       windowUpper:
         description: End date/time of the timing.
-        range: dateTime
+        range: datetime
       recalled:
         description: >-
           Indicates whether the timing is recalled or not (recalled timings are less reliable).
@@ -1039,7 +1132,7 @@ classes:
         required: false
       lastUpdated:
         description: When the resource was last updated
-        range: dateTime
+        range: datetime
         required: false
       source:
         description: Source system that created or updated the element
@@ -1092,35 +1185,25 @@ classes:
   Translation:
     description: >-
       A translation object that can be used to represent text in multiple languages.
+    exact_mappings:
+      - odm:TranslatedText
     attributes:
-      "@language":
+      "language":
         description: The language of the translation.
         range: string
         required: true
-      "@value":
+      "value":
         description: The translated text.
         range: string
         required: true
 
-  TranslationList:
+  TranslatedText:
     attributes:
       translations:
         range: Translation
         multivalued: true
         inlined: true
         inlined_as_list: true
-        
-types:
-  TranslatedText:
-    exact_mappings:
-      - odm:TranslatedText
-    description: >-
-      Text that can be represented in multiple languages.
-      Can be either a simple string or a list of translation objects.
-      { "@language": "en", "@value": "Hello" }
-    union_of:
-      - string
-      - TranslationList[]
 
 enums:
   AliasPredicateEnum:
@@ -1161,18 +1244,30 @@ enums:
       NOTIN:
         description: Not in set
 
-  name: UserType
-  description: Enumeration used in userType
-  permissible_values:
-    Sponsor:
-    Investigator:
-    Lab:
-    Other:
-    Subject:
-    Monitor:
-    Data analyst:
-    Care provider:
-    Assessor:
+  UserType:
+    description: >-
+      Enumeration used in userType.
+    permissible_values:
+      Sponsor:
+      Investigator:
+      Lab:
+      Other:
+      Subject:
+      Monitor:
+      Data analyst:
+      Care provider:
+      Assessor:
+
+  OrganizationType:
+    description: >-
+      Enumeration used in organizationType.
+    permissible_values:
+      Sponsor:
+      Site:
+      CRO:
+      Lab:
+      TechnologyProvider:
+      Other:
 
   SoftHard:
     description: >-
@@ -1271,7 +1366,7 @@ enums:
         text: Vendor
         meaning: ncit:C68608
 
-  ItemGroupRoles:
+  ItemGroupPurpose:
     description: >-
       The role of an item group within a specific context.
     permissible_values:
