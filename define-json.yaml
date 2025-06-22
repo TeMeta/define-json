@@ -8,13 +8,13 @@ license: MIT
 prefixes:
   linkml: https://w3id.org/linkml/
   skos: http://www.w3.org/2004/02/skos/core#
-  xsd: http://www.w3.org/2001/XMLSchema#
   odm: https://cdisc.org/odm2/
   usdm: https://cdisc.org/usdm/
   sdtm: https://cdisc.org/cosmos/sdtm_v1.0#
   fhir: http://hl7.org/fhir/
   omop: https://omop.org/omop-cdm/
   qb: http://purl.org/linked-data/cube#
+  sdmx: http://purl.org/linked-data/sdmx#
 default_prefix: odm
 
 imports:
@@ -67,12 +67,6 @@ classes:
         inlined_as_list: true
         exact_mappings:
           - skos:altLabel
-      # FHIR-inspired metadata attributes
-      meta:
-        description: >-
-          Metadata about this element, such as version, status, and provenance.
-        range: Metadata
-        inlined: true
 
   GovernedElement:
     is_a: IdentifiableElement
@@ -84,63 +78,114 @@ classes:
         description: >-
           Is this element required?
         range: boolean
-      collectionExceptionCondition:
-        description: >-
-          Condition that defines when collection may be exempted
-        range: Condition
       comment:
         description: >-
           Comment on the element, such as a rationale for its inclusion or exclusion.
         range: Comment
-        multivalued: true
-      # FHIR-inspired provenance extensions
-      recorded:
-        description: When this definition was created or last modified
-        range: datetime
-      agents:
-        description: People or systems involved in defining this item
-        range: User
         multivalued: true
       reason:
         description: Purpose or rationale for this data element
         any_of:
           - range: string
           - range: TranslatedText
+      lastUpdated:
+        description: When the resource was last updated
+        range: datetime
+      agents:
+        description: People or systems involved in defining this item
+        any_of:
+          - range: User
+          - range: Organization
+          - range: string
 
-  ReifiedConcept:
-    is_a: GovernedElement
-    description: >-
-      Canonical information layer showing how different data implementations (Items and ItemGroups)
-      represent the same underlying meanings, by making abstract concepts explicit and referenceable.
-      These objects are approximated as star schemas i.e. a central object with multiple properties.
-    narrow_mappings:
-      - usdm:BiomedicalConcept
-      - usdm:AnalysisConcept
-      - usdm:DerivationConcept
-    attributes:
-      properties:
-        description: >-
-          Properties of the reified object, which can be other governed elements or simple values.
-        range: ConceptProperty
-        multivalued: true
+  # TODO: Change abstract classesto MIXINS and add new ones for reusability
+  # We may be able to make this schema more fine-grained, compact and easier to read
+  # by using mixins like UUID, Identifiable, Governed, Documents, Provenance, Metadata, Temporal
   
-  ConceptProperty:
-    is_a: GovernedElement
-    narrow_mappings:
-      - usdm:BiomedicalConceptProperty
-      - usdm:DerivationConceptProperty
-      - usdm:AnalysisConceptProperty
+  IsFormatted:
+    mixin: true
     description: >-
-      A reification of a property concept in the context of its containing topic concept.
+      View Rendering options for e.g. for reporting, exchange, or storage
+    related_mappings:
+      - sdmx:Facet
+      - sdmx:Representation
     attributes:
-      isEnabled:
+      decimalDigits:
         description: >-
-          Indicates whether this property is enabled for the concept.
-        range: boolean
-      codeList:
+          For decimal values, the number of digits after the decimal point.
+        range: integer
+      displayFormat:
         description: >-
-          Reference to a CodeList that constrains the values of this property.
+          A display format for the item.
+        range: string
+      significantDigits:
+        description: >-
+          For numeric values, the number of significant digits.
+        range: integer
+
+  IsResource:
+    mixin: true
+    description: >-
+      Additional metadata for FHIR(esources) and Data Products
+    attributes:
+      versionId:
+        description: Version identifier for this specific version of the resource
+        range: string
+      profile:
+        description: Profiles this resource claims to conform to
+        range: string
+        multivalued: true
+      security:
+        description: Security tags applied to this resource
+        range: Coding
+        multivalued: true
+      tag:
+        description: Tags applied to this resource
+        range: Coding
+        multivalued: true
+
+  IsODMItem:
+    mixin: true
+    description: >-
+      Additional attributes for CDISC Operational Data Model
+    attributes:
+      role:
+        description: >-
+          Identifies the role of the item within the containing context, taken from the roleCodeList.
+        any_of:
+          - range: string
+          - range: TranslatedText
+      roleCodeList:
+        description: >-
+          Reference to the CodeList that defines the roles for this item.
         range: CodeList
+      hasNoData:
+        description: >-
+          Set to Yes if this is a manifest and there is no data for this item.
+        range: boolean
+      crfCompletionInstructions:
+        any_of:
+          - range: string
+          - range: TranslatedText
+        description: >-
+          CRFCompletionInstructions reference: Instructions for the clinical site on how to enter collected information on the CRF.
+      cdiscNotes:
+        any_of:
+          - range: string
+          - range: TranslatedText
+        description: >-
+          CDISCNotes reference: Explanatory text for the variable
+      implementationNotes:
+        description: >-
+          ImplementationNotes reference: Further information, such as rationale and implementation instructions, on how to implement the CRF data collection fields.
+        any_of:
+          - range: string
+          - range: TranslatedText    
+      collectionExceptionCondition:
+        description: >-
+          Condition that defines when collection may be exempted
+        range: Condition
+
 
   MetaDataVersion:
     tree_root: true
@@ -227,12 +272,16 @@ classes:
 
   Item:
     is_a: GovernedElement
+    mixins:
+      - IsODMItem
+      - IsFormatted
     description: >-
       A data item in a specific context.
     exact_mappings:
       - odm:ItemRef
       - odm:ItemDef
     close_mappings:
+      - sdmx:Component
       - qb:ComponentSpecification
       - fhir:ElementDefinition
     narrow_mappings:
@@ -246,6 +295,7 @@ classes:
       - usdm:BiomedicalConceptProperty
       - usdm:DerivationConceptProperty
       - usdm:AnalysisConceptProperty
+      - sdmx:Concept
     attributes:
       dataType:
         description: >-
@@ -292,54 +342,11 @@ classes:
         description: >-
           Reference to a abstract concept property that this item is a specialization / instance of.
         range: ConceptProperty
-      # Not as sure about these ones
-      role:
-        description: >-
-          Identifies the role of the item within the containing context, taken from the roleCodeList.
-        any_of:
-          - range: string
-          - range: TranslatedText
-      roleCodeList:
-        description: >-
-          Reference to the CodeList that defines the roles for this item.
-        range: CodeList
-      hasNoData:
-        description: >-
-          Set to Yes if this is a manifest and there is no data for this item.
-        range: boolean
-      crfCompletionInstructions:
-        any_of:
-          - range: string
-          - range: TranslatedText
-        description: >-
-          CRFCompletionInstructions reference: Instructions for the clinical site on how to enter collected information on the CRF.
-      cdiscNotes:
-        any_of:
-          - range: string
-          - range: TranslatedText
-        description: >-
-          CDISCNotes reference: Explanatory text for the variable
-      implementationNotes:
-        description: >-
-          ImplementationNotes reference: Further information, such as rationale and implementation instructions, on how to implement the CRF data collection fields.
-        any_of:
-          - range: string
-          - range: TranslatedText
-      decimalDigits:
-        description: >-
-          For decimal values, the number of digits after the decimal point.
-        range: integer
-      displayFormat:
-        description: >-
-          A display format for the item.
-        range: string
-      significantDigits:
-        description: >-
-          For numeric values, the number of significant digits.
-        range: integer
 
   ItemGroup:
     is_a: GovernedElement
+    mixins:
+      - IsResource
     description: >-
       An ItemGroup element describes a specific context as a collection.
       Uses include 
@@ -355,11 +362,13 @@ classes:
       - fhir:ViewDefinition
       - omop:Table
       - qb:Dataset
+      - sdmx:DataStructureDefinition
+      - sdmx:MetaDataStructureDefinition
     related_mappings:
       - usdm:BiomedicalConcept
       - usdm:Procedure
       - usdm:Indication
-      - usdm:Event
+      - sdmx:ComponentList
       - qb:DataStructureDefinition
     attributes:
       domain:
@@ -418,11 +427,10 @@ classes:
     close_mappings:
       - omop:Concept
       - skos:Concept
-    # Do we need any of these types of structures in the model?
-    # related_mappings:
-    #   - usdm:AliasCode
-    #   - linkml:StructuredAlias
-    #   - skosxl:Label
+      - skos:Label
+      - sdmx:Code
+      - sdmx:Concept
+      - sdmx:ISOConceptReference
     attributes: 
       uuid:
         description: Universal unique identifier
@@ -451,6 +459,9 @@ classes:
           - skos:prefLabel
 
   CodingMapping:
+    is_a: IdentifiableElement
+    related_mappings:
+      - sdmx:ItemSchemeMap
     description: Mapping between codings
     attributes:
       source:
@@ -468,19 +479,70 @@ classes:
       confidence:
         description: Confidence in the mapping (0.0-1.0)
         range: float
-    
+
+  ReifiedConcept:
+    is_a: GovernedElement
+    description: >-
+      Canonical information layer showing how different data implementations (Items and ItemGroups)
+      represent the same underlying meanings, by making abstract concepts explicit and referenceable.
+      These objects are approximated as star schemas i.e. a central object with multiple properties.
+    close_mappings:
+      - sdmx:MetaDataStructureDefinition
+      - sdmx:Concept
+    narrow_mappings:
+      - usdm:BiomedicalConcept
+      - usdm:AnalysisConcept
+      - usdm:DerivationConcept
+    attributes:
+      properties:
+        description: >-
+          Properties of the reified object, which can be other governed elements or simple values.
+        range: ConceptProperty
+        multivalued: true
+  
+  ConceptProperty:
+    is_a: GovernedElement
+    close_mappings:
+      - sdmx:MetaDataAttribute
+      - sdmx:Concept
+    narrow_mappings:
+      - usdm:BiomedicalConceptProperty
+      - usdm:DerivationConceptProperty
+      - usdm:AnalysisConceptProperty
+    description: >-
+      A reification of a property concept in the context of its containing topic concept.
+    attributes:
+      minOccurs:
+        description: >-
+          Minimum number of occurrences of this property in the context.
+          Set to >0 to mandate some number of occurrences.
+        range: integer
+      maxOccurs:
+        description: >-
+          Maximum number of occurrences of this property in the context.
+          Leave empty for unbounded. Set to 0 to disable property.
+        range: integer
+      codeList:
+        description: >-
+          Reference to a CodeList that constrains the values of this property.
+        range: CodeList 
+
   WhereClause:
     is_a: IdentifiableElement
     exact_mappings:
-      - qb:Slice
+      - sdmx:AttachmentConstraint
     related_mappings:
       - fhir:StructureDefinition/context
+      - qb:Slice
+      - sdmx:CubeRegion
+      - sdmx:DataKeySet
+      - sdmx:MetadataTargetRegion
     description: >-
       A WhereClause element describes conditions under which the containing context applies.
       When empty, indicates applicability across the entire parent context.
     attributes:
       conditions:
-        description: Logical conditions that apply in this context (combined with OR)
+        description: Logical conditions that apply in this context (combined with AND)
         range: Condition
         multivalued: true
 
@@ -491,6 +553,9 @@ classes:
       - usdm:Condition
     related_mappings:
       - fhir:Expression
+      - qb:SliceKey
+      - sdmx:DataConstraint
+      - sdmx:MetaDataConstraint
     description: >-
       Reusable logical condition with AND logic between components
     attributes:
@@ -518,6 +583,8 @@ classes:
     description: >-
       A RangeCheck element describes a simple comparison check resolving as boolean.
       The referenced item's value is compared against a specified value.
+    related_mappings:
+      - sdmx:DataKeySet
     attributes:
       comparator:
         description: >-
@@ -707,9 +774,14 @@ classes:
       - fhir:ValueSet
     close_mappings:
       - skos:Collection
-      - qb:CodeList
+      - sdmx:ItemScheme
+      - qb:codeList
     related_mappings:
       - usdm:BiomedicalConceptProperty/responseCodes
+    narrow_mappings:
+      - sdmx:Codelist
+      - sdmx:ValueList
+      - sdmx:ConceptScheme
     description: >-
       Defines a discrete set of permissible values for an item. This corresponds to the ODM CodeList construct.
     attributes:
@@ -750,6 +822,9 @@ classes:
       - usdm:ResponseCode
       - fhir:CodeableConcept
       - omop:Concept
+    narrow_mappings:
+      - sdmx:Code
+      - sdmx:ValueItem
     attributes:
       description:
         description: >-
@@ -773,6 +848,11 @@ classes:
 
   Comment:
     is_a: IdentifiableElement
+    exact_mappings:
+      - odm:CommentDef
+      - usdm:CommentAnnotation
+      - fhir:Annotation
+      - sdmx:Annotation
     description: >-
       A Comment element contains a description of a comment by the data/metdata handler.
     attributes:
@@ -839,6 +919,7 @@ classes:
     exact_mappings:
       - odm:Organization
       - usdm:Organization
+      - sdmx:Organisation
     attributes:
       role:
         description: >-
@@ -980,6 +1061,7 @@ classes:
   DataCube:
     is_a: ItemGroup
     close_mappings:
+      - sdmx:DataStructureDefinition
       - qb:DataStructureDefinition
     description: >-
       A dataset demanded by a specific Analysis
@@ -1087,6 +1169,7 @@ classes:
     is_a: Item
     exact_mappings:
       - qb:MeasureProperty
+      - sdmx:Measure
     description: >-
       A MeasureProperty element describes a measure property in a data cube.
     attributes:
@@ -1103,6 +1186,10 @@ classes:
     is_a: Item
     exact_mappings:
       - qb:DimensionProperty
+      - sdmx:Dimension
+    narrow_mappings:
+      - sdmx:MeasureDimension
+      - sdmx:TimeDimension
     description: >-
       A DimensionProperty element describes a dimension property in a data cube.
     attributes:
@@ -1115,48 +1202,43 @@ classes:
           The imputation method used for the measure property.
         range: Method
 
+  ComponentList:
+    is_a: IdentifiableElement
+    description: >-
+      An abstract definition of a list of components in a given data structure definition.
+      DimensionDescriptor: Dimension, TimeDimension
+      GroupDimensionDescriptor: Dimension, TimeDimension
+      MeasureDescriptor: Measure
+      AttributeDescriptor: DataAttribute, MetadataAttributeRef
+      MetadataAttributeDescriptor: MetadataAttribute
+    exact_mappings:
+      - sdmx:ComponentList
+    attributes:
+      components:
+        description: >-
+          The components that make up this component list.
+        any_of:
+          - range: Item
+          - range: MeasureProperty
+          - range: DimensionProperty
+          - range: AttributeProperty
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+
   AttributeProperty:
     is_a: Item
     exact_mappings:
       - qb:AttributeProperty
+      - sdmx:Attribute
     description: >-
       An AttributeProperty element describes an attribute property in a data cube.
-
-  # New classes for FHIR compatibility
-  Metadata:
-    description: Container for metadata about an element
-    attributes:
-      versionId:
-        description: Version identifier for this specific version of the resource
-        range: string
-        required: false
-      lastUpdated:
-        description: When the resource was last updated
-        range: datetime
-        required: false
-      source:
-        description: Source system that created or updated the element
-        range: string
-        required: false
-      profile:
-        description: Profiles this resource claims to conform to
-        range: string
-        multivalued: true
-        required: false
-      security:
-        description: Security tags applied to this resource
-        range: Coding
-        multivalued: true
-        required: false
-      tag:
-        description: Tags applied to this resource
-        range: Coding
-        multivalued: true
-        required: false
 
   Relationship:
     is_a: IdentifiableElement
     from_schema: sdtm
+    related_mappings:
+      - sdmx:ConceptSchemeMap
     description: >-
       A class to define semantic relationships between elements like Item or ItemGroup,
       capturing links such as "is the unit for" or "assesses seriousness of."
@@ -1187,6 +1269,7 @@ classes:
       A translation object that can be used to represent text in multiple languages.
     exact_mappings:
       - odm:TranslatedText
+      - sdmx:InternationalString
     attributes:
       "language":
         description: The language of the translation.
