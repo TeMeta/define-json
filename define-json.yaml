@@ -2,7 +2,7 @@ id: https://cdisc.org/define-json
 name: Define-JSON
 description: >-
   Data model for supply and demand data contracts to complement CDISC USDM, ODM, and Dataset-JSON.
-  (This LinkML version includes semantics to act as 'Rosetta Stone' for FHIR, OMOP, RDF, and CDISC)
+  (This LinkML version includes semantics to act as 'Rosetta Stone' for SDMX, FHIR, OMOP, RDF, and CDISC)
 license: MIT
 
 prefixes:
@@ -23,8 +23,21 @@ imports:
 classes:
   IdentifiableElement:
     abstract: true
+    mixins:
+      - Identifiable
+      - Labelled
+
+  GovernedElement:
+    abstract: true
+    mixins:
+      - Identifiable
+      - Labelled
+      - Governed
+
+  Identifiable:
+    description: slots that make an entity addressable
+    mixin: true
     attributes:
-      # is there a more conventional local identifier than this? 'id' is used in many places but may be ambiguous
       OID:
         description: >-
           Local identifier within this study/context. 
@@ -37,42 +50,10 @@ classes:
       uuid:
         description: Universal unique identifier
         range: string
-      name:
-        description: Short name or identifier, used for field names
-        range: string
-      description:
-        description: Detailed description, shown in tooltips
-        any_of:
-          - range: string
-          - range: TranslatedText
-      coding:
-        description: Semantic tags for this element
-        range: Coding
-        multivalued: true
-      label:
-        description: Human-readable label, shown in UIs
-        any_of:
-          - range: string
-          - range: TranslatedText
-        exact_mappings:
-          - skos:prefLabel
-      aliases:
-        description: >-
-          Alternative name or identifier for this CodeList.
-        any_of:
-          - range: string
-          - range: TranslatedText
-        multivalued: true
-        inlined: true
-        inlined_as_list: true
-        exact_mappings:
-          - skos:altLabel
 
-  GovernedElement:
-    is_a: IdentifiableElement
-    abstract: true
-    description: >-
-      An element that can be governed by collection rules
+  Governed:
+    description: Slots for audit trail and standards governance
+    mixin: true
     attributes:
       mandatory:
         description: >-
@@ -98,14 +79,44 @@ classes:
           - range: Organization
           - range: string
 
-  # TODO: Change abstract classesto MIXINS and add new ones for reusability
-  # We may be able to make this schema more fine-grained, compact and easier to read
-  # by using mixins like UUID, Identifiable, Governed, Documents, Provenance, Metadata, Temporal
-  
-  IsFormatted:
+  Labelled:
+    description: Slots for detailing meanings and multilingual descriptions.
     mixin: true
-    description: >-
-      View Rendering options for e.g. for reporting, exchange, or storage
+    attributes:
+      name:
+        description: Short name or identifier, used for field names
+        range: string
+      description:
+        description: Detailed description, shown in tooltips
+        any_of:
+          - range: string
+          - range: TranslatedText
+      coding:
+        description: Semantic tags for this element
+        range: Coding
+        multivalued: true
+      label:
+        description: Human-readable label, shown in UIs
+        any_of:
+          - range: string
+          - range: TranslatedText
+        exact_mappings:
+          - skos:prefLabel
+      aliases:
+        description: >-
+          Alternative name or identifier.
+        any_of:
+          - range: string
+          - range: TranslatedText
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+        exact_mappings:
+          - skos:altLabel
+
+  Formatted:
+    description: Slots for reporting, exchange, or storage.
+    mixin: true
     related_mappings:
       - sdmx:Facet
       - sdmx:Representation
@@ -123,14 +134,27 @@ classes:
           For numeric values, the number of significant digits.
         range: integer
 
-  IsResource:
+  Versioned:
+    description: >-
+      Version and connectivity information
     mixin: true
+    attributes:
+      version:
+        description: >-
+          The version of the external resources.
+        range: string
+      href:
+        description: Machine-readable instructions to obtain the resource e.g. FHIR path, URL
+        range: string
+        required: false
+
+  IsProfile:
     description: >-
       Additional metadata for FHIR(esources) and Data Products
+    mixin: true
+    mixins:
+      - Versioned
     attributes:
-      versionId:
-        description: Version identifier for this specific version of the resource
-        range: string
       profile:
         description: Profiles this resource claims to conform to
         range: string
@@ -139,10 +163,17 @@ classes:
         description: Security tags applied to this resource
         range: Coding
         multivalued: true
-      tag:
-        description: Tags applied to this resource
-        range: Coding
-        multivalued: true
+      authenticator:
+        description: Who/what authenticated the resource
+        any_of:
+          - range: User
+          - range: Organization
+          - range: string
+        required: false
+      validityPeriod:
+        description: Time period during which the resouce is valid
+        range: Timing
+        required: false
 
   IsODMItem:
     mixin: true
@@ -186,16 +217,15 @@ classes:
           Condition that defines when collection may be exempted
         range: Condition
 
-
   MetaDataVersion:
     tree_root: true
-    is_a: GovernedElement
     description: >-
       A MetaDataVersion element is the container representing a given version of a specification.
       It links to a particular usage context e.g. study, dataset, or a data collection instrument.
       All IdentifiableElements in scope are registered here for reuse
     close_mappings:
       - usdm:StudyDesign
+    is_a: GovernedElement
     attributes:
       items:
         description: >-
@@ -211,10 +241,12 @@ classes:
         multivalued: true
         inlined: true
         inlined_as_list: true
-      documents:
+      resources:
         description: >-
           References to documents that describe this version of the metadata.
-        range: DocumentReference
+        any_of:
+          - range: DocumentReference
+          - range: Resource
         multivalued: true
         inlined: true
         inlined_as_list: true
@@ -271,31 +303,31 @@ classes:
         inlined_as_list: true
 
   Item:
-    is_a: GovernedElement
-    mixins:
-      - IsODMItem
-      - IsFormatted
     description: >-
       A data item in a specific context.
-    exact_mappings:
+    close_mappings:
       - odm:ItemRef
       - odm:ItemDef
-    close_mappings:
-      - sdmx:Component
       - qb:ComponentSpecification
-      - fhir:ElementDefinition
+      - sdmx:DataAttribute
     narrow_mappings:
       - fhir:StructureDefinition/variable
+      - qb:ComponentProperty
       - omop:Field
       - omop:DerivedColumn
-      - qb:MeasureProperty
-      - qb:AttributeProperty
-      - qb:ComponentProperty
     related_mappings:
       - usdm:BiomedicalConceptProperty
       - usdm:DerivationConceptProperty
       - usdm:AnalysisConceptProperty
+      - fhir:ElementDefinition
+      - qb:MeasureProperty
+      - qb:AttributeProperty
       - sdmx:Concept
+      - sdmx:Component
+    is_a: GovernedElement
+    mixins:
+      - IsODMItem
+      - Formatted
     attributes:
       dataType:
         description: >-
@@ -344,9 +376,6 @@ classes:
         range: ConceptProperty
 
   ItemGroup:
-    is_a: GovernedElement
-    mixins:
-      - IsResource
     description: >-
       An ItemGroup element describes a specific context as a collection.
       Uses include 
@@ -354,22 +383,21 @@ classes:
        - Object / Profile of a FHIR Resource
        - Data Specialisation of a Biomedical Concept
        - Section of a form
-    exact_mappings:
-      - odm:ItemGroupRef
+    close_mappings:
       - odm:ItemGroupDef
+      - odm:ItemGroupRef
     narrow_mappings:
       - fhir:StructureDefinition
       - fhir:ViewDefinition
       - omop:Table
-      - qb:Dataset
-      - sdmx:DataStructureDefinition
-      - sdmx:MetaDataStructureDefinition
-    related_mappings:
-      - usdm:BiomedicalConcept
-      - usdm:Procedure
-      - usdm:Indication
-      - sdmx:ComponentList
       - qb:DataStructureDefinition
+      - sdmx:DataStructureDefinition
+    related_mappings:
+      - sdmx:ComponentList
+      - sdmx:MetaDataStructureDefinition
+    is_a: GovernedElement
+    mixins:
+      - IsProfile
     attributes:
       domain:
         description: >-
@@ -418,830 +446,14 @@ classes:
         close_mappings:
           - fhir:StructureDefinition/context
 
-  Coding:
-    description: Semantic coding reference
-    exact_mappings:
-      - odm:Coding
-      - usdm:Code
-      - fhir:Coding
-    close_mappings:
-      - omop:Concept
-      - skos:Concept
-      - skos:Label
-      - sdmx:Code
-      - sdmx:Concept
-      - sdmx:ISOConceptReference
-    attributes: 
-      uuid:
-        description: Universal unique identifier
-        range: string
-        identifier: true
-      code:
-        description: >-
-          The code value.
-        range: string
-        required: true
-      codeSystem:
-        description: >-
-          The code system identifier.
-        range: string
-        required: true
-      codeSystemVersion:
-        description: >-
-          The code system version.
-        range: string
-      decode:
-        description: Human-readable meaning
-        any_of:
-          - range: string
-          - range: TranslatedText
-        exact_mappings:
-          - skos:prefLabel
-
-  CodingMapping:
-    is_a: IdentifiableElement
-    related_mappings:
-      - sdmx:ItemSchemeMap
-    description: Mapping between codings
-    attributes:
-      source:
-        description: Source coding
-        range: Coding
-        required: true
-      target:
-        description: Target coding
-        range: Coding
-        required: true
-      relationship:
-        description: Type of mapping relationship
-        range: AliasPredicateEnum
-        required: true
-      confidence:
-        description: Confidence in the mapping (0.0-1.0)
-        range: float
-
-  ReifiedConcept:
-    is_a: GovernedElement
-    description: >-
-      Canonical information layer showing how different data implementations (Items and ItemGroups)
-      represent the same underlying meanings, by making abstract concepts explicit and referenceable.
-      These objects are approximated as star schemas i.e. a central object with multiple properties.
-    close_mappings:
-      - sdmx:MetaDataStructureDefinition
-      - sdmx:Concept
-    narrow_mappings:
-      - usdm:BiomedicalConcept
-      - usdm:AnalysisConcept
-      - usdm:DerivationConcept
-    attributes:
-      properties:
-        description: >-
-          Properties of the reified object, which can be other governed elements or simple values.
-        range: ConceptProperty
-        multivalued: true
-  
-  ConceptProperty:
-    is_a: GovernedElement
-    close_mappings:
-      - sdmx:MetaDataAttribute
-      - sdmx:Concept
-    narrow_mappings:
-      - usdm:BiomedicalConceptProperty
-      - usdm:DerivationConceptProperty
-      - usdm:AnalysisConceptProperty
-    description: >-
-      A reification of a property concept in the context of its containing topic concept.
-    attributes:
-      minOccurs:
-        description: >-
-          Minimum number of occurrences of this property in the context.
-          Set to >0 to mandate some number of occurrences.
-        range: integer
-      maxOccurs:
-        description: >-
-          Maximum number of occurrences of this property in the context.
-          Leave empty for unbounded. Set to 0 to disable property.
-        range: integer
-      codeList:
-        description: >-
-          Reference to a CodeList that constrains the values of this property.
-        range: CodeList 
-
-  WhereClause:
-    is_a: IdentifiableElement
-    exact_mappings:
-      - sdmx:AttachmentConstraint
-    related_mappings:
-      - fhir:StructureDefinition/context
-      - qb:Slice
-      - sdmx:CubeRegion
-      - sdmx:DataKeySet
-      - sdmx:MetadataTargetRegion
-    description: >-
-      A WhereClause element describes conditions under which the containing context applies.
-      When empty, indicates applicability across the entire parent context.
-    attributes:
-      conditions:
-        description: Logical conditions that apply in this context (combined with AND)
-        range: Condition
-        multivalued: true
-
-  Condition:
-    is_a: GovernedElement
-    exact_mappings:
-      - odm:ConditionDef
-      - usdm:Condition
-    related_mappings:
-      - fhir:Expression
-      - qb:SliceKey
-      - sdmx:DataConstraint
-      - sdmx:MetaDataConstraint
-    description: >-
-      Reusable logical condition with AND logic between components
-    attributes:
-      rangeChecks:
-        description: Range checks that compose this condition (combined with AND)
-        range: RangeCheck
-        multivalued: true
-      implementsCondition:
-        description: Reference to a external (e.g. USDM) condition definition that this implements
-        range: string
-      dimensions:
-        exact_mappings:
-          - qb:SliceKey
-        description: Items referenced in this condition
-        range: DimensionProperty
-        multivalued: true
-      formalExpression:
-        description: >-
-          A formal expression for complex checks
-        range: FormalExpression
-        multivalued: true
-
-  RangeCheck:
-    is_a: GovernedElement
-    description: >-
-      A RangeCheck element describes a simple comparison check resolving as boolean.
-      The referenced item's value is compared against a specified value.
-    related_mappings:
-      - sdmx:DataKeySet
-    attributes:
-      comparator:
-        description: >-
-          The type of comparison to be performed.
-        range: Comparator
-        required: true
-      checkValues:
-        description: Values to compare against
-        range: string
-        multivalued: true
-      softHard:
-        description: >-
-          Indicates whether a validation check is an error ("Hard") or a warning ("Soft").
-        range: SoftHard
-      item:
-        description: >-
-          Reference to the Item element whose value is being checked. If not specified, check applies to the enclosing context.
-        range: Item
-      formalExpression:
-        description: >-
-          A formal expression for complex checks
-        range: FormalExpression
-        multivalued: true
-
-  FormalExpression:
-    is_a: IdentifiableElement
-    exact_mappings:
-      - odm:FormalExpression
-      - odm:FormalExpressionRef
-      - fhir:Expression
-    description: >-
-      A FormalExpression defines the execution of a data derivation in a given context.
-    attributes:
-      context:
-        description: >-
-          The specific context within the containing element to which this formal expression applies.
-        exact_mappings:
-          - fhir:Expression/language 
-        range: string
-      expression:
-        description: >-
-          The actual text of the formal expression (renamed from 'code' for disambiguation).
-        range: string
-        required: true
-      returnType:
-        description: Return type of the expression
-        range: string
-      parameters:
-        description: Parameters used in the expression
-        range: Parameter
-        multivalued: true
-      returnValue:
-        description: Return value details
-        range: ReturnValue
-      externalCodeLibs:
-        description: External code libraries referenced
-        range: ExternalCodeLib
-        multivalued: true
-
-  Method:
-    is_a: GovernedElement
-    exact_mappings:
-      - odm:MethodRef
-      - odm:MethodDef
-    close_mappings:
-      - fhir:Expression
-      - omop:Transformation
-    description: >-
-      A Method element describes a reusable derivation method that can be referenced by Items.
-    attributes:
-      type:
-        description: >-
-          The type of method: Computation, Imputation, or Transformation.
-        range: MethodType
-      formalExpressions:
-        description: >-
-          Formal expressions used by this method
-        range: FormalExpression
-        multivalued: true
-      document:
-        description: >-
-          Reference to a document that describes this method in detail.
-        range: DocumentReference
-
-  SourceItem:
-    is_a: IdentifiableElement
-    description: Source of data for an item
-    attributes:
-      item:
-        description: Reference to an item
-        range: Item
-      resource:
-        description: Path to a resource (e.g. File, FHIR datasource) that is the source of this item
-        range: Resource
-        multivalued: true
-      document:
-        description: Reference to an external document
-        range: DocumentReference
-
-  Parameter:
-    is_a: IdentifiableElement
-    description: >-
-      A Parameter element describes a parameter used in a formal expression.
-    attributes:
-      dataType:
-        description: >-
-          The data type of the parameter.
-        range: DataType
-      codeList:
-        description: >-
-          A list of allowed values for the parameter.
-        range: CodeList
-        multivalued: true
-      value:
-        description: >-
-          A specific value for the parameter.
-        range: string
-      items:
-        description: >-
-          A list of item dependencies for the parameter.
-        range: Item
-        multivalued: true
-
-  ReturnValue:
-    is_a: IdentifiableElement
-    description: Return value details for a formal expression
-    attributes:
-      dataType:
-        description: >-
-          The data type of the return value.
-        range: DataType
-      valueList:
-        description: >-
-          A list of possible return values.
-        range: string
-        multivalued: true
-
-  ExternalCodeLib:
-    is_a: IdentifiableElement
-    description: >-
-      An ExternalCodeLib element describes an external code library referenced by a formal expression.
-    attributes:
-      library:
-        description: >-
-          The name of the external code library.
-        range: string
-        required: true
-      version:
-        description: >-
-          The version of the external code library.
-        range: string
-      location:
-        description: >-
-          The location (URL or other reference) of the external code library.
-        range: string
-
-  Origin:
-    is_a: IdentifiableElement
-    description: >-
-      An Origin element describes the source of data for an item.
-    attributes:
-      type:
-        description: >-
-          The type of origin: CRF, Derived, Protocol, eDT, Predecessor.
-        range: OriginType        
-      source:
-        description: >-
-          The source of the data, such as Investigator, Sponsor, Subject, or Vendor.
-        range: OriginSource
-      sourceItems:
-        description: >-
-          Source items for this origin
-        range: SourceItem
-        multivalued: true
-        inlined: true
-        inlined_as_list: true
-      document:
-        description: >-
-          Reference to a document that describes this origin in detail.
-        range: DocumentReference
-
-  CodeList:
-    is_a: GovernedElement
-    exact_mappings:
-      - odm:CodeList
-      - omop:Vocabulary
-      - fhir:ValueSet
-    close_mappings:
-      - skos:Collection
-      - sdmx:ItemScheme
-      - qb:codeList
-    related_mappings:
-      - usdm:BiomedicalConceptProperty/responseCodes
-    narrow_mappings:
-      - sdmx:Codelist
-      - sdmx:ValueList
-      - sdmx:ConceptScheme
-    description: >-
-      Defines a discrete set of permissible values for an item. This corresponds to the ODM CodeList construct.
-    attributes:
-      dataType:
-        description: >-
-          The data type for the values in the code list.
-        range: DataType
-      formatName:
-        description: >-
-          Name of a standard format definition.
-        range: string
-      codeListItems:
-        description: >-
-          The individual values that make up this CodeList.
-          The type of CodeListItem included determines its behaviour.
-        any_of:
-          - range: Coding
-          - range: CodeListItem
-          - any_of:
-          - range: string
-          - range: TranslatedText
-        inlined: true
-        inlined_as_list: true
-        multivalued: true
-      externalCodeList:
-        description: >-
-          Reference to a code list that is defined externally to this study.
-        range: Resource
-
-  CodeListItem:
-    is_a: Coding
-    description: >-
-      A structured CodeList member extending the Coding class in context of a CodeList.
-    exact_mappings:
-      - odm:CodeListItem
-    close_mappings:
-      - usdm:AliasCode
-      - usdm:ResponseCode
-      - fhir:CodeableConcept
-      - omop:Concept
-    narrow_mappings:
-      - sdmx:Code
-      - sdmx:ValueItem
-    attributes:
-      description:
-        description: >-
-          A detailed description of the code (e.g., for documentation purposes).
-        any_of:
-          - range: string
-          - range: TranslatedText
-      aliases:
-        description: Alternative labels for the code (ODM Alias, skos:altLabel)
-        any_of:
-          - range: string
-          - range: TranslatedText
-        multivalued: true
-      weight:
-        description: Numeric significance of the code (e.g., for scoring)
-        range: decimal
-      other:
-        description: >-
-          Flag to indicate that the term represents "other" content.
-        range: boolean
-
-  Comment:
-    is_a: IdentifiableElement
-    exact_mappings:
-      - odm:CommentDef
-      - usdm:CommentAnnotation
-      - fhir:Annotation
-      - sdmx:Annotation
-    description: >-
-      A Comment element contains a description of a comment by the data/metdata handler.
-    attributes:
-      text:
-        description: >-
-          The comment text.
-        any_of:
-          - range: string
-          - range: TranslatedText
-        required: true
-      documents:
-        description: >-
-          References to documents that contain or are referenced by this comment.
-        range: DocumentReference
-        multivalued: true
-
-  SiteOrSponsorComment:
-    is_a: IdentifiableElement
-    description: >-
-      Feedback from a site or sponsor.
-      Renamed from Comment to avoid confusion with CommentDef.
-    attributes:
-      text:
-        description: >-
-          The comment text.
-        any_of:
-          - range: string
-          - range: TranslatedText
-        required: true
-      source:
-        description: >-
-          who made the comment, such as Investigator, Sponsor.
-        any_of: 
-          - range: string
-          - range: OriginSource
-          - range: User
-
-  User:
-    is_a: IdentifiableElement
-    description: >-
-      Information about a specific user of a clinical data collection or data management system.
-    attributes:
-      userType:
-        description: >-
-          User's role in the study.
-        range: UserType
-      userName:
-        description: >-
-          The username of the user.
-        range: string
-      fullName:
-        description: >-
-          The full name of the user.
-        range: string
-      organization:
-        description: >-
-          The organization the user belongs to.
-        range: Organization
-
-  Organization:
-    is_a: IdentifiableElement
-    description: >-
-      Organization information, such as a site or sponsor.
-    exact_mappings:
-      - odm:Organization
-      - usdm:Organization
-      - sdmx:Organisation
-    attributes:
-      role:
-        description: >-
-          The role of the organization in the study.
-        range: string
-      type:
-        description: >-
-          The type of organization (e.g., site, sponsor, vendor).
-        range: OrganizationType
-      location:
-        description: >-
-          The physical location of the organization.
-        range: string
-      address:
-        description: >-
-          The address of the organization.
-        range: string
-      partOfOrganization:
-        description: >-
-          Reference to a parent organization if this organization is part of a larger entity.
-        range: Organization
-
-
-  Resource:
-    description: >-
-      Describes an external resource used as the source for the parent ItemGroup or Item.
-    is_a: IdentifiableElement
-    attributes:
-      resourceType:
-        description: >-
-          Type of resource (e.g.,  "ODM", "HL7-FHIR", "HL7-CDA", "HL7-v2", "OpenEHR-extract")
-        range: string
-        required: false
-      attribute:
-        description: Resource attribute name
-        range: string
-      href:
-        description: Machine-readable instructions to obtain the resource e.g. FHIR path, URL
-        range: string
-        required: false
-      
-  DocumentReference:
-    description: A comprehensive reference to an external document, combining elements from ODM and FHIR
-    is_a: IdentifiableElement
-    attributes:
-      # Core document reference attributes
-      title:
-        description: Document title
-        range: string
-      href:
-        description: URL, URI, or relative path to the referenced document
-        range: string
-      pages:
-        description: Reference to specific pages in a PDF document
-        range: integer
-        multivalued: true
-        required: false
-        
-      # Content metadata attributes
-      contentType:
-        description: MIME type of the document
-        range: string
-        required: false
-      language:
-        description: The human language of the content
-        range: string
-        required: false
-      size:
-        description: Size of the document in bytes
-        range: integer
-        required: false
-      hash:
-        description: Hash of document content for integrity verification
-        range: string
-        required: false
-      
-      # FHIR compatibility attributes
-      resourceType:
-        description: Indicates the FHIR resource type (typically "DocumentReference")
-        range: string
-        required: false
-      status:
-        description: The status of this document reference (current | superseded | entered-in-error)
-        range: string
-        required: false
-      docStatus:
-        description: Status of the underlying document (preliminary | final | amended | entered-in-error)
-        range: string
-        required: false
-      category:
-        description: Categorization of document (e.g., clinical, administrative)
-        range: string
-        multivalued: true
-        required: false
-      relationship:
-        description: Relationship to the referencing entity
-        range: string
-        required: false
-      description:
-        description: Human-readable description of the document
-        range: string
-        required: false
-      
-      # Authentication and authorship
-      author:
-        description: Who authored the document
-        range: Resource
-        required: false
-        multivalued: true
-      authenticator:
-        description: Who/what authenticated the document
-        range: Resource
-        required: false
-      securityLabel:
-        description: Security classification of the document
-        range: string
-        required: false
-        multivalued: true
-        
-      # Context and timing
-      creationContext:
-        description: Clinical context in which the document was created
-        range: Resource
-        required: false
-      versionIdentifier:
-        description: Version of the referenced document
-        range: string
-        required: false
-      validityPeriod:
-        description: Time period during which the document is valid
-        range: Timing
-        required: false
-      creation:
-        description: Document creation date
-        range: datetime
-        required: false
-
-  # New classes for Data Cube and Analysis Concept compatibility
-  DataCube:
-    is_a: ItemGroup
-    close_mappings:
-      - sdmx:DataStructureDefinition
-      - qb:DataStructureDefinition
-    description: >-
-      A dataset demanded by a specific Analysis
-    attributes:
-      dimensions:
-        range: DimensionProperty
-        multivalued: true
-      measures:
-        range: MeasureProperty
-        multivalued: true
-      attributes:
-        range: AttributeProperty
-        multivalued: true
-
-  Timing:
-    is_a: IdentifiableElement
-    description: >-
-      A timing element describes the timing of an event or occurrence.
-      It can be absolute (specific date/time), relative (duration), or nominal (event-based).
-    exact_mappings:
-      - usdm:Timing
-    broad_mappings:
-      - fhir:Timing
-    narrow_mappings:
-      - omop:Observation_period
-      - omop:Drug_era
-      - omop:Condition_era
-      - omop:Procedure_era
-      - fhir:Period
-      - fhir:Age
-      - fhir:Duration
-    attributes:
-      type:
-        description: >-
-          The type of timing: Fixed, Before (Relative), or After (Relative).
-        range: TimingType
-        required: true
-      isNominal:
-        description: >-
-          Indicates whether the timing is nominal (event-based) or not.
-        range: boolean
-      value:
-        description: >-
-          The value of the timing, which can be a date/time, duration, or event reference.
-        range: string
-        required: true
-      relativeTo:
-        description: >-
-          Reference to the event or occurrence that this timing is relative to.
-        range: NominalOccurrence
-      relativeFrom:
-        description: >-
-          Reference to the event or occurrence that this timing is relative to.
-        range: NominalOccurrence
-      windowLower:
-        description: Start date/time of the timing.
-        range: datetime
-      windowUpper:
-        description: End date/time of the timing.
-        range: datetime
-      recalled:
-        description: >-
-          Indicates whether the timing is recalled or not (recalled timings are less reliable).
-        range: boolean
-      frequency:
-        description: >-
-          Frequency. Use dose frequency terminology e.g. "BID" if applicable.
-        range: string
-      imputation:
-        description: >-
-          The imputation method used for the Timing.
-        range: Method
-
-  NominalOccurrence:
-    is_a: GovernedElement
-    narrow_mappings:
-      - usdm:ScheduledInstance
-      - usdm:Encounter
-      - fhir:PlanDefinition/action
-      - omop:Visit_occurrence
-      - omop:Condition_occurrence
-      - omop:Procedure_occurrence
-    attributes:
-      timing:
-        description: >-
-          A named event reference, that can nest further named timing references.
-        range: Timing
-        required: true
-      event:
-        description: >-
-          The ID of the event in a Schedule.
-        range: string
-        required: false
-      start:
-        description: >-
-          The start date/time of the occurrence.
-        range: NominalOccurrence
-      condition: 
-        description: >-
-          A condition that must be met for this occurrence to be valid.
-        range: Condition
-        multivalued: true
-
-  MeasureProperty:
-    is_a: Item
-    exact_mappings:
-      - qb:MeasureProperty
-      - sdmx:Measure
-    description: >-
-      A MeasureProperty element describes a measure property in a data cube.
-    attributes:
-      missingHandling:
-        description: >-
-          The method for handling missing values in the measure property.
-        range: Method
-      imputation:
-        description: >-
-          The imputation method used for the measure property.
-        range: Method
-
-  DimensionProperty:
-    is_a: Item
-    exact_mappings:
-      - qb:DimensionProperty
-      - sdmx:Dimension
-    narrow_mappings:
-      - sdmx:MeasureDimension
-      - sdmx:TimeDimension
-    description: >-
-      A DimensionProperty element describes a dimension property in a data cube.
-    attributes:
-      missingHandling:
-        description: >-
-          The method for handling missing values in the measure property.
-        range: Method
-      imputation:
-        description: >-
-          The imputation method used for the measure property.
-        range: Method
-
-  ComponentList:
-    is_a: IdentifiableElement
-    description: >-
-      An abstract definition of a list of components in a given data structure definition.
-      DimensionDescriptor: Dimension, TimeDimension
-      GroupDimensionDescriptor: Dimension, TimeDimension
-      MeasureDescriptor: Measure
-      AttributeDescriptor: DataAttribute, MetadataAttributeRef
-      MetadataAttributeDescriptor: MetadataAttribute
-    exact_mappings:
-      - sdmx:ComponentList
-    attributes:
-      components:
-        description: >-
-          The components that make up this component list.
-        any_of:
-          - range: Item
-          - range: MeasureProperty
-          - range: DimensionProperty
-          - range: AttributeProperty
-        multivalued: true
-        inlined: true
-        inlined_as_list: true
-
-  AttributeProperty:
-    is_a: Item
-    exact_mappings:
-      - qb:AttributeProperty
-      - sdmx:Attribute
-    description: >-
-      An AttributeProperty element describes an attribute property in a data cube.
-
   Relationship:
-    is_a: IdentifiableElement
-    from_schema: sdtm
-    related_mappings:
-      - sdmx:ConceptSchemeMap
     description: >-
       A class to define semantic relationships between elements like Item or ItemGroup,
       capturing links such as "is the unit for" or "assesses seriousness of."
+    from_schema: sdtm
+    related_mappings:
+      - sdmx:ConceptSchemeMap
+    is_a: IdentifiableElement
     attributes:
       subject:
         description: >-
@@ -1287,6 +499,784 @@ classes:
         multivalued: true
         inlined: true
         inlined_as_list: true
+
+  CodeList:
+    description: >-
+      Defines a discrete set of permissible values for an item. This corresponds to the ODM CodeList construct.
+    exact_mappings:
+      - odm:CodeList
+      - omop:Vocabulary
+      - fhir:ValueSet
+    close_mappings:
+      - skos:Collection
+      - sdmx:ItemScheme
+      - qb:codeList
+    related_mappings:
+      - usdm:BiomedicalConceptProperty/responseCodes
+    narrow_mappings:
+      - sdmx:Codelist
+      - sdmx:ValueList
+      - sdmx:ConceptScheme
+    is_a: GovernedElement
+    attributes:
+      dataType:
+        description: >-
+          The data type for the values in the code list.
+        range: DataType
+      formatName:
+        description: >-
+          Name of a standard format definition.
+        range: string
+      codeListItems:
+        description: >-
+          The individual values that make up this CodeList.
+          The type of CodeListItem included determines its behaviour.
+        any_of:
+          - range: Coding
+          - range: CodeListItem
+          - range: string
+          - range: TranslatedText
+        inlined: true
+        inlined_as_list: true
+        multivalued: true
+      externalCodeList:
+        description: >-
+          Reference to a code list that is defined externally to this study.
+        range: Resource
+
+  CodeListItem:
+    description: >-
+      A structured CodeList member extending the Coding class in context of a CodeList.
+    exact_mappings:
+      - odm:CodeListItem
+    close_mappings:
+      - usdm:AliasCode
+      - usdm:ResponseCode
+      - fhir:CodeableConcept
+      - omop:Concept
+    narrow_mappings:
+      - sdmx:Code
+      - sdmx:ValueItem
+    is_a: Coding
+    attributes:
+      description:
+        description: >-
+          A detailed description of the code (e.g., for documentation purposes).
+        any_of:
+          - range: string
+          - range: TranslatedText
+      aliases:
+        description: Alternative labels for the code (ODM Alias, skos:altLabel)
+        any_of:
+          - range: string
+          - range: TranslatedText
+        multivalued: true
+      weight:
+        description: Numeric significance of the code (e.g., for scoring)
+        range: decimal
+      other:
+        description: >-
+          Flag to indicate that the term represents "other" content.
+        range: boolean
+
+  Comment:
+    description: >-
+      A Comment element contains a description of a comment by the data/metdata handler.
+    exact_mappings:
+      - odm:CommentDef
+      - usdm:CommentAnnotation
+      - fhir:Annotation
+      - sdmx:Annotation
+    is_a: IdentifiableElement
+    attributes:
+      text:
+        description: >-
+          The comment text.
+        any_of:
+          - range: string
+          - range: TranslatedText
+        required: true
+      documents:
+        description: >-
+          References to documents that contain or are referenced by this comment.
+        range: DocumentReference
+        multivalued: true
+
+  Coding:
+    description: Semantic coding reference
+    exact_mappings:
+      - odm:Coding
+      - usdm:Code
+      - fhir:Coding
+    close_mappings:
+      - omop:Concept
+      - skos:Concept
+      - skos:Label
+      - sdmx:Code
+      - sdmx:Concept
+      - sdmx:ISOConceptReference
+    attributes: 
+      uuid:
+        description: Universal unique identifier
+        range: string
+        identifier: true
+      code:
+        description: >-
+          The code value.
+        range: string
+        required: true
+      codeSystem:
+        description: >-
+          The code system identifier.
+        range: string
+        required: true
+      codeSystemVersion:
+        description: >-
+          The code system version.
+        range: string
+      decode:
+        description: Human-readable meaning
+        any_of:
+          - range: string
+          - range: TranslatedText
+        exact_mappings:
+          - skos:prefLabel
+
+  CodingMapping:
+    description: Mapping between codings
+    related_mappings:
+      - sdmx:ItemSchemeMap
+    is_a: IdentifiableElement
+    attributes:
+      source:
+        description: Source coding
+        range: Coding
+        required: true
+      target:
+        description: Target coding
+        range: Coding
+        required: true
+      relationship:
+        description: Type of mapping relationship
+        range: AliasPredicateEnum
+        required: true
+      confidence:
+        description: Confidence in the mapping (0.0-1.0)
+        range: float
+
+  ReifiedConcept:
+    description: >-
+      Canonical information layer showing how different data implementations (Items and ItemGroups)
+      represent the same underlying meanings, by making abstract concepts explicit and referenceable.
+      These objects are approximated as star schemas i.e. a central object with multiple properties.
+    close_mappings:
+      - sdmx:MetaDataStructureDefinition
+      - sdmx:Concept
+    narrow_mappings:
+      - usdm:BiomedicalConcept
+      - usdm:AnalysisConcept
+      - usdm:DerivationConcept
+    is_a: GovernedElement
+    attributes:
+      properties:
+        description: >-
+          Properties of the reified object, which can be other governed elements or simple values.
+        range: ConceptProperty
+        multivalued: true
+  
+  ConceptProperty:
+    close_mappings:
+      - sdmx:MetaDataAttribute
+      - sdmx:Concept
+    narrow_mappings:
+      - usdm:BiomedicalConceptProperty
+      - usdm:DerivationConceptProperty
+      - usdm:AnalysisConceptProperty
+    description: >-
+      A reification of a property concept in the context of its containing topic concept.
+    is_a: GovernedElement
+    attributes:
+      minOccurs:
+        description: >-
+          Minimum number of occurrences of this property in the context.
+          Set to >0 to mandate some number of occurrences.
+        range: integer
+      maxOccurs:
+        description: >-
+          Maximum number of occurrences of this property in the context.
+          Leave empty for unbounded. Set to 0 to disable property.
+        range: integer
+      codeList:
+        description: >-
+          Reference to a CodeList that constrains the values of this property.
+        range: CodeList 
+
+  WhereClause:
+    description: >-
+      A WhereClause element describes conditions under which the containing context applies.
+      When empty, indicates applicability across the entire parent context.
+    close_mappings:
+      - sdmx:AttachmentConstraint
+    related_mappings:
+      - fhir:StructureDefinition/context
+      - qb:Slice
+      - sdmx:CubeRegion
+      - sdmx:DataKeySet
+      - sdmx:MetadataTargetRegion
+    is_a: IdentifiableElement
+    attributes:
+      conditions:
+        description: Logical conditions that apply in this context (combined with AND)
+        range: Condition
+        multivalued: true
+
+  Condition:
+    description: >-
+      Reusable logical condition with AND logic between components
+    close_mappings:
+      - odm:ConditionDef
+      - usdm:Condition
+    related_mappings:
+      - fhir:Expression
+      - qb:SliceKey
+      - sdmx:DataConstraint
+      - sdmx:MetaDataConstraint
+    is_a: GovernedElement
+    attributes:
+      rangeChecks:
+        description: Range checks that compose this condition (combined with AND)
+        range: RangeCheck
+        multivalued: true
+      implementsCondition:
+        description: Reference to a external (e.g. USDM) condition definition that this implements
+        range: string
+      dimensions:
+        exact_mappings:
+          - qb:SliceKey
+        description: Items referenced in this condition
+        range: DimensionProperty
+        multivalued: true
+      formalExpression:
+        description: >-
+          A formal expression for complex checks
+        range: FormalExpression
+        multivalued: true
+
+  RangeCheck:
+    description: >-
+      A RangeCheck element describes a simple comparison check resolving as boolean.
+      The referenced item's value is compared against a specified value.
+    related_mappings:
+      - sdmx:DataKeySet
+    is_a: GovernedElement
+    attributes:
+      comparator:
+        description: >-
+          The type of comparison to be performed.
+        range: Comparator
+        required: true
+      checkValues:
+        description: Values to compare against
+        range: string
+        multivalued: true
+      softHard:
+        description: >-
+          Indicates whether a validation check is an error ("Hard") or a warning ("Soft").
+        range: SoftHard
+      item:
+        description: >-
+          Reference to the Item element whose value is being checked. If not specified, check applies to the enclosing context.
+        range: Item
+      formalExpression:
+        description: >-
+          A formal expression for complex checks
+        range: FormalExpression
+        multivalued: true
+
+  FormalExpression:
+    description: >-
+      A FormalExpression defines the execution of a data derivation in a given context.
+    exact_mappings:
+      - odm:FormalExpression
+      - odm:FormalExpressionRef
+      - fhir:Expression
+    is_a: IdentifiableElement
+    attributes:
+      context:
+        description: >-
+          The specific context within the containing element to which this formal expression applies.
+        exact_mappings:
+          - fhir:Expression/language 
+        range: string
+      expression:
+        description: >-
+          The actual text of the formal expression (renamed from 'code' for disambiguation).
+        range: string
+        required: true
+      returnType:
+        description: Return type of the expression
+        range: string
+      parameters:
+        description: Parameters used in the expression
+        range: Parameter
+        multivalued: true
+      returnValue:
+        description: Return value details
+        range: ReturnValue
+      externalCodeLibs:
+        description: External code libraries referenced
+        range: Resource
+        multivalued: true
+
+  Method:
+    description: >-
+      A Method element describes a reusable derivation method that can be referenced by Items.
+    exact_mappings:
+      - odm:MethodRef
+      - odm:MethodDef
+    close_mappings:
+      - fhir:Expression
+      - omop:Transformation
+    is_a: GovernedElement
+    attributes:
+      type:
+        description: >-
+          The type of method: Computation, Imputation, or Transformation.
+        range: MethodType
+      formalExpressions:
+        description: >-
+          Formal expressions used by this method
+        range: FormalExpression
+        multivalued: true
+        inlined: true
+      document:
+        description: >-
+          Reference to a document that describes this method in detail.
+        range: DocumentReference
+
+  SourceItem:
+    description: Source of data for an item
+    is_a: IdentifiableElement
+    attributes:
+      item:
+        description: Reference to an item
+        range: Item
+      resource:
+        description: Path to a resource (e.g. File, FHIR datasource) that is the source of this item
+        any_of:
+          - range: Resource
+          - range: string
+        multivalued: true
+        inlined: false
+      document:
+        description: Reference to an external document
+        range: DocumentReference
+
+  Parameter:
+    description: >-
+      A Parameter element describes a parameter used in a formal expression.
+    is_a: IdentifiableElement
+    attributes:
+      dataType:
+        description: >-
+          The data type of the parameter.
+        range: DataType
+      codeList:
+        description: >-
+          A list of allowed values for the parameter.
+        range: CodeList
+        multivalued: true
+      value:
+        description: >-
+          A specific value for the parameter.
+        range: string
+      items:
+        description: >-
+          A list of item dependencies for the parameter.
+        range: Item
+        multivalued: true
+        inlined: false
+
+  ReturnValue:
+    description: Return value details for a formal expression
+    is_a: IdentifiableElement
+    attributes:
+      dataType:
+        description: >-
+          The data type of the return value.
+        range: DataType
+      valueList:
+        description: >-
+          A list of possible return values.
+        range: string
+        multivalued: true
+
+  Origin:
+    description: >-
+      An Origin element describes the source of data for an item.
+    is_a: IdentifiableElement
+    attributes:
+      type:
+        description: >-
+          The type of origin: CRF, Derived, Protocol, eDT, Predecessor.
+        range: OriginType        
+      source:
+        description: >-
+          The source of the data, such as Investigator, Sponsor, Subject, or Vendor.
+        range: OriginSource
+      sourceItems:
+        description: >-
+          Source items for this origin
+        range: SourceItem
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      document:
+        description: >-
+          Reference to a document that describes this origin in detail.
+        range: DocumentReference
+
+  SiteOrSponsorComment:
+    description: >-
+      Feedback from a site or sponsor.
+      Renamed from Comment to avoid confusion with CommentDef.
+    is_a: IdentifiableElement
+    attributes:
+      text:
+        description: >-
+          The comment text.
+        any_of:
+          - range: string
+          - range: TranslatedText
+        required: true
+      sourceType:
+        description: >-
+          who made the comment, such as Investigator, Sponsor.
+        range: OriginSource
+      source:
+        description: >-
+          ID of the comment provider
+        any_of:
+          - range: User
+          - range: Organization
+          - range: string
+
+  User:
+    description: >-
+      Information about a specific user of a clinical data collection or data management system.
+    is_a: IdentifiableElement
+    attributes:
+      userType:
+        description: >-
+          User's role in the study.
+        range: UserType
+      userName:
+        description: >-
+          The username of the user.
+        range: string
+      fullName:
+        description: >-
+          The full name of the user.
+        range: string
+      organization:
+        description: >-
+          The organization the user belongs to.
+        range: Organization
+
+  Organization:
+    description: >-
+      Organization information, such as a site or sponsor.
+    exact_mappings:
+      - odm:Organization
+      - usdm:Organization
+      - sdmx:Organisation
+    is_a: IdentifiableElement
+    attributes:
+      role:
+        description: >-
+          The role of the organization in the study.
+        range: string
+      type:
+        description: >-
+          The type of organization (e.g., site, sponsor, vendor).
+        range: OrganizationType
+      location:
+        description: >-
+          The physical location of the organization.
+        range: string
+      address:
+        description: >-
+          The address of the organization.
+        range: string
+      partOfOrganization:
+        description: >-
+          Reference to a parent organization if this organization is part of a larger entity.
+        range: Organization
+
+  Resource:
+    description: >-
+      Describes an external resource used as the source for the parent ItemGroup or Item.
+    is_a: IdentifiableElement
+    attributes:
+      resourceType:
+        description: >-
+          Type of resource (e.g.,  "ODM", "HL7-FHIR", "HL7-CDA", "HL7-v2", "OpenEHR-extract")
+        range: string
+        required: false
+      attribute:
+        description: Resource attribute name
+        range: string
+    mixins:
+      - Versioned
+      
+  DocumentReference:
+    description: A comprehensive reference to an external document, combining elements from ODM and FHIR
+    is_a: IdentifiableElement
+    mixins:
+      - Versioned
+    attributes:
+      # Core document reference attributes
+      title:
+        description: Document title
+        range: string
+      pages:
+        description: Reference to specific pages in a PDF document
+        range: integer
+        multivalued: true
+        required: false
+      relationship:
+        description: Relationship to the referencing entity
+        range: string
+        required: false
+
+  ReferenceStatus:
+    mixin: true
+    attributes:
+      status:
+        description: The status of this reference (current | superseded | entered-in-error)
+        range: string
+        required: false
+
+  # Unused, for illustration of relative level of detail in FHIR
+  # FHIRDocument:
+  #   is_a: DocumentReference
+  #   mixins:
+  #     - Identifiable
+  #     - labelled
+  #     - Governed
+  #     - IsProfile
+  #     - ReferenceStatus 
+  #   attributes:
+  #     contentType:
+  #       description: MIME type of the document
+  #       range: string
+  #       required: false
+  #     language:
+  #       description: The human language of the content
+  #       range: string
+  #       required: false
+  #     size:
+  #       description: Size of the document in bytes
+  #       range: integer
+  #       required: false
+  #     hash:
+  #       description: Hash of document content for integrity verification
+  #       range: string
+  #       required: false
+  #     resourceType:
+  #       description: Indicates the FHIR resource type (typically "DocumentReference")
+  #       range: string
+  #       required: false
+  #     creationContext:
+  #       description: Clinical context in which the document was created
+  #       range: string
+  #       required: false
+  #     docStatus:
+  #       description: Status of the underlying document (preliminary | final | amended | entered-in-error)
+  #       range: string
+  #       required: false
+  #     category:
+  #       description: Categorization of document (e.g., clinical, administrative)
+  #       range: string
+  #       multivalued: true
+  #       required: false
+
+  # New classes for Data Cube and Analysis Concept compatibility
+  DataCube:
+    description: >-
+      A dataset demanded by a specific Analysis
+    close_mappings:
+      - sdmx:DataStructureDefinition
+      - qb:DataStructureDefinition
+    is_a: ItemGroup
+    attributes:
+      dimensions:
+        range: DimensionProperty
+        multivalued: true
+      measures:
+        range: MeasureProperty
+        multivalued: true
+      attributes:
+        range: AttributeProperty
+        multivalued: true
+
+  Timing:
+    description: >-
+      A timing element describes the timing of an event or occurrence.
+      It can be absolute (specific date/time), relative (duration), or nominal (event-based).
+    exact_mappings:
+      - usdm:Timing
+    broad_mappings:
+      - fhir:Timing
+    narrow_mappings:
+      - omop:Observation_period
+      - omop:Drug_era
+      - omop:Condition_era
+      - omop:Procedure_era
+      - fhir:Period
+      - fhir:Age
+      - fhir:Duration
+    is_a: IdentifiableElement
+    attributes:
+      type:
+        description: >-
+          The type of timing: Fixed, Before (Relative), or After (Relative).
+        range: TimingType
+        required: true
+      isNominal:
+        description: >-
+          Indicates whether the timing is nominal (event-based) or not.
+        range: boolean
+      value:
+        description: >-
+          The value of the timing, which can be a date/time, duration, or event reference.
+        range: string
+        required: true
+      relativeTo:
+        description: >-
+          Reference to the event or occurrence that this timing is relative to.
+        range: NominalOccurrence
+      relativeFrom:
+        description: >-
+          Reference to the event or occurrence that this timing is relative to.
+        range: NominalOccurrence
+      windowLower:
+        description: Start date/time of the timing.
+        range: datetime
+      windowUpper:
+        description: End date/time of the timing.
+        range: datetime
+      recalled:
+        description: >-
+          Indicates whether the timing is recalled or not (recalled timings are less reliable).
+        range: boolean
+      frequency:
+        description: >-
+          Frequency. Use dose frequency terminology e.g. "BID" if applicable.
+        range: string
+      imputation:
+        description: >-
+          The imputation method used for the Timing.
+        range: Method
+
+  NominalOccurrence:
+    narrow_mappings:
+      - usdm:ScheduledInstance
+      - usdm:Encounter
+      - fhir:PlanDefinition/action
+      - omop:Visit_occurrence
+      - omop:Condition_occurrence
+      - omop:Procedure_occurrence
+    is_a: GovernedElement
+    attributes:
+      timing:
+        description: >-
+          A named event reference, that can nest further named timing references.
+        range: Timing
+        required: true
+      event:
+        description: >-
+          The ID of the event in a Schedule.
+        range: string
+        required: false
+      start:
+        description: >-
+          The start date/time of the occurrence.
+        range: NominalOccurrence
+      condition: 
+        description: >-
+          A condition that must be met for this occurrence to be valid.
+        range: Condition
+        multivalued: true
+
+  MeasureProperty:
+    description: >-
+      A MeasureProperty element describes a measure property in a data cube.
+    exact_mappings:
+      - qb:MeasureProperty
+      - sdmx:Measure
+    is_a: Item
+    attributes:
+      missingHandling:
+        description: >-
+          The method for handling missing values in the measure property.
+        range: Method
+      imputation:
+        description: >-
+          The imputation method used for the measure property.
+        range: Method
+
+  DimensionProperty:
+    description: >-
+      A DimensionProperty element describes a dimension property in a data cube.
+    exact_mappings:
+      - qb:DimensionProperty
+      - sdmx:Dimension
+    narrow_mappings:
+      - sdmx:MeasureDimension
+      - sdmx:TimeDimension
+    is_a: Item
+    attributes:
+      missingHandling:
+        description: >-
+          The method for handling missing values in the measure property.
+        range: Method
+      imputation:
+        description: >-
+          The imputation method used for the measure property.
+        range: Method
+
+  AttributeProperty:
+    description: >-
+      An AttributeProperty element describes an attribute property in a data cube.
+    exact_mappings:
+      - qb:AttributeProperty
+      - sdmx:Attribute
+    is_a: Item
+
+  ComponentList:
+    description: >-
+      An abstract definition of a list of components in a given data structure definition.
+      DimensionDescriptor: Dimension, TimeDimension
+      GroupDimensionDescriptor: Dimension, TimeDimension
+      MeasureDescriptor: Measure
+      AttributeDescriptor: DataAttribute, MetadataAttributeRef
+      MetadataAttributeDescriptor: MetadataAttribute
+    exact_mappings:
+      - sdmx:ComponentList
+    is_a: IdentifiableElement
+    attributes:
+      components:
+        description: >-
+          The components that make up this component list.
+        any_of:
+          - range: MeasureProperty
+          - range: DimensionProperty
+          - range: AttributeProperty
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+
 
 enums:
   AliasPredicateEnum:
