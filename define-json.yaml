@@ -2,9 +2,9 @@ id: https://cdisc.org/define-json
 name: Define-JSON
 description: >-
   Data model for supply and demand data contracts to complement CDISC USDM, ODM, and Dataset-JSON.
-  (This LinkML version includes semantics to act as 'Rosetta Stone' for SDMX, FHIR, OMOP, RDF, and CDISC)
+  This LinkML version includes semantics to act as Rosetta Stone for SDMX, FHIR, OMOP, RDF, and CDISC.
+  Note: this might be more of an 'ODM-JSON' if 'Define-JSON' is intended to be simple.
 license: MIT
-
 prefixes:
   linkml: https://w3id.org/linkml/
   skos: http://www.w3.org/2004/02/skos/core#
@@ -15,6 +15,9 @@ prefixes:
   omop: https://omop.org/omop-cdm/
   qb: http://purl.org/linked-data/cube#
   sdmx: http://purl.org/linked-data/sdmx#
+  dprod: https://ekgf.github.io/dprod/
+  prov: http://www.w3.org/ns/prov#
+  dcat: http://www.w3.org/ns/dcat#
 default_prefix: odm
 
 imports:
@@ -40,7 +43,7 @@ classes:
     attributes:
       OID:
         description: >-
-          Local identifier within this study/context. 
+          Local identifier within this study/context.
           Use CDISC OID format for regulatory submissions,
           or simple strings for internal use.
         identifier: true
@@ -74,10 +77,14 @@ classes:
         range: datetime
       agents:
         description: People or systems involved in defining this item
+        narrow_mappings:
+          - prov:wasAttributedTo
+          - prov:wasAssociatedBy
         any_of:
           - range: User
           - range: Organization
           - range: string
+          - range: prov:Agent
 
   Labelled:
     description: Slots for detailing meanings and multilingual descriptions.
@@ -211,7 +218,7 @@ classes:
           ImplementationNotes reference: Further information, such as rationale and implementation instructions, on how to implement the CRF data collection fields.
         any_of:
           - range: string
-          - range: TranslatedText    
+          - range: TranslatedText
       collectionExceptionCondition:
         description: >-
           Condition that defines when collection may be exempted
@@ -285,7 +292,7 @@ classes:
         inlined: true
         inlined_as_list: true
       mappings:
-        description: Coding mappings in this version of the metadata. 
+        description: Coding mappings in this version of the metadata.
         range: CodingMapping
         multivalued: true
         inlined: true
@@ -310,8 +317,10 @@ classes:
       - odm:ItemDef
       - qb:ComponentSpecification
       - sdmx:DataAttribute
+      - sdmx:MetadataAttribute
     narrow_mappings:
       - fhir:StructureDefinition/variable
+      - fhir:Questionnaire/item
       - qb:ComponentProperty
       - omop:Field
       - omop:DerivedColumn
@@ -320,10 +329,11 @@ classes:
       - usdm:DerivationConceptProperty
       - usdm:AnalysisConceptProperty
       - fhir:ElementDefinition
-      - qb:MeasureProperty
-      - qb:AttributeProperty
+      - qb:Measure
+      - qb:Attribute
       - sdmx:Concept
       - sdmx:Component
+      - sdmx:Representation
     is_a: GovernedElement
     mixins:
       - IsODMItem
@@ -377,24 +387,28 @@ classes:
 
   ItemGroup:
     description: >-
-      An ItemGroup element describes a specific context as a collection.
-      Uses include 
-       - Table / Dataframe
-       - Object / Profile of a FHIR Resource
-       - Data Specialisation of a Biomedical Concept
-       - Section of a form
+      An ItemGroup element describes a specific context as a collection of items or groups.
+      Uses include
+       - Table / Dataframe (MetaDataStructureDefinition, DataStructureDefinition in SDMX)
+       - Object / Profile of a FHIR Resource (MetaDataStructureDefinition, DataStructureDefinition in SDMX)
+       - Data Specialisation of a Biomedical Concept (.coreRepresentation in SDMX, default if not overwritten)
+       - Section of a form (ODM used for CRF definition)
     close_mappings:
       - odm:ItemGroupDef
       - odm:ItemGroupRef
     narrow_mappings:
       - fhir:StructureDefinition
       - fhir:ViewDefinition
+      - fhir:Questionnaire/item
       - omop:Table
       - qb:DataStructureDefinition
       - sdmx:DataStructureDefinition
-    related_mappings:
-      - sdmx:ComponentList
       - sdmx:MetaDataStructureDefinition
+    related_mappings:
+      - qb:Dataset
+      - qb:Observation
+      - qb:ObservationGroup
+      - qb:Slice
     is_a: GovernedElement
     mixins:
       - IsProfile
@@ -439,7 +453,7 @@ classes:
           Reference to a abstract concept topic that this item group is a specialization of
         range: ReifiedConcept
       whereClause:
-        description: >- 
+        description: >-
           If nested in a parent ItemGroup context,
           conditions for when this group applies
         range: WhereClause
@@ -475,7 +489,7 @@ classes:
           Variable relationship descriptive linking phrase.
         range: LinkingPhraseEnum
         required: true
-      
+
   Translation:
     description: >-
       A translation object that can be used to represent text in multiple languages.
@@ -615,7 +629,7 @@ classes:
       - sdmx:Code
       - sdmx:Concept
       - sdmx:ISOConceptReference
-    attributes: 
+    attributes:
       uuid:
         description: Universal unique identifier
         range: string
@@ -669,6 +683,7 @@ classes:
       Canonical information layer showing how different data implementations (Items and ItemGroups)
       represent the same underlying meanings, by making abstract concepts explicit and referenceable.
       These objects are approximated as star schemas i.e. a central object with multiple properties.
+      This allows linking to structure in the logical data model e.g. USDM, beyond just semantic tags.
     close_mappings:
       - sdmx:MetaDataStructureDefinition
       - sdmx:Concept
@@ -683,8 +698,12 @@ classes:
           Properties of the reified object, which can be other governed elements or simple values.
         range: ConceptProperty
         multivalued: true
-  
+        inlined: true
+        inlined_as_list: true
+
   ConceptProperty:
+    description: >-
+      A reification of a property concept in the context of its containing topic concept.
     close_mappings:
       - sdmx:MetaDataAttribute
       - sdmx:Concept
@@ -692,8 +711,6 @@ classes:
       - usdm:BiomedicalConceptProperty
       - usdm:DerivationConceptProperty
       - usdm:AnalysisConceptProperty
-    description: >-
-      A reification of a property concept in the context of its containing topic concept.
     is_a: GovernedElement
     attributes:
       minOccurs:
@@ -709,19 +726,20 @@ classes:
       codeList:
         description: >-
           Reference to a CodeList that constrains the values of this property.
-        range: CodeList 
+        range: CodeList
 
   WhereClause:
     description: >-
       A WhereClause element describes conditions under which the containing context applies.
       When empty, indicates applicability across the entire parent context.
+      Links Conditions extensibly to Structures where they are used
     close_mappings:
       - sdmx:AttachmentConstraint
     related_mappings:
       - fhir:StructureDefinition/context
+      - qb:ObservationGroup
       - qb:Slice
       - sdmx:CubeRegion
-      - sdmx:DataKeySet
       - sdmx:MetadataTargetRegion
     is_a: IdentifiableElement
     attributes:
@@ -741,21 +759,18 @@ classes:
       - qb:SliceKey
       - sdmx:DataConstraint
       - sdmx:MetaDataConstraint
+      - sdmx:DataKeySet
     is_a: GovernedElement
     attributes:
       rangeChecks:
         description: Range checks that compose this condition (combined with AND)
         range: RangeCheck
         multivalued: true
+        inlined: true
+        inlined_as_list: true
       implementsCondition:
         description: Reference to a external (e.g. USDM) condition definition that this implements
         range: string
-      dimensions:
-        exact_mappings:
-          - qb:SliceKey
-        description: Items referenced in this condition
-        range: DimensionProperty
-        multivalued: true
       formalExpression:
         description: >-
           A formal expression for complex checks
@@ -767,7 +782,8 @@ classes:
       A RangeCheck element describes a simple comparison check resolving as boolean.
       The referenced item's value is compared against a specified value.
     related_mappings:
-      - sdmx:DataKeySet
+      - qb:SliceKey
+      - sdmx:DataKey
     is_a: GovernedElement
     attributes:
       comparator:
@@ -779,19 +795,23 @@ classes:
         description: Values to compare against
         range: string
         multivalued: true
+      item:
+        description: >-
+          Reference to the Item element whose value is being checked. If not specified, check applies to the enclosing context.
+        any_of:
+          - range: Item
+          - range: Dimension
       softHard:
         description: >-
           Indicates whether a validation check is an error ("Hard") or a warning ("Soft").
         range: SoftHard
-      item:
-        description: >-
-          Reference to the Item element whose value is being checked. If not specified, check applies to the enclosing context.
-        range: Item
       formalExpression:
         description: >-
           A formal expression for complex checks
         range: FormalExpression
         multivalued: true
+        inlined: true
+        inlined_as_list: true
 
   FormalExpression:
     description: >-
@@ -806,7 +826,7 @@ classes:
         description: >-
           The specific context within the containing element to which this formal expression applies.
         exact_mappings:
-          - fhir:Expression/language 
+          - fhir:Expression/language
         range: string
       expression:
         description: >-
@@ -896,6 +916,12 @@ classes:
         range: Item
         multivalued: true
         inlined: false
+      conceptProperty:
+        description: >-
+          Reference to a specific concept property that this parameter represents or modifies.
+        range: ConceptProperty
+        multivalued: true
+        inlined: false
 
   ReturnValue:
     description: Return value details for a formal expression
@@ -919,7 +945,7 @@ classes:
       type:
         description: >-
           The type of origin: CRF, Derived, Protocol, eDT, Predecessor.
-        range: OriginType        
+        range: OriginType
       source:
         description: >-
           The source of the data, such as Investigator, Sponsor, Subject, or Vendor.
@@ -964,6 +990,10 @@ classes:
   User:
     description: >-
       Information about a specific user of a clinical data collection or data management system.
+    exact_mappings:
+      - odm:User
+    broad_mappings:
+      - prov:Agent
     is_a: IdentifiableElement
     attributes:
       userType:
@@ -981,6 +1011,8 @@ classes:
       organization:
         description: >-
           The organization the user belongs to.
+        close_mappings:
+          - prov:actedOnBehalfOf
         range: Organization
 
   Organization:
@@ -990,6 +1022,8 @@ classes:
       - odm:Organization
       - usdm:Organization
       - sdmx:Organisation
+    broad_mappings:
+      - prov:Agent
     is_a: IdentifiableElement
     attributes:
       role:
@@ -1015,8 +1049,12 @@ classes:
 
   Resource:
     description: >-
-      Describes an external resource used as the source for the parent ItemGroup or Item.
+      External resource used as the source for some Dataset, Itemgroup, or Item within.
+    close_mappings:
+      - odm:Resource
     is_a: IdentifiableElement
+    mixins:
+      - Versioned
     attributes:
       resourceType:
         description: >-
@@ -1024,101 +1062,36 @@ classes:
         range: string
         required: false
       attribute:
-        description: Resource attribute name
+        description: >-
+          Field provided by the Name attribute where the data or information can be obtained.
+          Examples are "valueQuantity.value" or "valueQuantity.unit".
         range: string
-    mixins:
-      - Versioned
-      
+      selection:
+        multivalued: true
+        description: >-
+          Machine-executable instructions for selecting data from the resource.
+        range: FormalExpression
+        inlined: true
+        inlined_as_list: true   
+
   DocumentReference:
-    description: A comprehensive reference to an external document, combining elements from ODM and FHIR
+    description: A comprehensive reference to an external document, combining elements from ODM and FHIR.
     is_a: IdentifiableElement
     mixins:
       - Versioned
     attributes:
-      # Core document reference attributes
       title:
-        description: Document title
+        description: Document title.
         range: string
       pages:
-        description: Reference to specific pages in a PDF document
+        description: Reference to specific pages in a PDF document.
         range: integer
         multivalued: true
         required: false
       relationship:
-        description: Relationship to the referencing entity
+        description: Relationship to the referencing entity.
         range: string
         required: false
-
-  ReferenceStatus:
-    mixin: true
-    attributes:
-      status:
-        description: The status of this reference (current | superseded | entered-in-error)
-        range: string
-        required: false
-
-  # Unused, for illustration of relative level of detail in FHIR
-  # FHIRDocument:
-  #   is_a: DocumentReference
-  #   mixins:
-  #     - Identifiable
-  #     - labelled
-  #     - Governed
-  #     - IsProfile
-  #     - ReferenceStatus 
-  #   attributes:
-  #     contentType:
-  #       description: MIME type of the document
-  #       range: string
-  #       required: false
-  #     language:
-  #       description: The human language of the content
-  #       range: string
-  #       required: false
-  #     size:
-  #       description: Size of the document in bytes
-  #       range: integer
-  #       required: false
-  #     hash:
-  #       description: Hash of document content for integrity verification
-  #       range: string
-  #       required: false
-  #     resourceType:
-  #       description: Indicates the FHIR resource type (typically "DocumentReference")
-  #       range: string
-  #       required: false
-  #     creationContext:
-  #       description: Clinical context in which the document was created
-  #       range: string
-  #       required: false
-  #     docStatus:
-  #       description: Status of the underlying document (preliminary | final | amended | entered-in-error)
-  #       range: string
-  #       required: false
-  #     category:
-  #       description: Categorization of document (e.g., clinical, administrative)
-  #       range: string
-  #       multivalued: true
-  #       required: false
-
-  # New classes for Data Cube and Analysis Concept compatibility
-  DataCube:
-    description: >-
-      A dataset demanded by a specific Analysis
-    close_mappings:
-      - sdmx:DataStructureDefinition
-      - qb:DataStructureDefinition
-    is_a: ItemGroup
-    attributes:
-      dimensions:
-        range: DimensionProperty
-        multivalued: true
-      measures:
-        range: MeasureProperty
-        multivalued: true
-      attributes:
-        range: AttributeProperty
-        multivalued: true
 
   Timing:
     description: >-
@@ -1180,13 +1153,19 @@ classes:
         range: Method
 
   NominalOccurrence:
+    description: >-
+      An event such as a planned or unplanned Encounter, Adverse Event
     narrow_mappings:
       - usdm:ScheduledInstance
       - usdm:Encounter
       - fhir:PlanDefinition/action
+      - fhir:ActivityDefinition
+      - fhir:Encounter
+      - fhir:AdverseEvent
       - omop:Visit_occurrence
       - omop:Condition_occurrence
       - omop:Procedure_occurrence
+    related_mappings:
     is_a: GovernedElement
     attributes:
       timing:
@@ -1199,60 +1178,313 @@ classes:
           The ID of the event in a Schedule.
         range: string
         required: false
-      start:
-        description: >-
-          The start date/time of the occurrence.
-        range: NominalOccurrence
-      condition: 
+      condition:
         description: >-
           A condition that must be met for this occurrence to be valid.
         range: Condition
         multivalued: true
 
-  MeasureProperty:
+  # Illustrating relative level of detail in FHIR
+  # IsFHIRDocument:
+  #   mixin: true
+  #   attributes:
+  #     status:
+  #       description: The status of this reference (current | superseded | entered-in-error)
+  #       range: string
+  #       required: false
+  #   attributes:
+  #     contentType:
+  #       description: MIME type of the document
+  #       range: string
+  #       required: false
+  #     language:
+  #       description: The human language of the content
+  #       range: string
+  #       required: false
+  #     size:
+  #       description: Size of the document in bytes
+  #       range: integer
+  #       required: false
+  #     hash:
+  #       description: Hash of document content for integrity verification
+  #       range: string
+  #       required: false
+  #     resourceType:
+  #       description: Indicates the FHIR resource type (typically "DocumentReference")
+  #       range: string
+  #       required: false
+  #     creationContext:
+  #       description: Clinical context in which the document was created
+  #       range: string
+  #       required: false
+  #     docStatus:
+  #       description: Status of the underlying document (preliminary | final | amended | entered-in-error)
+  #       range: string
+  #       required: false
+  #     category:
+  #       description: Categorization of document (e.g., clinical, administrative)
+  #       range: string
+  #       multivalued: true
+  #       required: false
+  
+  # FHIRDocument:
+  #   is_a: DocumentReference
+  #   mixins:
+  #     - Identifiable
+  #     - labelled
+  #     - Governed
+  #     - IsProfile
+  #     - IsFHIRDocument
+
+
+  # New classes for Data Cube, Analysis Concept, and DTA governance
+  DataStructureDefinition:
     description: >-
-      A MeasureProperty element describes a measure property in a data cube.
+      Structure for a data cube demanded by a specific Analysis.
+      Adds components: Dimensions, Attributes and Measures.
+      Items referenced by its components must all be present in .items
+    close_mappings:
+      - sdmx:DataStructureDefinition
+      - qb:DataStructureDefinition
+    is_a: ItemGroup
+    attributes:
+      dimensions:
+        range: Dimension
+        multivalued: true
+      measures:
+        range: Measure
+        multivalued: true
+      attributes:
+        range: DataAttribute
+        multivalued: true
+      grouping:
+        description: >-
+          An association to a set of metadata concepts that have an identified
+          structural role in a Data Structure Definition.
+        range: ComponentList
+      evolvingStructure:
+        range: boolean
+        ifabsent: F
+
+  Dataflow:
+    description: >-
+      Abstract representation of data provision for different reference periods.
+      A Distribution (and its Dataset) is an instance of a Dataflow.
+    close_mappings:
+      - sdmx:Dataflow
+    related_mappings:
+      - dprod:Distribution
+      - dcat:Distribution
+      - dprod:DataService
+      - dcat:DataService
+    is_a: GovernedElement
+    mixins:
+      - Versioned
+    attributes:
+      structure:
+        description: Structured component specification for this flow
+        range: DataStructureDefinition
+        required: true
+      dimensionConstraint:
+        range: Dimension
+        multivalued: true
+    
+  IsSdmxDataset:
+    mixin: true
+    description: >-
+      Additional metadata for SDMX Datasets
+    attributes:
+      action:
+        description: >-
+          Defines the action to be taken by the recipient system (information, append, replace, delete)
+      reportingBegin:
+        description: >-
+          A specific time period in a known system of time periods that
+          identifies the start period of a report.
+      reportingEnd:
+        description: >-
+          A specific time period in a known system of time periods that identifies
+          the end period of a report.
+      dataExtractionDate:
+        description: >-
+          A specific time period that identifies the date and time that the data are
+          extracted from a data source.
+      validFrom:
+        description: >-
+          Indicates the inclusive start time indicating the validity of the information
+          in the data set.
+      validTo:
+        description: >-
+          Indicates the inclusive end time indicating the validity of the information in the data set.
+      publicationYear:
+        description: >-
+          Specifies the year of publication of the data or metadata in terms of whatever
+          provisioning agreements might be in force.
+      publicationPeriod:
+        description: >-
+          Specifies the period of publication of the data or metadata in terms of whatever provisioning
+          agreements might be in force.
+
+  Dataset:
+    description: >-
+      Collection of observations that share the same dimensionality.
+      Expressed as a set of unique dimensions in context of a Data Product.
+    close_mappings:
+      - qb:Dataset
+      - sdmx:Dataset
+      - dprod:Dataset
+      - dcat:Dataset
+    narrow_mappings:
+      - sdmx:JsonDataset
+      - sdmx:CsvDataset
+      - sdmx:StructureSpecificDataset
+    is_a: IdentifiableElement
+    mixins:
+      - Versioned
+      - IsProfile
+      - IsSdmxDataset
+    attributes:
+      describedBy:
+        description: >-
+          Associates a Dataflow and thereby a Data Structure Definition to the data set.
+        range: Dataflow
+      structuredBy:
+        description: >-
+          Associates the Data Structure Definition that defines the structure of the Data Set.
+          Note that the Data Structure Definition is the same as that associated (non-mandatory) to the Dataflow.
+        range: DataStructureDefinition
+      publishedBy:
+        description: >-
+          Associates the Data Provider that reports/publishes the data.
+        any_of:
+          - range: Organization
+          - range: string
+      keys:
+        description: >-
+          Series and Group keys in the data that are associated with dimensions in this structure
+        range: Key
+        required: true
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      datasetType:
+        description: Type or classification of the dataset.
+      distribution:
+        description: Representations of this dataset in various formats or access methods.
+        range: Distribution
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+        exact_mappings:
+          - dcat:distribution
+      conformsTo:
+        description: Specification or standard that this dataset conforms to.
+        close_mappings:
+          - dct:conformsTo
+      hasPolicy:
+        description: Access or usage policy applied to this dataset.
+        range: odrl:Policy
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      informationSensitivityClassification:
+        description: Classification of the dataset's sensitivity or confidentiality.
+
+  DatasetKey:
+    description: >-
+      Comprises the cross-product of values of dimensions that identify some cross-section.
+    abstract: true
+    exact_mappings:
+      - sdmx:Key
+    attributes:
+      describedBy:
+        description: >-
+          Associates the Dimension Descriptor defined in the Data Structure Definition.
+        any_of:
+          - range: Dimension
+          - range: ComponentList
+      keyValues:
+        description: >-
+          List of Key Values that comprise each key, separated by a dot
+          e.g. SUBJ001.VISIT2.BMI
+        range: string
+        multivalued: true
+      attributeValues:
+        description: >-
+          Association to the Attribute Values relating to Key.
+        any_of:
+          - range: string
+          - range: Code
+
+  GroupKey:
+    description: >-
+      Use this for all other collection of dimensions that are a subset of the full set of dimensions.
+      If it includes Time dimension and/or uniquely-identifies rows, use SeriesKey instead.
+      Think of SeriesKey as row identifiers, a special case of Key that tags subsets of rows.
+    exact_mappings:
+      - sdmx:GroupKey
+    is_a: DatasetKey
+  
+  SeriesKey:
+    description: >-
+      Comprises the cross-product of values of dimensions, including Time, that identify uniquely an Observation.
+      SeriesKey is the dimension(s) shared by all Observations in a conceptual Series.
+      SeriesKeys in SDMX generally written by concatenating Dimension values with dots e.g. SUBJ1.BMI.VISIT2
+    exact_mappings:
+      - sdmx:SeriesKey
+    is_a: DatasetKey
+  
+  CubeComponent:
+    description: >-
+      Extends the generic traceable Item data field, adding analysis data cube properties.
+    abstract: true
+    exact_mappings:
+      - sdmx:Component
+    is_a: Item
+    attributes:
+      role:
+        description: >-
+          The role this component plays in its Structure Definition.
+      missingHandling:
+        description: >-
+          The method for handling missing values in the measure property.
+        range: Method
+      imputation:
+        description: >-
+          The imputation method used for the measure property.
+        range: Method
+
+  Measure:
+    description: >-
+      A Measure element describes a measure property in a data cube.
     exact_mappings:
       - qb:MeasureProperty
       - sdmx:Measure
-    is_a: Item
-    attributes:
-      missingHandling:
-        description: >-
-          The method for handling missing values in the measure property.
-        range: Method
-      imputation:
-        description: >-
-          The imputation method used for the measure property.
-        range: Method
+    is_a: CubeComponent
 
-  DimensionProperty:
+  Dimension:
     description: >-
-      A DimensionProperty element describes a dimension property in a data cube.
+      A Dimension element describes a dimension property in a data cube.
     exact_mappings:
       - qb:DimensionProperty
       - sdmx:Dimension
+    broad_mappings:
+      - sdmx:DataAttribute
     narrow_mappings:
       - sdmx:MeasureDimension
       - sdmx:TimeDimension
-    is_a: Item
+    is_a: CubeComponent
     attributes:
-      missingHandling:
-        description: >-
-          The method for handling missing values in the measure property.
-        range: Method
-      imputation:
-        description: >-
-          The imputation method used for the measure property.
-        range: Method
-
-  AttributeProperty:
+      keySequence:
+        range: integer
+ 
+  DataAttribute:
     description: >-
-      An AttributeProperty element describes an attribute property in a data cube.
+      An Attribute element describes an attribute property in a data cube.
     exact_mappings:
       - qb:AttributeProperty
-      - sdmx:Attribute
-    is_a: Item
+      - sdmx:DataAttribute
+    is_a: CubeComponent
 
   ComponentList:
     description: >-
@@ -1270,14 +1502,233 @@ classes:
         description: >-
           The components that make up this component list.
         any_of:
-          - range: MeasureProperty
-          - range: DimensionProperty
-          - range: AttributeProperty
+          - range: Measure
+          - range: Dimension
+          - range: DataAttribute
         multivalued: true
         inlined: true
         inlined_as_list: true
 
+  # How a dataset is constructed, by attaching attributes to dimensions and measures at different levels
+  # @Lex how do these relationships relate to SDTM DSS relationships?
+  MeasureRelationship:
+    description: >-
+      Associates DataAttribute with a Measure
+    exact_mappings:
+      - sdmx:MeasureRelationship
+    attributes:
+      measure:
+        range: Measure
+      attribute:
+        range: DataAttribute
 
+  DataflowRelationship:
+    description: >-
+      Associates DataAttribute with a Dataflow, reported at Dataset level
+    exact_mappings:
+      - sdmx:DataflowRelationship
+    attributes:
+      dataFlow:
+        range: Dataflow
+      attribute:
+        range: DataAttribute
+
+  GroupRelationship:
+    description: >-
+      Associates DataAttribute with a set of Dimensions.
+      Only used when the Attribute value varies based on all Group Dimension values,
+      e.g. hash of a combination of keys
+    exact_mappings:
+      - sdmx:GroupRelationship
+    attributes:
+      groupKey:
+        description: >-
+          Set of dimensions that this definition depends on
+        exact_mappings:
+          - sdmx:GroupDimensionDescriptor
+        range: ComponentList
+      attribute:
+        range: DataAttribute
+  
+  DimensionRelationship:
+    description: >-
+      Associates DataAttribute with a specific Dimension at a specific level.
+    exact_mappings:
+      - sdmx:DimensionRelationship
+    attributes:
+      dimensions:
+        exact_mappings:
+          - sdmx:DimensionDescriptor
+        range: Dimension
+        multivalued: true
+      groupKey:
+        description: >-
+          Set of dimensions that this definition depends on
+        exact_mappings:
+          - sdmx:GroupDimensionDescriptor
+        range: ComponentList
+      attribute:
+        range: DataAttribute
+
+  ObservationRelationship:
+    description: >-
+      Associates DataAttribute with a Observation.
+      A BiomedicalConcept-level implementation ItemGroup describes the Observation.
+      This allows value-level Items to be reused across multiple different Views.
+    exact_mappings:
+      - sdmx:ObservationRelationship
+    attributes:
+      item:
+        description: >-
+          Reference to the Item in an observation context that this definition applies to.
+          e.g. the SDTM Variable Specialisation for a given Biomedical Concept Property.
+        exact_mappings:
+          - sdmx:ObservationDescriptor
+        range: Item
+      attribute:
+        range: DataAttribute
+  
+  # DPROD to complement Dataset class and link to DCAT ontology
+  DataProduct:
+    description: >-
+      A governed, purpose-driven collection of datasets and services with an owning team and lifecycle.
+    exact_mappings:
+      - dprod:DataProduct
+      - dcat:DataService
+    is_a: GovernedElement
+    mixins:
+      - Versioned
+    attributes:
+      dataProductOwner:
+        description: The person or team accountable for this data product.
+        any_of:
+          - range: User
+          - range: Organization
+          - range: string
+        exact_mappings:
+          - prov:wasAttributedTo
+      domain:
+        description: The functional domain or business area this product serves.
+      purpose:
+        description: Statement of what this data product is intended to deliver.
+      lifecycleStatus:
+        description: Current lifecycle status of the data product.
+        range: DataProductLifecycleStatus
+      inputPort:
+        description: Services that provide input into this data product.
+        range: DataService
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      outputPort:
+        description: Services that expose output from this data product.
+        range: DataService
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      inputDataset:
+        description: Source datasets used by the data product.
+        range: Dataset
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      outputDataset:
+        description: Output datasets produced by the data product.
+        range: Dataset
+        multivalued: true
+        inlined_as_list: true
+      hasPolicy:
+        description: Policies governing the use and access of the data product.
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+
+  Distribution:
+    description: A specific technical representation of a dataset.
+    exact_mappings:
+      - dprod:Distribution
+      - dcat:Distribution
+    narrow_mappings:
+      - sdmx:JsonDataset
+      - sdmx:CsvDataset
+      - sdmx:StructureSpecificDataset
+    attributes:
+      accessService:
+        description: Service that provides access to this distribution.
+        range: DataService
+      conformsTo:
+        description: The standard or specification the distribution conforms to.
+        any_of:
+          - range: string
+          - range: DataStructureDefinition
+      isDistributionOf:
+        description: Dataset this distribution represents.
+        range: Dataset
+      format:
+        description: File format or serialization used in the distribution.
+
+  DataService:
+    description: An API or endpoint that serves or receives data.
+    exact_mappings:
+      - dprod:DataService
+      - dcat:DataService
+    is_a: Resource
+    attributes:
+      isAccessServiceOf:
+        description: Distribution(s) for which this service provides access.
+        range: Distribution
+      protocol:
+        description: Protocol used by the service (e.g., HTTPS, FTP).
+      securitySchemaType:
+        description: Security or authentication method used (e.g., OAuth2).
+
+  DataProvider:
+    description: >-
+      A Data Provider is an organization that provides data to a Data Consumer.
+      It can be a sponsor, site, or any other entity that supplies data.
+    close_mappings:
+      - sdmx:DataProvider
+    is_a: Organization
+    attributes:
+      providesDataFor:
+        description: >-
+          The Dataflows that this provider supplies data for.
+        range: Dataflow
+        multivalued: true
+      provisionAgreements:
+        description: >-
+          The ProvisionAgreements that this provider has with Data Consumers.
+        range: ProvisionAgreement
+        multivalued: true
+      source:
+        description: >-
+          Association to a data source
+        range: Resource
+        multivalued: true
+  
+  ProvisionAgreement:
+    description: >-
+      A ProvisionAgreement element describes the agreement between a Data Provider and a Data Consumer
+      regarding the provision of data.
+    close_mappings:
+      - sdmx:ProvisionAgreement
+    is_a: GovernedElement
+    mixins:
+      - Versioned
+    attributes:
+      provider:
+        description: >-
+          The Data Provider that is part of this agreement.
+        range: DataProvider
+      dataFlow:
+        description: >-
+          The Dataflow that is covered by this agreement.
+        range: Dataflow
+      source:
+        description: >-
+          The source of the data provided under this agreement.
+        range: Resource
+  
 enums:
   AliasPredicateEnum:
     description: permissible values for the relationship between an element and an alias
@@ -1407,7 +1858,7 @@ enums:
     description: >-
       The type of origin for a data item.
     permissible_values:
-      CRF:  
+      CRF:
         description: >-
           Case Report Form.
       Derived:
@@ -1422,7 +1873,7 @@ enums:
       Predecessor:
         description: >-
           From a predecessor study.
-  
+
   OriginSource:
     description: Enumeration used in source
     permissible_values:
@@ -1443,43 +1894,21 @@ enums:
     description: >-
       The role of an item group within a specific context.
     permissible_values:
+      DataCube:
+        description: >-
+          A Data Structure Definition for an Analysis Data Cube of dimensions, measures, and attributes.
       Table:
         description: >-
-          A table or data frame.
+          A simple table or data frame.
       Object:
         description: >-
           An object or profile of a FHIR resource.
       DataSpecialization:
         description: >-
-          A data specialization of a biomedical concept.
+          A data specialization of a concept.
       Section:
         description: >-
           A section of a form.
-  
-  ItemRoles:
-    description: >-
-      The role of an item within a specific context.
-    permissible_values:
-      Variable:
-        description: >-
-          A variable in a table or data cube.
-        broad_mappings:
-          - qb:MeasureProperty
-      Attribute:
-        description: >-
-          An attribute of an object or resource.
-        exact_mappings:
-          - qb:AttributeProperty
-      Field:
-        description: >-
-          A field in a form or document.
-        broad_mappings:
-          - qb:ComponentProperty
-      Dimension:
-        description: >-
-          A categorical dimension used to slice the dataset.
-        exact_mappings:
-          - qb:DimensionProperty
 
   TimingType:
     description: >-
@@ -1620,3 +2049,12 @@ enums:
       SPECIFIES:
       IS_VALUE_OF:
       IS_REFERENCE_TERMINOLOGY_FOR:
+
+  DataProductLifecycleStatus:
+    description: Lifecycle stages for a DataProduct
+    permissible_values:
+      Ideation:
+      Design:
+      Build:
+      Deploy:
+      Consume:
