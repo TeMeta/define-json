@@ -86,7 +86,6 @@ classes:
           - range: User
           - range: Organization
           - range: string
-          - range: prov:Agent
 
   Labelled:
     description: >-
@@ -1255,7 +1254,7 @@ classes:
         range: ComponentList
       evolvingStructure:
         range: boolean
-        ifabsent: F
+        ifabsent: false
 
   Dataflow:
     description: >-
@@ -1351,7 +1350,9 @@ classes:
       keys:
         description: >-
           Series and Group keys in the data that are associated with dimensions in this structure
-        range: Key
+        any_of:
+          - range: SeriesKey
+          - range: GroupKey
         required: true
         multivalued: true
         inlined: true
@@ -1372,7 +1373,6 @@ classes:
           - dct:conformsTo
       hasPolicy:
         description: Access or usage policy applied to this dataset
-        range: odrl:Policy
         multivalued: true
         inlined: true
         inlined_as_list: true
@@ -1403,7 +1403,7 @@ classes:
           Association to the Attribute Values relating to Key
         any_of:
           - range: string
-          - range: Code
+          - range: Coding
 
   GroupKey:
     description: >-
@@ -1421,12 +1421,17 @@ classes:
   
   CubeComponent:
     description: >-
-      An abstract data field that extends the generic traceable Item with analysis data cube properties
+      An abstract data field that represents a component in a data structure definition, referencing an Item for its definition
     abstract: true
     exact_mappings:
       - sdmx:Component
-    is_a: Item
+    is_a: GovernedElement
     attributes:
+      item:
+        description: >-
+          Reference to the Item that defines this component's data structure and properties
+        range: Item
+        required: true
       role:
         description: >-
           The role this component plays in its Structure Definition
