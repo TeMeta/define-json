@@ -100,12 +100,10 @@ def validate_schema(schema: str, verbose: bool, output_format: str):
                     ends_with_period += 1
     
     console.print(f"  Classes with descriptions: {classes_with_desc}/{len(classes)} ({classes_with_desc/len(classes)*100:.1f}%)")
-    console.print(f"  Aristotelian pattern: {aristotelian_pattern}/{len(classes)} ({aristotelian_pattern/len(classes)*100:.1f}%)")
     console.print(f"  Ends with period: {ends_with_period}/{len(classes)} ({ends_with_period/len(classes)*100:.1f}%)")
     
     results['quality_validation'] = {
         'description_coverage': classes_with_desc / len(classes) * 100 if classes else 0,
-        'aristotelian_coverage': aristotelian_pattern / len(classes) * 100 if classes else 0,
         'period_issues': ends_with_period
     }
     

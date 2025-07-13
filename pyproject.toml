@@ -14,6 +14,7 @@ pyyaml = "^6.0.2"
 jsonschema = "^4.24.0"
 click = "^8.2.1"
 rich = "^14.0.0"
+plotly = "^6.2.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.1"
@@ -24,6 +25,9 @@ pandas = "^2.3.0"
 matplotlib = "^3.10.3"
 seaborn = "^0.13.2"
 yamllint = "^1.37.1"
+mkdocs = "^1.6.1"
+mkdocs-material = "^9.6.15"
+mkdocstrings = {extras = ["python"], version = "^0.29.1"}
 
 [build-system]
 requires = ["poetry-core"]

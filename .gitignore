@@ -187,7 +187,6 @@ generated/
 *.pyd
 
 # LinkML generated files
-*.py
 !validate_schema.py
 !tests/*.py
 
