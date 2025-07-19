@@ -86,6 +86,26 @@ classes:
           - range: User
           - range: Organization
           - range: string
+      wasDerivedFrom:
+        description: >-
+          Reference to another item that this item implements or extends, e.g. a template Item definition.
+        exact_mappings:
+          - prov:wasDerivedFrom
+        any_of:
+          - range: Item
+          - range: ItemGroup
+          - range: MetaDataVersion
+          - range: CodeList
+          - range: ReifiedConcept
+          - range: ConceptProperty
+          - range: Condition
+          - range: RangeCheck
+          - range: Method
+          - range: NominalOccurrence
+          - range: Dataflow
+          - range: CubeComponent
+          - range: DataProduct
+          - range: ProvisionAgreement
 
   Labelled:
     description: >-
@@ -372,11 +392,6 @@ classes:
         description: >-
           The origin of the data
         range: Origin
-      # These could be turned into relationships rather than attributes
-      refersTo:
-        description: >-
-          Reference to another item that this item implements or extends, e.g. a template Item definition.
-        range: Item
       unitsItem:
         description: >-
           Reference to the item that defines the units of this item.
