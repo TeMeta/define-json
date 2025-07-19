@@ -566,14 +566,23 @@ classes:
     narrow_mappings:
       - sdmx:Code
       - sdmx:ValueItem
-    is_a: Coding
     attributes:
+      codeValue:
+        description: >-
+          The value of the CodeListItem before decoding
+        range: string
+        required: true
       description:
         description: >-
           A detailed description of the code (e.g., for documentation purposes)
         any_of:
           - range: string
           - range: TranslatedText
+      coding:
+        description: >-
+          The dictionary definition of the CodeListItem
+        range: Coding
+        required: true
       aliases:
         description: Alternative labels for the code (ODM Alias, skos:altLabel)
         any_of:
