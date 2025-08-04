@@ -59,12 +59,14 @@ generate-json-schema:
 
 generate-pydantic:
 	@echo "Generating Pydantic models from LinkML..."
-	poetry run linkml generate pydantic --meta AUTO define-json.yaml > generated/pydantic_models.py
+	poetry run linkml generate pydantic --meta AUTO define-json.yaml > generated/define.py
 	@echo "✓ Pydantic models generated: generated/pydantic_models.py"
 
 test: check-syntax validate linkml-lint
 	@echo "Running unit tests..."
 	poetry run python -m unittest tests.test_schema
+	@echo "Running datacube tests..."
+	poetry run python -m unittest tests.test_datacube
 	@echo "Running CLI validation..."
 	poetry run python validate_schema.py
 	@echo "✓ All tests passed"

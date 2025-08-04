@@ -559,7 +559,6 @@ classes:
           - range: Coding
           - range: CodeListItem
           - range: string
-          - range: TranslatedText
         inlined: true
         inlined_as_list: true
         multivalued: true
@@ -582,11 +581,15 @@ classes:
       - sdmx:Code
       - sdmx:ValueItem
     attributes:
-      codeValue:
+      codedValue:
         description: >-
           The value of the CodeListItem before decoding
         range: string
         required: true
+      decode:
+        description: >-
+          The decoded value of the CodeListItem
+        range: string
       description:
         description: >-
           A detailed description of the code (e.g., for documentation purposes)
@@ -597,7 +600,6 @@ classes:
         description: >-
           The dictionary definition of the CodeListItem
         range: Coding
-        required: true
       aliases:
         description: Alternative labels for the code (ODM Alias, skos:altLabel)
         any_of:
