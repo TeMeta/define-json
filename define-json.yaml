@@ -246,6 +246,12 @@ classes:
         description: >-
           Condition that defines when collection may be exempted
         range: Condition
+      preSpecifiedValue:
+        description: >-
+          Prefill value or a default value for a field that is automatically populated.
+        any_of:
+          - range: string
+          - range: TranslatedText
 
   MetaDataVersion:
     tree_root: true
@@ -392,10 +398,6 @@ classes:
         description: >-
           The origin of the data
         range: Origin
-      unitsItem:
-        description: >-
-          Reference to the item that defines the units of this item.
-        range: Item
       conceptProperty:
         description: >-
           Reference to a abstract concept property that this item is a specialization / instance of.
