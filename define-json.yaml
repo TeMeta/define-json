@@ -398,6 +398,7 @@ classes:
         description: >-
           The origin of the data
         range: Origin
+        inlined: true
       conceptProperty:
         description: >-
           Reference to a abstract concept property that this item is a specialization / instance of.
@@ -901,6 +902,7 @@ classes:
       item:
         description: Reference to an item
         range: Item
+        inlined: false
       resource:
         description: Path to a resource (e.g. File, FHIR datasource) that is the source of this item
         any_of:
