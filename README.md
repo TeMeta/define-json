@@ -75,6 +75,8 @@ A search, analysis or data access request is entered
 * specifying how target (including intermediate datasets) are derived from source
 * specifying the expected content and structure
 
+This allows us to specify e.g. a FHIR Data Contract, a promise to provide a particular Resource structure, and understand how it will be interpreted by analysis in tabular form
+
 ### Manifest
 
 Contextual / semantic / derivation / dependency / traceability / structural metadata to supplement a data transfer
@@ -84,6 +86,12 @@ Contextual / semantic / derivation / dependency / traceability / structural meta
 A given set of data products can be described using define-json to provide enhanced metadata around lineage, semantics and derivations.
 
 In the context of a Clinical Data Fabric/Mesh/Lake, MDR, or Operational Data Store: define-json can be used as a means of recording granular value-level lineage within dataset, allowing tooling to show dependencies and impact analysis.
+
+Define can even be used a psuedo 'MDR' with the way it tracks dependencies, provenance and impact analysis. 
+
+- `SourceItem` structure has detailed information about where the value came from, whether it's a document or CRF form or source dataset with its own referencable `Item`.
+- `wasDerivedFrom` relationship is borrows from PROV-O (Provenance Ontology) exclusively to denote template reuse i.e. "I am reusing this definition from somewhere else and making it my own".
+- `SourceItem` denotes a direct link. Changes to the source will impact the target. Conversely `wasDerivedFrom` relationship only provides provenance and lets you identify reuse without coupling the instances - you can modify each instance independently.
 
 ## Define bridges implementation and meaning
 
