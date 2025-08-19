@@ -69,7 +69,7 @@ classes:
           Comment on the element, such as a rationale for its inclusion or exclusion
         range: Comment
         multivalued: true
-      reason:
+      purpose:
         description: Purpose or rationale for this data element
         any_of:
           - range: string
@@ -443,10 +443,10 @@ classes:
         description: >-
           Set to Yes if this is a reference item group.
         range: boolean
-      purpose:
+      type:
         description: >-
-          Purpose of the item group
-        range: ItemGroupPurpose
+          Type of item group
+        range: ItemGroupType
         multivalued: true
       items:
         description: Items in this group
@@ -897,12 +897,14 @@ classes:
   SourceItem:
     description: >-
       A data source that provides the origin of information for an item
-    is_a: IdentifiableElement
     attributes:
       item:
         description: Reference to an item
         range: Item
         inlined: false
+      document:
+        description: Reference to an external document
+        range: DocumentReference
       resource:
         description: Path to a resource (e.g. File, FHIR datasource) that is the source of this item
         any_of:
@@ -910,9 +912,11 @@ classes:
           - range: string
         multivalued: true
         inlined: false
-      document:
-        description: Reference to an external document
-        range: DocumentReference
+      coding:
+        description: >-
+          A coding that describes the source of the item
+        range: Coding
+        multivalued: true
 
   Parameter:
     description: >-
@@ -1903,7 +1907,7 @@ enums:
         text: Vendor
         meaning: ncit:C68608
 
-  ItemGroupPurpose:
+  ItemGroupType:
     description: >-
       An enumeration that defines the roles of an item group within a specific context
     permissible_values:
@@ -1922,6 +1926,9 @@ enums:
       Section:
         description: >-
           A section of a form.
+      Form:
+        description: >-
+          A data collection form.
 
   TimingType:
     description: >-
