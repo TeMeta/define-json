@@ -966,7 +966,6 @@ classes:
   Origin:
     description: >-
       A provenance element that describes the source of data for an item
-    is_a: IdentifiableElement
     attributes:
       type:
         description: >-
