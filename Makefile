@@ -60,7 +60,7 @@ generate-json-schema:
 generate-pydantic:
 	@echo "Generating Pydantic models from LinkML..."
 	poetry run linkml generate pydantic --meta AUTO define-json.yaml > generated/define.py
-	@echo "✓ Pydantic models generated: generated/pydantic_models.py"
+	@echo "✓ Pydantic models generated: generated/define.py"
 
 test: check-syntax validate linkml-lint
 	@echo "Running unit tests..."

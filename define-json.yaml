@@ -447,7 +447,6 @@ classes:
         description: >-
           Type of item group
         range: ItemGroupType
-        multivalued: true
       items:
         description: Items in this group
         range: Item
@@ -1624,8 +1623,6 @@ classes:
           - prov:wasAttributedTo
       domain:
         description: The functional domain or business area this product serves
-      purpose:
-        description: Statement of what this data product is intended to deliver
       lifecycleStatus:
         description: Current lifecycle status of the data product
         range: DataProductLifecycleStatus
