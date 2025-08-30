@@ -714,6 +714,8 @@ classes:
       - usdm:AnalysisConcept
       - usdm:DerivationConcept
     is_a: GovernedElement
+    mixins:
+      - Versioned
     attributes:
       properties:
         description: >-
@@ -1096,7 +1098,7 @@ classes:
           Machine-executable instructions for selecting data from the resource.
         range: FormalExpression
         inlined: true
-        inlined_as_list: true   
+        inlined_as_list: true
 
   DocumentReference:
     description: >-
@@ -1250,7 +1252,7 @@ classes:
   #       range: string
   #       multivalued: true
   #       required: false
-  
+
   # FHIRDocument:
   #   is_a: DocumentReference
   #   mixins:
@@ -1259,7 +1261,6 @@ classes:
   #     - Governed
   #     - IsProfile
   #     - IsFHIRDocument
-
 
   # New classes for Data Cube, Analysis Concept, and DTA governance
   DataStructureDefinition:
@@ -1309,7 +1310,7 @@ classes:
       dimensionConstraint:
         range: Dimension
         multivalued: true
-    
+
   IsSdmxDataset:
     mixin: true
     description: >-
@@ -1443,14 +1444,14 @@ classes:
     exact_mappings:
       - sdmx:GroupKey
     is_a: DatasetKey
-  
+
   SeriesKey:
     description: >-
       A unique identifier that comprises the cross-product of dimension values including Time to identify observations, representing dimensions shared by all observations in a conceptual series
     exact_mappings:
       - sdmx:SeriesKey
     is_a: DatasetKey
-  
+
   CubeComponent:
     description: >-
       An abstract data field that represents a component in a data structure definition, referencing an Item for its definition
@@ -1499,7 +1500,7 @@ classes:
     attributes:
       keySequence:
         range: integer
- 
+
   DataAttribute:
     description: >-
       A data cube property that describes additional characteristics or metadata about observations
@@ -1564,7 +1565,7 @@ classes:
         range: ComponentList
       attribute:
         range: DataAttribute
-  
+
   DimensionRelationship:
     description: >-
       A relationship element that associates a DataAttribute with a specific Dimension at a specific level
@@ -1600,7 +1601,7 @@ classes:
         range: Item
       attribute:
         range: DataAttribute
-  
+
   # DPROD to complement Dataset class and link to DCAT ontology
   DataProduct:
     description: >-
@@ -1717,7 +1718,7 @@ classes:
           Association to a data source
         range: Resource
         multivalued: true
-  
+
   ProvisionAgreement:
     description: >-
       An agreement element that describes the contractual relationship between a Data Provider and a Data Consumer regarding data provision
@@ -1739,7 +1740,7 @@ classes:
         description: >-
           The source of the data provided under this agreement
         range: Resource
-  
+
 enums:
   AliasPredicateEnum:
     description: >-
