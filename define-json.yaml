@@ -124,6 +124,8 @@ classes:
         description: Semantic tags for this element
         range: Coding
         multivalued: true
+        inlined: true
+        inlined_as_list: true
       label:
         description: Human-readable label, shown in UIs
         any_of:
@@ -544,6 +546,8 @@ classes:
       - sdmx:ValueList
       - sdmx:ConceptScheme
     is_a: GovernedElement
+    mixins:
+      - Versioned
     attributes:
       dataType:
         description: >-
