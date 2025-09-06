@@ -69,7 +69,7 @@ classes:
           Comment on the element, such as a rationale for its inclusion or exclusion
         range: Comment
         multivalued: true
-      reason:
+      purpose:
         description: Purpose or rationale for this data element
         any_of:
           - range: string
@@ -86,7 +86,26 @@ classes:
           - range: User
           - range: Organization
           - range: string
-          - range: prov:Agent
+      wasDerivedFrom:
+        description: >-
+          Reference to another item that this item implements or extends, e.g. a template Item definition.
+        exact_mappings:
+          - prov:wasDerivedFrom
+        any_of:
+          - range: Item
+          - range: ItemGroup
+          - range: MetaDataVersion
+          - range: CodeList
+          - range: ReifiedConcept
+          - range: ConceptProperty
+          - range: Condition
+          - range: RangeCheck
+          - range: Method
+          - range: NominalOccurrence
+          - range: Dataflow
+          - range: CubeComponent
+          - range: DataProduct
+          - range: ProvisionAgreement
 
   Labelled:
     description: >-
@@ -105,6 +124,8 @@ classes:
         description: Semantic tags for this element
         range: Coding
         multivalued: true
+        inlined: true
+        inlined_as_list: true
       label:
         description: Human-readable label, shown in UIs
         any_of:
@@ -227,6 +248,12 @@ classes:
         description: >-
           Condition that defines when collection may be exempted
         range: Condition
+      preSpecifiedValue:
+        description: >-
+          Prefill value or a default value for a field that is automatically populated.
+        any_of:
+          - range: string
+          - range: TranslatedText
 
   MetaDataVersion:
     tree_root: true
@@ -373,15 +400,7 @@ classes:
         description: >-
           The origin of the data
         range: Origin
-      # These could be turned into relationships rather than attributes
-      refersTo:
-        description: >-
-          Reference to another item that this item implements or extends, e.g. a template Item definition.
-        range: Item
-      unitsItem:
-        description: >-
-          Reference to the item that defines the units of this item.
-        range: Item
+        inlined: true
       conceptProperty:
         description: >-
           Reference to a abstract concept property that this item is a specialization / instance of.
@@ -426,11 +445,10 @@ classes:
         description: >-
           Set to Yes if this is a reference item group.
         range: boolean
-      purpose:
+      type:
         description: >-
-          Purpose of the item group
-        range: ItemGroupPurpose
-        multivalued: true
+          Type of item group
+        range: ItemGroupType
       items:
         description: Items in this group
         range: Item
@@ -528,6 +546,8 @@ classes:
       - sdmx:ValueList
       - sdmx:ConceptScheme
     is_a: GovernedElement
+    mixins:
+      - Versioned
     attributes:
       dataType:
         description: >-
@@ -545,7 +565,6 @@ classes:
           - range: Coding
           - range: CodeListItem
           - range: string
-          - range: TranslatedText
         inlined: true
         inlined_as_list: true
         multivalued: true
@@ -567,14 +586,26 @@ classes:
     narrow_mappings:
       - sdmx:Code
       - sdmx:ValueItem
-    is_a: Coding
     attributes:
+      codedValue:
+        description: >-
+          The value of the CodeListItem before decoding
+        range: string
+        required: true
+      decode:
+        description: >-
+          The decoded value of the CodeListItem
+        range: string
       description:
         description: >-
           A detailed description of the code (e.g., for documentation purposes)
         any_of:
           - range: string
           - range: TranslatedText
+      coding:
+        description: >-
+          The dictionary definition of the CodeListItem
+        range: Coding
       aliases:
         description: Alternative labels for the code (ODM Alias, skos:altLabel)
         any_of:
@@ -687,6 +718,8 @@ classes:
       - usdm:AnalysisConcept
       - usdm:DerivationConcept
     is_a: GovernedElement
+    mixins:
+      - Versioned
     attributes:
       properties:
         description: >-
@@ -869,11 +902,14 @@ classes:
   SourceItem:
     description: >-
       A data source that provides the origin of information for an item
-    is_a: IdentifiableElement
     attributes:
       item:
         description: Reference to an item
         range: Item
+        inlined: false
+      document:
+        description: Reference to an external document
+        range: DocumentReference
       resource:
         description: Path to a resource (e.g. File, FHIR datasource) that is the source of this item
         any_of:
@@ -881,9 +917,11 @@ classes:
           - range: string
         multivalued: true
         inlined: false
-      document:
-        description: Reference to an external document
-        range: DocumentReference
+      coding:
+        description: >-
+          A coding that describes the source of the item
+        range: Coding
+        multivalued: true
 
   Parameter:
     description: >-
@@ -934,7 +972,6 @@ classes:
   Origin:
     description: >-
       A provenance element that describes the source of data for an item
-    is_a: IdentifiableElement
     attributes:
       type:
         description: >-
@@ -1065,7 +1102,7 @@ classes:
           Machine-executable instructions for selecting data from the resource.
         range: FormalExpression
         inlined: true
-        inlined_as_list: true   
+        inlined_as_list: true
 
   DocumentReference:
     description: >-
@@ -1219,7 +1256,7 @@ classes:
   #       range: string
   #       multivalued: true
   #       required: false
-  
+
   # FHIRDocument:
   #   is_a: DocumentReference
   #   mixins:
@@ -1228,7 +1265,6 @@ classes:
   #     - Governed
   #     - IsProfile
   #     - IsFHIRDocument
-
 
   # New classes for Data Cube, Analysis Concept, and DTA governance
   DataStructureDefinition:
@@ -1255,7 +1291,7 @@ classes:
         range: ComponentList
       evolvingStructure:
         range: boolean
-        ifabsent: F
+        ifabsent: false
 
   Dataflow:
     description: >-
@@ -1278,7 +1314,7 @@ classes:
       dimensionConstraint:
         range: Dimension
         multivalued: true
-    
+
   IsSdmxDataset:
     mixin: true
     description: >-
@@ -1351,7 +1387,9 @@ classes:
       keys:
         description: >-
           Series and Group keys in the data that are associated with dimensions in this structure
-        range: Key
+        any_of:
+          - range: SeriesKey
+          - range: GroupKey
         required: true
         multivalued: true
         inlined: true
@@ -1372,7 +1410,6 @@ classes:
           - dct:conformsTo
       hasPolicy:
         description: Access or usage policy applied to this dataset
-        range: odrl:Policy
         multivalued: true
         inlined: true
         inlined_as_list: true
@@ -1403,7 +1440,7 @@ classes:
           Association to the Attribute Values relating to Key
         any_of:
           - range: string
-          - range: Code
+          - range: Coding
 
   GroupKey:
     description: >-
@@ -1411,22 +1448,27 @@ classes:
     exact_mappings:
       - sdmx:GroupKey
     is_a: DatasetKey
-  
+
   SeriesKey:
     description: >-
       A unique identifier that comprises the cross-product of dimension values including Time to identify observations, representing dimensions shared by all observations in a conceptual series
     exact_mappings:
       - sdmx:SeriesKey
     is_a: DatasetKey
-  
+
   CubeComponent:
     description: >-
-      An abstract data field that extends the generic traceable Item with analysis data cube properties
+      An abstract data field that represents a component in a data structure definition, referencing an Item for its definition
     abstract: true
     exact_mappings:
       - sdmx:Component
-    is_a: Item
+    is_a: GovernedElement
     attributes:
+      item:
+        description: >-
+          Reference to the Item that defines this component's data structure and properties
+        range: Item
+        required: true
       role:
         description: >-
           The role this component plays in its Structure Definition
@@ -1462,7 +1504,7 @@ classes:
     attributes:
       keySequence:
         range: integer
- 
+
   DataAttribute:
     description: >-
       A data cube property that describes additional characteristics or metadata about observations
@@ -1527,7 +1569,7 @@ classes:
         range: ComponentList
       attribute:
         range: DataAttribute
-  
+
   DimensionRelationship:
     description: >-
       A relationship element that associates a DataAttribute with a specific Dimension at a specific level
@@ -1563,7 +1605,7 @@ classes:
         range: Item
       attribute:
         range: DataAttribute
-  
+
   # DPROD to complement Dataset class and link to DCAT ontology
   DataProduct:
     description: >-
@@ -1585,8 +1627,6 @@ classes:
           - prov:wasAttributedTo
       domain:
         description: The functional domain or business area this product serves
-      purpose:
-        description: Statement of what this data product is intended to deliver
       lifecycleStatus:
         description: Current lifecycle status of the data product
         range: DataProductLifecycleStatus
@@ -1682,7 +1722,7 @@ classes:
           Association to a data source
         range: Resource
         multivalued: true
-  
+
   ProvisionAgreement:
     description: >-
       An agreement element that describes the contractual relationship between a Data Provider and a Data Consumer regarding data provision
@@ -1704,7 +1744,7 @@ classes:
         description: >-
           The source of the data provided under this agreement
         range: Resource
-  
+
 enums:
   AliasPredicateEnum:
     description: >-
@@ -1868,7 +1908,7 @@ enums:
         text: Vendor
         meaning: ncit:C68608
 
-  ItemGroupPurpose:
+  ItemGroupType:
     description: >-
       An enumeration that defines the roles of an item group within a specific context
     permissible_values:
@@ -1887,6 +1927,9 @@ enums:
       Section:
         description: >-
           A section of a form.
+      Form:
+        description: >-
+          A data collection form.
 
   TimingType:
     description: >-
