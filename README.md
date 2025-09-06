@@ -9,35 +9,18 @@
 
 It is being designed in a Clinical Trial context to supplement the CDISC Unified Study Definitions ([USDM](https://github.com/cdisc-org/DDF-RA)) and [Dataset-JSON](https://github.com/cdisc-org/DataExchange-DatasetJson), providing a way to describe datasets and how they link causally to their context
 
-## Clinical Data Interchange is broken
-<img src="images/throwing_vase_over_wall.png" alt="The status quo of silos, files and documents" width="350"/>
-
-Fix what's broken. Improve what works. Repeat.
-
-Data has nuance. People have needs. We respect both.
-
 ## Context is everything
 
 > “Don't provide values without units”
 
-> “Don't define derivation/origin for a field without knowing what the Biomedical Concept is being implemented”
+`define-json` element definitions are context-specific by design, only applicable to some defined local scope.
 
-> “Don't quote someone without knowing what else they were saying and why”
+By being so strict about scope (every `Item` must belong to an `ItemGroup`, which can in turn can act as nested slices), granular reusable definitions can be created and applied to a wide variety of contexts.
 
-> “Don't send data without its Define”
 
-An implementation of [something] combines its abstract / template form with its context
+> “Don't quote someone without knowing what else they were saying and why
 
-* FHIR Profile is a implementation of a FHIR Resource template in the context of some healthcare or research authority
-* A granular definition for some Biomedical Concept (BC) is an implementation of a property of that BC in context of the standard being implemented
-* A Biomedical Concept Property is an implementation of some abstract Data Element Concept in context of a BC
-* A dataset is an implementation of a specified demand data contract in the context of a specific transfer/timepoint
-* Transformation code is the implementation of described transformation in the context of a specific environment
-
-`define-json` is context-specific by design. It is only applicable to some defined local scope.
-
-The context that Define is implementing, i.e. _your_ context, is up to you - make sure to record the surrounding context on your end so that the definitions within can be used and reused accurately.
-
+The context that Define is implementing, i.e. _your_ context, is up to you - make sure to record the surrounding context on your end so that the definitions within can be used and reused accurately:
 * CDISC Dataset Specification (actual data)
 * CDISC Dataset Specialisation (template in the context of Biomedical Concept)
 * OpenStudyBuilder Activity
@@ -49,6 +32,28 @@ The context that Define is implementing, i.e. _your_ context, is up to you - mak
 * Dataset Transformation Metaprogramming
 * Define-JSON / Define-XML for regulatory submission
 * AI model feature spec
+
+
+> “Don't send data without its Define”
+
+<img src="images/throwing_vase_over_wall.png" alt="The status quo of silos, files and documents" width="350"/>
+
+Clinical trial data exchange needs fixing.  We need to be able to simultaneously speak in nuanced concepts and understand in specific self-explanatory structure. _The first step is agreeing on that structure_.
+
+Being able to iterate rapidly is important to the early stages of development of this standard. _Fix what's broken. Improve what works. Repeat._
+
+
+> “Don't define derivation/origin for a field without knowing what the Biomedical Concept is being implemented”
+
+Define-JSON details implementation, but also links to `Coding`, `ReifiedConcept` and `ConceptProperty` for structured semantic connections, i.e. enabling each data element to be mapped unambiguously to standard dictionaries/ontologies, abstract concepts, and their properties.
+
+Tof [something] combines its abstract / template form with a context, then fleshes out that combined context.
+
+* FHIR Profile is a implementation of a FHIR Resource template in the context of some healthcare or research authority
+* A granular definition for some Biomedical Concept (BC) is an implementation of a property of that BC in context of the standard being implemented
+* A Biomedical Concept Property is an implementation of some abstract Data Element Concept in context of a BC
+* A dataset is an implementation of a specified demand data contract in the context of a specific transfer/timepoint
+* Transformation code is the implementation of described transformation in the context of a specific environment
 
 ## Usages
 
