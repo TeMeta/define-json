@@ -77,8 +77,8 @@ classes:
       lastUpdated:
         description: When the resource was last updated
         range: datetime
-      agents:
-        description: People or systems involved in defining this item
+      owner:
+        description: Party responsible for this element
         narrow_mappings:
           - prov:wasAttributedTo
           - prov:wasAssociatedBy
@@ -773,6 +773,8 @@ classes:
         description: Logical conditions that apply in this context (combined with AND)
         range: Condition
         multivalued: true
+        inlined: false
+        inlined_as_list: true
 
   Condition:
     description: >-
@@ -802,6 +804,8 @@ classes:
           A formal expression for complex checks
         range: FormalExpression
         multivalued: true
+        inlined: false
+        inlined_as_list: true
 
   RangeCheck:
     description: >-
@@ -820,6 +824,8 @@ classes:
         description: Values to compare against
         range: string
         multivalued: true
+        inlined: true
+        inlined_as_list: true
       item:
         description: >-
           Reference to the Item element whose value is being checked. If not specified, check applies to the enclosing context
