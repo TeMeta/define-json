@@ -18,6 +18,8 @@ prefixes:
   dprod: https://ekgf.github.io/dprod/
   prov: http://www.w3.org/ns/prov#
   dcat: http://www.w3.org/ns/dcat#
+  osb: https://openstudybuilder.com/
+  dct: http://purl.org/dc/terms/
 default_prefix: odm
 
 imports:
@@ -363,6 +365,10 @@ classes:
       - sdmx:Concept
       - sdmx:Component
       - sdmx:Representation
+      - osb:sdtm_variable
+      - osb:specimen
+      - osb:unit_dimension
+      - osb:std_unit
     is_a: GovernedElement
     mixins:
       - IsODMItem
@@ -412,6 +418,7 @@ classes:
     close_mappings:
       - odm:ItemGroupDef
       - odm:ItemGroupRef
+      - osb:ActivityInstance
     narrow_mappings:
       - fhir:StructureDefinition
       - fhir:ViewDefinition
@@ -425,6 +432,7 @@ classes:
       - qb:Observation
       - qb:ObservationGroup
       - qb:Slice
+      - osb:Activity
     is_a: GovernedElement
     mixins:
       - IsProfile
@@ -713,10 +721,15 @@ classes:
     close_mappings:
       - sdmx:MetaDataStructureDefinition
       - sdmx:Concept
+      - osb:Activity
     narrow_mappings:
       - usdm:BiomedicalConcept
       - usdm:AnalysisConcept
       - usdm:DerivationConcept
+    related_mappings:
+      - osb:ActivityInstance
+      - osb:assm_group
+      - osb:assm_subgroup
     is_a: GovernedElement
     mixins:
       - Versioned
@@ -739,6 +752,14 @@ classes:
       - usdm:BiomedicalConceptProperty
       - usdm:DerivationConceptProperty
       - usdm:AnalysisConceptProperty
+    related_mappings:
+      - osb:sdtm_variable
+      - osb:specimen
+      - osb:unit_dimension
+      - osb:std_unit
+      - osb:laterality
+      - osb:location
+      - osb:position
     is_a: GovernedElement
     attributes:
       minOccurs:
