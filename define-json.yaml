@@ -101,7 +101,6 @@ classes:
           - range: ReifiedConcept
           - range: ConceptProperty
           - range: Condition
-          - range: RangeCheck
           - range: Method
           - range: NominalOccurrence
           - range: Dataflow
@@ -197,6 +196,8 @@ classes:
         description: Security tags applied to this resource
         range: Coding
         multivalued: true
+        inlined: true
+        inlined_as_list: true
       authenticator:
         description: Who/what authenticated the resource
         any_of:
@@ -614,6 +615,7 @@ classes:
         description: >-
           The dictionary definition of the CodeListItem
         range: Coding
+        inlined: true
       aliases:
         description: Alternative labels for the code (ODM Alias, skos:altLabel)
         any_of:
@@ -666,15 +668,18 @@ classes:
       - sdmx:Concept
       - sdmx:ISOConceptReference
     attributes:
-      uuid:
-        description: Universal unique identifier
-        range: string
-        identifier: true
       code:
         description: >-
           The code value
         range: string
         required: true
+      decode:
+        description: Human-readable meaning
+        any_of:
+          - range: string
+          - range: TranslatedText
+        exact_mappings:
+          - skos:prefLabel
       codeSystem:
         description: >-
           The code system identifier
@@ -684,13 +689,6 @@ classes:
         description: >-
           The code system version
         range: string
-      decode:
-        description: Human-readable meaning
-        any_of:
-          - range: string
-          - range: TranslatedText
-        exact_mappings:
-          - skos:prefLabel
 
   CodingMapping:
     description: >-
@@ -819,7 +817,6 @@ classes:
         inlined_as_list: true
       implementsCondition:
         description: Reference to a external (e.g. USDM) condition definition that this implements
-        range: string
       formalExpression:
         description: >-
           A formal expression for complex checks
@@ -834,13 +831,11 @@ classes:
     related_mappings:
       - qb:SliceKey
       - sdmx:DataKey
-    is_a: GovernedElement
     attributes:
       comparator:
         description: >-
           The type of comparison to be performed
         range: Comparator
-        required: true
       checkValues:
         description: Values to compare against
         range: string
@@ -853,6 +848,8 @@ classes:
         any_of:
           - range: Item
           - range: Dimension
+          - range: Measure
+          - range: DataAttribute
       softHard:
         description: >-
           Indicates whether a validation check is an error ("Hard") or a warning ("Soft")
@@ -949,6 +946,8 @@ classes:
           A coding that describes the source of the item
         range: Coding
         multivalued: true
+        inlined: true
+        inlined_as_list: true
 
   Parameter:
     description: >-
@@ -1460,14 +1459,9 @@ classes:
         description: >-
           List of Key Values that comprise each key, separated by a dot
           e.g. SUBJ001.VISIT2.BMI
-        range: string
-        multivalued: true
       attributeValues:
         description: >-
           Association to the Attribute Values relating to Key
-        any_of:
-          - range: string
-          - range: Coding
 
   GroupKey:
     description: >-
@@ -1971,6 +1965,8 @@ enums:
       Fixed:
         text: Fixed
         meaning: ncit:C201358
+
+  # TODO: Add Enumerated terms for STATO / NCIT analysis concept relationships
 
   LinkingPhraseEnum:
     from_schema: sdtm
