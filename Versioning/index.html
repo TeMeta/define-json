@@ -6,9 +6,9 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="CDISC" name="author"/>
-<link href="https://TeMeta.github.io/define-json/Organization/" rel="canonical"/>
+<link href="https://TeMeta.github.io/define-json/Versioning/" rel="canonical"/>
 <link href="../img/favicon.ico" rel="shortcut icon"/>
-<title>Slot: organization - Define-JSON Documentation</title>
+<title>Versioning - Define-JSON Documentation</title>
 <link href="../css/bootstrap.min.css" rel="stylesheet"/>
 <link href="../css/fontawesome.min.css" rel="stylesheet"/>
 <link href="../css/brands.min.css" rel="stylesheet"/>
@@ -39,7 +39,7 @@
 <a class="nav-link" href="../README.md">About</a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="../Versioning/">Versioning</a>
+<a aria-current="page" class="nav-link active" href="./">Versioning</a>
 </li>
 </ul>
 <ul class="nav navbar-nav ms-md-auto">
@@ -49,7 +49,17 @@
                             </a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="https://github.com/TeMeta/define-json/edit/main/Organization.md">Edit on define-json
+<a class="nav-link" href=".." rel="prev">
+<i class="fa fa-arrow-left"></i> Previous
+                                </a>
+</li>
+<li class="nav-item">
+<a class="nav-link disabled" rel="next">
+                                    Next <i class="fa fa-arrow-right"></i>
+</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/TeMeta/define-json/edit/main/Versioning.md">Edit on define-json
                                     </a>
 </li>
 </ul>
@@ -66,103 +76,57 @@
 </div>
 <div class="navbar-collapse collapse card bg-body-tertiary" id="toc-collapse">
 <ul class="nav flex-column">
-<li class="nav-item" data-bs-level="1"><a class="nav-link" href="#slot-organization">Slot: organization</a>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#versioning-architecture-copy-and-link-vs-inheritance">Versioning Architecture: Copy-and-Link vs Inheritance</a>
 <ul class="nav flex-column">
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#applicable-classes">Applicable Classes</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#properties">Properties</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#identifier-and-mapping-information">Identifier and Mapping Information</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#mappings">Mappings</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#linkml-source">LinkML Source</a>
-<ul class="nav flex-column">
-</ul>
-</li>
 </ul>
 </li>
 </ul>
 </div>
 </div></div>
 <div class="col-md-9" role="main">
-<h1 id="slot-organization">Slot: organization</h1>
-<p><em>The organization the user belongs to.</em></p>
-<p>URI: <a href="https://cdisc.org/odm2/organization">odm:organization</a>
-Alias: organization</p>
-<!-- no inheritance hierarchy -->
-<h2 id="applicable-classes">Applicable Classes</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-<th>Modifies Slot</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../User/">User</a></td>
-<td>An entity that represents information about a specific user of a clinical dat...</td>
-<td>no</td>
-</tr>
-</tbody>
-</table>
-<h2 id="properties">Properties</h2>
-<ul>
-<li>Range: <a href="./">Organization</a></li>
-</ul>
-<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="schema-source">Schema Source</h3>
-<ul>
-<li>from schema: https://cdisc.org/define-json</li>
-</ul>
-<h2 id="mappings">Mappings</h2>
-<table>
-<thead>
-<tr>
-<th>Mapping Type</th>
-<th>Mapped Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>self</td>
-<td>odm:organization</td>
-</tr>
-<tr>
-<td>native</td>
-<td>odm:organization</td>
-</tr>
-<tr>
-<td>close</td>
-<td>prov:actedOnBehalfOf</td>
-</tr>
-</tbody>
-</table>
-<h2 id="linkml-source">LinkML Source</h2>
-<details>
-<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">organization</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The organization the user belongs to.</span>
-<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
-<span class="nt">close_mappings</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prov:actedOnBehalfOf</span>
-<span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">organization</span>
-<span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">User</span>
-<span class="nt">domain_of</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">User</span>
-<span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Organization</span>
+<h2 id="versioning-architecture-copy-and-link-vs-inheritance">Versioning Architecture: Copy-and-Link vs Inheritance</h2>
+<p>Define-JSON employs a <strong>copy-and-link</strong> versioning model rather than traditional inheritance hierarchies. This architectural choice has profound implications for clinical data management, regulatory compliance, and system maintainability.</p>
+<h3 id="the-copy-and-link-model">The Copy-and-Link Model</h3>
+<p>Instead of inheriting from parent versions, each <code>MetaDataVersion</code> is a complete, self-contained snapshot that links back to its sources via <code>wasDerivedFrom</code> relationships:</p>
+<div class="highlight"><pre><span></span><code>                    ┌──wasDerivedFrom── CDISC Standard v1.0
+                    │
+Study ABC v1.3 ─────┼──wasDerivedFrom── Study Template v2.1
+                    │
+                    └──wasDerivedFrom── Local Extensions
 </code></pre></div>
-</details></div>
+<p>Each version contains <strong>complete copies</strong> of all relevant definitions, creating an immutable snapshot with explicit provenance chains.</p>
+<h3 id="why-this-matters-for-clinical-data">Why This Matters for Clinical Data</h3>
+<p><strong>Regulatory Compliance</strong>
+- <strong>Immutable Audit Trail</strong>: Once created, versions never change - essential for regulatory submissions
+- <strong>Complete Context</strong>: Each submission is self-contained with no external dependencies
+- <strong>Clear Lineage</strong>: <code>wasDerivedFrom</code> provides unambiguous provenance for regulatory review</p>
+<p><strong>Data Integrity</strong>
+- <strong>No Cascade Failures</strong>: Changes to standards don't break existing studies
+- <strong>Temporal Consistency</strong>: Historical analyses remain reproducible indefinitely
+- <strong>Explicit Customisation</strong>: Study-specific modifications are clearly documented</p>
+<p><strong>Operational Benefits</strong>
+- <strong>Simplified Queries</strong>: All metadata is local - no complex inheritance resolution
+- <strong>Parallel Development</strong>: Teams can work independently without version conflicts
+- <strong>Predictable Performance</strong>: No deep inheritance chains to traverse</p>
+<h3 id="trade-offs-considered">Trade-offs Considered</h3>
+<p><strong>Storage vs Simplicity</strong>
+- <strong>Cost</strong>: More storage required for duplicated definitions
+- <strong>Benefit</strong>: Eliminates complex inheritance logic and cascade dependencies
+- <strong>Reality</strong>: Storage is cheap; developer time and regulatory risk are expensive</p>
+<p><strong>Propagation vs Isolation</strong>
+- <strong>Challenge</strong>: Updates must be explicitly propagated to derived versions
+- <strong>Benefit</strong>: Prevents unintended changes from affecting production systems
+- <strong>Mitigation</strong>: Tooling can assist with selective update propagation</p>
+<p><strong>Divergence vs Control</strong>
+- <strong>Risk</strong>: Versions may diverge over time without careful governance
+- <strong>Benefit</strong>: Explicit control over what changes are adopted and when
+- <strong>Practice</strong>: Regular review cycles ensure alignment where needed</p>
+<h3 id="implementation-pattern">Implementation Pattern</h3>
+<p>This mirrors successful patterns in other domains:
+- <strong>Git</strong>: Complete snapshots with parent pointers, not deltas
+- <strong>Docker</strong>: Immutable layers with explicit inheritance
+- <strong>Blockchain</strong>: Immutable blocks with cryptographic lineage</p>
+<p>For clinical data, where <strong>"reproducible forever"</strong> is not just good practice but regulatory requirement, this architecture provides the foundation for trustworthy, auditable data systems.</p></div>
 </div>
 </div>
 <footer class="col-md-12">

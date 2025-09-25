@@ -1,963 +1,971 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://temeta.github.io/define-json/</loc>
+         <loc>https://TeMeta.github.io/define-json/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/AliasPredicateEnum/</loc>
+         <loc>https://TeMeta.github.io/define-json/About/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Boolean/</loc>
+         <loc>https://TeMeta.github.io/define-json/AliasPredicateEnum/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/CodeList/</loc>
+         <loc>https://TeMeta.github.io/define-json/Boolean/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/CodeListItem/</loc>
+         <loc>https://TeMeta.github.io/define-json/CodeList/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Coding/</loc>
+         <loc>https://TeMeta.github.io/define-json/CodeListItem/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/CodingMapping/</loc>
+         <loc>https://TeMeta.github.io/define-json/Coding/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Comment/</loc>
+         <loc>https://TeMeta.github.io/define-json/CodingMapping/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/ComponentList/</loc>
+         <loc>https://TeMeta.github.io/define-json/Comment/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/ConceptProperty/</loc>
+         <loc>https://TeMeta.github.io/define-json/ComponentList/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Condition/</loc>
+         <loc>https://TeMeta.github.io/define-json/ConceptProperty/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/CubeComponent/</loc>
+         <loc>https://TeMeta.github.io/define-json/Condition/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Curie/</loc>
+         <loc>https://TeMeta.github.io/define-json/CubeComponent/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/DataAttribute/</loc>
+         <loc>https://TeMeta.github.io/define-json/Curie/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/DataProduct/</loc>
+         <loc>https://TeMeta.github.io/define-json/DataAttribute/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/DataProductLifecycleStatus/</loc>
+         <loc>https://TeMeta.github.io/define-json/DataProduct/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/DataProvider/</loc>
+         <loc>https://TeMeta.github.io/define-json/DataProductLifecycleStatus/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/DataService/</loc>
+         <loc>https://TeMeta.github.io/define-json/DataProvider/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/DataStructureDefinition/</loc>
+         <loc>https://TeMeta.github.io/define-json/DataService/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Dataflow/</loc>
+         <loc>https://TeMeta.github.io/define-json/DataStructureDefinition/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/DataflowRelationship/</loc>
+         <loc>https://TeMeta.github.io/define-json/Dataflow/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Dataset/</loc>
+         <loc>https://TeMeta.github.io/define-json/DataflowRelationship/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/DatasetKey/</loc>
+         <loc>https://TeMeta.github.io/define-json/Dataset/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Date/</loc>
+         <loc>https://TeMeta.github.io/define-json/DatasetKey/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/DateOrDatetime/</loc>
+         <loc>https://TeMeta.github.io/define-json/Date/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Datetime/</loc>
+         <loc>https://TeMeta.github.io/define-json/DateOrDatetime/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Decimal/</loc>
+         <loc>https://TeMeta.github.io/define-json/Datetime/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Define-JSON/</loc>
+         <loc>https://TeMeta.github.io/define-json/Decimal/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Dimension/</loc>
+         <loc>https://TeMeta.github.io/define-json/Define-JSON/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/DimensionRelationship/</loc>
+         <loc>https://TeMeta.github.io/define-json/Dimension/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Distribution/</loc>
+         <loc>https://TeMeta.github.io/define-json/DimensionRelationship/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/DocumentReference/</loc>
+         <loc>https://TeMeta.github.io/define-json/Distribution/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Double/</loc>
+         <loc>https://TeMeta.github.io/define-json/DocumentReference/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Float/</loc>
+         <loc>https://TeMeta.github.io/define-json/Double/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/FormalExpression/</loc>
+         <loc>https://TeMeta.github.io/define-json/Float/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Formatted/</loc>
+         <loc>https://TeMeta.github.io/define-json/FormalExpression/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Governed/</loc>
+         <loc>https://TeMeta.github.io/define-json/Formatted/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/GovernedElement/</loc>
+         <loc>https://TeMeta.github.io/define-json/Governed/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/GroupKey/</loc>
+         <loc>https://TeMeta.github.io/define-json/GovernedElement/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/GroupRelationship/</loc>
+         <loc>https://TeMeta.github.io/define-json/GroupKey/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Identifiable/</loc>
+         <loc>https://TeMeta.github.io/define-json/GroupRelationship/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/IdentifiableElement/</loc>
+         <loc>https://TeMeta.github.io/define-json/Identifiable/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Integer/</loc>
+         <loc>https://TeMeta.github.io/define-json/IdentifiableElement/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/IsODMItem/</loc>
+         <loc>https://TeMeta.github.io/define-json/Integer/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/IsProfile/</loc>
+         <loc>https://TeMeta.github.io/define-json/IsODMItem/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/IsSdmxDataset/</loc>
+         <loc>https://TeMeta.github.io/define-json/IsProfile/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Item/</loc>
+         <loc>https://TeMeta.github.io/define-json/IsSdmxDataset/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/ItemGroup/</loc>
+         <loc>https://TeMeta.github.io/define-json/Item/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/ItemGroupType/</loc>
+         <loc>https://TeMeta.github.io/define-json/ItemGroup/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Jsonpath/</loc>
+         <loc>https://TeMeta.github.io/define-json/ItemGroupType/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Jsonpointer/</loc>
+         <loc>https://TeMeta.github.io/define-json/Jsonpath/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Labelled/</loc>
+         <loc>https://TeMeta.github.io/define-json/Jsonpointer/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/LinkingPhraseEnum/</loc>
+         <loc>https://TeMeta.github.io/define-json/Labelled/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Measure/</loc>
+         <loc>https://TeMeta.github.io/define-json/LinkingPhraseEnum/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/MeasureRelationship/</loc>
+         <loc>https://TeMeta.github.io/define-json/Measure/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/MetaDataVersion/</loc>
+         <loc>https://TeMeta.github.io/define-json/MeasureRelationship/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Method/</loc>
+         <loc>https://TeMeta.github.io/define-json/MetaDataVersion/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/MethodType/</loc>
+         <loc>https://TeMeta.github.io/define-json/Method/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Ncname/</loc>
+         <loc>https://TeMeta.github.io/define-json/MethodType/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Nodeidentifier/</loc>
+         <loc>https://TeMeta.github.io/define-json/Ncname/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/NominalOccurrence/</loc>
+         <loc>https://TeMeta.github.io/define-json/Nodeidentifier/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/OID/</loc>
+         <loc>https://TeMeta.github.io/define-json/NominalOccurrence/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Objectidentifier/</loc>
+         <loc>https://TeMeta.github.io/define-json/OID/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/ObservationRelationship/</loc>
+         <loc>https://TeMeta.github.io/define-json/Objectidentifier/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Organization/</loc>
+         <loc>https://TeMeta.github.io/define-json/ObservationRelationship/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/OrganizationType/</loc>
+         <loc>https://TeMeta.github.io/define-json/Organization/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Origin/</loc>
+         <loc>https://TeMeta.github.io/define-json/OrganizationType/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/OriginSource/</loc>
+         <loc>https://TeMeta.github.io/define-json/Origin/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/OriginType/</loc>
+         <loc>https://TeMeta.github.io/define-json/OriginSource/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Parameter/</loc>
+         <loc>https://TeMeta.github.io/define-json/OriginType/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/PredicateTermEnum/</loc>
+         <loc>https://TeMeta.github.io/define-json/Parameter/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/ProvisionAgreement/</loc>
+         <loc>https://TeMeta.github.io/define-json/PredicateTermEnum/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/RangeCheck/</loc>
+         <loc>https://TeMeta.github.io/define-json/ProvisionAgreement/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/ReifiedConcept/</loc>
+         <loc>https://TeMeta.github.io/define-json/RangeCheck/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Relationship/</loc>
+         <loc>https://TeMeta.github.io/define-json/ReifiedConcept/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Resource/</loc>
+         <loc>https://TeMeta.github.io/define-json/Relationship/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/ReturnValue/</loc>
+         <loc>https://TeMeta.github.io/define-json/Resource/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/SeriesKey/</loc>
+         <loc>https://TeMeta.github.io/define-json/ReturnValue/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/SiteOrSponsorComment/</loc>
+         <loc>https://TeMeta.github.io/define-json/SeriesKey/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/SourceItem/</loc>
+         <loc>https://TeMeta.github.io/define-json/SiteOrSponsorComment/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Sparqlpath/</loc>
+         <loc>https://TeMeta.github.io/define-json/SourceItem/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/String/</loc>
+         <loc>https://TeMeta.github.io/define-json/Sparqlpath/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Time/</loc>
+         <loc>https://TeMeta.github.io/define-json/String/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Timing/</loc>
+         <loc>https://TeMeta.github.io/define-json/Time/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/TimingType/</loc>
+         <loc>https://TeMeta.github.io/define-json/Timing/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/TranslatedText/</loc>
+         <loc>https://TeMeta.github.io/define-json/TimingType/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Translation/</loc>
+         <loc>https://TeMeta.github.io/define-json/TranslatedText/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Uri/</loc>
+         <loc>https://TeMeta.github.io/define-json/Translation/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Uriorcurie/</loc>
+         <loc>https://TeMeta.github.io/define-json/Uri/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/User/</loc>
+         <loc>https://TeMeta.github.io/define-json/Uriorcurie/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/Versioned/</loc>
+         <loc>https://TeMeta.github.io/define-json/User/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/WhereClause/</loc>
+         <loc>https://TeMeta.github.io/define-json/Versioned/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/accessService/</loc>
+         <loc>https://TeMeta.github.io/define-json/Versioning/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/action/</loc>
+         <loc>https://TeMeta.github.io/define-json/WhereClause/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/address/</loc>
+         <loc>https://TeMeta.github.io/define-json/accessService/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/aliases/</loc>
+         <loc>https://TeMeta.github.io/define-json/action/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/attribute/</loc>
+         <loc>https://TeMeta.github.io/define-json/address/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/attributeValues/</loc>
+         <loc>https://TeMeta.github.io/define-json/aliases/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/attributes/</loc>
+         <loc>https://TeMeta.github.io/define-json/attribute/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/authenticator/</loc>
+         <loc>https://TeMeta.github.io/define-json/attributeValues/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/cdiscNotes/</loc>
+         <loc>https://TeMeta.github.io/define-json/attributes/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/checkValues/</loc>
+         <loc>https://TeMeta.github.io/define-json/authenticator/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/children/</loc>
+         <loc>https://TeMeta.github.io/define-json/cdiscNotes/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/code/</loc>
+         <loc>https://TeMeta.github.io/define-json/checkValues/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/codeListItems/</loc>
+         <loc>https://TeMeta.github.io/define-json/children/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/codeLists/</loc>
+         <loc>https://TeMeta.github.io/define-json/code/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/codeSystem/</loc>
+         <loc>https://TeMeta.github.io/define-json/codeListItems/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/codeSystemVersion/</loc>
+         <loc>https://TeMeta.github.io/define-json/codeLists/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/codedValue/</loc>
+         <loc>https://TeMeta.github.io/define-json/codeSystem/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/codings/</loc>
+         <loc>https://TeMeta.github.io/define-json/codeSystemVersion/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/collectionExceptionCondition/</loc>
+         <loc>https://TeMeta.github.io/define-json/codedValue/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/comparator/</loc>
+         <loc>https://TeMeta.github.io/define-json/codings/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/components/</loc>
+         <loc>https://TeMeta.github.io/define-json/collectionExceptionCondition/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/concepts/</loc>
+         <loc>https://TeMeta.github.io/define-json/comparator/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/conditions/</loc>
+         <loc>https://TeMeta.github.io/define-json/components/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/confidence/</loc>
+         <loc>https://TeMeta.github.io/define-json/concepts/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/conformsTo/</loc>
+         <loc>https://TeMeta.github.io/define-json/conditions/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/context/</loc>
+         <loc>https://TeMeta.github.io/define-json/confidence/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/crfCompletionInstructions/</loc>
+         <loc>https://TeMeta.github.io/define-json/conformsTo/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/dataExtractionDate/</loc>
+         <loc>https://TeMeta.github.io/define-json/context/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/dataProductOwner/</loc>
+         <loc>https://TeMeta.github.io/define-json/crfCompletionInstructions/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/dataType/</loc>
+         <loc>https://TeMeta.github.io/define-json/dataExtractionDate/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/datasetType/</loc>
+         <loc>https://TeMeta.github.io/define-json/dataProductOwner/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/decimalDigits/</loc>
+         <loc>https://TeMeta.github.io/define-json/dataType/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/decode/</loc>
+         <loc>https://TeMeta.github.io/define-json/datasetType/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/describedBy/</loc>
+         <loc>https://TeMeta.github.io/define-json/decimalDigits/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/description/</loc>
+         <loc>https://TeMeta.github.io/define-json/decode/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/dimensionConstraint/</loc>
+         <loc>https://TeMeta.github.io/define-json/describedBy/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/dimensions/</loc>
+         <loc>https://TeMeta.github.io/define-json/description/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/displayFormat/</loc>
+         <loc>https://TeMeta.github.io/define-json/dimensionConstraint/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/document/</loc>
+         <loc>https://TeMeta.github.io/define-json/dimensions/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/documents/</loc>
+         <loc>https://TeMeta.github.io/define-json/displayFormat/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/domain/</loc>
+         <loc>https://TeMeta.github.io/define-json/document/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/event/</loc>
+         <loc>https://TeMeta.github.io/define-json/documents/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/evolvingStructure/</loc>
+         <loc>https://TeMeta.github.io/define-json/domain/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/expression/</loc>
+         <loc>https://TeMeta.github.io/define-json/event/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/externalCodeLibs/</loc>
+         <loc>https://TeMeta.github.io/define-json/evolvingStructure/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/externalCodeList/</loc>
+         <loc>https://TeMeta.github.io/define-json/expression/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/formalExpressions/</loc>
+         <loc>https://TeMeta.github.io/define-json/externalCodeLibs/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/format/</loc>
+         <loc>https://TeMeta.github.io/define-json/externalCodeList/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/formatName/</loc>
+         <loc>https://TeMeta.github.io/define-json/formalExpressions/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/frequency/</loc>
+         <loc>https://TeMeta.github.io/define-json/format/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/fullName/</loc>
+         <loc>https://TeMeta.github.io/define-json/formatName/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/grouping/</loc>
+         <loc>https://TeMeta.github.io/define-json/frequency/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/hasNoData/</loc>
+         <loc>https://TeMeta.github.io/define-json/fullName/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/hasPolicy/</loc>
+         <loc>https://TeMeta.github.io/define-json/grouping/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/href/</loc>
+         <loc>https://TeMeta.github.io/define-json/hasNoData/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/implementationNotes/</loc>
+         <loc>https://TeMeta.github.io/define-json/hasPolicy/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/implementsConcept/</loc>
+         <loc>https://TeMeta.github.io/define-json/href/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/implementsCondition/</loc>
+         <loc>https://TeMeta.github.io/define-json/implementationNotes/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/imputation/</loc>
+         <loc>https://TeMeta.github.io/define-json/implementsConcept/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/informationSensitivityClassification/</loc>
+         <loc>https://TeMeta.github.io/define-json/implementsCondition/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/inputDataset/</loc>
+         <loc>https://TeMeta.github.io/define-json/imputation/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/inputPort/</loc>
+         <loc>https://TeMeta.github.io/define-json/informationSensitivityClassification/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/isAccessServiceOf/</loc>
+         <loc>https://TeMeta.github.io/define-json/inputDataset/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/isDistributionOf/</loc>
+         <loc>https://TeMeta.github.io/define-json/inputPort/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/isNominal/</loc>
+         <loc>https://TeMeta.github.io/define-json/isAccessServiceOf/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/isReferenceData/</loc>
+         <loc>https://TeMeta.github.io/define-json/isDistributionOf/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/itemGroups/</loc>
+         <loc>https://TeMeta.github.io/define-json/isNominal/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/items/</loc>
+         <loc>https://TeMeta.github.io/define-json/isReferenceData/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/keySequence/</loc>
+         <loc>https://TeMeta.github.io/define-json/itemGroups/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/keyValues/</loc>
+         <loc>https://TeMeta.github.io/define-json/items/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/keys/</loc>
+         <loc>https://TeMeta.github.io/define-json/keySequence/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/label/</loc>
+         <loc>https://TeMeta.github.io/define-json/keyValues/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/language/</loc>
+         <loc>https://TeMeta.github.io/define-json/keys/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/lastUpdated/</loc>
+         <loc>https://TeMeta.github.io/define-json/label/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/length/</loc>
+         <loc>https://TeMeta.github.io/define-json/language/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/lifecycleStatus/</loc>
+         <loc>https://TeMeta.github.io/define-json/lastUpdated/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/linkingPhrase/</loc>
+         <loc>https://TeMeta.github.io/define-json/length/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/location/</loc>
+         <loc>https://TeMeta.github.io/define-json/lifecycleStatus/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/mandatory/</loc>
+         <loc>https://TeMeta.github.io/define-json/linkingPhrase/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/mappings/</loc>
+         <loc>https://TeMeta.github.io/define-json/location/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/maxOccurs/</loc>
+         <loc>https://TeMeta.github.io/define-json/mandatory/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/measures/</loc>
+         <loc>https://TeMeta.github.io/define-json/mappings/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/methods/</loc>
+         <loc>https://TeMeta.github.io/define-json/maxOccurs/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/minOccurs/</loc>
+         <loc>https://TeMeta.github.io/define-json/measures/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/missingHandling/</loc>
+         <loc>https://TeMeta.github.io/define-json/methods/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/name/</loc>
+         <loc>https://TeMeta.github.io/define-json/minOccurs/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/object/</loc>
+         <loc>https://TeMeta.github.io/define-json/missingHandling/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/other/</loc>
+         <loc>https://TeMeta.github.io/define-json/name/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/outputDataset/</loc>
+         <loc>https://TeMeta.github.io/define-json/object/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/outputPort/</loc>
+         <loc>https://TeMeta.github.io/define-json/other/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/owner/</loc>
+         <loc>https://TeMeta.github.io/define-json/outputDataset/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/pages/</loc>
+         <loc>https://TeMeta.github.io/define-json/outputPort/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/parameters/</loc>
+         <loc>https://TeMeta.github.io/define-json/owner/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/partOfOrganization/</loc>
+         <loc>https://TeMeta.github.io/define-json/pages/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/preSpecifiedValue/</loc>
+         <loc>https://TeMeta.github.io/define-json/parameters/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/predicateTerm/</loc>
+         <loc>https://TeMeta.github.io/define-json/partOfOrganization/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/profile/</loc>
+         <loc>https://TeMeta.github.io/define-json/preSpecifiedValue/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/properties/</loc>
+         <loc>https://TeMeta.github.io/define-json/predicateTerm/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/protocol/</loc>
+         <loc>https://TeMeta.github.io/define-json/profile/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/provider/</loc>
+         <loc>https://TeMeta.github.io/define-json/properties/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/providesDataFor/</loc>
+         <loc>https://TeMeta.github.io/define-json/protocol/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/provisionAgreements/</loc>
+         <loc>https://TeMeta.github.io/define-json/provider/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/publicationPeriod/</loc>
+         <loc>https://TeMeta.github.io/define-json/providesDataFor/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/publicationYear/</loc>
+         <loc>https://TeMeta.github.io/define-json/provisionAgreements/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/publishedBy/</loc>
+         <loc>https://TeMeta.github.io/define-json/publicationPeriod/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/purpose/</loc>
+         <loc>https://TeMeta.github.io/define-json/publicationYear/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/rangeChecks/</loc>
+         <loc>https://TeMeta.github.io/define-json/publishedBy/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/recalled/</loc>
+         <loc>https://TeMeta.github.io/define-json/purpose/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/relationships/</loc>
+         <loc>https://TeMeta.github.io/define-json/rangeChecks/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/relativeFrom/</loc>
+         <loc>https://TeMeta.github.io/define-json/recalled/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/relativeTo/</loc>
+         <loc>https://TeMeta.github.io/define-json/relationships/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/reportingBegin/</loc>
+         <loc>https://TeMeta.github.io/define-json/relativeFrom/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/reportingEnd/</loc>
+         <loc>https://TeMeta.github.io/define-json/relativeTo/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/resourceType/</loc>
+         <loc>https://TeMeta.github.io/define-json/reportingBegin/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/resources/</loc>
+         <loc>https://TeMeta.github.io/define-json/reportingEnd/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/returnType/</loc>
+         <loc>https://TeMeta.github.io/define-json/resourceType/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/role/</loc>
+         <loc>https://TeMeta.github.io/define-json/resources/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/roleCodeList/</loc>
+         <loc>https://TeMeta.github.io/define-json/returnType/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/security/</loc>
+         <loc>https://TeMeta.github.io/define-json/role/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/securitySchemaType/</loc>
+         <loc>https://TeMeta.github.io/define-json/roleCodeList/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/selection/</loc>
+         <loc>https://TeMeta.github.io/define-json/security/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/significantDigits/</loc>
+         <loc>https://TeMeta.github.io/define-json/securitySchemaType/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/softHard/</loc>
+         <loc>https://TeMeta.github.io/define-json/selection/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/source/</loc>
+         <loc>https://TeMeta.github.io/define-json/significantDigits/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/sourceItems/</loc>
+         <loc>https://TeMeta.github.io/define-json/softHard/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/sourceType/</loc>
+         <loc>https://TeMeta.github.io/define-json/source/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/structure/</loc>
+         <loc>https://TeMeta.github.io/define-json/sourceItems/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/structuredBy/</loc>
+         <loc>https://TeMeta.github.io/define-json/sourceType/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/subject/</loc>
+         <loc>https://TeMeta.github.io/define-json/structure/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/target/</loc>
+         <loc>https://TeMeta.github.io/define-json/structuredBy/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/text/</loc>
+         <loc>https://TeMeta.github.io/define-json/subject/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/title/</loc>
+         <loc>https://TeMeta.github.io/define-json/target/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/translations/</loc>
+         <loc>https://TeMeta.github.io/define-json/text/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/type/</loc>
+         <loc>https://TeMeta.github.io/define-json/title/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/userName/</loc>
+         <loc>https://TeMeta.github.io/define-json/translations/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/userType/</loc>
+         <loc>https://TeMeta.github.io/define-json/type/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/uuid/</loc>
+         <loc>https://TeMeta.github.io/define-json/userName/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/validFrom/</loc>
+         <loc>https://TeMeta.github.io/define-json/userType/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/validTo/</loc>
+         <loc>https://TeMeta.github.io/define-json/uuid/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/validityPeriod/</loc>
+         <loc>https://TeMeta.github.io/define-json/validFrom/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/value/</loc>
+         <loc>https://TeMeta.github.io/define-json/validTo/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/valueList/</loc>
+         <loc>https://TeMeta.github.io/define-json/validityPeriod/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/version/</loc>
+         <loc>https://TeMeta.github.io/define-json/value/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/wasDerivedFrom/</loc>
+         <loc>https://TeMeta.github.io/define-json/valueList/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/weight/</loc>
+         <loc>https://TeMeta.github.io/define-json/version/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/whereClauses/</loc>
+         <loc>https://TeMeta.github.io/define-json/wasDerivedFrom/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/windowLower/</loc>
+         <loc>https://TeMeta.github.io/define-json/weight/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
     <url>
-         <loc>https://temeta.github.io/define-json/windowUpper/</loc>
+         <loc>https://TeMeta.github.io/define-json/whereClauses/</loc>
+         <lastmod>2025-09-25</lastmod>
+    </url>
+    <url>
+         <loc>https://TeMeta.github.io/define-json/windowLower/</loc>
+         <lastmod>2025-09-25</lastmod>
+    </url>
+    <url>
+         <loc>https://TeMeta.github.io/define-json/windowUpper/</loc>
          <lastmod>2025-09-25</lastmod>
     </url>
 </urlset>
