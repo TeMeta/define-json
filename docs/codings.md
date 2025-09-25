@@ -1,0 +1,87 @@
+
+
+# Slot: codings 
+
+
+_Codings defined in this version of the metadata_
+
+
+
+
+
+URI: [odm:codings](https://cdisc.org/odm2/codings)
+Alias: codings
+
+<!-- no inheritance hierarchy -->
+
+
+
+
+
+## Applicable Classes
+
+| Name | Description | Modifies Slot |
+| --- | --- | --- |
+| [MetaDataVersion](MetaDataVersion.md) | A container element that represents a given version of a specification, linki... |  no  |
+
+
+
+
+
+
+
+## Properties
+
+* Range: [Coding](Coding.md)
+
+* Multivalued: True
+
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://cdisc.org/define-json
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | odm:codings |
+| native | odm:codings |
+
+
+
+
+## LinkML Source
+
+<details>
+```yaml
+name: codings
+description: Codings defined in this version of the metadata
+from_schema: https://cdisc.org/define-json
+rank: 1000
+alias: codings
+owner: MetaDataVersion
+domain_of:
+- MetaDataVersion
+range: Coding
+multivalued: true
+inlined: true
+inlined_as_list: true
+
+```
+</details>

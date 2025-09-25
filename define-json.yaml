@@ -3,7 +3,6 @@ name: Define-JSON
 description: >-
   Data model for supply and demand data contracts to complement CDISC USDM, ODM, and Dataset-JSON.
   This LinkML version includes semantics to act as Rosetta Stone for SDMX, FHIR, OMOP, RDF, and CDISC.
-  Note: this might be more of an 'ODM-JSON' if 'Define-JSON' is intended to be simple.
 license: MIT
 prefixes:
   linkml: https://w3id.org/linkml/

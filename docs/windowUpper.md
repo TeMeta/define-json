@@ -1,0 +1,82 @@
+
+
+# Slot: windowUpper 
+
+
+_End date/time of the timing_
+
+
+
+
+
+URI: [odm:windowUpper](https://cdisc.org/odm2/windowUpper)
+Alias: windowUpper
+
+<!-- no inheritance hierarchy -->
+
+
+
+
+
+## Applicable Classes
+
+| Name | Description | Modifies Slot |
+| --- | --- | --- |
+| [Timing](Timing.md) | A temporal element that describes the timing of an event or occurrence, which... |  no  |
+
+
+
+
+
+
+
+## Properties
+
+* Range: [Datetime](Datetime.md)
+
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://cdisc.org/define-json
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | odm:windowUpper |
+| native | odm:windowUpper |
+
+
+
+
+## LinkML Source
+
+<details>
+```yaml
+name: windowUpper
+description: End date/time of the timing
+from_schema: https://cdisc.org/define-json
+rank: 1000
+alias: windowUpper
+owner: Timing
+domain_of:
+- Timing
+range: datetime
+
+```
+</details>

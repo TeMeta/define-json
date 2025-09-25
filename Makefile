@@ -75,6 +75,16 @@ notebook:
 	@echo "Starting Jupyter notebook server..."
 	poetry run jupyter notebook
 
+# https://linkml.io/linkml/generators/docgen.html
+docs:
+	@echo "Generating documentation..."
+	cp versioning_architecture.md docs/Versioning.md;
+	cp README.md docs/About.md;
+	mkdir -p docs/images;
+	cp images/* docs/images/;
+	poetry run gen-doc define-json.yaml --directory docs/ --template-directory docs/docgen --hierarchical-class-view --diagram-type er_diagram --sort-by rank --include-top-level-diagram
+
+
 docs-serve:
 	@echo "Serving documentation with MkDocs..."
 	poetry run mkdocs serve
@@ -82,6 +92,10 @@ docs-serve:
 docs-build:
 	@echo "Building static documentation site with MkDocs..."
 	poetry run mkdocs build
+
+docs-deploy:
+	@echo "Deploying documentation to GitHub Pages..."
+	poetry run mkdocs gh-deploy
 
 clean:
 	@echo "Cleaning up generated files..."
