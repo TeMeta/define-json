@@ -17,8 +17,8 @@ Alias: conceptProperty
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Parameter](Parameter.md) | A variable element that describes an input used in a formal expression |  no  |
 | [Item](Item.md) | A data element that represents a specific piece of information within a defin... |  no  |
+| [Parameter](Parameter.md) | A variable element that describes an input used in a formal expression |  no  |
 
 
 

@@ -17,11 +17,11 @@ Alias: source
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
+| [SiteOrSponsorComment](SiteOrSponsorComment.md) | A feedback element that contains comments from a site or sponsor, distinct fr... |  no  |
+| [ProvisionAgreement](ProvisionAgreement.md) | An agreement element that describes the contractual relationship between a Da... |  no  |
+| [DataProvider](DataProvider.md) | An organization element that provides data to a Data Consumer, which can be a... |  no  |
 | [CodingMapping](CodingMapping.md) | A mapping relationship that establishes connections between different coding ... |  no  |
 | [Origin](Origin.md) | A provenance element that describes the source of data for an item |  no  |
-| [ProvisionAgreement](ProvisionAgreement.md) | An agreement element that describes the contractual relationship between a Da... |  no  |
-| [SiteOrSponsorComment](SiteOrSponsorComment.md) | A feedback element that contains comments from a site or sponsor, distinct fr... |  no  |
-| [DataProvider](DataProvider.md) | An organization element that provides data to a Data Consumer, which can be a... |  no  |
 
 
 

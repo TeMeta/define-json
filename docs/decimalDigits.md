@@ -22,8 +22,8 @@ Alias: decimalDigits
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Item](Item.md) | A data element that represents a specific piece of information within a defin... |  no  |
 | [Formatted](Formatted.md) | A mixin that provides slots for reporting, exchange, or storage formatting |  no  |
+| [Item](Item.md) | A data element that represents a specific piece of information within a defin... |  no  |
 
 
 

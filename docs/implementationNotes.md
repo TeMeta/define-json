@@ -22,8 +22,8 @@ Alias: implementationNotes
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Item](Item.md) | A data element that represents a specific piece of information within a defin... |  no  |
 | [IsODMItem](IsODMItem.md) | A mixin that provides additional attributes for CDISC Operational Data Model ... |  no  |
+| [Item](Item.md) | A data element that represents a specific piece of information within a defin... |  no  |
 
 
 

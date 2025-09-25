@@ -17,9 +17,9 @@ Alias: domain
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
+| [DataStructureDefinition](DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysi... |  no  |
 | [ItemGroup](ItemGroup.md) | A collection element that groups related items or subgroups within a specific... |  no  |
 | [DataProduct](DataProduct.md) | A governed collection that represents a purpose-driven assembly of datasets a... |  no  |
-| [DataStructureDefinition](DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysi... |  no  |
 
 
 

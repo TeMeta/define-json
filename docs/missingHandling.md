@@ -22,10 +22,10 @@ Alias: missingHandling
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [DataAttribute](DataAttribute.md) | A data cube property that describes additional characteristics or metadata ab... |  no  |
 | [CubeComponent](CubeComponent.md) | An abstract data field that represents a component in a data structure defini... |  no  |
-| [Dimension](Dimension.md) | A data cube property that describes a categorical or hierarchical dimension |  no  |
+| [DataAttribute](DataAttribute.md) | A data cube property that describes additional characteristics or metadata ab... |  no  |
 | [Measure](Measure.md) | A data cube property that describes a measurable quantity or value |  no  |
+| [Dimension](Dimension.md) | A data cube property that describes a categorical or hierarchical dimension |  no  |
 
 
 

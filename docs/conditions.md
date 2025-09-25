@@ -17,8 +17,8 @@ Alias: conditions
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [WhereClause](WhereClause.md) | A conditional element that describes the circumstances under which a containi... |  no  |
 | [MetaDataVersion](MetaDataVersion.md) | A container element that represents a given version of a specification, linki... |  no  |
+| [WhereClause](WhereClause.md) | A conditional element that describes the circumstances under which a containi... |  no  |
 
 
 

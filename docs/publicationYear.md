@@ -22,8 +22,8 @@ Alias: publicationYear
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [IsSdmxDataset](IsSdmxDataset.md) | A mixin that provides additional metadata specific to SDMX Datasets |  no  |
 | [Dataset](Dataset.md) | A collection element that groups observations sharing the same dimensionality... |  no  |
+| [IsSdmxDataset](IsSdmxDataset.md) | A mixin that provides additional metadata specific to SDMX Datasets |  no  |
 
 
 

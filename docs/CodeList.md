@@ -17,9 +17,9 @@ Alias: codeList
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Parameter](Parameter.md) | A variable element that describes an input used in a formal expression |  no  |
-| [Item](Item.md) | A data element that represents a specific piece of information within a defin... |  no  |
 | [ConceptProperty](ConceptProperty.md) | A reified property concept that exists within the context of its containing t... |  no  |
+| [Item](Item.md) | A data element that represents a specific piece of information within a defin... |  no  |
+| [Parameter](Parameter.md) | A variable element that describes an input used in a formal expression |  no  |
 
 
 

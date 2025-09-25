@@ -80,8 +80,6 @@ docs:
 	@echo "Generating documentation..."
 	cp versioning_architecture.md docs/Versioning.md;
 	cp README.md docs/About.md;
-	mkdir -p docs/images;
-	cp images/* docs/images/;
 	poetry run gen-doc define-json.yaml --directory docs/ --template-directory docs/docgen --hierarchical-class-view --diagram-type er_diagram --sort-by rank --include-top-level-diagram
 
 

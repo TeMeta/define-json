@@ -37,7 +37,7 @@ The context that Define is implementing, i.e. _your_ context, is up to you - mak
 
 > “Don't send data without its Define”
 
-<img src="images/throwing_vase_over_wall.png" alt="The status quo of silos, files and documents" width="350"/>
+<img src="https://github.com/TeMeta/define-json/blob/gh-pages/images/throwing_vase_over_wall.png?raw=true" alt="The status quo of silos, files and documents" width="350"/>
 
 Clinical trial data exchange needs fixing.  We need to be able to simultaneously speak in nuanced concepts and understand in specific self-explanatory structure. _The first step is agreeing on that structure_.
 

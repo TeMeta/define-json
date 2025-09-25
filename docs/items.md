@@ -17,10 +17,10 @@ Alias: items
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Parameter](Parameter.md) | A variable element that describes an input used in a formal expression |  no  |
+| [DataStructureDefinition](DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysi... |  no  |
 | [ItemGroup](ItemGroup.md) | A collection element that groups related items or subgroups within a specific... |  no  |
 | [MetaDataVersion](MetaDataVersion.md) | A container element that represents a given version of a specification, linki... |  no  |
-| [DataStructureDefinition](DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysi... |  no  |
+| [Parameter](Parameter.md) | A variable element that describes an input used in a formal expression |  no  |
 
 
 

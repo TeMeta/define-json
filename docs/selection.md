@@ -22,8 +22,8 @@ Alias: selection
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [DataService](DataService.md) | A service element that provides an API or endpoint for serving or receiving d... |  no  |
 | [Resource](Resource.md) | An external reference that serves as the source for a Dataset, ItemGroup, or ... |  no  |
+| [DataService](DataService.md) | A service element that provides an API or endpoint for serving or receiving d... |  no  |
 
 
 

@@ -22,10 +22,10 @@ Alias: validityPeriod
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Dataset](Dataset.md) | A collection element that groups observations sharing the same dimensionality... |  no  |
-| [ItemGroup](ItemGroup.md) | A collection element that groups related items or subgroups within a specific... |  no  |
-| [IsProfile](IsProfile.md) | A mixin that provides additional metadata for FHIR resources and Data Product... |  no  |
 | [DataStructureDefinition](DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysi... |  no  |
+| [ItemGroup](ItemGroup.md) | A collection element that groups related items or subgroups within a specific... |  no  |
+| [Dataset](Dataset.md) | A collection element that groups observations sharing the same dimensionality... |  no  |
+| [IsProfile](IsProfile.md) | A mixin that provides additional metadata for FHIR resources and Data Product... |  no  |
 
 
 

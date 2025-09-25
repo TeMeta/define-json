@@ -17,8 +17,8 @@ Alias: dimensions
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [DimensionRelationship](DimensionRelationship.md) | A relationship element that associates a DataAttribute with a specific Dimens... |  no  |
 | [DataStructureDefinition](DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysi... |  no  |
+| [DimensionRelationship](DimensionRelationship.md) | A relationship element that associates a DataAttribute with a specific Dimens... |  no  |
 
 
 

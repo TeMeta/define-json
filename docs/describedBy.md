@@ -17,10 +17,10 @@ Alias: describedBy
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [DatasetKey](DatasetKey.md) | An abstract identifier that comprises the cross-product of dimension values t... |  no  |
-| [Dataset](Dataset.md) | A collection element that groups observations sharing the same dimensionality... |  no  |
 | [SeriesKey](SeriesKey.md) | A unique identifier that comprises the cross-product of dimension values incl... |  no  |
 | [GroupKey](GroupKey.md) | A dimension subset that represents collections of dimensions that are subsets... |  no  |
+| [Dataset](Dataset.md) | A collection element that groups observations sharing the same dimensionality... |  no  |
+| [DatasetKey](DatasetKey.md) | An abstract identifier that comprises the cross-product of dimension values t... |  no  |
 
 
 

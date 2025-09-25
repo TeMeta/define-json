@@ -17,9 +17,9 @@ Alias: whereClause
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
+| [DataStructureDefinition](DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysi... |  no  |
 | [ItemGroup](ItemGroup.md) | A collection element that groups related items or subgroups within a specific... |  no  |
 | [Item](Item.md) | A data element that represents a specific piece of information within a defin... |  no  |
-| [DataStructureDefinition](DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysi... |  no  |
 
 
 

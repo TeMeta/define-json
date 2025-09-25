@@ -17,8 +17,8 @@ Alias: relationship
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [DocumentReference](DocumentReference.md) | A comprehensive reference element that points to an external document, combin... |  no  |
 | [CodingMapping](CodingMapping.md) | A mapping relationship that establishes connections between different coding ... |  no  |
+| [DocumentReference](DocumentReference.md) | A comprehensive reference element that points to an external document, combin... |  no  |
 
 
 

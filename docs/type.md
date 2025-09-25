@@ -17,13 +17,13 @@ Alias: type
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ItemGroup](ItemGroup.md) | A collection element that groups related items or subgroups within a specific... |  no  |
-| [Timing](Timing.md) | A temporal element that describes the timing of an event or occurrence, which... |  no  |
-| [Organization](Organization.md) | An entity that represents organizational information, such as a site or spons... |  no  |
-| [Origin](Origin.md) | A provenance element that describes the source of data for an item |  no  |
+| [DataProvider](DataProvider.md) | An organization element that provides data to a Data Consumer, which can be a... |  no  |
 | [Method](Method.md) | A reusable computational procedure that describes how to derive values and ca... |  no  |
 | [DataStructureDefinition](DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysi... |  no  |
-| [DataProvider](DataProvider.md) | An organization element that provides data to a Data Consumer, which can be a... |  no  |
+| [Timing](Timing.md) | A temporal element that describes the timing of an event or occurrence, which... |  no  |
+| [ItemGroup](ItemGroup.md) | A collection element that groups related items or subgroups within a specific... |  no  |
+| [Origin](Origin.md) | A provenance element that describes the source of data for an item |  no  |
+| [Organization](Organization.md) | An entity that represents organizational information, such as a site or spons... |  no  |
 
 
 

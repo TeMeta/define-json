@@ -18,9 +18,9 @@ Alias: imputation
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
 | [CubeComponent](CubeComponent.md) | An abstract data field that represents a component in a data structure defini... |  no  |
-| [Measure](Measure.md) | A data cube property that describes a measurable quantity or value |  no  |
-| [DataAttribute](DataAttribute.md) | A data cube property that describes additional characteristics or metadata ab... |  no  |
 | [Timing](Timing.md) | A temporal element that describes the timing of an event or occurrence, which... |  no  |
+| [DataAttribute](DataAttribute.md) | A data cube property that describes additional characteristics or metadata ab... |  no  |
+| [Measure](Measure.md) | A data cube property that describes a measurable quantity or value |  no  |
 | [Dimension](Dimension.md) | A data cube property that describes a categorical or hierarchical dimension |  no  |
 
 

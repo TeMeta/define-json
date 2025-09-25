@@ -17,8 +17,8 @@ Alias: hasPolicy
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Dataset](Dataset.md) | A collection element that groups observations sharing the same dimensionality... |  no  |
 | [DataProduct](DataProduct.md) | A governed collection that represents a purpose-driven assembly of datasets a... |  no  |
+| [Dataset](Dataset.md) | A collection element that groups observations sharing the same dimensionality... |  no  |
 
 
 
