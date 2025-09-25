@@ -19,7 +19,6 @@ It is being designed in a Clinical Trial context to supplement the CDISC Unified
 
 By being so strict about scope (every `Item` must belong to an `ItemGroup`, which can in turn can act as nested slices), granular reusable definitions can be created and applied to a wide variety of contexts.
 
-
 > “Don't quote someone without knowing what else they were saying and why
 
 The context that Define is implementing, i.e. _your_ context, is up to you - make sure to record the surrounding context on your end so that the definitions within can be used and reused accurately:
@@ -36,7 +35,6 @@ The context that Define is implementing, i.e. _your_ context, is up to you - mak
 * Define-JSON / Define-XML for regulatory submission
 * AI model feature spec
 
-
 > “Don't send data without its Define”
 
 <img src="images/throwing_vase_over_wall.png" alt="The status quo of silos, files and documents" width="350"/>
@@ -44,7 +42,6 @@ The context that Define is implementing, i.e. _your_ context, is up to you - mak
 Clinical trial data exchange needs fixing.  We need to be able to simultaneously speak in nuanced concepts and understand in specific self-explanatory structure. _The first step is agreeing on that structure_.
 
 Being able to iterate rapidly is important to the early stages of development of this standard. _Fix what's broken. Improve what works. Repeat._
-
 
 > “Don't define derivation/origin for a field without knowing what the Biomedical Concept is being implemented”
 
