@@ -96,36 +96,50 @@ Study ABC v1.3 ─────┼──wasDerivedFrom── Study Template v2.1
 </code></pre></div>
 <p>Each version contains <strong>complete copies</strong> of all relevant definitions, creating an immutable snapshot with explicit provenance chains.</p>
 <h3 id="why-this-matters-for-clinical-data">Why This Matters for Clinical Data</h3>
-<p><strong>Regulatory Compliance</strong>
-- <strong>Immutable Audit Trail</strong>: Once created, versions never change - essential for regulatory submissions
-- <strong>Complete Context</strong>: Each submission is self-contained with no external dependencies
-- <strong>Clear Lineage</strong>: <code>wasDerivedFrom</code> provides unambiguous provenance for regulatory review</p>
-<p><strong>Data Integrity</strong>
-- <strong>No Cascade Failures</strong>: Changes to standards don't break existing studies
-- <strong>Temporal Consistency</strong>: Historical analyses remain reproducible indefinitely
-- <strong>Explicit Customisation</strong>: Study-specific modifications are clearly documented</p>
-<p><strong>Operational Benefits</strong>
-- <strong>Simplified Queries</strong>: All metadata is local - no complex inheritance resolution
-- <strong>Parallel Development</strong>: Teams can work independently without version conflicts
-- <strong>Predictable Performance</strong>: No deep inheritance chains to traverse</p>
+<p><strong>Regulatory Compliance</strong></p>
+<ul>
+<li><strong>Immutable Audit Trail</strong>: Once created, versions never change - essential for regulatory submissions</li>
+<li><strong>Complete Context</strong>: Each submission is self-contained with no external dependencies</li>
+<li><strong>Clear Lineage</strong>: <code>wasDerivedFrom</code> provides unambiguous provenance for regulatory review</li>
+</ul>
+<p><strong>Data Integrity</strong></p>
+<ul>
+<li><strong>No Cascade Failures</strong>: Changes to standards don't break existing studies</li>
+<li><strong>Temporal Consistency</strong>: Historical analyses remain reproducible indefinitely</li>
+<li><strong>Explicit Customisation</strong>: Study-specific modifications are clearly documented</li>
+</ul>
+<p><strong>Operational Benefits</strong></p>
+<ul>
+<li><strong>Simplified Queries</strong>: All metadata is local - no complex inheritance resolution</li>
+<li><strong>Parallel Development</strong>: Teams can work independently without version conflicts</li>
+<li><strong>Predictable Performance</strong>: No deep inheritance chains to traverse</li>
+</ul>
 <h3 id="trade-offs-considered">Trade-offs Considered</h3>
-<p><strong>Storage vs Simplicity</strong>
-- <strong>Cost</strong>: More storage required for duplicated definitions
-- <strong>Benefit</strong>: Eliminates complex inheritance logic and cascade dependencies
-- <strong>Reality</strong>: Storage is cheap; developer time and regulatory risk are expensive</p>
-<p><strong>Propagation vs Isolation</strong>
-- <strong>Challenge</strong>: Updates must be explicitly propagated to derived versions
-- <strong>Benefit</strong>: Prevents unintended changes from affecting production systems
-- <strong>Mitigation</strong>: Tooling can assist with selective update propagation</p>
-<p><strong>Divergence vs Control</strong>
-- <strong>Risk</strong>: Versions may diverge over time without careful governance
-- <strong>Benefit</strong>: Explicit control over what changes are adopted and when
-- <strong>Practice</strong>: Regular review cycles ensure alignment where needed</p>
+<p><strong>Storage vs Simplicity</strong></p>
+<ul>
+<li><strong>Cost</strong>: More storage required for duplicated definitions</li>
+<li><strong>Benefit</strong>: Eliminates complex inheritance logic and cascade dependencies</li>
+<li><strong>Reality</strong>: Storage is cheap; developer time and regulatory risk are expensive</li>
+</ul>
+<p><strong>Propagation vs Isolation</strong></p>
+<ul>
+<li><strong>Challenge</strong>: Updates must be explicitly propagated to derived versions</li>
+<li><strong>Benefit</strong>: Prevents unintended changes from affecting production systems</li>
+<li><strong>Mitigation</strong>: Tooling can assist with selective update propagation</li>
+</ul>
+<p><strong>Divergence vs Control</strong></p>
+<ul>
+<li><strong>Risk</strong>: Versions may diverge over time without careful governance</li>
+<li><strong>Benefit</strong>: Explicit control over what changes are adopted and when</li>
+<li><strong>Practice</strong>: Regular review cycles ensure alignment where needed</li>
+</ul>
 <h3 id="implementation-pattern">Implementation Pattern</h3>
-<p>This mirrors successful patterns in other domains:
-- <strong>Git</strong>: Complete snapshots with parent pointers, not deltas
-- <strong>Docker</strong>: Immutable layers with explicit inheritance
-- <strong>Blockchain</strong>: Immutable blocks with cryptographic lineage</p>
+<p>This mirrors successful patterns in other domains:</p>
+<ul>
+<li><strong>Git</strong>: Complete snapshots with parent pointers, not deltas</li>
+<li><strong>Docker</strong>: Immutable layers with explicit inheritance</li>
+<li><strong>Blockchain</strong>: Immutable blocks with cryptographic lineage</li>
+</ul>
 <p>For clinical data, where <strong>"reproducible forever"</strong> is not just good practice but regulatory requirement, this architecture provides the foundation for trustworthy, auditable data systems.</p></div>
 </div>
 </div>
