@@ -106,6 +106,7 @@
 <li><strong>Supply</strong>: Data Contract for what a particular provider promises to deliver (e.g. Data Transfer Agreements with each supplier)</li>
 </ol>
 <p>It is being designed in a Clinical Trial context to supplement the CDISC Unified Study Definitions (<a href="https://github.com/cdisc-org/DDF-RA">USDM</a>) and <a href="https://github.com/cdisc-org/DataExchange-DatasetJson">Dataset-JSON</a>, providing a way to describe datasets and how they link causally to their context</p>
+<p><a href="https://temeta.github.io/define-json">Documentation Site</a></p>
 <h2 id="context-is-everything">Context is everything</h2>
 <blockquote>
 <p>“Don't provide values without units”</p>
@@ -115,18 +116,20 @@
 <blockquote>
 <p>“Don't quote someone without knowing what else they were saying and why</p>
 </blockquote>
-<p>The context that Define is implementing, i.e. <em>your</em> context, is up to you - make sure to record the surrounding context on your end so that the definitions within can be used and reused accurately:
-* CDISC Dataset Specification (actual data)
-* CDISC Dataset Specialisation (template in the context of Biomedical Concept)
-* OpenStudyBuilder Activity
-* FHIR Profile or IG
-* Clinical Recording Model
-* Structured Data Collection forms / apps
-* Clinical eSource Data Spec (a.k.a. Data Transfer Agreement, Data Contract)
-* OMOP-CDM mappings
-* Dataset Transformation Metaprogramming
-* Define-JSON / Define-XML for regulatory submission
-* AI model feature spec</p>
+<p>The context that Define is implementing, i.e. <em>your</em> context, is up to you - make sure to record the surrounding context on your end so that the definitions within can be used and reused accurately:</p>
+<ul>
+<li>CDISC Dataset Specification (actual data)</li>
+<li>CDISC Dataset Specialisation (template in the context of Biomedical Concept)</li>
+<li>OpenStudyBuilder Activity</li>
+<li>FHIR Profile or IG</li>
+<li>Clinical Recording Model</li>
+<li>Structured Data Collection forms / apps</li>
+<li>Clinical eSource Data Spec (a.k.a. Data Transfer Agreement, Data Contract)</li>
+<li>OMOP-CDM mappings</li>
+<li>Dataset Transformation Metaprogramming</li>
+<li>Define-JSON / Define-XML for regulatory submission</li>
+<li>AI model feature spec</li>
+</ul>
 <blockquote>
 <p>“Don't send data without its Define”</p>
 </blockquote>
@@ -166,7 +169,7 @@
 <h3 id="data-product-catalog">Data Product Catalog</h3>
 <p>A given set of data products can be described using define-json to provide enhanced metadata around lineage, semantics and derivations.</p>
 <p>In the context of a Clinical Data Fabric/Mesh/Lake, MDR, or Operational Data Store: define-json can be used as a means of recording granular value-level lineage within dataset, allowing tooling to show dependencies and impact analysis.</p>
-<p>Define can even be used a psuedo 'MDR' with the way it tracks dependencies, provenance and impact analysis. </p>
+<p>Define can even be used a psuedo 'MDR' with the way it tracks dependencies, provenance and impact analysis.</p>
 <ul>
 <li><code>SourceItem</code> structure has detailed information about where the value came from, whether it's a document or CRF form or source dataset with its own referencable <code>Item</code>.</li>
 <li><code>wasDerivedFrom</code> relationship is borrows from PROV-O (Provenance Ontology) exclusively to denote template reuse i.e. "I am reusing this definition from somewhere else and making it my own".</li>
