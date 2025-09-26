@@ -265,17 +265,17 @@ classes:
       - usdm:StudyDesign
     is_a: GovernedElement
     attributes:
-      items:
+      itemGroups:
         description: >-
-          Items defined in this version of the metadata
-        range: Item
+          Item groups, containing items, defined in this version of the metadata
+        range: ItemGroup
         multivalued: true
         inlined: true
         inlined_as_list: true
-      itemGroups:
+      items:
         description: >-
-          Item groups defined in this version of the metadata
-        range: ItemGroup
+          Template or top-level items (not belonging to any item group) defined in this version of the metadata
+        range: Item
         multivalued: true
         inlined: true
         inlined_as_list: true
@@ -322,12 +322,6 @@ classes:
         multivalued: true
         inlined: true
         inlined_as_list: true
-      mappings:
-        description: Coding mappings in this version of the metadata
-        range: CodingMapping
-        multivalued: true
-        inlined: true
-        inlined_as_list: true
       concepts:
         description: Structured Concepts defined in this version of the metadata
         range: ReifiedConcept
@@ -336,6 +330,12 @@ classes:
         description: >-
           Relationships between items, item groups, and other elements in this version of the metadata.
         range: Relationship
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      dictionaries:
+        description: Dictionaries defined in this version of the metadata
+        range: Dictionary
         multivalued: true
         inlined: true
         inlined_as_list: true
@@ -688,29 +688,28 @@ classes:
         description: >-
           The code system version
         range: string
+      aliasType:
+        description: >-
+          How this coding is related in the context of its parent element
+        range: AliasPredicate
 
-  CodingMapping:
+  Dictionary:
     description: >-
-      A mapping relationship that establishes connections between different coding systems
-    related_mappings:
-      - sdmx:ItemSchemeMap
+      A dictionary that defines a set of codes and their meanings
     is_a: IdentifiableElement
     attributes:
-      source:
-        description: Source coding
+      terms:
+        description: Terms in this dictionary - leave this empty in most cases to keep the file small
         range: Coding
-        required: true
-      target:
-        description: Target coding
-        range: Coding
-        required: true
-      relationship:
-        description: Type of mapping relationship
-        range: AliasPredicateEnum
-        required: true
-      confidence:
-        description: Confidence in the mapping (0.0-1.0)
-        range: float
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      publishedBy:
+        description: >-
+          Associates the Data Provider that reports/publishes the data.
+        any_of:
+          - range: Organization
+          - range: string
 
   ReifiedConcept:
     description: >-
@@ -1766,7 +1765,7 @@ classes:
         range: Resource
 
 enums:
-  AliasPredicateEnum:
+  AliasPredicate:
     description: >-
       An enumeration that defines permissible values for the relationship between an element and its alias
     from_schema: linkml:AliasPredicateEnum
