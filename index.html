@@ -117,6 +117,20 @@
 <pre class="mermaid"><code>erDiagram
 MetaDataVersion {
     stringList resources  
+    string fileOID  
+    datetime asOfDateTime  
+    datetime creationDateTime  
+    string odmVersion  
+    string fileType  
+    string originator  
+    string sourceSystem  
+    string sourceSystemVersion  
+    string context  
+    string defineVersion  
+    string studyOID  
+    string studyName  
+    string studyDescription  
+    string protocolName  
     string OID  
     string uuid  
     string name  
@@ -143,13 +157,36 @@ Coding {
     string decode  
     string codeSystem  
     string codeSystemVersion  
+    AliasPredicate aliasType  
 }
 DocumentReference {
     string title  
+    string leafID  
     integerList pages  
     string relationship  
     string version  
     string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+Standard {
+    StandardName name  
+    StandardType type  
+    PublishingSet publishingSet  
+    string version  
+    StandardStatus status  
+    string OID  
+    string uuid  
+    string description  
+    string label  
+    stringList aliases  
+}
+Dictionary {
+    string publishedBy  
     string OID  
     string uuid  
     string name  
@@ -339,16 +376,6 @@ Method {
     string owner  
     string wasDerivedFrom  
 }
-CodingMapping {
-    AliasPredicateEnum relationship  
-    float confidence  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
 ItemGroup {
     string domain  
     string structure  
@@ -400,21 +427,27 @@ NominalOccurrence {
     string wasDerivedFrom  
 }
 
-MetaDataVersion ||--}o Item : "items"
 MetaDataVersion ||--}o ItemGroup : "itemGroups"
+MetaDataVersion ||--}o Item : "items"
 MetaDataVersion ||--}o Condition : "conditions"
 MetaDataVersion ||--}o WhereClause : "whereClauses"
 MetaDataVersion ||--}o Method : "methods"
 MetaDataVersion ||--}o CodeList : "codeLists"
 MetaDataVersion ||--}o Coding : "codings"
-MetaDataVersion ||--}o CodingMapping : "mappings"
 MetaDataVersion ||--}o ReifiedConcept : "concepts"
 MetaDataVersion ||--}o Relationship : "relationships"
+MetaDataVersion ||--}o Dictionary : "dictionaries"
+MetaDataVersion ||--}o Standard : "standards"
+MetaDataVersion ||--}o DocumentReference : "annotatedCRF"
 MetaDataVersion ||--}o Coding : "coding"
 MetaDataVersion ||--}o Comment : "comment"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 DocumentReference ||--}o Coding : "coding"
+Standard ||--}o Comment : "comment"
+Standard ||--}o Coding : "coding"
+Dictionary ||--}o Coding : "terms"
+Dictionary ||--}o Coding : "coding"
 Relationship ||--|| IdentifiableElement : "subject"
 Relationship ||--|| IdentifiableElement : "object"
 Relationship ||--}o Coding : "coding"
@@ -465,9 +498,6 @@ Method ||--}o FormalExpression : "formalExpressions"
 Method ||--|o DocumentReference : "document"
 Method ||--}o Coding : "coding"
 Method ||--}o Comment : "comment"
-CodingMapping ||--|| Coding : "source"
-CodingMapping ||--|| Coding : "target"
-CodingMapping ||--}o Coding : "coding"
 ItemGroup ||--}o Item : "items"
 ItemGroup ||--}o ItemGroup : "children"
 ItemGroup ||--|o ReifiedConcept : "implementsConcept"
@@ -496,243 +526,255 @@ NominalOccurrence ||--}o Comment : "comment"
 </thead>
 <tbody>
 <tr>
-<td><a href="CodeListItem/">CodeListItem</a></td>
+<td><a href="classes/CodeListItem/">CodeListItem</a></td>
 <td>A structured member of a CodeList that extends the Coding class with addition...</td>
 </tr>
 <tr>
-<td><a href="Coding/">Coding</a></td>
+<td><a href="classes/Coding/">Coding</a></td>
 <td>A semantic reference that provides standardized codes and their meanings from...</td>
 </tr>
 <tr>
-<td><a href="DataflowRelationship/">DataflowRelationship</a></td>
+<td><a href="classes/DataflowRelationship/">DataflowRelationship</a></td>
 <td>A relationship element that associates a DataAttribute with a Dataflow, repor...</td>
 </tr>
 <tr>
-<td><a href="DatasetKey/">DatasetKey</a></td>
+<td><a href="classes/DatasetKey/">DatasetKey</a></td>
 <td>An abstract identifier that comprises the cross-product of dimension values t...</td>
 </tr>
 <tr>
-<td>        <a href="GroupKey/">GroupKey</a></td>
+<td>        <a href="classes/GroupKey/">GroupKey</a></td>
 <td>A dimension subset that represents collections of dimensions that are subsets...</td>
 </tr>
 <tr>
-<td>        <a href="SeriesKey/">SeriesKey</a></td>
+<td>        <a href="classes/SeriesKey/">SeriesKey</a></td>
 <td>A unique identifier that comprises the cross-product of dimension values incl...</td>
 </tr>
 <tr>
-<td><a href="DimensionRelationship/">DimensionRelationship</a></td>
+<td><a href="classes/DimensionRelationship/">DimensionRelationship</a></td>
 <td>A relationship element that associates a DataAttribute with a specific Dimens...</td>
 </tr>
 <tr>
-<td><a href="Distribution/">Distribution</a></td>
+<td><a href="classes/Distribution/">Distribution</a></td>
 <td>A technical representation that provides a specific format or access method f...</td>
 </tr>
 <tr>
-<td><a href="Formatted/">Formatted</a></td>
+<td><a href="classes/Formatted/">Formatted</a></td>
 <td>A mixin that provides slots for reporting, exchange, or storage formatting</td>
 </tr>
 <tr>
-<td><a href="Governed/">Governed</a></td>
+<td><a href="classes/Governed/">Governed</a></td>
 <td>A mixin that provides slots for audit trail and standards governance, includi...</td>
 </tr>
 <tr>
-<td><a href="GovernedElement/">GovernedElement</a></td>
+<td><a href="classes/GovernedElement/">GovernedElement</a></td>
 <td></td>
 </tr>
 <tr>
-<td>        <a href="CodeList/">CodeList</a></td>
+<td>        <a href="classes/CodeList/">CodeList</a></td>
 <td>A value set that defines a discrete collection of permissible values for an i...</td>
 </tr>
 <tr>
-<td>        <a href="ConceptProperty/">ConceptProperty</a></td>
+<td>        <a href="classes/ConceptProperty/">ConceptProperty</a></td>
 <td>A reified property concept that exists within the context of its containing t...</td>
 </tr>
 <tr>
-<td>        <a href="Condition/">Condition</a></td>
+<td>        <a href="classes/Condition/">Condition</a></td>
 <td>A reusable logical construct that combines multiple components using AND logi...</td>
 </tr>
 <tr>
-<td>        <a href="CubeComponent/">CubeComponent</a></td>
+<td>        <a href="classes/CubeComponent/">CubeComponent</a></td>
 <td>An abstract data field that represents a component in a data structure defini...</td>
 </tr>
 <tr>
-<td>                <a href="DataAttribute/">DataAttribute</a></td>
+<td>                <a href="classes/DataAttribute/">DataAttribute</a></td>
 <td>A data cube property that describes additional characteristics or metadata ab...</td>
 </tr>
 <tr>
-<td>                <a href="Dimension/">Dimension</a></td>
+<td>                <a href="classes/Dimension/">Dimension</a></td>
 <td>A data cube property that describes a categorical or hierarchical dimension</td>
 </tr>
 <tr>
-<td>                <a href="Measure/">Measure</a></td>
+<td>                <a href="classes/Measure/">Measure</a></td>
 <td>A data cube property that describes a measurable quantity or value</td>
 </tr>
 <tr>
-<td>        <a href="Dataflow/">Dataflow</a></td>
+<td>        <a href="classes/Dataflow/">Dataflow</a></td>
 <td>An abstract representation that defines data provision for different referenc...</td>
 </tr>
 <tr>
-<td>        <a href="DataProduct/">DataProduct</a></td>
+<td>        <a href="classes/DataProduct/">DataProduct</a></td>
 <td>A governed collection that represents a purpose-driven assembly of datasets a...</td>
 </tr>
 <tr>
-<td>        <a href="Item/">Item</a></td>
+<td>        <a href="classes/Item/">Item</a></td>
 <td>A data element that represents a specific piece of information within a defin...</td>
 </tr>
 <tr>
-<td>        <a href="ItemGroup/">ItemGroup</a></td>
+<td>        <a href="classes/ItemGroup/">ItemGroup</a></td>
 <td>A collection element that groups related items or subgroups within a specific...</td>
 </tr>
 <tr>
-<td>                <a href="DataStructureDefinition/">DataStructureDefinition</a></td>
+<td>                <a href="classes/DataStructureDefinition/">DataStructureDefinition</a></td>
 <td>A structural element that defines the organization of a data cube for analysi...</td>
 </tr>
 <tr>
-<td>        <a href="MetaDataVersion/">MetaDataVersion</a></td>
+<td>        <a href="classes/MetaDataVersion/">MetaDataVersion</a></td>
 <td>A container element that represents a given version of a specification, linki...</td>
 </tr>
 <tr>
-<td>        <a href="Method/">Method</a></td>
+<td>        <a href="classes/Method/">Method</a></td>
 <td>A reusable computational procedure that describes how to derive values and ca...</td>
 </tr>
 <tr>
-<td>        <a href="NominalOccurrence/">NominalOccurrence</a></td>
+<td>        <a href="classes/NominalOccurrence/">NominalOccurrence</a></td>
 <td>An event element that represents occurrences such as planned or unplanned enc...</td>
 </tr>
 <tr>
-<td>        <a href="ProvisionAgreement/">ProvisionAgreement</a></td>
+<td>        <a href="classes/ProvisionAgreement/">ProvisionAgreement</a></td>
 <td>An agreement element that describes the contractual relationship between a Da...</td>
 </tr>
 <tr>
-<td>        <a href="ReifiedConcept/">ReifiedConcept</a></td>
+<td>        <a href="classes/ReifiedConcept/">ReifiedConcept</a></td>
 <td>A canonical information layer that makes abstract concepts explicit and refer...</td>
 </tr>
 <tr>
-<td><a href="GroupRelationship/">GroupRelationship</a></td>
+<td><a href="classes/GroupRelationship/">GroupRelationship</a></td>
 <td>A relationship element that associates a DataAttribute with a set of Dimensio...</td>
 </tr>
 <tr>
-<td><a href="Identifiable/">Identifiable</a></td>
+<td><a href="classes/Identifiable/">Identifiable</a></td>
 <td>A mixin that provides slots for making an entity addressable within a study o...</td>
 </tr>
 <tr>
-<td><a href="IdentifiableElement/">IdentifiableElement</a></td>
+<td><a href="classes/IdentifiableElement/">IdentifiableElement</a></td>
 <td></td>
 </tr>
 <tr>
-<td>        <a href="CodingMapping/">CodingMapping</a></td>
-<td>A mapping relationship that establishes connections between different coding ...</td>
-</tr>
-<tr>
-<td>        <a href="Comment/">Comment</a></td>
+<td>        <a href="classes/Comment/">Comment</a></td>
 <td>A descriptive element that contains explanatory text provided by a data or me...</td>
 </tr>
 <tr>
-<td>        <a href="ComponentList/">ComponentList</a></td>
+<td>        <a href="classes/ComponentList/">ComponentList</a></td>
 <td>An abstract definition that specifies a list of components within a data stru...</td>
 </tr>
 <tr>
-<td>        <a href="Dataset/">Dataset</a></td>
+<td>        <a href="classes/Dataset/">Dataset</a></td>
 <td>A collection element that groups observations sharing the same dimensionality...</td>
 </tr>
 <tr>
-<td>        <a href="DocumentReference/">DocumentReference</a></td>
+<td>        <a href="classes/Dictionary/">Dictionary</a></td>
+<td>A dictionary that defines a set of codes and their meanings</td>
+</tr>
+<tr>
+<td>        <a href="classes/DocumentReference/">DocumentReference</a></td>
 <td>A comprehensive reference element that points to an external document, combin...</td>
 </tr>
 <tr>
-<td>        <a href="FormalExpression/">FormalExpression</a></td>
+<td>        <a href="classes/FormalExpression/">FormalExpression</a></td>
 <td>A computational element that defines the execution of a data derivation withi...</td>
 </tr>
 <tr>
-<td>        <a href="Organization/">Organization</a></td>
+<td>        <a href="classes/Organization/">Organization</a></td>
 <td>An entity that represents organizational information, such as a site or spons...</td>
 </tr>
 <tr>
-<td>                <a href="DataProvider/">DataProvider</a></td>
+<td>                <a href="classes/DataProvider/">DataProvider</a></td>
 <td>An organization element that provides data to a Data Consumer, which can be a...</td>
 </tr>
 <tr>
-<td>        <a href="Parameter/">Parameter</a></td>
+<td>        <a href="classes/Parameter/">Parameter</a></td>
 <td>A variable element that describes an input used in a formal expression</td>
 </tr>
 <tr>
-<td>        <a href="Relationship/">Relationship</a></td>
+<td>        <a href="classes/Relationship/">Relationship</a></td>
 <td>A semantic link that defines connections between elements such as Items or It...</td>
 </tr>
 <tr>
-<td>        <a href="Resource/">Resource</a></td>
+<td>        <a href="classes/Resource/">Resource</a></td>
 <td>An external reference that serves as the source for a Dataset, ItemGroup, or ...</td>
 </tr>
 <tr>
-<td>                <a href="DataService/">DataService</a></td>
+<td>                <a href="classes/DataService/">DataService</a></td>
 <td>A service element that provides an API or endpoint for serving or receiving d...</td>
 </tr>
 <tr>
-<td>        <a href="ReturnValue/">ReturnValue</a></td>
+<td>        <a href="classes/ReturnValue/">ReturnValue</a></td>
 <td>An output specification that defines the details of what a formal expression ...</td>
 </tr>
 <tr>
-<td>        <a href="SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
+<td>        <a href="classes/SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
 <td>A feedback element that contains comments from a site or sponsor, distinct fr...</td>
 </tr>
 <tr>
-<td>        <a href="Timing/">Timing</a></td>
+<td>        <a href="classes/Standard/">Standard</a></td>
+<td>A collection element that groups related standards within a specific context,...</td>
+</tr>
+<tr>
+<td>        <a href="classes/Timing/">Timing</a></td>
 <td>A temporal element that describes the timing of an event or occurrence, which...</td>
 </tr>
 <tr>
-<td>        <a href="User/">User</a></td>
+<td>        <a href="classes/User/">User</a></td>
 <td>An entity that represents information about a specific user of a clinical dat...</td>
 </tr>
 <tr>
-<td>        <a href="WhereClause/">WhereClause</a></td>
+<td>        <a href="classes/WhereClause/">WhereClause</a></td>
 <td>A conditional element that describes the circumstances under which a containi...</td>
 </tr>
 <tr>
-<td><a href="IsODMItem/">IsODMItem</a></td>
+<td><a href="classes/IsODMItem/">IsODMItem</a></td>
 <td>A mixin that provides additional attributes for CDISC Operational Data Model ...</td>
 </tr>
 <tr>
-<td><a href="IsProfile/">IsProfile</a></td>
+<td><a href="classes/IsProfile/">IsProfile</a></td>
 <td>A mixin that provides additional metadata for FHIR resources and Data Product...</td>
 </tr>
 <tr>
-<td><a href="IsSdmxDataset/">IsSdmxDataset</a></td>
+<td><a href="classes/IsSdmxDataset/">IsSdmxDataset</a></td>
 <td>A mixin that provides additional metadata specific to SDMX Datasets</td>
 </tr>
 <tr>
-<td><a href="Labelled/">Labelled</a></td>
+<td><a href="classes/Labelled/">Labelled</a></td>
 <td>A mixin that provides slots for detailing meanings and multilingual descripti...</td>
 </tr>
 <tr>
-<td><a href="MeasureRelationship/">MeasureRelationship</a></td>
+<td><a href="classes/MeasureRelationship/">MeasureRelationship</a></td>
 <td>A relationship element that associates a DataAttribute with a Measure</td>
 </tr>
 <tr>
-<td><a href="ObservationRelationship/">ObservationRelationship</a></td>
+<td><a href="classes/ObservationRelationship/">ObservationRelationship</a></td>
 <td>A relationship element that associates a DataAttribute with an Observation, a...</td>
 </tr>
 <tr>
-<td><a href="Origin/">Origin</a></td>
+<td><a href="classes/ODMFileMetadata/">ODMFileMetadata</a></td>
+<td>A mixin that provides ODM file-level metadata attributes including file ident...</td>
+</tr>
+<tr>
+<td><a href="classes/Origin/">Origin</a></td>
 <td>A provenance element that describes the source of data for an item</td>
 </tr>
 <tr>
-<td><a href="RangeCheck/">RangeCheck</a></td>
+<td><a href="classes/RangeCheck/">RangeCheck</a></td>
 <td>A validation element that performs a simple comparison check between a refere...</td>
 </tr>
 <tr>
-<td><a href="SourceItem/">SourceItem</a></td>
+<td><a href="classes/SourceItem/">SourceItem</a></td>
 <td>A data source that provides the origin of information for an item</td>
 </tr>
 <tr>
-<td><a href="TranslatedText/">TranslatedText</a></td>
+<td><a href="classes/StudyMetadata/">StudyMetadata</a></td>
+<td>A mixin that provides study-level metadata attributes including study identif...</td>
+</tr>
+<tr>
+<td><a href="classes/TranslatedText/">TranslatedText</a></td>
 <td></td>
 </tr>
 <tr>
-<td><a href="Translation/">Translation</a></td>
+<td><a href="classes/Translation/">Translation</a></td>
 <td>A text representation that provides content in a specific language, used for ...</td>
 </tr>
 <tr>
-<td><a href="Versioned/">Versioned</a></td>
+<td><a href="classes/Versioned/">Versioned</a></td>
 <td>A mixin that provides version and connectivity information, including version...</td>
 </tr>
 </tbody>
@@ -747,675 +789,747 @@ NominalOccurrence ||--}o Comment : "comment"
 </thead>
 <tbody>
 <tr>
-<td><a href="OID/">OID</a></td>
+<td><a href="slots/OID/">OID</a></td>
 <td>Local identifier within this study/context</td>
 </tr>
 <tr>
-<td><a href="uuid/">uuid</a></td>
+<td><a href="slots/uuid/">uuid</a></td>
 <td>Universal unique identifier</td>
 </tr>
 <tr>
-<td><a href="mandatory/">mandatory</a></td>
+<td><a href="slots/mandatory/">mandatory</a></td>
 <td>Is this element required?</td>
 </tr>
 <tr>
-<td><a href="comment.md">comment</a></td>
+<td><a href="slots/comment/">comment</a></td>
 <td>Comment on the element, such as a rationale for its inclusion or exclusion</td>
 </tr>
 <tr>
-<td><a href="purpose/">purpose</a></td>
+<td><a href="slots/purpose/">purpose</a></td>
 <td>Purpose or rationale for this data element</td>
 </tr>
 <tr>
-<td><a href="lastUpdated/">lastUpdated</a></td>
+<td><a href="slots/lastUpdated/">lastUpdated</a></td>
 <td>When the resource was last updated</td>
 </tr>
 <tr>
-<td><a href="owner/">owner</a></td>
+<td><a href="slots/owner/">owner</a></td>
 <td>Party responsible for this element</td>
 </tr>
 <tr>
-<td><a href="wasDerivedFrom/">wasDerivedFrom</a></td>
+<td><a href="slots/wasDerivedFrom/">wasDerivedFrom</a></td>
 <td>Reference to another item that this item implements or extends, e</td>
 </tr>
 <tr>
-<td><a href="name/">name</a></td>
+<td><a href="slots/name/">name</a></td>
 <td>Short name or identifier, used for field names</td>
 </tr>
 <tr>
-<td><a href="description/">description</a></td>
+<td><a href="slots/description/">description</a></td>
 <td>Detailed description, shown in tooltips</td>
 </tr>
 <tr>
-<td><a href="coding.md">coding</a></td>
+<td><a href="slots/coding/">coding</a></td>
 <td>Semantic tags for this element</td>
 </tr>
 <tr>
-<td><a href="label/">label</a></td>
+<td><a href="slots/label/">label</a></td>
 <td>Human-readable label, shown in UIs</td>
 </tr>
 <tr>
-<td><a href="aliases/">aliases</a></td>
+<td><a href="slots/aliases/">aliases</a></td>
 <td>Alternative name or identifier</td>
 </tr>
 <tr>
-<td><a href="decimalDigits/">decimalDigits</a></td>
+<td><a href="slots/decimalDigits/">decimalDigits</a></td>
 <td>For decimal values, the number of digits after the decimal point</td>
 </tr>
 <tr>
-<td><a href="displayFormat/">displayFormat</a></td>
+<td><a href="slots/displayFormat/">displayFormat</a></td>
 <td>A display format for the item</td>
 </tr>
 <tr>
-<td><a href="significantDigits/">significantDigits</a></td>
+<td><a href="slots/significantDigits/">significantDigits</a></td>
 <td>For numeric values, the number of significant digits</td>
 </tr>
 <tr>
-<td><a href="version/">version</a></td>
+<td><a href="slots/version/">version</a></td>
 <td>The version of the external resources</td>
 </tr>
 <tr>
-<td><a href="href/">href</a></td>
+<td><a href="slots/href/">href</a></td>
 <td>Machine-readable instructions to obtain the resource e</td>
 </tr>
 <tr>
-<td><a href="profile/">profile</a></td>
+<td><a href="slots/profile/">profile</a></td>
 <td>Profiles this resource claims to conform to</td>
 </tr>
 <tr>
-<td><a href="security/">security</a></td>
+<td><a href="slots/security/">security</a></td>
 <td>Security tags applied to this resource</td>
 </tr>
 <tr>
-<td><a href="authenticator/">authenticator</a></td>
+<td><a href="slots/authenticator/">authenticator</a></td>
 <td>Who/what authenticated the resource</td>
 </tr>
 <tr>
-<td><a href="validityPeriod/">validityPeriod</a></td>
+<td><a href="slots/validityPeriod/">validityPeriod</a></td>
 <td>Time period during which the resouce is valid</td>
 </tr>
 <tr>
-<td><a href="role/">role</a></td>
+<td><a href="slots/role/">role</a></td>
 <td>Identifies the role of the item within the containing context, taken from the...</td>
 </tr>
 <tr>
-<td><a href="roleCodeList/">roleCodeList</a></td>
+<td><a href="slots/roleCodeList/">roleCodeList</a></td>
 <td>Reference to the CodeList that defines the roles for this item</td>
 </tr>
 <tr>
-<td><a href="hasNoData/">hasNoData</a></td>
+<td><a href="slots/hasNoData/">hasNoData</a></td>
 <td>Set to Yes if this is a manifest and there is no data for this item</td>
 </tr>
 <tr>
-<td><a href="crfCompletionInstructions/">crfCompletionInstructions</a></td>
+<td><a href="slots/crfCompletionInstructions/">crfCompletionInstructions</a></td>
 <td>CRFCompletionInstructions reference: Instructions for the clinical site on ho...</td>
 </tr>
 <tr>
-<td><a href="cdiscNotes/">cdiscNotes</a></td>
+<td><a href="slots/cdiscNotes/">cdiscNotes</a></td>
 <td>CDISCNotes reference: Explanatory text for the variable</td>
 </tr>
 <tr>
-<td><a href="implementationNotes/">implementationNotes</a></td>
+<td><a href="slots/implementationNotes/">implementationNotes</a></td>
 <td>ImplementationNotes reference: Further information, such as rationale and imp...</td>
 </tr>
 <tr>
-<td><a href="collectionExceptionCondition/">collectionExceptionCondition</a></td>
+<td><a href="slots/collectionExceptionCondition/">collectionExceptionCondition</a></td>
 <td>Condition that defines when collection may be exempted</td>
 </tr>
 <tr>
-<td><a href="preSpecifiedValue/">preSpecifiedValue</a></td>
+<td><a href="slots/preSpecifiedValue/">preSpecifiedValue</a></td>
 <td>Prefill value or a default value for a field that is automatically populated</td>
 </tr>
 <tr>
-<td><a href="items/">items</a></td>
-<td>Items defined in this version of the metadata</td>
+<td><a href="slots/fileOID/">fileOID</a></td>
+<td>Unique identifier for the ODM file</td>
 </tr>
 <tr>
-<td><a href="itemGroups/">itemGroups</a></td>
-<td>Item groups defined in this version of the metadata</td>
+<td><a href="slots/asOfDateTime/">asOfDateTime</a></td>
+<td>Date and time when the data snapshot was taken</td>
 </tr>
 <tr>
-<td><a href="resources/">resources</a></td>
+<td><a href="slots/creationDateTime/">creationDateTime</a></td>
+<td>Date and time when the ODM file was created</td>
+</tr>
+<tr>
+<td><a href="slots/odmVersion/">odmVersion</a></td>
+<td>Version of the ODM standard used</td>
+</tr>
+<tr>
+<td><a href="slots/fileType/">fileType</a></td>
+<td>Type of ODM file (e</td>
+</tr>
+<tr>
+<td><a href="slots/originator/">originator</a></td>
+<td>Organization or system that created the ODM file</td>
+</tr>
+<tr>
+<td><a href="slots/sourceSystem/">sourceSystem</a></td>
+<td>Source system that generated the data</td>
+</tr>
+<tr>
+<td><a href="slots/sourceSystemVersion/">sourceSystemVersion</a></td>
+<td>Version of the source system</td>
+</tr>
+<tr>
+<td><a href="slots/context/">context</a></td>
+<td>Define-XML context (usually "Other" for Define-XML)</td>
+</tr>
+<tr>
+<td><a href="slots/defineVersion/">defineVersion</a></td>
+<td>Version of Define-XML specification used</td>
+</tr>
+<tr>
+<td><a href="slots/studyOID/">studyOID</a></td>
+<td>Unique identifier for the study</td>
+</tr>
+<tr>
+<td><a href="slots/studyName/">studyName</a></td>
+<td>Name of the study</td>
+</tr>
+<tr>
+<td><a href="slots/studyDescription/">studyDescription</a></td>
+<td>Description of the study</td>
+</tr>
+<tr>
+<td><a href="slots/protocolName/">protocolName</a></td>
+<td>Protocol name for the study</td>
+</tr>
+<tr>
+<td><a href="slots/itemGroups/">itemGroups</a></td>
+<td>Item groups, containing items, defined in this version of the metadata</td>
+</tr>
+<tr>
+<td><a href="slots/items/">items</a></td>
+<td>Template or top-level items (not belonging to any item group) defined in this...</td>
+</tr>
+<tr>
+<td><a href="slots/resources/">resources</a></td>
 <td>References to documents that describe this version of the metadata</td>
 </tr>
 <tr>
-<td><a href="conditions/">conditions</a></td>
+<td><a href="slots/conditions/">conditions</a></td>
 <td>Logical conditions that apply to this version of the metadata</td>
 </tr>
 <tr>
-<td><a href="whereClauses/">whereClauses</a></td>
+<td><a href="slots/whereClauses/">whereClauses</a></td>
 <td>Data contexts that apply to this version of the metadata</td>
 </tr>
 <tr>
-<td><a href="methods/">methods</a></td>
+<td><a href="slots/methods/">methods</a></td>
 <td>Methods defined in this version of the metadata</td>
 </tr>
 <tr>
-<td><a href="codeLists/">codeLists</a></td>
+<td><a href="slots/codeLists/">codeLists</a></td>
 <td>Code lists defined in this version of the metadata</td>
 </tr>
 <tr>
-<td><a href="codings/">codings</a></td>
+<td><a href="slots/codings/">codings</a></td>
 <td>Codings defined in this version of the metadata</td>
 </tr>
 <tr>
-<td><a href="mappings/">mappings</a></td>
-<td>Coding mappings in this version of the metadata</td>
-</tr>
-<tr>
-<td><a href="concepts/">concepts</a></td>
+<td><a href="slots/concepts/">concepts</a></td>
 <td>Structured Concepts defined in this version of the metadata</td>
 </tr>
 <tr>
-<td><a href="relationships/">relationships</a></td>
+<td><a href="slots/relationships/">relationships</a></td>
 <td>Relationships between items, item groups, and other elements in this version ...</td>
 </tr>
 <tr>
-<td><a href="dataType/">dataType</a></td>
+<td><a href="slots/dictionaries/">dictionaries</a></td>
+<td>Dictionaries defined in this version of the metadata</td>
+</tr>
+<tr>
+<td><a href="slots/standards/">standards</a></td>
+<td>Standards defined in this version of the metadata</td>
+</tr>
+<tr>
+<td><a href="slots/annotatedCRF/">annotatedCRF</a></td>
+<td>Reference to annotated case report forms</td>
+</tr>
+<tr>
+<td><a href="slots/dataType/">dataType</a></td>
 <td>The data type of the item</td>
 </tr>
 <tr>
-<td><a href="length/">length</a></td>
+<td><a href="slots/length/">length</a></td>
 <td>The maximum length of the data item in characters</td>
 </tr>
 <tr>
-<td><a href="codeList.md">codeList</a></td>
+<td><a href="slots/codeList/">codeList</a></td>
 <td>Reference to the CodeList that constrains the item values</td>
 </tr>
 <tr>
-<td><a href="method.md">method</a></td>
+<td><a href="slots/method/">method</a></td>
 <td>Reference to the Method element that describes how to derive this item's valu...</td>
 </tr>
 <tr>
-<td><a href="rangeChecks/">rangeChecks</a></td>
+<td><a href="slots/rangeChecks/">rangeChecks</a></td>
 <td>Range checks applied to this item (e</td>
 </tr>
 <tr>
-<td><a href="whereClause.md">whereClause</a></td>
+<td><a href="slots/whereClause/">whereClause</a></td>
 <td>Conditions for when this item definition applies</td>
 </tr>
 <tr>
-<td><a href="origin.md">origin</a></td>
+<td><a href="slots/origin/">origin</a></td>
 <td>The origin of the data</td>
 </tr>
 <tr>
-<td><a href="conceptProperty.md">conceptProperty</a></td>
+<td><a href="slots/conceptProperty/">conceptProperty</a></td>
 <td>Reference to a abstract concept property that this item is a specialization /...</td>
 </tr>
 <tr>
-<td><a href="domain/">domain</a></td>
+<td><a href="slots/domain/">domain</a></td>
 <td>Domain abbreviation for the dataset</td>
 </tr>
 <tr>
-<td><a href="structure/">structure</a></td>
+<td><a href="slots/structure/">structure</a></td>
 <td>Data structure of the item group, indicating how the records are organized</td>
 </tr>
 <tr>
-<td><a href="isReferenceData/">isReferenceData</a></td>
+<td><a href="slots/isReferenceData/">isReferenceData</a></td>
 <td>Set to Yes if this is a reference item group</td>
 </tr>
 <tr>
-<td><a href="type/">type</a></td>
+<td><a href="slots/type/">type</a></td>
 <td>Type of item group</td>
 </tr>
 <tr>
-<td><a href="children/">children</a></td>
+<td><a href="slots/children/">children</a></td>
 <td>Child item groups within this item group</td>
 </tr>
 <tr>
-<td><a href="implementsConcept/">implementsConcept</a></td>
+<td><a href="slots/implementsConcept/">implementsConcept</a></td>
 <td>Reference to a abstract concept topic that this item group is a specializatio...</td>
 </tr>
 <tr>
-<td><a href="subject/">subject</a></td>
+<td><a href="slots/subject/">subject</a></td>
 <td>The starting element of the relationship (e</td>
 </tr>
 <tr>
-<td><a href="object/">object</a></td>
+<td><a href="slots/object/">object</a></td>
 <td>The ending element of the relationship</td>
 </tr>
 <tr>
-<td><a href="predicateTerm/">predicateTerm</a></td>
+<td><a href="slots/predicateTerm/">predicateTerm</a></td>
 <td>Short variable relationship linking phrase for programming purposes</td>
 </tr>
 <tr>
-<td><a href="linkingPhrase/">linkingPhrase</a></td>
+<td><a href="slots/linkingPhrase/">linkingPhrase</a></td>
 <td>Variable relationship descriptive linking phrase</td>
 </tr>
 <tr>
-<td><a href="language/">language</a></td>
+<td><a href="slots/language/">language</a></td>
 <td>The language of the translation</td>
 </tr>
 <tr>
-<td><a href="value/">value</a></td>
+<td><a href="slots/value/">value</a></td>
 <td>The translated text</td>
 </tr>
 <tr>
-<td><a href="translations/">translations</a></td>
+<td><a href="slots/translations/">translations</a></td>
 <td></td>
 </tr>
 <tr>
-<td><a href="formatName/">formatName</a></td>
+<td><a href="slots/formatName/">formatName</a></td>
 <td>Name of a standard format definition</td>
 </tr>
 <tr>
-<td><a href="codeListItems/">codeListItems</a></td>
+<td><a href="slots/codeListItems/">codeListItems</a></td>
 <td>The individual values that make up this CodeList</td>
 </tr>
 <tr>
-<td><a href="externalCodeList/">externalCodeList</a></td>
+<td><a href="slots/externalCodeList/">externalCodeList</a></td>
 <td>Reference to a code list that is defined externally to this study</td>
 </tr>
 <tr>
-<td><a href="codedValue/">codedValue</a></td>
+<td><a href="slots/codedValue/">codedValue</a></td>
 <td>The value of the CodeListItem before decoding</td>
 </tr>
 <tr>
-<td><a href="decode/">decode</a></td>
+<td><a href="slots/decode/">decode</a></td>
 <td>The decoded value of the CodeListItem</td>
 </tr>
 <tr>
-<td><a href="weight/">weight</a></td>
+<td><a href="slots/weight/">weight</a></td>
 <td>Numeric significance of the code (e</td>
 </tr>
 <tr>
-<td><a href="other/">other</a></td>
+<td><a href="slots/other/">other</a></td>
 <td>Flag to indicate that the term represents "other" content</td>
 </tr>
 <tr>
-<td><a href="text/">text</a></td>
+<td><a href="slots/text/">text</a></td>
 <td>The comment text</td>
 </tr>
 <tr>
-<td><a href="documents/">documents</a></td>
+<td><a href="slots/documents/">documents</a></td>
 <td>References to documents that contain or are referenced by this comment</td>
 </tr>
 <tr>
-<td><a href="code/">code</a></td>
+<td><a href="slots/code/">code</a></td>
 <td>The code value</td>
 </tr>
 <tr>
-<td><a href="codeSystem/">codeSystem</a></td>
+<td><a href="slots/codeSystem/">codeSystem</a></td>
 <td>The code system identifier</td>
 </tr>
 <tr>
-<td><a href="codeSystemVersion/">codeSystemVersion</a></td>
+<td><a href="slots/codeSystemVersion/">codeSystemVersion</a></td>
 <td>The code system version</td>
 </tr>
 <tr>
-<td><a href="source/">source</a></td>
-<td>Source coding</td>
+<td><a href="slots/aliasType/">aliasType</a></td>
+<td>How this coding is related in the context of its parent element</td>
 </tr>
 <tr>
-<td><a href="target/">target</a></td>
-<td>Target coding</td>
+<td><a href="slots/terms/">terms</a></td>
+<td>Terms in this dictionary - leave this empty in most cases to keep the file sm...</td>
 </tr>
 <tr>
-<td><a href="relationship.md">relationship</a></td>
-<td>Type of mapping relationship</td>
-</tr>
-<tr>
-<td><a href="confidence/">confidence</a></td>
-<td>Confidence in the mapping (0</td>
-</tr>
-<tr>
-<td><a href="properties/">properties</a></td>
-<td>Properties of the reified object, which can be other governed elements or sim...</td>
-</tr>
-<tr>
-<td><a href="minOccurs/">minOccurs</a></td>
-<td>Minimum number of occurrences of this property in the context</td>
-</tr>
-<tr>
-<td><a href="maxOccurs/">maxOccurs</a></td>
-<td>Maximum number of occurrences of this property in the context</td>
-</tr>
-<tr>
-<td><a href="implementsCondition/">implementsCondition</a></td>
-<td>Reference to a external (e</td>
-</tr>
-<tr>
-<td><a href="formalExpression.md">formalExpression</a></td>
-<td>A formal expression for complex checks</td>
-</tr>
-<tr>
-<td><a href="comparator/">comparator</a></td>
-<td>The type of comparison to be performed</td>
-</tr>
-<tr>
-<td><a href="checkValues/">checkValues</a></td>
-<td>Values to compare against</td>
-</tr>
-<tr>
-<td><a href="item.md">item</a></td>
-<td>Reference to the Item element whose value is being checked</td>
-</tr>
-<tr>
-<td><a href="softHard/">softHard</a></td>
-<td>Indicates whether a validation check is an error ("Hard") or a warning ("Soft...</td>
-</tr>
-<tr>
-<td><a href="context/">context</a></td>
-<td>The specific context within the containing element to which this formal expre...</td>
-</tr>
-<tr>
-<td><a href="expression/">expression</a></td>
-<td>The actual text of the formal expression (renamed from 'code' for disambiguat...</td>
-</tr>
-<tr>
-<td><a href="returnType/">returnType</a></td>
-<td>Return type of the expression</td>
-</tr>
-<tr>
-<td><a href="parameters/">parameters</a></td>
-<td>Parameters used in the expression</td>
-</tr>
-<tr>
-<td><a href="returnValue.md">returnValue</a></td>
-<td>Return value details</td>
-</tr>
-<tr>
-<td><a href="externalCodeLibs/">externalCodeLibs</a></td>
-<td>External code libraries referenced</td>
-</tr>
-<tr>
-<td><a href="formalExpressions/">formalExpressions</a></td>
-<td>Formal expressions used by this method</td>
-</tr>
-<tr>
-<td><a href="document/">document</a></td>
-<td>Reference to a document that describes this method in detail</td>
-</tr>
-<tr>
-<td><a href="resource.md">resource</a></td>
-<td>Path to a resource (e</td>
-</tr>
-<tr>
-<td><a href="valueList/">valueList</a></td>
-<td>A list of possible return values</td>
-</tr>
-<tr>
-<td><a href="sourceItems/">sourceItems</a></td>
-<td>Source items for this origin</td>
-</tr>
-<tr>
-<td><a href="sourceType/">sourceType</a></td>
-<td>who made the comment, such as Investigator, Sponsor</td>
-</tr>
-<tr>
-<td><a href="userType/">userType</a></td>
-<td>User's role in the study</td>
-</tr>
-<tr>
-<td><a href="userName/">userName</a></td>
-<td>The username of the user</td>
-</tr>
-<tr>
-<td><a href="fullName/">fullName</a></td>
-<td>The full name of the user</td>
-</tr>
-<tr>
-<td><a href="organization.md">organization</a></td>
-<td>The organization the user belongs to</td>
-</tr>
-<tr>
-<td><a href="location/">location</a></td>
-<td>The physical location of the organization</td>
-</tr>
-<tr>
-<td><a href="address/">address</a></td>
-<td>The address of the organization</td>
-</tr>
-<tr>
-<td><a href="partOfOrganization/">partOfOrganization</a></td>
-<td>Reference to a parent organization if this organization is part of a larger e...</td>
-</tr>
-<tr>
-<td><a href="resourceType/">resourceType</a></td>
-<td>Type of resource (e</td>
-</tr>
-<tr>
-<td><a href="attribute/">attribute</a></td>
-<td>Field provided by the Name attribute where the data or information can be obt...</td>
-</tr>
-<tr>
-<td><a href="selection/">selection</a></td>
-<td>Machine-executable instructions for selecting data from the resource</td>
-</tr>
-<tr>
-<td><a href="title/">title</a></td>
-<td>Document title</td>
-</tr>
-<tr>
-<td><a href="pages/">pages</a></td>
-<td>Reference to specific pages in a PDF document</td>
-</tr>
-<tr>
-<td><a href="isNominal/">isNominal</a></td>
-<td>Indicates whether the timing is nominal (event-based) or not</td>
-</tr>
-<tr>
-<td><a href="relativeTo/">relativeTo</a></td>
-<td>Reference to the event or occurrence that this timing is relative to</td>
-</tr>
-<tr>
-<td><a href="relativeFrom/">relativeFrom</a></td>
-<td>Reference to the event or occurrence that this timing is relative to</td>
-</tr>
-<tr>
-<td><a href="windowLower/">windowLower</a></td>
-<td>Start date/time of the timing</td>
-</tr>
-<tr>
-<td><a href="windowUpper/">windowUpper</a></td>
-<td>End date/time of the timing</td>
-</tr>
-<tr>
-<td><a href="recalled/">recalled</a></td>
-<td>Indicates whether the timing is recalled or not (recalled timings are less re...</td>
-</tr>
-<tr>
-<td><a href="frequency/">frequency</a></td>
-<td>Frequency</td>
-</tr>
-<tr>
-<td><a href="imputation/">imputation</a></td>
-<td>The imputation method used for the Timing</td>
-</tr>
-<tr>
-<td><a href="timing.md">timing</a></td>
-<td>A named event reference, that can nest further named timing references</td>
-</tr>
-<tr>
-<td><a href="event/">event</a></td>
-<td>The ID of the event in a Schedule</td>
-</tr>
-<tr>
-<td><a href="condition.md">condition</a></td>
-<td>A condition that must be met for this occurrence to be valid</td>
-</tr>
-<tr>
-<td><a href="dimensions/">dimensions</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="measures/">measures</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="attributes/">attributes</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="grouping/">grouping</a></td>
-<td>An association to a set of metadata concepts that have an identified structur...</td>
-</tr>
-<tr>
-<td><a href="evolvingStructure/">evolvingStructure</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="dimensionConstraint/">dimensionConstraint</a></td>
-<td></td>
-</tr>
-<tr>
-<td><a href="action/">action</a></td>
-<td>Defines the action to be taken by the recipient system (information, append, ...</td>
-</tr>
-<tr>
-<td><a href="reportingBegin/">reportingBegin</a></td>
-<td>A specific time period in a known system of time periods that identifies the ...</td>
-</tr>
-<tr>
-<td><a href="reportingEnd/">reportingEnd</a></td>
-<td>A specific time period in a known system of time periods that identifies the ...</td>
-</tr>
-<tr>
-<td><a href="dataExtractionDate/">dataExtractionDate</a></td>
-<td>A specific time period that identifies the date and time that the data are ex...</td>
-</tr>
-<tr>
-<td><a href="validFrom/">validFrom</a></td>
-<td>Indicates the inclusive start time indicating the validity of the information...</td>
-</tr>
-<tr>
-<td><a href="validTo/">validTo</a></td>
-<td>Indicates the inclusive end time indicating the validity of the information i...</td>
-</tr>
-<tr>
-<td><a href="publicationYear/">publicationYear</a></td>
-<td>Specifies the year of publication of the data or metadata in terms of whateve...</td>
-</tr>
-<tr>
-<td><a href="publicationPeriod/">publicationPeriod</a></td>
-<td>Specifies the period of publication of the data or metadata in terms of whate...</td>
-</tr>
-<tr>
-<td><a href="describedBy/">describedBy</a></td>
-<td>Associates a Dataflow and thereby a Data Structure Definition to the data set</td>
-</tr>
-<tr>
-<td><a href="structuredBy/">structuredBy</a></td>
-<td>Associates the Data Structure Definition that defines the structure of the Da...</td>
-</tr>
-<tr>
-<td><a href="publishedBy/">publishedBy</a></td>
+<td><a href="slots/publishedBy/">publishedBy</a></td>
 <td>Associates the Data Provider that reports/publishes the data</td>
 </tr>
 <tr>
-<td><a href="keys/">keys</a></td>
+<td><a href="slots/properties/">properties</a></td>
+<td>Properties of the reified object, which can be other governed elements or sim...</td>
+</tr>
+<tr>
+<td><a href="slots/minOccurs/">minOccurs</a></td>
+<td>Minimum number of occurrences of this property in the context</td>
+</tr>
+<tr>
+<td><a href="slots/maxOccurs/">maxOccurs</a></td>
+<td>Maximum number of occurrences of this property in the context</td>
+</tr>
+<tr>
+<td><a href="slots/implementsCondition/">implementsCondition</a></td>
+<td>Reference to a external (e</td>
+</tr>
+<tr>
+<td><a href="slots/formalExpression/">formalExpression</a></td>
+<td>A formal expression for complex checks</td>
+</tr>
+<tr>
+<td><a href="slots/comparator/">comparator</a></td>
+<td>The type of comparison to be performed</td>
+</tr>
+<tr>
+<td><a href="slots/checkValues/">checkValues</a></td>
+<td>Values to compare against</td>
+</tr>
+<tr>
+<td><a href="slots/item/">item</a></td>
+<td>Reference to the Item element whose value is being checked</td>
+</tr>
+<tr>
+<td><a href="slots/softHard/">softHard</a></td>
+<td>Indicates whether a validation check is an error ("Hard") or a warning ("Soft...</td>
+</tr>
+<tr>
+<td><a href="slots/expression/">expression</a></td>
+<td>The actual text of the formal expression (renamed from 'code' for disambiguat...</td>
+</tr>
+<tr>
+<td><a href="slots/returnType/">returnType</a></td>
+<td>Return type of the expression</td>
+</tr>
+<tr>
+<td><a href="slots/parameters/">parameters</a></td>
+<td>Parameters used in the expression</td>
+</tr>
+<tr>
+<td><a href="slots/returnValue/">returnValue</a></td>
+<td>Return value details</td>
+</tr>
+<tr>
+<td><a href="slots/externalCodeLibs/">externalCodeLibs</a></td>
+<td>External code libraries referenced</td>
+</tr>
+<tr>
+<td><a href="slots/formalExpressions/">formalExpressions</a></td>
+<td>Formal expressions used by this method</td>
+</tr>
+<tr>
+<td><a href="slots/document/">document</a></td>
+<td>Reference to a document that describes this method in detail</td>
+</tr>
+<tr>
+<td><a href="slots/resource/">resource</a></td>
+<td>Path to a resource (e</td>
+</tr>
+<tr>
+<td><a href="slots/valueList/">valueList</a></td>
+<td>A list of possible return values</td>
+</tr>
+<tr>
+<td><a href="slots/source/">source</a></td>
+<td>The source of the data, such as Investigator, Sponsor, Subject, or Vendor</td>
+</tr>
+<tr>
+<td><a href="slots/sourceItems/">sourceItems</a></td>
+<td>Source items for this origin</td>
+</tr>
+<tr>
+<td><a href="slots/sourceType/">sourceType</a></td>
+<td>who made the comment, such as Investigator, Sponsor</td>
+</tr>
+<tr>
+<td><a href="slots/userType/">userType</a></td>
+<td>User's role in the study</td>
+</tr>
+<tr>
+<td><a href="slots/userName/">userName</a></td>
+<td>The username of the user</td>
+</tr>
+<tr>
+<td><a href="slots/fullName/">fullName</a></td>
+<td>The full name of the user</td>
+</tr>
+<tr>
+<td><a href="slots/organization/">organization</a></td>
+<td>The organization the user belongs to</td>
+</tr>
+<tr>
+<td><a href="slots/location/">location</a></td>
+<td>The physical location of the organization</td>
+</tr>
+<tr>
+<td><a href="slots/address/">address</a></td>
+<td>The address of the organization</td>
+</tr>
+<tr>
+<td><a href="slots/partOfOrganization/">partOfOrganization</a></td>
+<td>Reference to a parent organization if this organization is part of a larger e...</td>
+</tr>
+<tr>
+<td><a href="slots/publishingSet/">publishingSet</a></td>
+<td>Publishing Set of a Controlled Terminology</td>
+</tr>
+<tr>
+<td><a href="slots/status/">status</a></td>
+<td>Status of an Implementation Guide or of a Controlled Terminology</td>
+</tr>
+<tr>
+<td><a href="slots/resourceType/">resourceType</a></td>
+<td>Type of resource (e</td>
+</tr>
+<tr>
+<td><a href="slots/attribute/">attribute</a></td>
+<td>Field provided by the Name attribute where the data or information can be obt...</td>
+</tr>
+<tr>
+<td><a href="slots/selection/">selection</a></td>
+<td>Machine-executable instructions for selecting data from the resource</td>
+</tr>
+<tr>
+<td><a href="slots/title/">title</a></td>
+<td>Document title</td>
+</tr>
+<tr>
+<td><a href="slots/leafID/">leafID</a></td>
+<td>Leaf identifier for document reference in Define-XML</td>
+</tr>
+<tr>
+<td><a href="slots/pages/">pages</a></td>
+<td>Reference to specific pages in a PDF document</td>
+</tr>
+<tr>
+<td><a href="slots/relationship/">relationship</a></td>
+<td>Relationship to the referencing entity</td>
+</tr>
+<tr>
+<td><a href="slots/isNominal/">isNominal</a></td>
+<td>Indicates whether the timing is nominal (event-based) or not</td>
+</tr>
+<tr>
+<td><a href="slots/relativeTo/">relativeTo</a></td>
+<td>Reference to the event or occurrence that this timing is relative to</td>
+</tr>
+<tr>
+<td><a href="slots/relativeFrom/">relativeFrom</a></td>
+<td>Reference to the event or occurrence that this timing is relative to</td>
+</tr>
+<tr>
+<td><a href="slots/windowLower/">windowLower</a></td>
+<td>Start date/time of the timing</td>
+</tr>
+<tr>
+<td><a href="slots/windowUpper/">windowUpper</a></td>
+<td>End date/time of the timing</td>
+</tr>
+<tr>
+<td><a href="slots/recalled/">recalled</a></td>
+<td>Indicates whether the timing is recalled or not (recalled timings are less re...</td>
+</tr>
+<tr>
+<td><a href="slots/frequency/">frequency</a></td>
+<td>Frequency</td>
+</tr>
+<tr>
+<td><a href="slots/imputation/">imputation</a></td>
+<td>The imputation method used for the Timing</td>
+</tr>
+<tr>
+<td><a href="slots/timing/">timing</a></td>
+<td>A named event reference, that can nest further named timing references</td>
+</tr>
+<tr>
+<td><a href="slots/event/">event</a></td>
+<td>The ID of the event in a Schedule</td>
+</tr>
+<tr>
+<td><a href="slots/condition/">condition</a></td>
+<td>A condition that must be met for this occurrence to be valid</td>
+</tr>
+<tr>
+<td><a href="slots/dimensions/">dimensions</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="slots/measures/">measures</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="slots/attributes/">attributes</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="slots/grouping/">grouping</a></td>
+<td>An association to a set of metadata concepts that have an identified structur...</td>
+</tr>
+<tr>
+<td><a href="slots/evolvingStructure/">evolvingStructure</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="slots/dimensionConstraint/">dimensionConstraint</a></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="slots/action/">action</a></td>
+<td>Defines the action to be taken by the recipient system (information, append, ...</td>
+</tr>
+<tr>
+<td><a href="slots/reportingBegin/">reportingBegin</a></td>
+<td>A specific time period in a known system of time periods that identifies the ...</td>
+</tr>
+<tr>
+<td><a href="slots/reportingEnd/">reportingEnd</a></td>
+<td>A specific time period in a known system of time periods that identifies the ...</td>
+</tr>
+<tr>
+<td><a href="slots/dataExtractionDate/">dataExtractionDate</a></td>
+<td>A specific time period that identifies the date and time that the data are ex...</td>
+</tr>
+<tr>
+<td><a href="slots/validFrom/">validFrom</a></td>
+<td>Indicates the inclusive start time indicating the validity of the information...</td>
+</tr>
+<tr>
+<td><a href="slots/validTo/">validTo</a></td>
+<td>Indicates the inclusive end time indicating the validity of the information i...</td>
+</tr>
+<tr>
+<td><a href="slots/publicationYear/">publicationYear</a></td>
+<td>Specifies the year of publication of the data or metadata in terms of whateve...</td>
+</tr>
+<tr>
+<td><a href="slots/publicationPeriod/">publicationPeriod</a></td>
+<td>Specifies the period of publication of the data or metadata in terms of whate...</td>
+</tr>
+<tr>
+<td><a href="slots/describedBy/">describedBy</a></td>
+<td>Associates a Dataflow and thereby a Data Structure Definition to the data set</td>
+</tr>
+<tr>
+<td><a href="slots/structuredBy/">structuredBy</a></td>
+<td>Associates the Data Structure Definition that defines the structure of the Da...</td>
+</tr>
+<tr>
+<td><a href="slots/keys/">keys</a></td>
 <td>Series and Group keys in the data that are associated with dimensions in this...</td>
 </tr>
 <tr>
-<td><a href="datasetType/">datasetType</a></td>
+<td><a href="slots/datasetType/">datasetType</a></td>
 <td>Type or classification of the dataset</td>
 </tr>
 <tr>
-<td><a href="distribution.md">distribution</a></td>
+<td><a href="slots/distribution/">distribution</a></td>
 <td>Representations of this dataset in various formats or access methods</td>
 </tr>
 <tr>
-<td><a href="conformsTo/">conformsTo</a></td>
+<td><a href="slots/conformsTo/">conformsTo</a></td>
 <td>Specification or standard that this dataset conforms to</td>
 </tr>
 <tr>
-<td><a href="hasPolicy/">hasPolicy</a></td>
+<td><a href="slots/hasPolicy/">hasPolicy</a></td>
 <td>Access or usage policy applied to this dataset</td>
 </tr>
 <tr>
-<td><a href="informationSensitivityClassification/">informationSensitivityClassification</a></td>
+<td><a href="slots/informationSensitivityClassification/">informationSensitivityClassification</a></td>
 <td>Classification of the dataset's sensitivity or confidentiality</td>
 </tr>
 <tr>
-<td><a href="keyValues/">keyValues</a></td>
+<td><a href="slots/keyValues/">keyValues</a></td>
 <td>List of Key Values that comprise each key, separated by a dot e</td>
 </tr>
 <tr>
-<td><a href="attributeValues/">attributeValues</a></td>
+<td><a href="slots/attributeValues/">attributeValues</a></td>
 <td>Association to the Attribute Values relating to Key</td>
 </tr>
 <tr>
-<td><a href="missingHandling/">missingHandling</a></td>
+<td><a href="slots/missingHandling/">missingHandling</a></td>
 <td>The method for handling missing values in the measure property</td>
 </tr>
 <tr>
-<td><a href="keySequence/">keySequence</a></td>
+<td><a href="slots/keySequence/">keySequence</a></td>
 <td></td>
 </tr>
 <tr>
-<td><a href="components/">components</a></td>
+<td><a href="slots/components/">components</a></td>
 <td>The components that make up this component list</td>
 </tr>
 <tr>
-<td><a href="measure.md">measure</a></td>
+<td><a href="slots/measure/">measure</a></td>
 <td></td>
 </tr>
 <tr>
-<td><a href="dataFlow.md">dataFlow</a></td>
+<td><a href="slots/dataFlow/">dataFlow</a></td>
 <td></td>
 </tr>
 <tr>
-<td><a href="groupKey.md">groupKey</a></td>
+<td><a href="slots/groupKey/">groupKey</a></td>
 <td>Set of dimensions that this definition depends on</td>
 </tr>
 <tr>
-<td><a href="dataProductOwner/">dataProductOwner</a></td>
+<td><a href="slots/dataProductOwner/">dataProductOwner</a></td>
 <td>The person or team accountable for this data product</td>
 </tr>
 <tr>
-<td><a href="lifecycleStatus/">lifecycleStatus</a></td>
+<td><a href="slots/lifecycleStatus/">lifecycleStatus</a></td>
 <td>Current lifecycle status of the data product</td>
 </tr>
 <tr>
-<td><a href="inputPort/">inputPort</a></td>
+<td><a href="slots/inputPort/">inputPort</a></td>
 <td>Services that provide input into this data product</td>
 </tr>
 <tr>
-<td><a href="outputPort/">outputPort</a></td>
+<td><a href="slots/outputPort/">outputPort</a></td>
 <td>Services that expose output from this data product</td>
 </tr>
 <tr>
-<td><a href="inputDataset/">inputDataset</a></td>
+<td><a href="slots/inputDataset/">inputDataset</a></td>
 <td>Source datasets used by the data product</td>
 </tr>
 <tr>
-<td><a href="outputDataset/">outputDataset</a></td>
+<td><a href="slots/outputDataset/">outputDataset</a></td>
 <td>Output datasets produced by the data product</td>
 </tr>
 <tr>
-<td><a href="accessService/">accessService</a></td>
+<td><a href="slots/accessService/">accessService</a></td>
 <td>Service that provides access to this distribution</td>
 </tr>
 <tr>
-<td><a href="isDistributionOf/">isDistributionOf</a></td>
+<td><a href="slots/isDistributionOf/">isDistributionOf</a></td>
 <td>Dataset this distribution represents</td>
 </tr>
 <tr>
-<td><a href="format/">format</a></td>
+<td><a href="slots/format/">format</a></td>
 <td>File format or serialization used in the distribution</td>
 </tr>
 <tr>
-<td><a href="isAccessServiceOf/">isAccessServiceOf</a></td>
+<td><a href="slots/isAccessServiceOf/">isAccessServiceOf</a></td>
 <td>Distribution(s) for which this service provides access</td>
 </tr>
 <tr>
-<td><a href="protocol/">protocol</a></td>
+<td><a href="slots/protocol/">protocol</a></td>
 <td>Protocol used by the service (e</td>
 </tr>
 <tr>
-<td><a href="securitySchemaType/">securitySchemaType</a></td>
+<td><a href="slots/securitySchemaType/">securitySchemaType</a></td>
 <td>Security or authentication method used (e</td>
 </tr>
 <tr>
-<td><a href="providesDataFor/">providesDataFor</a></td>
+<td><a href="slots/providesDataFor/">providesDataFor</a></td>
 <td>The Dataflows that this provider supplies data for</td>
 </tr>
 <tr>
-<td><a href="provisionAgreements/">provisionAgreements</a></td>
+<td><a href="slots/provisionAgreements/">provisionAgreements</a></td>
 <td>The ProvisionAgreements that this provider has with Data Consumers</td>
 </tr>
 <tr>
-<td><a href="provider/">provider</a></td>
+<td><a href="slots/provider/">provider</a></td>
 <td>The Data Provider that is part of this agreement</td>
 </tr>
 </tbody>
@@ -1430,60 +1544,76 @@ NominalOccurrence ||--}o Comment : "comment"
 </thead>
 <tbody>
 <tr>
-<td><a href="AliasPredicateEnum/">AliasPredicateEnum</a></td>
+<td><a href="enums/AliasPredicate/">AliasPredicate</a></td>
 <td>An enumeration that defines permissible values for the relationship between a...</td>
 </tr>
 <tr>
-<td><a href="Comparator.md">Comparator</a></td>
+<td><a href="enums/Comparator/">Comparator</a></td>
 <td>An enumeration that defines the types of comparison operations available for ...</td>
 </tr>
 <tr>
-<td><a href="UserType.md">UserType</a></td>
+<td><a href="enums/UserType/">UserType</a></td>
 <td>An enumeration that defines the types of users in a clinical data collection ...</td>
 </tr>
 <tr>
-<td><a href="OrganizationType/">OrganizationType</a></td>
+<td><a href="enums/OrganizationType/">OrganizationType</a></td>
 <td>An enumeration that defines the types of organizations involved in clinical r...</td>
 </tr>
 <tr>
-<td><a href="SoftHard.md">SoftHard</a></td>
+<td><a href="enums/SoftHard/">SoftHard</a></td>
 <td>An enumeration that indicates whether a validation check should be treated as...</td>
 </tr>
 <tr>
-<td><a href="MethodType/">MethodType</a></td>
+<td><a href="enums/MethodType/">MethodType</a></td>
 <td>An enumeration that defines the types of computational methods available for ...</td>
 </tr>
 <tr>
-<td><a href="DataType.md">DataType</a></td>
+<td><a href="enums/DataType/">DataType</a></td>
 <td>An enumeration that defines the fundamental data types available for items</td>
 </tr>
 <tr>
-<td><a href="OriginType/">OriginType</a></td>
+<td><a href="enums/OriginType/">OriginType</a></td>
 <td>An enumeration that defines the types of origins for data items</td>
 </tr>
 <tr>
-<td><a href="OriginSource/">OriginSource</a></td>
+<td><a href="enums/OriginSource/">OriginSource</a></td>
 <td>An enumeration that defines the sources of data origin</td>
 </tr>
 <tr>
-<td><a href="ItemGroupType/">ItemGroupType</a></td>
+<td><a href="enums/ItemGroupType/">ItemGroupType</a></td>
 <td>An enumeration that defines the roles of an item group within a specific cont...</td>
 </tr>
 <tr>
-<td><a href="TimingType/">TimingType</a></td>
+<td><a href="enums/TimingType/">TimingType</a></td>
 <td>An enumeration that defines CDISC timing type values indicating the temporal ...</td>
 </tr>
 <tr>
-<td><a href="LinkingPhraseEnum/">LinkingPhraseEnum</a></td>
+<td><a href="enums/LinkingPhraseEnum/">LinkingPhraseEnum</a></td>
 <td>An enumeration that defines variable relationship descriptive linking phrases...</td>
 </tr>
 <tr>
-<td><a href="PredicateTermEnum/">PredicateTermEnum</a></td>
+<td><a href="enums/PredicateTermEnum/">PredicateTermEnum</a></td>
 <td>An enumeration that defines short variable relationship linking phrases for p...</td>
 </tr>
 <tr>
-<td><a href="DataProductLifecycleStatus/">DataProductLifecycleStatus</a></td>
+<td><a href="enums/DataProductLifecycleStatus/">DataProductLifecycleStatus</a></td>
 <td>An enumeration that defines the lifecycle stages for a DataProduct</td>
+</tr>
+<tr>
+<td><a href="enums/StandardName/">StandardName</a></td>
+<td>An enumeration that defines permissible values for standard names</td>
+</tr>
+<tr>
+<td><a href="enums/StandardType/">StandardType</a></td>
+<td>An enumeration that defines permissible values for standard types</td>
+</tr>
+<tr>
+<td><a href="enums/PublishingSet/">PublishingSet</a></td>
+<td>An enumeration that defines permissible values for publishing sets</td>
+</tr>
+<tr>
+<td><a href="enums/StandardStatus/">StandardStatus</a></td>
+<td>An enumeration that defines permissible values for standard status</td>
 </tr>
 </tbody>
 </table>
@@ -1497,79 +1627,79 @@ NominalOccurrence ||--}o Comment : "comment"
 </thead>
 <tbody>
 <tr>
-<td><a href="String/">String</a></td>
+<td><a href="types/String/">String</a></td>
 <td>A character string</td>
 </tr>
 <tr>
-<td><a href="Integer/">Integer</a></td>
+<td><a href="types/Integer/">Integer</a></td>
 <td>An integer</td>
 </tr>
 <tr>
-<td><a href="Boolean/">Boolean</a></td>
+<td><a href="types/Boolean/">Boolean</a></td>
 <td>A binary (true or false) value</td>
 </tr>
 <tr>
-<td><a href="Float/">Float</a></td>
+<td><a href="types/Float/">Float</a></td>
 <td>A real number that conforms to the xsd:float specification</td>
 </tr>
 <tr>
-<td><a href="Double/">Double</a></td>
+<td><a href="types/Double/">Double</a></td>
 <td>A real number that conforms to the xsd:double specification</td>
 </tr>
 <tr>
-<td><a href="Decimal/">Decimal</a></td>
+<td><a href="types/Decimal/">Decimal</a></td>
 <td>A real number with arbitrary precision that conforms to the xsd:decimal speci...</td>
 </tr>
 <tr>
-<td><a href="Time/">Time</a></td>
+<td><a href="types/Time/">Time</a></td>
 <td>A time object represents a (local) time of day, independent of any particular...</td>
 </tr>
 <tr>
-<td><a href="Date/">Date</a></td>
+<td><a href="types/Date/">Date</a></td>
 <td>a date (year, month and day) in an idealized calendar</td>
 </tr>
 <tr>
-<td><a href="Datetime/">Datetime</a></td>
+<td><a href="types/Datetime/">Datetime</a></td>
 <td>The combination of a date and time</td>
 </tr>
 <tr>
-<td><a href="DateOrDatetime/">DateOrDatetime</a></td>
+<td><a href="types/DateOrDatetime/">DateOrDatetime</a></td>
 <td>Either a date or a datetime</td>
 </tr>
 <tr>
-<td><a href="Uriorcurie/">Uriorcurie</a></td>
+<td><a href="types/Uriorcurie/">Uriorcurie</a></td>
 <td>a URI or a CURIE</td>
 </tr>
 <tr>
-<td><a href="Curie/">Curie</a></td>
+<td><a href="types/Curie/">Curie</a></td>
 <td>a compact URI</td>
 </tr>
 <tr>
-<td><a href="Uri/">Uri</a></td>
+<td><a href="types/Uri/">Uri</a></td>
 <td>a complete URI</td>
 </tr>
 <tr>
-<td><a href="Ncname/">Ncname</a></td>
+<td><a href="types/Ncname/">Ncname</a></td>
 <td>Prefix part of CURIE</td>
 </tr>
 <tr>
-<td><a href="Objectidentifier/">Objectidentifier</a></td>
+<td><a href="types/Objectidentifier/">Objectidentifier</a></td>
 <td>A URI or CURIE that represents an object in the model</td>
 </tr>
 <tr>
-<td><a href="Nodeidentifier/">Nodeidentifier</a></td>
+<td><a href="types/Nodeidentifier/">Nodeidentifier</a></td>
 <td>A URI, CURIE or BNODE that represents a node in a model</td>
 </tr>
 <tr>
-<td><a href="Jsonpointer/">Jsonpointer</a></td>
+<td><a href="types/Jsonpointer/">Jsonpointer</a></td>
 <td>A string encoding a JSON Pointer</td>
 </tr>
 <tr>
-<td><a href="Jsonpath/">Jsonpath</a></td>
+<td><a href="types/Jsonpath/">Jsonpath</a></td>
 <td>A string encoding a JSON Path</td>
 </tr>
 <tr>
-<td><a href="Sparqlpath/">Sparqlpath</a></td>
+<td><a href="types/Sparqlpath/">Sparqlpath</a></td>
 <td>A string encoding a SPARQL Property Path</td>
 </tr>
 </tbody>
@@ -1676,5 +1806,5 @@ NominalOccurrence ||--}o Comment : "comment"
 </html>
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-09-25 19:13:22.625913+00:00
+Build Date UTC : 2025-09-28 12:26:31.071986+00:00
 -->
