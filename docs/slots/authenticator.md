@@ -1,0 +1,89 @@
+
+
+# Slot: authenticator 
+
+
+_Who/what authenticated the resource_
+
+
+
+
+
+URI: [odm:slot/authenticator](https://cdisc.org/odm2/slot/authenticator)
+Alias: authenticator
+
+<!-- no inheritance hierarchy -->
+
+
+
+
+
+## Applicable Classes
+
+| Name | Description | Modifies Slot |
+| --- | --- | --- |
+| [DataStructureDefinition](../classes/DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysi... |  no  |
+| [IsProfile](../classes/IsProfile.md) | A mixin that provides additional metadata for FHIR resources and Data Product... |  no  |
+| [Dataset](../classes/Dataset.md) | A collection element that groups observations sharing the same dimensionality... |  no  |
+| [ItemGroup](../classes/ItemGroup.md) | A collection element that groups related items or subgroups within a specific... |  no  |
+
+
+
+
+
+
+
+## Properties
+
+* Range: NONE&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md)
+
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://cdisc.org/define-json
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | odm:authenticator |
+| native | odm:authenticator |
+
+
+
+
+## LinkML Source
+
+<details>
+```yaml
+name: authenticator
+description: Who/what authenticated the resource
+from_schema: https://cdisc.org/define-json
+rank: 1000
+alias: authenticator
+owner: IsProfile
+domain_of:
+- IsProfile
+required: false
+any_of:
+- range: User
+- range: Organization
+- range: string
+
+```
+</details>

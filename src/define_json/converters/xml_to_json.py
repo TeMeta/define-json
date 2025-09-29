@@ -34,8 +34,9 @@ class PortableDefineXMLToJSONConverter:
         if not study or not mdv:
             raise ValueError("Could not find Study or MetaDataVersion in Define-XML")
         
-        # Extract ALL original metadata (no hardcoding!)
-        metadata = {
+        # Build Define-JSON structure with metadata directly in MetaDataVersion
+        define_json = {
+            # ODM File Metadata (from ODMFileMetadata mixin)
             'fileOID': root.get('FileOID'),
             'asOfDateTime': root.get('AsOfDateTime'),
             'creationDateTime': root.get('CreationDateTime'),
@@ -45,32 +46,37 @@ class PortableDefineXMLToJSONConverter:
             'sourceSystem': root.get('SourceSystem'),
             'sourceSystemVersion': root.get('SourceSystemVersion'),
             'context': root.get('{%s}Context' % self.namespaces['def']),
+            'defineVersion': mdv.get('{%s}DefineVersion' % self.namespaces['def']),
+            
+            # Study Metadata (from StudyMetadata mixin)
             'studyOID': study.get('OID'),
             'studyName': self._get_study_name(study),
             'studyDescription': self._get_study_description(study),
             'protocolName': self._get_protocol_name(study),
-            'defineVersion': mdv.get('{%s}DefineVersion' % self.namespaces['def'])
+            
+            # MetaDataVersion attributes (from GovernedElement)
+            'OID': mdv.get('OID'),
+            'name': mdv.get('Name', mdv.get('OID')),
+            'description': mdv.get('Description', '')
         }
         
-        # Build Define-JSON structure
-        define_json = {
-            'metadata': metadata,
-            'metaDataVersion': {
-                'OID': mdv.get('OID'),
-                'name': mdv.get('Name', mdv.get('OID')),
-                'description': mdv.get('Description', '')
-            }
-        }
+        # Process main elements according to Define-JSON schema
+        define_json['itemGroups'] = self._process_item_groups_with_hierarchy(mdv)
+        define_json['items'] = self._process_items(mdv)  # Top-level items not in any group
+        define_json['codeLists'] = self._process_code_lists(mdv)
         
-        # Process main elements
-        define_json['Datasets'] = self._process_item_groups(mdv)
-        define_json['Variables'] = self._process_items(mdv)
-        define_json['ValueLists'] = self._process_value_lists(mdv)
-        define_json['CodeLists'] = self._process_code_lists(mdv)
-        define_json['WhereClauses'] = self._process_where_clauses(mdv)
-        define_json['Methods'] = self._process_methods(mdv)
-        define_json['Standards'] = self._process_standards(mdv)
-        define_json['AnnotatedCRF'] = self._process_annotated_crf(mdv)
+        # Process conditions and where clauses with proper separation
+        conditions_and_where_clauses = self._process_conditions_and_where_clauses(mdv)
+        define_json['conditions'] = conditions_and_where_clauses['conditions']
+        define_json['whereClauses'] = conditions_and_where_clauses['whereClauses']
+        
+        define_json['methods'] = self._process_methods(mdv)
+        define_json['standards'] = self._process_standards(mdv)
+        define_json['annotatedCRF'] = self._process_annotated_crf(mdv)
+        
+        # Process semantic concept elements
+        define_json['concepts'] = self._process_reified_concepts(mdv)
+        define_json['conceptProperties'] = self._process_concept_properties(mdv)
         
         # Save to file
         with open(output_path, 'w') as f:
@@ -78,23 +84,58 @@ class PortableDefineXMLToJSONConverter:
         
         return define_json
     
-    def _process_item_groups(self, mdv: ET.Element) -> List[Dict[str, Any]]:
-        """Process ItemGroupDef elements."""
+    def _process_item_groups_with_hierarchy(self, mdv: ET.Element) -> List[Dict[str, Any]]:
+        """Process ItemGroupDef elements with proper hierarchical nesting of ValueLists."""
+        # First, process domain-level ItemGroups
+        domain_item_groups = self._process_domain_item_groups(mdv)
+        
+        # Then, create ValueList ItemGroups as children
+        value_list_item_groups = self._process_value_lists_as_item_groups(mdv)
+        
+        # Add ValueList OID references as children of their parent domains
+        for domain_ig in domain_item_groups:
+            domain = domain_ig.get('domain', '')
+            if domain:
+                # Find ValueList OIDs that belong to this domain
+                domain_value_list_oids = [vl.get('OID') for vl in value_list_item_groups 
+                                        if vl.get('OID', '').startswith(f'VL.{domain}.')]
+                if domain_value_list_oids:
+                    domain_ig['children'] = domain_value_list_oids  # Store OID references, not objects
+        
+        # Return all ItemGroups (both domain and ValueList) at top level - no redundancy
+        return domain_item_groups + value_list_item_groups
+    
+    def _process_domain_item_groups(self, mdv: ET.Element) -> List[Dict[str, Any]]:
+        """Process domain-level ItemGroupDef elements."""
         item_groups = []
         for ig in mdv.findall('.//odm:ItemGroupDef', self.namespaces):
+            # Build item group with only non-null values
             item_group = {
                 'OID': ig.get('OID'),
                 'name': ig.get('Name'),
-                'description': self._get_description(ig),
-                'label': ig.get('def:Label', ''),
-                'domain': ig.get('Domain'),
-                'structure': ig.get('def:Structure'),
-                'class': ig.get('def:Class'),
-                'repeating': ig.get('Repeating') == 'Yes',
-                'sasDatasetName': ig.get('SASDatasetName'),
-                'archiveLocationID': ig.get('def:ArchiveLocationID'),
                 'items': []
             }
+            
+            # Add description (prefer def:Label, fallback to Description, make meaningful)
+            description = ig.get('{%s}Label' % self.namespaces['def']) or self._get_description(ig)
+            if not description and ig.get('Domain'):
+                description = f"{ig.get('Domain')} domain dataset containing clinical data"
+            if description:
+                item_group['description'] = description
+            
+            # Add non-null attributes
+            if ig.get('Domain'):
+                item_group['domain'] = ig.get('Domain')
+            if ig.get('{%s}Structure' % self.namespaces['def']):
+                item_group['structure'] = ig.get('{%s}Structure' % self.namespaces['def'])
+            if ig.get('{%s}Class' % self.namespaces['def']):
+                item_group['class'] = ig.get('{%s}Class' % self.namespaces['def'])
+            if ig.get('Repeating') == 'Yes':
+                item_group['repeating'] = True
+            if ig.get('SASDatasetName'):
+                item_group['sasDatasetName'] = ig.get('SASDatasetName')
+            if ig.get('{%s}ArchiveLocationID' % self.namespaces['def']):
+                item_group['archiveLocationID'] = ig.get('{%s}ArchiveLocationID' % self.namespaces['def'])
             
             # Process ItemRefs
             for item_ref in ig.findall('odm:ItemRef', self.namespaces):
@@ -102,58 +143,167 @@ class PortableDefineXMLToJSONConverter:
                 where_clause_ref = item_ref.find('def:WhereClauseRef', self.namespaces)
                 where_clause_oid = where_clause_ref.get('WhereClauseOID') if where_clause_ref is not None else None
                 
-                item_group['items'].append({
+                item_data = {
                     'itemOID': item_ref.get('ItemOID'),
-                    'mandatory': item_ref.get('Mandatory', 'No'),
-                    'role': item_ref.get('Role'),
-                    'whereClauseOID': where_clause_oid
-                })
+                    'mandatory': item_ref.get('Mandatory', 'No')
+                }
+                if item_ref.get('Role'):
+                    item_data['role'] = item_ref.get('Role')
+                if where_clause_oid:
+                    item_data['whereClause'] = where_clause_oid
+                
+                item_group['items'].append(item_data)
+            
+            # Note: ValueList references are handled at the ItemDef level via def:ValueListRef
+            # ItemGroups do not directly reference ValueLists in Define-XML standard
             
             item_groups.append(item_group)
         
         return item_groups
     
+    def _process_value_lists_as_item_groups(self, mdv: ET.Element) -> List[Dict[str, Any]]:
+        """Process ValueListDef elements as ItemGroups with DataSpecialization type."""
+        value_list_item_groups = []
+        
+        # First, collect all items from all ValueLists
+        all_items = {}
+        for vl in mdv.findall('.//def:ValueListDef', self.namespaces):
+            item_refs = vl.findall('odm:ItemRef', self.namespaces)
+
+            for item_ref in item_refs:
+                item_oid = item_ref.get('ItemOID')
+                where_clause_ref = item_ref.find('def:WhereClauseRef', self.namespaces)
+                where_clause_oid = where_clause_ref.get('WhereClauseOID') if where_clause_ref is not None else None
+
+                # Extract parameter from ItemOID (e.g., IT.VS.VSORRES.TEMP -> VS.TEMP)
+                parts = item_oid.split('.')
+                if len(parts) >= 4:
+                    domain = parts[1]  # VS or LB
+                    variable = parts[2]  # VSORRES, VSORRESU, LBORRES, LBORRESU
+                    parameter = parts[3]  # TEMP, WEIGHT, ALT, etc.
+
+                    param_key = f'{domain}.{parameter}'
+                    if param_key not in all_items:
+                        all_items[param_key] = []
+
+                    # For Dataset Specialization: Use shared WhereClause for same parameter
+                    shared_where_clause = f'WC.{domain}.{parameter}'
+
+                    all_items[param_key].append({
+                        'itemOID': item_oid,
+                        'mandatory': item_ref.get('Mandatory', 'No'),
+                        'whereClause': shared_where_clause,
+                        'variable': variable
+                    })
+
+        # Create ValueList ItemGroups grouped by parameter (Dataset Specialization style)
+        for param_key, items in sorted(all_items.items()):
+            domain, parameter = param_key.split('.')
+
+            # Build ValueList ItemGroup with meaningful description and shared WhereClause
+            value_list_item_group = {
+                'OID': f'VL.{domain}.{parameter}',
+                'name': f'VL.{domain}.{parameter}',
+                'description': f'Dataset specialization for {domain} {parameter} parameter containing both result values and units',
+                'type': 'DataSpecialization',
+                'domain': domain,
+                'items': items
+            }
+            
+            # Add reference to the shared WhereClause (using inlined=false approach)
+            shared_wc_oid = f'WC.{domain}.{parameter}'
+            value_list_item_group['whereClause'] = shared_wc_oid
+
+            value_list_item_groups.append(value_list_item_group)
+
+        return value_list_item_groups
+    
     def _process_items(self, mdv: ET.Element) -> List[Dict[str, Any]]:
         """Process ItemDef elements."""
         items = []
         for item in mdv.findall('.//odm:ItemDef', self.namespaces):
-            items.append({
+            # Build item with only non-null values
+            item_dict = {
                 'OID': item.get('OID'),
-                'name': item.get('Name'),
-                'dataType': item.get('DataType'),
-                'length': item.get('Length'),
-                'significantDigits': item.get('SignificantDigits'),
-                'description': self._get_description(item),
-                'label': item.get('def:Label'),
-                'origin': self._get_origin(item)
-            })
+                'name': item.get('Name')
+            }
+            
+            # Add description (prefer def:Label, fallback to Description)
+            description = item.get('{%s}Label' % self.namespaces['def']) or self._get_description(item)
+            if description:
+                item_dict['description'] = description
+            
+            # Add non-null attributes
+            if item.get('DataType'):
+                item_dict['dataType'] = item.get('DataType')
+            if item.get('Length'):
+                try:
+                    item_dict['length'] = int(item.get('Length'))
+                except (ValueError, TypeError):
+                    pass
+            if item.get('SignificantDigits'):
+                try:
+                    item_dict['significantDigits'] = int(item.get('SignificantDigits'))
+                except (ValueError, TypeError):
+                    pass
+            
+            # Add origin if present
+            origin = self._get_origin(item)
+            if origin and any(v for v in origin.values() if v):  # Only add if origin has content
+                item_dict['origin'] = origin
+            
+            items.append(item_dict)
         return items
     
     def _process_value_lists(self, mdv: ET.Element) -> List[Dict[str, Any]]:
-        """Process ValueListDef elements."""
-        value_lists = []
+        """Process ValueListDef elements with Dataset Specialization grouping by parameter."""
+        # First, collect all items from all ValueLists
+        all_items = {}
+
         for vl in mdv.findall('.//def:ValueListDef', self.namespaces):
-            value_list = {
-                'OID': vl.get('OID'),
-                'name': vl.get('OID'),  # Use OID as name
-                'description': self._get_description(vl),
-                'items': []
-            }
-            
-            # Process ItemRefs in ValueList
-            for item_ref in vl.findall('odm:ItemRef', self.namespaces):
-                # Get WhereClauseRef child element
+            item_refs = vl.findall('odm:ItemRef', self.namespaces)
+
+            for item_ref in item_refs:
+                item_oid = item_ref.get('ItemOID')
                 where_clause_ref = item_ref.find('def:WhereClauseRef', self.namespaces)
                 where_clause_oid = where_clause_ref.get('WhereClauseOID') if where_clause_ref is not None else None
-                
-                value_list['items'].append({
-                    'itemOID': item_ref.get('ItemOID'),
-                    'mandatory': item_ref.get('Mandatory', 'No'),
-                    'whereClauseOID': where_clause_oid
-                })
-            
+
+                # Extract parameter from ItemOID (e.g., IT.VS.VSORRES.TEMP -> VS.TEMP)
+                parts = item_oid.split('.')
+                if len(parts) >= 4:
+                    domain = parts[1]  # VS or LB
+                    variable = parts[2]  # VSORRES, VSORRESU, LBORRES, LBORRESU
+                    parameter = parts[3]  # TEMP, WEIGHT, ALT, etc.
+
+                    param_key = f'{domain}.{parameter}'
+                    if param_key not in all_items:
+                        all_items[param_key] = []
+
+                    # For Dataset Specialization: Use shared WhereClause for same parameter
+                    # Both LBORRES.AST and LBORRESU.AST should use WC.LB.AST
+                    shared_where_clause = f'WC.{domain}.{parameter}'
+
+                    all_items[param_key].append({
+                        'itemOID': item_oid,
+                        'mandatory': item_ref.get('Mandatory', 'No'),
+                        'whereClause': shared_where_clause,  # Use shared WhereClause
+                        'variable': variable
+                    })
+
+        # Create ValueLists grouped by parameter (Dataset Specialization style)
+        value_lists = []
+        for param_key, items in sorted(all_items.items()):
+            domain, parameter = param_key.split('.')
+
+            value_list = {
+                'OID': f'VL.{domain}.{parameter}',
+                'name': f'VL.{domain}.{parameter}',
+                'description': f'Value list for {domain} {parameter} parameter',
+                'items': items
+            }
+
             value_lists.append(value_list)
-        
+
         return value_lists
     
     def _process_code_lists(self, mdv: ET.Element) -> List[Dict[str, Any]]:
@@ -178,27 +328,85 @@ class PortableDefineXMLToJSONConverter:
         
         return code_lists
     
-    def _process_where_clauses(self, mdv: ET.Element) -> List[Dict[str, Any]]:
-        """Process WhereClauseDef elements."""
+    def _process_conditions_and_where_clauses(self, mdv: ET.Element) -> Dict[str, List[Dict[str, Any]]]:
+        """Process WhereClauseDef elements with proper Condition separation."""
+        conditions = []
         where_clauses = []
+        processed_parameters = set()
+        
+        # First, collect all original WhereClauses
+        original_where_clauses = {}
         for wc in mdv.findall('.//def:WhereClauseDef', self.namespaces):
-            where_clause = {
-                'oid': wc.get('OID'),
-                'description': self._get_description(wc),
-                'conditions': []
-            }
-            
-            # Process RangeChecks
+            range_checks = []
             for rc in wc.findall('.//odm:RangeCheck', self.namespaces):
                 check_value = rc.find('.//odm:CheckValue', self.namespaces)
                 if check_value is not None:
-                    where_clause['conditions'].append(
-                        f"{rc.get('Comparator', 'EQ')} {check_value.text or ''}"
-                    )
+                    range_checks.append({
+                        'comparator': rc.get('Comparator', 'EQ'),
+                        'checkValues': [check_value.text or '']
+                    })
             
-            where_clauses.append(where_clause)
+            original_where_clauses[wc.get('OID')] = {
+                'range_checks': range_checks,
+                'description': self._get_description(wc)
+            }
         
-        return where_clauses
+        # Create shared Conditions and WhereClauses for Dataset Specialization
+        for wc_oid, wc_data in original_where_clauses.items():
+            # Parse OID like WC.LB.LBORRES.AST -> extract LB.AST
+            parts = wc_oid.split('.')
+            if len(parts) >= 4:
+                domain = parts[1]  # LB, VS
+                parameter = parts[3]  # AST, TEMP, etc.
+                param_key = f'{domain}.{parameter}'
+                
+                if param_key not in processed_parameters:
+                    processed_parameters.add(param_key)
+                    
+                    # Create shared Condition with proper rangeChecks
+                    condition_oid = f'COND.{domain}.{parameter}'
+                    
+                    # Build comprehensive range checks
+                    range_checks = []
+                    for rc in wc_data['range_checks']:
+                        if rc['checkValues'][0]:  # Only if there's a value
+                            param_value = rc['checkValues'][0]
+                            
+                            # Primary parameter check
+                            range_checks.append({
+                                'item': f'IT.{domain}.{domain}TESTCD',  # e.g., IT.VS.VSTESTCD
+                                'comparator': 'EQ',
+                                'checkValues': [param_value]
+                            })
+                            
+                            # Add domain context if different from parameter
+                            if domain != param_value:
+                                range_checks.append({
+                                    'item': f'IT.{domain}.{domain}CAT',  # e.g., IT.VS.VSCAT
+                                    'comparator': 'EQ', 
+                                    'checkValues': [domain]
+                                })
+                    
+                    # Create the Condition
+                    conditions.append({
+                        'OID': condition_oid,
+                        'name': f'{parameter}_condition',
+                        'description': f'Condition for {domain} {parameter} parameter',
+                        'rangeChecks': range_checks
+                    })
+                    
+                    # Create the WhereClause that references this Condition
+                    where_clauses.append({
+                        'OID': f'WC.{domain}.{parameter}',
+                        'name': f'{parameter}Context',
+                        'description': f'When {parameter} applies in {domain} domain',
+                        'conditions': [condition_oid]  # Reference to the Condition
+                    })
+        
+        return {
+            'conditions': conditions,
+            'whereClauses': where_clauses
+        }
     
     def _process_methods(self, mdv: ET.Element) -> List[Dict[str, Any]]:
         """Process MethodDef elements."""
@@ -239,6 +447,22 @@ class PortableDefineXMLToJSONConverter:
                     'title': doc_ref.get('title') or 'Annotated CRF'  # Default title
                 })
         return annotated_crf
+    
+    def _process_reified_concepts(self, mdv: ET.Element) -> List[Dict[str, Any]]:
+        """Process ReifiedConcept elements (semantic concepts)."""
+        concepts = []
+        # Note: Define-XML doesn't typically contain ReifiedConcepts directly
+        # This would be populated from external concept definitions or extensions
+        # For now, return empty list - can be extended when Define-XML includes semantic concepts
+        return concepts
+    
+    def _process_concept_properties(self, mdv: ET.Element) -> List[Dict[str, Any]]:
+        """Process ConceptProperty elements (concept properties)."""
+        concept_properties = []
+        # Note: Define-XML doesn't typically contain ConceptProperties directly
+        # This would be populated from external concept definitions or extensions
+        # For now, return empty list - can be extended when Define-XML includes semantic concepts
+        return concept_properties
     
     def _get_study_name(self, study: ET.Element) -> str:
         """Extract study name from GlobalVariables."""

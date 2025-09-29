@@ -21,19 +21,23 @@ def main():
     print("🚀 Define-JSON Complete Demo")
     print("=" * 60)
     
-    # Define paths
+    # Define paths - use temp files to avoid cluttering data folder
+    import tempfile
     data_dir = Path(__file__).parent / 'data'
     xml_path = data_dir / 'define-360i.xml'
-    json_path = data_dir / 'define-360i-demo.json'
-    roundtrip_xml_path = data_dir / 'define-360i-demo-roundtrip.xml'
+    
+    # Create temporary files for demo outputs
+    temp_dir = Path(tempfile.gettempdir())
+    json_path = temp_dir / 'define-360i-demo.json'
+    roundtrip_xml_path = temp_dir / 'define-360i-demo-roundtrip.xml'
     
     if not xml_path.exists():
         print(f"❌ Error: {xml_path} not found")
         return 1
     
     print(f"📁 Input XML: {xml_path.name}")
-    print(f"📁 Output JSON: {json_path.name}")
-    print(f"📁 Roundtrip XML: {roundtrip_xml_path.name}")
+    print(f"📁 Output JSON: {json_path.name} (temp)")
+    print(f"📁 Roundtrip XML: {roundtrip_xml_path.name} (temp)")
     
     try:
         # Step 1: XML → JSON Conversion
@@ -43,13 +47,17 @@ def main():
         
         print(f"✅ Converted: {xml_path.name} → {json_path.name}")
         
-        # Extract from metadata section
-        metadata = data.get('metadata', {})
-        print(f"📊 Study: {metadata.get('studyName')} ({metadata.get('studyOID')})")
-        print(f"📊 Datasets: {len(data.get('Datasets', []))}")
-        print(f"📊 Variables: {len(data.get('Variables', []))}")
-        print(f"📊 Standards: {len(data.get('Standards', []))}")
-        print(f"📊 AnnotatedCRF: {len(data.get('AnnotatedCRF', []))}")
+        # Extract from flattened structure (mixins)
+        print(f"📊 Study: {data.get('studyName')} ({data.get('studyOID')})")
+        print(f"📊 ItemGroups: {len(data.get('itemGroups', []))}")
+        print(f"📊 Items: {len(data.get('items', []))}")
+        print(f"📊 Conditions: {len(data.get('conditions', []))}")
+        print(f"📊 WhereClauses: {len(data.get('whereClauses', []))}")
+        print(f"📊 CodeLists: {len(data.get('codeLists', []))}")
+        print(f"📊 Standards: {len(data.get('standards', []))}")
+        print(f"📊 AnnotatedCRF: {len(data.get('annotatedCRF', []))}")
+        print(f"📊 Concepts: {len(data.get('concepts', []))}")
+        print(f"📊 ConceptProperties: {len(data.get('conceptProperties', []))}")
         
         # Step 2: Validate XML → JSON
         print(f"\n🔄 Step 2: Validating XML → JSON conversion...")

@@ -11,6 +11,22 @@ It is being designed in a Clinical Trial context to supplement the CDISC Unified
 
 [Documentation Site](https://temeta.github.io/define-json)
 
+## 🔄 Quick Start: XML ↔ JSON Conversion
+
+For complete bidirectional conversion between Define-XML and Define-JSON, see:
+- **[CONVERSION_README.md](CONVERSION_README.md)** - Complete guide
+- **[QUICK_REFERENCE.md](QUICK_REFERENCE.md)** - Command cheat sheet
+
+### Basic Usage
+```bash
+# From project directory
+python -m define_json xml2json data/define.xml data/output.json
+python -m define_json json2xml data/input.json data/output.xml
+
+# From any other directory (see CONVERSION_README.md for details)
+PYTHONPATH=/path/to/define-json python -c "from src.define_json.converters.xml_to_json import PortableDefineXMLToJSONConverter; ..."
+```
+
 ## Context is everything
 
 > “Don't provide values without units”

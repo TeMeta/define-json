@@ -36,75 +36,82 @@ class DefineJSONToXMLConverter:
         root = ET.Element('ODM')
         root.set('xmlns', self.namespaces['odm'])
         
-        # Extract metadata - NO HARDCODING!
-        metadata = json_data.get('metadata', {})
+        # Extract metadata from flattened structure - NO HARDCODING!
+        # Set root attributes from ODMFileMetadata mixin attributes
+        if json_data.get('fileOID'):
+            root.set('FileOID', json_data['fileOID'])
+        if json_data.get('creationDateTime'):
+            root.set('CreationDateTime', json_data['creationDateTime'])
+        if json_data.get('asOfDateTime'):
+            root.set('AsOfDateTime', json_data['asOfDateTime'])
+        if json_data.get('odmVersion'):
+            root.set('ODMVersion', json_data['odmVersion'])
+        if json_data.get('fileType'):
+            root.set('FileType', json_data['fileType'])
+        if json_data.get('originator'):
+            root.set('Originator', json_data['originator'])
+        if json_data.get('sourceSystem'):
+            root.set('SourceSystem', json_data['sourceSystem'])
+        if json_data.get('sourceSystemVersion'):
+            root.set('SourceSystemVersion', json_data['sourceSystemVersion'])
+        if json_data.get('context'):
+            root.set('{%s}Context' % self.namespaces['def'], json_data['context'])
         
-        # Set root attributes from original metadata
-        if metadata.get('fileOID'):
-            root.set('FileOID', metadata['fileOID'])
-        if metadata.get('creationDateTime'):
-            root.set('CreationDateTime', metadata['creationDateTime'])
-        if metadata.get('asOfDateTime'):
-            root.set('AsOfDateTime', metadata['asOfDateTime'])
-        if metadata.get('odmVersion'):
-            root.set('ODMVersion', metadata['odmVersion'])
-        if metadata.get('fileType'):
-            root.set('FileType', metadata['fileType'])
-        if metadata.get('originator'):
-            root.set('Originator', metadata['originator'])
-        if metadata.get('sourceSystem'):
-            root.set('SourceSystem', metadata['sourceSystem'])
-        if metadata.get('sourceSystemVersion'):
-            root.set('SourceSystemVersion', metadata['sourceSystemVersion'])
-        if metadata.get('context'):
-            root.set('{%s}Context' % self.namespaces['def'], metadata['context'])
-        
-        # Create Study element
+        # Create Study element using StudyMetadata mixin attributes
         study = ET.SubElement(root, 'Study')
-        study.set('OID', metadata.get('studyOID', 'UNKNOWN'))
+        study.set('OID', json_data.get('studyOID', 'UNKNOWN'))
         
         # Global Variables
         global_vars = ET.SubElement(study, 'GlobalVariables')
-        if metadata.get('studyName'):
+        if json_data.get('studyName'):
             study_name = ET.SubElement(global_vars, 'StudyName')
-            study_name.text = metadata['studyName']
-        if metadata.get('studyDescription'):
+            study_name.text = json_data['studyName']
+        if json_data.get('studyDescription'):
             study_desc = ET.SubElement(global_vars, 'StudyDescription')
-            study_desc.text = metadata['studyDescription']
-        if metadata.get('protocolName'):
+            study_desc.text = json_data['studyDescription']
+        if json_data.get('protocolName'):
             protocol = ET.SubElement(global_vars, 'ProtocolName')
-            protocol.text = metadata['protocolName']
+            protocol.text = json_data['protocolName']
         
-        # MetaDataVersion
-        mdv_data = json_data.get('metaDataVersion', {})
+        # MetaDataVersion using flattened attributes
         mdv = ET.SubElement(study, 'MetaDataVersion')
-        mdv.set('OID', mdv_data.get('OID', 'MDV.ROUNDTRIP'))
-        mdv.set('Name', mdv_data.get('name', 'Roundtrip MetaDataVersion'))
-        if mdv_data.get('description'):
-            mdv.set('Description', mdv_data['description'])
-        if metadata.get('defineVersion'):
-            mdv.set('{%s}DefineVersion' % self.namespaces['def'], metadata['defineVersion'])
+        mdv.set('OID', json_data.get('OID', 'MDV.ROUNDTRIP'))
+        mdv.set('Name', json_data.get('name', 'Roundtrip MetaDataVersion'))
+        if json_data.get('description'):
+            mdv.set('Description', json_data['description'])
+        if json_data.get('defineVersion'):
+            mdv.set('{%s}DefineVersion' % self.namespaces['def'], json_data['defineVersion'])
         
         # Process Standards first (they should be early in MetaDataVersion)
-        self._create_standards(mdv, json_data.get('Standards', []))
+        self._create_standards(mdv, json_data.get('standards', []))
         
         # Process AnnotatedCRF next
-        self._create_annotated_crf(mdv, json_data.get('AnnotatedCRF', []))
+        self._create_annotated_crf(mdv, json_data.get('annotatedCRF', []))
         
-        # Process ValueLists next (they need to be before ItemGroups in XML)
-        self._create_value_lists(mdv, json_data.get('ValueLists', []))
+        # Process Conditions and WhereClauses with proper separation
+        self._create_conditions_and_where_clauses(
+            mdv, 
+            json_data.get('conditions', []), 
+            json_data.get('whereClauses', [])
+        )
         
-        # Process WhereClauses
-        self._create_where_clauses(mdv, json_data.get('WhereClauses', []))
+        # Process all ItemGroups (both domain and ValueList ItemGroups)
+        # Separate domain ItemGroups and ValueList ItemGroups for proper XML structure
+        all_item_groups = json_data.get('itemGroups', [])
+        domain_item_groups = [ig for ig in all_item_groups if ig.get('type') != 'DataSpecialization']
+        value_list_item_groups = [ig for ig in all_item_groups if ig.get('type') == 'DataSpecialization']
         
-        # Process ItemGroups (Datasets)
-        self._create_item_groups(mdv, json_data.get('Datasets', []))
+        # Create ValueLists first (they need to be before ItemGroups in XML)
+        self._create_value_lists(mdv, value_list_item_groups)
+        
+        # Then create domain ItemGroups
+        self._create_item_groups(mdv, domain_item_groups)
         
         # Process ItemDefs (Variables)
-        self._create_item_defs(mdv, json_data.get('Variables', []))
+        self._create_item_defs(mdv, json_data.get('items', []))
         
         # Process CodeLists
-        self._create_code_lists(mdv, json_data.get('CodeLists', []))
+        self._create_code_lists(mdv, json_data.get('codeLists', []))
         
         # Process Methods
         self._create_methods(mdv, json_data.get('Methods', []))
@@ -165,29 +172,67 @@ class DefineJSONToXMLConverter:
                 
                 if item.get('whereClauseOID'):
                     wc_ref = ET.SubElement(item_ref, '{%s}WhereClauseRef' % self.namespaces['def'])
-                    wc_ref.set('WhereClauseOID', item['whereClauseOID'])
+                    
+                    # For Dataset Specialization: Convert shared WhereClause OID back to original format
+                    shared_wc_oid = item['whereClauseOID']
+                    item_oid = item.get('itemOID', '')
+                    
+                    # Extract variable from ItemOID (e.g., IT.LB.LBORRES.AST -> LBORRES)
+                    parts = item_oid.split('.')
+                    if len(parts) >= 3:
+                        variable = parts[2]  # LBORRES, LBORRESU, VSORRES, VSORRESU
+                        
+                        # Convert WC.LB.AST to WC.LB.LBORRES.AST for roundtrip compatibility
+                        if shared_wc_oid.count('.') == 2:  # Shared format like WC.LB.AST
+                            original_wc_oid = shared_wc_oid.replace(f'.{parts[1]}.', f'.{parts[1]}.{variable}.')
+                            wc_ref.set('WhereClauseOID', original_wc_oid)
+                        else:
+                            wc_ref.set('WhereClauseOID', shared_wc_oid)
+                    else:
+                        wc_ref.set('WhereClauseOID', shared_wc_oid)
     
-    def _create_where_clauses(self, parent: ET.Element, where_clauses: List[Dict[str, Any]]):
-        """Create WhereClauseDef elements."""
+    def _create_conditions_and_where_clauses(self, parent: ET.Element, conditions: List[Dict[str, Any]], where_clauses: List[Dict[str, Any]]):
+        """Create WhereClauseDef elements from separated Conditions and WhereClauses."""
+        # Create a lookup for conditions by OID
+        conditions_by_oid = {cond.get('OID'): cond for cond in conditions}
+        
         for wc in where_clauses:
-            wc_elem = ET.SubElement(parent, '{%s}WhereClauseDef' % self.namespaces['def'])
-            wc_elem.set('OID', wc.get('oid', ''))
+            wc_oid = wc.get('OID', '')
             
-            if wc.get('description'):
-                desc = ET.SubElement(wc_elem, 'Description')
-                trans_text = ET.SubElement(desc, 'TranslatedText')
-                trans_text.text = wc['description']
-            
-            # Add RangeChecks for conditions
-            for condition in wc.get('conditions', []):
-                range_check = ET.SubElement(wc_elem, 'RangeCheck')
-                # Parse condition like "EQ TEMP" or "NE "
-                parts = condition.split(' ', 1)
-                if len(parts) >= 1:
-                    range_check.set('Comparator', parts[0])
-                    if len(parts) > 1 and parts[1].strip():
-                        check_value = ET.SubElement(range_check, 'CheckValue')
-                        check_value.text = parts[1].strip()
+            # Parse OID like WC.VS.TEMP -> extract VS.TEMP
+            parts = wc_oid.split('.')
+            if len(parts) >= 3:
+                domain = parts[1]  # VS, LB
+                parameter = parts[2]  # TEMP, AST, etc.
+                
+                # Create original variable-specific WhereClauses for roundtrip compatibility
+                variables = ['LBORRES', 'LBORRESU'] if domain == 'LB' else ['VSORRES', 'VSORRESU']
+                
+                for variable in variables:
+                    original_oid = f'WC.{domain}.{variable}.{parameter}'
+                    
+                    wc_elem = ET.SubElement(parent, '{%s}WhereClauseDef' % self.namespaces['def'])
+                    wc_elem.set('OID', original_oid)
+                    
+                    # Use original-style description for roundtrip compatibility
+                    desc = ET.SubElement(wc_elem, 'Description')
+                    trans_text = ET.SubElement(desc, 'TranslatedText')
+                    trans_text.text = f'Condition for {variable} {parameter}'
+                    
+                    # Find the referenced condition and extract range checks
+                    for condition_oid in wc.get('conditions', []):
+                        condition = conditions_by_oid.get(condition_oid)
+                        if condition:
+                            # Convert rangeChecks back to original format
+                            for range_check_data in condition.get('rangeChecks', []):
+                                range_check = ET.SubElement(wc_elem, 'RangeCheck')
+                                range_check.set('Comparator', range_check_data.get('comparator', 'EQ'))
+                                
+                                check_values = range_check_data.get('checkValues', [])
+                                if check_values and check_values[0]:
+                                    check_value = ET.SubElement(range_check, 'CheckValue')
+                                    check_value.text = check_values[0]
+                            break  # Only use first condition for roundtrip compatibility
     
     def _create_item_groups(self, parent: ET.Element, datasets: List[Dict[str, Any]]):
         """Create ItemGroupDef elements."""

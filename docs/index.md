@@ -14,6 +14,20 @@ Name: Define-JSON
 erDiagram
 MetaDataVersion {
     stringList resources  
+    string fileOID  
+    datetime asOfDateTime  
+    datetime creationDateTime  
+    string odmVersion  
+    string fileType  
+    string originator  
+    string sourceSystem  
+    string sourceSystemVersion  
+    string context  
+    string defineVersion  
+    string studyOID  
+    string studyName  
+    string studyDescription  
+    string protocolName  
     string OID  
     string uuid  
     string name  
@@ -44,6 +58,7 @@ Coding {
 }
 DocumentReference {
     string title  
+    string leafID  
     integerList pages  
     string relationship  
     string version  
@@ -51,6 +66,18 @@ DocumentReference {
     string OID  
     string uuid  
     string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+Standard {
+    StandardName name  
+    StandardType type  
+    PublishingSet publishingSet  
+    string version  
+    StandardStatus status  
+    string OID  
+    string uuid  
     string description  
     string label  
     stringList aliases  
@@ -115,7 +142,6 @@ ConceptProperty {
 CodeList {
     DataType dataType  
     string formatName  
-    stringList codeListItems  
     string version  
     string href  
     string OID  
@@ -246,11 +272,20 @@ Method {
     string owner  
     string wasDerivedFrom  
 }
+CodeListItem {
+    string codedValue  
+    string decode  
+    string description  
+    stringList aliases  
+    decimal weight  
+    boolean other  
+}
 ItemGroup {
     string domain  
     string structure  
     boolean isReferenceData  
     ItemGroupType type  
+    stringList children  
     stringList profile  
     string authenticator  
     string OID  
@@ -307,11 +342,15 @@ MetaDataVersion ||--}o Coding : "codings"
 MetaDataVersion ||--}o ReifiedConcept : "concepts"
 MetaDataVersion ||--}o Relationship : "relationships"
 MetaDataVersion ||--}o Dictionary : "dictionaries"
+MetaDataVersion ||--}o Standard : "standards"
+MetaDataVersion ||--}o DocumentReference : "annotatedCRF"
 MetaDataVersion ||--}o Coding : "coding"
 MetaDataVersion ||--}o Comment : "comment"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 DocumentReference ||--}o Coding : "coding"
+Standard ||--}o Comment : "comment"
+Standard ||--}o Coding : "coding"
 Dictionary ||--}o Coding : "terms"
 Dictionary ||--}o Coding : "coding"
 Relationship ||--|| IdentifiableElement : "subject"
@@ -324,6 +363,7 @@ ReifiedConcept ||--}o Comment : "comment"
 ConceptProperty ||--|o CodeList : "codeList"
 ConceptProperty ||--}o Coding : "coding"
 ConceptProperty ||--}o Comment : "comment"
+CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
 CodeList ||--}o Coding : "coding"
 CodeList ||--}o Comment : "comment"
@@ -364,8 +404,8 @@ Method ||--}o FormalExpression : "formalExpressions"
 Method ||--|o DocumentReference : "document"
 Method ||--}o Coding : "coding"
 Method ||--}o Comment : "comment"
+CodeListItem ||--|o Coding : "coding"
 ItemGroup ||--}o Item : "items"
-ItemGroup ||--}o ItemGroup : "children"
 ItemGroup ||--|o ReifiedConcept : "implementsConcept"
 ItemGroup ||--|o WhereClause : "whereClause"
 ItemGroup ||--}o Coding : "security"
@@ -433,6 +473,7 @@ NominalOccurrence ||--}o Comment : "comment"
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[DataService](classes/DataService.md) | A service element that provides an API or endpoint for serving or receiving d... |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ReturnValue](classes/ReturnValue.md) | An output specification that defines the details of what a formal expression ... |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[SiteOrSponsorComment](classes/SiteOrSponsorComment.md) | A feedback element that contains comments from a site or sponsor, distinct fr... |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Standard](classes/Standard.md) | A collection element that groups related standards within a specific context,... |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Timing](classes/Timing.md) | A temporal element that describes the timing of an event or occurrence, which... |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[User](classes/User.md) | An entity that represents information about a specific user of a clinical dat... |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[WhereClause](classes/WhereClause.md) | A conditional element that describes the circumstances under which a containi... |
@@ -442,9 +483,11 @@ NominalOccurrence ||--}o Comment : "comment"
 | [Labelled](classes/Labelled.md) | A mixin that provides slots for detailing meanings and multilingual descripti... |
 | [MeasureRelationship](classes/MeasureRelationship.md) | A relationship element that associates a DataAttribute with a Measure |
 | [ObservationRelationship](classes/ObservationRelationship.md) | A relationship element that associates a DataAttribute with an Observation, a... |
+| [ODMFileMetadata](classes/ODMFileMetadata.md) | A mixin that provides ODM file-level metadata attributes including file ident... |
 | [Origin](classes/Origin.md) | A provenance element that describes the source of data for an item |
 | [RangeCheck](classes/RangeCheck.md) | A validation element that performs a simple comparison check between a refere... |
 | [SourceItem](classes/SourceItem.md) | A data source that provides the origin of information for an item |
+| [StudyMetadata](classes/StudyMetadata.md) | A mixin that provides study-level metadata attributes including study identif... |
 | [TranslatedText](classes/TranslatedText.md) |  |
 | [Translation](classes/Translation.md) | A text representation that provides content in a specific language, used for ... |
 | [Versioned](classes/Versioned.md) | A mixin that provides version and connectivity information, including version... |
@@ -485,6 +528,20 @@ NominalOccurrence ||--}o Comment : "comment"
 | [implementationNotes](slots/implementationNotes.md) | ImplementationNotes reference: Further information, such as rationale and imp... |
 | [collectionExceptionCondition](slots/collectionExceptionCondition.md) | Condition that defines when collection may be exempted |
 | [preSpecifiedValue](slots/preSpecifiedValue.md) | Prefill value or a default value for a field that is automatically populated |
+| [fileOID](slots/fileOID.md) | Unique identifier for the ODM file |
+| [asOfDateTime](slots/asOfDateTime.md) | Date and time when the data snapshot was taken |
+| [creationDateTime](slots/creationDateTime.md) | Date and time when the ODM file was created |
+| [odmVersion](slots/odmVersion.md) | Version of the ODM standard used |
+| [fileType](slots/fileType.md) | Type of ODM file (e |
+| [originator](slots/originator.md) | Organization or system that created the ODM file |
+| [sourceSystem](slots/sourceSystem.md) | Source system that generated the data |
+| [sourceSystemVersion](slots/sourceSystemVersion.md) | Version of the source system |
+| [context](slots/context.md) | Define-XML context (usually "Other" for Define-XML) |
+| [defineVersion](slots/defineVersion.md) | Version of Define-XML specification used |
+| [studyOID](slots/studyOID.md) | Unique identifier for the study |
+| [studyName](slots/studyName.md) | Name of the study |
+| [studyDescription](slots/studyDescription.md) | Description of the study |
+| [protocolName](slots/protocolName.md) | Protocol name for the study |
 | [itemGroups](slots/itemGroups.md) | Item groups, containing items, defined in this version of the metadata |
 | [items](slots/items.md) | Template or top-level items (not belonging to any item group) defined in this... |
 | [resources](slots/resources.md) | References to documents that describe this version of the metadata |
@@ -496,6 +553,8 @@ NominalOccurrence ||--}o Comment : "comment"
 | [concepts](slots/concepts.md) | Structured Concepts defined in this version of the metadata |
 | [relationships](slots/relationships.md) | Relationships between items, item groups, and other elements in this version ... |
 | [dictionaries](slots/dictionaries.md) | Dictionaries defined in this version of the metadata |
+| [standards](slots/standards.md) | Standards defined in this version of the metadata |
+| [annotatedCRF](slots/annotatedCRF.md) | Reference to annotated case report forms |
 | [dataType](slots/dataType.md) | The data type of the item |
 | [length](slots/length.md) | The maximum length of the data item in characters |
 | [codeList](slots/codeList.md) | Reference to the CodeList that constrains the item values |
@@ -508,7 +567,7 @@ NominalOccurrence ||--}o Comment : "comment"
 | [structure](slots/structure.md) | Data structure of the item group, indicating how the records are organized |
 | [isReferenceData](slots/isReferenceData.md) | Set to Yes if this is a reference item group |
 | [type](slots/type.md) | Type of item group |
-| [children](slots/children.md) | Child item groups within this item group |
+| [children](slots/children.md) | References to child ItemGroups (OIDs) within this item group |
 | [implementsConcept](slots/implementsConcept.md) | Reference to a abstract concept topic that this item group is a specializatio... |
 | [subject](slots/subject.md) | The starting element of the relationship (e |
 | [object](slots/object.md) | The ending element of the relationship |
@@ -541,7 +600,6 @@ NominalOccurrence ||--}o Comment : "comment"
 | [checkValues](slots/checkValues.md) | Values to compare against |
 | [item](slots/item.md) | Reference to the Item element whose value is being checked |
 | [softHard](slots/softHard.md) | Indicates whether a validation check is an error ("Hard") or a warning ("Soft... |
-| [context](slots/context.md) | The specific context within the containing element to which this formal expre... |
 | [expression](slots/expression.md) | The actual text of the formal expression (renamed from 'code' for disambiguat... |
 | [returnType](slots/returnType.md) | Return type of the expression |
 | [parameters](slots/parameters.md) | Parameters used in the expression |
@@ -561,10 +619,13 @@ NominalOccurrence ||--}o Comment : "comment"
 | [location](slots/location.md) | The physical location of the organization |
 | [address](slots/address.md) | The address of the organization |
 | [partOfOrganization](slots/partOfOrganization.md) | Reference to a parent organization if this organization is part of a larger e... |
+| [publishingSet](slots/publishingSet.md) | Publishing Set of a Controlled Terminology |
+| [status](slots/status.md) | Status of an Implementation Guide or of a Controlled Terminology |
 | [resourceType](slots/resourceType.md) | Type of resource (e |
 | [attribute](slots/attribute.md) | Field provided by the Name attribute where the data or information can be obt... |
 | [selection](slots/selection.md) | Machine-executable instructions for selecting data from the resource |
 | [title](slots/title.md) | Document title |
+| [leafID](slots/leafID.md) | Leaf identifier for document reference in Define-XML |
 | [pages](slots/pages.md) | Reference to specific pages in a PDF document |
 | [relationship](slots/relationship.md) | Relationship to the referencing entity |
 | [isNominal](slots/isNominal.md) | Indicates whether the timing is nominal (event-based) or not |
@@ -643,6 +704,10 @@ NominalOccurrence ||--}o Comment : "comment"
 | [LinkingPhraseEnum](enums/LinkingPhraseEnum.md) | An enumeration that defines variable relationship descriptive linking phrases... |
 | [PredicateTermEnum](enums/PredicateTermEnum.md) | An enumeration that defines short variable relationship linking phrases for p... |
 | [DataProductLifecycleStatus](enums/DataProductLifecycleStatus.md) | An enumeration that defines the lifecycle stages for a DataProduct |
+| [StandardName](enums/StandardName.md) | An enumeration that defines permissible values for standard names |
+| [StandardType](enums/StandardType.md) | An enumeration that defines permissible values for standard types |
+| [PublishingSet](enums/PublishingSet.md) | An enumeration that defines permissible values for publishing sets |
+| [StandardStatus](enums/StandardStatus.md) | An enumeration that defines permissible values for standard status |
 
 
 ## Types

@@ -257,9 +257,10 @@ classes:
           - range: string
           - range: TranslatedText
 
-  ODMMetadata:
+  ODMFileMetadata:
     description: >-
-      Root-level ODM file metadata including file attributes, study information, and namespace declarations
+      A mixin that provides ODM file-level metadata attributes including file identifiers, timestamps, and system information
+    mixin: true
     attributes:
       fileOID:
         description: Unique identifier for the ODM file
@@ -292,6 +293,15 @@ classes:
       context:
         description: Define-XML context (usually "Other" for Define-XML)
         range: string
+      defineVersion:
+        description: Version of Define-XML specification used
+        range: string
+
+  StudyMetadata:
+    description: >-
+      A mixin that provides study-level metadata attributes including study identification and protocol information
+    mixin: true
+    attributes:
       studyOID:
         description: Unique identifier for the study
         range: string
@@ -305,9 +315,6 @@ classes:
       protocolName:
         description: Protocol name for the study
         range: string
-      defineVersion:
-        description: Version of Define-XML specification used
-        range: string
 
   MetaDataVersion:
     tree_root: true
@@ -316,13 +323,10 @@ classes:
     close_mappings:
       - usdm:StudyDesign
     is_a: GovernedElement
+    mixins:
+      - ODMFileMetadata
+      - StudyMetadata
     attributes:
-      metadata:
-        description: >-
-          Root-level ODM metadata including file attributes and study information
-        range: ODMMetadata
-        required: true
-        inlined: true
       itemGroups:
         description: >-
           Item groups, containing items, defined in this version of the metadata
@@ -473,7 +477,6 @@ classes:
         description: Conditions for when this item definition applies
         range: WhereClause
         inlined: false
-        inlined_as_list: true
       origin:
         description: >-
           The origin of the data
@@ -540,9 +543,12 @@ classes:
         inlined_as_list: true
       children:
         description: >-
-          Child item groups within this item group.
-        range: ItemGroup
+          References to child ItemGroups (OIDs) within this item group.
+          Use these OID references to look up the actual ItemGroup objects 
+          from the top-level itemGroups collection.
+        range: string
         multivalued: true
+        inlined: false
       implementsConcept:
         description: >-
           Reference to a abstract concept topic that this item group is a specialization of
@@ -552,6 +558,7 @@ classes:
           If nested in a parent ItemGroup context,
           conditions for when this group applies
         range: WhereClause
+        inlined: false
         close_mappings:
           - fhir:StructureDefinition/context
 
@@ -641,13 +648,10 @@ classes:
         description: >-
           The individual values that make up this CodeList.
           The type of CodeListItem included determines its behaviour
-        any_of:
-          - range: Coding
-          - range: CodeListItem
-          - range: string
+        range: CodeListItem
+        multivalued: true
         inlined: true
         inlined_as_list: true
-        multivalued: true
       externalCodeList:
         description: >-
           Reference to a code list that is defined externally to this study
@@ -863,7 +867,6 @@ classes:
         range: Condition
         multivalued: true
         inlined: false
-        inlined_as_list: true
 
   Condition:
     description: >-

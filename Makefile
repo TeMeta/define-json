@@ -1,27 +1,34 @@
-# Define-JSON Testing and Validation Makefile (Poetry-native)
+# Define-JSON Testing, Validation and Conversion Makefile
 
-.PHONY: help install test validate lint clean format check-syntax generate-docs notebook quick dev linkml-lint generate-json-schema generate-pydantic docs-serve docs-build
+.PHONY: help install test validate lint clean check-syntax linkml-lint generate-json-schema generate-pydantic docs docs-serve docs-build docs-deploy demo roundtrip convert test-roundtrip format setup
 
 help:
-	@echo "Define-JSON Testing and Validation (Poetry)"
-	@echo "============================================"
+	@echo "Define-JSON Testing, Validation and Conversion"
+	@echo "=============================================="
 	@echo ""
-	@echo "Available targets:"
+	@echo "Main targets:"
+	@echo "  demo                 - Run complete XML<->JSON conversion demo"
+	@echo "  roundtrip            - Test XML->JSON->XML roundtrip conversion"
+	@echo "  convert              - Convert sample XML to JSON"
+	@echo ""
+	@echo "Testing & Validation:"
 	@echo "  install              - Install all dependencies via Poetry"
-	@echo "  test                 - Run all tests (unit, CLI, schema)"
+	@echo "  test                 - Run all tests (unit, CLI, schema, roundtrip)"
 	@echo "  validate             - Validate YAML schema structure"
 	@echo "  lint                 - Lint YAML file for style issues"
 	@echo "  linkml-lint          - Run LinkML schema linter"
-	@echo "  format               - Format YAML file (manual step)"
 	@echo "  check-syntax         - Check YAML syntax"
+	@echo ""
+	@echo "Documentation:"
+	@echo "  docs                 - Generate LinkML documentation"
+	@echo "  docs-serve           - Serve documentation with MkDocs"
+	@echo "  docs-build           - Build static documentation site"
+	@echo "  docs-deploy          - Deploy docs to GitHub Pages"
+	@echo ""
+	@echo "Generators:"
 	@echo "  generate-json-schema - Generate JSON Schema from LinkML"
 	@echo "  generate-pydantic    - Generate Pydantic models from LinkML"
 	@echo "  clean                - Clean up generated files"
-	@echo "  notebook             - Start Jupyter notebook server"
-	@echo "  quick                - Quick CLI validation"
-	@echo "  dev                  - Quick validation for development"
-	@echo "  docs-serve           - Serve documentation with MkDocs"
-	@echo "  docs-build           - Build static documentation site"
 
 install:
 	@echo "Installing dependencies with Poetry..."
@@ -31,57 +38,67 @@ install:
 check-syntax:
 	@echo "Checking YAML syntax..."
 	poetry run python -c "import yaml; yaml.safe_load(open('define-json.yaml'))"
-	@echo "✓ YAML syntax is valid"
+	@echo "YAML syntax is valid"
 
 validate:
 	@echo "Validating LinkML schema structure..."
-	poetry run python -c "from linkml_runtime import SchemaView; sv = SchemaView('define-json.yaml'); print('✓ Schema loaded successfully')"
-	@echo "✓ LinkML schema validation passed"
+	poetry run python -c "from linkml_runtime import SchemaView; sv = SchemaView('define-json.yaml'); print('Schema loaded successfully')"
+	@echo "LinkML schema validation passed"
 
 lint:
 	@echo "Linting YAML file..."
-	poetry run yamllint define-json.yaml || echo "⚠ YAML linting issues found (yamllint)"
+	poetry run yamllint define-json.yaml || echo "YAML linting issues found (yamllint)"
 
 linkml-lint:
 	@echo "Running LinkML schema linter..."
-	poetry run linkml-lint define-json.yaml || echo "⚠ LinkML linting issues found (non-blocking)"
-	@echo "✓ LinkML linting complete"
-
-format:
-	@echo "Formatting YAML file..."
-	@echo "(No automatic YAML formatter configured. Use yamlfmt or similar if desired.)"
-	@echo "YAML formatting complete"
+	poetry run linkml-lint define-json.yaml || echo "LinkML linting issues found (non-blocking)"
+	@echo "LinkML linting complete"
 
 generate-json-schema:
 	@echo "Generating JSON Schema from LinkML..."
 	poetry run linkml generate json-schema define-json.yaml > generated/json-schema.json
-	@echo "✓ JSON Schema generated: generated/json-schema.json"
+	@echo "JSON Schema generated: generated/json-schema.json"
 
 generate-pydantic:
 	@echo "Generating Pydantic models from LinkML..."
 	poetry run linkml generate pydantic --meta AUTO define-json.yaml > generated/define.py
-	@echo "✓ Pydantic models generated: generated/define.py"
+	@echo "Pydantic models generated: generated/define.py"
 
-test: check-syntax validate linkml-lint
+# Main functionality targets
+demo:
+	@echo "Running complete XML<->JSON conversion demo..."
+	poetry run python demo.py
+
+roundtrip:
+	@echo "Testing XML->JSON->XML roundtrip conversion..."
+	@echo "Step 1: Converting XML to JSON..."
+	poetry run python -m src.define_json xml2json data/define-360i.xml data/makefile-roundtrip.json
+	@echo "Step 2: Running roundtrip validation..."
+	poetry run python -m src.define_json roundtrip data/define-360i.xml data/makefile-roundtrip.json
+
+convert:
+	@echo "Converting sample XML to JSON..."
+	poetry run python -m src.define_json xml2json data/define-360i.xml data/converted-sample.json
+
+# Testing targets
+test: check-syntax validate linkml-lint test-roundtrip
 	@echo "Running unit tests..."
-	poetry run python -m unittest tests.test_schema
-	@echo "Running datacube tests..."
-	poetry run python -m unittest tests.test_datacube
-	@echo "Running CLI validation..."
-	poetry run python validate_schema.py
-	@echo "✓ All tests passed"
+	poetry run python -m unittest discover tests/ -v
 
-notebook:
-	@echo "Starting Jupyter notebook server..."
-	poetry run jupyter notebook
+test-roundtrip:
+	@echo "Testing roundtrip functionality..."
+	poetry run python -c "from src.define_json.validation.roundtrip import validate_true_roundtrip; from pathlib import Path; result = validate_true_roundtrip(Path('data/define-360i.xml'), Path('data/define-360i-recreated.xml')); print('Roundtrip test passed' if result.get('passed') else 'Roundtrip test failed')"
 
-# https://linkml.io/linkml/generators/docgen.html
+# Documentation generation (suppress gen-doc warnings)
 docs:
-	@echo "Generating documentation..."
+	@echo "Generating LinkML documentation..."
+	mkdir -p docs/js docs/classes docs/enums docs/slots docs/types docs/schemas;
 	cp versioning_architecture.md docs/Versioning.md;
 	cp README.md docs/About.md;
-	poetry run gen-doc define-json.yaml --directory docs/ --subfolder-type-separation --hierarchical-class-view --diagram-type er_diagram --sort-by rank --include-top-level-diagram
-
+	cp src/js/* docs/js/;
+	cp CONVERSION_README.md docs/CONVERSION_README.md;
+	cp QUICK_REFERENCE.md docs/QUICK_REFERENCE.md;
+	poetry run gen-doc define-json.yaml --directory docs/ --subfolder-type-separation --hierarchical-class-view --diagram-type er_diagram --sort-by rank --include-top-level-diagram 2>/dev/null || poetry run gen-doc define-json.yaml --directory docs/ --subfolder-type-separation --hierarchical-class-view --diagram-type er_diagram --sort-by rank --include-top-level-diagram
 
 docs-serve:
 	@echo "Serving documentation with MkDocs..."
@@ -97,17 +114,22 @@ docs-deploy:
 
 clean:
 	@echo "Cleaning up generated files..."
-	rm -rf docs/
-	rm -rf generated/
-	rm -rf __pycache__/
+	rm -rf docs/*
+	rm -rf generated/*
+	rm -rf __pycache__/ src/**/__pycache__/
 	rm -rf .pytest_cache/
-	@echo "✓ Cleanup complete"
+	rm -f data/test*.json data/test*.xml data/converted*.json data/makefile-roundtrip.*
+	find . -name "*.pyc" -delete
+	find . -name ".DS_Store" -delete
+	@echo "Cleanup complete"
 
-dev: check-syntax validate linkml-lint
-	@echo "✓ Development validation complete"
+# Development helpers
+format:
+	@echo "Formatting Python code..."
+	poetry run black src/ tests/ *.py --line-length 100
+	@echo "Code formatting complete"
 
-quick: install
-	@echo "Running quick CLI validation..."
-	poetry run python validate_schema.py
-	@echo "✓ Quick validation complete"
-
+setup: install
+	@echo "Setting up development environment..."
+	mkdir -p data generated docs
+	@echo "Development environment ready"
