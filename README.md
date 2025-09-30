@@ -101,7 +101,7 @@ Being able to iterate rapidly is important to the early stages of development of
 
 Define-JSON details implementation, but also links to `Coding`, `ReifiedConcept` and `ConceptProperty` for structured semantic connections, i.e. enabling each data element to be mapped unambiguously to standard dictionaries/ontologies, abstract concepts, and their properties.
 
-Tof [something] combines its abstract / template form with a context, then fleshes out that combined context.
+The definition of [something] combines its abstract / template form with a context, then fleshes out that combined context.
 
 * FHIR Profile is a implementation of a FHIR Resource template in the context of some healthcare or research authority
 * A granular definition for some Biomedical Concept (BC) is an implementation of a property of that BC in context of the standard being implemented

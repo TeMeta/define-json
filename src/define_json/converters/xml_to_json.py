@@ -509,12 +509,13 @@ class DefineXMLToJSONConverter:
         
         # Process standard MethodDef elements (Define-XML v2.1)
         for method in mdv.findall('.//odm:MethodDef', self.namespaces):
-            methods.append({
+            method_dict = {
                 'OID': method.get('OID'),
                 'name': method.get('Name'),
                 'type': method.get('Type'),
                 'description': self._get_description(method)
-            })
+            }
+            methods.append(method_dict)
         
         # Process ComputationMethod elements (Define-XML v1.0, common in ADaM)
         computation_methods = self._process_computation_methods(mdv)
@@ -524,7 +525,95 @@ class DefineXMLToJSONConverter:
         auto_methods, derivation_method_map = self._auto_generate_methods_from_derivations(mdv)
         methods.extend(auto_methods)
         
+        # Apply programmatic naming for derivation methods after all processing
+        methods = self._apply_derivation_method_naming(methods, mdv)
+        
         return methods, derivation_method_map
+
+    def _apply_derivation_method_naming(self, methods: List[Dict[str, Any]], mdv: ET.Element) -> List[Dict[str, Any]]:
+        """Apply standardized naming to derivation methods after all processing is complete."""
+        
+        # Apply naming to derivation methods based on patterns and descriptions
+        for method in methods:
+            if method.get('type') == 'Derivation':
+                current_name = method.get('name', '')
+                description = method.get('description', '')
+                
+                # Extract variable name from existing name patterns or description
+                variable_name = self._extract_variable_from_method_name(current_name, description)
+                
+                if variable_name:
+                    method['name'] = f"Derivation Method for {variable_name}"
+        
+        return methods
+
+
+    def _extract_variable_from_method_name(self, name: str, description: str) -> Optional[str]:
+        """Extract variable name from existing method name patterns or description."""
+        import re
+        
+        # Pattern 1: "VARIABLE derivation (...)" format
+        match = re.match(r'^([A-Z_]+)\s+derivation', name)
+        if match:
+            return match.group(1)
+        
+        # Pattern 2: Handle complex cases first (multiple variables)
+        if 'ALT' in description and 'AST' in description:
+            return 'ALT/AST'
+        if 'BILHY' in description and 'TRANSHY' in description:
+            return 'BILHY/TRANSHY'
+        
+        # Pattern 3: Look for variable patterns in description
+        # Common patterns like "param='VARIABLE'" or "VARIABLE=" or "set VARIABLE="
+        var_patterns = [
+            r"param='([A-Z_]+)'",
+            r"param=\"([A-Z_]+)\"",
+            r"([A-Z_]+)=",
+            r"set ([A-Z_]+)",
+            r"flag.*([A-Z_]+FL)",
+            r"([A-Z_]+)\s*when",
+            r"([A-Z_]+)\s*where",
+            r"([A-Z_]+)\s*if",
+            r"([A-Z_]+)\s*>",
+            r"([A-Z_]+)\s*<",
+            r"([A-Z_]+)\s*ne",
+            r"([A-Z_]+)\s*>=",
+            r"([A-Z_]+)\s*<=",
+            r"([A-Z_]+)\.([A-Z_]+)",  # Dataset.Variable format
+            r"converted to.*([A-Z_]+)",
+            r"([A-Z_]+)\s*,\s*converted"
+        ]
+        
+        for pattern in var_patterns:
+            matches = re.findall(pattern, description, re.IGNORECASE)
+            if matches:
+                # Return the first meaningful variable name found
+                for match in matches:
+                    # Handle tuple matches from patterns with groups
+                    if isinstance(match, tuple):
+                        match = match[-1]  # Take the last group (usually the variable name)
+                    
+                    match = match.upper()
+                    if len(match) > 2 and match not in ['THE', 'AND', 'FOR', 'SET', 'SAS', 'DATE', 'MISSING', 'THEN', 'ELSE', 'WHERE', 'WHEN']:
+                        return match
+        
+        # Pattern 4: Look for specific variable mentions in description
+        common_vars = ['ASTDT', 'ASTDTF', 'ASTDY', 'AENDT', 'AENDY', 'ADURU', 'TRTEMFL', 'AOCCFL', 'AOCCSFL', 
+                      'AOCCPFL', 'AOCC02FL', 'AOCC03FL', 'AOCC04FL', 'CQ01NAM', 'AOCC01FL', 'PARAM', 'PARAMCD',
+                      'ALBTRVAL', 'AENTMTFL', 'AVISIT', 'ADY', 'PARAMN', 'BASE', 'ANL01FL', 'AWRANGE', 'AWTARGET',
+                      'AWTDIFF', 'AWLO', 'AWHI', 'AVISITN', 'AVAL', 'DTYPE', 'SITEGR1', 'TRT01PN', 'TRT01A', 
+                      'TRT01AN', 'TRTSDT', 'TRTEDT', 'CUMDOSE', 'AGEGR1', 'AGEGR1N', 'SAFFL', 'EFFFL', 'COMP8FL',
+                      'COMP16FL', 'COMP24FL', 'DISCONFL', 'DSRAEFL', 'BMIBLGR1', 'HEIGHTBL', 'WEIGHTBL', 'EDUCLVL',
+                      'DISONSDT', 'DURDIS', 'DURDSGR1', 'VISIT1DT', 'VISNUMEN', 'DCDECOD', 'DCREASCD', 'MMSETOT',
+                      'CNSR', 'EVNTDESC', 'SRCDOM', 'SRCVAR', 'SRCSEQ', 'MCHC', 'CHOL', 'PHOS', 'ANISO', 'MCV',
+                      'BILI', 'BILHY', 'TRANSHY', 'HYLAW', 'ACTOT', 'QSSEQ', 'NPTOT', 'ACITM01', 'ACITM02', 'ACITM03',
+                      'ACITM04', 'ACITM05', 'ACITM06', 'ACITM07', 'ACITM08', 'ACITM09', 'ACITM10', 'ACITM11', 'ACITM12']
+        
+        for var in common_vars:
+            if var in description.upper():
+                return var
+        
+        return None
 
     def _auto_generate_methods_from_derivations(self, mdv: ET.Element) -> List[Dict[str, Any]]:
         """Auto-generate Method objects from ItemDef derivation descriptions."""
