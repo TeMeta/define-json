@@ -124,9 +124,14 @@ def run_roundtrip_test(original_xml_path: Path, converted_json_path: Path) -> Di
     methods = json_data.get('methods', []) or json_data.get('Methods', [])
     standards = json_data.get('standards', []) or json_data.get('Standards', [])
     
+    # Count all items (both top-level and within ItemGroups)
+    all_items_count = len(items)  # Top-level items
+    for ig in domain_item_groups + value_list_item_groups:
+        all_items_count += len(ig.get('items', []))
+    
     json_counts = {
         'ItemGroupDef': len(domain_item_groups),
-        'ItemDef': len(items),
+        'ItemDef': all_items_count,
         'ValueListDef': len(value_list_item_groups),
         'CodeList': len(code_lists),
         'WhereClauseDef': len(where_clauses),
@@ -183,9 +188,16 @@ def run_roundtrip_test(original_xml_path: Path, converted_json_path: Path) -> Di
         where_clauses = json_data.get('whereClauses', []) or json_data.get('WhereClauses', [])
         methods = json_data.get('methods', []) or json_data.get('Methods', [])
         
+        # Collect all item OIDs (both top-level and within ItemGroups)
+        all_item_oids = [var.get('OID') for var in items]  # Top-level items
+        for ig in item_groups:
+            for item in ig.get('items', []):
+                if item.get('OID'):
+                    all_item_oids.append(item.get('OID'))
+        
         oids = {
             'ItemGroup': [ds.get('OID') for ds in item_groups],
-            'Item': [var.get('OID') for var in items],
+            'Item': all_item_oids,
             'ValueList': [vl.get('OID') for vl in value_lists],
             'CodeList': [cl.get('oid') or cl.get('OID') for cl in code_lists],
             'WhereClause': [wc.get('oid') or wc.get('OID') for wc in where_clauses],
