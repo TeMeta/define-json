@@ -1,0 +1,40 @@
+site_name: Define-JSON Documentation
+site_description: Data model for supply and demand data contracts to complement CDISC USDM, ODM, and Dataset-JSON
+site_author: CDISC
+site_url: https://TeMeta.github.io/define-json/
+
+# Repository
+repo_name: define-json
+repo_url: https://github.com/TeMeta/define-json
+edit_uri: edit/main/
+
+site_dir: './site'
+docs_dir: './docs'
+
+theme:
+    name: mkdocs
+    nav_style: dark
+
+plugins:
+    - search
+    - mermaid2:
+        arguments:
+          startOnLoad: false
+          mermaid:
+              er: 
+                  useMaxWidth: true
+markdown_extensions: 
+    - pymdownx.superfences:
+        custom_fences:
+            - name: mermaid
+              class: mermaid
+              format: !!python/name:mermaid2.fence_mermaid_custom
+extra_javascript:
+    - https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js
+    - https://cdn.jsdelivr.net/npm/mermaid@9.1.3/dist/mermaid.min.js
+    - js/enable_zoom.js
+
+nav:
+  - Index: index.md
+  - About: About.md
+  - Versioning: Versioning.md

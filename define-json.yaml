@@ -3,7 +3,6 @@ name: Define-JSON
 description: >-
   Data model for supply and demand data contracts to complement CDISC USDM, ODM, and Dataset-JSON.
   This LinkML version includes semantics to act as Rosetta Stone for SDMX, FHIR, OMOP, RDF, and CDISC.
-  Note: this might be more of an 'ODM-JSON' if 'Define-JSON' is intended to be simple.
 license: MIT
 prefixes:
   linkml: https://w3id.org/linkml/
@@ -258,6 +257,65 @@ classes:
           - range: string
           - range: TranslatedText
 
+  ODMFileMetadata:
+    description: >-
+      A mixin that provides ODM file-level metadata attributes including file identifiers, timestamps, and system information
+    mixin: true
+    attributes:
+      fileOID:
+        description: Unique identifier for the ODM file
+        range: string
+        required: true
+      asOfDateTime:
+        description: Date and time when the data snapshot was taken
+        range: datetime
+      creationDateTime:
+        description: Date and time when the ODM file was created
+        range: datetime
+        required: true
+      odmVersion:
+        description: Version of the ODM standard used
+        range: string
+        required: true
+      fileType:
+        description: Type of ODM file (e.g., Snapshot, Transactional)
+        range: string
+        required: true
+      originator:
+        description: Organization or system that created the ODM file
+        range: string
+      sourceSystem:
+        description: Source system that generated the data
+        range: string
+      sourceSystemVersion:
+        description: Version of the source system
+        range: string
+      context:
+        description: Define-XML context (usually "Other" for Define-XML)
+        range: string
+      defineVersion:
+        description: Version of Define-XML specification used
+        range: string
+
+  StudyMetadata:
+    description: >-
+      A mixin that provides study-level metadata attributes including study identification and protocol information
+    mixin: true
+    attributes:
+      studyOID:
+        description: Unique identifier for the study
+        range: string
+        required: true
+      studyName:
+        description: Name of the study
+        range: string
+      studyDescription:
+        description: Description of the study
+        range: string
+      protocolName:
+        description: Protocol name for the study
+        range: string
+
   MetaDataVersion:
     tree_root: true
     description: >-
@@ -265,18 +323,21 @@ classes:
     close_mappings:
       - usdm:StudyDesign
     is_a: GovernedElement
+    mixins:
+      - ODMFileMetadata
+      - StudyMetadata
     attributes:
-      items:
+      itemGroups:
         description: >-
-          Items defined in this version of the metadata
-        range: Item
+          Item groups, containing items, defined in this version of the metadata
+        range: ItemGroup
         multivalued: true
         inlined: true
         inlined_as_list: true
-      itemGroups:
+      items:
         description: >-
-          Item groups defined in this version of the metadata
-        range: ItemGroup
+          Template or top-level items (not belonging to any item group) defined in this version of the metadata
+        range: Item
         multivalued: true
         inlined: true
         inlined_as_list: true
@@ -323,12 +384,6 @@ classes:
         multivalued: true
         inlined: true
         inlined_as_list: true
-      mappings:
-        description: Coding mappings in this version of the metadata
-        range: CodingMapping
-        multivalued: true
-        inlined: true
-        inlined_as_list: true
       concepts:
         description: Structured Concepts defined in this version of the metadata
         range: ReifiedConcept
@@ -337,6 +392,26 @@ classes:
         description: >-
           Relationships between items, item groups, and other elements in this version of the metadata.
         range: Relationship
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      dictionaries:
+        description: Dictionaries defined in this version of the metadata
+        range: Dictionary
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      standards:
+        description: >-
+          Standards defined in this version of the metadata
+        range: Standard
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      annotatedCRF:
+        description: >-
+          Reference to annotated case report forms
+        range: DocumentReference
         multivalued: true
         inlined: true
         inlined_as_list: true
@@ -402,7 +477,6 @@ classes:
         description: Conditions for when this item definition applies
         range: WhereClause
         inlined: false
-        inlined_as_list: true
       origin:
         description: >-
           The origin of the data
@@ -469,9 +543,12 @@ classes:
         inlined_as_list: true
       children:
         description: >-
-          Child item groups within this item group.
-        range: ItemGroup
+          References to child ItemGroups (OIDs) within this item group.
+          Use these OID references to look up the actual ItemGroup objects 
+          from the top-level itemGroups collection.
+        range: string
         multivalued: true
+        inlined: false
       implementsConcept:
         description: >-
           Reference to a abstract concept topic that this item group is a specialization of
@@ -481,6 +558,7 @@ classes:
           If nested in a parent ItemGroup context,
           conditions for when this group applies
         range: WhereClause
+        inlined: false
         close_mappings:
           - fhir:StructureDefinition/context
 
@@ -570,13 +648,10 @@ classes:
         description: >-
           The individual values that make up this CodeList.
           The type of CodeListItem included determines its behaviour
-        any_of:
-          - range: Coding
-          - range: CodeListItem
-          - range: string
+        range: CodeListItem
+        multivalued: true
         inlined: true
         inlined_as_list: true
-        multivalued: true
       externalCodeList:
         description: >-
           Reference to a code list that is defined externally to this study
@@ -689,29 +764,28 @@ classes:
         description: >-
           The code system version
         range: string
+      aliasType:
+        description: >-
+          How this coding is related in the context of its parent element
+        range: AliasPredicate
 
-  CodingMapping:
+  Dictionary:
     description: >-
-      A mapping relationship that establishes connections between different coding systems
-    related_mappings:
-      - sdmx:ItemSchemeMap
+      A dictionary that defines a set of codes and their meanings
     is_a: IdentifiableElement
     attributes:
-      source:
-        description: Source coding
+      terms:
+        description: Terms in this dictionary - leave this empty in most cases to keep the file small
         range: Coding
-        required: true
-      target:
-        description: Target coding
-        range: Coding
-        required: true
-      relationship:
-        description: Type of mapping relationship
-        range: AliasPredicateEnum
-        required: true
-      confidence:
-        description: Confidence in the mapping (0.0-1.0)
-        range: float
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      publishedBy:
+        description: >-
+          Associates the Data Provider that reports/publishes the data.
+        any_of:
+          - range: Organization
+          - range: string
 
   ReifiedConcept:
     description: >-
@@ -793,7 +867,6 @@ classes:
         range: Condition
         multivalued: true
         inlined: false
-        inlined_as_list: true
 
   Condition:
     description: >-
@@ -1103,6 +1176,37 @@ classes:
           Reference to a parent organization if this organization is part of a larger entity.
         range: Organization
 
+  Standard:
+    description: >-
+      A collection element that groups related standards within a specific context, used for defining CDISC implementation guides and controlled terminologies
+    is_a: IdentifiableElement
+    attributes:
+      name:
+        description: >-
+          Name of a standard
+        range: StandardName
+      type:
+        description: >-
+          Type of a standard
+        range: StandardType
+      publishingSet:
+        description: >-
+          Publishing Set of a Controlled Terminology
+        range: PublishingSet
+      version:
+        description: >-
+          Version of an Implementation Guide or of a Controlled Terminology
+        range: string
+      status:
+        description: >-
+          Status of an Implementation Guide or of a Controlled Terminology
+        range: StandardStatus
+      comment:
+        description: >-
+          Comment on the standard
+        range: Comment
+        multivalued: true
+
   Resource:
     description: >-
       An external reference that serves as the source for a Dataset, ItemGroup, or Item
@@ -1139,6 +1243,9 @@ classes:
     attributes:
       title:
         description: Document title
+        range: string
+      leafID:
+        description: Leaf identifier for document reference in Define-XML
         range: string
       pages:
         description: Reference to specific pages in a PDF document
@@ -1767,7 +1874,7 @@ classes:
         range: Resource
 
 enums:
-  AliasPredicateEnum:
+  AliasPredicate:
     description: >-
       An enumeration that defines permissible values for the relationship between an element and its alias
     from_schema: linkml:AliasPredicateEnum
@@ -2105,3 +2212,61 @@ enums:
       Build:
       Deploy:
       Consume:
+
+  StandardName:
+    description: >-
+      An enumeration that defines permissible values for standard names
+    permissible_values:
+      ADaMIG:
+        description: Analysis Data Model Implementation Guide
+      BIMO:
+        description: Bioresearch Monitoring
+      CDISC/NCI:
+        description: CDISC/NCI Controlled Terminology
+      SDTMIG:
+        description: Study Data Tabulation Model Implementation Guide
+      SDTMIG-AP:
+        description: SDTMIG Associated Persons
+      SDTMIG-MD:
+        description: SDTMIG Medical Devices
+      SENDIG:
+        description: Standard for Exchange of Non-clinical Data Implementation Guide
+      SENDIG-AR:
+        description: SENDIG Adverse Reactions
+      SENDIG-DART:
+        description: SENDIG Developmental and Reproductive Toxicology
+      SENDIG-GENETOX:
+        description: SENDIG Genetic Toxicology
+
+  StandardType:
+    description: >-
+      An enumeration that defines permissible values for standard types
+    permissible_values:
+      CT:
+        description: Controlled Terminology
+      IG:
+        description: Implementation Guide
+
+  PublishingSet:
+    description: >-
+      An enumeration that defines permissible values for publishing sets
+    permissible_values:
+      ADaM:
+        description: Analysis Data Model
+      CDASH:
+        description: Clinical Data Acquisition Standards Harmonization
+      DEFINE-XML:
+        description: Define-XML Standard
+      SDTM:
+        description: Study Data Tabulation Model
+      SEND:
+        description: Standard for Exchange of Non-clinical Data
+
+  StandardStatus:
+    description: >-
+      An enumeration that defines permissible values for standard status
+    permissible_values:
+      DRAFT:
+        description: Draft version of the standard
+      FINAL:
+        description: Final version of the standard

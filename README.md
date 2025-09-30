@@ -9,6 +9,62 @@
 
 It is being designed in a Clinical Trial context to supplement the CDISC Unified Study Definitions ([USDM](https://github.com/cdisc-org/DDF-RA)) and [Dataset-JSON](https://github.com/cdisc-org/DataExchange-DatasetJson), providing a way to describe datasets and how they link causally to their context
 
+[Documentation Site](https://temeta.github.io/define-json)
+
+## 🔄 Quick Start: XML ↔ JSON Conversion
+
+For complete bidirectional conversion between Define-XML and Define-JSON, see:
+- **[CONVERSION_README.md](CONVERSION_README.md)** - Complete guide
+- **[QUICK_REFERENCE.md](QUICK_REFERENCE.md)** - Command cheat sheet
+
+### Basic Usage
+```bash
+# Recommended: Use Poetry (handles virtual environment automatically)
+poetry run python -m define_json xml2json data/define.xml data/output.json
+poetry run python -m define_json json2xml data/input.json data/output.xml
+
+# Alternative: Set PYTHONPATH manually
+PYTHONPATH=src python -m define_json xml2json data/define.xml data/output.json
+PYTHONPATH=src python -m define_json json2xml data/input.json data/output.xml
+
+# From any other directory
+PYTHONPATH=/path/to/define-json/src python -m define_json xml2json data/define.xml data/output.json
+```
+
+### Viewing XML Files with Stylesheets
+
+Generated XML files include an XSL stylesheet reference for proper rendering. Due to browser security policies, you may encounter CORS errors when opening XML files directly. Here are the solutions:
+
+#### Option 1: Use a Local Web Server (Recommended)
+```bash
+# Navigate to your XML file directory
+cd /path/to/your/xml/files
+python -m http.server 8000
+
+# Then open: http://localhost:8000/your-file.xml
+```
+
+#### Option 2: Generate HTML Directly (Recommended)
+```bash
+# Convert JSON directly to HTML (no CORS issues!)
+poetry run python -m define_json json2html input.json output.html
+
+# Convert existing XML to HTML
+poetry run python -m define_json xml2html input.xml output.html
+
+# Use custom XSL stylesheet
+poetry run python -m define_json json2html input.json output.html --xsl ./custom-style.xsl
+```
+
+#### Option 3: Configure Stylesheet Path
+```bash
+# Use relative path (works when XSL is in same directory)
+poetry run python -m define_json json2xml input.json output.xml --stylesheet "./define2-1.xsl"
+
+# Use absolute URL (if you have XSL hosted online)
+poetry run python -m define_json json2xml input.json output.xml --stylesheet "https://example.com/define2-1.xsl"
+```
+
 ## Context is everything
 
 > “Don't provide values without units”
@@ -17,10 +73,10 @@ It is being designed in a Clinical Trial context to supplement the CDISC Unified
 
 By being so strict about scope (every `Item` must belong to an `ItemGroup`, which can in turn can act as nested slices), granular reusable definitions can be created and applied to a wide variety of contexts.
 
-
 > “Don't quote someone without knowing what else they were saying and why
 
 The context that Define is implementing, i.e. _your_ context, is up to you - make sure to record the surrounding context on your end so that the definitions within can be used and reused accurately:
+
 * CDISC Dataset Specification (actual data)
 * CDISC Dataset Specialisation (template in the context of Biomedical Concept)
 * OpenStudyBuilder Activity
@@ -33,21 +89,19 @@ The context that Define is implementing, i.e. _your_ context, is up to you - mak
 * Define-JSON / Define-XML for regulatory submission
 * AI model feature spec
 
-
 > “Don't send data without its Define”
 
-<img src="images/throwing_vase_over_wall.png" alt="The status quo of silos, files and documents" width="350"/>
+<img src="https://github.com/TeMeta/define-json/blob/gh-pages/images/throwing_vase_over_wall.png?raw=true" alt="The status quo of silos, files and documents" width="350"/>
 
 Clinical trial data exchange needs fixing.  We need to be able to simultaneously speak in nuanced concepts and understand in specific self-explanatory structure. _The first step is agreeing on that structure_.
 
 Being able to iterate rapidly is important to the early stages of development of this standard. _Fix what's broken. Improve what works. Repeat._
 
-
 > “Don't define derivation/origin for a field without knowing what the Biomedical Concept is being implemented”
 
 Define-JSON details implementation, but also links to `Coding`, `ReifiedConcept` and `ConceptProperty` for structured semantic connections, i.e. enabling each data element to be mapped unambiguously to standard dictionaries/ontologies, abstract concepts, and their properties.
 
-Tof [something] combines its abstract / template form with a context, then fleshes out that combined context.
+The definition of [something] combines its abstract / template form with a context, then fleshes out that combined context.
 
 * FHIR Profile is a implementation of a FHIR Resource template in the context of some healthcare or research authority
 * A granular definition for some Biomedical Concept (BC) is an implementation of a property of that BC in context of the standard being implemented
@@ -92,7 +146,7 @@ A given set of data products can be described using define-json to provide enhan
 
 In the context of a Clinical Data Fabric/Mesh/Lake, MDR, or Operational Data Store: define-json can be used as a means of recording granular value-level lineage within dataset, allowing tooling to show dependencies and impact analysis.
 
-Define can even be used a psuedo 'MDR' with the way it tracks dependencies, provenance and impact analysis. 
+Define can even be used a psuedo 'MDR' with the way it tracks dependencies, provenance and impact analysis.
 
 - `SourceItem` structure has detailed information about where the value came from, whether it's a document or CRF form or source dataset with its own referencable `Item`.
 - `wasDerivedFrom` relationship is borrows from PROV-O (Provenance Ontology) exclusively to denote template reuse i.e. "I am reusing this definition from somewhere else and making it my own".

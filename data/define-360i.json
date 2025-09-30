@@ -1,0 +1,2179 @@
+{
+  "fileOID": "ODM.DEFINE21.360i.001",
+  "asOfDateTime": "2025-08-25T14:27:13.299792+00:00",
+  "creationDateTime": "2025-08-25T14:27:13.299812+00:00",
+  "odmVersion": "1.3.2",
+  "fileType": "Snapshot",
+  "originator": "360i Define-XML Team",
+  "sourceSystem": "odmlib",
+  "sourceSystemVersion": "0.2",
+  "context": "Other",
+  "defineVersion": "2.1.0",
+  "studyOID": "ODM.LZZT",
+  "studyName": "LZZT",
+  "studyDescription": "Safety and Efficacy of the Xanomeline Transdermal Therapeutic System (TTS) in Patients\n                with Mild to Moderate Alzheimer's Disease\n            ",
+  "protocolName": "LZZT",
+  "OID": "MDV.LZZT",
+  "name": "MDV LZZT",
+  "description": "Data Definitions for LZZT",
+  "itemGroups": [
+    {
+      "OID": "IG.DM",
+      "name": "DM",
+      "items": [
+        {
+          "OID": "IT.DM.STUDYID",
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Identifier"
+        },
+        {
+          "OID": "IT.DM.DOMAIN",
+          "name": "DOMAIN",
+          "description": "Domain Abbreviation",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Identifier"
+        },
+        {
+          "OID": "IT.DM.USUBJID",
+          "name": "USUBJID",
+          "description": "Unique Subject Identifier",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Identifier"
+        },
+        {
+          "OID": "IT.DM.SUBJID",
+          "name": "SUBJID",
+          "description": "Subject Identifier for the Study",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Topic"
+        },
+        {
+          "OID": "IT.DM.RFSTDTC",
+          "name": "RFSTDTC",
+          "description": "Subject Reference Start Date/Time",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.DM.RFENDTC",
+          "name": "RFENDTC",
+          "description": "Subject Reference End Date/Time",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.DM.RFXSTDTC",
+          "name": "RFXSTDTC",
+          "description": "Date/Time of First Study Treatment",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.DM.RFXENDTC",
+          "name": "RFXENDTC",
+          "description": "Date/Time of Last Study Treatment",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.DM.RFICDTC",
+          "name": "RFICDTC",
+          "description": "Date/Time of Informed Consent",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.DM.RFPENDTC",
+          "name": "RFPENDTC",
+          "description": "Date/Time of End of Participation",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.DM.DTHDTC",
+          "name": "DTHDTC",
+          "description": "Date/Time of Death",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.DM.DTHFL",
+          "name": "DTHFL",
+          "description": "Subject Death Flag",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.DM.SITEID",
+          "name": "SITEID",
+          "description": "Study Site Identifier",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.DM.AGE",
+          "name": "AGE",
+          "description": "Age",
+          "dataType": "float",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.DM.AGEU",
+          "name": "AGEU",
+          "description": "Age Units",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Variable Qualifier"
+        },
+        {
+          "OID": "IT.DM.SEX",
+          "name": "SEX",
+          "description": "Sex",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.DM.RACE",
+          "name": "RACE",
+          "description": "Race",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.DM.ARMCD",
+          "name": "ARMCD",
+          "description": "Planned Arm Code",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.DM.ARM",
+          "name": "ARM",
+          "description": "Description of Planned Arm",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Synonym Qualifier"
+        },
+        {
+          "OID": "IT.DM.ACTARMCD",
+          "name": "ACTARMCD",
+          "description": "Actual Arm Code",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.DM.ACTARM",
+          "name": "ACTARM",
+          "description": "Description of Actual Arm",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Synonym Qualifier"
+        },
+        {
+          "OID": "IT.DM.ARMNRS",
+          "name": "ARMNRS",
+          "description": "Reason Arm and/or Actual Arm is Null",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.DM.ACTARMUD",
+          "name": "ACTARMUD",
+          "description": "Description of Unplanned Actual Arm",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.DM.COUNTRY",
+          "name": "COUNTRY",
+          "description": "Country",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.DM.DMDTC",
+          "name": "DMDTC",
+          "description": "Date/Time of Collection",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Timing"
+        }
+      ],
+      "description": "Demographics",
+      "domain": "DM",
+      "structure": "One record per subject",
+      "sasDatasetName": "DM",
+      "archiveLocationID": "LF.DM"
+    },
+    {
+      "OID": "IG.VS",
+      "name": "VS",
+      "items": [
+        {
+          "OID": "IT.VS.STUDYID",
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Identifier"
+        },
+        {
+          "OID": "IT.VS.DOMAIN",
+          "name": "DOMAIN",
+          "description": "Domain Abbreviation",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Identifier"
+        },
+        {
+          "OID": "IT.VS.USUBJID",
+          "name": "USUBJID",
+          "description": "Unique Subject Identifier",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Identifier"
+        },
+        {
+          "OID": "IT.VS.VSSEQ",
+          "name": "VSSEQ",
+          "description": "Sequence Number",
+          "dataType": "float",
+          "mandatory": "No",
+          "role": "Identifier"
+        },
+        {
+          "OID": "IT.VS.VSTESTCD",
+          "name": "VSTESTCD",
+          "description": "Vital Signs Test Short Name",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Topic"
+        },
+        {
+          "OID": "IT.VS.VSTEST",
+          "name": "VSTEST",
+          "description": "Vital Signs Test Name",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Synonym Qualifier"
+        },
+        {
+          "OID": "IT.VS.VSPOS",
+          "name": "VSPOS",
+          "description": "Vital Signs Position of Subject",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.VS.VSORRES",
+          "name": "VSORRES",
+          "description": "Result or Finding in Original Units",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Result Qualifier"
+        },
+        {
+          "OID": "IT.VS.VSORRESU",
+          "name": "VSORRESU",
+          "description": "Original Units",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Variable Qualifier"
+        },
+        {
+          "OID": "IT.VS.VSSTRESC",
+          "name": "VSSTRESC",
+          "description": "Character Result/Finding in Std Format",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Result Qualifier"
+        },
+        {
+          "OID": "IT.VS.VSSTRESN",
+          "name": "VSSTRESN",
+          "description": "Numeric Result/Finding in Standard Units",
+          "dataType": "float",
+          "mandatory": "No",
+          "role": "Result Qualifier"
+        },
+        {
+          "OID": "IT.VS.VSSTRESU",
+          "name": "VSSTRESU",
+          "description": "Standard Units",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Variable Qualifier"
+        },
+        {
+          "OID": "IT.VS.VSLOC",
+          "name": "VSLOC",
+          "description": "Location of Vital Signs Measurement",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.VS.VSLAT",
+          "name": "VSLAT",
+          "description": "Laterality",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Result Qualifier"
+        },
+        {
+          "OID": "IT.VS.VSLOBXFL",
+          "name": "VSLOBXFL",
+          "description": "Last Observation Before Exposure Flag",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.VS.VISITNUM",
+          "name": "VISITNUM",
+          "description": "Visit Number",
+          "dataType": "float",
+          "mandatory": "No",
+          "role": "Timing"
+        },
+        {
+          "OID": "IT.VS.VSDTC",
+          "name": "VSDTC",
+          "description": "Date/Time of Measurements",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Timing"
+        }
+      ],
+      "description": "Vital Signs",
+      "domain": "VS",
+      "structure": "One record per vital sign measurement per time point per visit per subject",
+      "sasDatasetName": "VS",
+      "archiveLocationID": "LF.VS",
+      "children": [
+        "VL.VS.DIABP",
+        "VL.VS.HEIGHT",
+        "VL.VS.HR",
+        "VL.VS.SYSBP",
+        "VL.VS.TEMP",
+        "VL.VS.WEIGHT"
+      ]
+    },
+    {
+      "OID": "IG.LB",
+      "name": "LB",
+      "items": [
+        {
+          "OID": "IT.LB.STUDYID",
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Identifier"
+        },
+        {
+          "OID": "IT.LB.DOMAIN",
+          "name": "DOMAIN",
+          "description": "Domain Abbreviation",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Identifier"
+        },
+        {
+          "OID": "IT.LB.USUBJID",
+          "name": "USUBJID",
+          "description": "Unique Subject Identifier",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Identifier"
+        },
+        {
+          "OID": "IT.LB.LBSEQ",
+          "name": "LBSEQ",
+          "description": "Sequence Number",
+          "dataType": "float",
+          "mandatory": "No",
+          "role": "Identifier"
+        },
+        {
+          "OID": "IT.LB.LBTESTCD",
+          "name": "LBTESTCD",
+          "description": "Lab Test or Examination Short Name",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Topic"
+        },
+        {
+          "OID": "IT.LB.LBTEST",
+          "name": "LBTEST",
+          "description": "Lab Test or Examination Name",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Synonym Qualifier"
+        },
+        {
+          "OID": "IT.LB.LBCAT",
+          "name": "LBCAT",
+          "description": "Category for Lab Test",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Grouping Qualifier"
+        },
+        {
+          "OID": "IT.LB.LBORRES",
+          "name": "LBORRES",
+          "description": "Result or Finding in Original Units",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Result Qualifier"
+        },
+        {
+          "OID": "IT.LB.LBORRESU",
+          "name": "LBORRESU",
+          "description": "Original Units",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Variable Qualifier"
+        },
+        {
+          "OID": "IT.LB.LBORNRLO",
+          "name": "LBORNRLO",
+          "description": "Reference Range Lower Limit in Orig Unit",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Variable Qualifier"
+        },
+        {
+          "OID": "IT.LB.LBORNRHI",
+          "name": "LBORNRHI",
+          "description": "Reference Range Upper Limit in Orig Unit",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Variable Qualifier"
+        },
+        {
+          "OID": "IT.LB.LBSTRESC",
+          "name": "LBSTRESC",
+          "description": "Character Result/Finding in Std Format",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Result Qualifier"
+        },
+        {
+          "OID": "IT.LB.LBSTRESN",
+          "name": "LBSTRESN",
+          "description": "Numeric Result/Finding in Standard Units",
+          "dataType": "float",
+          "mandatory": "No",
+          "role": "Result Qualifier"
+        },
+        {
+          "OID": "IT.LB.LBSTRESU",
+          "name": "LBSTRESU",
+          "description": "Standard Units",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Variable Qualifier"
+        },
+        {
+          "OID": "IT.LB.LBSTNRLO",
+          "name": "LBSTNRLO",
+          "description": "Reference Range Lower Limit-Std Units",
+          "dataType": "float",
+          "mandatory": "No",
+          "role": "Variable Qualifier"
+        },
+        {
+          "OID": "IT.LB.LBSTNRHI",
+          "name": "LBSTNRHI",
+          "description": "Reference Range Upper Limit-Std Units",
+          "dataType": "float",
+          "mandatory": "No",
+          "role": "Variable Qualifier"
+        },
+        {
+          "OID": "IT.LB.LBNRIND",
+          "name": "LBNRIND",
+          "description": "Reference Range Indicator",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Variable Qualifier"
+        },
+        {
+          "OID": "IT.LB.LBSPEC",
+          "name": "LBSPEC",
+          "description": "Specimen Type",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.LB.LBLOBXFL",
+          "name": "LBLOBXFL",
+          "description": "Last Observation Before Exposure Flag",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.LB.LBFAST",
+          "name": "LBFAST",
+          "description": "Fasting Status",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.LB.VISITNUM",
+          "name": "VISITNUM",
+          "description": "Visit Number",
+          "dataType": "float",
+          "mandatory": "No",
+          "role": "Timing"
+        },
+        {
+          "OID": "IT.LB.LBDTC",
+          "name": "LBDTC",
+          "description": "Date/Time of Specimen Collection",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Timing"
+        }
+      ],
+      "description": "Laboratory Test Results",
+      "domain": "LB",
+      "structure": "One record per lab test per time point per visit per subject",
+      "sasDatasetName": "LB",
+      "archiveLocationID": "LF.LB",
+      "children": [
+        "VL.LB.ALB",
+        "VL.LB.ALP",
+        "VL.LB.ALT",
+        "VL.LB.AST",
+        "VL.LB.CREAT",
+        "VL.LB.HBA1C",
+        "VL.LB.K",
+        "VL.LB.SODIUM"
+      ]
+    },
+    {
+      "OID": "IG.AE",
+      "name": "AE",
+      "items": [
+        {
+          "OID": "IT.AE.STUDYID",
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Identifier"
+        },
+        {
+          "OID": "IT.AE.DOMAIN",
+          "name": "DOMAIN",
+          "description": "Domain Abbreviation",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Identifier"
+        },
+        {
+          "OID": "IT.AE.USUBJID",
+          "name": "USUBJID",
+          "description": "Unique Subject Identifier",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Identifier"
+        },
+        {
+          "OID": "IT.AE.AESEQ",
+          "name": "AESEQ",
+          "description": "Sequence Number",
+          "dataType": "float",
+          "mandatory": "No",
+          "role": "Identifier"
+        },
+        {
+          "OID": "IT.AE.AETERM",
+          "name": "AETERM",
+          "description": "Reported Term for the Adverse Event",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Topic"
+        },
+        {
+          "OID": "IT.AE.AELLT",
+          "name": "AELLT",
+          "description": "Lowest Level Term",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Variable Qualifier"
+        },
+        {
+          "OID": "IT.AE.AELLTCD",
+          "name": "AELLTCD",
+          "description": "Lowest Level Term Code",
+          "dataType": "float",
+          "mandatory": "No",
+          "role": "Variable Qualifier"
+        },
+        {
+          "OID": "IT.AE.AEDECOD",
+          "name": "AEDECOD",
+          "description": "Dictionary-Derived Term",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Synonym Qualifier"
+        },
+        {
+          "OID": "IT.AE.AEPTCD",
+          "name": "AEPTCD",
+          "description": "Preferred Term Code",
+          "dataType": "float",
+          "mandatory": "No",
+          "role": "Variable Qualifier"
+        },
+        {
+          "OID": "IT.AE.AEHLT",
+          "name": "AEHLT",
+          "description": "High Level Term",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Variable Qualifier"
+        },
+        {
+          "OID": "IT.AE.AEHLTCD",
+          "name": "AEHLTCD",
+          "description": "High Level Term Code",
+          "dataType": "float",
+          "mandatory": "No",
+          "role": "Variable Qualifier"
+        },
+        {
+          "OID": "IT.AE.AEHLGT",
+          "name": "AEHLGT",
+          "description": "High Level Group Term",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Variable Qualifier"
+        },
+        {
+          "OID": "IT.AE.AEHLGTCD",
+          "name": "AEHLGTCD",
+          "description": "High Level Group Term Code",
+          "dataType": "float",
+          "mandatory": "No",
+          "role": "Variable Qualifier"
+        },
+        {
+          "OID": "IT.AE.AECAT",
+          "name": "AECAT",
+          "description": "Category for Adverse Event",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Grouping Qualifier"
+        },
+        {
+          "OID": "IT.AE.AESCAT",
+          "name": "AESCAT",
+          "description": "Subcategory for Adverse Event",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Grouping Qualifier"
+        },
+        {
+          "OID": "IT.AE.AEPRESP",
+          "name": "AEPRESP",
+          "description": "Pre-Specified Adverse Event",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Variable Qualifier"
+        },
+        {
+          "OID": "IT.AE.AEBODSYS",
+          "name": "AEBODSYS",
+          "description": "Body System or Organ Class",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.AE.AEBDSYCD",
+          "name": "AEBDSYCD",
+          "description": "Body System or Organ Class Code",
+          "dataType": "float",
+          "mandatory": "No",
+          "role": "Variable Qualifier"
+        },
+        {
+          "OID": "IT.AE.AESOC",
+          "name": "AESOC",
+          "description": "Primary System Organ Class",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Variable Qualifier"
+        },
+        {
+          "OID": "IT.AE.AESOCCD",
+          "name": "AESOCCD",
+          "description": "Primary System Organ Class Code",
+          "dataType": "float",
+          "mandatory": "No",
+          "role": "Variable Qualifier"
+        },
+        {
+          "OID": "IT.AE.AELOC",
+          "name": "AELOC",
+          "description": "Location of Event",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.AE.AESEV",
+          "name": "AESEV",
+          "description": "Severity/Intensity",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.AE.AESER",
+          "name": "AESER",
+          "description": "Serious Event",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.AE.AEACN",
+          "name": "AEACN",
+          "description": "Action Taken with Study Treatment",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.AE.AEACNOTH",
+          "name": "AEACNOTH",
+          "description": "Other Action Taken",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.AE.AEREL",
+          "name": "AEREL",
+          "description": "Causality",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.AE.AERELNST",
+          "name": "AERELNST",
+          "description": "Relationship to Non-Study Treatment",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.AE.AEPATT",
+          "name": "AEPATT",
+          "description": "Pattern of Adverse Event",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.AE.AEOUT",
+          "name": "AEOUT",
+          "description": "Outcome of Adverse Event",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.AE.AESCAN",
+          "name": "AESCAN",
+          "description": "Involves Cancer",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.AE.AESCONG",
+          "name": "AESCONG",
+          "description": "Congenital Anomaly or Birth Defect",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.AE.AESDISAB",
+          "name": "AESDISAB",
+          "description": "Persist or Signif Disability/Incapacity",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.AE.AESDTH",
+          "name": "AESDTH",
+          "description": "Results in Death",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.AE.AESHOSP",
+          "name": "AESHOSP",
+          "description": "Requires or Prolongs Hospitalization",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.AE.AESLIFE",
+          "name": "AESLIFE",
+          "description": "Is Life Threatening",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.AE.AESOD",
+          "name": "AESOD",
+          "description": "Occurred with Overdose",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.AE.AESMIE",
+          "name": "AESMIE",
+          "description": "Other Medically Important Serious Event",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.AE.AECONTRT",
+          "name": "AECONTRT",
+          "description": "Concomitant or Additional Trtmnt Given",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.AE.AETOXGR",
+          "name": "AETOXGR",
+          "description": "Standard Toxicity Grade",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Record Qualifier"
+        },
+        {
+          "OID": "IT.AE.AESTDTC",
+          "name": "AESTDTC",
+          "description": "Start Date/Time of Adverse Event",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Timing"
+        },
+        {
+          "OID": "IT.AE.AEENDTC",
+          "name": "AEENDTC",
+          "description": "End Date/Time of Adverse Event",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Timing"
+        },
+        {
+          "OID": "IT.AE.AEENRF",
+          "name": "AEENRF",
+          "description": "End Relative to Reference Period",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Timing"
+        },
+        {
+          "OID": "IT.AE.AEENRTPT",
+          "name": "AEENRTPT",
+          "description": "End Relative to Reference Time Point",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Timing"
+        },
+        {
+          "OID": "IT.AE.AEENTPT",
+          "name": "AEENTPT",
+          "description": "End Reference Time Point",
+          "dataType": "text",
+          "mandatory": "No",
+          "role": "Timing"
+        }
+      ],
+      "description": "Adverse Events",
+      "domain": "AE",
+      "structure": "One record per adverse event per subject",
+      "sasDatasetName": "AE",
+      "archiveLocationID": "LF.AE"
+    },
+    {
+      "OID": "VL.LB.ALB",
+      "name": "VL.LB.ALB",
+      "description": "Dataset specialization for LB ALB parameter containing both result values and units",
+      "type": "DataSpecialization",
+      "domain": "LB",
+      "items": [
+        {
+          "OID": "IT.LB.LBORRES.ALB",
+          "name": "LBORRES",
+          "dataType": "text",
+          "significantDigits": 4,
+          "origin": {
+            "type": "Collected",
+            "source": "Vendor"
+          },
+          "mandatory": "No",
+          "whereClause": "WC.LB.ALB",
+          "variable": "LBORRES"
+        }
+      ],
+      "whereClause": "WC.LB.ALB"
+    },
+    {
+      "OID": "VL.LB.ALP",
+      "name": "VL.LB.ALP",
+      "description": "Dataset specialization for LB ALP parameter containing both result values and units",
+      "type": "DataSpecialization",
+      "domain": "LB",
+      "items": [
+        {
+          "OID": "IT.LB.LBORRES.ALP",
+          "name": "LBORRES",
+          "dataType": "float",
+          "significantDigits": 4,
+          "origin": {
+            "type": "Collected",
+            "source": "Vendor"
+          },
+          "mandatory": "No",
+          "whereClause": "WC.LB.ALP",
+          "variable": "LBORRES"
+        },
+        {
+          "OID": "IT.LB.LBORRESU.ALP",
+          "name": "LBORRESU",
+          "dataType": "text",
+          "mandatory": "No",
+          "whereClause": "WC.LB.ALP",
+          "variable": "LBORRESU"
+        }
+      ],
+      "whereClause": "WC.LB.ALP"
+    },
+    {
+      "OID": "VL.LB.ALT",
+      "name": "VL.LB.ALT",
+      "description": "Dataset specialization for LB ALT parameter containing both result values and units",
+      "type": "DataSpecialization",
+      "domain": "LB",
+      "items": [
+        {
+          "OID": "IT.LB.LBORRES.ALT",
+          "name": "LBORRES",
+          "dataType": "float",
+          "significantDigits": 4,
+          "origin": {
+            "type": "Collected",
+            "source": "Vendor"
+          },
+          "mandatory": "No",
+          "whereClause": "WC.LB.ALT",
+          "variable": "LBORRES"
+        },
+        {
+          "OID": "IT.LB.LBORRESU.ALT",
+          "name": "LBORRESU",
+          "dataType": "text",
+          "mandatory": "No",
+          "whereClause": "WC.LB.ALT",
+          "variable": "LBORRESU"
+        }
+      ],
+      "whereClause": "WC.LB.ALT"
+    },
+    {
+      "OID": "VL.LB.AST",
+      "name": "VL.LB.AST",
+      "description": "Dataset specialization for LB AST parameter containing both result values and units",
+      "type": "DataSpecialization",
+      "domain": "LB",
+      "items": [
+        {
+          "OID": "IT.LB.LBORRES.AST",
+          "name": "LBORRES",
+          "dataType": "float",
+          "significantDigits": 4,
+          "origin": {
+            "type": "Collected",
+            "source": "Vendor"
+          },
+          "mandatory": "No",
+          "whereClause": "WC.LB.AST",
+          "variable": "LBORRES"
+        },
+        {
+          "OID": "IT.LB.LBORRESU.AST",
+          "name": "LBORRESU",
+          "dataType": "text",
+          "mandatory": "No",
+          "whereClause": "WC.LB.AST",
+          "variable": "LBORRESU"
+        }
+      ],
+      "whereClause": "WC.LB.AST"
+    },
+    {
+      "OID": "VL.LB.CREAT",
+      "name": "VL.LB.CREAT",
+      "description": "Dataset specialization for LB CREAT parameter containing both result values and units",
+      "type": "DataSpecialization",
+      "domain": "LB",
+      "items": [
+        {
+          "OID": "IT.LB.LBORRES.CREAT",
+          "name": "LBORRES",
+          "dataType": "float",
+          "significantDigits": 4,
+          "origin": {
+            "type": "Collected",
+            "source": "Vendor"
+          },
+          "mandatory": "No",
+          "whereClause": "WC.LB.CREAT",
+          "variable": "LBORRES"
+        },
+        {
+          "OID": "IT.LB.LBORRESU.CREAT",
+          "name": "LBORRESU",
+          "dataType": "text",
+          "mandatory": "No",
+          "whereClause": "WC.LB.CREAT",
+          "variable": "LBORRESU"
+        }
+      ],
+      "whereClause": "WC.LB.CREAT"
+    },
+    {
+      "OID": "VL.LB.HBA1C",
+      "name": "VL.LB.HBA1C",
+      "description": "Dataset specialization for LB HBA1C parameter containing both result values and units",
+      "type": "DataSpecialization",
+      "domain": "LB",
+      "items": [
+        {
+          "OID": "IT.LB.LBORRES.HBA1C",
+          "name": "LBORRES",
+          "dataType": "float",
+          "significantDigits": 4,
+          "origin": {
+            "type": "Collected",
+            "source": "Vendor"
+          },
+          "mandatory": "No",
+          "whereClause": "WC.LB.HBA1C",
+          "variable": "LBORRES"
+        },
+        {
+          "OID": "IT.LB.LBORRESU.HBA1C",
+          "name": "LBORRESU",
+          "dataType": "text",
+          "mandatory": "No",
+          "whereClause": "WC.LB.HBA1C",
+          "variable": "LBORRESU"
+        }
+      ],
+      "whereClause": "WC.LB.HBA1C"
+    },
+    {
+      "OID": "VL.LB.K",
+      "name": "VL.LB.K",
+      "description": "Dataset specialization for LB K parameter containing both result values and units",
+      "type": "DataSpecialization",
+      "domain": "LB",
+      "items": [
+        {
+          "OID": "IT.LB.LBORRES.K",
+          "name": "LBORRES",
+          "dataType": "float",
+          "significantDigits": 4,
+          "origin": {
+            "type": "Collected",
+            "source": "Vendor"
+          },
+          "mandatory": "No",
+          "whereClause": "WC.LB.K",
+          "variable": "LBORRES"
+        },
+        {
+          "OID": "IT.LB.LBORRESU.K",
+          "name": "LBORRESU",
+          "dataType": "text",
+          "mandatory": "No",
+          "whereClause": "WC.LB.K",
+          "variable": "LBORRESU"
+        }
+      ],
+      "whereClause": "WC.LB.K"
+    },
+    {
+      "OID": "VL.LB.SODIUM",
+      "name": "VL.LB.SODIUM",
+      "description": "Dataset specialization for LB SODIUM parameter containing both result values and units",
+      "type": "DataSpecialization",
+      "domain": "LB",
+      "items": [
+        {
+          "OID": "IT.LB.LBORRES.SODIUM",
+          "name": "LBORRES",
+          "dataType": "float",
+          "significantDigits": 4,
+          "origin": {
+            "type": "Collected",
+            "source": "Vendor"
+          },
+          "mandatory": "No",
+          "whereClause": "WC.LB.SODIUM",
+          "variable": "LBORRES"
+        },
+        {
+          "OID": "IT.LB.LBORRESU.SODIUM",
+          "name": "LBORRESU",
+          "dataType": "text",
+          "mandatory": "No",
+          "whereClause": "WC.LB.SODIUM",
+          "variable": "LBORRESU"
+        }
+      ],
+      "whereClause": "WC.LB.SODIUM"
+    },
+    {
+      "OID": "VL.VS.DIABP",
+      "name": "VL.VS.DIABP",
+      "description": "Dataset specialization for VS DIABP parameter containing both result values and units",
+      "type": "DataSpecialization",
+      "domain": "VS",
+      "items": [
+        {
+          "OID": "IT.VS.VSORRES.DIABP",
+          "name": "VSORRES",
+          "dataType": "integer",
+          "origin": {
+            "type": "Collected",
+            "source": "Investigator"
+          },
+          "mandatory": "No",
+          "whereClause": "WC.VS.DIABP",
+          "variable": "VSORRES"
+        },
+        {
+          "OID": "IT.VS.VSORRESU.DIABP",
+          "name": "VSORRESU",
+          "dataType": "text",
+          "mandatory": "No",
+          "whereClause": "WC.VS.DIABP",
+          "variable": "VSORRESU"
+        }
+      ],
+      "whereClause": "WC.VS.DIABP"
+    },
+    {
+      "OID": "VL.VS.HEIGHT",
+      "name": "VL.VS.HEIGHT",
+      "description": "Dataset specialization for VS HEIGHT parameter containing both result values and units",
+      "type": "DataSpecialization",
+      "domain": "VS",
+      "items": [
+        {
+          "OID": "IT.VS.VSORRES.HEIGHT",
+          "name": "VSORRES",
+          "dataType": "float",
+          "significantDigits": 3,
+          "origin": {
+            "type": "Collected",
+            "source": "Investigator"
+          },
+          "mandatory": "No",
+          "whereClause": "WC.VS.HEIGHT",
+          "variable": "VSORRES"
+        },
+        {
+          "OID": "IT.VS.VSORRESU.HEIGHT",
+          "name": "VSORRESU",
+          "dataType": "text",
+          "mandatory": "No",
+          "whereClause": "WC.VS.HEIGHT",
+          "variable": "VSORRESU"
+        }
+      ],
+      "whereClause": "WC.VS.HEIGHT"
+    },
+    {
+      "OID": "VL.VS.HR",
+      "name": "VL.VS.HR",
+      "description": "Dataset specialization for VS HR parameter containing both result values and units",
+      "type": "DataSpecialization",
+      "domain": "VS",
+      "items": [
+        {
+          "OID": "IT.VS.VSORRES.HR",
+          "name": "VSORRES",
+          "dataType": "integer",
+          "origin": {
+            "type": "Collected",
+            "source": "Investigator"
+          },
+          "mandatory": "No",
+          "whereClause": "WC.VS.HR",
+          "variable": "VSORRES"
+        },
+        {
+          "OID": "IT.VS.VSORRESU.HR",
+          "name": "VSORRESU",
+          "dataType": "text",
+          "mandatory": "No",
+          "whereClause": "WC.VS.HR",
+          "variable": "VSORRESU"
+        }
+      ],
+      "whereClause": "WC.VS.HR"
+    },
+    {
+      "OID": "VL.VS.SYSBP",
+      "name": "VL.VS.SYSBP",
+      "description": "Dataset specialization for VS SYSBP parameter containing both result values and units",
+      "type": "DataSpecialization",
+      "domain": "VS",
+      "items": [
+        {
+          "OID": "IT.VS.VSORRES.SYSBP",
+          "name": "VSORRES",
+          "dataType": "integer",
+          "origin": {
+            "type": "Collected",
+            "source": "Investigator"
+          },
+          "mandatory": "No",
+          "whereClause": "WC.VS.SYSBP",
+          "variable": "VSORRES"
+        },
+        {
+          "OID": "IT.VS.VSORRESU.SYSBP",
+          "name": "VSORRESU",
+          "dataType": "text",
+          "mandatory": "No",
+          "whereClause": "WC.VS.SYSBP",
+          "variable": "VSORRESU"
+        }
+      ],
+      "whereClause": "WC.VS.SYSBP"
+    },
+    {
+      "OID": "VL.VS.TEMP",
+      "name": "VL.VS.TEMP",
+      "description": "Dataset specialization for VS TEMP parameter containing both result values and units",
+      "type": "DataSpecialization",
+      "domain": "VS",
+      "items": [
+        {
+          "OID": "IT.VS.VSORRES.TEMP",
+          "name": "VSORRES",
+          "dataType": "float",
+          "significantDigits": 3,
+          "origin": {
+            "type": "Collected",
+            "source": "Investigator"
+          },
+          "mandatory": "No",
+          "whereClause": "WC.VS.TEMP",
+          "variable": "VSORRES"
+        },
+        {
+          "OID": "IT.VS.VSORRESU.TEMP",
+          "name": "VSORRESU",
+          "dataType": "text",
+          "mandatory": "No",
+          "whereClause": "WC.VS.TEMP",
+          "variable": "VSORRESU"
+        }
+      ],
+      "whereClause": "WC.VS.TEMP"
+    },
+    {
+      "OID": "VL.VS.WEIGHT",
+      "name": "VL.VS.WEIGHT",
+      "description": "Dataset specialization for VS WEIGHT parameter containing both result values and units",
+      "type": "DataSpecialization",
+      "domain": "VS",
+      "items": [
+        {
+          "OID": "IT.VS.VSORRES.WEIGHT",
+          "name": "VSORRES",
+          "dataType": "float",
+          "significantDigits": 3,
+          "origin": {
+            "type": "Collected",
+            "source": "Investigator"
+          },
+          "mandatory": "No",
+          "whereClause": "WC.VS.WEIGHT",
+          "variable": "VSORRES"
+        },
+        {
+          "OID": "IT.VS.VSORRESU.WEIGHT",
+          "name": "VSORRESU",
+          "dataType": "text",
+          "mandatory": "No",
+          "whereClause": "WC.VS.WEIGHT",
+          "variable": "VSORRESU"
+        }
+      ],
+      "whereClause": "WC.VS.WEIGHT"
+    }
+  ],
+  "items": [],
+  "codeLists": [
+    {
+      "oid": "CL.NY",
+      "name": "No Yes Response",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "N",
+          "decode": "No"
+        },
+        {
+          "codedValue": "NA",
+          "decode": "NA"
+        },
+        {
+          "codedValue": "U",
+          "decode": "U"
+        },
+        {
+          "codedValue": "Y",
+          "decode": "Yes"
+        }
+      ]
+    },
+    {
+      "oid": "CL.AGEU",
+      "name": "Age Unit",
+      "dataType": "text",
+      "items": []
+    },
+    {
+      "oid": "CL.SEX",
+      "name": "Sex",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "F",
+          "decode": "Female"
+        },
+        {
+          "codedValue": "M",
+          "decode": "Male"
+        }
+      ]
+    },
+    {
+      "oid": "CL.RACE",
+      "name": "Race",
+      "dataType": "text",
+      "items": []
+    },
+    {
+      "oid": "CL.ARMNULRS",
+      "name": "Arm Null Reason",
+      "dataType": "text",
+      "items": []
+    },
+    {
+      "oid": "CL.VSTESTCD",
+      "name": "Vital Signs Test Code",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "DIABP",
+          "decode": "Diastolic Blood Pressure"
+        },
+        {
+          "codedValue": "HEIGHT",
+          "decode": "Height"
+        },
+        {
+          "codedValue": "HR",
+          "decode": "Heart Rate"
+        },
+        {
+          "codedValue": "SYSBP",
+          "decode": "Systolic Blood Pressure"
+        },
+        {
+          "codedValue": "TEMP",
+          "decode": "Body Temperature"
+        },
+        {
+          "codedValue": "WEIGHT",
+          "decode": "Weight"
+        }
+      ]
+    },
+    {
+      "oid": "CL.VSTEST",
+      "name": "Vital Signs Test Name",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "Diastolic Blood Pressure",
+          "decode": "Diastolic Blood Pressure"
+        },
+        {
+          "codedValue": "Heart Rate",
+          "decode": "Heart Rate"
+        },
+        {
+          "codedValue": "Height",
+          "decode": "Height"
+        },
+        {
+          "codedValue": "Systolic Blood Pressure",
+          "decode": "Systolic Blood Pressure"
+        },
+        {
+          "codedValue": "Temperature",
+          "decode": "Body Temperature"
+        },
+        {
+          "codedValue": "Weight",
+          "decode": "Weight"
+        }
+      ]
+    },
+    {
+      "oid": "CL.POSITION",
+      "name": "Position",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "PRONE",
+          "decode": "Prone"
+        },
+        {
+          "codedValue": "SEMI-RECUMBENT",
+          "decode": "Semi-Supine"
+        },
+        {
+          "codedValue": "SITTING",
+          "decode": "Sitting"
+        },
+        {
+          "codedValue": "STANDING",
+          "decode": "Orthostatic"
+        },
+        {
+          "codedValue": "SUPINE",
+          "decode": "Supine"
+        }
+      ]
+    },
+    {
+      "oid": "CL.VSRESU",
+      "name": "Units for Vital Signs Results",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "C",
+          "decode": "Degree Celsius"
+        },
+        {
+          "codedValue": "cm",
+          "decode": "Centimeter"
+        },
+        {
+          "codedValue": "F",
+          "decode": "Degree Fahrenheit"
+        },
+        {
+          "codedValue": "g",
+          "decode": "Gram"
+        },
+        {
+          "codedValue": "in",
+          "decode": "Inch"
+        },
+        {
+          "codedValue": "K",
+          "decode": "Kelvin"
+        },
+        {
+          "codedValue": "kg",
+          "decode": "Kilogram"
+        },
+        {
+          "codedValue": "LB",
+          "decode": "lb"
+        },
+        {
+          "codedValue": "m",
+          "decode": "Meter"
+        }
+      ]
+    },
+    {
+      "oid": "CL.LOC",
+      "name": "Anatomical Location",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "AXILLA",
+          "decode": "Armpit"
+        },
+        {
+          "codedValue": "BRACHIAL ARTERY",
+          "decode": "BRACHIAL ARTERY"
+        },
+        {
+          "codedValue": "CAROTID ARTERY",
+          "decode": "Common Carotid Artery"
+        },
+        {
+          "codedValue": "CEREBRAL ARTERY",
+          "decode": "CEREBRAL ARTERY"
+        },
+        {
+          "codedValue": "DORSALIS PEDIS ARTERY",
+          "decode": "Dorsal Pedal Artery"
+        },
+        {
+          "codedValue": "EAR",
+          "decode": "EAR"
+        },
+        {
+          "codedValue": "FEMORAL ARTERY",
+          "decode": "FEMORAL ARTERY"
+        },
+        {
+          "codedValue": "FINGER",
+          "decode": "Finger"
+        },
+        {
+          "codedValue": "FOREHEAD",
+          "decode": "Forehead"
+        },
+        {
+          "codedValue": "ORAL CAVITY",
+          "decode": "Buccal cavity"
+        },
+        {
+          "codedValue": "RADIAL ARTERY",
+          "decode": "Radial Artery"
+        },
+        {
+          "codedValue": "RECTUM",
+          "decode": "RECTUM"
+        }
+      ]
+    },
+    {
+      "oid": "CL.LAT",
+      "name": "Laterality",
+      "dataType": "text",
+      "items": []
+    },
+    {
+      "oid": "CL.LBTESTCD",
+      "name": "Laboratory Test Code",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "ALB",
+          "decode": "Albumin"
+        },
+        {
+          "codedValue": "ALP",
+          "decode": "Alkaline Phosphatase"
+        },
+        {
+          "codedValue": "ALT",
+          "decode": "Alanine Aminotransferase"
+        },
+        {
+          "codedValue": "AST",
+          "decode": "Aspartate Aminotransferase"
+        },
+        {
+          "codedValue": "CREAT",
+          "decode": "Creatinine"
+        },
+        {
+          "codedValue": "HBA1C",
+          "decode": "HbA1c"
+        },
+        {
+          "codedValue": "K",
+          "decode": "Potassium"
+        },
+        {
+          "codedValue": "SODIUM",
+          "decode": "Sodium"
+        }
+      ]
+    },
+    {
+      "oid": "CL.LBTEST",
+      "name": "Laboratory Test Name",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "Alanine Aminotransferase",
+          "decode": "Alanine Aminotransferase"
+        },
+        {
+          "codedValue": "Albumin",
+          "decode": "Albumin"
+        },
+        {
+          "codedValue": "Alkaline Phosphatase",
+          "decode": "Alkaline Phosphatase"
+        },
+        {
+          "codedValue": "Aspartate Aminotransferase",
+          "decode": "Aspartate Aminotransferase"
+        },
+        {
+          "codedValue": "Creatinine",
+          "decode": "Creatinine"
+        },
+        {
+          "codedValue": "Hemoglobin A1C",
+          "decode": "HbA1c"
+        },
+        {
+          "codedValue": "Potassium",
+          "decode": "Potassium"
+        },
+        {
+          "codedValue": "Sodium",
+          "decode": "Sodium"
+        }
+      ]
+    },
+    {
+      "oid": "CL.UNIT",
+      "name": "Unit",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "IU/L",
+          "decode": "IE/L"
+        },
+        {
+          "codedValue": "mEq/dL",
+          "decode": "Milliequivalent per Deciliter"
+        },
+        {
+          "codedValue": "mEq/L",
+          "decode": "Milliequivalent Per Liter"
+        },
+        {
+          "codedValue": "mg/dL",
+          "decode": "mg%"
+        },
+        {
+          "codedValue": "mg/L",
+          "decode": "g/m3"
+        },
+        {
+          "codedValue": "mmol/L",
+          "decode": "mcmol/mL"
+        },
+        {
+          "codedValue": "nkat/L",
+          "decode": "Nanokatal per Liter"
+        },
+        {
+          "codedValue": "U/L",
+          "decode": "mU/mL"
+        },
+        {
+          "codedValue": "ukat/L",
+          "decode": "mckat/L"
+        },
+        {
+          "codedValue": "umol/L",
+          "decode": "nmol/mL"
+        }
+      ]
+    },
+    {
+      "oid": "CL.LBSTRESC",
+      "name": "Laboratory Test Standard Character Result",
+      "dataType": "text",
+      "items": []
+    },
+    {
+      "oid": "CL.NRIND",
+      "name": "Reference Range Indicator",
+      "dataType": "text",
+      "items": []
+    },
+    {
+      "oid": "CL.SPECTYPE",
+      "name": "Specimen Type",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "BLOOD",
+          "decode": "Peripheral Blood"
+        },
+        {
+          "codedValue": "SERUM OR PLASMA",
+          "decode": "Ser/Plas"
+        },
+        {
+          "codedValue": "URINE",
+          "decode": "URINE"
+        }
+      ]
+    },
+    {
+      "oid": "CL.AESEV",
+      "name": "Severity/Intensity Scale for Adverse Events",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "MILD",
+          "decode": "1"
+        },
+        {
+          "codedValue": "MODERATE",
+          "decode": "2"
+        },
+        {
+          "codedValue": "SEVERE",
+          "decode": "3"
+        }
+      ]
+    },
+    {
+      "oid": "CL.ACN",
+      "name": "Action Taken with Study Treatment",
+      "dataType": "text",
+      "items": []
+    },
+    {
+      "oid": "CL.OUT",
+      "name": "Outcome of Event",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "FATAL",
+          "decode": "5"
+        },
+        {
+          "codedValue": "NOT RECOVERED/NOT RESOLVED",
+          "decode": "NOT RECOVERED/NOT RESOLVED"
+        },
+        {
+          "codedValue": "RECOVERED/RESOLVED WITH SEQUELAE",
+          "decode": "RECOVERED/RESOLVED WITH SEQUELAE"
+        },
+        {
+          "codedValue": "RECOVERED/RESOLVED",
+          "decode": "RECOVERED/RESOLVED"
+        },
+        {
+          "codedValue": "RECOVERING/RESOLVING",
+          "decode": "RECOVERING/RESOLVING"
+        },
+        {
+          "codedValue": "UNKNOWN",
+          "decode": "U"
+        }
+      ]
+    },
+    {
+      "oid": "CL.STENRF",
+      "name": "Relation to Reference Period",
+      "dataType": "text",
+      "items": []
+    }
+  ],
+  "conditions": [
+    {
+      "OID": "COND.VS.TEMP",
+      "name": "TEMP_condition",
+      "description": "Condition for VS TEMP parameter",
+      "rangeChecks": [
+        {
+          "item": "IT.VS.VSTESTCD",
+          "comparator": "EQ",
+          "checkValues": [
+            "TEMP"
+          ]
+        }
+      ]
+    },
+    {
+      "OID": "COND.VS.WEIGHT",
+      "name": "WEIGHT_condition",
+      "description": "Condition for VS WEIGHT parameter",
+      "rangeChecks": [
+        {
+          "item": "IT.VS.VSTESTCD",
+          "comparator": "EQ",
+          "checkValues": [
+            "WEIGHT"
+          ]
+        }
+      ]
+    },
+    {
+      "OID": "COND.VS.HEIGHT",
+      "name": "HEIGHT_condition",
+      "description": "Condition for VS HEIGHT parameter",
+      "rangeChecks": [
+        {
+          "item": "IT.VS.VSTESTCD",
+          "comparator": "EQ",
+          "checkValues": [
+            "HEIGHT"
+          ]
+        }
+      ]
+    },
+    {
+      "OID": "COND.VS.SYSBP",
+      "name": "SYSBP_condition",
+      "description": "Condition for VS SYSBP parameter",
+      "rangeChecks": [
+        {
+          "item": "IT.VS.VSTESTCD",
+          "comparator": "EQ",
+          "checkValues": [
+            "SYSBP"
+          ]
+        }
+      ]
+    },
+    {
+      "OID": "COND.VS.DIABP",
+      "name": "DIABP_condition",
+      "description": "Condition for VS DIABP parameter",
+      "rangeChecks": [
+        {
+          "item": "IT.VS.VSTESTCD",
+          "comparator": "EQ",
+          "checkValues": [
+            "DIABP"
+          ]
+        }
+      ]
+    },
+    {
+      "OID": "COND.VS.HR",
+      "name": "HR_condition",
+      "description": "Condition for VS HR parameter",
+      "rangeChecks": [
+        {
+          "item": "IT.VS.VSTESTCD",
+          "comparator": "EQ",
+          "checkValues": [
+            "HR"
+          ]
+        }
+      ]
+    },
+    {
+      "OID": "COND.LB.ALT",
+      "name": "ALT_condition",
+      "description": "Condition for LB ALT parameter",
+      "rangeChecks": [
+        {
+          "item": "IT.LB.LBTESTCD",
+          "comparator": "EQ",
+          "checkValues": [
+            "ALT"
+          ]
+        }
+      ]
+    },
+    {
+      "OID": "COND.LB.ALB",
+      "name": "ALB_condition",
+      "description": "Condition for LB ALB parameter",
+      "rangeChecks": [
+        {
+          "item": "IT.LB.LBTESTCD",
+          "comparator": "EQ",
+          "checkValues": [
+            "ALB"
+          ]
+        }
+      ]
+    },
+    {
+      "OID": "COND.LB.ALP",
+      "name": "ALP_condition",
+      "description": "Condition for LB ALP parameter",
+      "rangeChecks": [
+        {
+          "item": "IT.LB.LBTESTCD",
+          "comparator": "EQ",
+          "checkValues": [
+            "ALP"
+          ]
+        }
+      ]
+    },
+    {
+      "OID": "COND.LB.AST",
+      "name": "AST_condition",
+      "description": "Condition for LB AST parameter",
+      "rangeChecks": [
+        {
+          "item": "IT.LB.LBTESTCD",
+          "comparator": "EQ",
+          "checkValues": [
+            "AST"
+          ]
+        }
+      ]
+    },
+    {
+      "OID": "COND.LB.CREAT",
+      "name": "CREAT_condition",
+      "description": "Condition for LB CREAT parameter",
+      "rangeChecks": [
+        {
+          "item": "IT.LB.LBTESTCD",
+          "comparator": "EQ",
+          "checkValues": [
+            "CREAT"
+          ]
+        }
+      ]
+    },
+    {
+      "OID": "COND.LB.K",
+      "name": "K_condition",
+      "description": "Condition for LB K parameter",
+      "rangeChecks": [
+        {
+          "item": "IT.LB.LBTESTCD",
+          "comparator": "EQ",
+          "checkValues": [
+            "K"
+          ]
+        }
+      ]
+    },
+    {
+      "OID": "COND.LB.SODIUM",
+      "name": "SODIUM_condition",
+      "description": "Condition for LB SODIUM parameter",
+      "rangeChecks": [
+        {
+          "item": "IT.LB.LBTESTCD",
+          "comparator": "EQ",
+          "checkValues": [
+            "SODIUM"
+          ]
+        }
+      ]
+    },
+    {
+      "OID": "COND.LB.HBA1C",
+      "name": "HBA1C_condition",
+      "description": "Condition for LB HBA1C parameter",
+      "rangeChecks": [
+        {
+          "item": "IT.LB.LBTESTCD",
+          "comparator": "EQ",
+          "checkValues": [
+            "HBA1C"
+          ]
+        }
+      ]
+    }
+  ],
+  "whereClauses": [
+    {
+      "OID": "WC.VS.TEMP",
+      "name": "TEMPContext",
+      "description": "When TEMP applies in VS domain",
+      "conditions": [
+        "COND.VS.TEMP"
+      ]
+    },
+    {
+      "OID": "WC.VS.WEIGHT",
+      "name": "WEIGHTContext",
+      "description": "When WEIGHT applies in VS domain",
+      "conditions": [
+        "COND.VS.WEIGHT"
+      ]
+    },
+    {
+      "OID": "WC.VS.HEIGHT",
+      "name": "HEIGHTContext",
+      "description": "When HEIGHT applies in VS domain",
+      "conditions": [
+        "COND.VS.HEIGHT"
+      ]
+    },
+    {
+      "OID": "WC.VS.SYSBP",
+      "name": "SYSBPContext",
+      "description": "When SYSBP applies in VS domain",
+      "conditions": [
+        "COND.VS.SYSBP"
+      ]
+    },
+    {
+      "OID": "WC.VS.DIABP",
+      "name": "DIABPContext",
+      "description": "When DIABP applies in VS domain",
+      "conditions": [
+        "COND.VS.DIABP"
+      ]
+    },
+    {
+      "OID": "WC.VS.HR",
+      "name": "HRContext",
+      "description": "When HR applies in VS domain",
+      "conditions": [
+        "COND.VS.HR"
+      ]
+    },
+    {
+      "OID": "WC.LB.ALT",
+      "name": "ALTContext",
+      "description": "When ALT applies in LB domain",
+      "conditions": [
+        "COND.LB.ALT"
+      ]
+    },
+    {
+      "OID": "WC.LB.ALB",
+      "name": "ALBContext",
+      "description": "When ALB applies in LB domain",
+      "conditions": [
+        "COND.LB.ALB"
+      ]
+    },
+    {
+      "OID": "WC.LB.ALP",
+      "name": "ALPContext",
+      "description": "When ALP applies in LB domain",
+      "conditions": [
+        "COND.LB.ALP"
+      ]
+    },
+    {
+      "OID": "WC.LB.AST",
+      "name": "ASTContext",
+      "description": "When AST applies in LB domain",
+      "conditions": [
+        "COND.LB.AST"
+      ]
+    },
+    {
+      "OID": "WC.LB.CREAT",
+      "name": "CREATContext",
+      "description": "When CREAT applies in LB domain",
+      "conditions": [
+        "COND.LB.CREAT"
+      ]
+    },
+    {
+      "OID": "WC.LB.K",
+      "name": "KContext",
+      "description": "When K applies in LB domain",
+      "conditions": [
+        "COND.LB.K"
+      ]
+    },
+    {
+      "OID": "WC.LB.SODIUM",
+      "name": "SODIUMContext",
+      "description": "When SODIUM applies in LB domain",
+      "conditions": [
+        "COND.LB.SODIUM"
+      ]
+    },
+    {
+      "OID": "WC.LB.HBA1C",
+      "name": "HBA1CContext",
+      "description": "When HBA1C applies in LB domain",
+      "conditions": [
+        "COND.LB.HBA1C"
+      ]
+    }
+  ],
+  "methods": [],
+  "standards": [
+    {
+      "OID": "ST.1",
+      "name": "SDTMIG",
+      "type": "IG",
+      "version": "3.4",
+      "status": "Final",
+      "publishingSet": null
+    },
+    {
+      "OID": "ST.2",
+      "name": "CDISC/NCI",
+      "type": "CT",
+      "version": "2025-03-28",
+      "status": "Final",
+      "publishingSet": "SDTM"
+    }
+  ],
+  "annotatedCRF": [
+    {
+      "leafID": "LF.acrf",
+      "title": "Annotated CRF"
+    }
+  ],
+  "concepts": [],
+  "conceptProperties": []
+}
