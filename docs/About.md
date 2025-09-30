@@ -24,7 +24,7 @@ python -m define_json xml2json data/define.xml data/output.json
 python -m define_json json2xml data/input.json data/output.xml
 
 # From any other directory (see CONVERSION_README.md for details)
-PYTHONPATH=/path/to/define-json python -c "from src.define_json.converters.xml_to_json import PortableDefineXMLToJSONConverter; ..."
+PYTHONPATH=/path/to/define-json python -c "from src.define_json.converters.xml_to_json import DefineXMLToJSONConverter; ..."
 ```
 
 ## Context is everything

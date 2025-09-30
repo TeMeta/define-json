@@ -70,15 +70,12 @@ demo:
 	poetry run python demo.py
 
 roundtrip:
-	@echo "Testing XML->JSON->XML roundtrip conversion..."
-	@echo "Step 1: Converting XML to JSON..."
-	poetry run python -m src.define_json xml2json data/define-360i.xml data/makefile-roundtrip.json
-	@echo "Step 2: Running roundtrip validation..."
-	poetry run python -m src.define_json roundtrip data/define-360i.xml data/makefile-roundtrip.json
+	@echo "Testing XML→JSON→XML roundtrip conversion..."
+	poetry run python -m src.define_json test-roundtrip data/define-360i.xml
 
 convert:
 	@echo "Converting sample XML to JSON..."
-	poetry run python -m src.define_json xml2json data/define-360i.xml data/converted-sample.json
+	poetry run python -m src.define_json xml2json data/define-360i.xml data/define-360i.json
 
 # Testing targets
 test: check-syntax validate linkml-lint test-roundtrip

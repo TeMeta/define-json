@@ -1,0 +1,5586 @@
+{
+  "fileOID": "CDISCPILOT01",
+  "asOfDateTime": null,
+  "creationDateTime": "2012-03-15T11:09:08",
+  "odmVersion": "1.2",
+  "fileType": "Snapshot",
+  "originator": null,
+  "sourceSystem": null,
+  "sourceSystemVersion": null,
+  "context": null,
+  "defineVersion": "1.0.0",
+  "studyOID": "CDISCPILOT01",
+  "studyName": "CDISCPILOT01",
+  "studyDescription": "CDISCPILOT01 Data Definition",
+  "protocolName": "CDISCPILOT01",
+  "OID": "CDISC.SDTMIG.3.1.2",
+  "name": "Study CDISCPILOT01, Data Definitions",
+  "description": "Study CDISCPILOT01, Data Definitions",
+  "itemGroups": [
+    {
+      "OID": "TA",
+      "name": "TA",
+      "items": [
+        {
+          "OID": "TA.STUDYID",
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "length": 12,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "TA.DOMAIN",
+          "name": "DOMAIN",
+          "description": "Domain Abbreviation",
+          "dataType": "text",
+          "length": 2,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "TA.ARMCD",
+          "name": "ARMCD",
+          "description": "Planned Arm Code",
+          "dataType": "text",
+          "length": 8,
+          "mandatory": "Yes",
+          "role": "TOPIC"
+        },
+        {
+          "OID": "TA.ARM",
+          "name": "ARM",
+          "description": "Description of Planned Arm",
+          "dataType": "text",
+          "length": 20,
+          "mandatory": "Yes",
+          "role": "SYNONYM QUALIFIER"
+        },
+        {
+          "OID": "TA.TAETORD",
+          "name": "TAETORD",
+          "description": "Order of Element within Arm",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "TA.ETCD",
+          "name": "ETCD",
+          "description": "Element Code",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "Yes",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "TA.ELEMENT",
+          "name": "ELEMENT",
+          "description": "Description of Element",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "No",
+          "role": "SYNONYM QUALIFIER"
+        },
+        {
+          "OID": "TA.TABRANCH",
+          "name": "TABRANCH",
+          "description": "Branch",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "No",
+          "role": "RULE"
+        },
+        {
+          "OID": "TA.TATRANS",
+          "name": "TATRANS",
+          "description": "Transition Rule",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "No",
+          "role": "RULE"
+        },
+        {
+          "OID": "TA.EPOCH",
+          "name": "EPOCH",
+          "description": "Epoch",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "Yes",
+          "role": "TIMING"
+        }
+      ],
+      "description": "Trial Arms",
+      "structure": "One record per planned Element per Arm",
+      "class": "Trial Design",
+      "archiveLocationID": "Location.TA"
+    },
+    {
+      "OID": "TE",
+      "name": "TE",
+      "items": [
+        {
+          "OID": "TE.STUDYID",
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "length": 12,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "TE.DOMAIN",
+          "name": "DOMAIN",
+          "description": "Domain Abbreviation",
+          "dataType": "text",
+          "length": 2,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "TE.ETCD",
+          "name": "ETCD",
+          "description": "Element Code",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "Yes",
+          "role": "TOPIC"
+        },
+        {
+          "OID": "TE.ELEMENT",
+          "name": "ELEMENT",
+          "description": "Description of Element",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "Yes",
+          "role": "SYNONYM QUALIFIER"
+        },
+        {
+          "OID": "TE.TESTRL",
+          "name": "TESTRL",
+          "description": "Rule for Start of Element",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "Yes",
+          "role": "RULE"
+        },
+        {
+          "OID": "TE.TEENRL",
+          "name": "TEENRL",
+          "description": "Rule for End of Element",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "No",
+          "role": "RULE"
+        },
+        {
+          "OID": "TE.TEDUR",
+          "name": "TEDUR",
+          "description": "Planned Duration of Element",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "No",
+          "role": "TIMING"
+        }
+      ],
+      "description": "Trial Elements",
+      "structure": "One record per planned Element",
+      "class": "Trial Design",
+      "archiveLocationID": "Location.TE"
+    },
+    {
+      "OID": "TI",
+      "name": "TI",
+      "items": [
+        {
+          "OID": "TI.STUDYID",
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "length": 12,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "TI.DOMAIN",
+          "name": "DOMAIN",
+          "description": "Domain Abbreviation",
+          "dataType": "text",
+          "length": 2,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "TI.IETESTCD",
+          "name": "IETESTCD",
+          "description": "Incl/Excl Criterion Short Name",
+          "dataType": "text",
+          "length": 16,
+          "mandatory": "Yes",
+          "role": "TOPIC"
+        },
+        {
+          "OID": "TI.IETEST",
+          "name": "IETEST",
+          "description": "Inclusion/Exclusion Criterion",
+          "dataType": "text",
+          "length": 166,
+          "mandatory": "Yes",
+          "role": "SYNONYM QUALIFIER"
+        },
+        {
+          "OID": "TI.IECAT",
+          "name": "IECAT",
+          "description": "Inclusion/Exclusion Category",
+          "dataType": "text",
+          "length": 9,
+          "mandatory": "Yes",
+          "role": "GROUPING QUALIFIER"
+        },
+        {
+          "OID": "TI.TIRL",
+          "name": "TIRL",
+          "description": "Inclusion/Exclusion Criterion Rule",
+          "dataType": "text",
+          "length": 40,
+          "mandatory": "No",
+          "role": "RULE"
+        }
+      ],
+      "description": "Trial Inclusion/ Exclusion Criteria",
+      "structure": "One record per I/E criterion",
+      "class": "Trial Design",
+      "archiveLocationID": "Location.TI"
+    },
+    {
+      "OID": "TS",
+      "name": "TS",
+      "items": [
+        {
+          "OID": "TS.STUDYID",
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "length": 12,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "TS.DOMAIN",
+          "name": "DOMAIN",
+          "description": "Domain Abbreviation",
+          "dataType": "text",
+          "length": 2,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "TS.TSSEQ",
+          "name": "TSSEQ",
+          "description": "Sequence Number",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "TS.TSPARMCD",
+          "name": "TSPARMCD",
+          "description": "Trial Summary Parameter Short Name",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "Yes",
+          "role": "TOPIC"
+        },
+        {
+          "OID": "TS.TSPARM",
+          "name": "TSPARM",
+          "description": "Trial Summary Parameter",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "Yes",
+          "role": "SYNONYM QUALIFIER"
+        },
+        {
+          "OID": "TS.TSVAL",
+          "name": "TSVAL",
+          "description": "Parameter Value",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "Yes",
+          "role": "RESULT QUALIFIER"
+        }
+      ],
+      "description": "Trial Summary",
+      "structure": "One record per trial summary parameter value",
+      "class": "Trial Design",
+      "archiveLocationID": "Location.TS"
+    },
+    {
+      "OID": "TV",
+      "name": "TV",
+      "items": [
+        {
+          "OID": "TV.STUDYID",
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "length": 12,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "TV.DOMAIN",
+          "name": "DOMAIN",
+          "description": "Domain Abbreviation",
+          "dataType": "text",
+          "length": 2,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "TV.VISITNUM",
+          "name": "VISITNUM",
+          "description": "Visit Number",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 1,
+          "mandatory": "Yes",
+          "role": "TOPIC"
+        },
+        {
+          "OID": "TV.VISIT",
+          "name": "VISIT",
+          "description": "Visit Name",
+          "dataType": "text",
+          "length": 90,
+          "mandatory": "No",
+          "role": "SYNONYM QUALIFIER"
+        },
+        {
+          "OID": "TV.VISITDY",
+          "name": "VISITDY",
+          "description": "Planned Study Day of Visit",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "TV.ARMCD",
+          "name": "ARMCD",
+          "description": "Planned Arm Code",
+          "dataType": "text",
+          "length": 8,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "TV.ARM",
+          "name": "ARM",
+          "description": "Description of Planned Arm",
+          "dataType": "text",
+          "length": 20,
+          "mandatory": "No",
+          "role": "SYNONYM QUALIFIER"
+        },
+        {
+          "OID": "TV.TVSTRL",
+          "name": "TVSTRL",
+          "description": "Visit Start Rule",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "Yes",
+          "role": "RULE"
+        },
+        {
+          "OID": "TV.TVENRL",
+          "name": "TVENRL",
+          "description": "Visit End Rule",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "No",
+          "role": "RULE"
+        }
+      ],
+      "description": "Trial Visits",
+      "structure": "One record per planned Visit per Arm",
+      "class": "Trial Design",
+      "archiveLocationID": "Location.TV"
+    },
+    {
+      "OID": "DM",
+      "name": "DM",
+      "items": [
+        {
+          "OID": "DM.STUDYID",
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "length": 12,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "DM.DOMAIN",
+          "name": "DOMAIN",
+          "description": "Domain Abbreviation",
+          "dataType": "text",
+          "length": 2,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "DM.USUBJID",
+          "name": "USUBJID",
+          "description": "Unique Subject Identifier",
+          "dataType": "text",
+          "length": 11,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "DM.SUBJID",
+          "name": "SUBJID",
+          "description": "Subject Identifier for the Study",
+          "dataType": "text",
+          "length": 4,
+          "mandatory": "Yes",
+          "role": "TOPIC"
+        },
+        {
+          "OID": "DM.RFSTDTC",
+          "name": "RFSTDTC",
+          "description": "Subject Reference Start Date/Time",
+          "dataType": "date",
+          "length": 10,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "DM.RFENDTC",
+          "name": "RFENDTC",
+          "description": "Subject Reference End Date/Time",
+          "dataType": "date",
+          "length": 10,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "DM.RFXSTDTC",
+          "name": "RFXSTDTC",
+          "description": "Date/Time of First Study Treatment",
+          "dataType": "datetime",
+          "length": 20,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "DM.RFXENDTC",
+          "name": "RFXENDTC",
+          "description": "Date/Time of Last Study Treatment",
+          "dataType": "datetime",
+          "length": 20,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "DM.RFICDTC",
+          "name": "RFICDTC",
+          "description": "Date/Time of Informed Consent",
+          "dataType": "datetime",
+          "length": 20,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "DM.RFPENDTC",
+          "name": "RFPENDTC",
+          "description": "Date/Time of End of Participation",
+          "dataType": "datetime",
+          "length": 20,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "DM.DTHDTC",
+          "name": "DTHDTC",
+          "description": "Date/Time of Death",
+          "dataType": "datetime",
+          "length": 20,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "DM.DTHFL",
+          "name": "DTHFL",
+          "description": "Subject Death Flag",
+          "dataType": "text",
+          "length": 1,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "DM.SITEID",
+          "name": "SITEID",
+          "description": "Study Site Identifier",
+          "dataType": "text",
+          "length": 3,
+          "mandatory": "Yes",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "DM.AGE",
+          "name": "AGE",
+          "description": "Age",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "DM.AGEU",
+          "name": "AGEU",
+          "description": "Age Units",
+          "dataType": "text",
+          "length": 6,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "DM.SEX",
+          "name": "SEX",
+          "description": "Sex",
+          "dataType": "text",
+          "length": 1,
+          "mandatory": "Yes",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "DM.RACE",
+          "name": "RACE",
+          "description": "Race",
+          "dataType": "text",
+          "length": 78,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "DM.ETHNIC",
+          "name": "ETHNIC",
+          "description": "Ethnicity",
+          "dataType": "text",
+          "length": 25,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "DM.ARMCD",
+          "name": "ARMCD",
+          "description": "Planned Arm Code",
+          "dataType": "text",
+          "length": 8,
+          "mandatory": "Yes",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "DM.ARM",
+          "name": "ARM",
+          "description": "Description of Planned Arm",
+          "dataType": "text",
+          "length": 20,
+          "mandatory": "Yes",
+          "role": "SYNONYM QUALIFIER"
+        },
+        {
+          "OID": "DM.ACTARMCD",
+          "name": "ACTARMCD",
+          "description": "Actual Arm Code",
+          "dataType": "text",
+          "length": 8,
+          "mandatory": "Yes",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "DM.ACTARM",
+          "name": "ACTARM",
+          "description": "Description of Actual Arm",
+          "dataType": "text",
+          "length": 20,
+          "mandatory": "Yes",
+          "role": "SYNONYM QUALIFIER"
+        },
+        {
+          "OID": "DM.COUNTRY",
+          "name": "COUNTRY",
+          "description": "Country",
+          "dataType": "text",
+          "length": 3,
+          "mandatory": "Yes",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "DM.DMDTC",
+          "name": "DMDTC",
+          "description": "Date/Time of Collection",
+          "dataType": "date",
+          "length": 10,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "DM.DMDY",
+          "name": "DMDY",
+          "description": "Study Day of Collection",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "TIMING"
+        }
+      ],
+      "description": "Demographics",
+      "structure": "One record per subject",
+      "class": "Special Purpose",
+      "archiveLocationID": "Location.DM"
+    },
+    {
+      "OID": "SE",
+      "name": "SE",
+      "items": [
+        {
+          "OID": "SE.STUDYID",
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "length": 12,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SE.DOMAIN",
+          "name": "DOMAIN",
+          "description": "Domain Abbreviation",
+          "dataType": "text",
+          "length": 2,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SE.USUBJID",
+          "name": "USUBJID",
+          "description": "Unique Subject Identifier",
+          "dataType": "text",
+          "length": 11,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SE.SESEQ",
+          "name": "SESEQ",
+          "description": "Sequence Number",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SE.ETCD",
+          "name": "ETCD",
+          "description": "Element Code",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "Yes",
+          "role": "TOPIC"
+        },
+        {
+          "OID": "SE.ELEMENT",
+          "name": "ELEMENT",
+          "description": "Description of Element",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "No",
+          "role": "SYNONYM QUALIFIER"
+        },
+        {
+          "OID": "SE.SESTDTC",
+          "name": "SESTDTC",
+          "description": "Start Date/Time of Element",
+          "dataType": "date",
+          "length": 10,
+          "mandatory": "Yes",
+          "role": "TIMING"
+        },
+        {
+          "OID": "SE.SEENDTC",
+          "name": "SEENDTC",
+          "description": "End Date/Time of Element",
+          "dataType": "date",
+          "length": 10,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "SE.SEUPDES",
+          "name": "SEUPDES",
+          "description": "Description of Unplanned Element",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "No",
+          "role": "SYNONYM QUALIFIER"
+        }
+      ],
+      "description": "Subject Elements",
+      "structure": "One record per actual Element per subject",
+      "class": "Special Purpose",
+      "repeating": true,
+      "archiveLocationID": "Location.SE"
+    },
+    {
+      "OID": "SV",
+      "name": "SV",
+      "items": [
+        {
+          "OID": "SV.STUDYID",
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "length": 12,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SV.DOMAIN",
+          "name": "DOMAIN",
+          "description": "Domain Abbreviation",
+          "dataType": "text",
+          "length": 2,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SV.USUBJID",
+          "name": "USUBJID",
+          "description": "Unique Subject Identifier",
+          "dataType": "text",
+          "length": 11,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SV.VISITNUM",
+          "name": "VISITNUM",
+          "description": "Visit Number",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 1,
+          "mandatory": "Yes",
+          "role": "TOPIC"
+        },
+        {
+          "OID": "SV.VISIT",
+          "name": "VISIT",
+          "description": "Visit Name",
+          "dataType": "text",
+          "length": 19,
+          "mandatory": "No",
+          "role": "SYNONYM QUALIFIER"
+        },
+        {
+          "OID": "SV.VISITDY",
+          "name": "VISITDY",
+          "description": "Planned Study Day of Visit",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "SV.SVSTDTC",
+          "name": "SVSTDTC",
+          "description": "Start Date/Time of Visit",
+          "dataType": "date",
+          "length": 10,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "SV.SVENDTC",
+          "name": "SVENDTC",
+          "description": "End Date/Time of Visit",
+          "dataType": "date",
+          "length": 10,
+          "mandatory": "No",
+          "role": "TIMING"
+        }
+      ],
+      "description": "Subject Visits",
+      "structure": "One record per actual visit per subject",
+      "class": "Special Purpose",
+      "repeating": true,
+      "archiveLocationID": "Location.SV"
+    },
+    {
+      "OID": "CM",
+      "name": "CM",
+      "items": [
+        {
+          "OID": "CM.STUDYID",
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "length": 12,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "CM.DOMAIN",
+          "name": "DOMAIN",
+          "description": "Domain Abbreviation",
+          "dataType": "text",
+          "length": 2,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "CM.USUBJID",
+          "name": "USUBJID",
+          "description": "Unique Subject Identifier",
+          "dataType": "text",
+          "length": 11,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "CM.CMSEQ",
+          "name": "CMSEQ",
+          "description": "Sequence Number",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "CM.CMSPID",
+          "name": "CMSPID",
+          "description": "Sponsor-Defined Identifier",
+          "dataType": "text",
+          "length": 2,
+          "mandatory": "No",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "CM.CMTRT",
+          "name": "CMTRT",
+          "description": "Reported Name of Drug, Med, or Therapy",
+          "dataType": "text",
+          "length": 44,
+          "mandatory": "Yes",
+          "role": "TOPIC"
+        },
+        {
+          "OID": "CM.CMDECOD",
+          "name": "CMDECOD",
+          "description": "Standardized Medication Name",
+          "dataType": "text",
+          "length": 24,
+          "mandatory": "No",
+          "role": "SYNONYM QUALIFIER"
+        },
+        {
+          "OID": "CM.CMINDC",
+          "name": "CMINDC",
+          "description": "Indication",
+          "dataType": "text",
+          "length": 34,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "CM.CMCLAS",
+          "name": "CMCLAS",
+          "description": "Medication Class",
+          "dataType": "text",
+          "length": 42,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "CM.CMDOSE",
+          "name": "CMDOSE",
+          "description": "Dose per Administration",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "CM.CMDOSU",
+          "name": "CMDOSU",
+          "description": "Dose Units",
+          "dataType": "text",
+          "length": 17,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "CM.CMDOSFRQ",
+          "name": "CMDOSFRQ",
+          "description": "Dosing Frequency per Interval",
+          "dataType": "text",
+          "length": 15,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "CM.CMROUTE",
+          "name": "CMROUTE",
+          "description": "Route of Administration",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "CM.VISITNUM",
+          "name": "VISITNUM",
+          "description": "Visit Number",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 1,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "CM.VISIT",
+          "name": "VISIT",
+          "description": "Visit Name",
+          "dataType": "text",
+          "length": 19,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "CM.VISITDY",
+          "name": "VISITDY",
+          "description": "Planned Study Day of Visit",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "CM.CMDTC",
+          "name": "CMDTC",
+          "description": "Date/Time of Collection",
+          "dataType": "date",
+          "length": 10,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "CM.CMSTDTC",
+          "name": "CMSTDTC",
+          "description": "Start Date/Time of Medication",
+          "dataType": "date",
+          "length": 10,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "CM.CMENDTC",
+          "name": "CMENDTC",
+          "description": "End Date/Time of Medication",
+          "dataType": "date",
+          "length": 10,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "CM.CMSTDY",
+          "name": "CMSTDY",
+          "description": "Study Day of Start of Medication",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "CM.CMENDY",
+          "name": "CMENDY",
+          "description": "Study Day of End of Medication",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "TIMING"
+        }
+      ],
+      "description": "Concomitant Medications",
+      "structure": "One record per recorded medication occurrence or constant-dosing interval per subject",
+      "class": "Interventions",
+      "repeating": true,
+      "archiveLocationID": "Location.CM"
+    },
+    {
+      "OID": "EX",
+      "name": "EX",
+      "items": [
+        {
+          "OID": "EX.STUDYID",
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "length": 12,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "EX.DOMAIN",
+          "name": "DOMAIN",
+          "description": "Domain Abbreviation",
+          "dataType": "text",
+          "length": 2,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "EX.USUBJID",
+          "name": "USUBJID",
+          "description": "Unique Subject Identifier",
+          "dataType": "text",
+          "length": 11,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "EX.EXSEQ",
+          "name": "EXSEQ",
+          "description": "Sequence Number",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "EX.EXTRT",
+          "name": "EXTRT",
+          "description": "Name of Actual Treatment",
+          "dataType": "text",
+          "length": 10,
+          "mandatory": "Yes",
+          "role": "TOPIC"
+        },
+        {
+          "OID": "EX.EXDOSE",
+          "name": "EXDOSE",
+          "description": "Dose per Administration",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "EX.EXDOSU",
+          "name": "EXDOSU",
+          "description": "Dose Units",
+          "dataType": "text",
+          "length": 2,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "EX.EXDOSFRM",
+          "name": "EXDOSFRM",
+          "description": "Dose Form",
+          "dataType": "text",
+          "length": 5,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "EX.EXDOSFRQ",
+          "name": "EXDOSFRQ",
+          "description": "Dosing Frequency per Interval",
+          "dataType": "text",
+          "length": 2,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "EX.EXROUTE",
+          "name": "EXROUTE",
+          "description": "Route of Administration",
+          "dataType": "text",
+          "length": 11,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "EX.VISITNUM",
+          "name": "VISITNUM",
+          "description": "Visit Number",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 1,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "EX.VISIT",
+          "name": "VISIT",
+          "description": "Visit Name",
+          "dataType": "text",
+          "length": 19,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "EX.VISITDY",
+          "name": "VISITDY",
+          "description": "Planned Study Day of Visit",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "EX.EXSTDTC",
+          "name": "EXSTDTC",
+          "description": "Start Date/Time of Treatment",
+          "dataType": "date",
+          "length": 10,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "EX.EXENDTC",
+          "name": "EXENDTC",
+          "description": "End Date/Time of Treatment",
+          "dataType": "date",
+          "length": 10,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "EX.EXSTDY",
+          "name": "EXSTDY",
+          "description": "Study Day of Start of Treatment",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "EX.EXENDY",
+          "name": "EXENDY",
+          "description": "Study Day of End of Treatment",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "TIMING"
+        }
+      ],
+      "description": "Exposure",
+      "structure": "One record per constant dosing interval per subject",
+      "class": "Interventions",
+      "repeating": true,
+      "archiveLocationID": "Location.EX"
+    },
+    {
+      "OID": "AE",
+      "name": "AE",
+      "items": [
+        {
+          "OID": "AE.STUDYID",
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "length": 12,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "AE.DOMAIN",
+          "name": "DOMAIN",
+          "description": "Domain Abbreviation",
+          "dataType": "text",
+          "length": 2,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "AE.USUBJID",
+          "name": "USUBJID",
+          "description": "Unique Subject Identifier",
+          "dataType": "text",
+          "length": 11,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "AE.AESEQ",
+          "name": "AESEQ",
+          "description": "Sequence Number",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "AE.AESPID",
+          "name": "AESPID",
+          "description": "Sponsor-Defined Identifier",
+          "dataType": "text",
+          "length": 3,
+          "mandatory": "No",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "AE.AETERM",
+          "name": "AETERM",
+          "description": "Reported Term for the Adverse Event",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "Yes",
+          "role": "TOPIC"
+        },
+        {
+          "OID": "AE.AELLT",
+          "name": "AELLT",
+          "description": "Lowest Level Term",
+          "dataType": "text",
+          "length": 100,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "AE.AELLTCD",
+          "name": "AELLTCD",
+          "description": "Lowest Level Term Code",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "AE.AEDECOD",
+          "name": "AEDECOD",
+          "description": "Dictionary-Derived Term",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "No",
+          "role": "SYNONYM QUALIFIER"
+        },
+        {
+          "OID": "AE.AEPTCD",
+          "name": "AEPTCD",
+          "description": "Preferred Term Code",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "AE.AEHLT",
+          "name": "AEHLT",
+          "description": "High Level Term",
+          "dataType": "text",
+          "length": 100,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "AE.AEHLTCD",
+          "name": "AEHLTCD",
+          "description": "High Level Term Code",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "AE.AEHLGT",
+          "name": "AEHLGT",
+          "description": "High Level Group Term",
+          "dataType": "text",
+          "length": 100,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "AE.AEHLGTCD",
+          "name": "AEHLGTCD",
+          "description": "High Level Group Term Code",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "AE.AEBODSYS",
+          "name": "AEBODSYS",
+          "description": "Body System or Organ Class",
+          "dataType": "text",
+          "length": 67,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "AE.AEBDSYCD",
+          "name": "AEBDSYCD",
+          "description": "Body System or Organ Class Code",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "AE.AESOC",
+          "name": "AESOC",
+          "description": "Primary System Organ Class",
+          "dataType": "text",
+          "length": 100,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "AE.AESOCCD",
+          "name": "AESOCCD",
+          "description": "Primary System Organ Class Code",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "AE.AESEV",
+          "name": "AESEV",
+          "description": "Severity/Intensity",
+          "dataType": "text",
+          "length": 8,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "AE.AESER",
+          "name": "AESER",
+          "description": "Serious Event",
+          "dataType": "text",
+          "length": 1,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "AE.AEACN",
+          "name": "AEACN",
+          "description": "Action Taken with Study Treatment",
+          "dataType": "text",
+          "length": 30,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "AE.AEREL",
+          "name": "AEREL",
+          "description": "Causality",
+          "dataType": "text",
+          "length": 8,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "AE.AEOUT",
+          "name": "AEOUT",
+          "description": "Outcome of Adverse Event",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "AE.AESCAN",
+          "name": "AESCAN",
+          "description": "Involves Cancer",
+          "dataType": "text",
+          "length": 1,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "AE.AESCONG",
+          "name": "AESCONG",
+          "description": "Congenital Anomaly or Birth Defect",
+          "dataType": "text",
+          "length": 1,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "AE.AESDISAB",
+          "name": "AESDISAB",
+          "description": "Persist or Signif Disability/Incapacity",
+          "dataType": "text",
+          "length": 1,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "AE.AESDTH",
+          "name": "AESDTH",
+          "description": "Results in Death",
+          "dataType": "text",
+          "length": 1,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "AE.AESHOSP",
+          "name": "AESHOSP",
+          "description": "Requires or Prolongs Hospitalization",
+          "dataType": "text",
+          "length": 1,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "AE.AESLIFE",
+          "name": "AESLIFE",
+          "description": "Is Life Threatening",
+          "dataType": "text",
+          "length": 1,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "AE.AESOD",
+          "name": "AESOD",
+          "description": "Occurred with Overdose",
+          "dataType": "text",
+          "length": 1,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "AE.AEDTC",
+          "name": "AEDTC",
+          "description": "Date/Time of Collection",
+          "dataType": "date",
+          "length": 10,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "AE.AESTDTC",
+          "name": "AESTDTC",
+          "description": "Start Date/Time of Adverse Event",
+          "dataType": "date",
+          "length": 10,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "AE.AEENDTC",
+          "name": "AEENDTC",
+          "description": "End Date/Time of Adverse Event",
+          "dataType": "date",
+          "length": 10,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "AE.AESTDY",
+          "name": "AESTDY",
+          "description": "Study Day of Start of Adverse Event",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "AE.AEENDY",
+          "name": "AEENDY",
+          "description": "Study Day of End of Adverse Event",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "TIMING"
+        }
+      ],
+      "description": "Adverse Events",
+      "structure": "One record per adverse event per subject",
+      "class": "Events",
+      "repeating": true,
+      "archiveLocationID": "Location.AE"
+    },
+    {
+      "OID": "DS",
+      "name": "DS",
+      "items": [
+        {
+          "OID": "DS.STUDYID",
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "length": 12,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "DS.DOMAIN",
+          "name": "DOMAIN",
+          "description": "Domain Abbreviation",
+          "dataType": "text",
+          "length": 2,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "DS.USUBJID",
+          "name": "USUBJID",
+          "description": "Unique Subject Identifier",
+          "dataType": "text",
+          "length": 11,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "DS.DSSEQ",
+          "name": "DSSEQ",
+          "description": "Sequence Number",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "DS.DSSPID",
+          "name": "DSSPID",
+          "description": "Sponsor-Defined Identifier",
+          "dataType": "text",
+          "length": 2,
+          "mandatory": "No",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "DS.DSTERM",
+          "name": "DSTERM",
+          "description": "Reported Term for the Disposition Event",
+          "dataType": "text",
+          "length": 63,
+          "mandatory": "Yes",
+          "role": "TOPIC"
+        },
+        {
+          "OID": "DS.DSDECOD",
+          "name": "DSDECOD",
+          "description": "Standardized Disposition Term",
+          "dataType": "text",
+          "length": 63,
+          "mandatory": "Yes",
+          "role": "SYNONYM QUALIFIER"
+        },
+        {
+          "OID": "DS.DSCAT",
+          "name": "DSCAT",
+          "description": "Category for Disposition Event",
+          "dataType": "text",
+          "length": 17,
+          "mandatory": "No",
+          "role": "GROUPING QUALIFIER"
+        },
+        {
+          "OID": "DS.VISITNUM",
+          "name": "VISITNUM",
+          "description": "Visit Number",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 1,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "DS.VISIT",
+          "name": "VISIT",
+          "description": "Visit Name",
+          "dataType": "text",
+          "length": 19,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "DS.DSDTC",
+          "name": "DSDTC",
+          "description": "Date/Time of Collection",
+          "dataType": "datetime",
+          "length": 19,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "DS.DSSTDTC",
+          "name": "DSSTDTC",
+          "description": "Start Date/Time of Disposition Event",
+          "dataType": "date",
+          "length": 10,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "DS.DSSTDY",
+          "name": "DSSTDY",
+          "description": "Study Day of Start of Disposition Event",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "TIMING"
+        }
+      ],
+      "description": "Disposition",
+      "structure": "One record per disposition status or protocol milestone per subject",
+      "class": "Events",
+      "repeating": true,
+      "archiveLocationID": "Location.DS"
+    },
+    {
+      "OID": "MH",
+      "name": "MH",
+      "items": [
+        {
+          "OID": "MH.STUDYID",
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "length": 12,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "MH.DOMAIN",
+          "name": "DOMAIN",
+          "description": "Domain Abbreviation",
+          "dataType": "text",
+          "length": 2,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "MH.USUBJID",
+          "name": "USUBJID",
+          "description": "Unique Subject Identifier",
+          "dataType": "text",
+          "length": 11,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "MH.MHSEQ",
+          "name": "MHSEQ",
+          "description": "Sequence Number",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "MH.MHSPID",
+          "name": "MHSPID",
+          "description": "Sponsor-Defined Identifier",
+          "dataType": "text",
+          "length": 3,
+          "mandatory": "No",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "MH.MHTERM",
+          "name": "MHTERM",
+          "description": "Reported Term for the Medical History",
+          "dataType": "text",
+          "length": 19,
+          "mandatory": "Yes",
+          "role": "TOPIC"
+        },
+        {
+          "OID": "MH.MHLLT",
+          "name": "MHLLT",
+          "description": "Lowest Level Term",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "MH.MHDECOD",
+          "name": "MHDECOD",
+          "description": "Dictionary-Derived Term",
+          "dataType": "text",
+          "length": 44,
+          "mandatory": "No",
+          "role": "SYNONYM QUALIFIER"
+        },
+        {
+          "OID": "MH.MHHLT",
+          "name": "MHHLT",
+          "description": "High Level Term",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "MH.MHHLGT",
+          "name": "MHHLGT",
+          "description": "High Level Group Term",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "MH.MHCAT",
+          "name": "MHCAT",
+          "description": "Category for Medical History",
+          "dataType": "text",
+          "length": 34,
+          "mandatory": "No",
+          "role": "GROUPING QUALIFIER"
+        },
+        {
+          "OID": "MH.MHBODSYS",
+          "name": "MHBODSYS",
+          "description": "Body System or Organ Class",
+          "dataType": "text",
+          "length": 67,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "MH.MHSEV",
+          "name": "MHSEV",
+          "description": "Severity/Intensity",
+          "dataType": "text",
+          "length": 8,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "MH.VISITNUM",
+          "name": "VISITNUM",
+          "description": "Visit Number",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 1,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "MH.VISIT",
+          "name": "VISIT",
+          "description": "Visit Name",
+          "dataType": "text",
+          "length": 19,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "MH.VISITDY",
+          "name": "VISITDY",
+          "description": "Planned Study Day of Visit",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "MH.MHDTC",
+          "name": "MHDTC",
+          "description": "Date/Time of History Collection",
+          "dataType": "date",
+          "length": 10,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "MH.MHSTDTC",
+          "name": "MHSTDTC",
+          "description": "Start Date/Time of Medical History Event",
+          "dataType": "date",
+          "length": 10,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "MH.MHDY",
+          "name": "MHDY",
+          "description": "Study Day of History Collection",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "TIMING"
+        }
+      ],
+      "description": "Medical History",
+      "structure": "One record per medical history event per subject",
+      "class": "Events",
+      "repeating": true,
+      "archiveLocationID": "Location.MH"
+    },
+    {
+      "OID": "LB",
+      "name": "LB",
+      "items": [
+        {
+          "OID": "LB.STUDYID",
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "length": 12,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "LB.DOMAIN",
+          "name": "DOMAIN",
+          "description": "Domain Abbreviation",
+          "dataType": "text",
+          "length": 2,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "LB.USUBJID",
+          "name": "USUBJID",
+          "description": "Unique Subject Identifier",
+          "dataType": "text",
+          "length": 11,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "LB.LBSEQ",
+          "name": "LBSEQ",
+          "description": "Sequence Number",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "LB.LBTESTCD",
+          "name": "LBTESTCD",
+          "description": "Lab Test or Examination Short Name",
+          "dataType": "text",
+          "length": 7,
+          "mandatory": "Yes",
+          "role": "TOPIC"
+        },
+        {
+          "OID": "LB.LBTEST",
+          "name": "LBTEST",
+          "description": "Lab Test or Examination Name",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "Yes",
+          "role": "SYNONYM QUALIFIER"
+        },
+        {
+          "OID": "LB.LBCAT",
+          "name": "LBCAT",
+          "description": "Category for Lab Test",
+          "dataType": "text",
+          "length": 10,
+          "mandatory": "No",
+          "role": "GROUPING QUALIFIER"
+        },
+        {
+          "OID": "LB.LBORRES",
+          "name": "LBORRES",
+          "description": "Result or Finding in Original Units",
+          "dataType": "text",
+          "length": 5,
+          "mandatory": "No",
+          "role": "RESULT QUALIFIER"
+        },
+        {
+          "OID": "LB.LBORRESU",
+          "name": "LBORRESU",
+          "description": "Original Units",
+          "dataType": "text",
+          "length": 8,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "LB.LBORNRLO",
+          "name": "LBORNRLO",
+          "description": "Reference Range Lower Limit in Orig Unit",
+          "dataType": "text",
+          "length": 5,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "LB.LBORNRHI",
+          "name": "LBORNRHI",
+          "description": "Reference Range Upper Limit in Orig Unit",
+          "dataType": "text",
+          "length": 7,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "LB.LBSTRESC",
+          "name": "LBSTRESC",
+          "description": "Character Result/Finding in Std Format",
+          "dataType": "text",
+          "length": 8,
+          "mandatory": "No",
+          "role": "RESULT QUALIFIER"
+        },
+        {
+          "OID": "LB.LBSTRESN",
+          "name": "LBSTRESN",
+          "description": "Numeric Result/Finding in Standard Units",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "RESULT QUALIFIER"
+        },
+        {
+          "OID": "LB.LBSTRESU",
+          "name": "LBSTRESU",
+          "description": "Standard Units",
+          "dataType": "text",
+          "length": 8,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "LB.LBSTNRLO",
+          "name": "LBSTNRLO",
+          "description": "Reference Range Lower Limit-Std Units",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "LB.LBSTNRHI",
+          "name": "LBSTNRHI",
+          "description": "Reference Range Upper Limit-Std Units",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "LB.LBNRIND",
+          "name": "LBNRIND",
+          "description": "Reference Range Indicator",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "LB.LBBLFL",
+          "name": "LBBLFL",
+          "description": "Baseline Flag",
+          "dataType": "text",
+          "length": 1,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "LB.VISITNUM",
+          "name": "VISITNUM",
+          "description": "Visit Number",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 1,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "LB.VISIT",
+          "name": "VISIT",
+          "description": "Visit Name",
+          "dataType": "text",
+          "length": 19,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "LB.VISITDY",
+          "name": "VISITDY",
+          "description": "Planned Study Day of Visit",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "LB.LBDTC",
+          "name": "LBDTC",
+          "description": "Date/Time of Specimen Collection",
+          "dataType": "datetime",
+          "length": 16,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "LB.LBDY",
+          "name": "LBDY",
+          "description": "Study Day of Specimen Collection",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "TIMING"
+        }
+      ],
+      "description": "Laboratory Tests Results",
+      "structure": "One record per analyte per planned time point number per time point reference per visit per subject",
+      "class": "Findings",
+      "repeating": true,
+      "archiveLocationID": "Location.LB"
+    },
+    {
+      "OID": "QS",
+      "name": "QS",
+      "items": [
+        {
+          "OID": "QS.STUDYID",
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "length": 12,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "QS.DOMAIN",
+          "name": "DOMAIN",
+          "description": "Domain Abbreviation",
+          "dataType": "text",
+          "length": 2,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "QS.USUBJID",
+          "name": "USUBJID",
+          "description": "Unique Subject Identifier",
+          "dataType": "text",
+          "length": 11,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "QS.QSSEQ",
+          "name": "QSSEQ",
+          "description": "Sequence Number",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "QS.QSTESTCD",
+          "name": "QSTESTCD",
+          "description": "Question Short Name",
+          "dataType": "text",
+          "length": 8,
+          "mandatory": "Yes",
+          "role": "TOPIC"
+        },
+        {
+          "OID": "QS.QSTEST",
+          "name": "QSTEST",
+          "description": "Question Name",
+          "dataType": "text",
+          "length": 40,
+          "mandatory": "Yes",
+          "role": "SYNONYM QUALIFIER"
+        },
+        {
+          "OID": "QS.QSCAT",
+          "name": "QSCAT",
+          "description": "Category of Question",
+          "dataType": "text",
+          "length": 70,
+          "mandatory": "Yes",
+          "role": "GROUPING QUALIFIER"
+        },
+        {
+          "OID": "QS.QSSCAT",
+          "name": "QSSCAT",
+          "description": "Subcategory for Question",
+          "dataType": "text",
+          "length": 26,
+          "mandatory": "No",
+          "role": "GROUPING QUALIFIER"
+        },
+        {
+          "OID": "QS.QSORRES",
+          "name": "QSORRES",
+          "description": "Finding in Original Units",
+          "dataType": "text",
+          "length": 20,
+          "mandatory": "No",
+          "role": "RESULT QUALIFIER"
+        },
+        {
+          "OID": "QS.QSORRESU",
+          "name": "QSORRESU",
+          "description": "Original Units",
+          "dataType": "text",
+          "length": 7,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "QS.QSSTRESC",
+          "name": "QSSTRESC",
+          "description": "Character Result/Finding in Std Format",
+          "dataType": "text",
+          "length": 4,
+          "mandatory": "No",
+          "role": "RESULT QUALIFIER"
+        },
+        {
+          "OID": "QS.QSSTRESN",
+          "name": "QSSTRESN",
+          "description": "Numeric Finding in Standard Units",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "RESULT QUALIFIER"
+        },
+        {
+          "OID": "QS.QSSTRESU",
+          "name": "QSSTRESU",
+          "description": "Standard Units",
+          "dataType": "text",
+          "length": 7,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "QS.QSBLFL",
+          "name": "QSBLFL",
+          "description": "Baseline Flag",
+          "dataType": "text",
+          "length": 1,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "QS.QSDRVFL",
+          "name": "QSDRVFL",
+          "description": "Derived Flag",
+          "dataType": "text",
+          "length": 1,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "QS.VISITNUM",
+          "name": "VISITNUM",
+          "description": "Visit Number",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 1,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "QS.VISIT",
+          "name": "VISIT",
+          "description": "Visit Name",
+          "dataType": "text",
+          "length": 19,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "QS.VISITDY",
+          "name": "VISITDY",
+          "description": "Planned Study Day of Visit",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "QS.QSDTC",
+          "name": "QSDTC",
+          "description": "Date/Time of Finding",
+          "dataType": "date",
+          "length": 10,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "QS.QSDY",
+          "name": "QSDY",
+          "description": "Study Day of Finding",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "TIMING"
+        }
+      ],
+      "description": "Questionnaires",
+      "structure": "One record per questionnaire per question per time point per visit per subject",
+      "class": "Findings",
+      "repeating": true,
+      "archiveLocationID": "Location.QS"
+    },
+    {
+      "OID": "SC",
+      "name": "SC",
+      "items": [
+        {
+          "OID": "SC.STUDYID",
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "length": 12,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SC.DOMAIN",
+          "name": "DOMAIN",
+          "description": "Domain Abbreviation",
+          "dataType": "text",
+          "length": 2,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SC.USUBJID",
+          "name": "USUBJID",
+          "description": "Unique Subject Identifier",
+          "dataType": "text",
+          "length": 11,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SC.SCSEQ",
+          "name": "SCSEQ",
+          "description": "Sequence Number",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SC.SCTESTCD",
+          "name": "SCTESTCD",
+          "description": "Subject Characteristic Short Name",
+          "dataType": "text",
+          "length": 8,
+          "mandatory": "Yes",
+          "role": "TOPIC"
+        },
+        {
+          "OID": "SC.SCTEST",
+          "name": "SCTEST",
+          "description": "Subject Characteristic",
+          "dataType": "text",
+          "length": 18,
+          "mandatory": "Yes",
+          "role": "SYNONYM QUALIFIER"
+        },
+        {
+          "OID": "SC.SCCAT",
+          "name": "SCCAT",
+          "description": "Category for Subject Characteristic",
+          "dataType": "text",
+          "length": 9,
+          "mandatory": "No",
+          "role": "GROUPING QUALIFIER"
+        },
+        {
+          "OID": "SC.SCORRES",
+          "name": "SCORRES",
+          "description": "Result or Finding in Original Units",
+          "dataType": "text",
+          "length": 2,
+          "mandatory": "No",
+          "role": "RESULT QUALIFIER"
+        },
+        {
+          "OID": "SC.SCORRESU",
+          "name": "SCORRESU",
+          "description": "Original Units",
+          "dataType": "text",
+          "length": 5,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "SC.SCSTRESC",
+          "name": "SCSTRESC",
+          "description": "Character Result/Finding in Std Format",
+          "dataType": "text",
+          "length": 2,
+          "mandatory": "No",
+          "role": "RESULT QUALIFIER"
+        },
+        {
+          "OID": "SC.SCSTRESN",
+          "name": "SCSTRESN",
+          "description": "Numeric Result/Finding in Standard Units",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "RESULT QUALIFIER"
+        },
+        {
+          "OID": "SC.SCSTRESU",
+          "name": "SCSTRESU",
+          "description": "Standard Units",
+          "dataType": "text",
+          "length": 5,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "SC.SCDTC",
+          "name": "SCDTC",
+          "description": "Date/Time of Collection",
+          "dataType": "date",
+          "length": 10,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "SC.SCDY",
+          "name": "SCDY",
+          "description": "Study Day of Examination",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "TIMING"
+        }
+      ],
+      "description": "Subject Characteristics",
+      "structure": "One record per characteristic per subject",
+      "class": "Findings",
+      "repeating": true,
+      "archiveLocationID": "Location.SC"
+    },
+    {
+      "OID": "VS",
+      "name": "VS",
+      "items": [
+        {
+          "OID": "VS.STUDYID",
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "length": 12,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "VS.DOMAIN",
+          "name": "DOMAIN",
+          "description": "Domain Abbreviation",
+          "dataType": "text",
+          "length": 2,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "VS.USUBJID",
+          "name": "USUBJID",
+          "description": "Unique Subject Identifier",
+          "dataType": "text",
+          "length": 11,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "VS.VSSEQ",
+          "name": "VSSEQ",
+          "description": "Sequence Number",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "VS.VSTESTCD",
+          "name": "VSTESTCD",
+          "description": "Vital Signs Test Short Name",
+          "dataType": "text",
+          "length": 6,
+          "mandatory": "Yes",
+          "role": "TOPIC"
+        },
+        {
+          "OID": "VS.VSTEST",
+          "name": "VSTEST",
+          "description": "Vital Signs Test Name",
+          "dataType": "text",
+          "length": 24,
+          "mandatory": "Yes",
+          "role": "SYNONYM QUALIFIER"
+        },
+        {
+          "OID": "VS.VSPOS",
+          "name": "VSPOS",
+          "description": "Vital Signs Position of Subject",
+          "dataType": "text",
+          "length": 8,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "VS.VSORRES",
+          "name": "VSORRES",
+          "description": "Result or Finding in Original Units",
+          "dataType": "text",
+          "length": 5,
+          "mandatory": "No",
+          "role": "RESULT QUALIFIER"
+        },
+        {
+          "OID": "VS.VSORRESU",
+          "name": "VSORRESU",
+          "description": "Original Units",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "VS.VSSTRESC",
+          "name": "VSSTRESC",
+          "description": "Character Result/Finding in Std Format",
+          "dataType": "text",
+          "length": 6,
+          "mandatory": "No",
+          "role": "RESULT QUALIFIER"
+        },
+        {
+          "OID": "VS.VSSTRESN",
+          "name": "VSSTRESN",
+          "description": "Numeric Result/Finding in Standard Units",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "RESULT QUALIFIER"
+        },
+        {
+          "OID": "VS.VSSTRESU",
+          "name": "VSSTRESU",
+          "description": "Standard Units",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "No",
+          "role": "VARIABLE QUALIFIER"
+        },
+        {
+          "OID": "VS.VSSTAT",
+          "name": "VSSTAT",
+          "description": "Completion Status",
+          "dataType": "text",
+          "length": 8,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "VS.VSLOC",
+          "name": "VSLOC",
+          "description": "Location of Vital Signs Measurement",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "VS.VSBLFL",
+          "name": "VSBLFL",
+          "description": "Baseline Flag",
+          "dataType": "text",
+          "length": 1,
+          "mandatory": "No",
+          "role": "RECORD QUALIFIER"
+        },
+        {
+          "OID": "VS.VISITNUM",
+          "name": "VISITNUM",
+          "description": "Visit Number",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 1,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "VS.VISIT",
+          "name": "VISIT",
+          "description": "Visit Name",
+          "dataType": "text",
+          "length": 19,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "VS.VISITDY",
+          "name": "VISITDY",
+          "description": "Planned Study Day of Visit",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "VS.VSDTC",
+          "name": "VSDTC",
+          "description": "Date/Time of Measurements",
+          "dataType": "date",
+          "length": 10,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "VS.VSDY",
+          "name": "VSDY",
+          "description": "Study Day of Vital Signs",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "VS.VSTPT",
+          "name": "VSTPT",
+          "description": "Planned Time Point Name",
+          "dataType": "text",
+          "length": 30,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "VS.VSTPTNUM",
+          "name": "VSTPTNUM",
+          "description": "Planned Time Point Number",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "VS.VSELTM",
+          "name": "VSELTM",
+          "description": "Planned Elapsed Time from Time Point Ref",
+          "dataType": "text",
+          "length": 4,
+          "mandatory": "No",
+          "role": "TIMING"
+        },
+        {
+          "OID": "VS.VSTPTREF",
+          "name": "VSTPTREF",
+          "description": "Time Point Reference",
+          "dataType": "text",
+          "length": 16,
+          "mandatory": "No",
+          "role": "TIMING"
+        }
+      ],
+      "description": "Vital Signs",
+      "structure": "One record per vital sign measurement per time point per visit per subject",
+      "class": "Findings",
+      "repeating": true,
+      "archiveLocationID": "Location.VS"
+    },
+    {
+      "OID": "RELREC",
+      "name": "RELREC",
+      "items": [
+        {
+          "OID": "RELREC.STUDYID",
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "length": 12,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "RELREC.RDOMAIN",
+          "name": "RDOMAIN",
+          "description": "Related Domain Abbreviation",
+          "dataType": "text",
+          "length": 2,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "RELREC.USUBJID",
+          "name": "USUBJID",
+          "description": "Unique Subject Identifier",
+          "dataType": "text",
+          "length": 11,
+          "mandatory": "No",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "RELREC.IDVAR",
+          "name": "IDVAR",
+          "description": "Identifying Variable",
+          "dataType": "text",
+          "length": 8,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "RELREC.IDVARVAL",
+          "name": "IDVARVAL",
+          "description": "Identifying Variable Value",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "No",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "RELREC.RELTYPE",
+          "name": "RELTYPE",
+          "description": "Relationship Type",
+          "dataType": "text",
+          "length": 30,
+          "mandatory": "No",
+          "role": "RESULT QUALIFIER"
+        },
+        {
+          "OID": "RELREC.RELID",
+          "name": "RELID",
+          "description": "Relationship Identifier",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "Yes",
+          "role": "TOPIC"
+        }
+      ],
+      "description": "Related Records",
+      "structure": "One record per related record, group of records or datasets",
+      "class": "Relationship",
+      "repeating": true,
+      "archiveLocationID": "Location.RELREC"
+    },
+    {
+      "OID": "SUPPAE",
+      "name": "SUPPAE",
+      "items": [
+        {
+          "OID": "SUPPAE.STUDYID",
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "length": 12,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SUPPAE.RDOMAIN",
+          "name": "RDOMAIN",
+          "description": "Related Domain Abbreviation",
+          "dataType": "text",
+          "length": 2,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SUPPAE.USUBJID",
+          "name": "USUBJID",
+          "description": "Unique Subject Identifier",
+          "dataType": "text",
+          "length": 11,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SUPPAE.IDVAR",
+          "name": "IDVAR",
+          "description": "Identifying Variable",
+          "dataType": "text",
+          "length": 8,
+          "mandatory": "No",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SUPPAE.IDVARVAL",
+          "name": "IDVARVAL",
+          "description": "Identifying Variable Value",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "No",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SUPPAE.QNAM",
+          "name": "QNAM",
+          "description": "Qualifier Variable Name",
+          "dataType": "text",
+          "length": 8,
+          "mandatory": "Yes",
+          "role": "TOPIC"
+        },
+        {
+          "OID": "SUPPAE.QLABEL",
+          "name": "QLABEL",
+          "description": "Qualifier Variable Label",
+          "dataType": "text",
+          "length": 40,
+          "mandatory": "Yes",
+          "role": "SYNONYM QUALIFIER"
+        },
+        {
+          "OID": "SUPPAE.QVAL",
+          "name": "QVAL",
+          "description": "Data Value",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "Yes",
+          "role": "RESULT"
+        },
+        {
+          "OID": "SUPPAE.QORIG",
+          "name": "QORIG",
+          "description": "Origin",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "Yes",
+          "role": "RESULT QUALIFIER"
+        },
+        {
+          "OID": "SUPPAE.QEVAL",
+          "name": "QEVAL",
+          "description": "Evaluator",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "No",
+          "role": "RESULT QUALIFIER"
+        }
+      ],
+      "description": "Supplemental Qualifiers for AE",
+      "structure": "One record per IDVAR, IDVARVAL, and QNAM value per subject",
+      "class": "Relationship",
+      "repeating": true,
+      "archiveLocationID": "Location.SUPPAE"
+    },
+    {
+      "OID": "SUPPDM",
+      "name": "SUPPDM",
+      "items": [
+        {
+          "OID": "SUPPDM.STUDYID",
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "length": 12,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SUPPDM.RDOMAIN",
+          "name": "RDOMAIN",
+          "description": "Related Domain Abbreviation",
+          "dataType": "text",
+          "length": 2,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SUPPDM.USUBJID",
+          "name": "USUBJID",
+          "description": "Unique Subject Identifier",
+          "dataType": "text",
+          "length": 11,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SUPPDM.IDVAR",
+          "name": "IDVAR",
+          "description": "Identifying Variable",
+          "dataType": "text",
+          "length": 8,
+          "mandatory": "No",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SUPPDM.IDVARVAL",
+          "name": "IDVARVAL",
+          "description": "Identifying Variable Value",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "No",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SUPPDM.QNAM",
+          "name": "QNAM",
+          "description": "Qualifier Variable Name",
+          "dataType": "text",
+          "length": 8,
+          "mandatory": "Yes",
+          "role": "TOPIC"
+        },
+        {
+          "OID": "SUPPDM.QLABEL",
+          "name": "QLABEL",
+          "description": "Qualifier Variable Label",
+          "dataType": "text",
+          "length": 40,
+          "mandatory": "Yes",
+          "role": "SYNONYM QUALIFIER"
+        },
+        {
+          "OID": "SUPPDM.QVAL",
+          "name": "QVAL",
+          "description": "Data Value",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "Yes",
+          "role": "RESULT"
+        },
+        {
+          "OID": "SUPPDM.QORIG",
+          "name": "QORIG",
+          "description": "Origin",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "Yes",
+          "role": "RESULT QUALIFIER"
+        },
+        {
+          "OID": "SUPPDM.QEVAL",
+          "name": "QEVAL",
+          "description": "Evaluator",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "No",
+          "role": "RESULT QUALIFIER"
+        }
+      ],
+      "description": "Supplemental Qualifiers for DM",
+      "structure": "One record per IDVAR, IDVARVAL, and QNAM value per subject",
+      "class": "Relationship",
+      "repeating": true,
+      "archiveLocationID": "Location.SUPPDM"
+    },
+    {
+      "OID": "SUPPDS",
+      "name": "SUPPDS",
+      "items": [
+        {
+          "OID": "SUPPDS.STUDYID",
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "length": 12,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SUPPDS.RDOMAIN",
+          "name": "RDOMAIN",
+          "description": "Related Domain Abbreviation",
+          "dataType": "text",
+          "length": 2,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SUPPDS.USUBJID",
+          "name": "USUBJID",
+          "description": "Unique Subject Identifier",
+          "dataType": "text",
+          "length": 11,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SUPPDS.IDVAR",
+          "name": "IDVAR",
+          "description": "Identifying Variable",
+          "dataType": "text",
+          "length": 8,
+          "mandatory": "No",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SUPPDS.IDVARVAL",
+          "name": "IDVARVAL",
+          "description": "Identifying Variable Value",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "No",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SUPPDS.QNAM",
+          "name": "QNAM",
+          "description": "Qualifier Variable Name",
+          "dataType": "text",
+          "length": 8,
+          "mandatory": "Yes",
+          "role": "TOPIC"
+        },
+        {
+          "OID": "SUPPDS.QLABEL",
+          "name": "QLABEL",
+          "description": "Qualifier Variable Label",
+          "dataType": "text",
+          "length": 40,
+          "mandatory": "Yes",
+          "role": "SYNONYM QUALIFIER"
+        },
+        {
+          "OID": "SUPPDS.QVAL",
+          "name": "QVAL",
+          "description": "Data Value",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "Yes",
+          "role": "RESULT"
+        },
+        {
+          "OID": "SUPPDS.QORIG",
+          "name": "QORIG",
+          "description": "Origin",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "Yes",
+          "role": "RESULT QUALIFIER"
+        },
+        {
+          "OID": "SUPPDS.QEVAL",
+          "name": "QEVAL",
+          "description": "Evaluator",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "No",
+          "role": "RESULT QUALIFIER"
+        }
+      ],
+      "description": "Supplemental Qualifiers for DS",
+      "structure": "One record per IDVAR, IDVARVAL, and QNAM value per subject",
+      "class": "Relationship",
+      "repeating": true,
+      "archiveLocationID": "Location.SUPPDS"
+    },
+    {
+      "OID": "SUPPLB",
+      "name": "SUPPLB",
+      "items": [
+        {
+          "OID": "SUPPLB.STUDYID",
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "length": 12,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SUPPLB.RDOMAIN",
+          "name": "RDOMAIN",
+          "description": "Related Domain Abbreviation",
+          "dataType": "text",
+          "length": 2,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SUPPLB.USUBJID",
+          "name": "USUBJID",
+          "description": "Unique Subject Identifier",
+          "dataType": "text",
+          "length": 11,
+          "mandatory": "Yes",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SUPPLB.IDVAR",
+          "name": "IDVAR",
+          "description": "Identifying Variable",
+          "dataType": "text",
+          "length": 8,
+          "mandatory": "No",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SUPPLB.IDVARVAL",
+          "name": "IDVARVAL",
+          "description": "Identifying Variable Value",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "No",
+          "role": "IDENTIFIER"
+        },
+        {
+          "OID": "SUPPLB.QNAM",
+          "name": "QNAM",
+          "description": "Qualifier Variable Name",
+          "dataType": "text",
+          "length": 8,
+          "mandatory": "Yes",
+          "role": "TOPIC"
+        },
+        {
+          "OID": "SUPPLB.QLABEL",
+          "name": "QLABEL",
+          "description": "Qualifier Variable Label",
+          "dataType": "text",
+          "length": 40,
+          "mandatory": "Yes",
+          "role": "SYNONYM QUALIFIER"
+        },
+        {
+          "OID": "SUPPLB.QVAL",
+          "name": "QVAL",
+          "description": "Data Value",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "Yes",
+          "role": "RESULT"
+        },
+        {
+          "OID": "SUPPLB.QORIG",
+          "name": "QORIG",
+          "description": "Origin",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "Yes",
+          "role": "RESULT QUALIFIER"
+        },
+        {
+          "OID": "SUPPLB.QEVAL",
+          "name": "QEVAL",
+          "description": "Evaluator",
+          "dataType": "text",
+          "length": 200,
+          "mandatory": "No",
+          "role": "RESULT QUALIFIER"
+        }
+      ],
+      "description": "Supplemental Qualifiers for LB",
+      "structure": "One record per IDVAR, IDVARVAL, and QNAM value per subject",
+      "class": "Relationship",
+      "repeating": true,
+      "archiveLocationID": "Location.SUPPLB"
+    },
+    {
+      "OID": "VL.LBCAT.LBTESTCD",
+      "name": "VL.LBCAT.LBTESTCD",
+      "description": "Dataset specialization for LBCAT LBTESTCD parameter containing both result values and units",
+      "type": "DataSpecialization",
+      "domain": "LBCAT",
+      "items": [
+        {
+          "OID": "LB.LBCAT.CHEMISTRY.LBTESTCD.ALB",
+          "name": "ALB",
+          "description": "Albumin",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "CHEMISTRY"
+        },
+        {
+          "OID": "LB.LBCAT.CHEMISTRY.LBTESTCD.ALP",
+          "name": "ALP",
+          "description": "Alkaline Phosphatase",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "CHEMISTRY"
+        },
+        {
+          "OID": "LB.LBCAT.CHEMISTRY.LBTESTCD.ALT",
+          "name": "ALT",
+          "description": "Alanine Aminotransferase",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "CHEMISTRY"
+        },
+        {
+          "OID": "LB.LBCAT.CHEMISTRY.LBTESTCD.AST",
+          "name": "AST",
+          "description": "Aspartate Aminotransferase",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "CHEMISTRY"
+        },
+        {
+          "OID": "LB.LBCAT.CHEMISTRY.LBTESTCD.BILI",
+          "name": "BILI",
+          "description": "Bilirubin",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 2,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "CHEMISTRY"
+        },
+        {
+          "OID": "LB.LBCAT.CHEMISTRY.LBTESTCD.BUN",
+          "name": "BUN",
+          "description": "Blood Urea Nitrogen",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 3,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "CHEMISTRY"
+        },
+        {
+          "OID": "LB.LBCAT.CHEMISTRY.LBTESTCD.CA",
+          "name": "CA",
+          "description": "Calcium",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 5,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "CHEMISTRY"
+        },
+        {
+          "OID": "LB.LBCAT.CHEMISTRY.LBTESTCD.CHOL",
+          "name": "CHOL",
+          "description": "Cholesterol",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 5,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "CHEMISTRY"
+        },
+        {
+          "OID": "LB.LBCAT.CHEMISTRY.LBTESTCD.CK",
+          "name": "CK",
+          "description": "Creatine Kinase",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "CHEMISTRY"
+        },
+        {
+          "OID": "LB.LBCAT.CHEMISTRY.LBTESTCD.CL",
+          "name": "CL",
+          "description": "Chloride",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "CHEMISTRY"
+        },
+        {
+          "OID": "LB.LBCAT.CHEMISTRY.LBTESTCD.CREAT",
+          "name": "CREAT",
+          "description": "Creatinine",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 2,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "CHEMISTRY"
+        },
+        {
+          "OID": "LB.LBCAT.CHEMISTRY.LBTESTCD.GGT",
+          "name": "GGT",
+          "description": "Gamma Glutamyl Transferase",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "CHEMISTRY"
+        },
+        {
+          "OID": "LB.LBCAT.CHEMISTRY.LBTESTCD.GLUC",
+          "name": "GLUC",
+          "description": "Glucose",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 5,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "CHEMISTRY"
+        },
+        {
+          "OID": "LB.LBCAT.CHEMISTRY.LBTESTCD.K",
+          "name": "K",
+          "description": "Potassium",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 1,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "CHEMISTRY"
+        },
+        {
+          "OID": "LB.LBCAT.CHEMISTRY.LBTESTCD.PHOS",
+          "name": "PHOS",
+          "description": "Phosphate",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 5,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "CHEMISTRY"
+        },
+        {
+          "OID": "LB.LBCAT.CHEMISTRY.LBTESTCD.PROT",
+          "name": "PROT",
+          "description": "Protein",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "CHEMISTRY"
+        },
+        {
+          "OID": "LB.LBCAT.CHEMISTRY.LBTESTCD.SODIUM",
+          "name": "SODIUM",
+          "description": "Sodium",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "CHEMISTRY"
+        },
+        {
+          "OID": "LB.LBCAT.CHEMISTRY.LBTESTCD.URATE",
+          "name": "URATE",
+          "description": "Urate",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 3,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "CHEMISTRY"
+        },
+        {
+          "OID": "LB.LBCAT.HEMATOLOGY.LBTESTCD.ANISO",
+          "name": "ANISO",
+          "description": "Anisocytes",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "HEMATOLOGY"
+        },
+        {
+          "OID": "LB.LBCAT.HEMATOLOGY.LBTESTCD.BASO",
+          "name": "BASO",
+          "description": "Basophils",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 2,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "HEMATOLOGY"
+        },
+        {
+          "OID": "LB.LBCAT.HEMATOLOGY.LBTESTCD.EOS",
+          "name": "EOS",
+          "description": "Eosinophils",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 2,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "HEMATOLOGY"
+        },
+        {
+          "OID": "LB.LBCAT.HEMATOLOGY.LBTESTCD.HCT",
+          "name": "HCT",
+          "description": "Hematocrit",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 2,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "HEMATOLOGY"
+        },
+        {
+          "OID": "LB.LBCAT.HEMATOLOGY.LBTESTCD.HGB",
+          "name": "HGB",
+          "description": "Hemoglobin",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 5,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "HEMATOLOGY"
+        },
+        {
+          "OID": "LB.LBCAT.HEMATOLOGY.LBTESTCD.LYM",
+          "name": "LYM",
+          "description": "Lymphocytes",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 2,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "HEMATOLOGY"
+        },
+        {
+          "OID": "LB.LBCAT.HEMATOLOGY.LBTESTCD.MACROCY",
+          "name": "MACROCY",
+          "description": "Macrocytes",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "HEMATOLOGY"
+        },
+        {
+          "OID": "LB.LBCAT.HEMATOLOGY.LBTESTCD.MCH",
+          "name": "MCH",
+          "description": "Ery. Mean Corpuscular Hemoglobin",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 5,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "HEMATOLOGY"
+        },
+        {
+          "OID": "LB.LBCAT.HEMATOLOGY.LBTESTCD.MCHC",
+          "name": "MCHC",
+          "description": "Ery. Mean Corpuscular HGB Concentration",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 4,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "HEMATOLOGY"
+        },
+        {
+          "OID": "LB.LBCAT.HEMATOLOGY.LBTESTCD.MCV",
+          "name": "MCV",
+          "description": "Ery. Mean Corpuscular Volume",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "HEMATOLOGY"
+        },
+        {
+          "OID": "LB.LBCAT.HEMATOLOGY.LBTESTCD.MICROCY",
+          "name": "MICROCY",
+          "description": "Microcytes",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "HEMATOLOGY"
+        },
+        {
+          "OID": "LB.LBCAT.HEMATOLOGY.LBTESTCD.MONO",
+          "name": "MONO",
+          "description": "Monocytes",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 2,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "HEMATOLOGY"
+        },
+        {
+          "OID": "LB.LBCAT.HEMATOLOGY.LBTESTCD.PLAT",
+          "name": "PLAT",
+          "description": "Platelet",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "HEMATOLOGY"
+        },
+        {
+          "OID": "LB.LBCAT.HEMATOLOGY.LBTESTCD.POIKILO",
+          "name": "POIKILO",
+          "description": "Poikilocytes",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "HEMATOLOGY"
+        },
+        {
+          "OID": "LB.LBCAT.HEMATOLOGY.LBTESTCD.POLYCHR",
+          "name": "POLYCHR",
+          "description": "Polychromasia",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "HEMATOLOGY"
+        },
+        {
+          "OID": "LB.LBCAT.HEMATOLOGY.LBTESTCD.RBC",
+          "name": "RBC",
+          "description": "Erythrocytes",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 1,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "HEMATOLOGY"
+        },
+        {
+          "OID": "LB.LBCAT.HEMATOLOGY.LBTESTCD.WBC",
+          "name": "WBC",
+          "description": "Leukocytes",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 2,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "HEMATOLOGY"
+        },
+        {
+          "OID": "LB.LBCAT.NULL.LBTESTCD.HBA1C",
+          "name": "HBA1C",
+          "description": "Hemoglobin A1C",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 3,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "NULL"
+        },
+        {
+          "OID": "LB.LBCAT.OTHER.LBTESTCD.TSH",
+          "name": "TSH",
+          "description": "Thyrotropin",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 2,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "OTHER"
+        },
+        {
+          "OID": "LB.LBCAT.OTHER.LBTESTCD.VITB12",
+          "name": "VITB12",
+          "description": "Vitamin B12",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 4,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "OTHER"
+        },
+        {
+          "OID": "LB.LBCAT.URINALYSIS.LBTESTCD.COLOR",
+          "name": "COLOR",
+          "description": "Color",
+          "dataType": "text",
+          "length": 1,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "URINALYSIS"
+        },
+        {
+          "OID": "LB.LBCAT.URINALYSIS.LBTESTCD.KETONES",
+          "name": "KETONES",
+          "description": "Ketones",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "URINALYSIS"
+        },
+        {
+          "OID": "LB.LBCAT.URINALYSIS.LBTESTCD.PH",
+          "name": "PH",
+          "description": "pH",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "URINALYSIS"
+        },
+        {
+          "OID": "LB.LBCAT.URINALYSIS.LBTESTCD.SPGRAV",
+          "name": "SPGRAV",
+          "description": "Specific Gravity",
+          "dataType": "float",
+          "length": 8,
+          "significantDigits": 3,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "URINALYSIS"
+        },
+        {
+          "OID": "LB.LBCAT.URINALYSIS.LBTESTCD.UROBIL",
+          "name": "UROBIL",
+          "description": "Urobilinogen",
+          "dataType": "integer",
+          "length": 8,
+          "mandatory": "No",
+          "whereClause": "WC.LBCAT.LBTESTCD",
+          "variable": "URINALYSIS"
+        }
+      ],
+      "whereClause": "WC.LBCAT.LBTESTCD"
+    }
+  ],
+  "items": [],
+  "codeLists": [
+    {
+      "oid": "AECAUS",
+      "name": "AECAUS",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "NONE",
+          "decode": "NONE"
+        },
+        {
+          "codedValue": "POSSIBLE",
+          "decode": "POSSIBLE"
+        },
+        {
+          "codedValue": "PROBABLE",
+          "decode": "PROBABLE"
+        },
+        {
+          "codedValue": "REMOTE",
+          "decode": "REMOTE"
+        }
+      ]
+    },
+    {
+      "oid": "AGESPAN",
+      "name": "AGESPAN",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "CHILDREN (2-11 YEARS)",
+          "decode": "CHILDREN (2-11 YEARS)"
+        },
+        {
+          "codedValue": "ADOLESCENT (12-17 YEARS)",
+          "decode": "ADOLESCENT (12-17 YEARS)"
+        },
+        {
+          "codedValue": "ADULT (18-65)",
+          "decode": "ADULT (18-65)"
+        },
+        {
+          "codedValue": "ELDERLY (> 65)",
+          "decode": "ELDERLY (> 65)"
+        }
+      ]
+    },
+    {
+      "oid": "AGEU",
+      "name": "AGEU",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "YEARS",
+          "decode": "YEARS"
+        }
+      ]
+    },
+    {
+      "oid": "ARM",
+      "name": "ARM",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "Screen Failure",
+          "decode": "Screen Failure"
+        },
+        {
+          "codedValue": "Placebo",
+          "decode": "Placebo"
+        },
+        {
+          "codedValue": "Xanomeline Low Dose",
+          "decode": "Xanomeline Low Dose"
+        },
+        {
+          "codedValue": "Xanomeline High Dose",
+          "decode": "Xanomeline High Dose"
+        }
+      ]
+    },
+    {
+      "oid": "ARMCD",
+      "name": "ARMCD",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "Scrnfail",
+          "decode": "Screen Failure"
+        },
+        {
+          "codedValue": "Pbo",
+          "decode": "Placebo"
+        },
+        {
+          "codedValue": "Xan_Lo",
+          "decode": "Xanomeline Low Dose"
+        },
+        {
+          "codedValue": "Xan_Hi",
+          "decode": "Xanomeline High Dose"
+        }
+      ]
+    },
+    {
+      "oid": "CIBIC",
+      "name": "CIBIC",
+      "dataType": "integer",
+      "items": [
+        {
+          "codedValue": "1",
+          "decode": "Marked improvement"
+        },
+        {
+          "codedValue": "2",
+          "decode": "Moderate improvement"
+        },
+        {
+          "codedValue": "3",
+          "decode": "Minimal improvement"
+        },
+        {
+          "codedValue": "4",
+          "decode": "No Change"
+        },
+        {
+          "codedValue": "5",
+          "decode": "Minimal worsening"
+        },
+        {
+          "codedValue": "6",
+          "decode": "Moderate worsening"
+        },
+        {
+          "codedValue": "7",
+          "decode": "Marked worsening"
+        }
+      ]
+    },
+    {
+      "oid": "CMFREQ",
+      "name": "CMFREQ",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "BID",
+          "decode": "BID"
+        },
+        {
+          "codedValue": "EVERY MORNING",
+          "decode": "EVERY MORNING"
+        },
+        {
+          "codedValue": "EVERY NIGHT",
+          "decode": "EVERY NIGHT"
+        },
+        {
+          "codedValue": "ONCE",
+          "decode": "ONCE"
+        },
+        {
+          "codedValue": "OTHER",
+          "decode": "OTHER"
+        },
+        {
+          "codedValue": "PRN",
+          "decode": "PRN"
+        },
+        {
+          "codedValue": "Q3H",
+          "decode": "Q3H"
+        },
+        {
+          "codedValue": "Q4H",
+          "decode": "Q4H"
+        },
+        {
+          "codedValue": "Q6H",
+          "decode": "Q6H"
+        },
+        {
+          "codedValue": "Q4S",
+          "decode": "Q4S"
+        },
+        {
+          "codedValue": "QD",
+          "decode": "QD"
+        },
+        {
+          "codedValue": "QID",
+          "decode": "QID"
+        },
+        {
+          "codedValue": "QM",
+          "decode": "QM"
+        },
+        {
+          "codedValue": "QOD",
+          "decode": "QOD"
+        },
+        {
+          "codedValue": "QS",
+          "decode": "QS"
+        },
+        {
+          "codedValue": "TID",
+          "decode": "TID"
+        },
+        {
+          "codedValue": "TIS",
+          "decode": "TIS"
+        },
+        {
+          "codedValue": "TWICE",
+          "decode": "TWICE"
+        }
+      ]
+    },
+    {
+      "oid": "CMROUTE",
+      "name": "CMROUTE",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "AURICULAR (OTIC)",
+          "decode": "AURICULAR (OTIC)"
+        },
+        {
+          "codedValue": "INTRAMUSCULAR",
+          "decode": "INTRAMUSCULAR"
+        },
+        {
+          "codedValue": "INTRAVENOUS",
+          "decode": "INTRAVENOUS"
+        },
+        {
+          "codedValue": "NASAL",
+          "decode": "NASAL"
+        },
+        {
+          "codedValue": "OPHTHALMIC",
+          "decode": "OPHTHALMIC"
+        },
+        {
+          "codedValue": "ORAL",
+          "decode": "ORAL"
+        },
+        {
+          "codedValue": "RESPIRATORY (INHALATION)",
+          "decode": "RESPIRATORY (INHALATION)"
+        },
+        {
+          "codedValue": "RECTAL",
+          "decode": "RECTAL"
+        },
+        {
+          "codedValue": "SUBCUTANEOUS",
+          "decode": "SUBCUTANEOUS"
+        },
+        {
+          "codedValue": "SUBLINGUAL",
+          "decode": "SUBLINGUAL"
+        },
+        {
+          "codedValue": "TOPICAL",
+          "decode": "TOPICAL"
+        },
+        {
+          "codedValue": "TRANSDERMAL",
+          "decode": "TRANSDERMAL"
+        },
+        {
+          "codedValue": "VAGINAL",
+          "decode": "VAGINAL"
+        }
+      ]
+    },
+    {
+      "oid": "COLOR",
+      "name": "COLOR",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "N",
+          "decode": "Normal"
+        },
+        {
+          "codedValue": "A",
+          "decode": "Abnormal"
+        }
+      ]
+    },
+    {
+      "oid": "COUNTRY",
+      "name": "COUNTRY",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "USA",
+          "decode": "USA"
+        }
+      ]
+    },
+    {
+      "oid": "DISCCD",
+      "name": "DISCCD",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "COMPLETED",
+          "decode": "COMPLETED"
+        },
+        {
+          "codedValue": "ADVERSE EVENT",
+          "decode": "ADVERSE EVENT"
+        },
+        {
+          "codedValue": "DEATH",
+          "decode": "DEATH"
+        },
+        {
+          "codedValue": "LACK OF EFFICACY",
+          "decode": "LACK OF EFFICACY"
+        },
+        {
+          "codedValue": "LOST TO FOLLOW-UP",
+          "decode": "LOST TO FOLLOW-UP"
+        },
+        {
+          "codedValue": "WITHDRAWAL BY SUBJECT",
+          "decode": "WITHDRAWAL BY SUBJECT"
+        },
+        {
+          "codedValue": "SCREEN FAILURE",
+          "decode": "SCREEN FAILURE"
+        },
+        {
+          "codedValue": "STUDY TERMINATED BY SPONSOR",
+          "decode": "STUDY TERMINATED BY SPONSOR"
+        },
+        {
+          "codedValue": "PHYSICIAN DECISION",
+          "decode": "PHYSICIAN DECISION"
+        },
+        {
+          "codedValue": "PROTOCOL VIOLATION",
+          "decode": "PROTOCOL VIOLATION"
+        },
+        {
+          "codedValue": "FINAL LAB VISIT",
+          "decode": "FINAL LAB VISIT"
+        },
+        {
+          "codedValue": "FINAL RETRIEVAL VISIT",
+          "decode": "FINAL RETRIEVAL VISIT"
+        }
+      ]
+    },
+    {
+      "oid": "DISTSC",
+      "name": "DISTSC",
+      "dataType": "integer",
+      "items": [
+        {
+          "codedValue": "0",
+          "decode": "0"
+        },
+        {
+          "codedValue": "1",
+          "decode": "1"
+        },
+        {
+          "codedValue": "2",
+          "decode": "2"
+        },
+        {
+          "codedValue": "3",
+          "decode": "3"
+        },
+        {
+          "codedValue": "4",
+          "decode": "4"
+        },
+        {
+          "codedValue": "5",
+          "decode": "5"
+        }
+      ]
+    },
+    {
+      "oid": "DSCAT",
+      "name": "DSCAT",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "DISPOSITION EVENT",
+          "decode": "DISPOSITION EVENT"
+        },
+        {
+          "codedValue": "OTHER EVENT",
+          "decode": "OTHER EVENT"
+        }
+      ]
+    },
+    {
+      "oid": "ELEMENT",
+      "name": "ELEMENT",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "Screen",
+          "decode": "Screen"
+        },
+        {
+          "codedValue": "Placebo",
+          "decode": "Placebo"
+        },
+        {
+          "codedValue": "Low",
+          "decode": "Low"
+        },
+        {
+          "codedValue": "High_Start",
+          "decode": "High_Start"
+        },
+        {
+          "codedValue": "High_Middle",
+          "decode": "High_Middle"
+        },
+        {
+          "codedValue": "High_End",
+          "decode": "High_End"
+        },
+        {
+          "codedValue": "Follow_up",
+          "decode": "Follow_up"
+        }
+      ]
+    },
+    {
+      "oid": "EPOCH",
+      "name": "EPOCH",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "Screening",
+          "decode": "Screening"
+        },
+        {
+          "codedValue": "Treatment",
+          "decode": "Treatment"
+        }
+      ]
+    },
+    {
+      "oid": "ETCD",
+      "name": "ETCD",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "SCRN",
+          "decode": "Screen"
+        },
+        {
+          "codedValue": "PBO",
+          "decode": "Placebo"
+        },
+        {
+          "codedValue": "LO",
+          "decode": "Low"
+        },
+        {
+          "codedValue": "HIS",
+          "decode": "High_Start"
+        },
+        {
+          "codedValue": "HIM",
+          "decode": "High_Middle"
+        },
+        {
+          "codedValue": "HIE",
+          "decode": "High_End"
+        },
+        {
+          "codedValue": "FOLO",
+          "decode": "Follow_up"
+        },
+        {
+          "codedValue": "UNPLAN",
+          "decode": "Unplanned"
+        }
+      ]
+    },
+    {
+      "oid": "ETHNIC",
+      "name": "ETHNIC",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "NOT HISPANIC OR LATINO",
+          "decode": "NOT HISPANIC OR LATINO"
+        },
+        {
+          "codedValue": "HISPANIC OR LATINO",
+          "decode": "HISPANIC OR LATINO"
+        }
+      ]
+    },
+    {
+      "oid": "EXDOSEU",
+      "name": "EXDOSEU",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "mg",
+          "decode": "mg"
+        }
+      ]
+    },
+    {
+      "oid": "EXDOSFRM",
+      "name": "EXDOSFRM",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "PATCH",
+          "decode": "PATCH"
+        }
+      ]
+    },
+    {
+      "oid": "EXFREQ",
+      "name": "EXFREQ",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "QD",
+          "decode": "QD"
+        }
+      ]
+    },
+    {
+      "oid": "EXROUTE",
+      "name": "EXROUTE",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "TRANSDERMAL",
+          "decode": "TRANSDERMAL"
+        }
+      ]
+    },
+    {
+      "oid": "EXTRT",
+      "name": "EXTRT",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "PLACEBO",
+          "decode": "PLACEBO"
+        },
+        {
+          "codedValue": "XANOMELINE",
+          "decode": "XANOMELINE"
+        }
+      ]
+    },
+    {
+      "oid": "FREQSC",
+      "name": "FREQSC",
+      "dataType": "integer",
+      "items": [
+        {
+          "codedValue": "1",
+          "decode": "1"
+        },
+        {
+          "codedValue": "2",
+          "decode": "2"
+        },
+        {
+          "codedValue": "3",
+          "decode": "3"
+        },
+        {
+          "codedValue": "4",
+          "decode": "4"
+        }
+      ]
+    },
+    {
+      "oid": "IECAT",
+      "name": "IECAT",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "INCLUSION",
+          "decode": "INCLUSION"
+        },
+        {
+          "codedValue": "EXCLUSION",
+          "decode": "EXCLUSION"
+        }
+      ]
+    },
+    {
+      "oid": "IETEST",
+      "name": "IETEST",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "Males and postmenopausal females at least 50 years of age.",
+          "decode": "Males and postmenopausal females at least 50 years of age."
+        },
+        {
+          "codedValue": "Diagnosis of probable AD as defined by NINCDS and the ADRDA guidelines (Protocol Attachment LZZT.7).",
+          "decode": "Diagnosis of probable AD as defined by NINCDS and the ADRDA guidelines (Protocol Attachment LZZT.7)."
+        },
+        {
+          "codedValue": "MMSE score of 10 to 23.",
+          "decode": "MMSE score of 10 to 23."
+        },
+        {
+          "codedValue": "Modified Hachinski Ischemic Scale score of <= 4. (Protocol Attachment LZZT.8).",
+          "decode": "Modified Hachinski Ischemic Scale score of <= 4. (Protocol Attachment LZZT.8)."
+        },
+        {
+          "codedValue": "CNS imaging (CT scan or MRI of brain) compatible with AD within past 1 year.",
+          "decode": "CNS imaging (CT scan or MRI of brain) compatible with AD within past 1 year."
+        },
+        {
+          "codedValue": "Investigator has obtained informed consent signed by the patient (and/or legal representative) and by the caregiver.",
+          "decode": "Investigator has obtained informed consent signed by the patient (and/or legal representative) and by the caregiver."
+        },
+        {
+          "codedValue": "Geographic proximity to investigator's site that allows adequate follow-up.",
+          "decode": "Geographic proximity to investigator's site that allows adequate follow-up."
+        },
+        {
+          "codedValue": "Caregiverwill monitor administration of prescribed medications, and will be responsible for the overall care of the patient at home.",
+          "decode": "Caregiverwill monitor administration of prescribed medications, and will be responsible for the overall care of the patient at home."
+        },
+        {
+          "codedValue": "Persons who have previously completed or withdrawn from this study or any other investigating xanomeline TTS or the oral formulation of xanomeline.",
+          "decode": "Persons who have previously completed or withdrawn from this study or any other investigating xanomeline TTS or the oral formulation of xanomeline."
+        },
+        {
+          "codedValue": "Use of any investigational agent or approved Alzheimer's therapeutic medication within 30 days prior to enrollment into the study.",
+          "decode": "Use of any investigational agent or approved Alzheimer's therapeutic medication within 30 days prior to enrollment into the study."
+        },
+        {
+          "codedValue": "Serious illness which required hospitalization within 3 months of screening.",
+          "decode": "Serious illness which required hospitalization within 3 months of screening."
+        },
+        {
+          "codedValue": "Diagnosis of serious neurological conditions.",
+          "decode": "Diagnosis of serious neurological conditions."
+        },
+        {
+          "codedValue": "Episode of depression meeting DSM-IV criteria within 3 months of screening.",
+          "decode": "Episode of depression meeting DSM-IV criteria within 3 months of screening."
+        },
+        {
+          "codedValue": "A history of mental illness within the last 5 years.",
+          "decode": "A history of mental illness within the last 5 years."
+        },
+        {
+          "codedValue": "A history of syncope within the last 5 years.",
+          "decode": "A history of syncope within the last 5 years."
+        },
+        {
+          "codedValue": "Evidence from ECG recording at screening of any listed condition.",
+          "decode": "Evidence from ECG recording at screening of any listed condition."
+        },
+        {
+          "codedValue": "A history within the last 5 years of a serious cardiovascular disorder.",
+          "decode": "A history within the last 5 years of a serious cardiovascular disorder."
+        },
+        {
+          "codedValue": "A history within the last 5 years of a serious gastrointestinal disorder.",
+          "decode": "A history within the last 5 years of a serious gastrointestinal disorder."
+        },
+        {
+          "codedValue": "A history within the last 5 years of a serious endocrine disorder.",
+          "decode": "A history within the last 5 years of a serious endocrine disorder."
+        },
+        {
+          "codedValue": "A history within the last 5 years of a serious respiratory disorder (see list).",
+          "decode": "A history within the last 5 years of a serious respiratory disorder (see list)."
+        },
+        {
+          "codedValue": "A history within the last 5 years of a serious genitourinary disorder.",
+          "decode": "A history within the last 5 years of a serious genitourinary disorder."
+        },
+        {
+          "codedValue": "A history within the last 5 years of a serious rheumatologic disorder.",
+          "decode": "A history within the last 5 years of a serious rheumatologic disorder."
+        },
+        {
+          "codedValue": "A known history of human immunodeficiency virus (HIV) within the last 5 years.",
+          "decode": "A known history of human immunodeficiency virus (HIV) within the last 5 years."
+        },
+        {
+          "codedValue": "A history within the last 5 years of a serious infectious disease (see list in protocol).",
+          "decode": "A history within the last 5 years of a serious infectious disease (see list in protocol)."
+        },
+        {
+          "codedValue": "A history within the last 5 years of a primary or recurrent malignant disease (with exceptions, see list in protocol).",
+          "decode": "A history within the last 5 years of a primary or recurrent malignant disease (with exceptions, see list in protocol)."
+        },
+        {
+          "codedValue": "Visual, hearing, or communication disabilities impairing the ability to participate in the study; (for example, inability to speak or understand English, illiteracy).",
+          "decode": "Visual, hearing, or communication disabilities impairing the ability to participate in the study; (for example, inability to speak or understand English, illiteracy)."
+        },
+        {
+          "codedValue": "Laboratory test values exceeding the Lilly Reference Range III for the patient's age in any of the following analytes: creatinine, total bilirubin, SGOT, SGPT, etc.",
+          "decode": "Laboratory test values exceeding the Lilly Reference Range III for the patient's age in any of the following analytes: creatinine, total bilirubin, SGOT, SGPT, etc."
+        },
+        {
+          "codedValue": "Central laboratory test values below reference range for folate, and vitamin B12, and outside reference range for thyroid function tests.",
+          "decode": "Central laboratory test values below reference range for folate, and vitamin B12, and outside reference range for thyroid function tests."
+        },
+        {
+          "codedValue": "Positive syphilis screening with confirmatory testing.",
+          "decode": "Positive syphilis screening with confirmatory testing."
+        },
+        {
+          "codedValue": "Central laboratory test value above reference range for glycosylated hemoglobin (A1C) (insulin dependent diabetes mellitus patients only).",
+          "decode": "Central laboratory test value above reference range for glycosylated hemoglobin (A1C) (insulin dependent diabetes mellitus patients only)."
+        },
+        {
+          "codedValue": "Treatment with medications within 1 month prior to enrollment (see list).",
+          "decode": "Treatment with medications within 1 month prior to enrollment (see list)."
+        }
+      ]
+    },
+    {
+      "oid": "IETESTCD",
+      "name": "IETESTCD",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "INCL01",
+          "decode": "Males and postmenopausal females at least 50 years of age."
+        },
+        {
+          "codedValue": "INCL02",
+          "decode": "Diagnosis of probable AD as defined by NINCDS and the ADRDA guidelines (Protocol Attachment LZZT.7)."
+        },
+        {
+          "codedValue": "INCL03",
+          "decode": "MMSE score of 10 to 23."
+        },
+        {
+          "codedValue": "INCL04",
+          "decode": "Modified Hachinski Ischemic Scale score of <= 4. (Protocol Attachment LZZT.8)."
+        },
+        {
+          "codedValue": "INCL05",
+          "decode": "CNS imaging (CT scan or MRI of brain) compatible with AD within past 1 year."
+        },
+        {
+          "codedValue": "INCL06",
+          "decode": "Investigator has obtained informed consent signed by the patient (and/or legal representative) and by the caregiver."
+        },
+        {
+          "codedValue": "INCL07",
+          "decode": "Geographic proximity to investigator's site that allows adequate follow-up."
+        },
+        {
+          "codedValue": "INCL08",
+          "decode": "Caregiverwill monitor administration of prescribed medications, and will be responsible for the overall care of the patient at home."
+        },
+        {
+          "codedValue": "EXCL09",
+          "decode": "Persons who have previously completed or withdrawn from this study or any other investigating xanomeline TTS or the oral formulation of xanomeline."
+        },
+        {
+          "codedValue": "EXCL10",
+          "decode": "Use of any investigational agent or approved Alzheimer's therapeutic medication within 30 days prior to enrollment into the study."
+        },
+        {
+          "codedValue": "EXCL11",
+          "decode": "Serious illness which required hospitalization within 3 months of screening."
+        },
+        {
+          "codedValue": "EXCL12",
+          "decode": "Diagnosis of serious neurological conditions."
+        },
+        {
+          "codedValue": "EXCL13",
+          "decode": "Episode of depression meeting DSM-IV criteria within 3 months of screening."
+        },
+        {
+          "codedValue": "EXCL14",
+          "decode": "A history of mental illness within the last 5 years."
+        },
+        {
+          "codedValue": "EXCL15",
+          "decode": "A history of syncope within the last 5 years."
+        },
+        {
+          "codedValue": "EXCL16",
+          "decode": "Evidence from ECG recording at screening of any listed condition."
+        },
+        {
+          "codedValue": "EXCL17",
+          "decode": "A history within the last 5 years of a serious cardiovascular disorder."
+        },
+        {
+          "codedValue": "EXCL18",
+          "decode": "A history within the last 5 years of a serious gastrointestinal disorder."
+        },
+        {
+          "codedValue": "EXCL19",
+          "decode": "A history within the last 5 years of a serious endocrine disorder."
+        },
+        {
+          "codedValue": "EXCL20",
+          "decode": "A history within the last 5 years of a serious respiratory disorder (see list)."
+        },
+        {
+          "codedValue": "EXCL21",
+          "decode": "A history within the last 5 years of a serious genitourinary disorder."
+        },
+        {
+          "codedValue": "EXCL22",
+          "decode": "A history within the last 5 years of a serious rheumatologic disorder."
+        },
+        {
+          "codedValue": "EXCL23",
+          "decode": "A known history of human immunodeficiency virus (HIV) within the last 5 years."
+        },
+        {
+          "codedValue": "EXCL24",
+          "decode": "A history within the last 5 years of a serious infectious disease (see list in protocol)."
+        },
+        {
+          "codedValue": "EXCL25",
+          "decode": "A history within the last 5 years of a primary or recurrent malignant disease (with exceptions, see list in protocol)."
+        },
+        {
+          "codedValue": "EXCL26",
+          "decode": "Visual, hearing, or communication disabilities impairing the ability to participate in the study; (for example, inability to speak or understand English, illiteracy)."
+        },
+        {
+          "codedValue": "EXCL27",
+          "decode": "Laboratory test values exceeding the Lilly Reference Range III for the patient's age in any of the following analytes: creatinine, total bilirubin, SGOT, SGPT, etc."
+        },
+        {
+          "codedValue": "EXCL28",
+          "decode": "Central laboratory test values below reference range for folate, and vitamin B12, and outside reference range for thyroid function tests."
+        },
+        {
+          "codedValue": "EXCL29",
+          "decode": "Positive syphilis screening with confirmatory testing."
+        },
+        {
+          "codedValue": "EXCL30",
+          "decode": "Central laboratory test value above reference range for glycosylated hemoglobin (A1C) (insulin dependent diabetes mellitus patients only)."
+        },
+        {
+          "codedValue": "EXCL31",
+          "decode": "Treatment with medications within 1 month prior to enrollment (see list)."
+        }
+      ]
+    },
+    {
+      "oid": "LBCAT",
+      "name": "LBCAT",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "CHEMISTRY",
+          "decode": "CHEMISTRY"
+        },
+        {
+          "codedValue": "HEMATOLOGY",
+          "decode": "HEMATOLOGY"
+        },
+        {
+          "codedValue": "OTHER",
+          "decode": "OTHER"
+        },
+        {
+          "codedValue": "URINALYSIS",
+          "decode": "URINALYSIS"
+        }
+      ]
+    },
+    {
+      "oid": "LBNRIND",
+      "name": "LBNRIND",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "LOW",
+          "decode": "LOW"
+        },
+        {
+          "codedValue": "NORMAL",
+          "decode": "NORMAL"
+        },
+        {
+          "codedValue": "HIGH",
+          "decode": "HIGH"
+        },
+        {
+          "codedValue": "ABNORMAL",
+          "decode": "ABNORMAL"
+        }
+      ]
+    },
+    {
+      "oid": "LBUNIT",
+      "name": "LBUNIT",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "1",
+          "decode": "1"
+        },
+        {
+          "codedValue": "GI/L",
+          "decode": "GI/L"
+        },
+        {
+          "codedValue": "TI/L",
+          "decode": "TI/L"
+        },
+        {
+          "codedValue": "U/L",
+          "decode": "U/L"
+        },
+        {
+          "codedValue": "fL",
+          "decode": "fL"
+        },
+        {
+          "codedValue": "fmol(Fe)",
+          "decode": "fmol(Fe)"
+        },
+        {
+          "codedValue": "g/L",
+          "decode": "g/L"
+        },
+        {
+          "codedValue": "mU/L",
+          "decode": "mU/L"
+        },
+        {
+          "codedValue": "mmol/L",
+          "decode": "mmol/L"
+        },
+        {
+          "codedValue": "pmol/L",
+          "decode": "pmol/L"
+        },
+        {
+          "codedValue": "umol/L",
+          "decode": "umol/L"
+        }
+      ]
+    },
+    {
+      "oid": "MHCAT",
+      "name": "MHCAT",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "HISTORICAL DIAGNOSIS",
+          "decode": "HISTORICAL DIAGNOSIS"
+        },
+        {
+          "codedValue": "PRIMARY DIAGNOSIS",
+          "decode": "PRIMARY DIAGNOSIS"
+        },
+        {
+          "codedValue": "SIGNIFICANT PRE-EXISTING CONDITION",
+          "decode": "SIGNIFICANT PRE-EXISTING CONDITION"
+        }
+      ]
+    },
+    {
+      "oid": "ND",
+      "name": "ND",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "NOT DONE",
+          "decode": "NOT DONE"
+        }
+      ]
+    },
+    {
+      "oid": "NYNAN",
+      "name": "NYNAN",
+      "dataType": "integer",
+      "items": [
+        {
+          "codedValue": "0",
+          "decode": "NO"
+        },
+        {
+          "codedValue": "1",
+          "decode": "YES"
+        },
+        {
+          "codedValue": "96",
+          "decode": "NOT APPLICABLE"
+        }
+      ]
+    },
+    {
+      "oid": "OUT",
+      "name": "OUT",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "RECOVERED/RESOLVED",
+          "decode": "RECOVERED/RESOLVED"
+        },
+        {
+          "codedValue": "NOT RECOVERED/NOT RESOLVED",
+          "decode": "NOT RECOVERED/NOT RESOLVED"
+        },
+        {
+          "codedValue": "FATAL",
+          "decode": "FATAL"
+        }
+      ]
+    },
+    {
+      "oid": "PRESABSA",
+      "name": "PRESABSA",
+      "dataType": "integer",
+      "items": [
+        {
+          "codedValue": "0",
+          "decode": "ABSENT"
+        },
+        {
+          "codedValue": "1",
+          "decode": "PRESENT"
+        }
+      ]
+    },
+    {
+      "oid": "PRESABSB",
+      "name": "PRESABSB",
+      "dataType": "integer",
+      "items": [
+        {
+          "codedValue": "0",
+          "decode": "ABSENT"
+        },
+        {
+          "codedValue": "2",
+          "decode": "PRESENT"
+        }
+      ]
+    },
+    {
+      "oid": "PRESSC",
+      "name": "PRESSC",
+      "dataType": "integer",
+      "items": [
+        {
+          "codedValue": "0",
+          "decode": "ABSENT"
+        },
+        {
+          "codedValue": "96",
+          "decode": "NOT APPLICABLE"
+        }
+      ]
+    },
+    {
+      "oid": "QEVAL",
+      "name": "QEVAL",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "CLINICAL STUDY SPONSOR",
+          "decode": "CLINICAL STUDY SPONSOR"
+        }
+      ]
+    },
+    {
+      "oid": "QSCAT",
+      "name": "QSCAT",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "ALZHEIMER'S DISEASE ASSESSMENT SCALE",
+          "decode": "ALZHEIMER'S DISEASE ASSESSMENT SCALE"
+        },
+        {
+          "codedValue": "CLINICIAN'S INTERVIEW-BASED IMPRESSION OF CHANGE (CIBIC+)",
+          "decode": "CLINICIAN'S INTERVIEW-BASED IMPRESSION OF CHANGE (CIBIC+)"
+        },
+        {
+          "codedValue": "DISABILITY ASSESSMENT FOR DEMENTIA (DAD)",
+          "decode": "DISABILITY ASSESSMENT FOR DEMENTIA (DAD)"
+        },
+        {
+          "codedValue": "MINI-MENTAL STATE",
+          "decode": "MINI-MENTAL STATE"
+        },
+        {
+          "codedValue": "MODIFIED HACHINSKI ISCHEMIC SCORE",
+          "decode": "MODIFIED HACHINSKI ISCHEMIC SCORE"
+        },
+        {
+          "codedValue": "NEUROPSYCHIATRIC INVENTORY - REVISED (NPI-X)",
+          "decode": "NEUROPSYCHIATRIC INVENTORY - REVISED (NPI-X)"
+        }
+      ]
+    },
+    {
+      "oid": "QSUNIT",
+      "name": "QSUNIT",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "sec",
+          "decode": "sec"
+        }
+      ]
+    },
+    {
+      "oid": "RACE",
+      "name": "RACE",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "WHITE",
+          "decode": "WHITE"
+        },
+        {
+          "codedValue": "BLACK OR AFRICAN AMERICAN",
+          "decode": "BLACK OR AFRICAN AMERICAN"
+        },
+        {
+          "codedValue": "AMERICAN INDIAN OR ALASKA NATIVE",
+          "decode": "AMERICAN INDIAN OR ALASKA NATIVE"
+        },
+        {
+          "codedValue": "ASIAN",
+          "decode": "ASIAN"
+        }
+      ]
+    },
+    {
+      "oid": "ROLES",
+      "name": "ROLES",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "GROUPING QUALIFIER",
+          "decode": "GROUPING QUALIFIER"
+        },
+        {
+          "codedValue": "IDENTIFIER",
+          "decode": "IDENTIFIER"
+        },
+        {
+          "codedValue": "QUALIFIER",
+          "decode": "QUALIFIER"
+        },
+        {
+          "codedValue": "RECORD QUALIFIER",
+          "decode": "RECORD QUALIFIER"
+        },
+        {
+          "codedValue": "RESULT",
+          "decode": "RESULT"
+        },
+        {
+          "codedValue": "RESULT QUALIFIER",
+          "decode": "RESULT QUALIFIER"
+        },
+        {
+          "codedValue": "RULE",
+          "decode": "RULE"
+        },
+        {
+          "codedValue": "SYNONYM QUALIFIER",
+          "decode": "SYNONYM QUALIFIER"
+        },
+        {
+          "codedValue": "TIMING",
+          "decode": "TIMING"
+        },
+        {
+          "codedValue": "TOPIC",
+          "decode": "TOPIC"
+        },
+        {
+          "codedValue": "VARIABLE QUALIFIER",
+          "decode": "VARIABLE QUALIFIER"
+        }
+      ]
+    },
+    {
+      "oid": "SCCAT",
+      "name": "SCCAT",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "EDUCATION",
+          "decode": "EDUCATION"
+        }
+      ]
+    },
+    {
+      "oid": "SCORE3V",
+      "name": "SCORE3V",
+      "dataType": "integer",
+      "items": [
+        {
+          "codedValue": "1",
+          "decode": "1"
+        },
+        {
+          "codedValue": "2",
+          "decode": "2"
+        },
+        {
+          "codedValue": "3",
+          "decode": "3"
+        }
+      ]
+    },
+    {
+      "oid": "SCORE5V",
+      "name": "SCORE5V",
+      "dataType": "integer",
+      "items": [
+        {
+          "codedValue": "1",
+          "decode": "1"
+        },
+        {
+          "codedValue": "2",
+          "decode": "2"
+        },
+        {
+          "codedValue": "3",
+          "decode": "3"
+        },
+        {
+          "codedValue": "4",
+          "decode": "4"
+        },
+        {
+          "codedValue": "5",
+          "decode": "5"
+        }
+      ]
+    },
+    {
+      "oid": "SCORE9V",
+      "name": "SCORE9V",
+      "dataType": "integer",
+      "items": [
+        {
+          "codedValue": "1",
+          "decode": "1"
+        },
+        {
+          "codedValue": "2",
+          "decode": "2"
+        },
+        {
+          "codedValue": "3",
+          "decode": "3"
+        },
+        {
+          "codedValue": "4",
+          "decode": "4"
+        },
+        {
+          "codedValue": "5",
+          "decode": "5"
+        },
+        {
+          "codedValue": "6",
+          "decode": "6"
+        },
+        {
+          "codedValue": "7",
+          "decode": "7"
+        },
+        {
+          "codedValue": "8",
+          "decode": "8"
+        },
+        {
+          "codedValue": "9",
+          "decode": "9"
+        }
+      ]
+    },
+    {
+      "oid": "SCUNIT",
+      "name": "SCUNIT",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "YEARS",
+          "decode": "YEARS"
+        }
+      ]
+    },
+    {
+      "oid": "SEV",
+      "name": "SEV",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "MILD",
+          "decode": "MILD"
+        },
+        {
+          "codedValue": "MODERATE",
+          "decode": "MODERATE"
+        },
+        {
+          "codedValue": "SEVERE",
+          "decode": "SEVERE"
+        }
+      ]
+    },
+    {
+      "oid": "SEVSC",
+      "name": "SEVSC",
+      "dataType": "integer",
+      "items": [
+        {
+          "codedValue": "1",
+          "decode": "1"
+        },
+        {
+          "codedValue": "2",
+          "decode": "2"
+        },
+        {
+          "codedValue": "3",
+          "decode": "3"
+        }
+      ]
+    },
+    {
+      "oid": "SEX",
+      "name": "SEX",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "F",
+          "decode": "Female"
+        },
+        {
+          "codedValue": "M",
+          "decode": "Male"
+        },
+        {
+          "codedValue": "U",
+          "decode": "Unknown"
+        }
+      ]
+    },
+    {
+      "oid": "SEXPOP",
+      "name": "SEXPOP",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "BOTH",
+          "decode": "Both"
+        },
+        {
+          "codedValue": "F",
+          "decode": "Female"
+        },
+        {
+          "codedValue": "M",
+          "decode": "Male"
+        }
+      ]
+    },
+    {
+      "oid": "TBLIND",
+      "name": "TBLIND",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "DOUBLE BLIND",
+          "decode": "Double Blind Study"
+        },
+        {
+          "codedValue": "OPEN LABEL",
+          "decode": "Open Label Study"
+        },
+        {
+          "codedValue": "SINGLE BLIND",
+          "decode": "Single Blind Study"
+        }
+      ]
+    },
+    {
+      "oid": "TCNTRL",
+      "name": "TCNTRL",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "ACTIVE",
+          "decode": "ACTIVE"
+        },
+        {
+          "codedValue": "NONE",
+          "decode": "NONE"
+        },
+        {
+          "codedValue": "PLACEBO",
+          "decode": "PLACEBO"
+        }
+      ]
+    },
+    {
+      "oid": "TINDTP",
+      "name": "TINDTP",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "CURE",
+          "decode": "Cure Study"
+        },
+        {
+          "codedValue": "DIAGNOSIS",
+          "decode": "Diagnosis Study"
+        },
+        {
+          "codedValue": "MITIGATION",
+          "decode": "Adverse Effect Mitigation Study"
+        },
+        {
+          "codedValue": "PREVENTION",
+          "decode": "Prevention Study"
+        },
+        {
+          "codedValue": "TREATMENT",
+          "decode": "Treatment Study"
+        }
+      ]
+    },
+    {
+      "oid": "TPHASE",
+      "name": "TPHASE",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "Phase I Trial",
+          "decode": "Phase I Trial"
+        },
+        {
+          "codedValue": "Phase I/II Trial",
+          "decode": "Phase I/II Trial"
+        },
+        {
+          "codedValue": "Phase II Trial",
+          "decode": "Phase II Trial"
+        },
+        {
+          "codedValue": "Phase II/III Trial",
+          "decode": "Phase II/III Trial"
+        },
+        {
+          "codedValue": "Phase IIa Trial",
+          "decode": "Phase IIa Trial"
+        },
+        {
+          "codedValue": "Phase IIb Trial",
+          "decode": "Phase IIb Trial"
+        },
+        {
+          "codedValue": "Phase III Trial",
+          "decode": "Phase III Trial"
+        },
+        {
+          "codedValue": "Phase IIIa Trial",
+          "decode": "Phase IIIa Trial"
+        },
+        {
+          "codedValue": "Phase IIIb Trial",
+          "decode": "Phase IIIb Trial"
+        },
+        {
+          "codedValue": "Phase IV Trial",
+          "decode": "Phase IV Trial"
+        },
+        {
+          "codedValue": "Phase V Trial",
+          "decode": "Phase V Trial"
+        },
+        {
+          "codedValue": "NA",
+          "decode": "NA"
+        }
+      ]
+    },
+    {
+      "oid": "TTYPE",
+      "name": "TTYPE",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "BIO-AVAILABILITY",
+          "decode": "Bioavailability Study"
+        },
+        {
+          "codedValue": "BIO-EQUIVALENCE",
+          "decode": "Therapeutic Equivalency Study"
+        },
+        {
+          "codedValue": "EFFICACY",
+          "decode": "Efficacy Study"
+        },
+        {
+          "codedValue": "PHARMACODYNAMIC",
+          "decode": "Pharmacodynamic Study"
+        },
+        {
+          "codedValue": "PHARMACOECONOMIC",
+          "decode": "Pharmacoeconomic Study"
+        },
+        {
+          "codedValue": "PHARMACOGENOMIC",
+          "decode": "Pharmacogenomic Study"
+        },
+        {
+          "codedValue": "PHARMACOKINETIC",
+          "decode": "Pharmacokinetic Study"
+        },
+        {
+          "codedValue": "SAFETY",
+          "decode": "Safety Study"
+        }
+      ]
+    },
+    {
+      "oid": "VISIT",
+      "name": "VISIT",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "SCREENING 1",
+          "decode": "SCREENING 1"
+        },
+        {
+          "codedValue": "UNSCHEDULED 1.1",
+          "decode": "UNSCHEDULED 1.1"
+        },
+        {
+          "codedValue": "UNSCHEDULED 1.2",
+          "decode": "UNSCHEDULED 1.2"
+        },
+        {
+          "codedValue": "UNSCHEDULED 1.3",
+          "decode": "UNSCHEDULED 1.3"
+        },
+        {
+          "codedValue": "SCREENING 2",
+          "decode": "SCREENING 2"
+        },
+        {
+          "codedValue": "BASELINE",
+          "decode": "BASELINE"
+        },
+        {
+          "codedValue": "UNSCHEDULED 3.1",
+          "decode": "UNSCHEDULED 3.1"
+        },
+        {
+          "codedValue": "AMBUL ECG PLACEMENT",
+          "decode": "AMBUL ECG PLACEMENT"
+        },
+        {
+          "codedValue": "WEEK 2",
+          "decode": "WEEK 2"
+        },
+        {
+          "codedValue": "UNSCHEDULED 4.1",
+          "decode": "UNSCHEDULED 4.1"
+        },
+        {
+          "codedValue": "UNSCHEDULED 4.2",
+          "decode": "UNSCHEDULED 4.2"
+        },
+        {
+          "codedValue": "WEEK 4",
+          "decode": "WEEK 4"
+        },
+        {
+          "codedValue": "UNSCHEDULED 5.1",
+          "decode": "UNSCHEDULED 5.1"
+        },
+        {
+          "codedValue": "AMBUL ECG REMOVAL",
+          "decode": "AMBUL ECG REMOVAL"
+        },
+        {
+          "codedValue": "UNSCHEDULED 6.1",
+          "decode": "UNSCHEDULED 6.1"
+        },
+        {
+          "codedValue": "WEEK 6",
+          "decode": "WEEK 6"
+        },
+        {
+          "codedValue": "UNSCHEDULED 7.1",
+          "decode": "UNSCHEDULED 7.1"
+        },
+        {
+          "codedValue": "WEEK 8",
+          "decode": "WEEK 8"
+        },
+        {
+          "codedValue": "WEEK 10 (T)",
+          "decode": "WEEK 10 (T)"
+        },
+        {
+          "codedValue": "UNSCHEDULED 8.2",
+          "decode": "UNSCHEDULED 8.2"
+        },
+        {
+          "codedValue": "WEEK 12",
+          "decode": "WEEK 12"
+        },
+        {
+          "codedValue": "WEEK 14 (T)",
+          "decode": "WEEK 14 (T)"
+        },
+        {
+          "codedValue": "UNSCHEDULED 9.2",
+          "decode": "UNSCHEDULED 9.2"
+        },
+        {
+          "codedValue": "UNSCHEDULED 9.3",
+          "decode": "UNSCHEDULED 9.3"
+        },
+        {
+          "codedValue": "WEEK 16",
+          "decode": "WEEK 16"
+        },
+        {
+          "codedValue": "WEEK 18 (T)",
+          "decode": "WEEK 18 (T)"
+        },
+        {
+          "codedValue": "UNSCHEDULED 10.2",
+          "decode": "UNSCHEDULED 10.2"
+        },
+        {
+          "codedValue": "WEEK 20",
+          "decode": "WEEK 20"
+        },
+        {
+          "codedValue": "WEEK 22 (T)",
+          "decode": "WEEK 22 (T)"
+        },
+        {
+          "codedValue": "UNSCHEDULED 11.2",
+          "decode": "UNSCHEDULED 11.2"
+        },
+        {
+          "codedValue": "WEEK 24",
+          "decode": "WEEK 24"
+        },
+        {
+          "codedValue": "UNSCHEDULED 12.1",
+          "decode": "UNSCHEDULED 12.1"
+        },
+        {
+          "codedValue": "WEEK 26",
+          "decode": "WEEK 26"
+        },
+        {
+          "codedValue": "UNSCHEDULED 13.1",
+          "decode": "UNSCHEDULED 13.1"
+        },
+        {
+          "codedValue": "AE FOLLOW-UP",
+          "decode": "AE FOLLOW-UP"
+        },
+        {
+          "codedValue": "RETRIEVAL",
+          "decode": "RETRIEVAL"
+        },
+        {
+          "codedValue": "Rash followup",
+          "decode": "Rash followup"
+        }
+      ]
+    },
+    {
+      "oid": "VISITNUM",
+      "name": "VISITNUM",
+      "dataType": "float",
+      "items": [
+        {
+          "codedValue": "1",
+          "decode": "SCREENING 1"
+        },
+        {
+          "codedValue": "1.1",
+          "decode": "UNSCHEDULED 1.1"
+        },
+        {
+          "codedValue": "1.2",
+          "decode": "UNSCHEDULED 1.2"
+        },
+        {
+          "codedValue": "1.3",
+          "decode": "UNSCHEDULED 1.3"
+        },
+        {
+          "codedValue": "2",
+          "decode": "SCREENING 2"
+        },
+        {
+          "codedValue": "3",
+          "decode": "BASELINE"
+        },
+        {
+          "codedValue": "3.1",
+          "decode": "UNSCHEDULED 3.1"
+        },
+        {
+          "codedValue": "3.5",
+          "decode": "AMBUL ECG PLACEMENT"
+        },
+        {
+          "codedValue": "4",
+          "decode": "WEEK 2"
+        },
+        {
+          "codedValue": "4.1",
+          "decode": "UNSCHEDULED 4.1"
+        },
+        {
+          "codedValue": "4.2",
+          "decode": "UNSCHEDULED 4.2"
+        },
+        {
+          "codedValue": "5",
+          "decode": "WEEK 4"
+        },
+        {
+          "codedValue": "5.1",
+          "decode": "UNSCHEDULED 5.1"
+        },
+        {
+          "codedValue": "6",
+          "decode": "AMBUL ECG REMOVAL"
+        },
+        {
+          "codedValue": "6.1",
+          "decode": "UNSCHEDULED 6.1"
+        },
+        {
+          "codedValue": "7",
+          "decode": "WEEK 6"
+        },
+        {
+          "codedValue": "7.1",
+          "decode": "UNSCHEDULED 7.1"
+        },
+        {
+          "codedValue": "8",
+          "decode": "WEEK 8"
+        },
+        {
+          "codedValue": "8.1",
+          "decode": "WEEK 10 (T)"
+        },
+        {
+          "codedValue": "8.2",
+          "decode": "UNSCHEDULED 8.2"
+        },
+        {
+          "codedValue": "9",
+          "decode": "WEEK 12"
+        },
+        {
+          "codedValue": "9.1",
+          "decode": "WEEK 14 (T)"
+        },
+        {
+          "codedValue": "9.2",
+          "decode": "UNSCHEDULED 9.2"
+        },
+        {
+          "codedValue": "9.3",
+          "decode": "UNSCHEDULED 9.3"
+        },
+        {
+          "codedValue": "10",
+          "decode": "WEEK 16"
+        },
+        {
+          "codedValue": "10.1",
+          "decode": "WEEK 18 (T)"
+        },
+        {
+          "codedValue": "10.2",
+          "decode": "UNSCHEDULED 10.2"
+        },
+        {
+          "codedValue": "11",
+          "decode": "WEEK 20"
+        },
+        {
+          "codedValue": "11.1",
+          "decode": "WEEK 22 (T)"
+        },
+        {
+          "codedValue": "11.2",
+          "decode": "UNSCHEDULED 11.2"
+        },
+        {
+          "codedValue": "12",
+          "decode": "WEEK 24"
+        },
+        {
+          "codedValue": "12.1",
+          "decode": "UNSCHEDULED 12.1"
+        },
+        {
+          "codedValue": "13",
+          "decode": "WEEK 26"
+        },
+        {
+          "codedValue": "13.1",
+          "decode": "UNSCHEDULED 13.1"
+        },
+        {
+          "codedValue": "101",
+          "decode": "AE FOLLOW-UP"
+        },
+        {
+          "codedValue": "201",
+          "decode": "RETRIEVAL"
+        },
+        {
+          "codedValue": "501",
+          "decode": "Rash followup"
+        }
+      ]
+    },
+    {
+      "oid": "VSLOC",
+      "name": "VSLOC",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "ORAL CAVITY",
+          "decode": "ORAL CAVITY"
+        },
+        {
+          "codedValue": "EAR",
+          "decode": "EAR"
+        }
+      ]
+    },
+    {
+      "oid": "VSPOS",
+      "name": "VSPOS",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "STANDING",
+          "decode": "STANDING"
+        },
+        {
+          "codedValue": "SUPINE",
+          "decode": "SUPINE"
+        }
+      ]
+    },
+    {
+      "oid": "VSTPT",
+      "name": "VSTPT",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "AFTER LYING DOWN FOR 5 MINUTES",
+          "decode": "AFTER LYING DOWN FOR 5 MINUTES"
+        },
+        {
+          "codedValue": "AFTER STANDING FOR 1 MINUTE",
+          "decode": "AFTER STANDING FOR 1 MINUTE"
+        },
+        {
+          "codedValue": "AFTER STANDING FOR 3 MINUTES",
+          "decode": "AFTER STANDING FOR 3 MINUTES"
+        }
+      ]
+    },
+    {
+      "oid": "VSTPTNUM",
+      "name": "VSTPTNUM",
+      "dataType": "integer",
+      "items": [
+        {
+          "codedValue": "815",
+          "decode": "AFTER LYING DOWN FOR 5 MINUTES"
+        },
+        {
+          "codedValue": "816",
+          "decode": "AFTER STANDING FOR 1 MINUTE"
+        },
+        {
+          "codedValue": "817",
+          "decode": "AFTER STANDING FOR 3 MINUTES"
+        }
+      ]
+    },
+    {
+      "oid": "VSTPTREF",
+      "name": "VSTPTREF",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "PATIENT STANDING",
+          "decode": "PATIENT STANDING"
+        },
+        {
+          "codedValue": "PATIENT SUPINE",
+          "decode": "PATIENT SUPINE"
+        }
+      ]
+    },
+    {
+      "oid": "VSUNIT",
+      "name": "VSUNIT",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "C",
+          "decode": "C"
+        },
+        {
+          "codedValue": "F",
+          "decode": "F"
+        },
+        {
+          "codedValue": "BEATS/MIN",
+          "decode": "BEATS/MIN"
+        },
+        {
+          "codedValue": "cm",
+          "decode": "cm"
+        },
+        {
+          "codedValue": "IN",
+          "decode": "IN"
+        },
+        {
+          "codedValue": "LB",
+          "decode": "LB"
+        },
+        {
+          "codedValue": "kg",
+          "decode": "kg"
+        },
+        {
+          "codedValue": "mmHg",
+          "decode": "mmHg"
+        }
+      ]
+    },
+    {
+      "oid": "YN",
+      "name": "YN",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "N",
+          "decode": "No"
+        },
+        {
+          "codedValue": "Y",
+          "decode": "Yes"
+        }
+      ]
+    },
+    {
+      "oid": "Y_BLANK",
+      "name": "Y_BLANK",
+      "dataType": "text",
+      "items": [
+        {
+          "codedValue": "Y",
+          "decode": "Yes"
+        }
+      ]
+    },
+    {
+      "oid": "AEDICT",
+      "name": "ADVERSE EVENT DICTIONARY",
+      "dataType": "text",
+      "items": []
+    },
+    {
+      "oid": "DRUGDICT",
+      "name": "DRUG DICTIONARY",
+      "dataType": "text",
+      "items": []
+    },
+    {
+      "oid": "MHDICT",
+      "name": "MEDICAL HISTORY DICTIONARY",
+      "dataType": "text",
+      "items": []
+    }
+  ],
+  "conditions": [],
+  "whereClauses": [],
+  "methods": [],
+  "standards": [],
+  "annotatedCRF": [
+    {
+      "leafID": "blankcrf",
+      "title": "Annotated CRF"
+    }
+  ],
+  "concepts": [],
+  "conceptProperties": []
+}

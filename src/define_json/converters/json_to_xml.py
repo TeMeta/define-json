@@ -10,13 +10,31 @@ import xml.etree.ElementTree as ET
 import xml.dom.minidom
 from pathlib import Path
 from datetime import datetime
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Optional
+
+try:
+    from lxml import etree
+    LXML_AVAILABLE = True
+except ImportError:
+    LXML_AVAILABLE = False
 
 
 class DefineJSONToXMLConverter:
     """Convert Define-JSON back to Define-XML for true roundtrip validation."""
     
-    def __init__(self):
+    def __init__(self, stylesheet_href: str = "define2-1.xsl"):
+        """
+        Initialize converter.
+        
+        Args:
+            stylesheet_href: The href attribute for the XML stylesheet processing instruction.
+                           Can be a relative path, absolute path, or URL.
+                           Examples:
+                           - "define2-1.xsl" (relative, default)
+                           - "./define2-1.xsl" (explicit relative)
+                           - "https://example.com/define2-1.xsl" (URL)
+        """
+        self.stylesheet_href = stylesheet_href
         self.namespaces = {
             'odm': 'http://www.cdisc.org/ns/odm/v1.3',
             'def': 'http://www.cdisc.org/ns/def/v2.1',
@@ -31,6 +49,9 @@ class DefineJSONToXMLConverter:
         """Convert Define-JSON file back to Define-XML."""
         with open(json_path, 'r') as f:
             json_data = json.load(f)
+        
+        # Handle nested metaDataVersion format
+        json_data = self._normalize_json_structure(json_data)
         
         # Create root ODM element with proper namespace (let registration handle prefixes)
         root = ET.Element('ODM')
@@ -89,10 +110,16 @@ class DefineJSONToXMLConverter:
         self._create_annotated_crf(mdv, json_data.get('annotatedCRF', []))
         
         # Process Conditions and WhereClauses with proper separation
+        # Collect existing ItemOIDs to avoid creating WhereClauses for non-existent items
+        existing_item_oids = set()
+        for item in json_data.get('items', []):
+            existing_item_oids.add(item.get('OID'))
+        
         self._create_conditions_and_where_clauses(
             mdv, 
             json_data.get('conditions', []), 
-            json_data.get('whereClauses', [])
+            json_data.get('whereClauses', []),
+            existing_item_oids
         )
         
         # Process all ItemGroups (both domain and ValueList ItemGroups)
@@ -107,8 +134,29 @@ class DefineJSONToXMLConverter:
         # Then create domain ItemGroups
         self._create_item_groups(mdv, domain_item_groups)
         
-        # Process ItemDefs (Variables)
-        self._create_item_defs(mdv, json_data.get('items', []))
+        # Process ItemDefs (Variables) - collect from both top-level and nested in itemGroups
+        items = json_data.get('items', [])
+        
+        # Always also extract items from itemGroups (since items are now nested inline)
+        nested_items = []
+        for ig in json_data.get('itemGroups', []):
+            for item in ig.get('items', []):
+                # Items should already have OID field (schema conformant)
+                # But handle legacy itemOID for backward compatibility
+                if 'itemOID' in item and 'OID' not in item:
+                    item = item.copy()  # Don't modify original
+                    item['OID'] = item['itemOID']
+                nested_items.append(item)
+        
+        # Combine top-level and nested items, removing duplicates by OID
+        all_items = items + nested_items
+        unique_items = {}
+        for item in all_items:
+            oid = item.get('OID') or item.get('itemOID')
+            if oid:
+                unique_items[oid] = item
+        
+        self._create_item_defs(mdv, list(unique_items.values()))
         
         # Process CodeLists
         self._create_code_lists(mdv, json_data.get('codeLists', []))
@@ -116,12 +164,156 @@ class DefineJSONToXMLConverter:
         # Process Methods
         self._create_methods(mdv, json_data.get('Methods', []))
         
-        # Write to file
+        # Write to file with stylesheet processing instruction
         tree = ET.ElementTree(root)
         ET.indent(tree, space="  ", level=0)
-        tree.write(output_path, encoding='utf-8', xml_declaration=True)
+        
+        # Create XML string with processing instruction
+        xml_str = ET.tostring(root, encoding='unicode')
+        
+        # Format the XML properly
+        dom = xml.dom.minidom.parseString(xml_str)
+        formatted_xml = dom.toprettyxml(indent="  ", encoding=None)
+        
+        # Add stylesheet processing instruction after XML declaration
+        lines = formatted_xml.split('\n')
+        xml_declaration = '<?xml version="1.0" encoding="utf-8"?>'
+        stylesheet_pi = f'<?xml-stylesheet type="text/xsl" href="{self.stylesheet_href}"?>'
+        
+        # Write the complete XML with processing instruction
+        with open(output_path, 'w', encoding='utf-8') as f:
+            f.write(xml_declaration + '\n')
+            f.write(stylesheet_pi + '\n')
+            # Skip the minidom XML declaration and write the rest
+            content_lines = [line for line in lines if line.strip() and not line.strip().startswith('<?xml')]
+            f.write('\n'.join(content_lines))
         
         return root
+    
+    def convert_to_html(self, json_path: Path, output_path: Path, xsl_path: Optional[Path] = None) -> bool:
+        """
+        Convert Define-JSON to HTML using XSL transformation.
+        Simply converts JSON to XML first, then applies XSL transformation.
+        
+        Args:
+            json_path: Path to input Define-JSON file
+            output_path: Path for output HTML file
+            xsl_path: Path to XSL stylesheet (defaults to bundled define2-1.xsl)
+            
+        Returns:
+            True if successful, False otherwise
+        """
+        if not LXML_AVAILABLE:
+            raise ImportError("lxml is required for HTML generation. Install with: pip install lxml")
+        
+        try:
+            # Step 1: Convert JSON to XML (temporary file)
+            import tempfile
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.xml', delete=False) as tmp_xml:
+                temp_xml_path = Path(tmp_xml.name)
+            
+            # Generate XML first
+            self.convert_file(json_path, temp_xml_path)
+            
+            # Step 2: Apply XSL transformation to the XML
+            success = self.xml_to_html(temp_xml_path, output_path, xsl_path)
+            
+            # Clean up temporary file
+            temp_xml_path.unlink()
+            
+            return success
+            
+        except Exception as e:
+            print(f"Error during HTML generation: {e}")
+            return False
+    
+    def xml_to_html(self, xml_path: Path, output_path: Path, xsl_path: Optional[Path] = None) -> bool:
+        """
+        Convert XML to HTML using XSL transformation.
+        
+        Args:
+            xml_path: Path to input XML file
+            output_path: Path for output HTML file
+            xsl_path: Path to XSL stylesheet (defaults to bundled define2-1.xsl)
+            
+        Returns:
+            True if successful, False otherwise
+        """
+        if not LXML_AVAILABLE:
+            raise ImportError("lxml is required for HTML generation. Install with: pip install lxml")
+        
+        # Use bundled XSL if none provided
+        if xsl_path is None:
+            xsl_path = Path(__file__).parent.parent.parent.parent / "data" / "define2-1.xsl"
+        
+        if not xsl_path.exists():
+            raise FileNotFoundError(f"XSL stylesheet not found: {xsl_path}")
+        
+        if not xml_path.exists():
+            raise FileNotFoundError(f"XML file not found: {xml_path}")
+        
+        try:
+            # Load XML document
+            xml_doc = etree.parse(str(xml_path))
+            
+            # Load XSL stylesheet
+            xsl_doc = etree.parse(str(xsl_path))
+            transform = etree.XSLT(xsl_doc)
+            
+            # Apply transformation
+            html_doc = transform(xml_doc)
+            
+            # Write HTML output
+            with open(output_path, 'w', encoding='utf-8') as f:
+                f.write(str(html_doc))
+            
+            return True
+            
+        except Exception as e:
+            print(f"Error during XSL transformation: {e}")
+            return False
+    
+    def _normalize_json_structure(self, json_data: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Normalize JSON structure to handle both flattened and nested metaDataVersion formats.
+        
+        If the JSON has a metaDataVersion array, extract the first element's content
+        and merge it with the top-level data.
+        """
+        # If already flattened (has top-level itemGroups, items, etc.), return as-is
+        if json_data.get('itemGroups') or json_data.get('items'):
+            return json_data
+        
+        # Handle nested metaDataVersion format
+        if 'metaDataVersion' in json_data and isinstance(json_data['metaDataVersion'], list):
+            if len(json_data['metaDataVersion']) > 0:
+                # Extract the first metaDataVersion element
+                mdv_data = json_data['metaDataVersion'][0]
+                
+                # Create a new flattened structure
+                flattened = json_data.copy()
+                
+                # Remove the nested metaDataVersion array
+                del flattened['metaDataVersion']
+                
+                # Merge metaDataVersion content into top level
+                for key, value in mdv_data.items():
+                    if key not in flattened:  # Don't overwrite existing top-level data
+                        flattened[key] = value
+                
+                return flattened
+        
+        # Return original if no transformation needed
+        return json_data
+    
+    def _safe_str(self, value: Any) -> str:
+        """Safely convert any value to string for XML attributes."""
+        if isinstance(value, bool):
+            return 'Yes' if value else 'No'
+        elif value is None:
+            return ''
+        else:
+            return str(value)
     
     def _create_standards(self, parent: ET.Element, standards: List[Dict[str, Any]]):
         """Create def:Standards section."""
@@ -191,7 +383,7 @@ class DefineJSONToXMLConverter:
                     else:
                         wc_ref.set('WhereClauseOID', shared_wc_oid)
     
-    def _create_conditions_and_where_clauses(self, parent: ET.Element, conditions: List[Dict[str, Any]], where_clauses: List[Dict[str, Any]]):
+    def _create_conditions_and_where_clauses(self, parent: ET.Element, conditions: List[Dict[str, Any]], where_clauses: List[Dict[str, Any]], existing_item_oids: set = None):
         """Create WhereClauseDef elements from separated Conditions and WhereClauses."""
         # Create a lookup for conditions by OID
         conditions_by_oid = {cond.get('OID'): cond for cond in conditions}
@@ -205,10 +397,14 @@ class DefineJSONToXMLConverter:
                 domain = parts[1]  # VS, LB
                 parameter = parts[2]  # TEMP, AST, etc.
                 
-                # Create original variable-specific WhereClauses for roundtrip compatibility
+                # Only create WhereClauses for ItemOIDs that actually exist (no assumptions)
                 variables = ['LBORRES', 'LBORRESU'] if domain == 'LB' else ['VSORRES', 'VSORRESU']
                 
                 for variable in variables:
+                    # Check if the corresponding ItemOID actually exists
+                    expected_item_oid = f'IT.{domain}.{variable}.{parameter}'
+                    if existing_item_oids and expected_item_oid not in existing_item_oids:
+                        continue  # Skip creating WhereClause for non-existent ItemOID
                     original_oid = f'WC.{domain}.{variable}.{parameter}'
                     
                     wc_elem = ET.SubElement(parent, '{%s}WhereClauseDef' % self.namespaces['def'])
@@ -244,7 +440,7 @@ class DefineJSONToXMLConverter:
             if ds.get('domain'):
                 ig_elem.set('Domain', ds['domain'])
             if ds.get('repeating') is not None:
-                ig_elem.set('Repeating', 'Yes' if ds['repeating'] else 'No')
+                ig_elem.set('Repeating', self._safe_str(ds['repeating']))
             if ds.get('sasDatasetName'):
                 ig_elem.set('SASDatasetName', ds['sasDatasetName'])
             if ds.get('structure'):
@@ -264,8 +460,14 @@ class DefineJSONToXMLConverter:
             # Add ItemRefs
             for item in ds.get('items', []):
                 item_ref = ET.SubElement(ig_elem, 'ItemRef')
-                item_ref.set('ItemOID', item.get('itemOID', ''))
-                item_ref.set('Mandatory', item.get('mandatory', 'No'))
+                # Items should have OID field (schema conformant), but handle legacy itemOID
+                item_oid = item.get('OID') or item.get('itemOID', '')
+                item_ref.set('ItemOID', item_oid)
+                
+                # Convert boolean mandatory to string
+                mandatory = item.get('mandatory', 'No')
+                item_ref.set('Mandatory', self._safe_str(mandatory))
+                
                 if item.get('role'):
                     item_ref.set('Role', item['role'])
                 
@@ -307,14 +509,17 @@ class DefineJSONToXMLConverter:
         """Create CodeList elements."""
         for cl in code_lists:
             cl_elem = ET.SubElement(parent, 'CodeList')
-            cl_elem.set('OID', cl.get('oid', ''))
+            # Handle both 'OID' and 'oid' field names
+            oid = cl.get('OID') or cl.get('oid', '')
+            cl_elem.set('OID', oid)
             if cl.get('name'):
                 cl_elem.set('Name', cl['name'])
             if cl.get('dataType'):
                 cl_elem.set('DataType', cl['dataType'])
             
-            # Add CodeListItems
-            for item in cl.get('items', []):
+            # Add CodeListItems - handle both 'codeListItems' and 'items'
+            items = cl.get('codeListItems') or cl.get('items', [])
+            for item in items:
                 cli_elem = ET.SubElement(cl_elem, 'CodeListItem')
                 cli_elem.set('CodedValue', item.get('codedValue', ''))
                 

@@ -4,7 +4,8 @@ version = "0.1.0"
 description = "Define-JSON CDISC standard for data contracts"
 authors = ["Jeremy Teoh"]
 readme = "README.md"
-package-mode = false
+package-mode = true
+packages = [{include = "define_json", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
@@ -15,6 +16,7 @@ jsonschema = "^4.24.0"
 click = "^8.2.1"
 rich = "^14.0.0"
 plotly = "^6.2.0"
+lxml = "^5.3.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.1"

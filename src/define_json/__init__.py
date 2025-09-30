@@ -8,12 +8,12 @@ to complement CDISC USDM, ODM, and Dataset-JSON.
 __version__ = "0.1.0"
 __author__ = "Define-JSON Team"
 
-from .converters.xml_to_json import PortableDefineXMLToJSONConverter
+from .converters.xml_to_json import DefineXMLToJSONConverter
 from .converters.json_to_xml import DefineJSONToXMLConverter
 from .validation.roundtrip import run_roundtrip_test, validate_true_roundtrip
 
 __all__ = [
-    "PortableDefineXMLToJSONConverter",
+    "DefineXMLToJSONConverter",
     "DefineJSONToXMLConverter", 
     "run_roundtrip_test",
     "validate_true_roundtrip"

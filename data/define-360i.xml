@@ -1,0 +1,1766 @@
+<?xml version='1.0' encoding='utf-8'?>
+<ODM FileOID="ODM.DEFINE21.360i.001" AsOfDateTime="2025-08-25T14:27:13.299792+00:00"
+     CreationDateTime="2025-08-25T14:27:13.299812+00:00" ODMVersion="1.3.2" FileType="Snapshot"
+     Originator="360i Define-XML Team" SourceSystem="odmlib" SourceSystemVersion="0.2" def:Context="Other"
+     xmlns="http://www.cdisc.org/ns/odm/v1.3" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xlink="http://www.w3.org/1999/xlink"
+     xmlns:def="http://www.cdisc.org/ns/def/v2.1">
+    <Study OID="ODM.LZZT">
+        <GlobalVariables>
+            <StudyName>LZZT</StudyName>
+            <StudyDescription>Safety and Efficacy of the Xanomeline Transdermal Therapeutic System (TTS) in Patients
+                with Mild to Moderate Alzheimer's Disease
+            </StudyDescription>
+            <ProtocolName>LZZT</ProtocolName>
+        </GlobalVariables>
+        <MetaDataVersion OID="MDV.LZZT" Name="MDV LZZT" Description="Data Definitions for LZZT"
+                         def:DefineVersion="2.1.0">
+            <def:Standards>
+                <def:Standard OID="ST.1" Name="SDTMIG" Type="IG" Version="3.4" Status="Final"/>
+                <def:Standard OID="ST.2" Name="CDISC/NCI" Type="CT" Version="2025-03-28" Status="Final"
+                              PublishingSet="SDTM"/>
+            </def:Standards>
+            <def:AnnotatedCRF>
+                <def:DocumentRef leafID="LF.acrf"/>
+            </def:AnnotatedCRF>
+            <def:ValueListDef OID="VL.VS.VSORRES">
+                <ItemRef ItemOID="IT.VS.VSORRES.TEMP" Mandatory="No">
+                    <def:WhereClauseRef WhereClauseOID="WC.VS.VSORRES.TEMP"/>
+                </ItemRef>
+                <ItemRef ItemOID="IT.VS.VSORRES.WEIGHT" Mandatory="No">
+                    <def:WhereClauseRef WhereClauseOID="WC.VS.VSORRES.WEIGHT"/>
+                </ItemRef>
+                <ItemRef ItemOID="IT.VS.VSORRES.HEIGHT" Mandatory="No">
+                    <def:WhereClauseRef WhereClauseOID="WC.VS.VSORRES.HEIGHT"/>
+                </ItemRef>
+                <ItemRef ItemOID="IT.VS.VSORRES.SYSBP" Mandatory="No">
+                    <def:WhereClauseRef WhereClauseOID="WC.VS.VSORRES.SYSBP"/>
+                </ItemRef>
+                <ItemRef ItemOID="IT.VS.VSORRES.DIABP" Mandatory="No">
+                    <def:WhereClauseRef WhereClauseOID="WC.VS.VSORRES.DIABP"/>
+                </ItemRef>
+                <ItemRef ItemOID="IT.VS.VSORRES.HR" Mandatory="No">
+                    <def:WhereClauseRef WhereClauseOID="WC.VS.VSORRES.HR"/>
+                </ItemRef>
+            </def:ValueListDef>
+            <def:ValueListDef OID="VL.VS.VSORRESU">
+                <ItemRef ItemOID="IT.VS.VSORRESU.TEMP" Mandatory="No">
+                    <def:WhereClauseRef WhereClauseOID="WC.VS.VSORRESU.TEMP"/>
+                </ItemRef>
+                <ItemRef ItemOID="IT.VS.VSORRESU.WEIGHT" Mandatory="No">
+                    <def:WhereClauseRef WhereClauseOID="WC.VS.VSORRESU.WEIGHT"/>
+                </ItemRef>
+                <ItemRef ItemOID="IT.VS.VSORRESU.HEIGHT" Mandatory="No">
+                    <def:WhereClauseRef WhereClauseOID="WC.VS.VSORRESU.HEIGHT"/>
+                </ItemRef>
+                <ItemRef ItemOID="IT.VS.VSORRESU.SYSBP" Mandatory="No">
+                    <def:WhereClauseRef WhereClauseOID="WC.VS.VSORRESU.SYSBP"/>
+                </ItemRef>
+                <ItemRef ItemOID="IT.VS.VSORRESU.DIABP" Mandatory="No">
+                    <def:WhereClauseRef WhereClauseOID="WC.VS.VSORRESU.DIABP"/>
+                </ItemRef>
+                <ItemRef ItemOID="IT.VS.VSORRESU.HR" Mandatory="No">
+                    <def:WhereClauseRef WhereClauseOID="WC.VS.VSORRESU.HR"/>
+                </ItemRef>
+            </def:ValueListDef>
+            <def:ValueListDef OID="VL.LB.LBORRES">
+                <ItemRef ItemOID="IT.LB.LBORRES.ALT" Mandatory="No">
+                    <def:WhereClauseRef WhereClauseOID="WC.LB.LBORRES.ALT"/>
+                </ItemRef>
+                <ItemRef ItemOID="IT.LB.LBORRES.ALB" Mandatory="No">
+                    <def:WhereClauseRef WhereClauseOID="WC.LB.LBORRES.ALB"/>
+                </ItemRef>
+                <ItemRef ItemOID="IT.LB.LBORRES.ALP" Mandatory="No">
+                    <def:WhereClauseRef WhereClauseOID="WC.LB.LBORRES.ALP"/>
+                </ItemRef>
+                <ItemRef ItemOID="IT.LB.LBORRES.AST" Mandatory="No">
+                    <def:WhereClauseRef WhereClauseOID="WC.LB.LBORRES.AST"/>
+                </ItemRef>
+                <ItemRef ItemOID="IT.LB.LBORRES.CREAT" Mandatory="No">
+                    <def:WhereClauseRef WhereClauseOID="WC.LB.LBORRES.CREAT"/>
+                </ItemRef>
+                <ItemRef ItemOID="IT.LB.LBORRES.K" Mandatory="No">
+                    <def:WhereClauseRef WhereClauseOID="WC.LB.LBORRES.K"/>
+                </ItemRef>
+                <ItemRef ItemOID="IT.LB.LBORRES.SODIUM" Mandatory="No">
+                    <def:WhereClauseRef WhereClauseOID="WC.LB.LBORRES.SODIUM"/>
+                </ItemRef>
+                <ItemRef ItemOID="IT.LB.LBORRES.HBA1C" Mandatory="No">
+                    <def:WhereClauseRef WhereClauseOID="WC.LB.LBORRES.HBA1C"/>
+                </ItemRef>
+            </def:ValueListDef>
+            <def:ValueListDef OID="VL.LB.LBORRESU">
+                <ItemRef ItemOID="IT.LB.LBORRESU.ALT" Mandatory="No">
+                    <def:WhereClauseRef WhereClauseOID="WC.LB.LBORRESU.ALT"/>
+                </ItemRef>
+                <ItemRef ItemOID="IT.LB.LBORRESU.ALP" Mandatory="No">
+                    <def:WhereClauseRef WhereClauseOID="WC.LB.LBORRESU.ALP"/>
+                </ItemRef>
+                <ItemRef ItemOID="IT.LB.LBORRESU.AST" Mandatory="No">
+                    <def:WhereClauseRef WhereClauseOID="WC.LB.LBORRESU.AST"/>
+                </ItemRef>
+                <ItemRef ItemOID="IT.LB.LBORRESU.CREAT" Mandatory="No">
+                    <def:WhereClauseRef WhereClauseOID="WC.LB.LBORRESU.CREAT"/>
+                </ItemRef>
+                <ItemRef ItemOID="IT.LB.LBORRESU.K" Mandatory="No">
+                    <def:WhereClauseRef WhereClauseOID="WC.LB.LBORRESU.K"/>
+                </ItemRef>
+                <ItemRef ItemOID="IT.LB.LBORRESU.SODIUM" Mandatory="No">
+                    <def:WhereClauseRef WhereClauseOID="WC.LB.LBORRESU.SODIUM"/>
+                </ItemRef>
+                <ItemRef ItemOID="IT.LB.LBORRESU.HBA1C" Mandatory="No">
+                    <def:WhereClauseRef WhereClauseOID="WC.LB.LBORRESU.HBA1C"/>
+                </ItemRef>
+            </def:ValueListDef>
+            <def:WhereClauseDef OID="WC.VS.VSORRES.TEMP">
+                <RangeCheck SoftHard="Soft" def:ItemOID="IT.VS.VSTESTCD" Comparator="EQ">
+                    <CheckValue>TEMP</CheckValue>
+                </RangeCheck>
+            </def:WhereClauseDef>
+            <def:WhereClauseDef OID="WC.VS.VSORRES.WEIGHT">
+                <RangeCheck SoftHard="Soft" def:ItemOID="IT.VS.VSTESTCD" Comparator="EQ">
+                    <CheckValue>WEIGHT</CheckValue>
+                </RangeCheck>
+            </def:WhereClauseDef>
+            <def:WhereClauseDef OID="WC.VS.VSORRES.HEIGHT">
+                <RangeCheck SoftHard="Soft" def:ItemOID="IT.VS.VSTESTCD" Comparator="EQ">
+                    <CheckValue>HEIGHT</CheckValue>
+                </RangeCheck>
+            </def:WhereClauseDef>
+            <def:WhereClauseDef OID="WC.VS.VSORRES.SYSBP">
+                <RangeCheck SoftHard="Soft" def:ItemOID="IT.VS.VSTESTCD" Comparator="EQ">
+                    <CheckValue>SYSBP</CheckValue>
+                </RangeCheck>
+            </def:WhereClauseDef>
+            <def:WhereClauseDef OID="WC.VS.VSORRES.DIABP">
+                <RangeCheck SoftHard="Soft" def:ItemOID="IT.VS.VSTESTCD" Comparator="EQ">
+                    <CheckValue>DIABP</CheckValue>
+                </RangeCheck>
+            </def:WhereClauseDef>
+            <def:WhereClauseDef OID="WC.VS.VSORRES.HR">
+                <RangeCheck SoftHard="Soft" def:ItemOID="IT.VS.VSTESTCD" Comparator="EQ">
+                    <CheckValue>HR</CheckValue>
+                </RangeCheck>
+            </def:WhereClauseDef>
+            <def:WhereClauseDef OID="WC.VS.VSORRESU.TEMP">
+                <RangeCheck SoftHard="Soft" def:ItemOID="IT.VS.VSTESTCD" Comparator="EQ">
+                    <CheckValue>TEMP</CheckValue>
+                </RangeCheck>
+            </def:WhereClauseDef>
+            <def:WhereClauseDef OID="WC.VS.VSORRESU.WEIGHT">
+                <RangeCheck SoftHard="Soft" def:ItemOID="IT.VS.VSTESTCD" Comparator="EQ">
+                    <CheckValue>WEIGHT</CheckValue>
+                </RangeCheck>
+            </def:WhereClauseDef>
+            <def:WhereClauseDef OID="WC.VS.VSORRESU.HEIGHT">
+                <RangeCheck SoftHard="Soft" def:ItemOID="IT.VS.VSTESTCD" Comparator="EQ">
+                    <CheckValue>HEIGHT</CheckValue>
+                </RangeCheck>
+            </def:WhereClauseDef>
+            <def:WhereClauseDef OID="WC.VS.VSORRESU.SYSBP">
+                <RangeCheck SoftHard="Soft" def:ItemOID="IT.VS.VSTESTCD" Comparator="EQ">
+                    <CheckValue>SYSBP</CheckValue>
+                </RangeCheck>
+            </def:WhereClauseDef>
+            <def:WhereClauseDef OID="WC.VS.VSORRESU.DIABP">
+                <RangeCheck SoftHard="Soft" def:ItemOID="IT.VS.VSTESTCD" Comparator="EQ">
+                    <CheckValue>DIABP</CheckValue>
+                </RangeCheck>
+            </def:WhereClauseDef>
+            <def:WhereClauseDef OID="WC.VS.VSORRESU.HR">
+                <RangeCheck SoftHard="Soft" def:ItemOID="IT.VS.VSTESTCD" Comparator="EQ">
+                    <CheckValue>HR</CheckValue>
+                </RangeCheck>
+            </def:WhereClauseDef>
+            <def:WhereClauseDef OID="WC.LB.LBORRES.ALT">
+                <RangeCheck SoftHard="Soft" def:ItemOID="IT.LB.LBTESTCD" Comparator="EQ">
+                    <CheckValue>ALT</CheckValue>
+                </RangeCheck>
+            </def:WhereClauseDef>
+            <def:WhereClauseDef OID="WC.LB.LBORRES.ALB">
+                <RangeCheck SoftHard="Soft" def:ItemOID="IT.LB.LBTESTCD" Comparator="EQ">
+                    <CheckValue>ALB</CheckValue>
+                </RangeCheck>
+            </def:WhereClauseDef>
+            <def:WhereClauseDef OID="WC.LB.LBORRES.ALP">
+                <RangeCheck SoftHard="Soft" def:ItemOID="IT.LB.LBTESTCD" Comparator="EQ">
+                    <CheckValue>ALP</CheckValue>
+                </RangeCheck>
+            </def:WhereClauseDef>
+            <def:WhereClauseDef OID="WC.LB.LBORRES.AST">
+                <RangeCheck SoftHard="Soft" def:ItemOID="IT.LB.LBTESTCD" Comparator="EQ">
+                    <CheckValue>AST</CheckValue>
+                </RangeCheck>
+            </def:WhereClauseDef>
+            <def:WhereClauseDef OID="WC.LB.LBORRES.CREAT">
+                <RangeCheck SoftHard="Soft" def:ItemOID="IT.LB.LBTESTCD" Comparator="EQ">
+                    <CheckValue>CREAT</CheckValue>
+                </RangeCheck>
+            </def:WhereClauseDef>
+            <def:WhereClauseDef OID="WC.LB.LBORRES.K">
+                <RangeCheck SoftHard="Soft" def:ItemOID="IT.LB.LBTESTCD" Comparator="EQ">
+                    <CheckValue>K</CheckValue>
+                </RangeCheck>
+            </def:WhereClauseDef>
+            <def:WhereClauseDef OID="WC.LB.LBORRES.SODIUM">
+                <RangeCheck SoftHard="Soft" def:ItemOID="IT.LB.LBTESTCD" Comparator="EQ">
+                    <CheckValue>SODIUM</CheckValue>
+                </RangeCheck>
+            </def:WhereClauseDef>
+            <def:WhereClauseDef OID="WC.LB.LBORRES.HBA1C">
+                <RangeCheck SoftHard="Soft" def:ItemOID="IT.LB.LBTESTCD" Comparator="EQ">
+                    <CheckValue>HBA1C</CheckValue>
+                </RangeCheck>
+            </def:WhereClauseDef>
+            <def:WhereClauseDef OID="WC.LB.LBORRESU.ALT">
+                <RangeCheck SoftHard="Soft" def:ItemOID="IT.LB.LBTESTCD" Comparator="EQ">
+                    <CheckValue>ALT</CheckValue>
+                </RangeCheck>
+            </def:WhereClauseDef>
+            <def:WhereClauseDef OID="WC.LB.LBORRESU.ALP">
+                <RangeCheck SoftHard="Soft" def:ItemOID="IT.LB.LBTESTCD" Comparator="EQ">
+                    <CheckValue>ALP</CheckValue>
+                </RangeCheck>
+            </def:WhereClauseDef>
+            <def:WhereClauseDef OID="WC.LB.LBORRESU.AST">
+                <RangeCheck SoftHard="Soft" def:ItemOID="IT.LB.LBTESTCD" Comparator="EQ">
+                    <CheckValue>AST</CheckValue>
+                </RangeCheck>
+            </def:WhereClauseDef>
+            <def:WhereClauseDef OID="WC.LB.LBORRESU.CREAT">
+                <RangeCheck SoftHard="Soft" def:ItemOID="IT.LB.LBTESTCD" Comparator="EQ">
+                    <CheckValue>CREAT</CheckValue>
+                </RangeCheck>
+            </def:WhereClauseDef>
+            <def:WhereClauseDef OID="WC.LB.LBORRESU.K">
+                <RangeCheck SoftHard="Soft" def:ItemOID="IT.LB.LBTESTCD" Comparator="EQ">
+                    <CheckValue>K</CheckValue>
+                </RangeCheck>
+            </def:WhereClauseDef>
+            <def:WhereClauseDef OID="WC.LB.LBORRESU.SODIUM">
+                <RangeCheck SoftHard="Soft" def:ItemOID="IT.LB.LBTESTCD" Comparator="EQ">
+                    <CheckValue>SODIUM</CheckValue>
+                </RangeCheck>
+            </def:WhereClauseDef>
+            <def:WhereClauseDef OID="WC.LB.LBORRESU.HBA1C">
+                <RangeCheck SoftHard="Soft" def:ItemOID="IT.LB.LBTESTCD" Comparator="EQ">
+                    <CheckValue>HBA1C</CheckValue>
+                </RangeCheck>
+            </def:WhereClauseDef>
+            <ItemGroupDef OID="IG.DM" Name="DM" Domain="DM" SASDatasetName="DM" def:Structure="One record per subject"
+                          def:ArchiveLocationID="LF.DM" Repeating="No">
+                <Description>
+                    <TranslatedText xml:lang="en">Demographics</TranslatedText>
+                </Description>
+                <ItemRef ItemOID="IT.DM.STUDYID" Mandatory="No" Role="Identifier"/>
+                <ItemRef ItemOID="IT.DM.DOMAIN" Mandatory="No" Role="Identifier"/>
+                <ItemRef ItemOID="IT.DM.USUBJID" Mandatory="No" Role="Identifier"/>
+                <ItemRef ItemOID="IT.DM.SUBJID" Mandatory="No" Role="Topic"/>
+                <ItemRef ItemOID="IT.DM.RFSTDTC" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.DM.RFENDTC" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.DM.RFXSTDTC" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.DM.RFXENDTC" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.DM.RFICDTC" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.DM.RFPENDTC" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.DM.DTHDTC" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.DM.DTHFL" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.DM.SITEID" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.DM.AGE" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.DM.AGEU" Mandatory="No" Role="Variable Qualifier"/>
+                <ItemRef ItemOID="IT.DM.SEX" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.DM.RACE" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.DM.ARMCD" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.DM.ARM" Mandatory="No" Role="Synonym Qualifier"/>
+                <ItemRef ItemOID="IT.DM.ACTARMCD" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.DM.ACTARM" Mandatory="No" Role="Synonym Qualifier"/>
+                <ItemRef ItemOID="IT.DM.ARMNRS" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.DM.ACTARMUD" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.DM.COUNTRY" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.DM.DMDTC" Mandatory="No" Role="Timing"/>
+                <def:leaf ID="LF.DM" xlink:href="dm.xpt">
+                    <def:title>dm.xpt</def:title>
+                </def:leaf>
+                <def:Class Name="SPECIAL PURPOSE"/>
+            </ItemGroupDef>
+            <ItemGroupDef OID="IG.VS" Name="VS" Domain="VS" SASDatasetName="VS"
+                          def:Structure="One record per vital sign measurement per time point per visit per subject"
+                          def:ArchiveLocationID="LF.VS" Repeating="No">
+                <Description>
+                    <TranslatedText xml:lang="en">Vital Signs</TranslatedText>
+                </Description>
+                <ItemRef ItemOID="IT.VS.STUDYID" Mandatory="No" Role="Identifier"/>
+                <ItemRef ItemOID="IT.VS.DOMAIN" Mandatory="No" Role="Identifier"/>
+                <ItemRef ItemOID="IT.VS.USUBJID" Mandatory="No" Role="Identifier"/>
+                <ItemRef ItemOID="IT.VS.VSSEQ" Mandatory="No" Role="Identifier"/>
+                <ItemRef ItemOID="IT.VS.VSTESTCD" Mandatory="No" Role="Topic"/>
+                <ItemRef ItemOID="IT.VS.VSTEST" Mandatory="No" Role="Synonym Qualifier"/>
+                <ItemRef ItemOID="IT.VS.VSPOS" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.VS.VSORRES" Mandatory="No" Role="Result Qualifier"/>
+                <ItemRef ItemOID="IT.VS.VSORRESU" Mandatory="No" Role="Variable Qualifier"/>
+                <ItemRef ItemOID="IT.VS.VSSTRESC" Mandatory="No" Role="Result Qualifier"/>
+                <ItemRef ItemOID="IT.VS.VSSTRESN" Mandatory="No" Role="Result Qualifier"/>
+                <ItemRef ItemOID="IT.VS.VSSTRESU" Mandatory="No" Role="Variable Qualifier"/>
+                <ItemRef ItemOID="IT.VS.VSLOC" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.VS.VSLAT" Mandatory="No" Role="Result Qualifier"/>
+                <ItemRef ItemOID="IT.VS.VSLOBXFL" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.VS.VISITNUM" Mandatory="No" Role="Timing"/>
+                <ItemRef ItemOID="IT.VS.VSDTC" Mandatory="No" Role="Timing"/>
+                <def:leaf ID="LF.VS" xlink:href="vs.xpt">
+                    <def:title>vs.xpt</def:title>
+                </def:leaf>
+                <def:Class Name="FINDINGS"/>
+            </ItemGroupDef>
+            <ItemGroupDef OID="IG.LB" Name="LB" Domain="LB" SASDatasetName="LB"
+                          def:Structure="One record per lab test per time point per visit per subject"
+                          def:ArchiveLocationID="LF.LB" Repeating="No">
+                <Description>
+                    <TranslatedText xml:lang="en">Laboratory Test Results</TranslatedText>
+                </Description>
+                <ItemRef ItemOID="IT.LB.STUDYID" Mandatory="No" Role="Identifier"/>
+                <ItemRef ItemOID="IT.LB.DOMAIN" Mandatory="No" Role="Identifier"/>
+                <ItemRef ItemOID="IT.LB.USUBJID" Mandatory="No" Role="Identifier"/>
+                <ItemRef ItemOID="IT.LB.LBSEQ" Mandatory="No" Role="Identifier"/>
+                <ItemRef ItemOID="IT.LB.LBTESTCD" Mandatory="No" Role="Topic"/>
+                <ItemRef ItemOID="IT.LB.LBTEST" Mandatory="No" Role="Synonym Qualifier"/>
+                <ItemRef ItemOID="IT.LB.LBCAT" Mandatory="No" Role="Grouping Qualifier"/>
+                <ItemRef ItemOID="IT.LB.LBORRES" Mandatory="No" Role="Result Qualifier"/>
+                <ItemRef ItemOID="IT.LB.LBORRESU" Mandatory="No" Role="Variable Qualifier"/>
+                <ItemRef ItemOID="IT.LB.LBORNRLO" Mandatory="No" Role="Variable Qualifier"/>
+                <ItemRef ItemOID="IT.LB.LBORNRHI" Mandatory="No" Role="Variable Qualifier"/>
+                <ItemRef ItemOID="IT.LB.LBSTRESC" Mandatory="No" Role="Result Qualifier"/>
+                <ItemRef ItemOID="IT.LB.LBSTRESN" Mandatory="No" Role="Result Qualifier"/>
+                <ItemRef ItemOID="IT.LB.LBSTRESU" Mandatory="No" Role="Variable Qualifier"/>
+                <ItemRef ItemOID="IT.LB.LBSTNRLO" Mandatory="No" Role="Variable Qualifier"/>
+                <ItemRef ItemOID="IT.LB.LBSTNRHI" Mandatory="No" Role="Variable Qualifier"/>
+                <ItemRef ItemOID="IT.LB.LBNRIND" Mandatory="No" Role="Variable Qualifier"/>
+                <ItemRef ItemOID="IT.LB.LBSPEC" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.LB.LBLOBXFL" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.LB.LBFAST" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.LB.VISITNUM" Mandatory="No" Role="Timing"/>
+                <ItemRef ItemOID="IT.LB.LBDTC" Mandatory="No" Role="Timing"/>
+                <def:leaf ID="LF.LB" xlink:href="lb.xpt">
+                    <def:title>lb.xpt</def:title>
+                </def:leaf>
+                <def:Class Name="FINDINGS"/>
+            </ItemGroupDef>
+            <ItemGroupDef OID="IG.AE" Name="AE" Domain="AE" SASDatasetName="AE"
+                          def:Structure="One record per adverse event per subject" def:ArchiveLocationID="LF.AE"
+                          Repeating="No">
+                <Description>
+                    <TranslatedText xml:lang="en">Adverse Events</TranslatedText>
+                </Description>
+                <ItemRef ItemOID="IT.AE.STUDYID" Mandatory="No" Role="Identifier"/>
+                <ItemRef ItemOID="IT.AE.DOMAIN" Mandatory="No" Role="Identifier"/>
+                <ItemRef ItemOID="IT.AE.USUBJID" Mandatory="No" Role="Identifier"/>
+                <ItemRef ItemOID="IT.AE.AESEQ" Mandatory="No" Role="Identifier"/>
+                <ItemRef ItemOID="IT.AE.AETERM" Mandatory="No" Role="Topic"/>
+                <ItemRef ItemOID="IT.AE.AELLT" Mandatory="No" Role="Variable Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AELLTCD" Mandatory="No" Role="Variable Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AEDECOD" Mandatory="No" Role="Synonym Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AEPTCD" Mandatory="No" Role="Variable Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AEHLT" Mandatory="No" Role="Variable Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AEHLTCD" Mandatory="No" Role="Variable Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AEHLGT" Mandatory="No" Role="Variable Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AEHLGTCD" Mandatory="No" Role="Variable Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AECAT" Mandatory="No" Role="Grouping Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AESCAT" Mandatory="No" Role="Grouping Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AEPRESP" Mandatory="No" Role="Variable Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AEBODSYS" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AEBDSYCD" Mandatory="No" Role="Variable Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AESOC" Mandatory="No" Role="Variable Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AESOCCD" Mandatory="No" Role="Variable Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AELOC" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AESEV" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AESER" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AEACN" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AEACNOTH" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AEREL" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AERELNST" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AEPATT" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AEOUT" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AESCAN" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AESCONG" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AESDISAB" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AESDTH" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AESHOSP" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AESLIFE" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AESOD" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AESMIE" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AECONTRT" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AETOXGR" Mandatory="No" Role="Record Qualifier"/>
+                <ItemRef ItemOID="IT.AE.AESTDTC" Mandatory="No" Role="Timing"/>
+                <ItemRef ItemOID="IT.AE.AEENDTC" Mandatory="No" Role="Timing"/>
+                <ItemRef ItemOID="IT.AE.AEENRF" Mandatory="No" Role="Timing"/>
+                <ItemRef ItemOID="IT.AE.AEENRTPT" Mandatory="No" Role="Timing"/>
+                <ItemRef ItemOID="IT.AE.AEENTPT" Mandatory="No" Role="Timing"/>
+                <def:Class Name="EVENTS"/>
+                <def:leaf ID="LF.AE" xlink:href="ae.xpt">
+                    <def:title>ae.xpt</def:title>
+                </def:leaf>
+            </ItemGroupDef>
+            <ItemDef OID="IT.DM.STUDYID" Name="STUDYID" DataType="text" SASFieldName="STUDYID">
+                <Description>
+                    <TranslatedText xml:lang="en">Study Identifier</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.DM.DOMAIN" Name="DOMAIN" DataType="text" SASFieldName="DOMAIN">
+                <Description>
+                    <TranslatedText xml:lang="en">Domain Abbreviation</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.DM.USUBJID" Name="USUBJID" DataType="text" SASFieldName="USUBJID">
+                <Description>
+                    <TranslatedText xml:lang="en">Unique Subject Identifier</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.DM.SUBJID" Name="SUBJID" DataType="text" SASFieldName="SUBJID">
+                <Description>
+                    <TranslatedText xml:lang="en">Subject Identifier for the Study</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.DM.RFSTDTC" Name="RFSTDTC" DataType="text" SASFieldName="RFSTDTC">
+                <Description>
+                    <TranslatedText xml:lang="en">Subject Reference Start Date/Time</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.DM.RFENDTC" Name="RFENDTC" DataType="text" SASFieldName="RFENDTC">
+                <Description>
+                    <TranslatedText xml:lang="en">Subject Reference End Date/Time</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.DM.RFXSTDTC" Name="RFXSTDTC" DataType="text" SASFieldName="RFXSTDTC">
+                <Description>
+                    <TranslatedText xml:lang="en">Date/Time of First Study Treatment</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.DM.RFXENDTC" Name="RFXENDTC" DataType="text" SASFieldName="RFXENDTC">
+                <Description>
+                    <TranslatedText xml:lang="en">Date/Time of Last Study Treatment</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.DM.RFICDTC" Name="RFICDTC" DataType="text" SASFieldName="RFICDTC">
+                <Description>
+                    <TranslatedText xml:lang="en">Date/Time of Informed Consent</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.DM.RFPENDTC" Name="RFPENDTC" DataType="text" SASFieldName="RFPENDTC">
+                <Description>
+                    <TranslatedText xml:lang="en">Date/Time of End of Participation</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.DM.DTHDTC" Name="DTHDTC" DataType="text" SASFieldName="DTHDTC">
+                <Description>
+                    <TranslatedText xml:lang="en">Date/Time of Death</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.DM.DTHFL" Name="DTHFL" DataType="text" SASFieldName="DTHFL">
+                <Description>
+                    <TranslatedText xml:lang="en">Subject Death Flag</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.NY"/>
+            </ItemDef>
+            <ItemDef OID="IT.DM.SITEID" Name="SITEID" DataType="text" SASFieldName="SITEID">
+                <Description>
+                    <TranslatedText xml:lang="en">Study Site Identifier</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.DM.AGE" Name="AGE" DataType="float" SASFieldName="AGE">
+                <Description>
+                    <TranslatedText xml:lang="en">Age</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.DM.AGEU" Name="AGEU" DataType="text" SASFieldName="AGEU">
+                <Description>
+                    <TranslatedText xml:lang="en">Age Units</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.AGEU"/>
+            </ItemDef>
+            <ItemDef OID="IT.DM.SEX" Name="SEX" DataType="text" SASFieldName="SEX">
+                <Description>
+                    <TranslatedText xml:lang="en">Sex</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.SEX"/>
+            </ItemDef>
+            <ItemDef OID="IT.DM.RACE" Name="RACE" DataType="text" SASFieldName="RACE">
+                <Description>
+                    <TranslatedText xml:lang="en">Race</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.RACE"/>
+            </ItemDef>
+            <ItemDef OID="IT.DM.ARMCD" Name="ARMCD" DataType="text" SASFieldName="ARMCD">
+                <Description>
+                    <TranslatedText xml:lang="en">Planned Arm Code</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.DM.ARM" Name="ARM" DataType="text" SASFieldName="ARM">
+                <Description>
+                    <TranslatedText xml:lang="en">Description of Planned Arm</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.DM.ACTARMCD" Name="ACTARMCD" DataType="text" SASFieldName="ACTARMCD">
+                <Description>
+                    <TranslatedText xml:lang="en">Actual Arm Code</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.DM.ACTARM" Name="ACTARM" DataType="text" SASFieldName="ACTARM">
+                <Description>
+                    <TranslatedText xml:lang="en">Description of Actual Arm</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.DM.ARMNRS" Name="ARMNRS" DataType="text" SASFieldName="ARMNRS">
+                <Description>
+                    <TranslatedText xml:lang="en">Reason Arm and/or Actual Arm is Null</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.ARMNULRS"/>
+            </ItemDef>
+            <ItemDef OID="IT.DM.ACTARMUD" Name="ACTARMUD" DataType="text" SASFieldName="ACTARMUD">
+                <Description>
+                    <TranslatedText xml:lang="en">Description of Unplanned Actual Arm</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.DM.COUNTRY" Name="COUNTRY" DataType="text" SASFieldName="COUNTRY">
+                <Description>
+                    <TranslatedText xml:lang="en">Country</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.DM.DMDTC" Name="DMDTC" DataType="text" SASFieldName="DMDTC">
+                <Description>
+                    <TranslatedText xml:lang="en">Date/Time of Collection</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.VS.STUDYID" Name="STUDYID" DataType="text" SASFieldName="STUDYID">
+                <Description>
+                    <TranslatedText xml:lang="en">Study Identifier</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.VS.DOMAIN" Name="DOMAIN" DataType="text" SASFieldName="DOMAIN">
+                <Description>
+                    <TranslatedText xml:lang="en">Domain Abbreviation</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.VS.USUBJID" Name="USUBJID" DataType="text" SASFieldName="USUBJID">
+                <Description>
+                    <TranslatedText xml:lang="en">Unique Subject Identifier</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.VS.VSSEQ" Name="VSSEQ" DataType="float" SASFieldName="VSSEQ">
+                <Description>
+                    <TranslatedText xml:lang="en">Sequence Number</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.VS.VSTESTCD" Name="VSTESTCD" DataType="text" SASFieldName="VSTESTCD">
+                <Description>
+                    <TranslatedText xml:lang="en">Vital Signs Test Short Name</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.VSTESTCD"/>
+            </ItemDef>
+            <ItemDef OID="IT.VS.VSTEST" Name="VSTEST" DataType="text" SASFieldName="VSTEST">
+                <Description>
+                    <TranslatedText xml:lang="en">Vital Signs Test Name</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.VSTEST"/>
+            </ItemDef>
+            <ItemDef OID="IT.VS.VSPOS" Name="VSPOS" DataType="text" SASFieldName="VSPOS">
+                <Description>
+                    <TranslatedText xml:lang="en">Vital Signs Position of Subject</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.POSITION"/>
+            </ItemDef>
+            <ItemDef OID="IT.VS.VSORRES" Name="VSORRES" DataType="text" SASFieldName="VSORRES">
+                <Description>
+                    <TranslatedText xml:lang="en">Result or Finding in Original Units</TranslatedText>
+                </Description>
+                <def:ValueListRef ValueListOID="VL.VS.VSORRES"/>
+            </ItemDef>
+            <ItemDef OID="IT.VS.VSORRES.TEMP" Name="VSORRES" DataType="float" SASFieldName="VSORRES"
+                     SignificantDigits="3" def:DisplayFormat="8.3">
+                <def:Origin Type="Collected" Source="Investigator"/>
+            </ItemDef>
+            <ItemDef OID="IT.VS.VSORRES.WEIGHT" Name="VSORRES" DataType="float" SASFieldName="VSORRES"
+                     SignificantDigits="3" def:DisplayFormat="8.3">
+                <def:Origin Type="Collected" Source="Investigator"/>
+            </ItemDef>
+            <ItemDef OID="IT.VS.VSORRES.HEIGHT" Name="VSORRES" DataType="float" SASFieldName="VSORRES"
+                     SignificantDigits="3" def:DisplayFormat="8.3">
+                <def:Origin Type="Collected" Source="Investigator"/>
+            </ItemDef>
+            <ItemDef OID="IT.VS.VSORRES.SYSBP" Name="VSORRES" DataType="integer" SASFieldName="VSORRES">
+                <def:Origin Type="Collected" Source="Investigator"/>
+            </ItemDef>
+            <ItemDef OID="IT.VS.VSORRES.DIABP" Name="VSORRES" DataType="integer" SASFieldName="VSORRES">
+                <def:Origin Type="Collected" Source="Investigator"/>
+            </ItemDef>
+            <ItemDef OID="IT.VS.VSORRES.HR" Name="VSORRES" DataType="integer" SASFieldName="VSORRES">
+                <def:Origin Type="Collected" Source="Investigator"/>
+            </ItemDef>
+            <ItemDef OID="IT.VS.VSORRESU" Name="VSORRESU" DataType="text" SASFieldName="VSORRESU">
+                <Description>
+                    <TranslatedText xml:lang="en">Original Units</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.VSRESU"/>
+                <def:ValueListRef ValueListOID="VL.VS.VSORRESU"/>
+            </ItemDef>
+            <ItemDef OID="IT.VS.VSORRESU.TEMP" Name="VSORRESU" DataType="text" SASFieldName="VSORRESU"/>
+            <ItemDef OID="IT.VS.VSORRESU.WEIGHT" Name="VSORRESU" DataType="text" SASFieldName="VSORRESU"/>
+            <ItemDef OID="IT.VS.VSORRESU.HEIGHT" Name="VSORRESU" DataType="text" SASFieldName="VSORRESU"/>
+            <ItemDef OID="IT.VS.VSORRESU.SYSBP" Name="VSORRESU" DataType="text" SASFieldName="VSORRESU"/>
+            <ItemDef OID="IT.VS.VSORRESU.DIABP" Name="VSORRESU" DataType="text" SASFieldName="VSORRESU"/>
+            <ItemDef OID="IT.VS.VSORRESU.HR" Name="VSORRESU" DataType="text" SASFieldName="VSORRESU"/>
+            <ItemDef OID="IT.VS.VSSTRESC" Name="VSSTRESC" DataType="text" SASFieldName="VSSTRESC">
+                <Description>
+                    <TranslatedText xml:lang="en">Character Result/Finding in Std Format</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.VS.VSSTRESN" Name="VSSTRESN" DataType="float" SASFieldName="VSSTRESN">
+                <Description>
+                    <TranslatedText xml:lang="en">Numeric Result/Finding in Standard Units</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.VS.VSSTRESU" Name="VSSTRESU" DataType="text" SASFieldName="VSSTRESU">
+                <Description>
+                    <TranslatedText xml:lang="en">Standard Units</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.VSRESU"/>
+            </ItemDef>
+            <ItemDef OID="IT.VS.VSLOC" Name="VSLOC" DataType="text" SASFieldName="VSLOC">
+                <Description>
+                    <TranslatedText xml:lang="en">Location of Vital Signs Measurement</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.LOC"/>
+            </ItemDef>
+            <ItemDef OID="IT.VS.VSLAT" Name="VSLAT" DataType="text" SASFieldName="VSLAT">
+                <Description>
+                    <TranslatedText xml:lang="en">Laterality</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.LAT"/>
+            </ItemDef>
+            <ItemDef OID="IT.VS.VSLOBXFL" Name="VSLOBXFL" DataType="text" SASFieldName="VSLOBXFL">
+                <Description>
+                    <TranslatedText xml:lang="en">Last Observation Before Exposure Flag</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.NY"/>
+            </ItemDef>
+            <ItemDef OID="IT.VS.VISITNUM" Name="VISITNUM" DataType="float" SASFieldName="VISITNUM">
+                <Description>
+                    <TranslatedText xml:lang="en">Visit Number</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.VS.VSDTC" Name="VSDTC" DataType="text" SASFieldName="VSDTC">
+                <Description>
+                    <TranslatedText xml:lang="en">Date/Time of Measurements</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.LB.STUDYID" Name="STUDYID" DataType="text" SASFieldName="STUDYID">
+                <Description>
+                    <TranslatedText xml:lang="en">Study Identifier</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.LB.DOMAIN" Name="DOMAIN" DataType="text" SASFieldName="DOMAIN">
+                <Description>
+                    <TranslatedText xml:lang="en">Domain Abbreviation</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.LB.USUBJID" Name="USUBJID" DataType="text" SASFieldName="USUBJID">
+                <Description>
+                    <TranslatedText xml:lang="en">Unique Subject Identifier</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.LB.LBSEQ" Name="LBSEQ" DataType="float" SASFieldName="LBSEQ">
+                <Description>
+                    <TranslatedText xml:lang="en">Sequence Number</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.LB.LBTESTCD" Name="LBTESTCD" DataType="text" SASFieldName="LBTESTCD">
+                <Description>
+                    <TranslatedText xml:lang="en">Lab Test or Examination Short Name</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.LBTESTCD"/>
+            </ItemDef>
+            <ItemDef OID="IT.LB.LBTEST" Name="LBTEST" DataType="text" SASFieldName="LBTEST">
+                <Description>
+                    <TranslatedText xml:lang="en">Lab Test or Examination Name</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.LBTEST"/>
+            </ItemDef>
+            <ItemDef OID="IT.LB.LBCAT" Name="LBCAT" DataType="text" SASFieldName="LBCAT">
+                <Description>
+                    <TranslatedText xml:lang="en">Category for Lab Test</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.LB.LBORRES" Name="LBORRES" DataType="text" SASFieldName="LBORRES">
+                <Description>
+                    <TranslatedText xml:lang="en">Result or Finding in Original Units</TranslatedText>
+                </Description>
+                <def:ValueListRef ValueListOID="VL.LB.LBORRES"/>
+            </ItemDef>
+            <ItemDef OID="IT.LB.LBORRES.ALT" Name="LBORRES" DataType="float" SASFieldName="LBORRES"
+                     SignificantDigits="4" def:DisplayFormat="12.4">
+                <def:Origin Type="Collected" Source="Vendor"/>
+            </ItemDef>
+            <ItemDef OID="IT.LB.LBORRES.ALB" Name="LBORRES" DataType="text" SASFieldName="LBORRES"
+                     SignificantDigits="4">
+                <def:Origin Type="Collected" Source="Vendor"/>
+            </ItemDef>
+            <ItemDef OID="IT.LB.LBORRES.ALP" Name="LBORRES" DataType="float" SASFieldName="LBORRES"
+                     SignificantDigits="4" def:DisplayFormat="12.4">
+                <def:Origin Type="Collected" Source="Vendor"/>
+            </ItemDef>
+            <ItemDef OID="IT.LB.LBORRES.AST" Name="LBORRES" DataType="float" SASFieldName="LBORRES"
+                     SignificantDigits="4" def:DisplayFormat="12.4">
+                <def:Origin Type="Collected" Source="Vendor"/>
+            </ItemDef>
+            <ItemDef OID="IT.LB.LBORRES.CREAT" Name="LBORRES" DataType="float" SASFieldName="LBORRES"
+                     SignificantDigits="4" def:DisplayFormat="12.4">
+                <def:Origin Type="Collected" Source="Vendor"/>
+            </ItemDef>
+            <ItemDef OID="IT.LB.LBORRES.K" Name="LBORRES" DataType="float" SASFieldName="LBORRES" SignificantDigits="4"
+                     def:DisplayFormat="12.4">
+                <def:Origin Type="Collected" Source="Vendor"/>
+            </ItemDef>
+            <ItemDef OID="IT.LB.LBORRES.SODIUM" Name="LBORRES" DataType="float" SASFieldName="LBORRES"
+                     SignificantDigits="4" def:DisplayFormat="12.4">
+                <def:Origin Type="Collected" Source="Vendor"/>
+            </ItemDef>
+            <ItemDef OID="IT.LB.LBORRES.HBA1C" Name="LBORRES" DataType="float" SASFieldName="LBORRES"
+                     SignificantDigits="4" def:DisplayFormat="12.4">
+                <def:Origin Type="Collected" Source="Vendor"/>
+            </ItemDef>
+            <ItemDef OID="IT.LB.LBORRESU" Name="LBORRESU" DataType="text" SASFieldName="LBORRESU">
+                <Description>
+                    <TranslatedText xml:lang="en">Original Units</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.UNIT"/>
+                <def:ValueListRef ValueListOID="VL.LB.LBORRESU"/>
+            </ItemDef>
+            <ItemDef OID="IT.LB.LBORRESU.ALT" Name="LBORRESU" DataType="text" SASFieldName="LBORRESU"/>
+            <ItemDef OID="IT.LB.LBORRESU.ALP" Name="LBORRESU" DataType="text" SASFieldName="LBORRESU"/>
+            <ItemDef OID="IT.LB.LBORRESU.AST" Name="LBORRESU" DataType="text" SASFieldName="LBORRESU"/>
+            <ItemDef OID="IT.LB.LBORRESU.CREAT" Name="LBORRESU" DataType="text" SASFieldName="LBORRESU"/>
+            <ItemDef OID="IT.LB.LBORRESU.K" Name="LBORRESU" DataType="text" SASFieldName="LBORRESU"/>
+            <ItemDef OID="IT.LB.LBORRESU.SODIUM" Name="LBORRESU" DataType="text" SASFieldName="LBORRESU"/>
+            <ItemDef OID="IT.LB.LBORRESU.HBA1C" Name="LBORRESU" DataType="text" SASFieldName="LBORRESU"/>
+            <ItemDef OID="IT.LB.LBORNRLO" Name="LBORNRLO" DataType="text" SASFieldName="LBORNRLO">
+                <Description>
+                    <TranslatedText xml:lang="en">Reference Range Lower Limit in Orig Unit</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.LB.LBORNRHI" Name="LBORNRHI" DataType="text" SASFieldName="LBORNRHI">
+                <Description>
+                    <TranslatedText xml:lang="en">Reference Range Upper Limit in Orig Unit</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.LB.LBSTRESC" Name="LBSTRESC" DataType="text" SASFieldName="LBSTRESC">
+                <Description>
+                    <TranslatedText xml:lang="en">Character Result/Finding in Std Format</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.LBSTRESC"/>
+            </ItemDef>
+            <ItemDef OID="IT.LB.LBSTRESN" Name="LBSTRESN" DataType="float" SASFieldName="LBSTRESN">
+                <Description>
+                    <TranslatedText xml:lang="en">Numeric Result/Finding in Standard Units</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.LB.LBSTRESU" Name="LBSTRESU" DataType="text" SASFieldName="LBSTRESU">
+                <Description>
+                    <TranslatedText xml:lang="en">Standard Units</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.UNIT"/>
+            </ItemDef>
+            <ItemDef OID="IT.LB.LBSTNRLO" Name="LBSTNRLO" DataType="float" SASFieldName="LBSTNRLO">
+                <Description>
+                    <TranslatedText xml:lang="en">Reference Range Lower Limit-Std Units</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.LB.LBSTNRHI" Name="LBSTNRHI" DataType="float" SASFieldName="LBSTNRHI">
+                <Description>
+                    <TranslatedText xml:lang="en">Reference Range Upper Limit-Std Units</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.LB.LBNRIND" Name="LBNRIND" DataType="text" SASFieldName="LBNRIND">
+                <Description>
+                    <TranslatedText xml:lang="en">Reference Range Indicator</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.NRIND"/>
+            </ItemDef>
+            <ItemDef OID="IT.LB.LBSPEC" Name="LBSPEC" DataType="text" SASFieldName="LBSPEC">
+                <Description>
+                    <TranslatedText xml:lang="en">Specimen Type</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.SPECTYPE"/>
+            </ItemDef>
+            <ItemDef OID="IT.LB.LBLOBXFL" Name="LBLOBXFL" DataType="text" SASFieldName="LBLOBXFL">
+                <Description>
+                    <TranslatedText xml:lang="en">Last Observation Before Exposure Flag</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.NY"/>
+            </ItemDef>
+            <ItemDef OID="IT.LB.LBFAST" Name="LBFAST" DataType="text" SASFieldName="LBFAST">
+                <Description>
+                    <TranslatedText xml:lang="en">Fasting Status</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.NY"/>
+            </ItemDef>
+            <ItemDef OID="IT.LB.VISITNUM" Name="VISITNUM" DataType="float" SASFieldName="VISITNUM">
+                <Description>
+                    <TranslatedText xml:lang="en">Visit Number</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.LB.LBDTC" Name="LBDTC" DataType="text" SASFieldName="LBDTC">
+                <Description>
+                    <TranslatedText xml:lang="en">Date/Time of Specimen Collection</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.AE.STUDYID" Name="STUDYID" DataType="text" SASFieldName="STUDYID">
+                <Description>
+                    <TranslatedText xml:lang="en">Study Identifier</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.AE.DOMAIN" Name="DOMAIN" DataType="text" SASFieldName="DOMAIN">
+                <Description>
+                    <TranslatedText xml:lang="en">Domain Abbreviation</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.AE.USUBJID" Name="USUBJID" DataType="text" SASFieldName="USUBJID">
+                <Description>
+                    <TranslatedText xml:lang="en">Unique Subject Identifier</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AESEQ" Name="AESEQ" DataType="float" SASFieldName="AESEQ">
+                <Description>
+                    <TranslatedText xml:lang="en">Sequence Number</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AETERM" Name="AETERM" DataType="text" SASFieldName="AETERM">
+                <Description>
+                    <TranslatedText xml:lang="en">Reported Term for the Adverse Event</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AELLT" Name="AELLT" DataType="text" SASFieldName="AELLT">
+                <Description>
+                    <TranslatedText xml:lang="en">Lowest Level Term</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AELLTCD" Name="AELLTCD" DataType="float" SASFieldName="AELLTCD">
+                <Description>
+                    <TranslatedText xml:lang="en">Lowest Level Term Code</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AEDECOD" Name="AEDECOD" DataType="text" SASFieldName="AEDECOD">
+                <Description>
+                    <TranslatedText xml:lang="en">Dictionary-Derived Term</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AEPTCD" Name="AEPTCD" DataType="float" SASFieldName="AEPTCD">
+                <Description>
+                    <TranslatedText xml:lang="en">Preferred Term Code</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AEHLT" Name="AEHLT" DataType="text" SASFieldName="AEHLT">
+                <Description>
+                    <TranslatedText xml:lang="en">High Level Term</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AEHLTCD" Name="AEHLTCD" DataType="float" SASFieldName="AEHLTCD">
+                <Description>
+                    <TranslatedText xml:lang="en">High Level Term Code</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AEHLGT" Name="AEHLGT" DataType="text" SASFieldName="AEHLGT">
+                <Description>
+                    <TranslatedText xml:lang="en">High Level Group Term</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AEHLGTCD" Name="AEHLGTCD" DataType="float" SASFieldName="AEHLGTCD">
+                <Description>
+                    <TranslatedText xml:lang="en">High Level Group Term Code</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AECAT" Name="AECAT" DataType="text" SASFieldName="AECAT">
+                <Description>
+                    <TranslatedText xml:lang="en">Category for Adverse Event</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AESCAT" Name="AESCAT" DataType="text" SASFieldName="AESCAT">
+                <Description>
+                    <TranslatedText xml:lang="en">Subcategory for Adverse Event</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AEPRESP" Name="AEPRESP" DataType="text" SASFieldName="AEPRESP">
+                <Description>
+                    <TranslatedText xml:lang="en">Pre-Specified Adverse Event</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.NY"/>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AEBODSYS" Name="AEBODSYS" DataType="text" SASFieldName="AEBODSYS">
+                <Description>
+                    <TranslatedText xml:lang="en">Body System or Organ Class</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AEBDSYCD" Name="AEBDSYCD" DataType="float" SASFieldName="AEBDSYCD">
+                <Description>
+                    <TranslatedText xml:lang="en">Body System or Organ Class Code</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AESOC" Name="AESOC" DataType="text" SASFieldName="AESOC">
+                <Description>
+                    <TranslatedText xml:lang="en">Primary System Organ Class</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AESOCCD" Name="AESOCCD" DataType="float" SASFieldName="AESOCCD">
+                <Description>
+                    <TranslatedText xml:lang="en">Primary System Organ Class Code</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AELOC" Name="AELOC" DataType="text" SASFieldName="AELOC">
+                <Description>
+                    <TranslatedText xml:lang="en">Location of Event</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.LOC"/>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AESEV" Name="AESEV" DataType="text" SASFieldName="AESEV">
+                <Description>
+                    <TranslatedText xml:lang="en">Severity/Intensity</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.AESEV"/>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AESER" Name="AESER" DataType="text" SASFieldName="AESER">
+                <Description>
+                    <TranslatedText xml:lang="en">Serious Event</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.NY"/>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AEACN" Name="AEACN" DataType="text" SASFieldName="AEACN">
+                <Description>
+                    <TranslatedText xml:lang="en">Action Taken with Study Treatment</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.ACN"/>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AEACNOTH" Name="AEACNOTH" DataType="text" SASFieldName="AEACNOTH">
+                <Description>
+                    <TranslatedText xml:lang="en">Other Action Taken</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AEREL" Name="AEREL" DataType="text" SASFieldName="AEREL">
+                <Description>
+                    <TranslatedText xml:lang="en">Causality</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AERELNST" Name="AERELNST" DataType="text" SASFieldName="AERELNST">
+                <Description>
+                    <TranslatedText xml:lang="en">Relationship to Non-Study Treatment</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AEPATT" Name="AEPATT" DataType="text" SASFieldName="AEPATT">
+                <Description>
+                    <TranslatedText xml:lang="en">Pattern of Adverse Event</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AEOUT" Name="AEOUT" DataType="text" SASFieldName="AEOUT">
+                <Description>
+                    <TranslatedText xml:lang="en">Outcome of Adverse Event</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.OUT"/>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AESCAN" Name="AESCAN" DataType="text" SASFieldName="AESCAN">
+                <Description>
+                    <TranslatedText xml:lang="en">Involves Cancer</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.NY"/>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AESCONG" Name="AESCONG" DataType="text" SASFieldName="AESCONG">
+                <Description>
+                    <TranslatedText xml:lang="en">Congenital Anomaly or Birth Defect</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.NY"/>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AESDISAB" Name="AESDISAB" DataType="text" SASFieldName="AESDISAB">
+                <Description>
+                    <TranslatedText xml:lang="en">Persist or Signif Disability/Incapacity</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.NY"/>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AESDTH" Name="AESDTH" DataType="text" SASFieldName="AESDTH">
+                <Description>
+                    <TranslatedText xml:lang="en">Results in Death</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.NY"/>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AESHOSP" Name="AESHOSP" DataType="text" SASFieldName="AESHOSP">
+                <Description>
+                    <TranslatedText xml:lang="en">Requires or Prolongs Hospitalization</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.NY"/>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AESLIFE" Name="AESLIFE" DataType="text" SASFieldName="AESLIFE">
+                <Description>
+                    <TranslatedText xml:lang="en">Is Life Threatening</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.NY"/>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AESOD" Name="AESOD" DataType="text" SASFieldName="AESOD">
+                <Description>
+                    <TranslatedText xml:lang="en">Occurred with Overdose</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.NY"/>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AESMIE" Name="AESMIE" DataType="text" SASFieldName="AESMIE">
+                <Description>
+                    <TranslatedText xml:lang="en">Other Medically Important Serious Event</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.NY"/>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AECONTRT" Name="AECONTRT" DataType="text" SASFieldName="AECONTRT">
+                <Description>
+                    <TranslatedText xml:lang="en">Concomitant or Additional Trtmnt Given</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.NY"/>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AETOXGR" Name="AETOXGR" DataType="text" SASFieldName="AETOXGR">
+                <Description>
+                    <TranslatedText xml:lang="en">Standard Toxicity Grade</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AESTDTC" Name="AESTDTC" DataType="text" SASFieldName="AESTDTC">
+                <Description>
+                    <TranslatedText xml:lang="en">Start Date/Time of Adverse Event</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AEENDTC" Name="AEENDTC" DataType="text" SASFieldName="AEENDTC">
+                <Description>
+                    <TranslatedText xml:lang="en">End Date/Time of Adverse Event</TranslatedText>
+                </Description>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AEENRF" Name="AEENRF" DataType="text" SASFieldName="AEENRF">
+                <Description>
+                    <TranslatedText xml:lang="en">End Relative to Reference Period</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.STENRF"/>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AEENRTPT" Name="AEENRTPT" DataType="text" SASFieldName="AEENRTPT">
+                <Description>
+                    <TranslatedText xml:lang="en">End Relative to Reference Time Point</TranslatedText>
+                </Description>
+                <CodeListRef CodeListOID="CL.STENRF"/>
+            </ItemDef>
+            <ItemDef OID="IT.AE.AEENTPT" Name="AEENTPT" DataType="text" SASFieldName="AEENTPT">
+                <Description>
+                    <TranslatedText xml:lang="en">End Reference Time Point</TranslatedText>
+                </Description>
+            </ItemDef>
+            <CodeList OID="CL.NY" Name="No Yes Response" DataType="text">
+                <CodeListItem CodedValue="N">
+                    <Decode>
+                        <TranslatedText xml:lang="en">No</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C49487"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="NA">
+                    <Decode>
+                        <TranslatedText xml:lang="en">NA</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C48660"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="U">
+                    <Decode>
+                        <TranslatedText xml:lang="en">U</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C17998"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="Y">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Yes</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C49488"/>
+                </CodeListItem>
+                <Alias Context="nci:ExtCodeID" Name="C66742"/>
+            </CodeList>
+            <CodeList OID="CL.AGEU" Name="Age Unit" DataType="text">
+                <EnumeratedItem CodedValue="DAYS">
+                    <Alias Context="nci:ExtCodeID" Name="C25301"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="HOURS">
+                    <Alias Context="nci:ExtCodeID" Name="C25529"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="MONTHS">
+                    <Alias Context="nci:ExtCodeID" Name="C29846"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="WEEKS">
+                    <Alias Context="nci:ExtCodeID" Name="C29844"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="YEARS">
+                    <Alias Context="nci:ExtCodeID" Name="C29848"/>
+                </EnumeratedItem>
+                <Alias Context="nci:ExtCodeID" Name="C66781"/>
+            </CodeList>
+            <CodeList OID="CL.SEX" Name="Sex" DataType="text">
+                <CodeListItem CodedValue="F">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Female</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C16576"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="M">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Male</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C20197"/>
+                </CodeListItem>
+                <Alias Context="nci:ExtCodeID" Name="C66731"/>
+            </CodeList>
+            <CodeList OID="CL.RACE" Name="Race" DataType="text">
+                <EnumeratedItem CodedValue="AMERICAN INDIAN OR ALASKA NATIVE">
+                    <Alias Context="nci:ExtCodeID" Name="C41259"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="ASIAN">
+                    <Alias Context="nci:ExtCodeID" Name="C41260"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="BLACK OR AFRICAN AMERICAN">
+                    <Alias Context="nci:ExtCodeID" Name="C16352"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER">
+                    <Alias Context="nci:ExtCodeID" Name="C41219"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="NOT REPORTED">
+                    <Alias Context="nci:ExtCodeID" Name="C43234"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="OTHER">
+                    <Alias Context="nci:ExtCodeID" Name="C17649"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="UNKNOWN">
+                    <Alias Context="nci:ExtCodeID" Name="C17998"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="WHITE">
+                    <Alias Context="nci:ExtCodeID" Name="C41261"/>
+                </EnumeratedItem>
+                <Alias Context="nci:ExtCodeID" Name="C74457"/>
+            </CodeList>
+            <CodeList OID="CL.ARMNULRS" Name="Arm Null Reason" DataType="text">
+                <EnumeratedItem CodedValue="ASSIGNED, NOT TREATED">
+                    <Alias Context="nci:ExtCodeID" Name="C142238"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="NOT ASSIGNED">
+                    <Alias Context="nci:ExtCodeID" Name="C142239"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="SCREEN FAILURE">
+                    <Alias Context="nci:ExtCodeID" Name="C49628"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="UNPLANNED TREATMENT">
+                    <Alias Context="nci:ExtCodeID" Name="C142240"/>
+                </EnumeratedItem>
+                <Alias Context="nci:ExtCodeID" Name="C142179"/>
+            </CodeList>
+            <CodeList OID="CL.VSTESTCD" Name="Vital Signs Test Code" DataType="text">
+                <CodeListItem CodedValue="DIABP">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Diastolic Blood Pressure</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C25299"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="HEIGHT">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Height</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C25347"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="HR">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Heart Rate</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C49677"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="SYSBP">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Systolic Blood Pressure</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C25298"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="TEMP">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Body Temperature</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C174446"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="WEIGHT">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Weight</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C25208"/>
+                </CodeListItem>
+                <Alias Context="nci:ExtCodeID" Name="C66741"/>
+            </CodeList>
+            <CodeList OID="CL.VSTEST" Name="Vital Signs Test Name" DataType="text">
+                <CodeListItem CodedValue="Diastolic Blood Pressure">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Diastolic Blood Pressure</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C25299"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="Heart Rate">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Heart Rate</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C49677"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="Height">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Height</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C25347"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="Systolic Blood Pressure">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Systolic Blood Pressure</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C25298"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="Temperature">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Body Temperature</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C174446"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="Weight">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Weight</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C25208"/>
+                </CodeListItem>
+                <Alias Context="nci:ExtCodeID" Name="C67153"/>
+            </CodeList>
+            <CodeList OID="CL.POSITION" Name="Position" DataType="text">
+                <CodeListItem CodedValue="PRONE">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Prone</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C62165"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="SEMI-RECUMBENT">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Semi-Supine</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C111310"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="SITTING">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Sitting</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C62122"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="STANDING">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Orthostatic</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C62166"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="SUPINE">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Supine</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C62167"/>
+                </CodeListItem>
+                <Alias Context="nci:ExtCodeID" Name="C71148"/>
+            </CodeList>
+            <CodeList OID="CL.VSRESU" Name="Units for Vital Signs Results" DataType="text">
+                <CodeListItem CodedValue="C">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Degree Celsius</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C42559"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="cm">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Centimeter</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C49668"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="F">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Degree Fahrenheit</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C44277"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="g">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Gram</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C48155"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="in">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Inch</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C48500"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="K">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Kelvin</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C42537"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="kg">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Kilogram</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C28252"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="LB">
+                    <Decode>
+                        <TranslatedText xml:lang="en">lb</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C48531"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="m">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Meter</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C41139"/>
+                </CodeListItem>
+                <Alias Context="nci:ExtCodeID" Name="C66770"/>
+            </CodeList>
+            <CodeList OID="CL.LOC" Name="Anatomical Location" DataType="text">
+                <CodeListItem CodedValue="AXILLA">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Armpit</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C12674"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="BRACHIAL ARTERY">
+                    <Decode>
+                        <TranslatedText xml:lang="en">BRACHIAL ARTERY</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C12681"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="CAROTID ARTERY">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Common Carotid Artery</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C12687"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="CEREBRAL ARTERY">
+                    <Decode>
+                        <TranslatedText xml:lang="en">CEREBRAL ARTERY</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C12691"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="DORSALIS PEDIS ARTERY">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Dorsal Pedal Artery</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C32478"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="EAR">
+                    <Decode>
+                        <TranslatedText xml:lang="en">EAR</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C12394"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="FEMORAL ARTERY">
+                    <Decode>
+                        <TranslatedText xml:lang="en">FEMORAL ARTERY</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C12715"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="FINGER">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Finger</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C32608"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="FOREHEAD">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Forehead</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C89803"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="ORAL CAVITY">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Buccal cavity</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C12421"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="RADIAL ARTERY">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Radial Artery</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C12838"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="RECTUM">
+                    <Decode>
+                        <TranslatedText xml:lang="en">RECTUM</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C12390"/>
+                </CodeListItem>
+                <Alias Context="nci:ExtCodeID" Name="C74456"/>
+            </CodeList>
+            <CodeList OID="CL.LAT" Name="Laterality" DataType="text">
+                <EnumeratedItem CodedValue="LEFT">
+                    <Alias Context="nci:ExtCodeID" Name="C25229"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="RIGHT">
+                    <Alias Context="nci:ExtCodeID" Name="C25228"/>
+                </EnumeratedItem>
+                <Alias Context="nci:ExtCodeID" Name="C99073"/>
+            </CodeList>
+            <CodeList OID="CL.LBTESTCD" Name="Laboratory Test Code" DataType="text">
+                <CodeListItem CodedValue="ALB">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Albumin</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C64431"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="ALP">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Alkaline Phosphatase</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C64432"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="ALT">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Alanine Aminotransferase</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C64433"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="AST">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Aspartate Aminotransferase</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C64467"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="CREAT">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Creatinine</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C64547"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="HBA1C">
+                    <Decode>
+                        <TranslatedText xml:lang="en">HbA1c</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C64849"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="K">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Potassium</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C64853"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="SODIUM">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Sodium</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C64809"/>
+                </CodeListItem>
+                <Alias Context="nci:ExtCodeID" Name="C65047"/>
+            </CodeList>
+            <CodeList OID="CL.LBTEST" Name="Laboratory Test Name" DataType="text">
+                <CodeListItem CodedValue="Alanine Aminotransferase">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Alanine Aminotransferase</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C64433"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="Albumin">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Albumin</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C64431"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="Alkaline Phosphatase">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Alkaline Phosphatase</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C64432"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="Aspartate Aminotransferase">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Aspartate Aminotransferase</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C64467"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="Creatinine">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Creatinine</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C64547"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="Hemoglobin A1C">
+                    <Decode>
+                        <TranslatedText xml:lang="en">HbA1c</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C64849"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="Potassium">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Potassium</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C64853"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="Sodium">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Sodium</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C64809"/>
+                </CodeListItem>
+                <Alias Context="nci:ExtCodeID" Name="C67154"/>
+            </CodeList>
+            <CodeList OID="CL.UNIT" Name="Unit" DataType="text">
+                <CodeListItem CodedValue="IU/L">
+                    <Decode>
+                        <TranslatedText xml:lang="en">IE/L</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C67376"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="mEq/dL">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Milliequivalent per Deciliter</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C67473"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="mEq/L">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Milliequivalent Per Liter</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C67474"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="mg/dL">
+                    <Decode>
+                        <TranslatedText xml:lang="en">mg%</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C67015"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="mg/L">
+                    <Decode>
+                        <TranslatedText xml:lang="en">g/m3</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C64572"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="mmol/L">
+                    <Decode>
+                        <TranslatedText xml:lang="en">mcmol/mL</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C64387"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="nkat/L">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Nanokatal per Liter</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C70510"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="U/L">
+                    <Decode>
+                        <TranslatedText xml:lang="en">mU/mL</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C67456"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="ukat/L">
+                    <Decode>
+                        <TranslatedText xml:lang="en">mckat/L</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C67397"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="umol/L">
+                    <Decode>
+                        <TranslatedText xml:lang="en">nmol/mL</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C48508"/>
+                </CodeListItem>
+                <Alias Context="nci:ExtCodeID" Name="C71620"/>
+            </CodeList>
+            <CodeList OID="CL.LBSTRESC" Name="Laboratory Test Standard Character Result" DataType="text">
+                <EnumeratedItem CodedValue="ABNORMAL">
+                    <Alias Context="nci:ExtCodeID" Name="C25401"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="ABSENT">
+                    <Alias Context="nci:ExtCodeID" Name="C48190"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="BORDERLINE">
+                    <Alias Context="nci:ExtCodeID" Name="C14157"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="DETECTED">
+                    <Alias Context="nci:ExtCodeID" Name="C191719"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="INDETERMINATE">
+                    <Alias Context="nci:ExtCodeID" Name="C48658"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="NEGATIVE">
+                    <Alias Context="nci:ExtCodeID" Name="C38757"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="NORMAL">
+                    <Alias Context="nci:ExtCodeID" Name="C14165"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="NOT DETECTED">
+                    <Alias Context="nci:ExtCodeID" Name="C191300"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="POSITIVE">
+                    <Alias Context="nci:ExtCodeID" Name="C38758"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="PRESENT">
+                    <Alias Context="nci:ExtCodeID" Name="C25626"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="STRONGLY POSITIVE">
+                    <Alias Context="nci:ExtCodeID" Name="C191301"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="TOO NUMEROUS TO COUNT">
+                    <Alias Context="nci:ExtCodeID" Name="C191303"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="TRACE">
+                    <Alias Context="nci:ExtCodeID" Name="C80218"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="WEAKLY POSITIVE">
+                    <Alias Context="nci:ExtCodeID" Name="C191302"/>
+                </EnumeratedItem>
+                <Alias Context="nci:ExtCodeID" Name="C102580"/>
+            </CodeList>
+            <CodeList OID="CL.NRIND" Name="Reference Range Indicator" DataType="text">
+                <EnumeratedItem CodedValue="ABNORMAL">
+                    <Alias Context="nci:ExtCodeID" Name="C78802"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="HIGH">
+                    <Alias Context="nci:ExtCodeID" Name="C78800"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="LOW">
+                    <Alias Context="nci:ExtCodeID" Name="C78801"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="NORMAL">
+                    <Alias Context="nci:ExtCodeID" Name="C78727"/>
+                </EnumeratedItem>
+                <Alias Context="nci:ExtCodeID" Name="C78736"/>
+            </CodeList>
+            <CodeList OID="CL.SPECTYPE" Name="Specimen Type" DataType="text">
+                <CodeListItem CodedValue="BLOOD">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Peripheral Blood</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C12434"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="SERUM OR PLASMA">
+                    <Decode>
+                        <TranslatedText xml:lang="en">Ser/Plas</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C105706"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="URINE">
+                    <Decode>
+                        <TranslatedText xml:lang="en">URINE</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C13283"/>
+                </CodeListItem>
+                <Alias Context="nci:ExtCodeID" Name="C78734"/>
+            </CodeList>
+            <CodeList OID="CL.AESEV" Name="Severity/Intensity Scale for Adverse Events" DataType="text">
+                <CodeListItem CodedValue="MILD">
+                    <Decode>
+                        <TranslatedText xml:lang="en">1</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C41338"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="MODERATE">
+                    <Decode>
+                        <TranslatedText xml:lang="en">2</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C41339"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="SEVERE">
+                    <Decode>
+                        <TranslatedText xml:lang="en">3</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C41340"/>
+                </CodeListItem>
+                <Alias Context="nci:ExtCodeID" Name="C66769"/>
+            </CodeList>
+            <CodeList OID="CL.ACN" Name="Action Taken with Study Treatment" DataType="text">
+                <EnumeratedItem CodedValue="DOSE INCREASED">
+                    <Alias Context="nci:ExtCodeID" Name="C49503"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="DOSE NOT CHANGED">
+                    <Alias Context="nci:ExtCodeID" Name="C49504"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="DOSE RATE REDUCED">
+                    <Alias Context="nci:ExtCodeID" Name="C150826"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="DOSE REDUCED">
+                    <Alias Context="nci:ExtCodeID" Name="C49505"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="DRUG INTERRUPTED">
+                    <Alias Context="nci:ExtCodeID" Name="C49501"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="DRUG WITHDRAWN">
+                    <Alias Context="nci:ExtCodeID" Name="C49502"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="NOT APPLICABLE">
+                    <Alias Context="nci:ExtCodeID" Name="C48660"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="UNKNOWN">
+                    <Alias Context="nci:ExtCodeID" Name="C17998"/>
+                </EnumeratedItem>
+                <Alias Context="nci:ExtCodeID" Name="C66767"/>
+            </CodeList>
+            <CodeList OID="CL.OUT" Name="Outcome of Event" DataType="text">
+                <CodeListItem CodedValue="FATAL">
+                    <Decode>
+                        <TranslatedText xml:lang="en">5</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C48275"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="NOT RECOVERED/NOT RESOLVED">
+                    <Decode>
+                        <TranslatedText xml:lang="en">NOT RECOVERED/NOT RESOLVED</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C49494"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="RECOVERED/RESOLVED WITH SEQUELAE">
+                    <Decode>
+                        <TranslatedText xml:lang="en">RECOVERED/RESOLVED WITH SEQUELAE</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C49495"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="RECOVERED/RESOLVED">
+                    <Decode>
+                        <TranslatedText xml:lang="en">RECOVERED/RESOLVED</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C49498"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="RECOVERING/RESOLVING">
+                    <Decode>
+                        <TranslatedText xml:lang="en">RECOVERING/RESOLVING</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C49496"/>
+                </CodeListItem>
+                <CodeListItem CodedValue="UNKNOWN">
+                    <Decode>
+                        <TranslatedText xml:lang="en">U</TranslatedText>
+                    </Decode>
+                    <Alias Context="nci:ExtCodeID" Name="C17998"/>
+                </CodeListItem>
+                <Alias Context="nci:ExtCodeID" Name="C66768"/>
+            </CodeList>
+            <CodeList OID="CL.STENRF" Name="Relation to Reference Period" DataType="text">
+                <EnumeratedItem CodedValue="AFTER">
+                    <Alias Context="nci:ExtCodeID" Name="C38008"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="BEFORE">
+                    <Alias Context="nci:ExtCodeID" Name="C25629"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="BEFORE/DURING">
+                    <Alias Context="nci:ExtCodeID" Name="C184710"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="COINCIDENT">
+                    <Alias Context="nci:ExtCodeID" Name="C25456"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="DURING">
+                    <Alias Context="nci:ExtCodeID" Name="C25490"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="DURING/AFTER">
+                    <Alias Context="nci:ExtCodeID" Name="C49640"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="ONGOING">
+                    <Alias Context="nci:ExtCodeID" Name="C53279"/>
+                </EnumeratedItem>
+                <EnumeratedItem CodedValue="UNKNOWN">
+                    <Alias Context="nci:ExtCodeID" Name="C17998"/>
+                </EnumeratedItem>
+                <Alias Context="nci:ExtCodeID" Name="C66728"/>
+            </CodeList>
+        </MetaDataVersion>
+    </Study>
+</ODM>

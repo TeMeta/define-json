@@ -13,7 +13,7 @@ from pathlib import Path
 src_path = Path(__file__).parent.parent / 'src'
 sys.path.insert(0, str(src_path))
 
-from define_json.converters import PortableDefineXMLToJSONConverter
+from define_json.converters import DefineXMLToJSONConverter
 from define_json.validation import run_roundtrip_test, validate_define_json
 
 
@@ -35,7 +35,7 @@ def main():
     
     try:
         # Convert XML to JSON
-        converter = PortableDefineXMLToJSONConverter()
+        converter = DefineXMLToJSONConverter()
         data = converter.convert_file(xml_path, json_path)
         
         print(f"✅ Converted: {xml_path.name} → {json_path.name}")

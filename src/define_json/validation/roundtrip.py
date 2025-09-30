@@ -9,6 +9,56 @@ import json
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import Dict, List, Any
+import tempfile
+
+
+def run_true_roundtrip_test(original_xml_path: Path) -> Dict[str, Any]:
+    """
+    Run a complete XML → JSON → XML roundtrip test.
+    
+    Args:
+        original_xml_path: Path to the original Define-XML file
+        
+    Returns:
+        Dictionary with test results including passed status and any differences found
+    """
+    from ..converters.xml_to_json import DefineXMLToJSONConverter
+    from ..converters.json_to_xml import DefineJSONToXMLConverter
+    
+    test_results = {
+        'passed': True,
+        'errors': [],
+        'warnings': []
+    }
+    
+    try:
+        # Step 1: XML → JSON
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as tmp_json:
+            temp_json_path = Path(tmp_json.name)
+        
+        xml_to_json_converter = DefineXMLToJSONConverter()
+        json_data = xml_to_json_converter.convert_file(original_xml_path, temp_json_path)
+        
+        # Step 2: JSON → XML
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.xml', delete=False) as tmp_xml:
+            temp_xml_path = Path(tmp_xml.name)
+        
+        json_to_xml_converter = DefineJSONToXMLConverter()
+        json_to_xml_converter.convert_file(temp_json_path, temp_xml_path)
+        
+        # Step 3: Compare original XML with recreated XML
+        comparison_results = validate_true_roundtrip(original_xml_path, temp_xml_path)
+        
+        # Clean up temporary files
+        temp_json_path.unlink()
+        temp_xml_path.unlink()
+        
+        return comparison_results
+        
+    except Exception as e:
+        test_results['passed'] = False
+        test_results['errors'].append(f"Roundtrip conversion failed: {str(e)}")
+        return test_results
 
 
 def run_roundtrip_test(original_xml_path: Path, converted_json_path: Path) -> Dict[str, Any]:
@@ -62,22 +112,29 @@ def run_roundtrip_test(original_xml_path: Path, converted_json_path: Path) -> Di
         'CodeListItem': len(root.findall('.//odm:CodeListItem', namespaces))
     }
     
-    # Count domain ItemGroups and ValueList ItemGroups separately
-    all_item_groups = json_data.get('itemGroups', [])
+    # Count domain ItemGroups and ValueList ItemGroups separately - handle both formats
+    all_item_groups = json_data.get('itemGroups', []) or json_data.get('Datasets', [])
     domain_item_groups = [ig for ig in all_item_groups if ig.get('type') != 'DataSpecialization']
     value_list_item_groups = [ig for ig in all_item_groups if ig.get('type') == 'DataSpecialization']
     
+    # Handle both field name formats
+    items = json_data.get('items', []) or json_data.get('Variables', [])
+    code_lists = json_data.get('codeLists', []) or json_data.get('CodeLists', [])
+    where_clauses = json_data.get('whereClauses', []) or json_data.get('WhereClauses', [])
+    methods = json_data.get('methods', []) or json_data.get('Methods', [])
+    standards = json_data.get('standards', []) or json_data.get('Standards', [])
+    
     json_counts = {
         'ItemGroupDef': len(domain_item_groups),
-        'ItemDef': len(json_data.get('items', [])),
+        'ItemDef': len(items),
         'ValueListDef': len(value_list_item_groups),
-        'CodeList': len(json_data.get('codeLists', [])),
-        'WhereClauseDef': len(json_data.get('whereClauses', [])),
-        'MethodDef': len(json_data.get('methods', [])),
-        'Standard': len(json_data.get('standards', [])),
+        'CodeList': len(code_lists),
+        'WhereClauseDef': len(where_clauses),
+        'MethodDef': len(methods),
+        'Standard': len(standards),
         'ItemRef_ItemGroup': sum(len(ig.get('items', [])) for ig in domain_item_groups),
         'ItemRef_ValueList': sum(len(ig.get('items', [])) for ig in value_list_item_groups),
-        'CodeListItem': sum(len(cl.get('codeListItems', [])) for cl in json_data.get('codeLists', []))
+        'CodeListItem': sum(len(cl.get('codeListItems', []) or cl.get('items', [])) for cl in code_lists)
     }
     
     test_results['stats'] = {'xml': xml_counts, 'json': json_counts}
@@ -118,13 +175,21 @@ def run_roundtrip_test(original_xml_path: Path, converted_json_path: Path) -> Di
         return oids
     
     def extract_oids_from_json():
+        # Handle both field name formats (XML→JSON converter vs JSON→XML converter)
+        item_groups = json_data.get('itemGroups', []) or json_data.get('Datasets', [])
+        items = json_data.get('items', []) or json_data.get('Variables', [])
+        value_lists = json_data.get('valueLists', []) or json_data.get('ValueLists', [])
+        code_lists = json_data.get('codeLists', []) or json_data.get('CodeLists', [])
+        where_clauses = json_data.get('whereClauses', []) or json_data.get('WhereClauses', [])
+        methods = json_data.get('methods', []) or json_data.get('Methods', [])
+        
         oids = {
-            'ItemGroup': [ds.get('OID') for ds in json_data.get('Datasets', [])],
-            'Item': [var.get('OID') for var in json_data.get('Variables', [])],
-            'ValueList': [vl.get('OID') for vl in json_data.get('ValueLists', [])],
-            'CodeList': [cl.get('oid') for cl in json_data.get('CodeLists', [])],
-            'WhereClause': [wc.get('oid') for wc in json_data.get('WhereClauses', [])],
-            'Method': [m.get('oid') for m in json_data.get('Methods', [])]
+            'ItemGroup': [ds.get('OID') for ds in item_groups],
+            'Item': [var.get('OID') for var in items],
+            'ValueList': [vl.get('OID') for vl in value_lists],
+            'CodeList': [cl.get('oid') or cl.get('OID') for cl in code_lists],
+            'WhereClause': [wc.get('oid') or wc.get('OID') for wc in where_clauses],
+            'Method': [m.get('oid') or m.get('OID') for m in methods]
         }
         return oids
     
@@ -182,7 +247,9 @@ def run_roundtrip_test(original_xml_path: Path, converted_json_path: Path) -> Di
         xml_itemrefs[ig_oid] = set(filter(None, item_refs))
     
     json_itemrefs = {}
-    for ds in json_data.get('Datasets', []):
+    # Handle both field name formats
+    all_item_groups = json_data.get('itemGroups', []) or json_data.get('Datasets', [])
+    for ds in all_item_groups:
         ds_oid = ds.get('OID')
         item_refs = [item.get('itemOID') for item in ds.get('items', [])]
         json_itemrefs[ds_oid] = set(filter(None, item_refs))

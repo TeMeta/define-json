@@ -25,7 +25,7 @@ src/define_json/
 ## Key Features
 
 ### 🔄 **Bidirectional Converters**
-- **XML → JSON**: `PortableDefineXMLToJSONConverter`
+- **XML → JSON**: `DefineXMLToJSONConverter`
 - **JSON → XML**: `DefineJSONToXMLConverter`
 - Zero external dependencies, pure Python standard library
 
@@ -43,11 +43,11 @@ src/define_json/
 
 ### As a Package
 ```python
-from define_json.converters import PortableDefineXMLToJSONConverter
+from define_json.converters import DefineXMLToJSONConverter
 from define_json.validation import run_roundtrip_test
 
 # Convert XML to JSON
-converter = PortableDefineXMLToJSONConverter()
+converter = DefineXMLToJSONConverter()
 data = converter.convert_file('input.xml', 'output.json')
 
 # Validate conversion
