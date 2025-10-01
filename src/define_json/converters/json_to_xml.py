@@ -57,51 +57,39 @@ class DefineJSONToXMLConverter:
         root = ET.Element('ODM')
         root.set('xmlns', self.namespaces['odm'])
         
-        # Extract metadata from flattened structure - NO HARDCODING!
-        # Set root attributes from ODMFileMetadata mixin attributes
-        if json_data.get('fileOID'):
-            root.set('FileOID', json_data['fileOID'])
-        if json_data.get('creationDateTime'):
-            root.set('CreationDateTime', json_data['creationDateTime'])
-        if json_data.get('asOfDateTime'):
-            root.set('AsOfDateTime', json_data['asOfDateTime'])
-        if json_data.get('odmVersion'):
-            root.set('ODMVersion', json_data['odmVersion'])
-        if json_data.get('fileType'):
-            root.set('FileType', json_data['fileType'])
-        if json_data.get('originator'):
-            root.set('Originator', json_data['originator'])
-        if json_data.get('sourceSystem'):
-            root.set('SourceSystem', json_data['sourceSystem'])
-        if json_data.get('sourceSystemVersion'):
-            root.set('SourceSystemVersion', json_data['sourceSystemVersion'])
-        if json_data.get('context'):
-            root.set('{%s}Context' % self.namespaces['def'], json_data['context'])
+        # Generate ODM metadata from JSON content (data-driven, not hardcoded)
+        study_info = self._extract_study_info(json_data)
         
-        # Create Study element using StudyMetadata mixin attributes
+        # Set ODM root attributes with generated metadata
+        root.set('FileOID', study_info['file_oid'])
+        root.set('CreationDateTime', datetime.now().isoformat())
+        root.set('AsOfDateTime', datetime.now().isoformat())
+        root.set('ODMVersion', '1.3.2')
+        root.set('FileType', 'Snapshot')
+        root.set('Originator', study_info['originator'])
+        root.set('SourceSystem', 'define-json')
+        root.set('SourceSystemVersion', '1.0.0')
+        root.set('{%s}Context' % self.namespaces['def'], 'Other')
+        
+        # Create Study element with generated metadata
         study = ET.SubElement(root, 'Study')
-        study.set('OID', json_data.get('studyOID', 'UNKNOWN'))
+        study.set('OID', study_info['study_oid'])
         
-        # Global Variables
+        # Global Variables with generated metadata
         global_vars = ET.SubElement(study, 'GlobalVariables')
-        if json_data.get('studyName'):
-            study_name = ET.SubElement(global_vars, 'StudyName')
-            study_name.text = json_data['studyName']
-        if json_data.get('studyDescription'):
-            study_desc = ET.SubElement(global_vars, 'StudyDescription')
-            study_desc.text = json_data['studyDescription']
-        if json_data.get('protocolName'):
-            protocol = ET.SubElement(global_vars, 'ProtocolName')
-            protocol.text = json_data['protocolName']
+        study_name = ET.SubElement(global_vars, 'StudyName')
+        study_name.text = study_info['study_name']
+        study_desc = ET.SubElement(global_vars, 'StudyDescription')
+        study_desc.text = study_info['study_description']
+        protocol = ET.SubElement(global_vars, 'ProtocolName')
+        protocol.text = study_info['protocol_name']
         
-        # MetaDataVersion using flattened attributes
+        # MetaDataVersion with generated metadata
         mdv = ET.SubElement(study, 'MetaDataVersion')
-        mdv.set('OID', json_data.get('OID', 'MDV.ROUNDTRIP'))
-        mdv.set('Name', json_data.get('name', 'Roundtrip MetaDataVersion'))
-        if json_data.get('description'):
-            mdv.set('Description', json_data['description'])
-        if json_data.get('defineVersion'):
-            mdv.set('{%s}DefineVersion' % self.namespaces['def'], json_data['defineVersion'])
+        mdv.set('OID', study_info['mdv_oid'])
+        mdv.set('Name', study_info['mdv_name'])
+        mdv.set('Description', study_info['mdv_description'])
+        mdv.set('{%s}DefineVersion' % self.namespaces['def'], '2.1.0')
         
         # Process Standards first (they should be early in MetaDataVersion)
         self._create_standards(mdv, json_data.get('standards', []))
@@ -162,7 +150,7 @@ class DefineJSONToXMLConverter:
         self._create_code_lists(mdv, json_data.get('codeLists', []))
         
         # Process Methods
-        self._create_methods(mdv, json_data.get('Methods', []))
+        self._create_methods(mdv, json_data.get('methods', []))
         
         # Write to file with stylesheet processing instruction
         tree = ET.ElementTree(root)
@@ -359,15 +347,18 @@ class DefineJSONToXMLConverter:
             # Add ItemRefs
             for item in vl.get('items', []):
                 item_ref = ET.SubElement(vl_elem, 'ItemRef')
-                item_ref.set('ItemOID', item.get('itemOID', ''))
+                # Handle both OID and itemOID for compatibility
+                item_oid = item.get('OID') or item.get('itemOID', '')
+                item_ref.set('ItemOID', item_oid)
                 item_ref.set('Mandatory', item.get('mandatory', 'No'))
                 
-                if item.get('whereClauseOID'):
+                # Handle both whereClause and whereClauseOID for compatibility
+                where_clause = item.get('whereClause') or item.get('whereClauseOID')
+                if where_clause:
                     wc_ref = ET.SubElement(item_ref, '{%s}WhereClauseRef' % self.namespaces['def'])
                     
                     # For Dataset Specialization: Convert shared WhereClause OID back to original format
-                    shared_wc_oid = item['whereClauseOID']
-                    item_oid = item.get('itemOID', '')
+                    shared_wc_oid = where_clause
                     
                     # Extract variable from ItemOID (e.g., IT.LB.LBORRES.AST -> LBORRES)
                     parts = item_oid.split('.')
@@ -383,6 +374,61 @@ class DefineJSONToXMLConverter:
                     else:
                         wc_ref.set('WhereClauseOID', shared_wc_oid)
     
+    def _extract_study_info(self, json_data: Dict[str, Any]) -> Dict[str, str]:
+        """Extract study information from JSON content, preserving existing names when available."""
+        # Extract domain information from ItemGroups for fallback generation
+        domains = set()
+        item_count = 0
+        dataset_count = len(json_data.get('itemGroups', []))
+        
+        for ig in json_data.get('itemGroups', []):
+            domain = ig.get('name', '').upper()
+            # Check for traditional domain codes (DM, AE, etc.) or use first part of descriptive names
+            if domain and len(domain) <= 2:  # Traditional domain code
+                domains.add(domain)
+            elif domain:  # Descriptive name - extract meaningful part
+                # Extract first meaningful word (e.g., "Vital_Sign" -> "VS", "Randomization" -> "RAND")
+                words = domain.split('_')
+                if words:
+                    # Create abbreviation from first letters
+                    abbrev = ''.join(word[0] for word in words[:2] if word)
+                    if len(abbrev) <= 4:  # Reasonable abbreviation length
+                        domains.add(abbrev)
+            item_count += len(ig.get('items', []))
+        
+        # Generate meaningful identifiers based on content
+        domain_list = sorted(domains)
+        primary_domain = domain_list[0] if domain_list else 'STUDY'
+        
+        # Generate OIDs based on content
+        file_oid = f"ODM.DEFINE.{primary_domain}.{datetime.now().strftime('%Y%m%d')}"
+        study_oid = f"ODM.STUDY.{primary_domain}"
+        mdv_oid = f"MDV.{primary_domain}"
+        
+        # PRESERVE existing names when available, generate meaningful defaults when missing
+        study_name = json_data.get('studyName') or (f"Multi-Domain Study ({len(domains)} domains)" if len(domains) > 1 else f"{primary_domain} Study")
+        study_description = json_data.get('studyDescription') or (f"Study containing {dataset_count} datasets with {item_count} variables across {len(domains)} domains" if len(domains) > 1 else f"Study containing {dataset_count} datasets with {item_count} variables")
+        protocol_name = json_data.get('protocolName') or f"Protocol {primary_domain}"
+        
+        # For MetaDataVersion, use existing name/description if available
+        mdv_name = json_data.get('name') or f"MetaDataVersion {primary_domain}"
+        mdv_description = json_data.get('description') or (f"Data definitions for {', '.join(domain_list)} domains" if domain_list else f"Data definitions for {dataset_count} datasets")
+        
+        # Generate originator based on content
+        originator = f"Define-JSON Converter (Generated from {len(domains)} domains, {dataset_count} datasets)"
+        
+        return {
+            'file_oid': file_oid,
+            'study_oid': study_oid,
+            'mdv_oid': mdv_oid,
+            'study_name': study_name,
+            'study_description': study_description,
+            'protocol_name': protocol_name,
+            'mdv_name': mdv_name,
+            'mdv_description': mdv_description,
+            'originator': originator
+        }
+
     def _create_conditions_and_where_clauses(self, parent: ET.Element, conditions: List[Dict[str, Any]], where_clauses: List[Dict[str, Any]], existing_item_oids: set = None):
         """Create WhereClauseDef elements from separated Conditions and WhereClauses."""
         # Create a lookup for conditions by OID
@@ -496,6 +542,16 @@ class DefineJSONToXMLConverter:
                 trans_text = ET.SubElement(desc, 'TranslatedText')
                 trans_text.text = var['description']
             
+            # Add CodeListRef if present
+            if var.get('codelist'):
+                cl_ref = ET.SubElement(item_elem, '{%s}CodeListRef' % self.namespaces['def'])
+                cl_ref.set('CodeListOID', var['codelist'])
+            
+            # Add MethodRef if present
+            if var.get('method'):
+                method_ref = ET.SubElement(item_elem, '{%s}MethodRef' % self.namespaces['def'])
+                method_ref.set('MethodOID', var['method'])
+            
             # Add Origin if present
             origin = var.get('origin', {})
             if origin and (origin.get('type') or origin.get('source')):
@@ -532,7 +588,9 @@ class DefineJSONToXMLConverter:
         """Create MethodDef elements."""
         for method in methods:
             method_elem = ET.SubElement(parent, 'MethodDef')
-            method_elem.set('OID', method.get('oid', ''))
+            # Handle both 'OID' and 'oid' field names
+            oid = method.get('OID') or method.get('oid', '')
+            method_elem.set('OID', oid)
             if method.get('name'):
                 method_elem.set('Name', method['name'])
             if method.get('type'):

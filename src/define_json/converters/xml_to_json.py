@@ -72,31 +72,9 @@ class DefineXMLToJSONConverter:
         if not study or not mdv:
             raise ValueError("Could not find Study or MetaDataVersion in Define-XML")
         
-        # Build Define-JSON structure with metadata directly in MetaDataVersion
-        define_json = {
-            # ODM File Metadata (from ODMFileMetadata mixin)
-            'fileOID': root.get('FileOID'),
-            'asOfDateTime': root.get('AsOfDateTime'),
-            'creationDateTime': root.get('CreationDateTime'),
-            'odmVersion': root.get('ODMVersion'),
-            'fileType': root.get('FileType'),
-            'originator': root.get('Originator'),
-            'sourceSystem': root.get('SourceSystem'),
-            'sourceSystemVersion': root.get('SourceSystemVersion'),
-            'context': root.get('{%s}Context' % active_namespaces['def']),
-            'defineVersion': mdv.get('{%s}DefineVersion' % active_namespaces['def']),
-            
-            # Study Metadata (from StudyMetadata mixin)
-            'studyOID': study.get('OID'),
-            'studyName': self._get_study_name(study),
-            'studyDescription': self._get_study_description(study),
-            'protocolName': self._get_protocol_name(study),
-            
-            # MetaDataVersion attributes (from GovernedElement)
-            'OID': mdv.get('OID'),
-            'name': mdv.get('Name', mdv.get('OID')),
-            'description': mdv.get('Description', '')
-        }
+        # Build Define-JSON structure - NO ODM metadata pollution!
+        # ODM metadata should stay in XML, not be copied to JSON
+        define_json = {}
         
         # Process methods first to get derivation method map for linking
         methods, derivation_method_map = self._process_methods(mdv)
@@ -223,6 +201,16 @@ class DefineXMLToJSONConverter:
                 item_dict['significantDigits'] = int(item_def.get('SignificantDigits'))
             except (ValueError, TypeError):
                 pass
+        
+        # Add CodeListRef if present
+        codelist_ref = item_def.find('def:CodeListRef', self.namespaces)
+        if codelist_ref is not None:
+            item_dict['codelist'] = codelist_ref.get('CodeListOID')
+        
+        # Add MethodRef if present
+        method_ref = item_def.find('def:MethodRef', self.namespaces)
+        if method_ref is not None:
+            item_dict['method'] = method_ref.get('MethodOID')
         
         # Add origin if present
         origin = self._get_origin(item_def)
@@ -510,7 +498,7 @@ class DefineXMLToJSONConverter:
         # Process standard MethodDef elements (Define-XML v2.1)
         for method in mdv.findall('.//odm:MethodDef', self.namespaces):
             method_dict = {
-                'OID': method.get('OID'),
+                'oid': method.get('OID'),
                 'name': method.get('Name'),
                 'type': method.get('Type'),
                 'description': self._get_description(method)
