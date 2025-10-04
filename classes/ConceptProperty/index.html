@@ -150,7 +150,6 @@ DocumentReference {
 CodeList {
     DataType dataType  
     string formatName  
-    stringList codeListItems  
     string version  
     string href  
     string OID  
@@ -177,6 +176,14 @@ Resource {
     string label  
     stringList aliases  
 }
+CodeListItem {
+    string codedValue  
+    string decode  
+    string description  
+    stringList aliases  
+    decimal weight  
+    boolean other  
+}
 
 ConceptProperty ||--|o CodeList : "codeList"
 ConceptProperty ||--}o Coding : "coding"
@@ -184,11 +191,13 @@ ConceptProperty ||--}o Comment : "comment"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 DocumentReference ||--}o Coding : "coding"
+CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
 CodeList ||--}o Coding : "coding"
 CodeList ||--}o Comment : "comment"
 Resource ||--}o FormalExpression : "selection"
 Resource ||--}o Coding : "coding"
+CodeListItem ||--|o Coding : "coding"
 
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>

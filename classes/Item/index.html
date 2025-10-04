@@ -158,6 +158,7 @@ DocumentReference {
 }
 Condition {
     string implementsCondition  
+    LogicalOperator operator  
     string OID  
     string uuid  
     string name  
@@ -186,11 +187,11 @@ RangeCheck {
     stringList checkValues  
     string item  
     SoftHard softHard  
+    LogicalOperator operator  
 }
 CodeList {
     DataType dataType  
     string formatName  
-    stringList codeListItems  
     string version  
     string href  
     string OID  
@@ -216,6 +217,14 @@ Resource {
     string description  
     string label  
     stringList aliases  
+}
+CodeListItem {
+    string codedValue  
+    string decode  
+    string description  
+    stringList aliases  
+    decimal weight  
+    boolean other  
 }
 ConceptProperty {
     integer minOccurs  
@@ -265,7 +274,7 @@ Method {
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--|o WhereClause : "whereClause"
+Item ||--}o WhereClause : "whereClause"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
 Item ||--|o CodeList : "roleCodeList"
@@ -277,6 +286,7 @@ Comment ||--}o Coding : "coding"
 DocumentReference ||--}o Coding : "coding"
 Condition ||--}o RangeCheck : "rangeChecks"
 Condition ||--}o FormalExpression : "formalExpression"
+Condition ||--}o Condition : "conditions"
 Condition ||--}o Coding : "coding"
 Condition ||--}o Comment : "comment"
 FormalExpression ||--}o Parameter : "parameters"
@@ -284,11 +294,13 @@ FormalExpression ||--|o ReturnValue : "returnValue"
 FormalExpression ||--}o Resource : "externalCodeLibs"
 FormalExpression ||--}o Coding : "coding"
 RangeCheck ||--}o FormalExpression : "formalExpression"
+CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
 CodeList ||--}o Coding : "coding"
 CodeList ||--}o Comment : "comment"
 Resource ||--}o FormalExpression : "selection"
 Resource ||--}o Coding : "coding"
+CodeListItem ||--|o Coding : "coding"
 ConceptProperty ||--|o CodeList : "codeList"
 ConceptProperty ||--}o Coding : "coding"
 ConceptProperty ||--}o Comment : "comment"
@@ -355,8 +367,8 @@ Method ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="../../slots/whereClause/">whereClause</a></td>
-<td>0..1 <br/> <a href="../WhereClause/">WhereClause</a></td>
-<td>Conditions for when this item definition applies</td>
+<td>* <br/> <a href="../WhereClause/">WhereClause</a></td>
+<td>References to different situations that define when this item applies</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -615,7 +627,7 @@ Method ||--}o Comment : "comment"
 <tr>
 <td><a href="../Parameter/">Parameter</a></td>
 <td><a href="../../slots/items/">items</a></td>
-<td>range</td>
+<td>any_of[range]</td>
 <td><a href="./">Item</a></td>
 </tr>
 <tr>
@@ -838,15 +850,30 @@ Method ||--}o Comment : "comment"
 <span class="w">    </span><span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">whereClause</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">whereClause</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Conditions for when this item definition applies</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'References</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">different</span><span class="nv"> </span><span class="s">situations</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">define</span><span class="nv"> </span><span class="s">when</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">applies.</span>
+
+<span class="w">      </span><span class="s">Multiple</span><span class="nv"> </span><span class="s">whereClauses</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">combined</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">OR</span><span class="nv"> </span><span class="s">logic:</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">applies</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">ANY</span><span class="nv"> </span><span class="s">referenced</span>
+<span class="w">      </span><span class="s">WhereClause</span><span class="nv"> </span><span class="s">matches.</span>
+
+<span class="w">      </span><span class="s">Within</span><span class="nv"> </span><span class="s">each</span><span class="nv"> </span><span class="s">WhereClause,</span><span class="nv"> </span><span class="s">conditions</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">combined</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">AND</span><span class="nv"> </span><span class="s">logic:</span><span class="nv"> </span><span class="s">all</span><span class="nv"> </span><span class="s">conditions</span>
+<span class="w">      </span><span class="s">must</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">true.</span>
+
+
+<span class="w">      </span><span class="s">Example:</span><span class="nv"> </span><span class="s">whereClause:</span><span class="nv"> </span><span class="s">["WC.SYSBP",</span><span class="nv"> </span><span class="s">"WC.DIABP"]</span><span class="nv"> </span><span class="s">means</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">applies</span><span class="nv"> </span><span class="s">when</span>
+
+<span class="w">      </span><span class="s">(all</span><span class="nv"> </span><span class="s">conditions</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">WC.SYSBP</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">true)</span><span class="nv"> </span><span class="s">OR</span><span class="nv"> </span><span class="s">(all</span><span class="nv"> </span><span class="s">conditions</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">WC.DIABP</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">true).</span>
+
+<span class="w">      </span><span class="s">'</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
+<span class="w">    </span><span class="nt">close_mappings</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fhir:StructureDefinition/context</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Item</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WhereClause</span>
-<span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">    </span><span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">  </span><span class="nt">origin</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">origin</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The origin of the data</span>
@@ -968,8 +995,23 @@ Method ||--}o Comment : "comment"
 <span class="w">    </span><span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">whereClause</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">whereClause</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Conditions for when this item definition applies</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'References</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">different</span><span class="nv"> </span><span class="s">situations</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">define</span><span class="nv"> </span><span class="s">when</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">applies.</span>
+
+<span class="w">      </span><span class="s">Multiple</span><span class="nv"> </span><span class="s">whereClauses</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">combined</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">OR</span><span class="nv"> </span><span class="s">logic:</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">applies</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">ANY</span><span class="nv"> </span><span class="s">referenced</span>
+<span class="w">      </span><span class="s">WhereClause</span><span class="nv"> </span><span class="s">matches.</span>
+
+<span class="w">      </span><span class="s">Within</span><span class="nv"> </span><span class="s">each</span><span class="nv"> </span><span class="s">WhereClause,</span><span class="nv"> </span><span class="s">conditions</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">combined</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">AND</span><span class="nv"> </span><span class="s">logic:</span><span class="nv"> </span><span class="s">all</span><span class="nv"> </span><span class="s">conditions</span>
+<span class="w">      </span><span class="s">must</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">true.</span>
+
+
+<span class="w">      </span><span class="s">Example:</span><span class="nv"> </span><span class="s">whereClause:</span><span class="nv"> </span><span class="s">["WC.SYSBP",</span><span class="nv"> </span><span class="s">"WC.DIABP"]</span><span class="nv"> </span><span class="s">means</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">applies</span><span class="nv"> </span><span class="s">when</span>
+
+<span class="w">      </span><span class="s">(all</span><span class="nv"> </span><span class="s">conditions</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">WC.SYSBP</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">true)</span><span class="nv"> </span><span class="s">OR</span><span class="nv"> </span><span class="s">(all</span><span class="nv"> </span><span class="s">conditions</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">WC.DIABP</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">true).</span>
+
+<span class="w">      </span><span class="s">'</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
+<span class="w">    </span><span class="nt">close_mappings</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fhir:StructureDefinition/context</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">whereClause</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Item</span>
@@ -977,8 +1019,8 @@ Method ||--}o Comment : "comment"
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Item</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WhereClause</span>
-<span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">    </span><span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">  </span><span class="nt">origin</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">origin</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The origin of the data</span>

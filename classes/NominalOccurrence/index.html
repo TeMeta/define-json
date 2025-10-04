@@ -148,6 +148,7 @@ DocumentReference {
 }
 Condition {
     string implementsCondition  
+    LogicalOperator operator  
     string OID  
     string uuid  
     string name  
@@ -176,6 +177,7 @@ RangeCheck {
     stringList checkValues  
     string item  
     SoftHard softHard  
+    LogicalOperator operator  
 }
 Timing {
     TimingType type  
@@ -216,6 +218,7 @@ Comment ||--}o Coding : "coding"
 DocumentReference ||--}o Coding : "coding"
 Condition ||--}o RangeCheck : "rangeChecks"
 Condition ||--}o FormalExpression : "formalExpression"
+Condition ||--}o Condition : "conditions"
 Condition ||--}o Coding : "coding"
 Condition ||--}o Comment : "comment"
 FormalExpression ||--}o Parameter : "parameters"

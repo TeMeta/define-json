@@ -200,6 +200,7 @@ Item {
 }
 Condition {
     string implementsCondition  
+    LogicalOperator operator  
     string OID  
     string uuid  
     string name  
@@ -215,7 +216,6 @@ Condition {
 CodeList {
     DataType dataType  
     string formatName  
-    stringList codeListItems  
     string version  
     string href  
     string OID  
@@ -262,6 +262,7 @@ RangeCheck {
     stringList checkValues  
     string item  
     SoftHard softHard  
+    LogicalOperator operator  
 }
 
 CubeComponent ||--|| Item : "item"
@@ -283,7 +284,7 @@ FormalExpression ||--}o Coding : "coding"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--|o WhereClause : "whereClause"
+Item ||--}o WhereClause : "whereClause"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
 Item ||--|o CodeList : "roleCodeList"
@@ -292,8 +293,10 @@ Item ||--}o Coding : "coding"
 Item ||--}o Comment : "comment"
 Condition ||--}o RangeCheck : "rangeChecks"
 Condition ||--}o FormalExpression : "formalExpression"
+Condition ||--}o Condition : "conditions"
 Condition ||--}o Coding : "coding"
 Condition ||--}o Comment : "comment"
+CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
 CodeList ||--}o Coding : "coding"
 CodeList ||--}o Comment : "comment"

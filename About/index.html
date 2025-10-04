@@ -80,6 +80,10 @@
 <ul class="nav flex-column">
 </ul>
 </li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#quick-start-xml-json-conversion">🔄 Quick Start: XML ↔ JSON Conversion</a>
+<ul class="nav flex-column">
+</ul>
+</li>
 <li class="nav-item" data-bs-level="2"><a class="nav-link" href="#context-is-everything">Context is everything</a>
 <ul class="nav flex-column">
 </ul>
@@ -107,6 +111,48 @@
 </ol>
 <p>It is being designed in a Clinical Trial context to supplement the CDISC Unified Study Definitions (<a href="https://github.com/cdisc-org/DDF-RA">USDM</a>) and <a href="https://github.com/cdisc-org/DataExchange-DatasetJson">Dataset-JSON</a>, providing a way to describe datasets and how they link causally to their context</p>
 <p><a href="https://temeta.github.io/define-json">Documentation Site</a></p>
+<h2 id="quick-start-xml-json-conversion">🔄 Quick Start: XML ↔ JSON Conversion</h2>
+<p>For complete bidirectional conversion between Define-XML and Define-JSON, see:
+- <strong><a href="../CONVERSION_README/">CONVERSION_README.md</a></strong> - Complete guide
+- <strong><a href="../QUICK_REFERENCE/">QUICK_REFERENCE.md</a></strong> - Command cheat sheet</p>
+<h3 id="basic-usage">Basic Usage</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Recommended: Use Poetry (handles virtual environment automatically)</span>
+poetry<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>define_json<span class="w"> </span>xml2json<span class="w"> </span>data/define.xml<span class="w"> </span>data/output.json
+poetry<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>define_json<span class="w"> </span>json2xml<span class="w"> </span>data/input.json<span class="w"> </span>data/output.xml
+
+<span class="c1"># Alternative: Set PYTHONPATH manually</span>
+<span class="nv">PYTHONPATH</span><span class="o">=</span>src<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>define_json<span class="w"> </span>xml2json<span class="w"> </span>data/define.xml<span class="w"> </span>data/output.json
+<span class="nv">PYTHONPATH</span><span class="o">=</span>src<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>define_json<span class="w"> </span>json2xml<span class="w"> </span>data/input.json<span class="w"> </span>data/output.xml
+
+<span class="c1"># From any other directory</span>
+<span class="nv">PYTHONPATH</span><span class="o">=</span>/path/to/define-json/src<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>define_json<span class="w"> </span>xml2json<span class="w"> </span>data/define.xml<span class="w"> </span>data/output.json
+</code></pre></div>
+<h3 id="viewing-xml-files-with-stylesheets">Viewing XML Files with Stylesheets</h3>
+<p>Generated XML files include an XSL stylesheet reference for proper rendering. Due to browser security policies, you may encounter CORS errors when opening XML files directly. Here are the solutions:</p>
+<h4 id="option-1-use-a-local-web-server-recommended">Option 1: Use a Local Web Server (Recommended)</h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Navigate to your XML file directory</span>
+<span class="nb">cd</span><span class="w"> </span>/path/to/your/xml/files
+python<span class="w"> </span>-m<span class="w"> </span>http.server<span class="w"> </span><span class="m">8000</span>
+
+<span class="c1"># Then open: http://localhost:8000/your-file.xml</span>
+</code></pre></div>
+<h4 id="option-2-generate-html-directly-recommended">Option 2: Generate HTML Directly (Recommended)</h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Convert JSON directly to HTML (no CORS issues!)</span>
+poetry<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>define_json<span class="w"> </span>json2html<span class="w"> </span>input.json<span class="w"> </span>output.html
+
+<span class="c1"># Convert existing XML to HTML</span>
+poetry<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>define_json<span class="w"> </span>xml2html<span class="w"> </span>input.xml<span class="w"> </span>output.html
+
+<span class="c1"># Use custom XSL stylesheet</span>
+poetry<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>define_json<span class="w"> </span>json2html<span class="w"> </span>input.json<span class="w"> </span>output.html<span class="w"> </span>--xsl<span class="w"> </span>./custom-style.xsl
+</code></pre></div>
+<h4 id="option-3-configure-stylesheet-path">Option 3: Configure Stylesheet Path</h4>
+<div class="highlight"><pre><span></span><code><span class="c1"># Use relative path (works when XSL is in same directory)</span>
+poetry<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>define_json<span class="w"> </span>json2xml<span class="w"> </span>input.json<span class="w"> </span>output.xml<span class="w"> </span>--stylesheet<span class="w"> </span><span class="s2">"./define2-1.xsl"</span>
+
+<span class="c1"># Use absolute URL (if you have XSL hosted online)</span>
+poetry<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>define_json<span class="w"> </span>json2xml<span class="w"> </span>input.json<span class="w"> </span>output.xml<span class="w"> </span>--stylesheet<span class="w"> </span><span class="s2">"https://example.com/define2-1.xsl"</span>
+</code></pre></div>
 <h2 id="context-is-everything">Context is everything</h2>
 <blockquote>
 <p>“Don't provide values without units”</p>
@@ -140,7 +186,7 @@
 <p>“Don't define derivation/origin for a field without knowing what the Biomedical Concept is being implemented”</p>
 </blockquote>
 <p>Define-JSON details implementation, but also links to <code>Coding</code>, <code>ReifiedConcept</code> and <code>ConceptProperty</code> for structured semantic connections, i.e. enabling each data element to be mapped unambiguously to standard dictionaries/ontologies, abstract concepts, and their properties.</p>
-<p>Tof [something] combines its abstract / template form with a context, then fleshes out that combined context.</p>
+<p>The definition of [something] combines its abstract / template form with a context, then fleshes out that combined context.</p>
 <ul>
 <li>FHIR Profile is a implementation of a FHIR Resource template in the context of some healthcare or research authority</li>
 <li>A granular definition for some Biomedical Concept (BC) is an implementation of a property of that BC in context of the standard being implemented</li>

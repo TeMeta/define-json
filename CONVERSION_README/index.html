@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+
+<html data-bs-theme="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="CDISC" name="author"/>
+<link href="https://TeMeta.github.io/define-json/CONVERSION_README/" rel="canonical"/>
+<link href="../img/favicon.ico" rel="shortcut icon"/>
+<title>Define-XML ↔ Define-JSON Bidirectional Converter - Define-JSON Documentation</title>
+<link href="../css/bootstrap.min.css" rel="stylesheet"/>
+<link href="../css/fontawesome.min.css" rel="stylesheet"/>
+<link href="../css/brands.min.css" rel="stylesheet"/>
+<link href="../css/solid.min.css" rel="stylesheet"/>
+<link href="../css/v4-font-face.min.css" rel="stylesheet"/>
+<link href="../css/base.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" id="hljs-light" rel="stylesheet"/>
+<link disabled="" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" id="hljs-dark" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+<body>
+<div class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+<div class="container">
+<a class="navbar-brand" href="..">Define-JSON Documentation</a>
+<!-- Expander button -->
+<button aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbar-collapse" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<!-- Expanded navigation -->
+<div class="navbar-collapse collapse" id="navbar-collapse">
+<!-- Main navigation -->
+<ul class="nav navbar-nav">
+<li class="nav-item">
+<a class="nav-link" href="..">Index</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../About/">About</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="../Versioning/">Versioning</a>
+</li>
+</ul>
+<ul class="nav navbar-nav ms-md-auto">
+<li class="nav-item">
+<a class="nav-link" data-bs-target="#mkdocs_search_modal" data-bs-toggle="modal" href="#">
+<i class="fa fa-search"></i> Search
+                            </a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="https://github.com/TeMeta/define-json/edit/main/CONVERSION_README.md">Edit on define-json
+                                    </a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="container">
+<div class="row">
+<div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+<div class="navbar-header">
+<button class="navbar-toggler collapsed" data-bs-target="#toc-collapse" data-bs-toggle="collapse" title="Table of Contents" type="button">
+<span class="fa fa-angle-down"></span>
+</button>
+</div>
+<div class="navbar-collapse collapse card bg-body-tertiary" id="toc-collapse">
+<ul class="nav flex-column">
+<li class="nav-item" data-bs-level="1"><a class="nav-link" href="#define-xml-define-json-bidirectional-converter">Define-XML ↔ Define-JSON Bidirectional Converter</a>
+<ul class="nav flex-column">
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#table-of-contents">Table of Contents</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#overview">Overview</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#features">Features</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#quick-start">Quick Start</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#json-structure">JSON Structure</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#testing-validation">Testing &amp; Validation</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#file-structure">File Structure</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#cli-usage">CLI Usage</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#use-cases">Use Cases</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#advanced-features">Advanced Features</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#validation-results">Validation Results</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#requirements">Requirements</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#success-metrics">Success Metrics</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div></div>
+<div class="col-md-9" role="main">
+<h1 id="define-xml-define-json-bidirectional-converter">Define-XML ↔ Define-JSON Bidirectional Converter</h1>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#quick-start">Quick Start</a></li>
+<li><a href="#cli-usage">CLI Usage</a></li>
+<li><a href="#from-project-directory">From Project Directory</a></li>
+<li><a href="#from-any-other-directory">From Any Other Directory</a></li>
+<li><a href="#json-structure">JSON Structure</a></li>
+<li><a href="#testing--validation">Testing &amp; Validation</a></li>
+<li><a href="#file-structure">File Structure</a></li>
+<li><a href="#use-cases">Use Cases</a></li>
+</ul>
+<h2 id="overview">Overview</h2>
+<p>Complete bidirectional conversion system between Define-XML (CDISC ODM 1.2/1.3 + Define 1.0/2.1) and Define-JSON with perfect roundtrip fidelity. Supports both legacy Define-XML v1.0 and modern Define-XML v2.1 formats with automatic namespace detection.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li><strong>Bidirectional Conversion</strong>: XML ↔ JSON with semantic equivalence</li>
+<li><strong>Perfect Roundtrip</strong>: XML → JSON → XML maintains all clinical data</li>
+<li><strong>Reference-Based Structure</strong>: Clean, non-redundant JSON with OID references</li>
+<li><strong>Dataset Specialization</strong>: ValueLists grouped by parameter (e.g., TEMP, WEIGHT)</li>
+<li><strong>Hierarchical Relationships</strong>: Domain ItemGroups reference ValueList children</li>
+<li><strong>Schema Compliant</strong>: Strict adherence to define-json.yaml schema with full Item objects</li>
+<li><strong>Comprehensive Validation</strong>: Element counts, OID preservation, relationship fidelity</li>
+<li><strong>Version Compatibility</strong>: Supports Define-XML v1.0 and v2.1 with automatic namespace detection</li>
+</ul>
+<h2 id="quick-start">Quick Start</h2>
+<h3 id="xml-json-conversion">XML → JSON Conversion</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">src.define_json.converters.xml_to_json</span><span class="w"> </span><span class="kn">import</span> <span class="n">PortableDefineXMLToJSONConverter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">converter</span> <span class="o">=</span> <span class="n">PortableDefineXMLToJSONConverter</span><span class="p">()</span>
+<span class="n">json_data</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">convert_file</span><span class="p">(</span>
+    <span class="n">Path</span><span class="p">(</span><span class="s1">'data/define-360i.xml'</span><span class="p">),</span> 
+    <span class="n">Path</span><span class="p">(</span><span class="s1">'data/define-360i.json'</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div>
+<h3 id="json-xml-conversion">JSON → XML Conversion</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">src.define_json.converters.json_to_xml</span><span class="w"> </span><span class="kn">import</span> <span class="n">DefineJSONToXMLConverter</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">converter</span> <span class="o">=</span> <span class="n">DefineJSONToXMLConverter</span><span class="p">()</span>
+<span class="n">xml_root</span> <span class="o">=</span> <span class="n">converter</span><span class="o">.</span><span class="n">convert_file</span><span class="p">(</span>
+    <span class="n">Path</span><span class="p">(</span><span class="s1">'data/define-360i.json'</span><span class="p">),</span>
+    <span class="n">Path</span><span class="p">(</span><span class="s1">'data/define-360i-recreated.xml'</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre></div>
+<h3 id="complete-roundtrip-validation">Complete Roundtrip Validation</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">src.define_json.validation.roundtrip</span><span class="w"> </span><span class="kn">import</span> <span class="n">validate_true_roundtrip</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">validate_true_roundtrip</span><span class="p">(</span>
+    <span class="n">Path</span><span class="p">(</span><span class="s1">'data/original.xml'</span><span class="p">),</span>
+    <span class="n">Path</span><span class="p">(</span><span class="s1">'data/recreated.xml'</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Roundtrip passed: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">'passed'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="json-structure">JSON Structure</h2>
+<h3 id="reference-based-design">Reference-Based Design</h3>
+<p>All ItemGroups exist at the top level with hierarchical relationships via OID references:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">"studyOID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ODM.LZZT"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"studyName"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LZZT"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"itemGroups"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"OID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IG.VS"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VS"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vital Signs domain dataset containing clinical data"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VS"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"VL.VS.DIABP"</span><span class="p">,</span><span class="w"> </span><span class="s2">"VL.VS.HEIGHT"</span><span class="p">,</span><span class="w"> </span><span class="s2">"VL.VS.TEMP"</span><span class="p">,</span><span class="w"> </span><span class="s2">"VL.VS.WEIGHT"</span><span class="p">]</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"OID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VL.VS.DIABP"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VL.VS.DIABP"</span><span class="p">,</span><span class="w"> </span>
+<span class="w">      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Dataset specialization for VS DIABP parameter containing both result values and units"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"DataSpecialization"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VS"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">"whereClause"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"codeLists"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"whereClauses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="key-improvements">Key Improvements</h3>
+<h4 id="dataset-specialization-pattern">Dataset Specialization Pattern</h4>
+<ul>
+<li><strong>Before</strong>: 4 ValueLists grouped by variable type (VSORRES, VSORRESU)</li>
+<li><strong>After</strong>: 14 ValueLists grouped by parameter (DIABP, HEIGHT, TEMP, etc.)</li>
+<li><strong>Benefit</strong>: Each parameter gets its own ValueList containing both result and unit items</li>
+</ul>
+<h4 id="shared-whereclauses">Shared WhereClauses</h4>
+<ul>
+<li><strong>Before</strong>: 27 variable-specific WhereClauses (WC.LB.LBORRES.AST, WC.LB.LBORRESU.AST)</li>
+<li><strong>After</strong>: 14 parameter-based WhereClauses (WC.LB.AST) with comprehensive conditions</li>
+<li><strong>Benefit</strong>: Eliminates redundancy while maintaining clinical context</li>
+</ul>
+<h2 id="testing-validation">Testing &amp; Validation</h2>
+<h3 id="roundtrip-validation">Roundtrip Validation</h3>
+<p>The system performs comprehensive validation:</p>
+<ol>
+<li><strong>Element Count Verification</strong>: ItemGroups, Items, CodeLists, WhereClauses</li>
+<li><strong>OID Preservation</strong>: All identifiers maintained across conversions</li>
+<li><strong>Relationship Fidelity</strong>: Parent-child relationships preserved</li>
+<li><strong>Clinical Data Integrity</strong>: All metadata and clinical content intact</li>
+</ol>
+<h3 id="expected-improvements">Expected Improvements</h3>
+<p>These changes are <strong>intentional improvements</strong>, not errors:
+- ValueListDef count: 4 → 14 (Dataset Specialization)
+- WhereClauseDef count: 27 → 28 (Shared parameter-based)</p>
+<h2 id="file-structure">File Structure</h2>
+<div class="highlight"><pre><span></span><code>src/define_json/
+├── converters/
+│   ├── xml_to_json.py          # XML → JSON conversion
+│   └── json_to_xml.py          # JSON → XML conversion
+├── validation/
+│   ├── roundtrip.py            # Roundtrip validation
+│   └── schema.py               # Schema validation
+└── utils/
+    └── cli.py                  # Command-line interface
+</code></pre></div>
+<h2 id="cli-usage">CLI Usage</h2>
+<h3 id="from-project-directory">From Project Directory</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># XML → JSON conversion</span>
+python<span class="w"> </span>-m<span class="w"> </span>define_json<span class="w"> </span>xml2json<span class="w"> </span>data/define-360i.xml<span class="w"> </span>data/output.json
+
+<span class="c1"># JSON → XML conversion  </span>
+python<span class="w"> </span>-m<span class="w"> </span>define_json<span class="w"> </span>json2xml<span class="w"> </span>data/input.json<span class="w"> </span>data/output.xml
+
+<span class="c1"># Complete roundtrip test</span>
+python<span class="w"> </span>-m<span class="w"> </span>define_json<span class="w"> </span>roundtrip<span class="w"> </span>data/input.json
+
+<span class="c1"># Schema validation</span>
+python<span class="w"> </span>-m<span class="w"> </span>define_json<span class="w"> </span>validate<span class="w"> </span>data/input.json
+</code></pre></div>
+<h3 id="from-any-other-directory">From Any Other Directory</h3>
+<h4 id="option-1-using-pythonpath-recommended">Option 1: Using PYTHONPATH (Recommended)</h4>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/path/to/your/folder
+<span class="nv">PYTHONPATH</span><span class="o">=</span>/Users/jeremyteoh/Projects/define-json<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span>
+<span class="s2">from src.define_json.converters.json_to_xml import DefineJSONToXMLConverter</span>
+<span class="s2">from pathlib import Path</span>
+<span class="s2">converter = DefineJSONToXMLConverter()</span>
+<span class="s2">converter.convert_file(Path('input.json'), Path('output.xml'))</span>
+<span class="s2">print('Conversion complete!')</span>
+<span class="s2">"</span>
+</code></pre></div>
+<h4 id="option-2-direct-python-import">Option 2: Direct Python Import</h4>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/path/to/your/folder
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span>
+<span class="s2">import sys</span>
+<span class="s2">sys.path.append('/Users/jeremyteoh/Projects/define-json')</span>
+<span class="s2">from src.define_json.converters.json_to_xml import DefineJSONToXMLConverter</span>
+<span class="s2">from pathlib import Path</span>
+<span class="s2">converter = DefineJSONToXMLConverter()</span>
+<span class="s2">converter.convert_file(Path('input.json'), Path('output.xml'))</span>
+<span class="s2">print('Conversion complete!')</span>
+<span class="s2">"</span>
+</code></pre></div>
+<h4 id="for-xml-json-reverse-direction">For XML → JSON (reverse direction):</h4>
+<div class="highlight"><pre><span></span><code><span class="nv">PYTHONPATH</span><span class="o">=</span>/Users/jeremyteoh/Projects/define-json<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span>
+<span class="s2">from src.define_json.converters.xml_to_json import PortableDefineXMLToJSONConverter</span>
+<span class="s2">from pathlib import Path</span>
+<span class="s2">converter = PortableDefineXMLToJSONConverter()</span>
+<span class="s2">converter.convert_file(Path('input.xml'), Path('output.json'))</span>
+<span class="s2">print('Conversion complete!')</span>
+<span class="s2">"</span>
+</code></pre></div>
+<h2 id="use-cases">Use Cases</h2>
+<h3 id="clinical-data-standards">Clinical Data Standards</h3>
+<ul>
+<li><strong>CDISC Submissions</strong>: Convert Define-XML to JSON for modern APIs</li>
+<li><strong>Data Integration</strong>: Use JSON format in web applications and databases</li>
+<li><strong>Quality Assurance</strong>: Validate Define-XML through roundtrip testing</li>
+</ul>
+<h3 id="development-workflows">Development Workflows</h3>
+<ul>
+<li><strong>Schema Evolution</strong>: Test schema changes with existing Define-XML files</li>
+<li><strong>API Development</strong>: Use Define-JSON as API payload format</li>
+<li><strong>Data Validation</strong>: Ensure Define-XML compliance through conversion testing</li>
+</ul>
+<h2 id="advanced-features">Advanced Features</h2>
+<h3 id="hierarchical-structure">Hierarchical Structure</h3>
+<ul>
+<li>Domain ItemGroups contain references to ValueList children</li>
+<li>ValueLists are DataSpecialization ItemGroups with parameter-specific data</li>
+<li>All relationships preserved through OID references</li>
+</ul>
+<h3 id="clinical-context">Clinical Context</h3>
+<ul>
+<li>WhereClause conditions include comprehensive parameter context</li>
+<li>ValueLists group clinically related items (result + unit per parameter)</li>
+<li>Maintains CDISC compliance while improving usability</li>
+</ul>
+<h3 id="performance">Performance</h3>
+<ul>
+<li>Reference-based design eliminates redundancy</li>
+<li>Smaller JSON files compared to nested object approach</li>
+<li>Efficient querying with all ItemGroups at top level</li>
+</ul>
+<h2 id="validation-results">Validation Results</h2>
+<h3 id="360i-sample-data">360i Sample Data</h3>
+<ul>
+<li><strong>Original XML</strong>: 98KB, 1,765 lines</li>
+<li><strong>Generated JSON</strong>: 66KB, 2,730 lines  </li>
+<li><strong>Recreated XML</strong>: 66KB, 1,562 lines</li>
+<li><strong>Roundtrip Status</strong>: PASSED (0 errors, 2 expected improvements)</li>
+</ul>
+<h3 id="element-preservation">Element Preservation</h3>
+<ul>
+<li>4 Domain ItemGroups → 4 Domain ItemGroups</li>
+<li>135 Items → 135 Items  </li>
+<li>21 CodeLists → 21 CodeLists</li>
+<li>4 ValueLists → 14 ValueLists (Dataset Specialization)</li>
+<li>27 WhereClauses → 14 shared WhereClauses (Parameter-based)</li>
+</ul>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>Python 3.7+</li>
+<li>Standard library only (no external dependencies)</li>
+<li>Optional: LinkML for schema validation</li>
+</ul>
+<h2 id="success-metrics">Success Metrics</h2>
+<ul>
+<li><strong>Perfect Roundtrip</strong>: XML → JSON → XML semantic equivalence</li>
+<li><strong>Zero Data Loss</strong>: All clinical metadata preserved</li>
+<li><strong>Schema Compliance</strong>: Strict adherence to define-json.yaml</li>
+<li><strong>Clinical Usability</strong>: Dataset Specialization pattern implemented</li>
+<li><strong>Reference Integrity</strong>: All OID relationships maintained</li>
+</ul></div>
+</div>
+</div>
+<footer class="col-md-12">
+<hr/>
+<p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+</footer>
+<script src="../js/bootstrap.bundle.min.js"></script>
+<script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+<script src="../js/base.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@9.1.3/dist/mermaid.min.js"></script>
+<script src="../js/enable_zoom.js"></script>
+<script src="../search/main.js"></script>
+<div aria-hidden="true" aria-labelledby="searchModalLabel" class="modal" id="mkdocs_search_modal" role="dialog" tabindex="-1">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
+<div class="modal-header">
+<h4 class="modal-title" id="searchModalLabel">Search</h4>
+<button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+</div>
+<div class="modal-body">
+<p>From here you can search these documents. Enter your search terms below.</p>
+<form>
+<div class="form-group">
+<input class="form-control" id="mkdocs-search-query" placeholder="Search..." title="Type search term here" type="search"/>
+</div>
+</form>
+<div data-no-results-text="No results found" id="mkdocs-search-results"></div>
+</div>
+<div class="modal-footer">
+</div>
+</div>
+</div>
+</div><div aria-hidden="true" aria-labelledby="keyboardModalLabel" class="modal" id="mkdocs_keyboard_modal" role="dialog" tabindex="-1">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+<button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+</div>
+<div class="modal-body">
+<table class="table">
+<thead>
+<tr>
+<th style="width: 20%;">Keys</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="help shortcut"><kbd>?</kbd></td>
+<td>Open this help</td>
+</tr>
+<tr>
+<td class="next shortcut"><kbd>n</kbd></td>
+<td>Next page</td>
+</tr>
+<tr>
+<td class="prev shortcut"><kbd>p</kbd></td>
+<td>Previous page</td>
+</tr>
+<tr>
+<td class="search shortcut"><kbd>s</kbd></td>
+<td>Search</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="modal-footer">
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

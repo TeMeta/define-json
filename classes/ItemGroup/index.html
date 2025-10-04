@@ -107,6 +107,8 @@ ItemGroup {
     string structure  
     boolean isReferenceData  
     ItemGroupType type  
+    stringList children  
+    string whereClause  
     stringList profile  
     string authenticator  
     string OID  
@@ -196,28 +198,6 @@ NominalOccurrence {
     string owner  
     string wasDerivedFrom  
 }
-WhereClause {
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
-Condition {
-    string implementsCondition  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
 ReifiedConcept {
     string version  
     string href  
@@ -272,10 +252,24 @@ Item {
     string owner  
     string wasDerivedFrom  
 }
+Condition {
+    string implementsCondition  
+    LogicalOperator operator  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
 CodeList {
     DataType dataType  
     string formatName  
-    stringList codeListItems  
     string version  
     string href  
     string OID  
@@ -294,17 +288,24 @@ Origin {
     OriginType type  
     OriginSource source  
 }
+WhereClause {
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
 RangeCheck {
     Comparator comparator  
     stringList checkValues  
     string item  
     SoftHard softHard  
+    LogicalOperator operator  
 }
 
 ItemGroup ||--}o Item : "items"
-ItemGroup ||--}o ItemGroup : "children"
 ItemGroup ||--|o ReifiedConcept : "implementsConcept"
-ItemGroup ||--|o WhereClause : "whereClause"
 ItemGroup ||--}o Coding : "security"
 ItemGroup ||--|o Timing : "validityPeriod"
 ItemGroup ||--}o Coding : "coding"
@@ -324,12 +325,6 @@ NominalOccurrence ||--|| Timing : "timing"
 NominalOccurrence ||--}o Condition : "condition"
 NominalOccurrence ||--}o Coding : "coding"
 NominalOccurrence ||--}o Comment : "comment"
-WhereClause ||--}o Condition : "conditions"
-WhereClause ||--}o Coding : "coding"
-Condition ||--}o RangeCheck : "rangeChecks"
-Condition ||--}o FormalExpression : "formalExpression"
-Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comment"
 ReifiedConcept ||--}o ConceptProperty : "properties"
 ReifiedConcept ||--}o Coding : "coding"
 ReifiedConcept ||--}o Comment : "comment"
@@ -339,18 +334,26 @@ ConceptProperty ||--}o Comment : "comment"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--|o WhereClause : "whereClause"
+Item ||--}o WhereClause : "whereClause"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
 Item ||--|o CodeList : "roleCodeList"
 Item ||--|o Condition : "collectionExceptionCondition"
 Item ||--}o Coding : "coding"
 Item ||--}o Comment : "comment"
+Condition ||--}o RangeCheck : "rangeChecks"
+Condition ||--}o FormalExpression : "formalExpression"
+Condition ||--}o Condition : "conditions"
+Condition ||--}o Coding : "coding"
+Condition ||--}o Comment : "comment"
+CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
 CodeList ||--}o Coding : "coding"
 CodeList ||--}o Comment : "comment"
 Origin ||--}o SourceItem : "sourceItems"
 Origin ||--|o DocumentReference : "document"
+WhereClause ||--}o Condition : "conditions"
+WhereClause ||--}o Coding : "coding"
 RangeCheck ||--}o FormalExpression : "formalExpression"
 
 </code></pre>
@@ -407,8 +410,8 @@ RangeCheck ||--}o FormalExpression : "formalExpression"
 </tr>
 <tr>
 <td><a href="../../slots/children/">children</a></td>
-<td>* <br/> <a href="./">ItemGroup</a></td>
-<td>Child item groups within this item group</td>
+<td>* <br/> <a href="../../types/String/">String</a></td>
+<td>References to child ItemGroups (OIDs) within this item group</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -419,8 +422,8 @@ RangeCheck ||--}o FormalExpression : "formalExpression"
 </tr>
 <tr>
 <td><a href="../../slots/whereClause/">whereClause</a></td>
-<td>0..1 <br/> <a href="../WhereClause/">WhereClause</a></td>
-<td>If nested in a parent ItemGroup context, conditions for when this group appli...</td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>References to different situations that define when this item applies</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -582,12 +585,6 @@ RangeCheck ||--}o FormalExpression : "formalExpression"
 </tr>
 <tr>
 <td><a href="./">ItemGroup</a></td>
-<td><a href="../../slots/children/">children</a></td>
-<td>range</td>
-<td><a href="./">ItemGroup</a></td>
-</tr>
-<tr>
-<td><a href="./">ItemGroup</a></td>
 <td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
 <td>any_of[range]</td>
 <td><a href="./">ItemGroup</a></td>
@@ -626,12 +623,6 @@ RangeCheck ||--}o FormalExpression : "formalExpression"
 <td><a href="../NominalOccurrence/">NominalOccurrence</a></td>
 <td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
 <td>any_of[range]</td>
-<td><a href="./">ItemGroup</a></td>
-</tr>
-<tr>
-<td><a href="../DataStructureDefinition/">DataStructureDefinition</a></td>
-<td><a href="../../slots/children/">children</a></td>
-<td>range</td>
 <td><a href="./">ItemGroup</a></td>
 </tr>
 <tr>
@@ -811,13 +802,16 @@ RangeCheck ||--}o FormalExpression : "formalExpression"
 <span class="w">    </span><span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">children</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">children</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Child item groups within this item group.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">References to child ItemGroups (OIDs) within this item group. Use</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">these OID references to look up the actual ItemGroup objects  from the top-level</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">itemGroups collection.</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 <span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">  </span><span class="nt">implementsConcept</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">implementsConcept</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reference to a abstract concept topic that this item group is a specialization</span>
@@ -829,15 +823,27 @@ RangeCheck ||--}o FormalExpression : "formalExpression"
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ReifiedConcept</span>
 <span class="w">  </span><span class="nt">whereClause</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">whereClause</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">If nested in a parent ItemGroup context, conditions for when this</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">group applies</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'References</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">different</span><span class="nv"> </span><span class="s">situations</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">define</span><span class="nv"> </span><span class="s">when</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">applies.</span>
+
+<span class="w">      </span><span class="s">Multiple</span><span class="nv"> </span><span class="s">whereClauses</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">combined</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">OR</span><span class="nv"> </span><span class="s">logic:</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">applies</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">ANY</span><span class="nv"> </span><span class="s">referenced</span>
+<span class="w">      </span><span class="s">WhereClause</span><span class="nv"> </span><span class="s">matches.</span>
+
+<span class="w">      </span><span class="s">Within</span><span class="nv"> </span><span class="s">each</span><span class="nv"> </span><span class="s">WhereClause,</span><span class="nv"> </span><span class="s">conditions</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">combined</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">AND</span><span class="nv"> </span><span class="s">logic:</span><span class="nv"> </span><span class="s">all</span><span class="nv"> </span><span class="s">conditions</span>
+<span class="w">      </span><span class="s">must</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">true.</span>
+
+
+<span class="w">      </span><span class="s">Example:</span><span class="nv"> </span><span class="s">whereClause:</span><span class="nv"> </span><span class="s">["WC.SYSBP",</span><span class="nv"> </span><span class="s">"WC.DIABP"]</span><span class="nv"> </span><span class="s">means</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">applies</span><span class="nv"> </span><span class="s">when</span>
+
+<span class="w">      </span><span class="s">(all</span><span class="nv"> </span><span class="s">conditions</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">WC.SYSBP</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">true)</span><span class="nv"> </span><span class="s">OR</span><span class="nv"> </span><span class="s">(all</span><span class="nv"> </span><span class="s">conditions</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">WC.DIABP</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">true).</span>
+
+<span class="w">      </span><span class="s">'</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">close_mappings</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fhir:StructureDefinition/context</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Item</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WhereClause</span>
+<span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </code></pre></div>
 </details>
 <h3 id="induced">Induced</h3>
@@ -939,15 +945,18 @@ RangeCheck ||--}o FormalExpression : "formalExpression"
 <span class="w">    </span><span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">children</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">children</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Child item groups within this item group.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">References to child ItemGroups (OIDs) within this item group. Use</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">these OID references to look up the actual ItemGroup objects  from the top-level</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">itemGroups collection.</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">children</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 <span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">  </span><span class="nt">implementsConcept</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">implementsConcept</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reference to a abstract concept topic that this item group is a specialization</span>
@@ -961,8 +970,20 @@ RangeCheck ||--}o FormalExpression : "formalExpression"
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ReifiedConcept</span>
 <span class="w">  </span><span class="nt">whereClause</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">whereClause</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">If nested in a parent ItemGroup context, conditions for when this</span>
-<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">group applies</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'References</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">different</span><span class="nv"> </span><span class="s">situations</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">define</span><span class="nv"> </span><span class="s">when</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">applies.</span>
+
+<span class="w">      </span><span class="s">Multiple</span><span class="nv"> </span><span class="s">whereClauses</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">combined</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">OR</span><span class="nv"> </span><span class="s">logic:</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">applies</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">ANY</span><span class="nv"> </span><span class="s">referenced</span>
+<span class="w">      </span><span class="s">WhereClause</span><span class="nv"> </span><span class="s">matches.</span>
+
+<span class="w">      </span><span class="s">Within</span><span class="nv"> </span><span class="s">each</span><span class="nv"> </span><span class="s">WhereClause,</span><span class="nv"> </span><span class="s">conditions</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">combined</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">AND</span><span class="nv"> </span><span class="s">logic:</span><span class="nv"> </span><span class="s">all</span><span class="nv"> </span><span class="s">conditions</span>
+<span class="w">      </span><span class="s">must</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">true.</span>
+
+
+<span class="w">      </span><span class="s">Example:</span><span class="nv"> </span><span class="s">whereClause:</span><span class="nv"> </span><span class="s">["WC.SYSBP",</span><span class="nv"> </span><span class="s">"WC.DIABP"]</span><span class="nv"> </span><span class="s">means</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">applies</span><span class="nv"> </span><span class="s">when</span>
+
+<span class="w">      </span><span class="s">(all</span><span class="nv"> </span><span class="s">conditions</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">WC.SYSBP</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">true)</span><span class="nv"> </span><span class="s">OR</span><span class="nv"> </span><span class="s">(all</span><span class="nv"> </span><span class="s">conditions</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">WC.DIABP</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">true).</span>
+
+<span class="w">      </span><span class="s">'</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">close_mappings</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fhir:StructureDefinition/context</span>
@@ -971,7 +992,7 @@ RangeCheck ||--}o FormalExpression : "formalExpression"
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Item</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WhereClause</span>
+<span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">  </span><span class="nt">profile</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">profile</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Profiles this resource claims to conform to</span>

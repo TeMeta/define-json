@@ -108,6 +108,7 @@ IsODMItem {
 }
 Condition {
     string implementsCondition  
+    LogicalOperator operator  
     string OID  
     string uuid  
     string name  
@@ -152,11 +153,11 @@ RangeCheck {
     stringList checkValues  
     string item  
     SoftHard softHard  
+    LogicalOperator operator  
 }
 CodeList {
     DataType dataType  
     string formatName  
-    stringList codeListItems  
     string version  
     string href  
     string OID  
@@ -183,11 +184,20 @@ Resource {
     string label  
     stringList aliases  
 }
+CodeListItem {
+    string codedValue  
+    string decode  
+    string description  
+    stringList aliases  
+    decimal weight  
+    boolean other  
+}
 
 IsODMItem ||--|o CodeList : "roleCodeList"
 IsODMItem ||--|o Condition : "collectionExceptionCondition"
 Condition ||--}o RangeCheck : "rangeChecks"
 Condition ||--}o FormalExpression : "formalExpression"
+Condition ||--}o Condition : "conditions"
 Condition ||--}o Coding : "coding"
 Condition ||--}o Comment : "comment"
 Comment ||--}o DocumentReference : "documents"
@@ -197,11 +207,13 @@ FormalExpression ||--|o ReturnValue : "returnValue"
 FormalExpression ||--}o Resource : "externalCodeLibs"
 FormalExpression ||--}o Coding : "coding"
 RangeCheck ||--}o FormalExpression : "formalExpression"
+CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
 CodeList ||--}o Coding : "coding"
 CodeList ||--}o Comment : "comment"
 Resource ||--}o FormalExpression : "selection"
 Resource ||--}o Coding : "coding"
+CodeListItem ||--|o Coding : "coding"
 
 </code></pre>
 <!-- no inheritance hierarchy -->

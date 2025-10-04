@@ -159,6 +159,7 @@ ReturnValue {
 Parameter {
     DataType dataType  
     string value  
+    stringList items  
     string OID  
     string uuid  
     string name  
@@ -208,7 +209,6 @@ Resource ||--}o FormalExpression : "selection"
 Resource ||--}o Coding : "coding"
 ReturnValue ||--}o Coding : "coding"
 Parameter ||--}o CodeList : "codeList"
-Parameter ||--}o Item : "items"
 Parameter ||--}o ConceptProperty : "conceptProperty"
 Parameter ||--}o Coding : "coding"
 Distribution ||--|o DataService : "accessService"

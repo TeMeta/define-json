@@ -202,6 +202,8 @@ DataStructureDefinition {
     string structure  
     boolean isReferenceData  
     ItemGroupType type  
+    stringList children  
+    string whereClause  
     stringList profile  
     string authenticator  
     string OID  
@@ -227,14 +229,6 @@ Comment {
     string label  
     stringList aliases  
 }
-WhereClause {
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
 ReifiedConcept {
     string version  
     string href  
@@ -249,27 +243,6 @@ ReifiedConcept {
     datetime lastUpdated  
     string owner  
     string wasDerivedFrom  
-}
-ItemGroup {
-    string domain  
-    string structure  
-    boolean isReferenceData  
-    ItemGroupType type  
-    stringList profile  
-    string authenticator  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-    string version  
-    string href  
 }
 Item {
     DataType dataType  
@@ -391,32 +364,20 @@ DataStructureDefinition ||--}o Measure : "measures"
 DataStructureDefinition ||--}o DataAttribute : "attributes"
 DataStructureDefinition ||--|o ComponentList : "grouping"
 DataStructureDefinition ||--}o Item : "items"
-DataStructureDefinition ||--}o ItemGroup : "children"
 DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
-DataStructureDefinition ||--|o WhereClause : "whereClause"
 DataStructureDefinition ||--}o Coding : "security"
 DataStructureDefinition ||--|o Timing : "validityPeriod"
 DataStructureDefinition ||--}o Coding : "coding"
 DataStructureDefinition ||--}o Comment : "comment"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
-WhereClause ||--}o Condition : "conditions"
-WhereClause ||--}o Coding : "coding"
 ReifiedConcept ||--}o ConceptProperty : "properties"
 ReifiedConcept ||--}o Coding : "coding"
 ReifiedConcept ||--}o Comment : "comment"
-ItemGroup ||--}o Item : "items"
-ItemGroup ||--}o ItemGroup : "children"
-ItemGroup ||--|o ReifiedConcept : "implementsConcept"
-ItemGroup ||--|o WhereClause : "whereClause"
-ItemGroup ||--}o Coding : "security"
-ItemGroup ||--|o Timing : "validityPeriod"
-ItemGroup ||--}o Coding : "coding"
-ItemGroup ||--}o Comment : "comment"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--|o WhereClause : "whereClause"
+Item ||--}o WhereClause : "whereClause"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
 Item ||--|o CodeList : "roleCodeList"

@@ -188,6 +188,7 @@ NominalOccurrence {
 }
 Condition {
     string implementsCondition  
+    LogicalOperator operator  
     string OID  
     string uuid  
     string name  
@@ -222,6 +223,7 @@ NominalOccurrence ||--}o Coding : "coding"
 NominalOccurrence ||--}o Comment : "comment"
 Condition ||--}o RangeCheck : "rangeChecks"
 Condition ||--}o FormalExpression : "formalExpression"
+Condition ||--}o Condition : "conditions"
 Condition ||--}o Coding : "coding"
 Condition ||--}o Comment : "comment"
 

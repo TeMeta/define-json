@@ -245,7 +245,6 @@ ConceptProperty {
 CodeList {
     DataType dataType  
     string formatName  
-    stringList codeListItems  
     string version  
     string href  
     string OID  
@@ -296,12 +295,65 @@ ReturnValue {
 Parameter {
     DataType dataType  
     string value  
+    stringList items  
     string OID  
     string uuid  
     string name  
     string description  
     string label  
     stringList aliases  
+}
+CodeListItem {
+    string codedValue  
+    string decode  
+    string description  
+    stringList aliases  
+    decimal weight  
+    boolean other  
+}
+Method {
+    MethodType type  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+WhereClause {
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+Condition {
+    string implementsCondition  
+    LogicalOperator operator  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+RangeCheck {
+    Comparator comparator  
+    stringList checkValues  
+    string item  
+    SoftHard softHard  
+    LogicalOperator operator  
 }
 Item {
     DataType dataType  
@@ -327,26 +379,6 @@ Item {
     string owner  
     string wasDerivedFrom  
 }
-Condition {
-    string implementsCondition  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-RangeCheck {
-    Comparator comparator  
-    stringList checkValues  
-    string item  
-    SoftHard softHard  
-}
 Origin {
     OriginType type  
     OriginSource source  
@@ -354,33 +386,13 @@ Origin {
 SourceItem {
     stringList resource  
 }
-WhereClause {
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
-Method {
-    MethodType type  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
 ItemGroup {
     string domain  
     string structure  
     boolean isReferenceData  
     ItemGroupType type  
+    stringList children  
+    string whereClause  
     stringList profile  
     string authenticator  
     string OID  
@@ -458,6 +470,7 @@ ReifiedConcept ||--}o Comment : "comment"
 ConceptProperty ||--|o CodeList : "codeList"
 ConceptProperty ||--}o Coding : "coding"
 ConceptProperty ||--}o Comment : "comment"
+CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
 CodeList ||--}o Coding : "coding"
 CodeList ||--}o Comment : "comment"
@@ -469,39 +482,38 @@ FormalExpression ||--}o Resource : "externalCodeLibs"
 FormalExpression ||--}o Coding : "coding"
 ReturnValue ||--}o Coding : "coding"
 Parameter ||--}o CodeList : "codeList"
-Parameter ||--}o Item : "items"
 Parameter ||--}o ConceptProperty : "conceptProperty"
 Parameter ||--}o Coding : "coding"
+CodeListItem ||--|o Coding : "coding"
+Method ||--}o FormalExpression : "formalExpressions"
+Method ||--|o DocumentReference : "document"
+Method ||--}o Coding : "coding"
+Method ||--}o Comment : "comment"
+WhereClause ||--}o Condition : "conditions"
+WhereClause ||--}o Coding : "coding"
+Condition ||--}o RangeCheck : "rangeChecks"
+Condition ||--}o FormalExpression : "formalExpression"
+Condition ||--}o Condition : "conditions"
+Condition ||--}o Coding : "coding"
+Condition ||--}o Comment : "comment"
+RangeCheck ||--}o FormalExpression : "formalExpression"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--|o WhereClause : "whereClause"
+Item ||--}o WhereClause : "whereClause"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
 Item ||--|o CodeList : "roleCodeList"
 Item ||--|o Condition : "collectionExceptionCondition"
 Item ||--}o Coding : "coding"
 Item ||--}o Comment : "comment"
-Condition ||--}o RangeCheck : "rangeChecks"
-Condition ||--}o FormalExpression : "formalExpression"
-Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comment"
-RangeCheck ||--}o FormalExpression : "formalExpression"
 Origin ||--}o SourceItem : "sourceItems"
 Origin ||--|o DocumentReference : "document"
 SourceItem ||--|o Item : "item"
 SourceItem ||--|o DocumentReference : "document"
 SourceItem ||--}o Coding : "coding"
-WhereClause ||--}o Condition : "conditions"
-WhereClause ||--}o Coding : "coding"
-Method ||--}o FormalExpression : "formalExpressions"
-Method ||--|o DocumentReference : "document"
-Method ||--}o Coding : "coding"
-Method ||--}o Comment : "comment"
 ItemGroup ||--}o Item : "items"
-ItemGroup ||--}o ItemGroup : "children"
 ItemGroup ||--|o ReifiedConcept : "implementsConcept"
-ItemGroup ||--|o WhereClause : "whereClause"
 ItemGroup ||--}o Coding : "security"
 ItemGroup ||--|o Timing : "validityPeriod"
 ItemGroup ||--}o Coding : "coding"
@@ -579,7 +591,7 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td>        <a href="classes/Condition/">Condition</a></td>
-<td>A reusable logical construct that combines multiple components using AND logi...</td>
+<td>A reusable, composable, and nestable logical construct allowing for complex e...</td>
 </tr>
 <tr>
 <td>        <a href="classes/CubeComponent/">CubeComponent</a></td>
@@ -1038,7 +1050,7 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="slots/whereClause/">whereClause</a></td>
-<td>Conditions for when this item definition applies</td>
+<td>References to different situations that define when this item applies</td>
 </tr>
 <tr>
 <td><a href="slots/origin/">origin</a></td>
@@ -1066,7 +1078,7 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="slots/children/">children</a></td>
-<td>Child item groups within this item group</td>
+<td>References to child ItemGroups (OIDs) within this item group</td>
 </tr>
 <tr>
 <td><a href="slots/implementsConcept/">implementsConcept</a></td>
@@ -1178,7 +1190,11 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="slots/formalExpression/">formalExpression</a></td>
-<td>A formal expression for complex checks</td>
+<td>Logical expression, resolving to a boolean, that implements this condition in...</td>
+</tr>
+<tr>
+<td><a href="slots/operator/">operator</a></td>
+<td>Logical operator for combining child conditions or range checks</td>
 </tr>
 <tr>
 <td><a href="slots/comparator/">comparator</a></td>
@@ -1615,6 +1631,10 @@ NominalOccurrence ||--}o Comment : "comment"
 <td><a href="enums/StandardStatus/">StandardStatus</a></td>
 <td>An enumeration that defines permissible values for standard status</td>
 </tr>
+<tr>
+<td><a href="enums/LogicalOperator/">LogicalOperator</a></td>
+<td>Logical operators for combining conditions in Boolean expressions</td>
+</tr>
 </tbody>
 </table>
 <h2 id="types">Types</h2>
@@ -1806,5 +1826,5 @@ NominalOccurrence ||--}o Comment : "comment"
 </html>
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-09-28 12:26:31.071986+00:00
+Build Date UTC : 2025-10-04 21:48:14.830193+00:00
 -->
