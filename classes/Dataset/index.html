@@ -203,7 +203,6 @@ DataStructureDefinition {
     boolean isReferenceData  
     ItemGroupType type  
     stringList children  
-    string whereClause  
     stringList profile  
     string authenticator  
     string OID  
@@ -222,6 +221,14 @@ DataStructureDefinition {
 }
 Comment {
     string text  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+WhereClause {
     string OID  
     string uuid  
     string name  
@@ -349,11 +356,13 @@ Timing ||--}o Coding : "coding"
 Method ||--}o FormalExpression : "formalExpressions"
 Method ||--|o DocumentReference : "document"
 Method ||--}o Coding : "coding"
-Method ||--}o Comment : "comment"
+Method ||--}o Comment : "comments"
+Method ||--}o Comment : "siteOrSponsorComments"
 NominalOccurrence ||--|| Timing : "timing"
 NominalOccurrence ||--}o Condition : "condition"
 NominalOccurrence ||--}o Coding : "coding"
-NominalOccurrence ||--}o Comment : "comment"
+NominalOccurrence ||--}o Comment : "comments"
+NominalOccurrence ||--}o Comment : "siteOrSponsorComments"
 Distribution ||--|o DataService : "accessService"
 Distribution ||--|o Dataset : "isDistributionOf"
 DataService ||--|o Distribution : "isAccessServiceOf"
@@ -365,45 +374,55 @@ DataStructureDefinition ||--}o DataAttribute : "attributes"
 DataStructureDefinition ||--|o ComponentList : "grouping"
 DataStructureDefinition ||--}o Item : "items"
 DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
+DataStructureDefinition ||--}o WhereClause : "whereClauses"
 DataStructureDefinition ||--}o Coding : "security"
 DataStructureDefinition ||--|o Timing : "validityPeriod"
 DataStructureDefinition ||--}o Coding : "coding"
-DataStructureDefinition ||--}o Comment : "comment"
+DataStructureDefinition ||--}o Comment : "comments"
+DataStructureDefinition ||--}o Comment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
+WhereClause ||--}o Condition : "conditions"
+WhereClause ||--}o Coding : "coding"
 ReifiedConcept ||--}o ConceptProperty : "properties"
 ReifiedConcept ||--}o Coding : "coding"
-ReifiedConcept ||--}o Comment : "comment"
+ReifiedConcept ||--}o Comment : "comments"
+ReifiedConcept ||--}o Comment : "siteOrSponsorComments"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--}o WhereClause : "whereClause"
+Item ||--}o WhereClause : "whereClauses"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
 Item ||--|o CodeList : "roleCodeList"
 Item ||--|o Condition : "collectionExceptionCondition"
 Item ||--}o Coding : "coding"
-Item ||--}o Comment : "comment"
+Item ||--}o Comment : "comments"
+Item ||--}o Comment : "siteOrSponsorComments"
 ComponentList ||--}o Coding : "coding"
 DataAttribute ||--|| Item : "item"
 DataAttribute ||--|o Method : "missingHandling"
 DataAttribute ||--|o Method : "imputation"
 DataAttribute ||--}o Coding : "coding"
-DataAttribute ||--}o Comment : "comment"
+DataAttribute ||--}o Comment : "comments"
+DataAttribute ||--}o Comment : "siteOrSponsorComments"
 Measure ||--|| Item : "item"
 Measure ||--|o Method : "missingHandling"
 Measure ||--|o Method : "imputation"
 Measure ||--}o Coding : "coding"
-Measure ||--}o Comment : "comment"
+Measure ||--}o Comment : "comments"
+Measure ||--}o Comment : "siteOrSponsorComments"
 Dimension ||--|| Item : "item"
 Dimension ||--|o Method : "missingHandling"
 Dimension ||--|o Method : "imputation"
 Dimension ||--}o Coding : "coding"
-Dimension ||--}o Comment : "comment"
+Dimension ||--}o Comment : "comments"
+Dimension ||--}o Comment : "siteOrSponsorComments"
 Dataflow ||--|| DataStructureDefinition : "structure"
 Dataflow ||--}o Dimension : "dimensionConstraint"
 Dataflow ||--}o Coding : "coding"
-Dataflow ||--}o Comment : "comment"
+Dataflow ||--}o Comment : "comments"
+Dataflow ||--}o Comment : "siteOrSponsorComments"
 
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
@@ -427,25 +446,25 @@ Dataflow ||--}o Comment : "comment"
 <tr>
 <td><a href="../../slots/describedBy/">describedBy</a></td>
 <td>0..1 <br/> <a href="../Dataflow/">Dataflow</a></td>
-<td>Associates a Dataflow and thereby a Data Structure Definition to the data set</td>
+<td>Associates a Dataflow and thereby a Data Structure Definition to the data set.</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/structuredBy/">structuredBy</a></td>
 <td>0..1 <br/> <a href="../DataStructureDefinition/">DataStructureDefinition</a></td>
-<td>Associates the Data Structure Definition that defines the structure of the Da...</td>
+<td>Associates the Data Structure Definition that defines the structure of the Data Set. Note that the Data Structure Definition is the same as that associated (non-mandatory) to the Dataflow.</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/publishedBy/">publishedBy</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../Organization/">Organization</a> or <br/><a href="../../types/String/">String</a></td>
-<td>Associates the Data Provider that reports/publishes the data</td>
+<td>Associates the Data Provider that reports/publishes the data.</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/keys/">keys</a></td>
 <td>1..* <br/> <a href="../../types/String/">String</a> or <br/><a href="../SeriesKey/">SeriesKey</a> or <br/><a href="../GroupKey/">GroupKey</a></td>
-<td>Series and Group keys in the data that are associated with dimensions in this...</td>
+<td>Series and Group keys in the data that are associated with dimensions in this structure</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -487,7 +506,7 @@ Dataflow ||--}o Comment : "comment"
 <tr>
 <td><a href="../../slots/href/">href</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Machine-readable instructions to obtain the resource e</td>
+<td>Machine-readable instructions to obtain the resource e.g. FHIR path, URL</td>
 <td><a href="../Versioned/">Versioned</a></td>
 </tr>
 <tr>
@@ -517,55 +536,55 @@ Dataflow ||--}o Comment : "comment"
 <tr>
 <td><a href="../../slots/action/">action</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Defines the action to be taken by the recipient system (information, append, ...</td>
+<td>Defines the action to be taken by the recipient system (information, append, replace, delete)</td>
 <td><a href="../IsSdmxDataset/">IsSdmxDataset</a></td>
 </tr>
 <tr>
 <td><a href="../../slots/reportingBegin/">reportingBegin</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>A specific time period in a known system of time periods that identifies the ...</td>
+<td>A specific time period in a known system of time periods that identifies the start period of a report.</td>
 <td><a href="../IsSdmxDataset/">IsSdmxDataset</a></td>
 </tr>
 <tr>
 <td><a href="../../slots/reportingEnd/">reportingEnd</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>A specific time period in a known system of time periods that identifies the ...</td>
+<td>A specific time period in a known system of time periods that identifies the end period of a report.</td>
 <td><a href="../IsSdmxDataset/">IsSdmxDataset</a></td>
 </tr>
 <tr>
 <td><a href="../../slots/dataExtractionDate/">dataExtractionDate</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>A specific time period that identifies the date and time that the data are ex...</td>
+<td>A specific time period that identifies the date and time that the data are extracted from a data source.</td>
 <td><a href="../IsSdmxDataset/">IsSdmxDataset</a></td>
 </tr>
 <tr>
 <td><a href="../../slots/validFrom/">validFrom</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Indicates the inclusive start time indicating the validity of the information...</td>
+<td>Indicates the inclusive start time indicating the validity of the information in the data set.</td>
 <td><a href="../IsSdmxDataset/">IsSdmxDataset</a></td>
 </tr>
 <tr>
 <td><a href="../../slots/validTo/">validTo</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Indicates the inclusive end time indicating the validity of the information i...</td>
+<td>Indicates the inclusive end time indicating the validity of the information in the data set.</td>
 <td><a href="../IsSdmxDataset/">IsSdmxDataset</a></td>
 </tr>
 <tr>
 <td><a href="../../slots/publicationYear/">publicationYear</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Specifies the year of publication of the data or metadata in terms of whateve...</td>
+<td>Specifies the year of publication of the data or metadata in terms of whatever provisioning agreements might be in force.</td>
 <td><a href="../IsSdmxDataset/">IsSdmxDataset</a></td>
 </tr>
 <tr>
 <td><a href="../../slots/publicationPeriod/">publicationPeriod</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Specifies the period of publication of the data or metadata in terms of whate...</td>
+<td>Specifies the period of publication of the data or metadata in terms of whatever provisioning agreements might be in force.</td>
 <td><a href="../IsSdmxDataset/">IsSdmxDataset</a></td>
 </tr>
 <tr>
 <td><a href="../../slots/OID/">OID</a></td>
 <td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>Local identifier within this study/context</td>
+<td>Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.</td>
 <td><a href="../Identifiable/">Identifiable</a></td>
 </tr>
 <tr>

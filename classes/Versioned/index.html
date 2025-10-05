@@ -127,7 +127,7 @@ Versioned {
 <tr>
 <td><a href="../../slots/href/">href</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Machine-readable instructions to obtain the resource e</td>
+<td>Machine-readable instructions to obtain the resource e.g. FHIR path, URL</td>
 <td>direct</td>
 </tr>
 </tbody>
@@ -143,39 +143,39 @@ Versioned {
 <tbody>
 <tr>
 <td><a href="../IsProfile/">IsProfile</a></td>
-<td>A mixin that provides additional metadata for FHIR resources and Data Product...</td>
+<td>A mixin that provides additional metadata for FHIR resources and Data Products, including profiles, security tags, and validity periods</td>
 </tr>
 <tr>
 <td><a href="../CodeList/">CodeList</a></td>
-<td>A value set that defines a discrete collection of permissible values for an i...</td>
+<td>A value set that defines a discrete collection of permissible values for an item, corresponding to the ODM CodeList construct</td>
 </tr>
 <tr>
 <td><a href="../ReifiedConcept/">ReifiedConcept</a></td>
-<td>A canonical information layer that makes abstract concepts explicit and refer...</td>
+<td>A canonical information layer that makes abstract concepts explicit and referenceable, showing how different data implementations represent the same underlying meanings through a star schema structure with multiple properties</td>
 </tr>
 <tr>
 <td><a href="../Resource/">Resource</a></td>
-<td>An external reference that serves as the source for a Dataset, ItemGroup, or ...</td>
+<td>An external reference that serves as the source for a Dataset, ItemGroup, or Item</td>
 </tr>
 <tr>
 <td><a href="../DocumentReference/">DocumentReference</a></td>
-<td>A comprehensive reference element that points to an external document, combin...</td>
+<td>A comprehensive reference element that points to an external document, combining elements from ODM and FHIR</td>
 </tr>
 <tr>
 <td><a href="../Dataflow/">Dataflow</a></td>
-<td>An abstract representation that defines data provision for different referenc...</td>
+<td>An abstract representation that defines data provision for different reference periods, where a Distribution and its Dataset are instances</td>
 </tr>
 <tr>
 <td><a href="../Dataset/">Dataset</a></td>
-<td>A collection element that groups observations sharing the same dimensionality...</td>
+<td>A collection element that groups observations sharing the same dimensionality, expressed as a set of unique dimensions within a Data Product context</td>
 </tr>
 <tr>
 <td><a href="../DataProduct/">DataProduct</a></td>
-<td>A governed collection that represents a purpose-driven assembly of datasets a...</td>
+<td>A governed collection that represents a purpose-driven assembly of datasets and services with an owning team and lifecycle</td>
 </tr>
 <tr>
 <td><a href="../ProvisionAgreement/">ProvisionAgreement</a></td>
-<td>An agreement element that describes the contractual relationship between a Da...</td>
+<td>An agreement element that describes the contractual relationship between a Data Provider and a Data Consumer regarding data provision</td>
 </tr>
 </tbody>
 </table>

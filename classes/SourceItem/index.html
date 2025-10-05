@@ -243,27 +243,31 @@ DocumentReference ||--}o Coding : "coding"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--}o WhereClause : "whereClause"
+Item ||--}o WhereClause : "whereClauses"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
 Item ||--|o CodeList : "roleCodeList"
 Item ||--|o Condition : "collectionExceptionCondition"
 Item ||--}o Coding : "coding"
-Item ||--}o Comment : "comment"
+Item ||--}o Comment : "comments"
+Item ||--}o Comment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 Condition ||--}o RangeCheck : "rangeChecks"
 Condition ||--}o FormalExpression : "formalExpression"
 Condition ||--}o Condition : "conditions"
 Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comment"
+Condition ||--}o Comment : "comments"
+Condition ||--}o Comment : "siteOrSponsorComments"
 CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
 CodeList ||--}o Coding : "coding"
-CodeList ||--}o Comment : "comment"
+CodeList ||--}o Comment : "comments"
+CodeList ||--}o Comment : "siteOrSponsorComments"
 ConceptProperty ||--|o CodeList : "codeList"
 ConceptProperty ||--}o Coding : "coding"
-ConceptProperty ||--}o Comment : "comment"
+ConceptProperty ||--}o Comment : "comments"
+ConceptProperty ||--}o Comment : "siteOrSponsorComments"
 Origin ||--}o SourceItem : "sourceItems"
 Origin ||--|o DocumentReference : "document"
 WhereClause ||--}o Condition : "conditions"
@@ -272,7 +276,8 @@ RangeCheck ||--}o FormalExpression : "formalExpression"
 Method ||--}o FormalExpression : "formalExpressions"
 Method ||--|o DocumentReference : "document"
 Method ||--}o Coding : "coding"
-Method ||--}o Comment : "comment"
+Method ||--}o Comment : "comments"
+Method ||--}o Comment : "siteOrSponsorComments"
 
 </code></pre>
 <!-- no inheritance hierarchy -->
@@ -302,7 +307,7 @@ Method ||--}o Comment : "comment"
 <tr>
 <td><a href="../../slots/resource/">resource</a></td>
 <td>* <br/> <a href="../../types/String/">String</a> or <br/><a href="../Resource/">Resource</a> or <br/><a href="../../types/String/">String</a></td>
-<td>Path to a resource (e</td>
+<td>Path to a resource (e.g. File, FHIR datasource) that is the source of this item</td>
 <td>direct</td>
 </tr>
 <tr>

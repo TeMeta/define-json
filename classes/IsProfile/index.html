@@ -168,11 +168,13 @@ Timing ||--}o Coding : "coding"
 Method ||--}o FormalExpression : "formalExpressions"
 Method ||--|o DocumentReference : "document"
 Method ||--}o Coding : "coding"
-Method ||--}o Comment : "comment"
+Method ||--}o Comment : "comments"
+Method ||--}o Comment : "siteOrSponsorComments"
 NominalOccurrence ||--|| Timing : "timing"
 NominalOccurrence ||--}o Condition : "condition"
 NominalOccurrence ||--}o Coding : "coding"
-NominalOccurrence ||--}o Comment : "comment"
+NominalOccurrence ||--}o Comment : "comments"
+NominalOccurrence ||--}o Comment : "siteOrSponsorComments"
 
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
@@ -223,7 +225,7 @@ NominalOccurrence ||--}o Comment : "comment"
 <tr>
 <td><a href="../../slots/href/">href</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Machine-readable instructions to obtain the resource e</td>
+<td>Machine-readable instructions to obtain the resource e.g. FHIR path, URL</td>
 <td><a href="../Versioned/">Versioned</a></td>
 </tr>
 </tbody>
@@ -239,11 +241,11 @@ NominalOccurrence ||--}o Comment : "comment"
 <tbody>
 <tr>
 <td><a href="../ItemGroup/">ItemGroup</a></td>
-<td>A collection element that groups related items or subgroups within a specific...</td>
+<td>A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections</td>
 </tr>
 <tr>
 <td><a href="../Dataset/">Dataset</a></td>
-<td>A collection element that groups observations sharing the same dimensionality...</td>
+<td>A collection element that groups observations sharing the same dimensionality, expressed as a set of unique dimensions within a Data Product context</td>
 </tr>
 </tbody>
 </table>

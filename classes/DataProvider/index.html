@@ -213,13 +213,15 @@ ProvisionAgreement ||--|o DataProvider : "provider"
 ProvisionAgreement ||--|o Dataflow : "dataFlow"
 ProvisionAgreement ||--|o Resource : "source"
 ProvisionAgreement ||--}o Coding : "coding"
-ProvisionAgreement ||--}o Comment : "comment"
+ProvisionAgreement ||--}o Comment : "comments"
+ProvisionAgreement ||--}o Comment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 Dataflow ||--|| DataStructureDefinition : "structure"
 Dataflow ||--}o Dimension : "dimensionConstraint"
 Dataflow ||--}o Coding : "coding"
-Dataflow ||--}o Comment : "comment"
+Dataflow ||--}o Comment : "comments"
+Dataflow ||--}o Comment : "siteOrSponsorComments"
 
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
@@ -264,37 +266,37 @@ Dataflow ||--}o Comment : "comment"
 <tr>
 <td><a href="../../slots/role/">role</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>The role of the organization in the study</td>
+<td>The role of the organization in the study.</td>
 <td><a href="../Organization/">Organization</a></td>
 </tr>
 <tr>
 <td><a href="../../slots/type/">type</a></td>
 <td>0..1 <br/> <a href="../../enums/OrganizationType/">OrganizationType</a></td>
-<td>The type of organization (e</td>
+<td>The type of organization (e.g., site, sponsor, vendor).</td>
 <td><a href="../Organization/">Organization</a></td>
 </tr>
 <tr>
 <td><a href="../../slots/location/">location</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>The physical location of the organization</td>
+<td>The physical location of the organization.</td>
 <td><a href="../Organization/">Organization</a></td>
 </tr>
 <tr>
 <td><a href="../../slots/address/">address</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>The address of the organization</td>
+<td>The address of the organization.</td>
 <td><a href="../Organization/">Organization</a></td>
 </tr>
 <tr>
 <td><a href="../../slots/partOfOrganization/">partOfOrganization</a></td>
 <td>0..1 <br/> <a href="../Organization/">Organization</a></td>
-<td>Reference to a parent organization if this organization is part of a larger e...</td>
+<td>Reference to a parent organization if this organization is part of a larger entity.</td>
 <td><a href="../Organization/">Organization</a></td>
 </tr>
 <tr>
 <td><a href="../../slots/OID/">OID</a></td>
 <td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>Local identifier within this study/context</td>
+<td>Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.</td>
 <td><a href="../Identifiable/">Identifiable</a></td>
 </tr>
 <tr>

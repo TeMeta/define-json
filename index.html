@@ -173,6 +173,362 @@ DocumentReference {
     string label  
     stringList aliases  
 }
+DataProduct {
+    string dataProductOwner  
+    string domain  
+    DataProductLifecycleStatus lifecycleStatus  
+    stringList hasPolicy  
+    string version  
+    string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+Dataset {
+    string publishedBy  
+    stringList keys  
+    string datasetType  
+    string conformsTo  
+    stringList hasPolicy  
+    string informationSensitivityClassification  
+    string version  
+    string href  
+    stringList profile  
+    string authenticator  
+    string action  
+    string reportingBegin  
+    string reportingEnd  
+    string dataExtractionDate  
+    string validFrom  
+    string validTo  
+    string publicationYear  
+    string publicationPeriod  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+Timing {
+    TimingType type  
+    boolean isNominal  
+    string value  
+    datetime windowLower  
+    datetime windowUpper  
+    boolean recalled  
+    string frequency  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+Method {
+    MethodType type  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+FormalExpression {
+    string context  
+    string expression  
+    string returnType  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+Resource {
+    string resourceType  
+    string attribute  
+    string version  
+    string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+ReturnValue {
+    DataType dataType  
+    stringList valueList  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+Parameter {
+    DataType dataType  
+    string value  
+    stringList items  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+ConceptProperty {
+    integer minOccurs  
+    integer maxOccurs  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+CodeList {
+    DataType dataType  
+    string formatName  
+    string version  
+    string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+CodeListItem {
+    string codedValue  
+    string decode  
+    string description  
+    stringList aliases  
+    decimal weight  
+    boolean other  
+}
+NominalOccurrence {
+    string event  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+Condition {
+    string implementsCondition  
+    LogicalOperator operator  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+RangeCheck {
+    Comparator comparator  
+    stringList checkValues  
+    string item  
+    SoftHard softHard  
+    LogicalOperator operator  
+}
+Distribution {
+    string conformsTo  
+    string format  
+}
+DataService {
+    string protocol  
+    string securitySchemaType  
+    string resourceType  
+    string attribute  
+    string version  
+    string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+DataStructureDefinition {
+    boolean evolvingStructure  
+    string domain  
+    string structure  
+    boolean isReferenceData  
+    ItemGroupType type  
+    stringList children  
+    stringList profile  
+    string authenticator  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+    string version  
+    string href  
+}
+WhereClause {
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+ReifiedConcept {
+    string version  
+    string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+Item {
+    DataType dataType  
+    integer length  
+    string role  
+    boolean hasNoData  
+    string crfCompletionInstructions  
+    string cdiscNotes  
+    string implementationNotes  
+    string preSpecifiedValue  
+    integer decimalDigits  
+    string displayFormat  
+    integer significantDigits  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+Origin {
+    OriginType type  
+    OriginSource source  
+}
+SourceItem {
+    stringList resource  
+}
+ComponentList {
+    stringList components  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+DataAttribute {
+    string role  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+Measure {
+    string role  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+Dimension {
+    integer keySequence  
+    string role  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+Dataflow {
+    string version  
+    string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
 Standard {
     StandardName name  
     StandardType type  
@@ -212,187 +568,12 @@ IdentifiableElement {
     string label  
     stringList aliases  
 }
-ReifiedConcept {
-    string version  
-    string href  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-ConceptProperty {
-    integer minOccurs  
-    integer maxOccurs  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-CodeList {
-    DataType dataType  
-    string formatName  
-    string version  
-    string href  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-Resource {
-    string resourceType  
-    string attribute  
-    string version  
-    string href  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
-FormalExpression {
-    string context  
-    string expression  
-    string returnType  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
-ReturnValue {
-    DataType dataType  
-    stringList valueList  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
-Parameter {
-    DataType dataType  
-    string value  
-    stringList items  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
-CodeListItem {
-    string codedValue  
-    string decode  
-    string description  
-    stringList aliases  
-    decimal weight  
-    boolean other  
-}
-Method {
-    MethodType type  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-WhereClause {
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
-Condition {
-    string implementsCondition  
-    LogicalOperator operator  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-RangeCheck {
-    Comparator comparator  
-    stringList checkValues  
-    string item  
-    SoftHard softHard  
-    LogicalOperator operator  
-}
-Item {
-    DataType dataType  
-    integer length  
-    string role  
-    boolean hasNoData  
-    string crfCompletionInstructions  
-    string cdiscNotes  
-    string implementationNotes  
-    string preSpecifiedValue  
-    integer decimalDigits  
-    string displayFormat  
-    integer significantDigits  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-Origin {
-    OriginType type  
-    OriginSource source  
-}
-SourceItem {
-    stringList resource  
-}
 ItemGroup {
     string domain  
     string structure  
     boolean isReferenceData  
     ItemGroupType type  
     stringList children  
-    string whereClause  
     stringList profile  
     string authenticator  
     string OID  
@@ -409,35 +590,6 @@ ItemGroup {
     string version  
     string href  
 }
-Timing {
-    TimingType type  
-    boolean isNominal  
-    string value  
-    datetime windowLower  
-    datetime windowUpper  
-    boolean recalled  
-    string frequency  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
-NominalOccurrence {
-    string event  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
 
 MetaDataVersion ||--}o ItemGroup : "itemGroups"
 MetaDataVersion ||--}o Item : "items"
@@ -450,13 +602,131 @@ MetaDataVersion ||--}o ReifiedConcept : "concepts"
 MetaDataVersion ||--}o Relationship : "relationships"
 MetaDataVersion ||--}o Dictionary : "dictionaries"
 MetaDataVersion ||--}o Standard : "standards"
-MetaDataVersion ||--}o DocumentReference : "annotatedCRF"
+MetaDataVersion ||--}o DocumentReference : "annotatedCRFs"
+MetaDataVersion ||--}o DataProduct : "dataProducts"
 MetaDataVersion ||--}o Coding : "coding"
-MetaDataVersion ||--}o Comment : "comment"
+MetaDataVersion ||--}o Comment : "comments"
+MetaDataVersion ||--}o Comment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 DocumentReference ||--}o Coding : "coding"
-Standard ||--}o Comment : "comment"
+DataProduct ||--}o DataService : "inputPort"
+DataProduct ||--}o DataService : "outputPort"
+DataProduct ||--}o Dataset : "inputDataset"
+DataProduct ||--}o Dataset : "outputDataset"
+DataProduct ||--}o Coding : "coding"
+DataProduct ||--}o Comment : "comments"
+DataProduct ||--}o Comment : "siteOrSponsorComments"
+Dataset ||--|o Dataflow : "describedBy"
+Dataset ||--|o DataStructureDefinition : "structuredBy"
+Dataset ||--}o Distribution : "distribution"
+Dataset ||--}o Coding : "security"
+Dataset ||--|o Timing : "validityPeriod"
+Dataset ||--}o Coding : "coding"
+Timing ||--|o NominalOccurrence : "relativeTo"
+Timing ||--|o NominalOccurrence : "relativeFrom"
+Timing ||--|o Method : "imputation"
+Timing ||--}o Coding : "coding"
+Method ||--}o FormalExpression : "formalExpressions"
+Method ||--|o DocumentReference : "document"
+Method ||--}o Coding : "coding"
+Method ||--}o Comment : "comments"
+Method ||--}o Comment : "siteOrSponsorComments"
+FormalExpression ||--}o Parameter : "parameters"
+FormalExpression ||--|o ReturnValue : "returnValue"
+FormalExpression ||--}o Resource : "externalCodeLibs"
+FormalExpression ||--}o Coding : "coding"
+Resource ||--}o FormalExpression : "selection"
+Resource ||--}o Coding : "coding"
+ReturnValue ||--}o Coding : "coding"
+Parameter ||--}o CodeList : "codeList"
+Parameter ||--}o ConceptProperty : "conceptProperty"
+Parameter ||--}o Coding : "coding"
+ConceptProperty ||--|o CodeList : "codeList"
+ConceptProperty ||--}o Coding : "coding"
+ConceptProperty ||--}o Comment : "comments"
+ConceptProperty ||--}o Comment : "siteOrSponsorComments"
+CodeList ||--}o CodeListItem : "codeListItems"
+CodeList ||--|o Resource : "externalCodeList"
+CodeList ||--}o Coding : "coding"
+CodeList ||--}o Comment : "comments"
+CodeList ||--}o Comment : "siteOrSponsorComments"
+CodeListItem ||--|o Coding : "coding"
+NominalOccurrence ||--|| Timing : "timing"
+NominalOccurrence ||--}o Condition : "condition"
+NominalOccurrence ||--}o Coding : "coding"
+NominalOccurrence ||--}o Comment : "comments"
+NominalOccurrence ||--}o Comment : "siteOrSponsorComments"
+Condition ||--}o RangeCheck : "rangeChecks"
+Condition ||--}o FormalExpression : "formalExpression"
+Condition ||--}o Condition : "conditions"
+Condition ||--}o Coding : "coding"
+Condition ||--}o Comment : "comments"
+Condition ||--}o Comment : "siteOrSponsorComments"
+RangeCheck ||--}o FormalExpression : "formalExpression"
+Distribution ||--|o DataService : "accessService"
+Distribution ||--|o Dataset : "isDistributionOf"
+DataService ||--|o Distribution : "isAccessServiceOf"
+DataService ||--}o FormalExpression : "selection"
+DataService ||--}o Coding : "coding"
+DataStructureDefinition ||--}o Dimension : "dimensions"
+DataStructureDefinition ||--}o Measure : "measures"
+DataStructureDefinition ||--}o DataAttribute : "attributes"
+DataStructureDefinition ||--|o ComponentList : "grouping"
+DataStructureDefinition ||--}o Item : "items"
+DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
+DataStructureDefinition ||--}o WhereClause : "whereClauses"
+DataStructureDefinition ||--}o Coding : "security"
+DataStructureDefinition ||--|o Timing : "validityPeriod"
+DataStructureDefinition ||--}o Coding : "coding"
+DataStructureDefinition ||--}o Comment : "comments"
+DataStructureDefinition ||--}o Comment : "siteOrSponsorComments"
+WhereClause ||--}o Condition : "conditions"
+WhereClause ||--}o Coding : "coding"
+ReifiedConcept ||--}o ConceptProperty : "properties"
+ReifiedConcept ||--}o Coding : "coding"
+ReifiedConcept ||--}o Comment : "comments"
+ReifiedConcept ||--}o Comment : "siteOrSponsorComments"
+Item ||--|o CodeList : "codeList"
+Item ||--|o Method : "method"
+Item ||--}o RangeCheck : "rangeChecks"
+Item ||--}o WhereClause : "whereClauses"
+Item ||--|o Origin : "origin"
+Item ||--|o ConceptProperty : "conceptProperty"
+Item ||--|o CodeList : "roleCodeList"
+Item ||--|o Condition : "collectionExceptionCondition"
+Item ||--}o Coding : "coding"
+Item ||--}o Comment : "comments"
+Item ||--}o Comment : "siteOrSponsorComments"
+Origin ||--}o SourceItem : "sourceItems"
+Origin ||--|o DocumentReference : "document"
+SourceItem ||--|o Item : "item"
+SourceItem ||--|o DocumentReference : "document"
+SourceItem ||--}o Coding : "coding"
+ComponentList ||--}o Coding : "coding"
+DataAttribute ||--|| Item : "item"
+DataAttribute ||--|o Method : "missingHandling"
+DataAttribute ||--|o Method : "imputation"
+DataAttribute ||--}o Coding : "coding"
+DataAttribute ||--}o Comment : "comments"
+DataAttribute ||--}o Comment : "siteOrSponsorComments"
+Measure ||--|| Item : "item"
+Measure ||--|o Method : "missingHandling"
+Measure ||--|o Method : "imputation"
+Measure ||--}o Coding : "coding"
+Measure ||--}o Comment : "comments"
+Measure ||--}o Comment : "siteOrSponsorComments"
+Dimension ||--|| Item : "item"
+Dimension ||--|o Method : "missingHandling"
+Dimension ||--|o Method : "imputation"
+Dimension ||--}o Coding : "coding"
+Dimension ||--}o Comment : "comments"
+Dimension ||--}o Comment : "siteOrSponsorComments"
+Dataflow ||--|| DataStructureDefinition : "structure"
+Dataflow ||--}o Dimension : "dimensionConstraint"
+Dataflow ||--}o Coding : "coding"
+Dataflow ||--}o Comment : "comments"
+Dataflow ||--}o Comment : "siteOrSponsorComments"
 Standard ||--}o Coding : "coding"
 Dictionary ||--}o Coding : "terms"
 Dictionary ||--}o Coding : "coding"
@@ -464,68 +734,14 @@ Relationship ||--|| IdentifiableElement : "subject"
 Relationship ||--|| IdentifiableElement : "object"
 Relationship ||--}o Coding : "coding"
 IdentifiableElement ||--}o Coding : "coding"
-ReifiedConcept ||--}o ConceptProperty : "properties"
-ReifiedConcept ||--}o Coding : "coding"
-ReifiedConcept ||--}o Comment : "comment"
-ConceptProperty ||--|o CodeList : "codeList"
-ConceptProperty ||--}o Coding : "coding"
-ConceptProperty ||--}o Comment : "comment"
-CodeList ||--}o CodeListItem : "codeListItems"
-CodeList ||--|o Resource : "externalCodeList"
-CodeList ||--}o Coding : "coding"
-CodeList ||--}o Comment : "comment"
-Resource ||--}o FormalExpression : "selection"
-Resource ||--}o Coding : "coding"
-FormalExpression ||--}o Parameter : "parameters"
-FormalExpression ||--|o ReturnValue : "returnValue"
-FormalExpression ||--}o Resource : "externalCodeLibs"
-FormalExpression ||--}o Coding : "coding"
-ReturnValue ||--}o Coding : "coding"
-Parameter ||--}o CodeList : "codeList"
-Parameter ||--}o ConceptProperty : "conceptProperty"
-Parameter ||--}o Coding : "coding"
-CodeListItem ||--|o Coding : "coding"
-Method ||--}o FormalExpression : "formalExpressions"
-Method ||--|o DocumentReference : "document"
-Method ||--}o Coding : "coding"
-Method ||--}o Comment : "comment"
-WhereClause ||--}o Condition : "conditions"
-WhereClause ||--}o Coding : "coding"
-Condition ||--}o RangeCheck : "rangeChecks"
-Condition ||--}o FormalExpression : "formalExpression"
-Condition ||--}o Condition : "conditions"
-Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comment"
-RangeCheck ||--}o FormalExpression : "formalExpression"
-Item ||--|o CodeList : "codeList"
-Item ||--|o Method : "method"
-Item ||--}o RangeCheck : "rangeChecks"
-Item ||--}o WhereClause : "whereClause"
-Item ||--|o Origin : "origin"
-Item ||--|o ConceptProperty : "conceptProperty"
-Item ||--|o CodeList : "roleCodeList"
-Item ||--|o Condition : "collectionExceptionCondition"
-Item ||--}o Coding : "coding"
-Item ||--}o Comment : "comment"
-Origin ||--}o SourceItem : "sourceItems"
-Origin ||--|o DocumentReference : "document"
-SourceItem ||--|o Item : "item"
-SourceItem ||--|o DocumentReference : "document"
-SourceItem ||--}o Coding : "coding"
 ItemGroup ||--}o Item : "items"
 ItemGroup ||--|o ReifiedConcept : "implementsConcept"
+ItemGroup ||--}o WhereClause : "whereClauses"
 ItemGroup ||--}o Coding : "security"
 ItemGroup ||--|o Timing : "validityPeriod"
 ItemGroup ||--}o Coding : "coding"
-ItemGroup ||--}o Comment : "comment"
-Timing ||--|o NominalOccurrence : "relativeTo"
-Timing ||--|o NominalOccurrence : "relativeFrom"
-Timing ||--|o Method : "imputation"
-Timing ||--}o Coding : "coding"
-NominalOccurrence ||--|| Timing : "timing"
-NominalOccurrence ||--}o Condition : "condition"
-NominalOccurrence ||--}o Coding : "coding"
-NominalOccurrence ||--}o Comment : "comment"
+ItemGroup ||--}o Comment : "comments"
+ItemGroup ||--}o Comment : "siteOrSponsorComments"
 
 </code></pre>
 <h2 id="classes">Classes</h2>
@@ -539,35 +755,35 @@ NominalOccurrence ||--}o Comment : "comment"
 <tbody>
 <tr>
 <td><a href="classes/CodeListItem/">CodeListItem</a></td>
-<td>A structured member of a CodeList that extends the Coding class with addition...</td>
+<td>A structured member of a CodeList that extends the Coding class with additional context-specific properties</td>
 </tr>
 <tr>
 <td><a href="classes/Coding/">Coding</a></td>
-<td>A semantic reference that provides standardized codes and their meanings from...</td>
+<td>A semantic reference that provides standardized codes and their meanings from controlled vocabularies</td>
 </tr>
 <tr>
 <td><a href="classes/DataflowRelationship/">DataflowRelationship</a></td>
-<td>A relationship element that associates a DataAttribute with a Dataflow, repor...</td>
+<td>A relationship element that associates a DataAttribute with a Dataflow, reported at the Dataset level</td>
 </tr>
 <tr>
 <td><a href="classes/DatasetKey/">DatasetKey</a></td>
-<td>An abstract identifier that comprises the cross-product of dimension values t...</td>
+<td>An abstract identifier that comprises the cross-product of dimension values to identify a specific cross-section</td>
 </tr>
 <tr>
 <td>        <a href="classes/GroupKey/">GroupKey</a></td>
-<td>A dimension subset that represents collections of dimensions that are subsets...</td>
+<td>A dimension subset that represents collections of dimensions that are subsets of the full dimension set, distinct from SeriesKey which includes Time dimensions</td>
 </tr>
 <tr>
 <td>        <a href="classes/SeriesKey/">SeriesKey</a></td>
-<td>A unique identifier that comprises the cross-product of dimension values incl...</td>
+<td>A unique identifier that comprises the cross-product of dimension values including Time to identify observations, representing dimensions shared by all observations in a conceptual series</td>
 </tr>
 <tr>
 <td><a href="classes/DimensionRelationship/">DimensionRelationship</a></td>
-<td>A relationship element that associates a DataAttribute with a specific Dimens...</td>
+<td>A relationship element that associates a DataAttribute with a specific Dimension at a specific level</td>
 </tr>
 <tr>
 <td><a href="classes/Distribution/">Distribution</a></td>
-<td>A technical representation that provides a specific format or access method f...</td>
+<td>A technical representation that provides a specific format or access method for a dataset</td>
 </tr>
 <tr>
 <td><a href="classes/Formatted/">Formatted</a></td>
@@ -575,7 +791,7 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="classes/Governed/">Governed</a></td>
-<td>A mixin that provides slots for audit trail and standards governance, includi...</td>
+<td>A mixin that provides slots for audit trail and standards governance, including mandatory status, comments, and attribution</td>
 </tr>
 <tr>
 <td><a href="classes/GovernedElement/">GovernedElement</a></td>
@@ -583,23 +799,23 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td>        <a href="classes/CodeList/">CodeList</a></td>
-<td>A value set that defines a discrete collection of permissible values for an i...</td>
+<td>A value set that defines a discrete collection of permissible values for an item, corresponding to the ODM CodeList construct</td>
 </tr>
 <tr>
 <td>        <a href="classes/ConceptProperty/">ConceptProperty</a></td>
-<td>A reified property concept that exists within the context of its containing t...</td>
+<td>A reified property concept that exists within the context of its containing topic concept</td>
 </tr>
 <tr>
 <td>        <a href="classes/Condition/">Condition</a></td>
-<td>A reusable, composable, and nestable logical construct allowing for complex e...</td>
+<td>A reusable, composable, and nestable logical construct allowing for complex expressions. Conditions are most useful when given a meaningful name and linked to Study Definitions.</td>
 </tr>
 <tr>
 <td>        <a href="classes/CubeComponent/">CubeComponent</a></td>
-<td>An abstract data field that represents a component in a data structure defini...</td>
+<td>An abstract data field that represents a component in a data structure definition, referencing an Item for its definition</td>
 </tr>
 <tr>
 <td>                <a href="classes/DataAttribute/">DataAttribute</a></td>
-<td>A data cube property that describes additional characteristics or metadata ab...</td>
+<td>A data cube property that describes additional characteristics or metadata about observations</td>
 </tr>
 <tr>
 <td>                <a href="classes/Dimension/">Dimension</a></td>
@@ -611,51 +827,55 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td>        <a href="classes/Dataflow/">Dataflow</a></td>
-<td>An abstract representation that defines data provision for different referenc...</td>
+<td>An abstract representation that defines data provision for different reference periods, where a Distribution and its Dataset are instances</td>
 </tr>
 <tr>
 <td>        <a href="classes/DataProduct/">DataProduct</a></td>
-<td>A governed collection that represents a purpose-driven assembly of datasets a...</td>
+<td>A governed collection that represents a purpose-driven assembly of datasets and services with an owning team and lifecycle</td>
 </tr>
 <tr>
 <td>        <a href="classes/Item/">Item</a></td>
-<td>A data element that represents a specific piece of information within a defin...</td>
+<td>A data element that represents a specific piece of information within a defined context, with data type, constraints, and derivation methods</td>
 </tr>
 <tr>
 <td>        <a href="classes/ItemGroup/">ItemGroup</a></td>
-<td>A collection element that groups related items or subgroups within a specific...</td>
+<td>A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections</td>
 </tr>
 <tr>
 <td>                <a href="classes/DataStructureDefinition/">DataStructureDefinition</a></td>
-<td>A structural element that defines the organization of a data cube for analysi...</td>
+<td>A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures</td>
 </tr>
 <tr>
 <td>        <a href="classes/MetaDataVersion/">MetaDataVersion</a></td>
-<td>A container element that represents a given version of a specification, linki...</td>
+<td>A container element that represents a given version of a specification, linking to a particular usage context such as a study, dataset, or data collection instrument.</td>
 </tr>
 <tr>
 <td>        <a href="classes/Method/">Method</a></td>
-<td>A reusable computational procedure that describes how to derive values and ca...</td>
+<td>A reusable computational procedure that describes how to derive values and can be referenced by Items</td>
 </tr>
 <tr>
 <td>        <a href="classes/NominalOccurrence/">NominalOccurrence</a></td>
-<td>An event element that represents occurrences such as planned or unplanned enc...</td>
+<td>An event element that represents occurrences such as planned or unplanned encounters or adverse events</td>
 </tr>
 <tr>
 <td>        <a href="classes/ProvisionAgreement/">ProvisionAgreement</a></td>
-<td>An agreement element that describes the contractual relationship between a Da...</td>
+<td>An agreement element that describes the contractual relationship between a Data Provider and a Data Consumer regarding data provision</td>
 </tr>
 <tr>
 <td>        <a href="classes/ReifiedConcept/">ReifiedConcept</a></td>
-<td>A canonical information layer that makes abstract concepts explicit and refer...</td>
+<td>A canonical information layer that makes abstract concepts explicit and referenceable, showing how different data implementations represent the same underlying meanings through a star schema structure with multiple properties</td>
+</tr>
+<tr>
+<td>        <a href="classes/SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
+<td>A feedback element that contains comments from a site or sponsor, distinct from the general Comment class</td>
 </tr>
 <tr>
 <td><a href="classes/GroupRelationship/">GroupRelationship</a></td>
-<td>A relationship element that associates a DataAttribute with a set of Dimensio...</td>
+<td>A relationship element that associates a DataAttribute with a set of Dimensions, used when attribute values vary based on all group dimension values</td>
 </tr>
 <tr>
 <td><a href="classes/Identifiable/">Identifiable</a></td>
-<td>A mixin that provides slots for making an entity addressable within a study o...</td>
+<td>A mixin that provides slots for making an entity addressable within a study or context</td>
 </tr>
 <tr>
 <td><a href="classes/IdentifiableElement/">IdentifiableElement</a></td>
@@ -663,15 +883,15 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td>        <a href="classes/Comment/">Comment</a></td>
-<td>A descriptive element that contains explanatory text provided by a data or me...</td>
+<td>A descriptive element that contains explanatory text provided by a data or metadata handler</td>
 </tr>
 <tr>
 <td>        <a href="classes/ComponentList/">ComponentList</a></td>
-<td>An abstract definition that specifies a list of components within a data stru...</td>
+<td>An abstract definition that specifies a list of components within a data structure definition, including various descriptor types</td>
 </tr>
 <tr>
 <td>        <a href="classes/Dataset/">Dataset</a></td>
-<td>A collection element that groups observations sharing the same dimensionality...</td>
+<td>A collection element that groups observations sharing the same dimensionality, expressed as a set of unique dimensions within a Data Product context</td>
 </tr>
 <tr>
 <td>        <a href="classes/Dictionary/">Dictionary</a></td>
@@ -679,19 +899,19 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td>        <a href="classes/DocumentReference/">DocumentReference</a></td>
-<td>A comprehensive reference element that points to an external document, combin...</td>
+<td>A comprehensive reference element that points to an external document, combining elements from ODM and FHIR</td>
 </tr>
 <tr>
 <td>        <a href="classes/FormalExpression/">FormalExpression</a></td>
-<td>A computational element that defines the execution of a data derivation withi...</td>
+<td>A computational element that defines the execution of a data derivation within a specific context</td>
 </tr>
 <tr>
 <td>        <a href="classes/Organization/">Organization</a></td>
-<td>An entity that represents organizational information, such as a site or spons...</td>
+<td>An entity that represents organizational information, such as a site or sponsor</td>
 </tr>
 <tr>
 <td>                <a href="classes/DataProvider/">DataProvider</a></td>
-<td>An organization element that provides data to a Data Consumer, which can be a...</td>
+<td>An organization element that provides data to a Data Consumer, which can be a sponsor, site, or any other entity that supplies data</td>
 </tr>
 <tr>
 <td>        <a href="classes/Parameter/">Parameter</a></td>
@@ -699,47 +919,43 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td>        <a href="classes/Relationship/">Relationship</a></td>
-<td>A semantic link that defines connections between elements such as Items or It...</td>
+<td>A semantic link that defines connections between elements such as Items or ItemGroups, capturing relationships like "is the unit for" or "assesses seriousness of"</td>
 </tr>
 <tr>
 <td>        <a href="classes/Resource/">Resource</a></td>
-<td>An external reference that serves as the source for a Dataset, ItemGroup, or ...</td>
+<td>An external reference that serves as the source for a Dataset, ItemGroup, or Item</td>
 </tr>
 <tr>
 <td>                <a href="classes/DataService/">DataService</a></td>
-<td>A service element that provides an API or endpoint for serving or receiving d...</td>
+<td>A service element that provides an API or endpoint for serving or receiving data</td>
 </tr>
 <tr>
 <td>        <a href="classes/ReturnValue/">ReturnValue</a></td>
-<td>An output specification that defines the details of what a formal expression ...</td>
-</tr>
-<tr>
-<td>        <a href="classes/SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
-<td>A feedback element that contains comments from a site or sponsor, distinct fr...</td>
+<td>An output specification that defines the details of what a formal expression returns</td>
 </tr>
 <tr>
 <td>        <a href="classes/Standard/">Standard</a></td>
-<td>A collection element that groups related standards within a specific context,...</td>
+<td>A collection element that groups related standards within a specific context, used for defining CDISC implementation guides and controlled terminologies</td>
 </tr>
 <tr>
 <td>        <a href="classes/Timing/">Timing</a></td>
-<td>A temporal element that describes the timing of an event or occurrence, which...</td>
+<td>A temporal element that describes the timing of an event or occurrence, which can be absolute, relative, or nominal</td>
 </tr>
 <tr>
 <td>        <a href="classes/User/">User</a></td>
-<td>An entity that represents information about a specific user of a clinical dat...</td>
+<td>An entity that represents information about a specific user of a clinical data collection or data management system</td>
 </tr>
 <tr>
 <td>        <a href="classes/WhereClause/">WhereClause</a></td>
-<td>A conditional element that describes the circumstances under which a containi...</td>
+<td>A conditional element that describes the circumstances under which a containing context applies, linking conditions to structures where they are used</td>
 </tr>
 <tr>
 <td><a href="classes/IsODMItem/">IsODMItem</a></td>
-<td>A mixin that provides additional attributes for CDISC Operational Data Model ...</td>
+<td>A mixin that provides additional attributes for CDISC Operational Data Model items, including roles, completion instructions, and implementation notes</td>
 </tr>
 <tr>
 <td><a href="classes/IsProfile/">IsProfile</a></td>
-<td>A mixin that provides additional metadata for FHIR resources and Data Product...</td>
+<td>A mixin that provides additional metadata for FHIR resources and Data Products, including profiles, security tags, and validity periods</td>
 </tr>
 <tr>
 <td><a href="classes/IsSdmxDataset/">IsSdmxDataset</a></td>
@@ -747,7 +963,7 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="classes/Labelled/">Labelled</a></td>
-<td>A mixin that provides slots for detailing meanings and multilingual descripti...</td>
+<td>A mixin that provides slots for detailing meanings and multilingual descriptions</td>
 </tr>
 <tr>
 <td><a href="classes/MeasureRelationship/">MeasureRelationship</a></td>
@@ -755,11 +971,11 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="classes/ObservationRelationship/">ObservationRelationship</a></td>
-<td>A relationship element that associates a DataAttribute with an Observation, a...</td>
+<td>A relationship element that associates a DataAttribute with an Observation, allowing value-level Items to be reused across multiple different Views</td>
 </tr>
 <tr>
 <td><a href="classes/ODMFileMetadata/">ODMFileMetadata</a></td>
-<td>A mixin that provides ODM file-level metadata attributes including file ident...</td>
+<td>A mixin that provides ODM file-level metadata attributes including file identifiers, timestamps, and system information</td>
 </tr>
 <tr>
 <td><a href="classes/Origin/">Origin</a></td>
@@ -767,7 +983,7 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="classes/RangeCheck/">RangeCheck</a></td>
-<td>A validation element that performs a simple comparison check between a refere...</td>
+<td>A validation element that performs a simple comparison check between a referenced item's value and specified values, resolving to a boolean result</td>
 </tr>
 <tr>
 <td><a href="classes/SourceItem/">SourceItem</a></td>
@@ -775,7 +991,7 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="classes/StudyMetadata/">StudyMetadata</a></td>
-<td>A mixin that provides study-level metadata attributes including study identif...</td>
+<td>A mixin that provides study-level metadata attributes including study identification and protocol information</td>
 </tr>
 <tr>
 <td><a href="classes/TranslatedText/">TranslatedText</a></td>
@@ -783,11 +999,11 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="classes/Translation/">Translation</a></td>
-<td>A text representation that provides content in a specific language, used for ...</td>
+<td>A text representation that provides content in a specific language, used for multilingual support</td>
 </tr>
 <tr>
 <td><a href="classes/Versioned/">Versioned</a></td>
-<td>A mixin that provides version and connectivity information, including version...</td>
+<td>A mixin that provides version and connectivity information, including version numbers and resource references</td>
 </tr>
 </tbody>
 </table>
@@ -802,7 +1018,7 @@ NominalOccurrence ||--}o Comment : "comment"
 <tbody>
 <tr>
 <td><a href="slots/OID/">OID</a></td>
-<td>Local identifier within this study/context</td>
+<td>Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.</td>
 </tr>
 <tr>
 <td><a href="slots/uuid/">uuid</a></td>
@@ -813,7 +1029,11 @@ NominalOccurrence ||--}o Comment : "comment"
 <td>Is this element required?</td>
 </tr>
 <tr>
-<td><a href="slots/comment/">comment</a></td>
+<td><a href="slots/comments/">comments</a></td>
+<td>Comment on the element, such as a rationale for its inclusion or exclusion</td>
+</tr>
+<tr>
+<td><a href="slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>Comment on the element, such as a rationale for its inclusion or exclusion</td>
 </tr>
 <tr>
@@ -830,7 +1050,7 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>Reference to another item that this item implements or extends, e</td>
+<td>Reference to another item that this item implements or extends, e.g. a template Item definition.</td>
 </tr>
 <tr>
 <td><a href="slots/name/">name</a></td>
@@ -870,7 +1090,7 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="slots/href/">href</a></td>
-<td>Machine-readable instructions to obtain the resource e</td>
+<td>Machine-readable instructions to obtain the resource e.g. FHIR path, URL</td>
 </tr>
 <tr>
 <td><a href="slots/profile/">profile</a></td>
@@ -890,7 +1110,7 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="slots/role/">role</a></td>
-<td>Identifies the role of the item within the containing context, taken from the...</td>
+<td>Identifies the role of the item within the containing context, taken from the roleCodeList</td>
 </tr>
 <tr>
 <td><a href="slots/roleCodeList/">roleCodeList</a></td>
@@ -902,7 +1122,7 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="slots/crfCompletionInstructions/">crfCompletionInstructions</a></td>
-<td>CRFCompletionInstructions reference: Instructions for the clinical site on ho...</td>
+<td>CRFCompletionInstructions reference: Instructions for the clinical site on how to enter collected information on the CRF</td>
 </tr>
 <tr>
 <td><a href="slots/cdiscNotes/">cdiscNotes</a></td>
@@ -910,7 +1130,7 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="slots/implementationNotes/">implementationNotes</a></td>
-<td>ImplementationNotes reference: Further information, such as rationale and imp...</td>
+<td>ImplementationNotes reference: Further information, such as rationale and implementation instructions, on how to implement the CRF data collection fields</td>
 </tr>
 <tr>
 <td><a href="slots/collectionExceptionCondition/">collectionExceptionCondition</a></td>
@@ -918,7 +1138,7 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="slots/preSpecifiedValue/">preSpecifiedValue</a></td>
-<td>Prefill value or a default value for a field that is automatically populated</td>
+<td>Prefill value or a default value for a field that is automatically populated.</td>
 </tr>
 <tr>
 <td><a href="slots/fileOID/">fileOID</a></td>
@@ -938,7 +1158,7 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="slots/fileType/">fileType</a></td>
-<td>Type of ODM file (e</td>
+<td>Type of ODM file (e.g., Snapshot, Transactional)</td>
 </tr>
 <tr>
 <td><a href="slots/originator/">originator</a></td>
@@ -982,27 +1202,27 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="slots/items/">items</a></td>
-<td>Template or top-level items (not belonging to any item group) defined in this...</td>
+<td>Template or top-level items (not belonging to any item group) defined in this version of the metadata</td>
 </tr>
 <tr>
 <td><a href="slots/resources/">resources</a></td>
-<td>References to documents that describe this version of the metadata</td>
+<td>References to documents that describe this version of the metadata.</td>
 </tr>
 <tr>
 <td><a href="slots/conditions/">conditions</a></td>
-<td>Logical conditions that apply to this version of the metadata</td>
+<td>Logical conditions that apply to this version of the metadata.</td>
 </tr>
 <tr>
 <td><a href="slots/whereClauses/">whereClauses</a></td>
-<td>Data contexts that apply to this version of the metadata</td>
+<td>Data contexts that apply to this version of the metadata.</td>
 </tr>
 <tr>
 <td><a href="slots/methods/">methods</a></td>
-<td>Methods defined in this version of the metadata</td>
+<td>Methods defined in this version of the metadata.</td>
 </tr>
 <tr>
 <td><a href="slots/codeLists/">codeLists</a></td>
-<td>Code lists defined in this version of the metadata</td>
+<td>Code lists defined in this version of the metadata.</td>
 </tr>
 <tr>
 <td><a href="slots/codings/">codings</a></td>
@@ -1014,7 +1234,7 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="slots/relationships/">relationships</a></td>
-<td>Relationships between items, item groups, and other elements in this version ...</td>
+<td>Relationships between items, item groups, and other elements in this version of the metadata.</td>
 </tr>
 <tr>
 <td><a href="slots/dictionaries/">dictionaries</a></td>
@@ -1025,32 +1245,32 @@ NominalOccurrence ||--}o Comment : "comment"
 <td>Standards defined in this version of the metadata</td>
 </tr>
 <tr>
-<td><a href="slots/annotatedCRF/">annotatedCRF</a></td>
+<td><a href="slots/annotatedCRFs/">annotatedCRFs</a></td>
 <td>Reference to annotated case report forms</td>
 </tr>
 <tr>
+<td><a href="slots/dataProducts/">dataProducts</a></td>
+<td>Indexed data flows with clear ownership</td>
+</tr>
+<tr>
 <td><a href="slots/dataType/">dataType</a></td>
-<td>The data type of the item</td>
+<td>The data type of the item.</td>
 </tr>
 <tr>
 <td><a href="slots/length/">length</a></td>
-<td>The maximum length of the data item in characters</td>
+<td>The maximum length of the data item in characters.</td>
 </tr>
 <tr>
 <td><a href="slots/codeList/">codeList</a></td>
-<td>Reference to the CodeList that constrains the item values</td>
+<td>Reference to the CodeList that constrains the item values.</td>
 </tr>
 <tr>
 <td><a href="slots/method/">method</a></td>
-<td>Reference to the Method element that describes how to derive this item's valu...</td>
+<td>Reference to the Method element that describes how to derive this item's value.</td>
 </tr>
 <tr>
 <td><a href="slots/rangeChecks/">rangeChecks</a></td>
-<td>Range checks applied to this item (e</td>
-</tr>
-<tr>
-<td><a href="slots/whereClause/">whereClause</a></td>
-<td>References to different situations that define when this item applies</td>
+<td>Range checks applied to this item (e.g. edit checks, CORE rules)</td>
 </tr>
 <tr>
 <td><a href="slots/origin/">origin</a></td>
@@ -1058,19 +1278,19 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="slots/conceptProperty/">conceptProperty</a></td>
-<td>Reference to a abstract concept property that this item is a specialization /...</td>
+<td>Reference to a abstract concept property that this item is a specialization / instance of.</td>
 </tr>
 <tr>
 <td><a href="slots/domain/">domain</a></td>
-<td>Domain abbreviation for the dataset</td>
+<td>Domain abbreviation for the dataset.</td>
 </tr>
 <tr>
 <td><a href="slots/structure/">structure</a></td>
-<td>Data structure of the item group, indicating how the records are organized</td>
+<td>Data structure of the item group, indicating how the records are organized. If this is a FHIR Resource, is it nested or flattened? If this is a structured concept, is it a Biomedical/Derivation/Analysis concept?</td>
 </tr>
 <tr>
 <td><a href="slots/isReferenceData/">isReferenceData</a></td>
-<td>Set to Yes if this is a reference item group</td>
+<td>Set to Yes if this is a reference item group.</td>
 </tr>
 <tr>
 <td><a href="slots/type/">type</a></td>
@@ -1078,27 +1298,27 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="slots/children/">children</a></td>
-<td>References to child ItemGroups (OIDs) within this item group</td>
+<td>References to child ItemGroups (OIDs) within this item group. Use these OID references to look up the actual ItemGroup objects  from the top-level itemGroups collection.</td>
 </tr>
 <tr>
 <td><a href="slots/implementsConcept/">implementsConcept</a></td>
-<td>Reference to a abstract concept topic that this item group is a specializatio...</td>
+<td>Reference to a abstract concept topic that this item group is a specialization of</td>
 </tr>
 <tr>
 <td><a href="slots/subject/">subject</a></td>
-<td>The starting element of the relationship (e</td>
+<td>The starting element of the relationship (e.g., an Item or ItemGroup).</td>
 </tr>
 <tr>
 <td><a href="slots/object/">object</a></td>
-<td>The ending element of the relationship</td>
+<td>The ending element of the relationship.</td>
 </tr>
 <tr>
 <td><a href="slots/predicateTerm/">predicateTerm</a></td>
-<td>Short variable relationship linking phrase for programming purposes</td>
+<td>Short variable relationship linking phrase for programming purposes.</td>
 </tr>
 <tr>
 <td><a href="slots/linkingPhrase/">linkingPhrase</a></td>
-<td>Variable relationship descriptive linking phrase</td>
+<td>Variable relationship descriptive linking phrase.</td>
 </tr>
 <tr>
 <td><a href="slots/language/">language</a></td>
@@ -1118,7 +1338,7 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="slots/codeListItems/">codeListItems</a></td>
-<td>The individual values that make up this CodeList</td>
+<td>The individual values that make up this CodeList. The type of CodeListItem included determines its behaviour</td>
 </tr>
 <tr>
 <td><a href="slots/externalCodeList/">externalCodeList</a></td>
@@ -1134,7 +1354,7 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="slots/weight/">weight</a></td>
-<td>Numeric significance of the code (e</td>
+<td>Numeric significance of the code (e.g., for scoring)</td>
 </tr>
 <tr>
 <td><a href="slots/other/">other</a></td>
@@ -1142,7 +1362,7 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="slots/text/">text</a></td>
-<td>The comment text</td>
+<td>The comment text.</td>
 </tr>
 <tr>
 <td><a href="slots/documents/">documents</a></td>
@@ -1166,35 +1386,35 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="slots/terms/">terms</a></td>
-<td>Terms in this dictionary - leave this empty in most cases to keep the file sm...</td>
+<td>Terms in this dictionary - leave this empty in most cases to keep the file small</td>
 </tr>
 <tr>
 <td><a href="slots/publishedBy/">publishedBy</a></td>
-<td>Associates the Data Provider that reports/publishes the data</td>
+<td>Associates the Data Provider that reports/publishes the data.</td>
 </tr>
 <tr>
 <td><a href="slots/properties/">properties</a></td>
-<td>Properties of the reified object, which can be other governed elements or sim...</td>
+<td>Properties of the reified object, which can be other governed elements or simple values</td>
 </tr>
 <tr>
 <td><a href="slots/minOccurs/">minOccurs</a></td>
-<td>Minimum number of occurrences of this property in the context</td>
+<td>Minimum number of occurrences of this property in the context. Set to &gt;0 to mandate some number of occurrences</td>
 </tr>
 <tr>
 <td><a href="slots/maxOccurs/">maxOccurs</a></td>
-<td>Maximum number of occurrences of this property in the context</td>
+<td>Maximum number of occurrences of this property in the context. Leave empty for unbounded. Set to 0 to disable property</td>
 </tr>
 <tr>
 <td><a href="slots/implementsCondition/">implementsCondition</a></td>
-<td>Reference to a external (e</td>
+<td>Reference to a external (e.g. USDM) condition definition that this implements</td>
 </tr>
 <tr>
 <td><a href="slots/formalExpression/">formalExpression</a></td>
-<td>Logical expression, resolving to a boolean, that implements this condition in...</td>
+<td>Logical expression, resolving to a boolean, that implements this condition in a specific context</td>
 </tr>
 <tr>
 <td><a href="slots/operator/">operator</a></td>
-<td>Logical operator for combining child conditions or range checks</td>
+<td>Logical operator for combining child conditions or range checks. Defaults to ALL if not specified.</td>
 </tr>
 <tr>
 <td><a href="slots/comparator/">comparator</a></td>
@@ -1206,15 +1426,15 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="slots/item/">item</a></td>
-<td>Reference to the Item element whose value is being checked</td>
+<td>Reference to the Item element whose value is being checked. If not specified, check applies to the enclosing context</td>
 </tr>
 <tr>
 <td><a href="slots/softHard/">softHard</a></td>
-<td>Indicates whether a validation check is an error ("Hard") or a warning ("Soft...</td>
+<td>Indicates whether a validation check is an error ("Hard") or a warning ("Soft")</td>
 </tr>
 <tr>
 <td><a href="slots/expression/">expression</a></td>
-<td>The actual text of the formal expression (renamed from 'code' for disambiguat...</td>
+<td>The actual text of the formal expression (renamed from 'code' for disambiguation).</td>
 </tr>
 <tr>
 <td><a href="slots/returnType/">returnType</a></td>
@@ -1238,19 +1458,19 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="slots/document/">document</a></td>
-<td>Reference to a document that describes this method in detail</td>
+<td>Reference to a document that describes this method in detail.</td>
 </tr>
 <tr>
 <td><a href="slots/resource/">resource</a></td>
-<td>Path to a resource (e</td>
+<td>Path to a resource (e.g. File, FHIR datasource) that is the source of this item</td>
 </tr>
 <tr>
 <td><a href="slots/valueList/">valueList</a></td>
-<td>A list of possible return values</td>
+<td>A list of possible return values.</td>
 </tr>
 <tr>
 <td><a href="slots/source/">source</a></td>
-<td>The source of the data, such as Investigator, Sponsor, Subject, or Vendor</td>
+<td>The source of the data, such as Investigator, Sponsor, Subject, or Vendor.</td>
 </tr>
 <tr>
 <td><a href="slots/sourceItems/">sourceItems</a></td>
@@ -1258,35 +1478,35 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="slots/sourceType/">sourceType</a></td>
-<td>who made the comment, such as Investigator, Sponsor</td>
+<td>who made the comment, such as Investigator, Sponsor.</td>
 </tr>
 <tr>
 <td><a href="slots/userType/">userType</a></td>
-<td>User's role in the study</td>
+<td>User's role in the study.</td>
 </tr>
 <tr>
 <td><a href="slots/userName/">userName</a></td>
-<td>The username of the user</td>
+<td>The username of the user.</td>
 </tr>
 <tr>
 <td><a href="slots/fullName/">fullName</a></td>
-<td>The full name of the user</td>
+<td>The full name of the user.</td>
 </tr>
 <tr>
 <td><a href="slots/organization/">organization</a></td>
-<td>The organization the user belongs to</td>
+<td>The organization the user belongs to.</td>
 </tr>
 <tr>
 <td><a href="slots/location/">location</a></td>
-<td>The physical location of the organization</td>
+<td>The physical location of the organization.</td>
 </tr>
 <tr>
 <td><a href="slots/address/">address</a></td>
-<td>The address of the organization</td>
+<td>The address of the organization.</td>
 </tr>
 <tr>
 <td><a href="slots/partOfOrganization/">partOfOrganization</a></td>
-<td>Reference to a parent organization if this organization is part of a larger e...</td>
+<td>Reference to a parent organization if this organization is part of a larger entity.</td>
 </tr>
 <tr>
 <td><a href="slots/publishingSet/">publishingSet</a></td>
@@ -1298,15 +1518,15 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="slots/resourceType/">resourceType</a></td>
-<td>Type of resource (e</td>
+<td>Type of resource (e.g.,  "ODM", "HL7-FHIR", "HL7-CDA", "HL7-v2", "OpenEHR-extract")</td>
 </tr>
 <tr>
 <td><a href="slots/attribute/">attribute</a></td>
-<td>Field provided by the Name attribute where the data or information can be obt...</td>
+<td>Field provided by the Name attribute where the data or information can be obtained. Examples are "valueQuantity.value" or "valueQuantity.unit".</td>
 </tr>
 <tr>
 <td><a href="slots/selection/">selection</a></td>
-<td>Machine-executable instructions for selecting data from the resource</td>
+<td>Machine-executable instructions for selecting data from the resource.</td>
 </tr>
 <tr>
 <td><a href="slots/title/">title</a></td>
@@ -1326,15 +1546,15 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="slots/isNominal/">isNominal</a></td>
-<td>Indicates whether the timing is nominal (event-based) or not</td>
+<td>Indicates whether the timing is nominal (event-based) or not.</td>
 </tr>
 <tr>
 <td><a href="slots/relativeTo/">relativeTo</a></td>
-<td>Reference to the event or occurrence that this timing is relative to</td>
+<td>Reference to the event or occurrence that this timing is relative to.</td>
 </tr>
 <tr>
 <td><a href="slots/relativeFrom/">relativeFrom</a></td>
-<td>Reference to the event or occurrence that this timing is relative to</td>
+<td>Reference to the event or occurrence that this timing is relative to.</td>
 </tr>
 <tr>
 <td><a href="slots/windowLower/">windowLower</a></td>
@@ -1346,27 +1566,27 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="slots/recalled/">recalled</a></td>
-<td>Indicates whether the timing is recalled or not (recalled timings are less re...</td>
+<td>Indicates whether the timing is recalled or not (recalled timings are less reliable).</td>
 </tr>
 <tr>
 <td><a href="slots/frequency/">frequency</a></td>
-<td>Frequency</td>
+<td>Frequency. Use dose frequency terminology e.g. "BID" if applicable.</td>
 </tr>
 <tr>
 <td><a href="slots/imputation/">imputation</a></td>
-<td>The imputation method used for the Timing</td>
+<td>The imputation method used for the Timing.</td>
 </tr>
 <tr>
 <td><a href="slots/timing/">timing</a></td>
-<td>A named event reference, that can nest further named timing references</td>
+<td>A named event reference, that can nest further named timing references.</td>
 </tr>
 <tr>
 <td><a href="slots/event/">event</a></td>
-<td>The ID of the event in a Schedule</td>
+<td>The ID of the event in a Schedule.</td>
 </tr>
 <tr>
 <td><a href="slots/condition/">condition</a></td>
-<td>A condition that must be met for this occurrence to be valid</td>
+<td>A condition that must be met for this occurrence to be valid.</td>
 </tr>
 <tr>
 <td><a href="slots/dimensions/">dimensions</a></td>
@@ -1382,7 +1602,7 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="slots/grouping/">grouping</a></td>
-<td>An association to a set of metadata concepts that have an identified structur...</td>
+<td>An association to a set of metadata concepts that have an identified structural role in a Data Structure Definition.</td>
 </tr>
 <tr>
 <td><a href="slots/evolvingStructure/">evolvingStructure</a></td>
@@ -1394,47 +1614,47 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="slots/action/">action</a></td>
-<td>Defines the action to be taken by the recipient system (information, append, ...</td>
+<td>Defines the action to be taken by the recipient system (information, append, replace, delete)</td>
 </tr>
 <tr>
 <td><a href="slots/reportingBegin/">reportingBegin</a></td>
-<td>A specific time period in a known system of time periods that identifies the ...</td>
+<td>A specific time period in a known system of time periods that identifies the start period of a report.</td>
 </tr>
 <tr>
 <td><a href="slots/reportingEnd/">reportingEnd</a></td>
-<td>A specific time period in a known system of time periods that identifies the ...</td>
+<td>A specific time period in a known system of time periods that identifies the end period of a report.</td>
 </tr>
 <tr>
 <td><a href="slots/dataExtractionDate/">dataExtractionDate</a></td>
-<td>A specific time period that identifies the date and time that the data are ex...</td>
+<td>A specific time period that identifies the date and time that the data are extracted from a data source.</td>
 </tr>
 <tr>
 <td><a href="slots/validFrom/">validFrom</a></td>
-<td>Indicates the inclusive start time indicating the validity of the information...</td>
+<td>Indicates the inclusive start time indicating the validity of the information in the data set.</td>
 </tr>
 <tr>
 <td><a href="slots/validTo/">validTo</a></td>
-<td>Indicates the inclusive end time indicating the validity of the information i...</td>
+<td>Indicates the inclusive end time indicating the validity of the information in the data set.</td>
 </tr>
 <tr>
 <td><a href="slots/publicationYear/">publicationYear</a></td>
-<td>Specifies the year of publication of the data or metadata in terms of whateve...</td>
+<td>Specifies the year of publication of the data or metadata in terms of whatever provisioning agreements might be in force.</td>
 </tr>
 <tr>
 <td><a href="slots/publicationPeriod/">publicationPeriod</a></td>
-<td>Specifies the period of publication of the data or metadata in terms of whate...</td>
+<td>Specifies the period of publication of the data or metadata in terms of whatever provisioning agreements might be in force.</td>
 </tr>
 <tr>
 <td><a href="slots/describedBy/">describedBy</a></td>
-<td>Associates a Dataflow and thereby a Data Structure Definition to the data set</td>
+<td>Associates a Dataflow and thereby a Data Structure Definition to the data set.</td>
 </tr>
 <tr>
 <td><a href="slots/structuredBy/">structuredBy</a></td>
-<td>Associates the Data Structure Definition that defines the structure of the Da...</td>
+<td>Associates the Data Structure Definition that defines the structure of the Data Set. Note that the Data Structure Definition is the same as that associated (non-mandatory) to the Dataflow.</td>
 </tr>
 <tr>
 <td><a href="slots/keys/">keys</a></td>
-<td>Series and Group keys in the data that are associated with dimensions in this...</td>
+<td>Series and Group keys in the data that are associated with dimensions in this structure</td>
 </tr>
 <tr>
 <td><a href="slots/datasetType/">datasetType</a></td>
@@ -1458,7 +1678,7 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="slots/keyValues/">keyValues</a></td>
-<td>List of Key Values that comprise each key, separated by a dot e</td>
+<td>List of Key Values that comprise each key, separated by a dot e.g. SUBJ001.VISIT2.BMI</td>
 </tr>
 <tr>
 <td><a href="slots/attributeValues/">attributeValues</a></td>
@@ -1530,11 +1750,11 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="slots/protocol/">protocol</a></td>
-<td>Protocol used by the service (e</td>
+<td>Protocol used by the service (e.g., HTTPS, FTP)</td>
 </tr>
 <tr>
 <td><a href="slots/securitySchemaType/">securitySchemaType</a></td>
-<td>Security or authentication method used (e</td>
+<td>Security or authentication method used (e.g., OAuth2)</td>
 </tr>
 <tr>
 <td><a href="slots/providesDataFor/">providesDataFor</a></td>
@@ -1561,27 +1781,27 @@ NominalOccurrence ||--}o Comment : "comment"
 <tbody>
 <tr>
 <td><a href="enums/AliasPredicate/">AliasPredicate</a></td>
-<td>An enumeration that defines permissible values for the relationship between a...</td>
+<td>An enumeration that defines permissible values for the relationship between an element and its alias</td>
 </tr>
 <tr>
 <td><a href="enums/Comparator/">Comparator</a></td>
-<td>An enumeration that defines the types of comparison operations available for ...</td>
+<td>An enumeration that defines the types of comparison operations available for a RangeCheck</td>
 </tr>
 <tr>
 <td><a href="enums/UserType/">UserType</a></td>
-<td>An enumeration that defines the types of users in a clinical data collection ...</td>
+<td>An enumeration that defines the types of users in a clinical data collection or management system</td>
 </tr>
 <tr>
 <td><a href="enums/OrganizationType/">OrganizationType</a></td>
-<td>An enumeration that defines the types of organizations involved in clinical r...</td>
+<td>An enumeration that defines the types of organizations involved in clinical research</td>
 </tr>
 <tr>
 <td><a href="enums/SoftHard/">SoftHard</a></td>
-<td>An enumeration that indicates whether a validation check should be treated as...</td>
+<td>An enumeration that indicates whether a validation check should be treated as an error or a warning</td>
 </tr>
 <tr>
 <td><a href="enums/MethodType/">MethodType</a></td>
-<td>An enumeration that defines the types of computational methods available for ...</td>
+<td>An enumeration that defines the types of computational methods available for data processing</td>
 </tr>
 <tr>
 <td><a href="enums/DataType/">DataType</a></td>
@@ -1597,19 +1817,19 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="enums/ItemGroupType/">ItemGroupType</a></td>
-<td>An enumeration that defines the roles of an item group within a specific cont...</td>
+<td>An enumeration that defines the roles of an item group within a specific context</td>
 </tr>
 <tr>
 <td><a href="enums/TimingType/">TimingType</a></td>
-<td>An enumeration that defines CDISC timing type values indicating the temporal ...</td>
+<td>An enumeration that defines CDISC timing type values indicating the temporal relationship of an observation to a reference point</td>
 </tr>
 <tr>
 <td><a href="enums/LinkingPhraseEnum/">LinkingPhraseEnum</a></td>
-<td>An enumeration that defines variable relationship descriptive linking phrases...</td>
+<td>An enumeration that defines variable relationship descriptive linking phrases from the COSMoS SDTM BC model</td>
 </tr>
 <tr>
 <td><a href="enums/PredicateTermEnum/">PredicateTermEnum</a></td>
-<td>An enumeration that defines short variable relationship linking phrases for p...</td>
+<td>An enumeration that defines short variable relationship linking phrases for programming purposes from the COSMoS SDTM BC model</td>
 </tr>
 <tr>
 <td><a href="enums/DataProductLifecycleStatus/">DataProductLifecycleStatus</a></td>
@@ -1633,7 +1853,7 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="enums/LogicalOperator/">LogicalOperator</a></td>
-<td>Logical operators for combining conditions in Boolean expressions</td>
+<td>Logical operators for combining conditions in Boolean expressions. For complex expressions, use the EXPRESSION value.</td>
 </tr>
 </tbody>
 </table>
@@ -1668,11 +1888,11 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="types/Decimal/">Decimal</a></td>
-<td>A real number with arbitrary precision that conforms to the xsd:decimal speci...</td>
+<td>A real number with arbitrary precision that conforms to the xsd:decimal specification</td>
 </tr>
 <tr>
 <td><a href="types/Time/">Time</a></td>
-<td>A time object represents a (local) time of day, independent of any particular...</td>
+<td>A time object represents a (local) time of day, independent of any particular day</td>
 </tr>
 <tr>
 <td><a href="types/Date/">Date</a></td>
@@ -1704,23 +1924,23 @@ NominalOccurrence ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="types/Objectidentifier/">Objectidentifier</a></td>
-<td>A URI or CURIE that represents an object in the model</td>
+<td>A URI or CURIE that represents an object in the model.</td>
 </tr>
 <tr>
 <td><a href="types/Nodeidentifier/">Nodeidentifier</a></td>
-<td>A URI, CURIE or BNODE that represents a node in a model</td>
+<td>A URI, CURIE or BNODE that represents a node in a model.</td>
 </tr>
 <tr>
 <td><a href="types/Jsonpointer/">Jsonpointer</a></td>
-<td>A string encoding a JSON Pointer</td>
+<td>A string encoding a JSON Pointer. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to a valid object within the current instance document when encoded in tree form.</td>
 </tr>
 <tr>
 <td><a href="types/Jsonpath/">Jsonpath</a></td>
-<td>A string encoding a JSON Path</td>
+<td>A string encoding a JSON Path. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded in tree form.</td>
 </tr>
 <tr>
 <td><a href="types/Sparqlpath/">Sparqlpath</a></td>
-<td>A string encoding a SPARQL Property Path</td>
+<td>A string encoding a SPARQL Property Path. The value of the string MUST conform to SPARQL syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded as RDF.</td>
 </tr>
 </tbody>
 </table>
@@ -1826,5 +2046,5 @@ NominalOccurrence ||--}o Comment : "comment"
 </html>
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-10-04 21:48:14.830193+00:00
+Build Date UTC : 2025-10-05 18:56:44.042612+00:00
 -->

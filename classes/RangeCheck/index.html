@@ -197,13 +197,13 @@ Parameter ||--}o Coding : "coding"
 <tr>
 <td><a href="../../slots/item/">item</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../Item/">Item</a> or <br/><a href="../Dimension/">Dimension</a> or <br/><a href="../Measure/">Measure</a> or <br/><a href="../DataAttribute/">DataAttribute</a></td>
-<td>Reference to the Item element whose value is being checked</td>
+<td>Reference to the Item element whose value is being checked. If not specified, check applies to the enclosing context</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/softHard/">softHard</a></td>
 <td>0..1 <br/> <a href="../../enums/SoftHard/">SoftHard</a></td>
-<td>Indicates whether a validation check is an error ("Hard") or a warning ("Soft...</td>
+<td>Indicates whether a validation check is an error ("Hard") or a warning ("Soft")</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -215,7 +215,7 @@ Parameter ||--}o Coding : "coding"
 <tr>
 <td><a href="../../slots/operator/">operator</a></td>
 <td>0..1 <br/> <a href="../../enums/LogicalOperator/">LogicalOperator</a></td>
-<td>Logical operator for combining child conditions or range checks</td>
+<td>Logical operator for combining child conditions or range checks. Defaults to ALL if not specified.</td>
 <td>direct</td>
 </tr>
 </tbody>

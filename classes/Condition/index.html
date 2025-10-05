@@ -203,7 +203,8 @@ Condition ||--}o RangeCheck : "rangeChecks"
 Condition ||--}o FormalExpression : "formalExpression"
 Condition ||--}o Condition : "conditions"
 Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comment"
+Condition ||--}o Comment : "comments"
+Condition ||--}o Comment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 DocumentReference ||--}o Coding : "coding"
@@ -247,31 +248,31 @@ RangeCheck ||--}o FormalExpression : "formalExpression"
 <tr>
 <td><a href="../../slots/implementsCondition/">implementsCondition</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Reference to a external (e</td>
+<td>Reference to a external (e.g. USDM) condition definition that this implements</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/formalExpression/">formalExpression</a></td>
 <td>* <br/> <a href="../FormalExpression/">FormalExpression</a></td>
-<td>Logical expression, resolving to a boolean, that implements this condition in...</td>
+<td>Logical expression, resolving to a boolean, that implements this condition in a specific context</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/operator/">operator</a></td>
 <td>0..1 <br/> <a href="../../enums/LogicalOperator/">LogicalOperator</a></td>
-<td>Logical operator for combining child conditions or range checks</td>
+<td>Logical operator for combining child conditions or range checks. Defaults to ALL if not specified.</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/conditions/">conditions</a></td>
 <td>* <br/> <a href="./">Condition</a></td>
-<td>Child conditions to combine using the operator</td>
+<td>Child conditions to combine using the operator. Multiple conditions are composed according to the operator (AND/OR/NOT). Rearrange and nest to compose XOR, or combinations of AND and OR. Unless the operator is EXPRESSION, in which case the formalExpression is used instead. Use OID references to reuse conditions defined elsewhere.</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/OID/">OID</a></td>
 <td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>Local identifier within this study/context</td>
+<td>Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.</td>
 <td><a href="../Identifiable/">Identifiable</a></td>
 </tr>
 <tr>
@@ -317,7 +318,13 @@ RangeCheck ||--}o FormalExpression : "formalExpression"
 <td><a href="../Governed/">Governed</a></td>
 </tr>
 <tr>
-<td><a href="../../slots/comment/">comment</a></td>
+<td><a href="../../slots/comments/">comments</a></td>
+<td>* <br/> <a href="../Comment/">Comment</a></td>
+<td>Comment on the element, such as a rationale for its inclusion or exclusion</td>
+<td><a href="../Governed/">Governed</a></td>
+</tr>
+<tr>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>* <br/> <a href="../Comment/">Comment</a></td>
 <td>Comment on the element, such as a rationale for its inclusion or exclusion</td>
 <td><a href="../Governed/">Governed</a></td>
@@ -343,7 +350,7 @@ RangeCheck ||--}o FormalExpression : "formalExpression"
 <tr>
 <td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../Item/">Item</a> or <br/><a href="../ItemGroup/">ItemGroup</a> or <br/><a href="../MetaDataVersion/">MetaDataVersion</a> or <br/><a href="../CodeList/">CodeList</a> or <br/><a href="../ReifiedConcept/">ReifiedConcept</a> or <br/><a href="../ConceptProperty/">ConceptProperty</a> or <br/><a href="./">Condition</a> or <br/><a href="../Method/">Method</a> or <br/><a href="../NominalOccurrence/">NominalOccurrence</a> or <br/><a href="../Dataflow/">Dataflow</a> or <br/><a href="../CubeComponent/">CubeComponent</a> or <br/><a href="../DataProduct/">DataProduct</a> or <br/><a href="../ProvisionAgreement/">ProvisionAgreement</a></td>
-<td>Reference to another item that this item implements or extends, e</td>
+<td>Reference to another item that this item implements or extends, e.g. a template Item definition.</td>
 <td><a href="../Governed/">Governed</a></td>
 </tr>
 </tbody>
@@ -445,6 +452,12 @@ RangeCheck ||--}o FormalExpression : "formalExpression"
 </tr>
 <tr>
 <td><a href="../Method/">Method</a></td>
+<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
+<td>any_of[range]</td>
+<td><a href="./">Condition</a></td>
+</tr>
+<tr>
+<td><a href="../SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
 <td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
 <td>any_of[range]</td>
 <td><a href="./">Condition</a></td>
@@ -817,19 +830,32 @@ RangeCheck ||--}o FormalExpression : "formalExpression"
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">boolean</span>
-<span class="w">  </span><span class="nt">comment</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">comment</span>
+<span class="w">  </span><span class="nt">comments</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">comments</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Comment on the element, such as a rationale for its inclusion or</span>
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">exclusion</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">comment</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">comments</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Condition</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Standard</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Comment</span>
 <span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">siteOrSponsorComments</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">siteOrSponsorComments</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Comment on the element, such as a rationale for its inclusion or</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">exclusion</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">siteOrSponsorComments</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Condition</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Comment</span>
+<span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">  </span><span class="nt">purpose</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">purpose</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Purpose or rationale for this data element</span>

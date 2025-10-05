@@ -207,7 +207,6 @@ DataStructureDefinition {
     boolean isReferenceData  
     ItemGroupType type  
     stringList children  
-    string whereClause  
     stringList profile  
     string authenticator  
     string OID  
@@ -232,6 +231,14 @@ Timing {
     datetime windowUpper  
     boolean recalled  
     string frequency  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+WhereClause {
     string OID  
     string uuid  
     string name  
@@ -295,7 +302,8 @@ Measure {
 Dataflow ||--|| DataStructureDefinition : "structure"
 Dataflow ||--}o Dimension : "dimensionConstraint"
 Dataflow ||--}o Coding : "coding"
-Dataflow ||--}o Comment : "comment"
+Dataflow ||--}o Comment : "comments"
+Dataflow ||--}o Comment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 DocumentReference ||--}o Coding : "coding"
@@ -303,49 +311,59 @@ Dimension ||--|| Item : "item"
 Dimension ||--|o Method : "missingHandling"
 Dimension ||--|o Method : "imputation"
 Dimension ||--}o Coding : "coding"
-Dimension ||--}o Comment : "comment"
+Dimension ||--}o Comment : "comments"
+Dimension ||--}o Comment : "siteOrSponsorComments"
 Method ||--}o FormalExpression : "formalExpressions"
 Method ||--|o DocumentReference : "document"
 Method ||--}o Coding : "coding"
-Method ||--}o Comment : "comment"
+Method ||--}o Comment : "comments"
+Method ||--}o Comment : "siteOrSponsorComments"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--}o WhereClause : "whereClause"
+Item ||--}o WhereClause : "whereClauses"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
 Item ||--|o CodeList : "roleCodeList"
 Item ||--|o Condition : "collectionExceptionCondition"
 Item ||--}o Coding : "coding"
-Item ||--}o Comment : "comment"
+Item ||--}o Comment : "comments"
+Item ||--}o Comment : "siteOrSponsorComments"
 DataStructureDefinition ||--}o Dimension : "dimensions"
 DataStructureDefinition ||--}o Measure : "measures"
 DataStructureDefinition ||--}o DataAttribute : "attributes"
 DataStructureDefinition ||--|o ComponentList : "grouping"
 DataStructureDefinition ||--}o Item : "items"
 DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
+DataStructureDefinition ||--}o WhereClause : "whereClauses"
 DataStructureDefinition ||--}o Coding : "security"
 DataStructureDefinition ||--|o Timing : "validityPeriod"
 DataStructureDefinition ||--}o Coding : "coding"
-DataStructureDefinition ||--}o Comment : "comment"
+DataStructureDefinition ||--}o Comment : "comments"
+DataStructureDefinition ||--}o Comment : "siteOrSponsorComments"
 Timing ||--|o NominalOccurrence : "relativeTo"
 Timing ||--|o NominalOccurrence : "relativeFrom"
 Timing ||--|o Method : "imputation"
 Timing ||--}o Coding : "coding"
+WhereClause ||--}o Condition : "conditions"
+WhereClause ||--}o Coding : "coding"
 ReifiedConcept ||--}o ConceptProperty : "properties"
 ReifiedConcept ||--}o Coding : "coding"
-ReifiedConcept ||--}o Comment : "comment"
+ReifiedConcept ||--}o Comment : "comments"
+ReifiedConcept ||--}o Comment : "siteOrSponsorComments"
 ComponentList ||--}o Coding : "coding"
 DataAttribute ||--|| Item : "item"
 DataAttribute ||--|o Method : "missingHandling"
 DataAttribute ||--|o Method : "imputation"
 DataAttribute ||--}o Coding : "coding"
-DataAttribute ||--}o Comment : "comment"
+DataAttribute ||--}o Comment : "comments"
+DataAttribute ||--}o Comment : "siteOrSponsorComments"
 Measure ||--|| Item : "item"
 Measure ||--|o Method : "missingHandling"
 Measure ||--|o Method : "imputation"
 Measure ||--}o Coding : "coding"
-Measure ||--}o Comment : "comment"
+Measure ||--}o Comment : "comments"
+Measure ||--}o Comment : "siteOrSponsorComments"
 
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
@@ -387,13 +405,13 @@ Measure ||--}o Comment : "comment"
 <tr>
 <td><a href="../../slots/href/">href</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Machine-readable instructions to obtain the resource e</td>
+<td>Machine-readable instructions to obtain the resource e.g. FHIR path, URL</td>
 <td><a href="../Versioned/">Versioned</a></td>
 </tr>
 <tr>
 <td><a href="../../slots/OID/">OID</a></td>
 <td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>Local identifier within this study/context</td>
+<td>Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.</td>
 <td><a href="../Identifiable/">Identifiable</a></td>
 </tr>
 <tr>
@@ -439,7 +457,13 @@ Measure ||--}o Comment : "comment"
 <td><a href="../Governed/">Governed</a></td>
 </tr>
 <tr>
-<td><a href="../../slots/comment/">comment</a></td>
+<td><a href="../../slots/comments/">comments</a></td>
+<td>* <br/> <a href="../Comment/">Comment</a></td>
+<td>Comment on the element, such as a rationale for its inclusion or exclusion</td>
+<td><a href="../Governed/">Governed</a></td>
+</tr>
+<tr>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>* <br/> <a href="../Comment/">Comment</a></td>
 <td>Comment on the element, such as a rationale for its inclusion or exclusion</td>
 <td><a href="../Governed/">Governed</a></td>
@@ -465,7 +489,7 @@ Measure ||--}o Comment : "comment"
 <tr>
 <td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../Item/">Item</a> or <br/><a href="../ItemGroup/">ItemGroup</a> or <br/><a href="../MetaDataVersion/">MetaDataVersion</a> or <br/><a href="../CodeList/">CodeList</a> or <br/><a href="../ReifiedConcept/">ReifiedConcept</a> or <br/><a href="../ConceptProperty/">ConceptProperty</a> or <br/><a href="../Condition/">Condition</a> or <br/><a href="../Method/">Method</a> or <br/><a href="../NominalOccurrence/">NominalOccurrence</a> or <br/><a href="./">Dataflow</a> or <br/><a href="../CubeComponent/">CubeComponent</a> or <br/><a href="../DataProduct/">DataProduct</a> or <br/><a href="../ProvisionAgreement/">ProvisionAgreement</a></td>
-<td>Reference to another item that this item implements or extends, e</td>
+<td>Reference to another item that this item implements or extends, e.g. a template Item definition.</td>
 <td><a href="../Governed/">Governed</a></td>
 </tr>
 </tbody>
@@ -537,6 +561,12 @@ Measure ||--}o Comment : "comment"
 </tr>
 <tr>
 <td><a href="../Method/">Method</a></td>
+<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
+<td>any_of[range]</td>
+<td><a href="./">Dataflow</a></td>
+</tr>
+<tr>
+<td><a href="../SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
 <td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
 <td>any_of[range]</td>
 <td><a href="./">Dataflow</a></td>
@@ -860,19 +890,32 @@ Measure ||--}o Comment : "comment"
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">boolean</span>
-<span class="w">  </span><span class="nt">comment</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">comment</span>
+<span class="w">  </span><span class="nt">comments</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">comments</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Comment on the element, such as a rationale for its inclusion or</span>
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">exclusion</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">comment</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">comments</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Dataflow</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Standard</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Comment</span>
 <span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">siteOrSponsorComments</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">siteOrSponsorComments</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Comment on the element, such as a rationale for its inclusion or</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">exclusion</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">siteOrSponsorComments</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Dataflow</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Comment</span>
+<span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">  </span><span class="nt">purpose</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">purpose</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Purpose or rationale for this data element</span>

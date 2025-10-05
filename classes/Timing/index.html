@@ -209,7 +209,8 @@ Timing ||--}o Coding : "coding"
 Method ||--}o FormalExpression : "formalExpressions"
 Method ||--|o DocumentReference : "document"
 Method ||--}o Coding : "coding"
-Method ||--}o Comment : "comment"
+Method ||--}o Comment : "comments"
+Method ||--}o Comment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 DocumentReference ||--}o Coding : "coding"
@@ -220,12 +221,14 @@ FormalExpression ||--}o Coding : "coding"
 NominalOccurrence ||--|| Timing : "timing"
 NominalOccurrence ||--}o Condition : "condition"
 NominalOccurrence ||--}o Coding : "coding"
-NominalOccurrence ||--}o Comment : "comment"
+NominalOccurrence ||--}o Comment : "comments"
+NominalOccurrence ||--}o Comment : "siteOrSponsorComments"
 Condition ||--}o RangeCheck : "rangeChecks"
 Condition ||--}o FormalExpression : "formalExpression"
 Condition ||--}o Condition : "conditions"
 Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comment"
+Condition ||--}o Comment : "comments"
+Condition ||--}o Comment : "siteOrSponsorComments"
 
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
@@ -249,31 +252,31 @@ Condition ||--}o Comment : "comment"
 <tr>
 <td><a href="../../slots/type/">type</a></td>
 <td>1 <br/> <a href="../../enums/TimingType/">TimingType</a></td>
-<td>The type of timing: Fixed, Before (Relative), or After (Relative)</td>
+<td>The type of timing: Fixed, Before (Relative), or After (Relative).</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/isNominal/">isNominal</a></td>
 <td>0..1 <br/> <a href="../../types/Boolean/">Boolean</a></td>
-<td>Indicates whether the timing is nominal (event-based) or not</td>
+<td>Indicates whether the timing is nominal (event-based) or not.</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/value/">value</a></td>
 <td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>The value of the timing, which can be a date/time, duration, or event referen...</td>
+<td>The value of the timing, which can be a date/time, duration, or event reference.</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/relativeTo/">relativeTo</a></td>
 <td>0..1 <br/> <a href="../NominalOccurrence/">NominalOccurrence</a></td>
-<td>Reference to the event or occurrence that this timing is relative to</td>
+<td>Reference to the event or occurrence that this timing is relative to.</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/relativeFrom/">relativeFrom</a></td>
 <td>0..1 <br/> <a href="../NominalOccurrence/">NominalOccurrence</a></td>
-<td>Reference to the event or occurrence that this timing is relative to</td>
+<td>Reference to the event or occurrence that this timing is relative to.</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -291,25 +294,25 @@ Condition ||--}o Comment : "comment"
 <tr>
 <td><a href="../../slots/recalled/">recalled</a></td>
 <td>0..1 <br/> <a href="../../types/Boolean/">Boolean</a></td>
-<td>Indicates whether the timing is recalled or not (recalled timings are less re...</td>
+<td>Indicates whether the timing is recalled or not (recalled timings are less reliable).</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/frequency/">frequency</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Frequency</td>
+<td>Frequency. Use dose frequency terminology e.g. "BID" if applicable.</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/imputation/">imputation</a></td>
 <td>0..1 <br/> <a href="../Method/">Method</a></td>
-<td>The imputation method used for the Timing</td>
+<td>The imputation method used for the Timing.</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/OID/">OID</a></td>
 <td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>Local identifier within this study/context</td>
+<td>Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.</td>
 <td><a href="../Identifiable/">Identifiable</a></td>
 </tr>
 <tr>

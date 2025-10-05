@@ -251,31 +251,31 @@ Dataset ||--}o Coding : "coding"
 <tr>
 <td><a href="../../slots/protocol/">protocol</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Protocol used by the service (e</td>
+<td>Protocol used by the service (e.g., HTTPS, FTP)</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/securitySchemaType/">securitySchemaType</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Security or authentication method used (e</td>
+<td>Security or authentication method used (e.g., OAuth2)</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/resourceType/">resourceType</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Type of resource (e</td>
+<td>Type of resource (e.g.,  "ODM", "HL7-FHIR", "HL7-CDA", "HL7-v2", "OpenEHR-extract")</td>
 <td><a href="../Resource/">Resource</a></td>
 </tr>
 <tr>
 <td><a href="../../slots/attribute/">attribute</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Field provided by the Name attribute where the data or information can be obt...</td>
+<td>Field provided by the Name attribute where the data or information can be obtained. Examples are "valueQuantity.value" or "valueQuantity.unit".</td>
 <td><a href="../Resource/">Resource</a></td>
 </tr>
 <tr>
 <td><a href="../../slots/selection/">selection</a></td>
 <td>* <br/> <a href="../FormalExpression/">FormalExpression</a></td>
-<td>Machine-executable instructions for selecting data from the resource</td>
+<td>Machine-executable instructions for selecting data from the resource.</td>
 <td><a href="../Resource/">Resource</a></td>
 </tr>
 <tr>
@@ -287,13 +287,13 @@ Dataset ||--}o Coding : "coding"
 <tr>
 <td><a href="../../slots/href/">href</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Machine-readable instructions to obtain the resource e</td>
+<td>Machine-readable instructions to obtain the resource e.g. FHIR path, URL</td>
 <td><a href="../Versioned/">Versioned</a></td>
 </tr>
 <tr>
 <td><a href="../../slots/OID/">OID</a></td>
 <td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>Local identifier within this study/context</td>
+<td>Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.</td>
 <td><a href="../Identifiable/">Identifiable</a></td>
 </tr>
 <tr>

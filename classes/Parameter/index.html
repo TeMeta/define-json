@@ -167,13 +167,15 @@ Parameter ||--}o ConceptProperty : "conceptProperty"
 Parameter ||--}o Coding : "coding"
 ConceptProperty ||--|o CodeList : "codeList"
 ConceptProperty ||--}o Coding : "coding"
-ConceptProperty ||--}o Comment : "comment"
+ConceptProperty ||--}o Comment : "comments"
+ConceptProperty ||--}o Comment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
 CodeList ||--}o Coding : "coding"
-CodeList ||--}o Comment : "comment"
+CodeList ||--}o Comment : "comments"
+CodeList ||--}o Comment : "siteOrSponsorComments"
 
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
@@ -197,37 +199,37 @@ CodeList ||--}o Comment : "comment"
 <tr>
 <td><a href="../../slots/dataType/">dataType</a></td>
 <td>0..1 <br/> <a href="../../enums/DataType/">DataType</a></td>
-<td>The data type of the parameter</td>
+<td>The data type of the parameter.</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/codeList/">codeList</a></td>
 <td>* <br/> <a href="../CodeList/">CodeList</a></td>
-<td>A list of allowed values for the parameter</td>
+<td>A list of allowed values for the parameter.</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/value/">value</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>A specific value for the parameter</td>
+<td>A specific value for the parameter.</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/items/">items</a></td>
 <td>* <br/> <a href="../../types/String/">String</a> or <br/><a href="../Item/">Item</a> or <br/><a href="../Dimension/">Dimension</a> or <br/><a href="../Measure/">Measure</a> or <br/><a href="../DataAttribute/">DataAttribute</a></td>
-<td>A list of item dependencies for the parameter</td>
+<td>A list of item dependencies for the parameter.</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/conceptProperty/">conceptProperty</a></td>
 <td>* <br/> <a href="../ConceptProperty/">ConceptProperty</a></td>
-<td>Reference to a specific concept property that this parameter represents or mo...</td>
+<td>Reference to a specific concept property that this parameter represents or modifies.</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/OID/">OID</a></td>
 <td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>Local identifier within this study/context</td>
+<td>Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.</td>
 <td><a href="../Identifiable/">Identifiable</a></td>
 </tr>
 <tr>

@@ -106,22 +106,22 @@
 <tr>
 <td>EXPRESSION</td>
 <td>None</td>
-<td>Evaluate condition using expression</td>
+<td>Evaluate condition using expression. Default if expression is present.</td>
 </tr>
 <tr>
 <td>AND</td>
 <td>None</td>
-<td>All child conditions must be true (all_of)</td>
+<td>All child conditions must be true (all_of). Default if expression is not present.</td>
 </tr>
 <tr>
 <td>OR</td>
 <td>None</td>
-<td>At least one child condition must be true (any_of)</td>
+<td>At least one child condition must be true (any_of).</td>
 </tr>
 <tr>
 <td>NOT</td>
 <td>None</td>
-<td>Negates the child condition(s) (not_any_of)</td>
+<td>Negates the child condition(s) (not_any_of).</td>
 </tr>
 </tbody>
 </table>
@@ -136,7 +136,7 @@
 <tbody>
 <tr>
 <td><a href="../../slots/operator/">operator</a></td>
-<td>Logical operator for combining child conditions or range checks</td>
+<td>Logical operator for combining child conditions or range checks. Defaults to ALL if not specified.</td>
 </tr>
 </tbody>
 </table>

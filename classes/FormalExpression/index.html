@@ -198,11 +198,13 @@ Parameter ||--}o ConceptProperty : "conceptProperty"
 Parameter ||--}o Coding : "coding"
 ConceptProperty ||--|o CodeList : "codeList"
 ConceptProperty ||--}o Coding : "coding"
-ConceptProperty ||--}o Comment : "comment"
+ConceptProperty ||--}o Comment : "comments"
+ConceptProperty ||--}o Comment : "siteOrSponsorComments"
 CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
 CodeList ||--}o Coding : "coding"
-CodeList ||--}o Comment : "comment"
+CodeList ||--}o Comment : "comments"
+CodeList ||--}o Comment : "siteOrSponsorComments"
 
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
@@ -226,13 +228,13 @@ CodeList ||--}o Comment : "comment"
 <tr>
 <td><a href="../../slots/context/">context</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>The specific context within the containing element to which this formal expre...</td>
+<td>The specific context within the containing element to which this formal expression applies.</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/expression/">expression</a></td>
 <td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>The actual text of the formal expression (renamed from 'code' for disambiguat...</td>
+<td>The actual text of the formal expression (renamed from 'code' for disambiguation).</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -262,7 +264,7 @@ CodeList ||--}o Comment : "comment"
 <tr>
 <td><a href="../../slots/OID/">OID</a></td>
 <td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>Local identifier within this study/context</td>
+<td>Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.</td>
 <td><a href="../Identifiable/">Identifiable</a></td>
 </tr>
 <tr>

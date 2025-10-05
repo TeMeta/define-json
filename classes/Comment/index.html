@@ -159,7 +159,7 @@ DocumentReference ||--}o Coding : "coding"
 <tr>
 <td><a href="../../slots/text/">text</a></td>
 <td>1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>The comment text</td>
+<td>The comment text.</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -171,7 +171,7 @@ DocumentReference ||--}o Coding : "coding"
 <tr>
 <td><a href="../../slots/OID/">OID</a></td>
 <td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>Local identifier within this study/context</td>
+<td>Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.</td>
 <td><a href="../Identifiable/">Identifiable</a></td>
 </tr>
 <tr>
@@ -225,121 +225,241 @@ DocumentReference ||--}o Coding : "coding"
 <tbody>
 <tr>
 <td><a href="../GovernedElement/">GovernedElement</a></td>
-<td><a href="../../slots/comment/">comment</a></td>
+<td><a href="../../slots/comments/">comments</a></td>
+<td>range</td>
+<td><a href="./">Comment</a></td>
+</tr>
+<tr>
+<td><a href="../GovernedElement/">GovernedElement</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
 <td><a href="../Governed/">Governed</a></td>
-<td><a href="../../slots/comment/">comment</a></td>
+<td><a href="../../slots/comments/">comments</a></td>
+<td>range</td>
+<td><a href="./">Comment</a></td>
+</tr>
+<tr>
+<td><a href="../Governed/">Governed</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
 <td><a href="../MetaDataVersion/">MetaDataVersion</a></td>
-<td><a href="../../slots/comment/">comment</a></td>
+<td><a href="../../slots/comments/">comments</a></td>
+<td>range</td>
+<td><a href="./">Comment</a></td>
+</tr>
+<tr>
+<td><a href="../MetaDataVersion/">MetaDataVersion</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
 <td><a href="../Item/">Item</a></td>
-<td><a href="../../slots/comment/">comment</a></td>
+<td><a href="../../slots/comments/">comments</a></td>
+<td>range</td>
+<td><a href="./">Comment</a></td>
+</tr>
+<tr>
+<td><a href="../Item/">Item</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
 <td><a href="../ItemGroup/">ItemGroup</a></td>
-<td><a href="../../slots/comment/">comment</a></td>
+<td><a href="../../slots/comments/">comments</a></td>
+<td>range</td>
+<td><a href="./">Comment</a></td>
+</tr>
+<tr>
+<td><a href="../ItemGroup/">ItemGroup</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
 <td><a href="../CodeList/">CodeList</a></td>
-<td><a href="../../slots/comment/">comment</a></td>
+<td><a href="../../slots/comments/">comments</a></td>
+<td>range</td>
+<td><a href="./">Comment</a></td>
+</tr>
+<tr>
+<td><a href="../CodeList/">CodeList</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
 <td><a href="../ReifiedConcept/">ReifiedConcept</a></td>
-<td><a href="../../slots/comment/">comment</a></td>
+<td><a href="../../slots/comments/">comments</a></td>
+<td>range</td>
+<td><a href="./">Comment</a></td>
+</tr>
+<tr>
+<td><a href="../ReifiedConcept/">ReifiedConcept</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
 <td><a href="../ConceptProperty/">ConceptProperty</a></td>
-<td><a href="../../slots/comment/">comment</a></td>
+<td><a href="../../slots/comments/">comments</a></td>
+<td>range</td>
+<td><a href="./">Comment</a></td>
+</tr>
+<tr>
+<td><a href="../ConceptProperty/">ConceptProperty</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
 <td><a href="../Condition/">Condition</a></td>
-<td><a href="../../slots/comment/">comment</a></td>
+<td><a href="../../slots/comments/">comments</a></td>
+<td>range</td>
+<td><a href="./">Comment</a></td>
+</tr>
+<tr>
+<td><a href="../Condition/">Condition</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
 <td><a href="../Method/">Method</a></td>
-<td><a href="../../slots/comment/">comment</a></td>
+<td><a href="../../slots/comments/">comments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
-<td><a href="../Standard/">Standard</a></td>
-<td><a href="../../slots/comment/">comment</a></td>
+<td><a href="../Method/">Method</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
+<td>range</td>
+<td><a href="./">Comment</a></td>
+</tr>
+<tr>
+<td><a href="../SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
+<td><a href="../../slots/comments/">comments</a></td>
+<td>range</td>
+<td><a href="./">Comment</a></td>
+</tr>
+<tr>
+<td><a href="../SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
 <td><a href="../NominalOccurrence/">NominalOccurrence</a></td>
-<td><a href="../../slots/comment/">comment</a></td>
+<td><a href="../../slots/comments/">comments</a></td>
+<td>range</td>
+<td><a href="./">Comment</a></td>
+</tr>
+<tr>
+<td><a href="../NominalOccurrence/">NominalOccurrence</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
 <td><a href="../DataStructureDefinition/">DataStructureDefinition</a></td>
-<td><a href="../../slots/comment/">comment</a></td>
+<td><a href="../../slots/comments/">comments</a></td>
+<td>range</td>
+<td><a href="./">Comment</a></td>
+</tr>
+<tr>
+<td><a href="../DataStructureDefinition/">DataStructureDefinition</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
 <td><a href="../Dataflow/">Dataflow</a></td>
-<td><a href="../../slots/comment/">comment</a></td>
+<td><a href="../../slots/comments/">comments</a></td>
+<td>range</td>
+<td><a href="./">Comment</a></td>
+</tr>
+<tr>
+<td><a href="../Dataflow/">Dataflow</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
 <td><a href="../CubeComponent/">CubeComponent</a></td>
-<td><a href="../../slots/comment/">comment</a></td>
+<td><a href="../../slots/comments/">comments</a></td>
+<td>range</td>
+<td><a href="./">Comment</a></td>
+</tr>
+<tr>
+<td><a href="../CubeComponent/">CubeComponent</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
 <td><a href="../Measure/">Measure</a></td>
-<td><a href="../../slots/comment/">comment</a></td>
+<td><a href="../../slots/comments/">comments</a></td>
+<td>range</td>
+<td><a href="./">Comment</a></td>
+</tr>
+<tr>
+<td><a href="../Measure/">Measure</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
 <td><a href="../Dimension/">Dimension</a></td>
-<td><a href="../../slots/comment/">comment</a></td>
+<td><a href="../../slots/comments/">comments</a></td>
+<td>range</td>
+<td><a href="./">Comment</a></td>
+</tr>
+<tr>
+<td><a href="../Dimension/">Dimension</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
 <td><a href="../DataAttribute/">DataAttribute</a></td>
-<td><a href="../../slots/comment/">comment</a></td>
+<td><a href="../../slots/comments/">comments</a></td>
+<td>range</td>
+<td><a href="./">Comment</a></td>
+</tr>
+<tr>
+<td><a href="../DataAttribute/">DataAttribute</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
 <td><a href="../DataProduct/">DataProduct</a></td>
-<td><a href="../../slots/comment/">comment</a></td>
+<td><a href="../../slots/comments/">comments</a></td>
+<td>range</td>
+<td><a href="./">Comment</a></td>
+</tr>
+<tr>
+<td><a href="../DataProduct/">DataProduct</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
 <td><a href="../ProvisionAgreement/">ProvisionAgreement</a></td>
-<td><a href="../../slots/comment/">comment</a></td>
+<td><a href="../../slots/comments/">comments</a></td>
+<td>range</td>
+<td><a href="./">Comment</a></td>
+</tr>
+<tr>
+<td><a href="../ProvisionAgreement/">ProvisionAgreement</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>

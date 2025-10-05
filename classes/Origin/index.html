@@ -160,13 +160,14 @@ SourceItem ||--}o Coding : "coding"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--}o WhereClause : "whereClause"
+Item ||--}o WhereClause : "whereClauses"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
 Item ||--|o CodeList : "roleCodeList"
 Item ||--|o Condition : "collectionExceptionCondition"
 Item ||--}o Coding : "coding"
-Item ||--}o Comment : "comment"
+Item ||--}o Comment : "comments"
+Item ||--}o Comment : "siteOrSponsorComments"
 
 </code></pre>
 <!-- no inheritance hierarchy -->
@@ -184,13 +185,13 @@ Item ||--}o Comment : "comment"
 <tr>
 <td><a href="../../slots/type/">type</a></td>
 <td>0..1 <br/> <a href="../../enums/OriginType/">OriginType</a></td>
-<td>The type of origin: CRF, Derived, Protocol, eDT, Predecessor</td>
+<td>The type of origin: CRF, Derived, Protocol, eDT, Predecessor.</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/source/">source</a></td>
 <td>0..1 <br/> <a href="../../enums/OriginSource/">OriginSource</a></td>
-<td>The source of the data, such as Investigator, Sponsor, Subject, or Vendor</td>
+<td>The source of the data, such as Investigator, Sponsor, Subject, or Vendor.</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -202,7 +203,7 @@ Item ||--}o Comment : "comment"
 <tr>
 <td><a href="../../slots/document/">document</a></td>
 <td>0..1 <br/> <a href="../DocumentReference/">DocumentReference</a></td>
-<td>Reference to a document that describes this origin in detail</td>
+<td>Reference to a document that describes this origin in detail.</td>
 <td>direct</td>
 </tr>
 </tbody>

@@ -274,13 +274,14 @@ Method {
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--}o WhereClause : "whereClause"
+Item ||--}o WhereClause : "whereClauses"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
 Item ||--|o CodeList : "roleCodeList"
 Item ||--|o Condition : "collectionExceptionCondition"
 Item ||--}o Coding : "coding"
-Item ||--}o Comment : "comment"
+Item ||--}o Comment : "comments"
+Item ||--}o Comment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 DocumentReference ||--}o Coding : "coding"
@@ -288,7 +289,8 @@ Condition ||--}o RangeCheck : "rangeChecks"
 Condition ||--}o FormalExpression : "formalExpression"
 Condition ||--}o Condition : "conditions"
 Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comment"
+Condition ||--}o Comment : "comments"
+Condition ||--}o Comment : "siteOrSponsorComments"
 FormalExpression ||--}o Parameter : "parameters"
 FormalExpression ||--|o ReturnValue : "returnValue"
 FormalExpression ||--}o Resource : "externalCodeLibs"
@@ -297,13 +299,15 @@ RangeCheck ||--}o FormalExpression : "formalExpression"
 CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
 CodeList ||--}o Coding : "coding"
-CodeList ||--}o Comment : "comment"
+CodeList ||--}o Comment : "comments"
+CodeList ||--}o Comment : "siteOrSponsorComments"
 Resource ||--}o FormalExpression : "selection"
 Resource ||--}o Coding : "coding"
 CodeListItem ||--|o Coding : "coding"
 ConceptProperty ||--|o CodeList : "codeList"
 ConceptProperty ||--}o Coding : "coding"
-ConceptProperty ||--}o Comment : "comment"
+ConceptProperty ||--}o Comment : "comments"
+ConceptProperty ||--}o Comment : "siteOrSponsorComments"
 Origin ||--}o SourceItem : "sourceItems"
 Origin ||--|o DocumentReference : "document"
 SourceItem ||--|o Item : "item"
@@ -314,7 +318,8 @@ WhereClause ||--}o Coding : "coding"
 Method ||--}o FormalExpression : "formalExpressions"
 Method ||--|o DocumentReference : "document"
 Method ||--}o Coding : "coding"
-Method ||--}o Comment : "comment"
+Method ||--}o Comment : "comments"
+Method ||--}o Comment : "siteOrSponsorComments"
 
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
@@ -338,55 +343,55 @@ Method ||--}o Comment : "comment"
 <tr>
 <td><a href="../../slots/dataType/">dataType</a></td>
 <td>1 <br/> <a href="../../enums/DataType/">DataType</a></td>
-<td>The data type of the item</td>
+<td>The data type of the item.</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/length/">length</a></td>
 <td>0..1 <br/> <a href="../../types/Integer/">Integer</a></td>
-<td>The maximum length of the data item in characters</td>
+<td>The maximum length of the data item in characters.</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/codeList/">codeList</a></td>
 <td>0..1 <br/> <a href="../CodeList/">CodeList</a></td>
-<td>Reference to the CodeList that constrains the item values</td>
+<td>Reference to the CodeList that constrains the item values.</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/method/">method</a></td>
 <td>0..1 <br/> <a href="../Method/">Method</a></td>
-<td>Reference to the Method element that describes how to derive this item's valu...</td>
+<td>Reference to the Method element that describes how to derive this item's value.</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/rangeChecks/">rangeChecks</a></td>
 <td>* <br/> <a href="../RangeCheck/">RangeCheck</a></td>
-<td>Range checks applied to this item (e</td>
+<td>Range checks applied to this item (e.g. edit checks, CORE rules)</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../../slots/whereClause/">whereClause</a></td>
+<td><a href="../../slots/whereClauses/">whereClauses</a></td>
 <td>* <br/> <a href="../WhereClause/">WhereClause</a></td>
-<td>References to different situations that define when this item applies</td>
+<td>References to different situations that define when this item applies.<br/>Multiple whereClauses are combined with OR logic: the item applies if ANY referenced WhereClause matches.<br/>Within each WhereClause, conditions are combined with AND logic: all conditions must be true.<br/><br/>Example: whereClause: ["WC.SYSBP", "WC.DIABP"] means the item applies when<br/>(all conditions in WC.SYSBP are true) OR (all conditions in WC.DIABP are true).</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/origin/">origin</a></td>
-<td>0..1 <br/> <a href="../Origin/">Origin</a></td>
+<td>0..1 <br> <a href="../Origin/">Origin</a></br></td>
 <td>The origin of the data</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/conceptProperty/">conceptProperty</a></td>
-<td>0..1 <br/> <a href="../ConceptProperty/">ConceptProperty</a></td>
-<td>Reference to a abstract concept property that this item is a specialization /...</td>
+<td>0..1 <br> <a href="../ConceptProperty/">ConceptProperty</a></br></td>
+<td>Reference to a abstract concept property that this item is a specialization / instance of.</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/role/">role</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>Identifies the role of the item within the containing context, taken from the...</td>
+<td>0..1 <br> <a href="../../types/String/">String</a> or <br><a href="../../types/String/">String</a> or <br><a href="../TranslatedText/">TranslatedText</a></br></br></br></td>
+<td>Identifies the role of the item within the containing context, taken from the roleCodeList</td>
 <td><a href="../IsODMItem/">IsODMItem</a></td>
 </tr>
 <tr>
@@ -404,7 +409,7 @@ Method ||--}o Comment : "comment"
 <tr>
 <td><a href="../../slots/crfCompletionInstructions/">crfCompletionInstructions</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>CRFCompletionInstructions reference: Instructions for the clinical site on ho...</td>
+<td>CRFCompletionInstructions reference: Instructions for the clinical site on how to enter collected information on the CRF</td>
 <td><a href="../IsODMItem/">IsODMItem</a></td>
 </tr>
 <tr>
@@ -416,7 +421,7 @@ Method ||--}o Comment : "comment"
 <tr>
 <td><a href="../../slots/implementationNotes/">implementationNotes</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>ImplementationNotes reference: Further information, such as rationale and imp...</td>
+<td>ImplementationNotes reference: Further information, such as rationale and implementation instructions, on how to implement the CRF data collection fields</td>
 <td><a href="../IsODMItem/">IsODMItem</a></td>
 </tr>
 <tr>
@@ -428,7 +433,7 @@ Method ||--}o Comment : "comment"
 <tr>
 <td><a href="../../slots/preSpecifiedValue/">preSpecifiedValue</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>Prefill value or a default value for a field that is automatically populated</td>
+<td>Prefill value or a default value for a field that is automatically populated.</td>
 <td><a href="../IsODMItem/">IsODMItem</a></td>
 </tr>
 <tr>
@@ -452,7 +457,7 @@ Method ||--}o Comment : "comment"
 <tr>
 <td><a href="../../slots/OID/">OID</a></td>
 <td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>Local identifier within this study/context</td>
+<td>Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.</td>
 <td><a href="../Identifiable/">Identifiable</a></td>
 </tr>
 <tr>
@@ -498,7 +503,13 @@ Method ||--}o Comment : "comment"
 <td><a href="../Governed/">Governed</a></td>
 </tr>
 <tr>
-<td><a href="../../slots/comment/">comment</a></td>
+<td><a href="../../slots/comments/">comments</a></td>
+<td>* <br/> <a href="../Comment/">Comment</a></td>
+<td>Comment on the element, such as a rationale for its inclusion or exclusion</td>
+<td><a href="../Governed/">Governed</a></td>
+</tr>
+<tr>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>* <br/> <a href="../Comment/">Comment</a></td>
 <td>Comment on the element, such as a rationale for its inclusion or exclusion</td>
 <td><a href="../Governed/">Governed</a></td>
@@ -524,7 +535,7 @@ Method ||--}o Comment : "comment"
 <tr>
 <td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="./">Item</a> or <br/><a href="../ItemGroup/">ItemGroup</a> or <br/><a href="../MetaDataVersion/">MetaDataVersion</a> or <br/><a href="../CodeList/">CodeList</a> or <br/><a href="../ReifiedConcept/">ReifiedConcept</a> or <br/><a href="../ConceptProperty/">ConceptProperty</a> or <br/><a href="../Condition/">Condition</a> or <br/><a href="../Method/">Method</a> or <br/><a href="../NominalOccurrence/">NominalOccurrence</a> or <br/><a href="../Dataflow/">Dataflow</a> or <br/><a href="../CubeComponent/">CubeComponent</a> or <br/><a href="../DataProduct/">DataProduct</a> or <br/><a href="../ProvisionAgreement/">ProvisionAgreement</a></td>
-<td>Reference to another item that this item implements or extends, e</td>
+<td>Reference to another item that this item implements or extends, e.g. a template Item definition.</td>
 <td><a href="../Governed/">Governed</a></td>
 </tr>
 </tbody>
@@ -627,6 +638,12 @@ Method ||--}o Comment : "comment"
 <tr>
 <td><a href="../Parameter/">Parameter</a></td>
 <td><a href="../../slots/items/">items</a></td>
+<td>any_of[range]</td>
+<td><a href="./">Item</a></td>
+</tr>
+<tr>
+<td><a href="../SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
+<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
 <td>any_of[range]</td>
 <td><a href="./">Item</a></td>
 </tr>
@@ -848,8 +865,8 @@ Method ||--}o Comment : "comment"
 <span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">whereClause</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">whereClause</span>
+<span class="w">  </span><span class="nt">whereClauses</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">whereClauses</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'References</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">different</span><span class="nv"> </span><span class="s">situations</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">define</span><span class="nv"> </span><span class="s">when</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">applies.</span>
 
 <span class="w">      </span><span class="s">Multiple</span><span class="nv"> </span><span class="s">whereClauses</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">combined</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">OR</span><span class="nv"> </span><span class="s">logic:</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">applies</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">ANY</span><span class="nv"> </span><span class="s">referenced</span>
@@ -867,8 +884,8 @@ Method ||--}o Comment : "comment"
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">close_mappings</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fhir:StructureDefinition/context</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MetaDataVersion</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Item</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WhereClause</span>
@@ -993,8 +1010,8 @@ Method ||--}o Comment : "comment"
 <span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">whereClause</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">whereClause</span>
+<span class="w">  </span><span class="nt">whereClauses</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">whereClauses</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'References</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">different</span><span class="nv"> </span><span class="s">situations</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">define</span><span class="nv"> </span><span class="s">when</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">applies.</span>
 
 <span class="w">      </span><span class="s">Multiple</span><span class="nv"> </span><span class="s">whereClauses</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">combined</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">OR</span><span class="nv"> </span><span class="s">logic:</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">applies</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">ANY</span><span class="nv"> </span><span class="s">referenced</span>
@@ -1012,10 +1029,10 @@ Method ||--}o Comment : "comment"
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">close_mappings</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fhir:StructureDefinition/context</span>
-<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">whereClause</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">whereClauses</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Item</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MetaDataVersion</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Item</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WhereClause</span>
@@ -1284,19 +1301,32 @@ Method ||--}o Comment : "comment"
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">boolean</span>
-<span class="w">  </span><span class="nt">comment</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">comment</span>
+<span class="w">  </span><span class="nt">comments</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">comments</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Comment on the element, such as a rationale for its inclusion or</span>
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">exclusion</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">comment</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">comments</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Item</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Standard</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Comment</span>
 <span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">siteOrSponsorComments</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">siteOrSponsorComments</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Comment on the element, such as a rationale for its inclusion or</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">exclusion</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">siteOrSponsorComments</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Item</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Comment</span>
+<span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">  </span><span class="nt">purpose</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">purpose</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Purpose or rationale for this data element</span>

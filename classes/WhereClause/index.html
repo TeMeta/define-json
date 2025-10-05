@@ -166,7 +166,8 @@ Condition ||--}o RangeCheck : "rangeChecks"
 Condition ||--}o FormalExpression : "formalExpression"
 Condition ||--}o Condition : "conditions"
 Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comment"
+Condition ||--}o Comment : "comments"
+Condition ||--}o Comment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 FormalExpression ||--}o Parameter : "parameters"
@@ -203,7 +204,7 @@ RangeCheck ||--}o FormalExpression : "formalExpression"
 <tr>
 <td><a href="../../slots/OID/">OID</a></td>
 <td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>Local identifier within this study/context</td>
+<td>Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.</td>
 <td><a href="../Identifiable/">Identifiable</a></td>
 </tr>
 <tr>
@@ -263,7 +264,19 @@ RangeCheck ||--}o FormalExpression : "formalExpression"
 </tr>
 <tr>
 <td><a href="../Item/">Item</a></td>
-<td><a href="../../slots/whereClause/">whereClause</a></td>
+<td><a href="../../slots/whereClauses/">whereClauses</a></td>
+<td>range</td>
+<td><a href="./">WhereClause</a></td>
+</tr>
+<tr>
+<td><a href="../ItemGroup/">ItemGroup</a></td>
+<td><a href="../../slots/whereClauses/">whereClauses</a></td>
+<td>range</td>
+<td><a href="./">WhereClause</a></td>
+</tr>
+<tr>
+<td><a href="../DataStructureDefinition/">DataStructureDefinition</a></td>
+<td><a href="../../slots/whereClauses/">whereClauses</a></td>
 <td>range</td>
 <td><a href="./">WhereClause</a></td>
 </tr>

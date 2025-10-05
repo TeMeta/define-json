@@ -199,7 +199,8 @@ Condition ||--}o RangeCheck : "rangeChecks"
 Condition ||--}o FormalExpression : "formalExpression"
 Condition ||--}o Condition : "conditions"
 Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comment"
+Condition ||--}o Comment : "comments"
+Condition ||--}o Comment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 FormalExpression ||--}o Parameter : "parameters"
@@ -210,7 +211,8 @@ RangeCheck ||--}o FormalExpression : "formalExpression"
 CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
 CodeList ||--}o Coding : "coding"
-CodeList ||--}o Comment : "comment"
+CodeList ||--}o Comment : "comments"
+CodeList ||--}o Comment : "siteOrSponsorComments"
 Resource ||--}o FormalExpression : "selection"
 Resource ||--}o Coding : "coding"
 CodeListItem ||--|o Coding : "coding"
@@ -231,7 +233,7 @@ CodeListItem ||--|o Coding : "coding"
 <tr>
 <td><a href="../../slots/role/">role</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>Identifies the role of the item within the containing context, taken from the...</td>
+<td>Identifies the role of the item within the containing context, taken from the roleCodeList</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -249,7 +251,7 @@ CodeListItem ||--|o Coding : "coding"
 <tr>
 <td><a href="../../slots/crfCompletionInstructions/">crfCompletionInstructions</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>CRFCompletionInstructions reference: Instructions for the clinical site on ho...</td>
+<td>CRFCompletionInstructions reference: Instructions for the clinical site on how to enter collected information on the CRF</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -261,7 +263,7 @@ CodeListItem ||--|o Coding : "coding"
 <tr>
 <td><a href="../../slots/implementationNotes/">implementationNotes</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>ImplementationNotes reference: Further information, such as rationale and imp...</td>
+<td>ImplementationNotes reference: Further information, such as rationale and implementation instructions, on how to implement the CRF data collection fields</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -273,7 +275,7 @@ CodeListItem ||--|o Coding : "coding"
 <tr>
 <td><a href="../../slots/preSpecifiedValue/">preSpecifiedValue</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>Prefill value or a default value for a field that is automatically populated</td>
+<td>Prefill value or a default value for a field that is automatically populated.</td>
 <td>direct</td>
 </tr>
 </tbody>
@@ -289,7 +291,7 @@ CodeListItem ||--|o Coding : "coding"
 <tbody>
 <tr>
 <td><a href="../Item/">Item</a></td>
-<td>A data element that represents a specific piece of information within a defin...</td>
+<td>A data element that represents a specific piece of information within a defined context, with data type, constraints, and derivation methods</td>
 </tr>
 </tbody>
 </table>

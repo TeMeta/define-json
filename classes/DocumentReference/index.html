@@ -178,13 +178,13 @@ DocumentReference ||--}o Coding : "coding"
 <tr>
 <td><a href="../../slots/href/">href</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Machine-readable instructions to obtain the resource e</td>
+<td>Machine-readable instructions to obtain the resource e.g. FHIR path, URL</td>
 <td><a href="../Versioned/">Versioned</a></td>
 </tr>
 <tr>
 <td><a href="../../slots/OID/">OID</a></td>
 <td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>Local identifier within this study/context</td>
+<td>Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.</td>
 <td><a href="../Identifiable/">Identifiable</a></td>
 </tr>
 <tr>
@@ -244,7 +244,7 @@ DocumentReference ||--}o Coding : "coding"
 </tr>
 <tr>
 <td><a href="../MetaDataVersion/">MetaDataVersion</a></td>
-<td><a href="../../slots/annotatedCRF/">annotatedCRF</a></td>
+<td><a href="../../slots/annotatedCRFs/">annotatedCRFs</a></td>
 <td>range</td>
 <td><a href="./">DocumentReference</a></td>
 </tr>

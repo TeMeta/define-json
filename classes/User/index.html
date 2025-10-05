@@ -160,31 +160,31 @@ Organization ||--}o Coding : "coding"
 <tr>
 <td><a href="../../slots/userType/">userType</a></td>
 <td>0..1 <br/> <a href="../../enums/UserType/">UserType</a></td>
-<td>User's role in the study</td>
+<td>User's role in the study.</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/userName/">userName</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>The username of the user</td>
+<td>The username of the user.</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/fullName/">fullName</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>The full name of the user</td>
+<td>The full name of the user.</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/organization/">organization</a></td>
 <td>0..1 <br/> <a href="../Organization/">Organization</a></td>
-<td>The organization the user belongs to</td>
+<td>The organization the user belongs to.</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../../slots/OID/">OID</a></td>
 <td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>Local identifier within this study/context</td>
+<td>Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.</td>
 <td><a href="../Identifiable/">Identifiable</a></td>
 </tr>
 <tr>
@@ -311,6 +311,12 @@ Organization ||--}o Coding : "coding"
 <tr>
 <td><a href="../SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
 <td><a href="../../slots/source/">source</a></td>
+<td>any_of[range]</td>
+<td><a href="./">User</a></td>
+</tr>
+<tr>
+<td><a href="../SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
+<td><a href="../../slots/owner/">owner</a></td>
 <td>any_of[range]</td>
 <td><a href="./">User</a></td>
 </tr>
