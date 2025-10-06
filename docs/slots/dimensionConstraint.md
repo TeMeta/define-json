@@ -17,7 +17,7 @@ Alias: dimensionConstraint
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Dataflow](../classes/Dataflow.md) | An abstract representation that defines data provision for different referenc... |  no  |
+| [Dataflow](../classes/Dataflow.md) | An abstract representation that defines data provision for different reference periods, where a Distribution and its Dataset are instances |  no  |
 
 
 

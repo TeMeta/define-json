@@ -106,7 +106,7 @@ URI: [LinkingPhraseEnum](../enums/LinkingPhraseEnum.md)
 
 | Name | Description |
 | ---  | --- |
-| [linkingPhrase](../slots/linkingPhrase.md) | Variable relationship descriptive linking phrase |
+| [linkingPhrase](../slots/linkingPhrase.md) | Variable relationship descriptive linking phrase. |
 
 
 

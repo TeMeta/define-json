@@ -38,6 +38,11 @@ Comment {
     string description  
     string label  
     stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
 }
 Coding {
     string code  
@@ -165,9 +170,12 @@ ProvisionAgreement ||--|o DataProvider : "provider"
 ProvisionAgreement ||--|o Dataflow : "dataFlow"
 ProvisionAgreement ||--|o Resource : "source"
 ProvisionAgreement ||--}o Coding : "coding"
-ProvisionAgreement ||--}o Comment : "comment"
+ProvisionAgreement ||--}o Comment : "comments"
+ProvisionAgreement ||--}o Comment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
+Comment ||--}o Comment : "comments"
+Comment ||--}o Comment : "siteOrSponsorComments"
 DocumentReference ||--}o Coding : "coding"
 Resource ||--}o FormalExpression : "selection"
 Resource ||--}o Coding : "coding"
@@ -178,23 +186,26 @@ FormalExpression ||--}o Coding : "coding"
 Dataflow ||--|| DataStructureDefinition : "structure"
 Dataflow ||--}o Dimension : "dimensionConstraint"
 Dataflow ||--}o Coding : "coding"
-Dataflow ||--}o Comment : "comment"
+Dataflow ||--}o Comment : "comments"
+Dataflow ||--}o Comment : "siteOrSponsorComments"
 Dimension ||--|| Item : "item"
 Dimension ||--|o Method : "missingHandling"
 Dimension ||--|o Method : "imputation"
 Dimension ||--}o Coding : "coding"
-Dimension ||--}o Comment : "comment"
+Dimension ||--}o Comment : "comments"
+Dimension ||--}o Comment : "siteOrSponsorComments"
 DataStructureDefinition ||--}o Dimension : "dimensions"
 DataStructureDefinition ||--}o Measure : "measures"
 DataStructureDefinition ||--}o DataAttribute : "attributes"
 DataStructureDefinition ||--|o ComponentList : "grouping"
 DataStructureDefinition ||--}o Item : "items"
 DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
-DataStructureDefinition ||--|o WhereClause : "whereClause"
+DataStructureDefinition ||--}o WhereClause : "applicableWhen"
 DataStructureDefinition ||--}o Coding : "security"
 DataStructureDefinition ||--|o Timing : "validityPeriod"
 DataStructureDefinition ||--}o Coding : "coding"
-DataStructureDefinition ||--}o Comment : "comment"
+DataStructureDefinition ||--}o Comment : "comments"
+DataStructureDefinition ||--}o Comment : "siteOrSponsorComments"
 DataProvider ||--}o Dataflow : "providesDataFor"
 DataProvider ||--}o ProvisionAgreement : "provisionAgreements"
 DataProvider ||--}o Resource : "source"
@@ -222,8 +233,8 @@ Organization ||--}o Coding : "coding"
 | [dataFlow](../slots/dataFlow.md) | 0..1 <br/> [Dataflow](../classes/Dataflow.md) | The Dataflow that is covered by this agreement | direct |
 | [source](../slots/source.md) | 0..1 <br/> [Resource](../classes/Resource.md) | The source of the data provided under this agreement | direct |
 | [version](../slots/version.md) | 0..1 <br/> [String](../types/String.md) | The version of the external resources | [Versioned](../classes/Versioned.md) |
-| [href](../slots/href.md) | 0..1 <br/> [String](../types/String.md) | Machine-readable instructions to obtain the resource e | [Versioned](../classes/Versioned.md) |
-| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context | [Identifiable](../classes/Identifiable.md) |
+| [href](../slots/href.md) | 0..1 <br/> [String](../types/String.md) | Machine-readable instructions to obtain the resource e.g. FHIR path, URL | [Versioned](../classes/Versioned.md) |
+| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
 | [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
 | [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
 | [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Detailed description, shown in tooltips | [Labelled](../classes/Labelled.md) |
@@ -231,11 +242,12 @@ Organization ||--}o Coding : "coding"
 | [label](../slots/label.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Human-readable label, shown in UIs | [Labelled](../classes/Labelled.md) |
 | [aliases](../slots/aliases.md) | * <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Alternative name or identifier | [Labelled](../classes/Labelled.md) |
 | [mandatory](../slots/mandatory.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Is this element required? | [Governed](../classes/Governed.md) |
-| [comment](../slots/comment.md) | * <br/> [Comment](../classes/Comment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
+| [comments](../slots/comments.md) | * <br/> [Comment](../classes/Comment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
+| [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | * <br/> [Comment](../classes/Comment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
 | [purpose](../slots/purpose.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Purpose or rationale for this data element | [Governed](../classes/Governed.md) |
-| [lastUpdated](../slots/lastUpdated.md) | 0..1 <br/> [Datetime](../types/Datetime.md) | When the resource was last updated | [Governed](../classes/Governed.md) |
+| [lastUpdated](../slots/lastUpdated.md) | 1 <br/> [Datetime](../types/Datetime.md) | When the resource was last updated | [Governed](../classes/Governed.md) |
 | [owner](../slots/owner.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Party responsible for this element | [Governed](../classes/Governed.md) |
-| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[MetaDataVersion](../classes/MetaDataVersion.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[ReifiedConcept](../classes/ReifiedConcept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[Condition](../classes/Condition.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[NominalOccurrence](../classes/NominalOccurrence.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e | [Governed](../classes/Governed.md) |
+| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[MetaDataVersion](../classes/MetaDataVersion.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[ReifiedConcept](../classes/ReifiedConcept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[Condition](../classes/Condition.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[NominalOccurrence](../classes/NominalOccurrence.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
 
 
 
@@ -251,10 +263,13 @@ Organization ||--}o Coding : "coding"
 | [Item](../classes/Item.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ProvisionAgreement](../classes/ProvisionAgreement.md) |
 | [ItemGroup](../classes/ItemGroup.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ProvisionAgreement](../classes/ProvisionAgreement.md) |
 | [CodeList](../classes/CodeList.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ProvisionAgreement](../classes/ProvisionAgreement.md) |
+| [Comment](../classes/Comment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ProvisionAgreement](../classes/ProvisionAgreement.md) |
 | [ReifiedConcept](../classes/ReifiedConcept.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ProvisionAgreement](../classes/ProvisionAgreement.md) |
 | [ConceptProperty](../classes/ConceptProperty.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ProvisionAgreement](../classes/ProvisionAgreement.md) |
+| [WhereClause](../classes/WhereClause.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ProvisionAgreement](../classes/ProvisionAgreement.md) |
 | [Condition](../classes/Condition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ProvisionAgreement](../classes/ProvisionAgreement.md) |
 | [Method](../classes/Method.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ProvisionAgreement](../classes/ProvisionAgreement.md) |
+| [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ProvisionAgreement](../classes/ProvisionAgreement.md) |
 | [NominalOccurrence](../classes/NominalOccurrence.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ProvisionAgreement](../classes/ProvisionAgreement.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ProvisionAgreement](../classes/ProvisionAgreement.md) |
 | [Dataflow](../classes/Dataflow.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ProvisionAgreement](../classes/ProvisionAgreement.md) |
@@ -526,19 +541,32 @@ attributes:
     domain_of:
     - Governed
     range: boolean
-  comment:
-    name: comment
+  comments:
+    name: comments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
     from_schema: https://cdisc.org/define-json
     rank: 1000
-    alias: comment
+    alias: comments
     owner: ProvisionAgreement
     domain_of:
     - Governed
-    - Standard
     range: Comment
     multivalued: true
+    inlined: false
+  siteOrSponsorComments:
+    name: siteOrSponsorComments
+    description: Comment on the element, such as a rationale for its inclusion or
+      exclusion
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    alias: siteOrSponsorComments
+    owner: ProvisionAgreement
+    domain_of:
+    - Governed
+    range: Comment
+    multivalued: true
+    inlined: false
   purpose:
     name: purpose
     description: Purpose or rationale for this data element
@@ -562,6 +590,7 @@ attributes:
     domain_of:
     - Governed
     range: datetime
+    required: true
   owner:
     name: owner
     description: Party responsible for this element

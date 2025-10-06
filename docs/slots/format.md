@@ -22,7 +22,7 @@ Alias: format
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Distribution](../classes/Distribution.md) | A technical representation that provides a specific format or access method f... |  no  |
+| [Distribution](../classes/Distribution.md) | A technical representation that provides a specific format or access method for a dataset |  no  |
 
 
 

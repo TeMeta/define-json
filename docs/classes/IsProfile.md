@@ -78,14 +78,16 @@ Timing ||--|o NominalOccurrence : "relativeTo"
 Timing ||--|o NominalOccurrence : "relativeFrom"
 Timing ||--|o Method : "imputation"
 Timing ||--}o Coding : "coding"
-Method ||--}o FormalExpression : "formalExpressions"
+Method ||--}o FormalExpression : "expressions"
 Method ||--|o DocumentReference : "document"
 Method ||--}o Coding : "coding"
-Method ||--}o Comment : "comment"
+Method ||--}o Comment : "comments"
+Method ||--}o Comment : "siteOrSponsorComments"
 NominalOccurrence ||--|| Timing : "timing"
 NominalOccurrence ||--}o Condition : "condition"
 NominalOccurrence ||--}o Coding : "coding"
-NominalOccurrence ||--}o Comment : "comment"
+NominalOccurrence ||--}o Comment : "comments"
+NominalOccurrence ||--}o Comment : "siteOrSponsorComments"
 
 ```
 
@@ -106,7 +108,7 @@ NominalOccurrence ||--}o Comment : "comment"
 | [authenticator](../slots/authenticator.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Who/what authenticated the resource | direct |
 | [validityPeriod](../slots/validityPeriod.md) | 0..1 <br/> [Timing](../classes/Timing.md) | Time period during which the resouce is valid | direct |
 | [version](../slots/version.md) | 0..1 <br/> [String](../types/String.md) | The version of the external resources | [Versioned](../classes/Versioned.md) |
-| [href](../slots/href.md) | 0..1 <br/> [String](../types/String.md) | Machine-readable instructions to obtain the resource e | [Versioned](../classes/Versioned.md) |
+| [href](../slots/href.md) | 0..1 <br/> [String](../types/String.md) | Machine-readable instructions to obtain the resource e.g. FHIR path, URL | [Versioned](../classes/Versioned.md) |
 
 
 
@@ -114,8 +116,8 @@ NominalOccurrence ||--}o Comment : "comment"
 
 | mixed into | description |
 | --- | --- |
-| [ItemGroup](../classes/ItemGroup.md) | A collection element that groups related items or subgroups within a specific... |
-| [Dataset](../classes/Dataset.md) | A collection element that groups observations sharing the same dimensionality... |
+| [ItemGroup](../classes/ItemGroup.md) | A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections |
+| [Dataset](../classes/Dataset.md) | A collection element that groups observations sharing the same dimensionality, expressed as a set of unique dimensions within a Data Product context |
 
 
 

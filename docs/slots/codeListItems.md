@@ -22,7 +22,7 @@ Alias: codeListItems
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [CodeList](../classes/CodeList.md) | A value set that defines a discrete collection of permissible values for an i... |  no  |
+| [CodeList](../classes/CodeList.md) | A value set that defines a discrete collection of permissible values for an item, corresponding to the ODM CodeList construct |  no  |
 
 
 

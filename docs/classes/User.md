@@ -66,11 +66,11 @@ Organization ||--}o Coding : "coding"
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [userType](../slots/userType.md) | 0..1 <br/> [UserType](../enums/UserType.md) | User's role in the study | direct |
-| [userName](../slots/userName.md) | 0..1 <br/> [String](../types/String.md) | The username of the user | direct |
-| [fullName](../slots/fullName.md) | 0..1 <br/> [String](../types/String.md) | The full name of the user | direct |
-| [organization](../slots/organization.md) | 0..1 <br/> [Organization](../classes/Organization.md) | The organization the user belongs to | direct |
-| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context | [Identifiable](../classes/Identifiable.md) |
+| [userType](../slots/userType.md) | 0..1 <br/> [UserType](../enums/UserType.md) | User's role in the study. | direct |
+| [userName](../slots/userName.md) | 0..1 <br/> [String](../types/String.md) | The username of the user. | direct |
+| [fullName](../slots/fullName.md) | 0..1 <br/> [String](../types/String.md) | The full name of the user. | direct |
+| [organization](../slots/organization.md) | 0..1 <br/> [Organization](../classes/Organization.md) | The organization the user belongs to. | direct |
+| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
 | [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
 | [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
 | [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Detailed description, shown in tooltips | [Labelled](../classes/Labelled.md) |
@@ -94,11 +94,14 @@ Organization ||--}o Coding : "coding"
 | [ItemGroup](../classes/ItemGroup.md) | [authenticator](../slots/authenticator.md) | any_of[range] | [User](../classes/User.md) |
 | [ItemGroup](../classes/ItemGroup.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 | [CodeList](../classes/CodeList.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
+| [Comment](../classes/Comment.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 | [ReifiedConcept](../classes/ReifiedConcept.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 | [ConceptProperty](../classes/ConceptProperty.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
+| [WhereClause](../classes/WhereClause.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 | [Condition](../classes/Condition.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 | [Method](../classes/Method.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [source](../slots/source.md) | any_of[range] | [User](../classes/User.md) |
+| [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 | [NominalOccurrence](../classes/NominalOccurrence.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [authenticator](../slots/authenticator.md) | any_of[range] | [User](../classes/User.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |

@@ -13,11 +13,11 @@ URI: [OriginType](../enums/OriginType.md)
 
 | Value | Meaning | Description |
 | --- | --- | --- |
-| CRF | None | Case Report Form |
-| Derived | None | Derived from other items |
-| Protocol | None | Protocol-defined data |
-| eDT | None | Electronic data transfer |
-| Predecessor | None | From a predecessor study |
+| CRF | None | Case Report Form. |
+| Derived | None | Derived from other items. |
+| Protocol | None | Protocol-defined data. |
+| eDT | None | Electronic data transfer. |
+| Predecessor | None | From a predecessor study. |
 
 
 

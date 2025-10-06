@@ -22,7 +22,7 @@ Alias: protocol
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [DataService](../classes/DataService.md) | A service element that provides an API or endpoint for serving or receiving d... |  no  |
+| [DataService](../classes/DataService.md) | A service element that provides an API or endpoint for serving or receiving data |  no  |
 
 
 

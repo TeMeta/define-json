@@ -22,7 +22,7 @@ Alias: documents
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Comment](../classes/Comment.md) | A descriptive element that contains explanatory text provided by a data or me... |  no  |
+| [Comment](../classes/Comment.md) | A descriptive element that contains explanatory text provided by a data or metadata handler |  no  |
 
 
 

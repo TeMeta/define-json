@@ -20,6 +20,7 @@ RangeCheck {
     stringList checkValues  
     string item  
     SoftHard softHard  
+    LogicalOperator operator  
 }
 FormalExpression {
     string context  
@@ -64,6 +65,9 @@ ReturnValue {
 Parameter {
     DataType dataType  
     string value  
+    string defaultValue  
+    stringList items  
+    boolean required  
     string OID  
     string uuid  
     string name  
@@ -72,7 +76,7 @@ Parameter {
     stringList aliases  
 }
 
-RangeCheck ||--}o FormalExpression : "formalExpression"
+RangeCheck ||--}o FormalExpression : "expressions"
 FormalExpression ||--}o Parameter : "parameters"
 FormalExpression ||--|o ReturnValue : "returnValue"
 FormalExpression ||--}o Resource : "externalCodeLibs"
@@ -81,8 +85,9 @@ Resource ||--}o FormalExpression : "selection"
 Resource ||--}o Coding : "coding"
 ReturnValue ||--}o Coding : "coding"
 Parameter ||--}o CodeList : "codeList"
-Parameter ||--}o Item : "items"
 Parameter ||--}o ConceptProperty : "conceptProperty"
+Parameter ||--}o WhereClause : "applicableWhen"
+Parameter ||--}o Condition : "conditions"
 Parameter ||--}o Coding : "coding"
 
 ```
@@ -98,9 +103,10 @@ Parameter ||--}o Coding : "coding"
 | ---  | --- | --- | --- |
 | [comparator](../slots/comparator.md) | 0..1 <br/> [Comparator](../enums/Comparator.md) | The type of comparison to be performed | direct |
 | [checkValues](../slots/checkValues.md) | * <br/> [String](../types/String.md) | Values to compare against | direct |
-| [item](../slots/item.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[Dimension](../classes/Dimension.md)&nbsp;or&nbsp;<br />[Measure](../classes/Measure.md)&nbsp;or&nbsp;<br />[DataAttribute](../classes/DataAttribute.md) | Reference to the Item element whose value is being checked | direct |
-| [softHard](../slots/softHard.md) | 0..1 <br/> [SoftHard](../enums/SoftHard.md) | Indicates whether a validation check is an error ("Hard") or a warning ("Soft... | direct |
-| [formalExpression](../slots/formalExpression.md) | * <br/> [FormalExpression](../classes/FormalExpression.md) | A formal expression for complex checks | direct |
+| [item](../slots/item.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[Dimension](../classes/Dimension.md)&nbsp;or&nbsp;<br />[Measure](../classes/Measure.md)&nbsp;or&nbsp;<br />[DataAttribute](../classes/DataAttribute.md) | Reference to the Item element whose value is being checked. If not specified, check applies to the enclosing context | direct |
+| [softHard](../slots/softHard.md) | 0..1 <br/> [SoftHard](../enums/SoftHard.md) | Indicates whether a validation check is an error ("Hard") or a warning ("Soft") | direct |
+| [expressions](../slots/expressions.md) | * <br/> [FormalExpression](../classes/FormalExpression.md) | A formal expression for complex checks | direct |
+| [operator](../slots/operator.md) | 0..1 <br/> [LogicalOperator](../enums/LogicalOperator.md) | Logical operator for combining child conditions or range checks. Defaults to ALL if not specified. | direct |
 
 
 
@@ -208,17 +214,28 @@ attributes:
     domain_of:
     - RangeCheck
     range: SoftHard
-  formalExpression:
-    name: formalExpression
+  expressions:
+    name: expressions
     description: A formal expression for complex checks
     from_schema: https://cdisc.org/define-json
     domain_of:
     - Condition
     - RangeCheck
+    - Method
     range: FormalExpression
     multivalued: true
     inlined: true
     inlined_as_list: true
+  operator:
+    name: operator
+    description: Logical operator for combining child conditions or range checks.
+      Defaults to ALL if not specified.
+    from_schema: https://cdisc.org/define-json
+    domain_of:
+    - Condition
+    - RangeCheck
+    range: LogicalOperator
+    required: false
 
 ```
 </details>
@@ -287,19 +304,32 @@ attributes:
     domain_of:
     - RangeCheck
     range: SoftHard
-  formalExpression:
-    name: formalExpression
+  expressions:
+    name: expressions
     description: A formal expression for complex checks
     from_schema: https://cdisc.org/define-json
-    alias: formalExpression
+    alias: expressions
     owner: RangeCheck
     domain_of:
     - Condition
     - RangeCheck
+    - Method
     range: FormalExpression
     multivalued: true
     inlined: true
     inlined_as_list: true
+  operator:
+    name: operator
+    description: Logical operator for combining child conditions or range checks.
+      Defaults to ALL if not specified.
+    from_schema: https://cdisc.org/define-json
+    alias: operator
+    owner: RangeCheck
+    domain_of:
+    - Condition
+    - RangeCheck
+    range: LogicalOperator
+    required: false
 
 ```
 </details>

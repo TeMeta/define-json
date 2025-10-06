@@ -22,7 +22,7 @@ Alias: pages
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [DocumentReference](../classes/DocumentReference.md) | A comprehensive reference element that points to an external document, combin... |  no  |
+| [DocumentReference](../classes/DocumentReference.md) | A comprehensive reference element that points to an external document, combining elements from ODM and FHIR |  no  |
 
 
 

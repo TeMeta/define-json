@@ -22,7 +22,7 @@ Alias: minOccurs
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ConceptProperty](../classes/ConceptProperty.md) | A reified property concept that exists within the context of its containing t... |  no  |
+| [ConceptProperty](../classes/ConceptProperty.md) | A reified property concept that exists within the context of its containing topic concept |  no  |
 
 
 

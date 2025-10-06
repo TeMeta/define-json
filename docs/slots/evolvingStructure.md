@@ -17,7 +17,7 @@ Alias: evolvingStructure
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [DataStructureDefinition](../classes/DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysi... |  no  |
+| [DataStructureDefinition](../classes/DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures |  no  |
 
 
 

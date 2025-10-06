@@ -3,7 +3,7 @@
 # Class: Condition 
 
 
-_A reusable logical construct that combines multiple components using AND logic_
+_A reusable, composable, and nestable logical construct allowing for complex expressions. Conditions are most useful when given a meaningful name and linked to Study Definitions._
 
 
 
@@ -17,6 +17,7 @@ URI: [odm:class/Condition](https://cdisc.org/odm2/class/Condition)
 erDiagram
 Condition {
     string implementsCondition  
+    LogicalOperator operator  
     string OID  
     string uuid  
     string name  
@@ -37,6 +38,11 @@ Comment {
     string description  
     string label  
     stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
 }
 Coding {
     string code  
@@ -95,6 +101,9 @@ ReturnValue {
 Parameter {
     DataType dataType  
     string value  
+    string defaultValue  
+    stringList items  
+    boolean required  
     string OID  
     string uuid  
     string name  
@@ -107,14 +116,19 @@ RangeCheck {
     stringList checkValues  
     string item  
     SoftHard softHard  
+    LogicalOperator operator  
 }
 
 Condition ||--}o RangeCheck : "rangeChecks"
-Condition ||--}o FormalExpression : "formalExpression"
+Condition ||--}o FormalExpression : "expressions"
+Condition ||--}o Condition : "conditions"
 Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comment"
+Condition ||--}o Comment : "comments"
+Condition ||--}o Comment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
+Comment ||--}o Comment : "comments"
+Comment ||--}o Comment : "siteOrSponsorComments"
 DocumentReference ||--}o Coding : "coding"
 FormalExpression ||--}o Parameter : "parameters"
 FormalExpression ||--|o ReturnValue : "returnValue"
@@ -124,10 +138,11 @@ Resource ||--}o FormalExpression : "selection"
 Resource ||--}o Coding : "coding"
 ReturnValue ||--}o Coding : "coding"
 Parameter ||--}o CodeList : "codeList"
-Parameter ||--}o Item : "items"
 Parameter ||--}o ConceptProperty : "conceptProperty"
+Parameter ||--}o WhereClause : "applicableWhen"
+Parameter ||--}o Condition : "conditions"
 Parameter ||--}o Coding : "coding"
-RangeCheck ||--}o FormalExpression : "formalExpression"
+RangeCheck ||--}o FormalExpression : "expressions"
 
 ```
 
@@ -144,10 +159,12 @@ RangeCheck ||--}o FormalExpression : "formalExpression"
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [rangeChecks](../slots/rangeChecks.md) | * <br/> [RangeCheck](../classes/RangeCheck.md) | Range checks that compose this condition (combined with AND) | direct |
-| [implementsCondition](../slots/implementsCondition.md) | 0..1 <br/> [String](../types/String.md) | Reference to a external (e | direct |
-| [formalExpression](../slots/formalExpression.md) | * <br/> [FormalExpression](../classes/FormalExpression.md) | A formal expression for complex checks | direct |
-| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context | [Identifiable](../classes/Identifiable.md) |
+| [rangeChecks](../slots/rangeChecks.md) | * <br/> [RangeCheck](../classes/RangeCheck.md) | Range checks that compose this condition | direct |
+| [implementsCondition](../slots/implementsCondition.md) | 0..1 <br/> [String](../types/String.md) | Reference to a external (e.g. USDM) condition definition that this implements | direct |
+| [expressions](../slots/expressions.md) | * <br/> [FormalExpression](../classes/FormalExpression.md) | Logical expression, resolving to a boolean, that implements this condition in a specific context | direct |
+| [operator](../slots/operator.md) | 0..1 <br/> [LogicalOperator](../enums/LogicalOperator.md) | Logical operator for combining child conditions or range checks. Defaults to ALL if not specified. | direct |
+| [conditions](../slots/conditions.md) | * <br/> [Condition](../classes/Condition.md) | Child conditions to combine using the operator. Multiple conditions are composed according to the operator (AND/OR/NOT). Rearrange and nest to compose XOR, or combinations of AND and OR. Unless the operator is EXPRESSION, in which case the formalExpression is used instead. Use OID references to reuse conditions defined elsewhere. | direct |
+| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
 | [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
 | [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
 | [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Detailed description, shown in tooltips | [Labelled](../classes/Labelled.md) |
@@ -155,11 +172,12 @@ RangeCheck ||--}o FormalExpression : "formalExpression"
 | [label](../slots/label.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Human-readable label, shown in UIs | [Labelled](../classes/Labelled.md) |
 | [aliases](../slots/aliases.md) | * <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Alternative name or identifier | [Labelled](../classes/Labelled.md) |
 | [mandatory](../slots/mandatory.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Is this element required? | [Governed](../classes/Governed.md) |
-| [comment](../slots/comment.md) | * <br/> [Comment](../classes/Comment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
+| [comments](../slots/comments.md) | * <br/> [Comment](../classes/Comment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
+| [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | * <br/> [Comment](../classes/Comment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
 | [purpose](../slots/purpose.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Purpose or rationale for this data element | [Governed](../classes/Governed.md) |
-| [lastUpdated](../slots/lastUpdated.md) | 0..1 <br/> [Datetime](../types/Datetime.md) | When the resource was last updated | [Governed](../classes/Governed.md) |
+| [lastUpdated](../slots/lastUpdated.md) | 1 <br/> [Datetime](../types/Datetime.md) | When the resource was last updated | [Governed](../classes/Governed.md) |
 | [owner](../slots/owner.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Party responsible for this element | [Governed](../classes/Governed.md) |
-| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[MetaDataVersion](../classes/MetaDataVersion.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[ReifiedConcept](../classes/ReifiedConcept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[Condition](../classes/Condition.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[NominalOccurrence](../classes/NominalOccurrence.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e | [Governed](../classes/Governed.md) |
+| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[MetaDataVersion](../classes/MetaDataVersion.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[ReifiedConcept](../classes/ReifiedConcept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[Condition](../classes/Condition.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[NominalOccurrence](../classes/NominalOccurrence.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
 
 
 
@@ -178,11 +196,16 @@ RangeCheck ||--}o FormalExpression : "formalExpression"
 | [Item](../classes/Item.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Condition](../classes/Condition.md) |
 | [ItemGroup](../classes/ItemGroup.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Condition](../classes/Condition.md) |
 | [CodeList](../classes/CodeList.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Condition](../classes/Condition.md) |
+| [Comment](../classes/Comment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Condition](../classes/Condition.md) |
 | [ReifiedConcept](../classes/ReifiedConcept.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Condition](../classes/Condition.md) |
 | [ConceptProperty](../classes/ConceptProperty.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Condition](../classes/Condition.md) |
 | [WhereClause](../classes/WhereClause.md) | [conditions](../slots/conditions.md) | range | [Condition](../classes/Condition.md) |
+| [WhereClause](../classes/WhereClause.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Condition](../classes/Condition.md) |
+| [Condition](../classes/Condition.md) | [conditions](../slots/conditions.md) | range | [Condition](../classes/Condition.md) |
 | [Condition](../classes/Condition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Condition](../classes/Condition.md) |
 | [Method](../classes/Method.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Condition](../classes/Condition.md) |
+| [Parameter](../classes/Parameter.md) | [conditions](../slots/conditions.md) | range | [Condition](../classes/Condition.md) |
+| [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Condition](../classes/Condition.md) |
 | [NominalOccurrence](../classes/NominalOccurrence.md) | [condition](../slots/condition.md) | range | [Condition](../classes/Condition.md) |
 | [NominalOccurrence](../classes/NominalOccurrence.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Condition](../classes/Condition.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Condition](../classes/Condition.md) |
@@ -239,8 +262,9 @@ RangeCheck ||--}o FormalExpression : "formalExpression"
 <details>
 ```yaml
 name: Condition
-description: A reusable logical construct that combines multiple components using
-  AND logic
+description: A reusable, composable, and nestable logical construct allowing for complex
+  expressions. Conditions are most useful when given a meaningful name and linked
+  to Study Definitions.
 from_schema: https://cdisc.org/define-json
 close_mappings:
 - odm:ConditionDef
@@ -255,7 +279,7 @@ is_a: GovernedElement
 attributes:
   rangeChecks:
     name: rangeChecks
-    description: Range checks that compose this condition (combined with AND)
+    description: Range checks that compose this condition
     from_schema: https://cdisc.org/define-json
     domain_of:
     - Item
@@ -272,18 +296,47 @@ attributes:
     rank: 1000
     domain_of:
     - Condition
-  formalExpression:
-    name: formalExpression
-    description: A formal expression for complex checks
+  expressions:
+    name: expressions
+    description: Logical expression, resolving to a boolean, that implements this
+      condition in a specific context
     from_schema: https://cdisc.org/define-json
     rank: 1000
     domain_of:
     - Condition
     - RangeCheck
+    - Method
     range: FormalExpression
     multivalued: true
     inlined: true
     inlined_as_list: true
+  operator:
+    name: operator
+    description: Logical operator for combining child conditions or range checks.
+      Defaults to ALL if not specified.
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    domain_of:
+    - Condition
+    - RangeCheck
+    range: LogicalOperator
+    required: false
+  conditions:
+    name: conditions
+    description: Child conditions to combine using the operator. Multiple conditions
+      are composed according to the operator (AND/OR/NOT). Rearrange and nest to compose
+      XOR, or combinations of AND and OR. Unless the operator is EXPRESSION, in which
+      case the formalExpression is used instead. Use OID references to reuse conditions
+      defined elsewhere.
+    from_schema: https://cdisc.org/define-json
+    domain_of:
+    - MetaDataVersion
+    - WhereClause
+    - Condition
+    - Parameter
+    range: Condition
+    multivalued: true
+    inlined: false
 
 ```
 </details>
@@ -293,8 +346,9 @@ attributes:
 <details>
 ```yaml
 name: Condition
-description: A reusable logical construct that combines multiple components using
-  AND logic
+description: A reusable, composable, and nestable logical construct allowing for complex
+  expressions. Conditions are most useful when given a meaningful name and linked
+  to Study Definitions.
 from_schema: https://cdisc.org/define-json
 close_mappings:
 - odm:ConditionDef
@@ -309,7 +363,7 @@ is_a: GovernedElement
 attributes:
   rangeChecks:
     name: rangeChecks
-    description: Range checks that compose this condition (combined with AND)
+    description: Range checks that compose this condition
     from_schema: https://cdisc.org/define-json
     alias: rangeChecks
     owner: Condition
@@ -330,20 +384,53 @@ attributes:
     owner: Condition
     domain_of:
     - Condition
-  formalExpression:
-    name: formalExpression
-    description: A formal expression for complex checks
+  expressions:
+    name: expressions
+    description: Logical expression, resolving to a boolean, that implements this
+      condition in a specific context
     from_schema: https://cdisc.org/define-json
     rank: 1000
-    alias: formalExpression
+    alias: expressions
     owner: Condition
     domain_of:
     - Condition
     - RangeCheck
+    - Method
     range: FormalExpression
     multivalued: true
     inlined: true
     inlined_as_list: true
+  operator:
+    name: operator
+    description: Logical operator for combining child conditions or range checks.
+      Defaults to ALL if not specified.
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    alias: operator
+    owner: Condition
+    domain_of:
+    - Condition
+    - RangeCheck
+    range: LogicalOperator
+    required: false
+  conditions:
+    name: conditions
+    description: Child conditions to combine using the operator. Multiple conditions
+      are composed according to the operator (AND/OR/NOT). Rearrange and nest to compose
+      XOR, or combinations of AND and OR. Unless the operator is EXPRESSION, in which
+      case the formalExpression is used instead. Use OID references to reuse conditions
+      defined elsewhere.
+    from_schema: https://cdisc.org/define-json
+    alias: conditions
+    owner: Condition
+    domain_of:
+    - MetaDataVersion
+    - WhereClause
+    - Condition
+    - Parameter
+    range: Condition
+    multivalued: true
+    inlined: false
   OID:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
@@ -452,19 +539,32 @@ attributes:
     domain_of:
     - Governed
     range: boolean
-  comment:
-    name: comment
+  comments:
+    name: comments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
     from_schema: https://cdisc.org/define-json
     rank: 1000
-    alias: comment
+    alias: comments
     owner: Condition
     domain_of:
     - Governed
-    - Standard
     range: Comment
     multivalued: true
+    inlined: false
+  siteOrSponsorComments:
+    name: siteOrSponsorComments
+    description: Comment on the element, such as a rationale for its inclusion or
+      exclusion
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    alias: siteOrSponsorComments
+    owner: Condition
+    domain_of:
+    - Governed
+    range: Comment
+    multivalued: true
+    inlined: false
   purpose:
     name: purpose
     description: Purpose or rationale for this data element
@@ -488,6 +588,7 @@ attributes:
     domain_of:
     - Governed
     range: datetime
+    required: true
   owner:
     name: owner
     description: Party responsible for this element

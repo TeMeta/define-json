@@ -22,7 +22,7 @@ Alias: organization
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [User](../classes/User.md) | An entity that represents information about a specific user of a clinical dat... |  no  |
+| [User](../classes/User.md) | An entity that represents information about a specific user of a clinical data collection or data management system |  no  |
 
 
 

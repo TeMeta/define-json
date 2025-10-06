@@ -71,9 +71,15 @@ Comment {
     string description  
     string label  
     stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
 }
 Condition {
     string implementsCondition  
+    LogicalOperator operator  
     string OID  
     string uuid  
     string name  
@@ -129,12 +135,18 @@ WhereClause {
     string description  
     string label  
     stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
 }
 RangeCheck {
     Comparator comparator  
     stringList checkValues  
     string item  
     SoftHard softHard  
+    LogicalOperator operator  
 }
 Method {
     MethodType type  
@@ -158,35 +170,45 @@ DocumentReference ||--}o Coding : "coding"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--|o WhereClause : "whereClause"
+Item ||--}o WhereClause : "applicableWhen"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
 Item ||--|o CodeList : "roleCodeList"
 Item ||--|o Condition : "collectionExceptionCondition"
 Item ||--}o Coding : "coding"
-Item ||--}o Comment : "comment"
+Item ||--}o Comment : "comments"
+Item ||--}o Comment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
+Comment ||--}o Comment : "comments"
+Comment ||--}o Comment : "siteOrSponsorComments"
 Condition ||--}o RangeCheck : "rangeChecks"
-Condition ||--}o FormalExpression : "formalExpression"
+Condition ||--}o FormalExpression : "expressions"
+Condition ||--}o Condition : "conditions"
 Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comment"
+Condition ||--}o Comment : "comments"
+Condition ||--}o Comment : "siteOrSponsorComments"
 CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
 CodeList ||--}o Coding : "coding"
-CodeList ||--}o Comment : "comment"
+CodeList ||--}o Comment : "comments"
+CodeList ||--}o Comment : "siteOrSponsorComments"
 ConceptProperty ||--|o CodeList : "codeList"
 ConceptProperty ||--}o Coding : "coding"
-ConceptProperty ||--}o Comment : "comment"
+ConceptProperty ||--}o Comment : "comments"
+ConceptProperty ||--}o Comment : "siteOrSponsorComments"
 Origin ||--}o SourceItem : "sourceItems"
 Origin ||--|o DocumentReference : "document"
 WhereClause ||--}o Condition : "conditions"
 WhereClause ||--}o Coding : "coding"
-RangeCheck ||--}o FormalExpression : "formalExpression"
-Method ||--}o FormalExpression : "formalExpressions"
+WhereClause ||--}o Comment : "comments"
+WhereClause ||--}o Comment : "siteOrSponsorComments"
+RangeCheck ||--}o FormalExpression : "expressions"
+Method ||--}o FormalExpression : "expressions"
 Method ||--|o DocumentReference : "document"
 Method ||--}o Coding : "coding"
-Method ||--}o Comment : "comment"
+Method ||--}o Comment : "comments"
+Method ||--}o Comment : "siteOrSponsorComments"
 
 ```
 
@@ -201,7 +223,7 @@ Method ||--}o Comment : "comment"
 | ---  | --- | --- | --- |
 | [item](../slots/item.md) | 0..1 <br/> [Item](../classes/Item.md) | Reference to an item | direct |
 | [document](../slots/document.md) | 0..1 <br/> [DocumentReference](../classes/DocumentReference.md) | Reference to an external document | direct |
-| [resource](../slots/resource.md) | * <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Resource](../classes/Resource.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Path to a resource (e | direct |
+| [resource](../slots/resource.md) | * <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Resource](../classes/Resource.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Path to a resource (e.g. File, FHIR datasource) that is the source of this item | direct |
 | [coding](../slots/coding.md) | * <br/> [Coding](../classes/Coding.md) | A coding that describes the source of the item | direct |
 
 

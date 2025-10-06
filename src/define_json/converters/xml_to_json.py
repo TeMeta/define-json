@@ -72,9 +72,22 @@ class DefineXMLToJSONConverter:
         if not study or not mdv:
             raise ValueError("Could not find Study or MetaDataVersion in Define-XML")
         
-        # Build Define-JSON structure - NO ODM metadata pollution!
-        # ODM metadata should stay in XML, not be copied to JSON
+        # Build Define-JSON structure with required ODM metadata
         define_json = {}
+        
+        # Extract ODM-level metadata
+        define_json['studyOID'] = study.get('OID')
+        define_json['fileOID'] = root.get('FileOID')
+        define_json['creationDateTime'] = root.get('CreationDateTime')
+        define_json['odmVersion'] = root.get('ODMVersion')
+        define_json['fileType'] = root.get('FileType')
+        
+        # Extract study-level metadata
+        define_json['studyName'] = self._get_study_name(study)
+        define_json['studyDescription'] = self._get_study_description(study)
+        define_json['protocolName'] = self._get_protocol_name(study)
+        define_json['metaDataVersionOID'] = mdv.get('OID')
+        define_json['metaDataVersionName'] = mdv.get('Name')
         
         # Process methods first to get derivation method map for linking
         methods, derivation_method_map = self._process_methods(mdv)

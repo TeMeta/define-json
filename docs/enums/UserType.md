@@ -30,7 +30,7 @@ URI: [UserType](../enums/UserType.md)
 
 | Name | Description |
 | ---  | --- |
-| [userType](../slots/userType.md) | User's role in the study |
+| [userType](../slots/userType.md) | User's role in the study. |
 
 
 

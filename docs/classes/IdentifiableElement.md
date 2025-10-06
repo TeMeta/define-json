@@ -38,13 +38,10 @@ IdentifiableElement ||--}o Coding : "coding"
 ## Inheritance
 * **IdentifiableElement** [ [Identifiable](../classes/Identifiable.md) [Labelled](../classes/Labelled.md)]
     * [Relationship](../classes/Relationship.md)
-    * [Comment](../classes/Comment.md)
     * [Dictionary](../classes/Dictionary.md)
-    * [WhereClause](../classes/WhereClause.md)
     * [FormalExpression](../classes/FormalExpression.md)
     * [Parameter](../classes/Parameter.md)
     * [ReturnValue](../classes/ReturnValue.md)
-    * [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md)
     * [User](../classes/User.md)
     * [Organization](../classes/Organization.md)
     * [Standard](../classes/Standard.md)
@@ -60,7 +57,7 @@ IdentifiableElement ||--}o Coding : "coding"
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context | [Identifiable](../classes/Identifiable.md) |
+| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
 | [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
 | [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
 | [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Detailed description, shown in tooltips | [Labelled](../classes/Labelled.md) |

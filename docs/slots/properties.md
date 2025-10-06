@@ -22,7 +22,7 @@ Alias: properties
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ReifiedConcept](../classes/ReifiedConcept.md) | A canonical information layer that makes abstract concepts explicit and refer... |  no  |
+| [ReifiedConcept](../classes/ReifiedConcept.md) | A canonical information layer that makes abstract concepts explicit and referenceable, showing how different data implementations represent the same underlying meanings through a star schema structure with multiple properties |  no  |
 
 
 

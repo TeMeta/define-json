@@ -52,7 +52,7 @@ URI: [PredicateTermEnum](../enums/PredicateTermEnum.md)
 
 | Name | Description |
 | ---  | --- |
-| [predicateTerm](../slots/predicateTerm.md) | Short variable relationship linking phrase for programming purposes |
+| [predicateTerm](../slots/predicateTerm.md) | Short variable relationship linking phrase for programming purposes. |
 
 
 

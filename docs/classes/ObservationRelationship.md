@@ -40,6 +40,11 @@ Comment {
     string description  
     string label  
     stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
 }
 Coding {
     string code  
@@ -93,23 +98,28 @@ DataAttribute ||--|| Item : "item"
 DataAttribute ||--|o Method : "missingHandling"
 DataAttribute ||--|o Method : "imputation"
 DataAttribute ||--}o Coding : "coding"
-DataAttribute ||--}o Comment : "comment"
+DataAttribute ||--}o Comment : "comments"
+DataAttribute ||--}o Comment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
-Method ||--}o FormalExpression : "formalExpressions"
+Comment ||--}o Comment : "comments"
+Comment ||--}o Comment : "siteOrSponsorComments"
+Method ||--}o FormalExpression : "expressions"
 Method ||--|o DocumentReference : "document"
 Method ||--}o Coding : "coding"
-Method ||--}o Comment : "comment"
+Method ||--}o Comment : "comments"
+Method ||--}o Comment : "siteOrSponsorComments"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--|o WhereClause : "whereClause"
+Item ||--}o WhereClause : "applicableWhen"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
 Item ||--|o CodeList : "roleCodeList"
 Item ||--|o Condition : "collectionExceptionCondition"
 Item ||--}o Coding : "coding"
-Item ||--}o Comment : "comment"
+Item ||--}o Comment : "comments"
+Item ||--}o Comment : "siteOrSponsorComments"
 
 ```
 
@@ -122,7 +132,7 @@ Item ||--}o Comment : "comment"
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [item](../slots/item.md) | 0..1 <br/> [Item](../classes/Item.md) | Reference to the Item in an observation context that this definition applies ... | direct |
+| [item](../slots/item.md) | 0..1 <br/> [Item](../classes/Item.md) | Reference to the Item in an observation context that this definition applies to. e.g. the SDTM Variable Specialisation for a given Biomedical Concept Property. | direct |
 | [attribute](../slots/attribute.md) | 0..1 <br/> [DataAttribute](../classes/DataAttribute.md) |  | direct |
 
 

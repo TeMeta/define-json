@@ -39,7 +39,7 @@ SeriesKey {
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
 | [describedBy](../slots/describedBy.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Dimension](../classes/Dimension.md)&nbsp;or&nbsp;<br />[ComponentList](../classes/ComponentList.md) | Associates the Dimension Descriptor defined in the Data Structure Definition | [DatasetKey](../classes/DatasetKey.md) |
-| [keyValues](../slots/keyValues.md) | 0..1 <br/> [String](../types/String.md) | List of Key Values that comprise each key, separated by a dot e | [DatasetKey](../classes/DatasetKey.md) |
+| [keyValues](../slots/keyValues.md) | 0..1 <br/> [String](../types/String.md) | List of Key Values that comprise each key, separated by a dot e.g. SUBJ001.VISIT2.BMI | [DatasetKey](../classes/DatasetKey.md) |
 | [attributeValues](../slots/attributeValues.md) | 0..1 <br/> [String](../types/String.md) | Association to the Attribute Values relating to Key | [DatasetKey](../classes/DatasetKey.md) |
 
 

@@ -25,6 +25,7 @@ IsODMItem {
 }
 Condition {
     string implementsCondition  
+    LogicalOperator operator  
     string OID  
     string uuid  
     string name  
@@ -45,6 +46,11 @@ Comment {
     string description  
     string label  
     stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
 }
 Coding {
     string code  
@@ -69,6 +75,7 @@ RangeCheck {
     stringList checkValues  
     string item  
     SoftHard softHard  
+    LogicalOperator operator  
 }
 CodeList {
     DataType dataType  
@@ -111,20 +118,25 @@ CodeListItem {
 IsODMItem ||--|o CodeList : "roleCodeList"
 IsODMItem ||--|o Condition : "collectionExceptionCondition"
 Condition ||--}o RangeCheck : "rangeChecks"
-Condition ||--}o FormalExpression : "formalExpression"
+Condition ||--}o FormalExpression : "expressions"
+Condition ||--}o Condition : "conditions"
 Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comment"
+Condition ||--}o Comment : "comments"
+Condition ||--}o Comment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
+Comment ||--}o Comment : "comments"
+Comment ||--}o Comment : "siteOrSponsorComments"
 FormalExpression ||--}o Parameter : "parameters"
 FormalExpression ||--|o ReturnValue : "returnValue"
 FormalExpression ||--}o Resource : "externalCodeLibs"
 FormalExpression ||--}o Coding : "coding"
-RangeCheck ||--}o FormalExpression : "formalExpression"
+RangeCheck ||--}o FormalExpression : "expressions"
 CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
 CodeList ||--}o Coding : "coding"
-CodeList ||--}o Comment : "comment"
+CodeList ||--}o Comment : "comments"
+CodeList ||--}o Comment : "siteOrSponsorComments"
 Resource ||--}o FormalExpression : "selection"
 Resource ||--}o Coding : "coding"
 CodeListItem ||--|o Coding : "coding"
@@ -140,14 +152,14 @@ CodeListItem ||--|o Coding : "coding"
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [role](../slots/role.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Identifies the role of the item within the containing context, taken from the... | direct |
+| [role](../slots/role.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Identifies the role of the item within the containing context, taken from the roleCodeList | direct |
 | [roleCodeList](../slots/roleCodeList.md) | 0..1 <br/> [CodeList](../classes/CodeList.md) | Reference to the CodeList that defines the roles for this item | direct |
 | [hasNoData](../slots/hasNoData.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Set to Yes if this is a manifest and there is no data for this item | direct |
-| [crfCompletionInstructions](../slots/crfCompletionInstructions.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | CRFCompletionInstructions reference: Instructions for the clinical site on ho... | direct |
+| [crfCompletionInstructions](../slots/crfCompletionInstructions.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | CRFCompletionInstructions reference: Instructions for the clinical site on how to enter collected information on the CRF | direct |
 | [cdiscNotes](../slots/cdiscNotes.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | CDISCNotes reference: Explanatory text for the variable | direct |
-| [implementationNotes](../slots/implementationNotes.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | ImplementationNotes reference: Further information, such as rationale and imp... | direct |
+| [implementationNotes](../slots/implementationNotes.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | ImplementationNotes reference: Further information, such as rationale and implementation instructions, on how to implement the CRF data collection fields | direct |
 | [collectionExceptionCondition](../slots/collectionExceptionCondition.md) | 0..1 <br/> [Condition](../classes/Condition.md) | Condition that defines when collection may be exempted | direct |
-| [preSpecifiedValue](../slots/preSpecifiedValue.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Prefill value or a default value for a field that is automatically populated | direct |
+| [preSpecifiedValue](../slots/preSpecifiedValue.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Prefill value or a default value for a field that is automatically populated. | direct |
 
 
 
@@ -155,7 +167,7 @@ CodeListItem ||--|o Coding : "coding"
 
 | mixed into | description |
 | --- | --- |
-| [Item](../classes/Item.md) | A data element that represents a specific piece of information within a defin... |
+| [Item](../classes/Item.md) | A data element that represents a specific piece of information within a defined context, with data type, constraints, and derivation methods |
 
 
 

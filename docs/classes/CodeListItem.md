@@ -46,10 +46,10 @@ CodeListItem ||--|o Coding : "coding"
 | ---  | --- | --- | --- |
 | [codedValue](../slots/codedValue.md) | 1 <br/> [String](../types/String.md) | The value of the CodeListItem before decoding | direct |
 | [decode](../slots/decode.md) | 0..1 <br/> [String](../types/String.md) | The decoded value of the CodeListItem | direct |
-| [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | A detailed description of the code (e | direct |
+| [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | A detailed description of the code (e.g., for documentation purposes) | direct |
 | [coding](../slots/coding.md) | 0..1 <br/> [Coding](../classes/Coding.md) | The dictionary definition of the CodeListItem | direct |
 | [aliases](../slots/aliases.md) | * <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Alternative labels for the code (ODM Alias, skos:altLabel) | direct |
-| [weight](../slots/weight.md) | 0..1 <br/> [Decimal](../types/Decimal.md) | Numeric significance of the code (e | direct |
+| [weight](../slots/weight.md) | 0..1 <br/> [Decimal](../types/Decimal.md) | Numeric significance of the code (e.g., for scoring) | direct |
 | [other](../slots/other.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Flag to indicate that the term represents "other" content | direct |
 
 

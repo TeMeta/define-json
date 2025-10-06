@@ -22,7 +22,7 @@ Alias: language
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Translation](../classes/Translation.md) | A text representation that provides content in a specific language, used for ... |  no  |
+| [Translation](../classes/Translation.md) | A text representation that provides content in a specific language, used for multilingual support |  no  |
 
 
 

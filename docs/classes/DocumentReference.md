@@ -59,8 +59,8 @@ DocumentReference ||--}o Coding : "coding"
 | [pages](../slots/pages.md) | * <br/> [Integer](../types/Integer.md) | Reference to specific pages in a PDF document | direct |
 | [relationship](../slots/relationship.md) | 0..1 <br/> [String](../types/String.md) | Relationship to the referencing entity | direct |
 | [version](../slots/version.md) | 0..1 <br/> [String](../types/String.md) | The version of the external resources | [Versioned](../classes/Versioned.md) |
-| [href](../slots/href.md) | 0..1 <br/> [String](../types/String.md) | Machine-readable instructions to obtain the resource e | [Versioned](../classes/Versioned.md) |
-| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context | [Identifiable](../classes/Identifiable.md) |
+| [href](../slots/href.md) | 0..1 <br/> [String](../types/String.md) | Machine-readable instructions to obtain the resource e.g. FHIR path, URL | [Versioned](../classes/Versioned.md) |
+| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
 | [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
 | [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
 | [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Detailed description, shown in tooltips | [Labelled](../classes/Labelled.md) |
@@ -77,7 +77,7 @@ DocumentReference ||--}o Coding : "coding"
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
 | [MetaDataVersion](../classes/MetaDataVersion.md) | [resources](../slots/resources.md) | any_of[range] | [DocumentReference](../classes/DocumentReference.md) |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | [annotatedCRF](../slots/annotatedCRF.md) | range | [DocumentReference](../classes/DocumentReference.md) |
+| [MetaDataVersion](../classes/MetaDataVersion.md) | [annotatedCRFs](../slots/annotatedCRFs.md) | range | [DocumentReference](../classes/DocumentReference.md) |
 | [Comment](../classes/Comment.md) | [documents](../slots/documents.md) | range | [DocumentReference](../classes/DocumentReference.md) |
 | [Method](../classes/Method.md) | [document](../slots/document.md) | range | [DocumentReference](../classes/DocumentReference.md) |
 | [SourceItem](../classes/SourceItem.md) | [document](../slots/document.md) | range | [DocumentReference](../classes/DocumentReference.md) |

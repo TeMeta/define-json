@@ -39,14 +39,14 @@ IsSdmxDataset {
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [action](../slots/action.md) | 0..1 <br/> [String](../types/String.md) | Defines the action to be taken by the recipient system (information, append, ... | direct |
-| [reportingBegin](../slots/reportingBegin.md) | 0..1 <br/> [String](../types/String.md) | A specific time period in a known system of time periods that identifies the ... | direct |
-| [reportingEnd](../slots/reportingEnd.md) | 0..1 <br/> [String](../types/String.md) | A specific time period in a known system of time periods that identifies the ... | direct |
-| [dataExtractionDate](../slots/dataExtractionDate.md) | 0..1 <br/> [String](../types/String.md) | A specific time period that identifies the date and time that the data are ex... | direct |
-| [validFrom](../slots/validFrom.md) | 0..1 <br/> [String](../types/String.md) | Indicates the inclusive start time indicating the validity of the information... | direct |
-| [validTo](../slots/validTo.md) | 0..1 <br/> [String](../types/String.md) | Indicates the inclusive end time indicating the validity of the information i... | direct |
-| [publicationYear](../slots/publicationYear.md) | 0..1 <br/> [String](../types/String.md) | Specifies the year of publication of the data or metadata in terms of whateve... | direct |
-| [publicationPeriod](../slots/publicationPeriod.md) | 0..1 <br/> [String](../types/String.md) | Specifies the period of publication of the data or metadata in terms of whate... | direct |
+| [action](../slots/action.md) | 0..1 <br/> [String](../types/String.md) | Defines the action to be taken by the recipient system (information, append, replace, delete) | direct |
+| [reportingBegin](../slots/reportingBegin.md) | 0..1 <br/> [String](../types/String.md) | A specific time period in a known system of time periods that identifies the start period of a report. | direct |
+| [reportingEnd](../slots/reportingEnd.md) | 0..1 <br/> [String](../types/String.md) | A specific time period in a known system of time periods that identifies the end period of a report. | direct |
+| [dataExtractionDate](../slots/dataExtractionDate.md) | 0..1 <br/> [String](../types/String.md) | A specific time period that identifies the date and time that the data are extracted from a data source. | direct |
+| [validFrom](../slots/validFrom.md) | 0..1 <br/> [String](../types/String.md) | Indicates the inclusive start time indicating the validity of the information in the data set. | direct |
+| [validTo](../slots/validTo.md) | 0..1 <br/> [String](../types/String.md) | Indicates the inclusive end time indicating the validity of the information in the data set. | direct |
+| [publicationYear](../slots/publicationYear.md) | 0..1 <br/> [String](../types/String.md) | Specifies the year of publication of the data or metadata in terms of whatever provisioning agreements might be in force. | direct |
+| [publicationPeriod](../slots/publicationPeriod.md) | 0..1 <br/> [String](../types/String.md) | Specifies the period of publication of the data or metadata in terms of whatever provisioning agreements might be in force. | direct |
 
 
 
@@ -54,7 +54,7 @@ IsSdmxDataset {
 
 | mixed into | description |
 | --- | --- |
-| [Dataset](../classes/Dataset.md) | A collection element that groups observations sharing the same dimensionality... |
+| [Dataset](../classes/Dataset.md) | A collection element that groups observations sharing the same dimensionality, expressed as a set of unique dimensions within a Data Product context |
 
 
 

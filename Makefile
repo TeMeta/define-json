@@ -63,7 +63,6 @@ generate-pydantic:
 	@echo "Generating Pydantic models from LinkML..."
 	poetry run linkml generate pydantic --meta AUTO define-json.yaml > generated/define.py
 	@echo "Pydantic models generated: generated/define.py"
-
 # Main functionality targets
 demo:
 	@echo "Running complete XML<->JSON conversion demo..."
@@ -95,7 +94,8 @@ docs:
 	cp src/js/* docs/js/;
 	cp CONVERSION_README.md docs/CONVERSION_README.md;
 	cp QUICK_REFERENCE.md docs/QUICK_REFERENCE.md;
-	poetry run gen-doc define-json.yaml --directory docs/ --subfolder-type-separation --hierarchical-class-view --diagram-type er_diagram --sort-by rank --include-top-level-diagram 2>/dev/null || poetry run gen-doc define-json.yaml --directory docs/ --subfolder-type-separation --hierarchical-class-view --diagram-type er_diagram --sort-by rank --include-top-level-diagram
+	poetry run gen-doc define-json.yaml --directory docs/ --subfolder-type-separation --hierarchical-class-view --diagram-type er_diagram \
+	--sort-by rank --include-top-level-diagram --truncate-descriptions false
 
 docs-serve:
 	@echo "Serving documentation with MkDocs..."
@@ -130,3 +130,6 @@ setup: install
 	@echo "Setting up development environment..."
 	mkdir -p data generated docs
 	@echo "Development environment ready"
+# Generate all together, stop if any fail
+generate-all: validate clean docs docs-build docs-deploy generate-json-schema generate-pydantic
+	@echo "All generators complete"

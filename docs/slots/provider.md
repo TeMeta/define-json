@@ -22,7 +22,7 @@ Alias: provider
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ProvisionAgreement](../classes/ProvisionAgreement.md) | An agreement element that describes the contractual relationship between a Da... |  no  |
+| [ProvisionAgreement](../classes/ProvisionAgreement.md) | An agreement element that describes the contractual relationship between a Data Provider and a Data Consumer regarding data provision |  no  |
 
 
 

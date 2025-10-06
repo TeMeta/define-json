@@ -49,6 +49,7 @@ classes:
           Use CDISC OID format for regulatory submissions,
           or simple strings for internal use.
         identifier: true
+        required: false
         range: string
         pattern: "^[A-Za-z][A-Za-z0-9._-]*$"
       # URI vs UUID?
@@ -60,16 +61,26 @@ classes:
     description: >-
       A mixin that provides slots for audit trail and standards governance, including mandatory status, comments, and attribution
     mixin: true
+    slot_usage:
+      OID:
+        required: true
     attributes:
       mandatory:
         description: >-
           Is this element required?
         range: boolean
-      comment:
+      comments:
         description: >-
           Comment on the element, such as a rationale for its inclusion or exclusion
         range: Comment
         multivalued: true
+        inlined: false
+      siteOrSponsorComments:
+        description: >-
+          Comment on the element, such as a rationale for its inclusion or exclusion
+        range: Comment
+        multivalued: true 
+        inlined: false
       purpose:
         description: Purpose or rationale for this data element
         any_of:
@@ -78,6 +89,7 @@ classes:
       lastUpdated:
         description: When the resource was last updated
         range: datetime
+        required: true
       owner:
         description: Party responsible for this element
         narrow_mappings:
@@ -408,10 +420,17 @@ classes:
         multivalued: true
         inlined: true
         inlined_as_list: true
-      annotatedCRF:
+      annotatedCRFs:
         description: >-
           Reference to annotated case report forms
         range: DocumentReference
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      dataProducts:
+        description: >-
+          Indexed data flows with clear ownership
+        range: DataProduct
         multivalued: true
         inlined: true
         inlined_as_list: true
@@ -473,10 +492,19 @@ classes:
         multivalued: true
         inlined: true
         inlined_as_list: true
-      whereClause:
-        description: Conditions for when this item definition applies
+      applicableWhen:
+        description: |
+          References to different situations that define when this item applies.
+          Multiple whereClauses are combined with OR logic: the item applies if ANY referenced WhereClause matches.
+          Within each WhereClause, conditions are combined with AND logic: all conditions must be true.
+          
+          Example: whereClause: ["WC.SYSBP", "WC.DIABP"] means the item applies when
+          (all conditions in WC.SYSBP are true) OR (all conditions in WC.DIABP are true).
         range: WhereClause
+        multivalued: true
         inlined: false
+        close_mappings:
+          - fhir:StructureDefinition/context
       origin:
         description: >-
           The origin of the data
@@ -553,11 +581,16 @@ classes:
         description: >-
           Reference to a abstract concept topic that this item group is a specialization of
         range: ReifiedConcept
-      whereClause:
-        description: >-
-          If nested in a parent ItemGroup context,
-          conditions for when this group applies
+      applicableWhen:
+        description: |
+          References to different situations that define when this item applies.
+          Multiple whereClauses are combined with OR logic: the item applies if ANY referenced WhereClause matches.
+          Within each WhereClause, conditions are combined with AND logic: all conditions must be true.
+          
+          Example: whereClause: ["WC.SYSBP", "WC.DIABP"] means the item applies when
+          (all conditions in WC.SYSBP are true) OR (all conditions in WC.DIABP are true).
         range: WhereClause
+        multivalued: true
         inlined: false
         close_mappings:
           - fhir:StructureDefinition/context
@@ -713,7 +746,7 @@ classes:
       - usdm:CommentAnnotation
       - fhir:Annotation
       - sdmx:Annotation
-    is_a: IdentifiableElement
+    is_a: GovernedElement
     attributes:
       text:
         description: >-
@@ -860,7 +893,7 @@ classes:
       - qb:Slice
       - sdmx:CubeRegion
       - sdmx:MetadataTargetRegion
-    is_a: IdentifiableElement
+    is_a: GovernedElement
     attributes:
       conditions:
         description: Logical conditions that apply in this context (combined with AND)
@@ -870,7 +903,8 @@ classes:
 
   Condition:
     description: >-
-      A reusable logical construct that combines multiple components using AND logic
+      A reusable, composable, and nestable logical construct allowing for complex expressions.
+      Conditions are most useful when given a meaningful name and linked to Study Definitions.
     close_mappings:
       - odm:ConditionDef
       - usdm:Condition
@@ -883,20 +917,36 @@ classes:
     is_a: GovernedElement
     attributes:
       rangeChecks:
-        description: Range checks that compose this condition (combined with AND)
+        description: Range checks that compose this condition
         range: RangeCheck
         multivalued: true
         inlined: true
         inlined_as_list: true
       implementsCondition:
         description: Reference to a external (e.g. USDM) condition definition that this implements
-      formalExpression:
+      expressions:
         description: >-
-          A formal expression for complex checks
+          Logical expression, resolving to a boolean, that implements this condition in a specific context
         range: FormalExpression
         multivalued: true
-        inlined: false
+        inlined: true
         inlined_as_list: true
+      operator:
+        description: >-
+          Logical operator for combining child conditions or range checks.
+          Defaults to ALL if not specified.
+        range: LogicalOperator
+        required: false
+      conditions:
+        description: >-
+          Child conditions to combine using the operator.
+          Multiple conditions are composed according to the operator (AND/OR/NOT).
+          Rearrange and nest to compose XOR, or combinations of AND and OR.
+          Unless the operator is EXPRESSION, in which case the formalExpression is used instead.
+          Use OID references to reuse conditions defined elsewhere.
+        range: Condition
+        multivalued: true
+        inlined: false
 
   RangeCheck:
     description: >-
@@ -927,13 +977,19 @@ classes:
         description: >-
           Indicates whether a validation check is an error ("Hard") or a warning ("Soft")
         range: SoftHard
-      formalExpression:
+      expressions:
         description: >-
           A formal expression for complex checks
         range: FormalExpression
         multivalued: true
         inlined: true
         inlined_as_list: true
+      operator:
+        description: >-
+          Logical operator for combining child conditions or range checks.
+          Defaults to ALL if not specified.
+        range: LogicalOperator
+        required: false
 
   FormalExpression:
     description: >-
@@ -962,6 +1018,8 @@ classes:
         description: Parameters used in the expression
         range: Parameter
         multivalued: true
+        inlined: true
+        inlined_as_list: true
       returnValue:
         description: Return value details
         range: ReturnValue
@@ -985,12 +1043,13 @@ classes:
         description: >-
           The type of method: Computation, Imputation, or Transformation.
         range: MethodType
-      formalExpressions:
+      expressions:
         description: >-
           Formal expressions used by this method
         range: FormalExpression
         multivalued: true
         inlined: true
+        inlined_as_list: true
       document:
         description: >-
           Reference to a document that describes this method in detail.
@@ -1038,12 +1097,20 @@ classes:
         multivalued: true
       value:
         description: >-
-          A specific value for the parameter.
+          A specific bound value for the parameter.
+        range: string
+      defaultValue:
+        description: >-
+          A default value for the parameter.
         range: string
       items:
         description: >-
           A list of item dependencies for the parameter.
-        range: Item
+        any_of:
+          - range: Item
+          - range: Dimension
+          - range: Measure
+          - range: DataAttribute
         multivalued: true
         inlined: false
       conceptProperty:
@@ -1052,6 +1119,38 @@ classes:
         range: ConceptProperty
         multivalued: true
         inlined: false
+      applicableWhen:
+        description: >-
+          References to different situations that define when this parameter 
+          is applicable or required in the containing expression.
+          Multiple whereClauses are combined with OR logic: the parameter applies 
+          if ANY referenced WhereClause matches.
+
+          Within each WhereClause, conditions are combined with AND logic.
+          Example: applicableWhen: ["WC.ADULT", "WC.PEDIATRIC"] means the parameter 
+          is needed when (all conditions in WC.ADULT are true) OR 
+          (all conditions in WC.PEDIATRIC are true).
+        range: WhereClause
+        multivalued: true
+        inlined: false
+      conditions:
+        description: >-
+          Validation conditions that constrain this parameter's value beyond controlled terminology.
+          Multiple conditions are combined with AND logic: all must be satisfied.
+          Use these for parameter validation rules, distinct from applicableWhen 
+          which determines if the parameter is needed at all.
+          
+          Example: A parameter AGE might have conditions ensuring it's >= 0 and <= 120.
+          or conditions might make up part of a componsed expression.
+        range: Condition
+        multivalued: true
+        inlined: false    
+      required:
+        description: >-
+          Indicates whether this parameter must be provided when the 
+          containing expression is evaluated (technical constraint).
+        range: boolean
+        ifabsent: false
 
   ReturnValue:
     description: >-
@@ -1095,7 +1194,7 @@ classes:
   SiteOrSponsorComment:
     description: >-
       A feedback element that contains comments from a site or sponsor, distinct from the general Comment class
-    is_a: IdentifiableElement
+    is_a: GovernedElement
     attributes:
       text:
         description: >-
@@ -1201,12 +1300,6 @@ classes:
         description: >-
           Status of an Implementation Guide or of a Controlled Terminology
         range: StandardStatus
-      comment:
-        description: >-
-          Comment on the standard
-        range: Comment
-        multivalued: true
-
   Resource:
     description: >-
       An external reference that serves as the source for a Dataset, ItemGroup, or Item
@@ -1227,10 +1320,10 @@ classes:
           Examples are "valueQuantity.value" or "valueQuantity.unit".
         range: string
       selection:
-        multivalued: true
         description: >-
           Machine-executable instructions for selecting data from the resource.
         range: FormalExpression
+        multivalued: true
         inlined: true
         inlined_as_list: true
 
@@ -2270,3 +2363,21 @@ enums:
         description: Draft version of the standard
       FINAL:
         description: Final version of the standard
+
+  LogicalOperator:
+    description: >-
+      Logical operators for combining conditions in Boolean expressions.
+      For complex expressions, use the EXPRESSION value.
+    permissible_values:
+      EXPRESSION:
+        description: >-
+          Evaluate condition using expression. Default if expression is present.
+      AND:
+        description: >-
+          All child conditions must be true (all_of). Default if expression is not present.
+      OR:
+        description: >-
+          At least one child condition must be true (any_of).
+      NOT:
+        description: >-
+          Negates the child condition(s) (not_any_of).

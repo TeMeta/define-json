@@ -22,7 +22,7 @@ Alias: linkingPhrase
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Relationship](../classes/Relationship.md) | A semantic link that defines connections between elements such as Items or It... |  no  |
+| [Relationship](../classes/Relationship.md) | A semantic link that defines connections between elements such as Items or ItemGroups, capturing relationships like "is the unit for" or "assesses seriousness of" |  no  |
 
 
 

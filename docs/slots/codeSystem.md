@@ -22,7 +22,7 @@ Alias: codeSystem
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Coding](../classes/Coding.md) | A semantic reference that provides standardized codes and their meanings from... |  no  |
+| [Coding](../classes/Coding.md) | A semantic reference that provides standardized codes and their meanings from controlled vocabularies |  no  |
 
 
 

@@ -22,7 +22,7 @@ Alias: sourceType
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | A feedback element that contains comments from a site or sponsor, distinct fr... |  no  |
+| [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | A feedback element that contains comments from a site or sponsor, distinct from the general Comment class |  no  |
 
 
 

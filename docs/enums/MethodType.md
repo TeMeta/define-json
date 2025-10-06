@@ -13,9 +13,9 @@ URI: [MethodType](../enums/MethodType.md)
 
 | Value | Meaning | Description |
 | --- | --- | --- |
-| Computation | None | Mathematical computation using values of other items |
-| Imputation | None | Assignment of a value based on a estimation (imputation) procedure |
-| Transformation | None | Transformation of the item's value according to a standard algorithm, such as... |
+| Computation | None | Mathematical computation using values of other items. |
+| Imputation | None | Assignment of a value based on a estimation (imputation) procedure. |
+| Transformation | None | Transformation of the item's value according to a standard algorithm, such as a change in units. |
 
 
 

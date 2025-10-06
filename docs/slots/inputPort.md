@@ -22,7 +22,7 @@ Alias: inputPort
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [DataProduct](../classes/DataProduct.md) | A governed collection that represents a purpose-driven assembly of datasets a... |  no  |
+| [DataProduct](../classes/DataProduct.md) | A governed collection that represents a purpose-driven assembly of datasets and services with an owning team and lifecycle |  no  |
 
 
 

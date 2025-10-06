@@ -13,10 +13,10 @@ URI: [AliasPredicate](../enums/AliasPredicate.md)
 
 | Value | Meaning | Description |
 | --- | --- | --- |
-| EXACT_SYNONYM | skos:exactMatch | Codes have identical meaning e |
-| RELATED_SYNONYM | skos:relatedMatch | Codes are related but not equivalent e |
-| BROAD_SYNONYM | skos:broaderMatch | Target is broader than source e |
-| NARROW_SYNONYM | skos:narrowerMatch | Target is narrower than source e |
+| EXACT_SYNONYM | skos:exactMatch | Codes have identical meaning e.g. "diabetes mellitus" and "DM" |
+| RELATED_SYNONYM | skos:relatedMatch | Codes are related but not equivalent e.g. "diabetes" and "mellitus" |
+| BROAD_SYNONYM | skos:broaderMatch | Target is broader than source e.g. "diabetes" is broader than "type 2 diabetes" |
+| NARROW_SYNONYM | skos:narrowerMatch | Target is narrower than source e.g. "type 2 diabetes" is narrower than "diabetes" |
 
 
 

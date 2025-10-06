@@ -59,6 +59,11 @@ Comment {
     string description  
     string label  
     stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
 }
 DocumentReference {
     string title  
@@ -101,6 +106,7 @@ NominalOccurrence {
 }
 Condition {
     string implementsCondition  
+    LogicalOperator operator  
     string OID  
     string uuid  
     string name  
@@ -118,12 +124,15 @@ Timing ||--|o NominalOccurrence : "relativeTo"
 Timing ||--|o NominalOccurrence : "relativeFrom"
 Timing ||--|o Method : "imputation"
 Timing ||--}o Coding : "coding"
-Method ||--}o FormalExpression : "formalExpressions"
+Method ||--}o FormalExpression : "expressions"
 Method ||--|o DocumentReference : "document"
 Method ||--}o Coding : "coding"
-Method ||--}o Comment : "comment"
+Method ||--}o Comment : "comments"
+Method ||--}o Comment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
+Comment ||--}o Comment : "comments"
+Comment ||--}o Comment : "siteOrSponsorComments"
 DocumentReference ||--}o Coding : "coding"
 FormalExpression ||--}o Parameter : "parameters"
 FormalExpression ||--|o ReturnValue : "returnValue"
@@ -132,11 +141,14 @@ FormalExpression ||--}o Coding : "coding"
 NominalOccurrence ||--|| Timing : "timing"
 NominalOccurrence ||--}o Condition : "condition"
 NominalOccurrence ||--}o Coding : "coding"
-NominalOccurrence ||--}o Comment : "comment"
+NominalOccurrence ||--}o Comment : "comments"
+NominalOccurrence ||--}o Comment : "siteOrSponsorComments"
 Condition ||--}o RangeCheck : "rangeChecks"
-Condition ||--}o FormalExpression : "formalExpression"
+Condition ||--}o FormalExpression : "expressions"
+Condition ||--}o Condition : "conditions"
 Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comment"
+Condition ||--}o Comment : "comments"
+Condition ||--}o Comment : "siteOrSponsorComments"
 
 ```
 
@@ -153,17 +165,17 @@ Condition ||--}o Comment : "comment"
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [type](../slots/type.md) | 1 <br/> [TimingType](../enums/TimingType.md) | The type of timing: Fixed, Before (Relative), or After (Relative) | direct |
-| [isNominal](../slots/isNominal.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Indicates whether the timing is nominal (event-based) or not | direct |
-| [value](../slots/value.md) | 1 <br/> [String](../types/String.md) | The value of the timing, which can be a date/time, duration, or event referen... | direct |
-| [relativeTo](../slots/relativeTo.md) | 0..1 <br/> [NominalOccurrence](../classes/NominalOccurrence.md) | Reference to the event or occurrence that this timing is relative to | direct |
-| [relativeFrom](../slots/relativeFrom.md) | 0..1 <br/> [NominalOccurrence](../classes/NominalOccurrence.md) | Reference to the event or occurrence that this timing is relative to | direct |
+| [type](../slots/type.md) | 1 <br/> [TimingType](../enums/TimingType.md) | The type of timing: Fixed, Before (Relative), or After (Relative). | direct |
+| [isNominal](../slots/isNominal.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Indicates whether the timing is nominal (event-based) or not. | direct |
+| [value](../slots/value.md) | 1 <br/> [String](../types/String.md) | The value of the timing, which can be a date/time, duration, or event reference. | direct |
+| [relativeTo](../slots/relativeTo.md) | 0..1 <br/> [NominalOccurrence](../classes/NominalOccurrence.md) | Reference to the event or occurrence that this timing is relative to. | direct |
+| [relativeFrom](../slots/relativeFrom.md) | 0..1 <br/> [NominalOccurrence](../classes/NominalOccurrence.md) | Reference to the event or occurrence that this timing is relative to. | direct |
 | [windowLower](../slots/windowLower.md) | 0..1 <br/> [Datetime](../types/Datetime.md) | Start date/time of the timing | direct |
 | [windowUpper](../slots/windowUpper.md) | 0..1 <br/> [Datetime](../types/Datetime.md) | End date/time of the timing | direct |
-| [recalled](../slots/recalled.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Indicates whether the timing is recalled or not (recalled timings are less re... | direct |
-| [frequency](../slots/frequency.md) | 0..1 <br/> [String](../types/String.md) | Frequency | direct |
-| [imputation](../slots/imputation.md) | 0..1 <br/> [Method](../classes/Method.md) | The imputation method used for the Timing | direct |
-| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context | [Identifiable](../classes/Identifiable.md) |
+| [recalled](../slots/recalled.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Indicates whether the timing is recalled or not (recalled timings are less reliable). | direct |
+| [frequency](../slots/frequency.md) | 0..1 <br/> [String](../types/String.md) | Frequency. Use dose frequency terminology e.g. "BID" if applicable. | direct |
+| [imputation](../slots/imputation.md) | 0..1 <br/> [Method](../classes/Method.md) | The imputation method used for the Timing. | direct |
+| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
 | [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
 | [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
 | [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Detailed description, shown in tooltips | [Labelled](../classes/Labelled.md) |

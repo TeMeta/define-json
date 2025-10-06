@@ -144,7 +144,7 @@ class DefineJSONToXMLConverter:
             if oid:
                 unique_items[oid] = item
         
-        self._create_item_defs(mdv, list(unique_items.values()))
+        self._create_item_defs(mdv, list(unique_items.values()), json_data.get('codeLists', []))
         
         # Process CodeLists
         self._create_code_lists(mdv, json_data.get('codeLists', []))
@@ -376,46 +376,66 @@ class DefineJSONToXMLConverter:
     
     def _extract_study_info(self, json_data: Dict[str, Any]) -> Dict[str, str]:
         """Extract study information from JSON content, preserving existing names when available."""
-        # Extract domain information from ItemGroups for fallback generation
-        domains = set()
-        item_count = 0
-        dataset_count = len(json_data.get('itemGroups', []))
+        # PREFER existing ODM metadata from JSON if available
+        # Otherwise, generate fallbacks based on content
         
-        for ig in json_data.get('itemGroups', []):
-            domain = ig.get('name', '').upper()
-            # Check for traditional domain codes (DM, AE, etc.) or use first part of descriptive names
-            if domain and len(domain) <= 2:  # Traditional domain code
-                domains.add(domain)
-            elif domain:  # Descriptive name - extract meaningful part
-                # Extract first meaningful word (e.g., "Vital_Sign" -> "VS", "Randomization" -> "RAND")
-                words = domain.split('_')
-                if words:
-                    # Create abbreviation from first letters
-                    abbrev = ''.join(word[0] for word in words[:2] if word)
-                    if len(abbrev) <= 4:  # Reasonable abbreviation length
-                        domains.add(abbrev)
-            item_count += len(ig.get('items', []))
+        # Check for existing ODM metadata
+        study_oid = json_data.get('studyOID')
+        file_oid = json_data.get('fileOID')
+        mdv_oid = json_data.get('metaDataVersionOID')
         
-        # Generate meaningful identifiers based on content
-        domain_list = sorted(domains)
-        primary_domain = domain_list[0] if domain_list else 'STUDY'
-        
-        # Generate OIDs based on content
-        file_oid = f"ODM.DEFINE.{primary_domain}.{datetime.now().strftime('%Y%m%d')}"
-        study_oid = f"ODM.STUDY.{primary_domain}"
-        mdv_oid = f"MDV.{primary_domain}"
-        
-        # PRESERVE existing names when available, generate meaningful defaults when missing
-        study_name = json_data.get('studyName') or (f"Multi-Domain Study ({len(domains)} domains)" if len(domains) > 1 else f"{primary_domain} Study")
-        study_description = json_data.get('studyDescription') or (f"Study containing {dataset_count} datasets with {item_count} variables across {len(domains)} domains" if len(domains) > 1 else f"Study containing {dataset_count} datasets with {item_count} variables")
-        protocol_name = json_data.get('protocolName') or f"Protocol {primary_domain}"
-        
-        # For MetaDataVersion, use existing name/description if available
-        mdv_name = json_data.get('name') or f"MetaDataVersion {primary_domain}"
-        mdv_description = json_data.get('description') or (f"Data definitions for {', '.join(domain_list)} domains" if domain_list else f"Data definitions for {dataset_count} datasets")
-        
-        # Generate originator based on content
-        originator = f"Define-JSON Converter (Generated from {len(domains)} domains, {dataset_count} datasets)"
+        # If no existing metadata, extract domain information for fallback generation
+        if not study_oid or not file_oid or not mdv_oid:
+            domains = set()
+            item_count = 0
+            dataset_count = len(json_data.get('itemGroups', []))
+            
+            for ig in json_data.get('itemGroups', []):
+                domain = ig.get('name', '').upper()
+                # Check for traditional domain codes (DM, AE, etc.) or use first part of descriptive names
+                if domain and len(domain) <= 2:  # Traditional domain code
+                    domains.add(domain)
+                elif domain:  # Descriptive name - extract meaningful part
+                    # Extract first meaningful word (e.g., "Vital_Sign" -> "VS", "Randomization" -> "RAND")
+                    words = domain.split('_')
+                    if words:
+                        # Create abbreviation from first letters
+                        abbrev = ''.join(word[0] for word in words[:2] if word)
+                        if len(abbrev) <= 4:  # Reasonable abbreviation length
+                            domains.add(abbrev)
+                item_count += len(ig.get('items', []))
+            
+            # Generate meaningful identifiers based on content
+            domain_list = sorted(domains)
+            primary_domain = domain_list[0] if domain_list else 'STUDY'
+            
+            # Generate OIDs based on content only if not provided
+            if not file_oid:
+                file_oid = f"ODM.DEFINE.{primary_domain}.{datetime.now().strftime('%Y%m%d')}"
+            if not study_oid:
+                study_oid = f"ODM.STUDY.{primary_domain}"
+            if not mdv_oid:
+                mdv_oid = f"MDV.{primary_domain}"
+            
+            # PRESERVE existing names when available, generate meaningful defaults when missing
+            study_name = json_data.get('studyName') or (f"Multi-Domain Study ({len(domains)} domains)" if len(domains) > 1 else f"{primary_domain} Study")
+            study_description = json_data.get('studyDescription') or (f"Study containing {dataset_count} datasets with {item_count} variables across {len(domains)} domains" if len(domains) > 1 else f"Study containing {dataset_count} datasets with {item_count} variables")
+            protocol_name = json_data.get('protocolName') or f"Protocol {primary_domain}"
+            
+            # For MetaDataVersion, use existing name/description if available
+            mdv_name = json_data.get('metaDataVersionName') or f"MetaDataVersion {primary_domain}"
+            mdv_description = json_data.get('description') or (f"Data definitions for {', '.join(domain_list)} domains" if domain_list else f"Data definitions for {dataset_count} datasets")
+            
+            # Generate originator based on content
+            originator = f"Define-JSON Converter (Generated from {len(domains)} domains, {dataset_count} datasets)"
+        else:
+            # Use existing metadata
+            study_name = json_data.get('studyName', 'Study')
+            study_description = json_data.get('studyDescription', '')
+            protocol_name = json_data.get('protocolName', 'Protocol')
+            mdv_name = json_data.get('metaDataVersionName', 'MetaDataVersion')
+            mdv_description = json_data.get('description', '')
+            originator = "Define-JSON Converter"
         
         return {
             'file_oid': file_oid,
@@ -521,7 +541,7 @@ class DefineJSONToXMLConverter:
                     wc_ref = ET.SubElement(item_ref, '{%s}WhereClauseRef' % self.namespaces['def'])
                     wc_ref.set('WhereClauseOID', item['whereClauseOID'])
     
-    def _create_item_defs(self, parent: ET.Element, variables: List[Dict[str, Any]]):
+    def _create_item_defs(self, parent: ET.Element, variables: List[Dict[str, Any]], available_code_lists: List[Dict[str, Any]] = None):
         """Create ItemDef elements."""
         for var in variables:
             item_elem = ET.SubElement(parent, 'ItemDef')
@@ -542,10 +562,14 @@ class DefineJSONToXMLConverter:
                 trans_text = ET.SubElement(desc, 'TranslatedText')
                 trans_text.text = var['description']
             
-            # Add CodeListRef if present
-            if var.get('codelist'):
+            # Add CodeListRef if present or intelligently assign one
+            codelist_oid = var.get('codelist') or var.get('codeList')
+            if not codelist_oid and available_code_lists:
+                codelist_oid = self._intelligently_assign_codelist(var, available_code_lists)
+            
+            if codelist_oid:
                 cl_ref = ET.SubElement(item_elem, '{%s}CodeListRef' % self.namespaces['def'])
-                cl_ref.set('CodeListOID', var['codelist'])
+                cl_ref.set('CodeListOID', codelist_oid)
             
             # Add MethodRef if present
             if var.get('method'):
@@ -560,6 +584,53 @@ class DefineJSONToXMLConverter:
                     origin_elem.set('Type', origin['type'])
                 if origin.get('source'):
                     origin_elem.set('Source', origin['source'])
+    
+    def _intelligently_assign_codelist(self, item: Dict[str, Any], available_code_lists: List[Dict[str, Any]]) -> str:
+        """Intelligently assign a CodeList to an item based on content analysis."""
+        import re
+        
+        name = item.get('name', '').lower()
+        description = item.get('description', '').lower()
+        
+        # Create a mapping of CodeList OIDs to their names for pattern matching
+        codelist_map = {cl.get('oid', ''): cl.get('name', '').lower() for cl in available_code_lists}
+        
+        # Yes/No questions
+        if any(word in name or word in description for word in ['are you', 'do you', 'have you', 'would you', 'can you', 'will you', 'is', 'was', 'did', 'should', 'could']):
+            if 'CL.YESNO' in codelist_map:
+                return 'CL.YESNO'
+        
+        # Satisfaction questions
+        if any(word in name or word in description for word in ['satisfied', 'satisfaction', 'agree', 'disagree', 'comfortable', 'uncomfortable']):
+            if 'CL.SATISFACTION' in codelist_map:
+                return 'CL.SATISFACTION'
+        
+        # Likelihood questions
+        if any(word in name or word in description for word in ['likely', 'unlikely', 'neutral', 'extremely likely', 'extremely unlikely']):
+            if 'CL.LIKELIHOOD' in codelist_map:
+                return 'CL.LIKELIHOOD'
+        
+        # Comfort level questions
+        if any(word in name or word in description for word in ['comfortable', 'uncomfortable', 'very comfortable', 'very uncomfortable', 'comfort level']):
+            if 'CL.COMFORT_LEVEL' in codelist_map:
+                return 'CL.COMFORT_LEVEL'
+        
+        # Preference questions
+        if any(word in name or word in description for word in ['prefer', 'preference', 'indifferent', 'tampon', 'clinic']):
+            if 'CL.PREFERENCE' in codelist_map:
+                return 'CL.PREFERENCE'
+        
+        # Likert scale questions
+        if any(word in name or word in description for word in ['likert', 'scale', 'strongly agree', 'strongly disagree']):
+            if 'CL.LIKERT_SCALE' in codelist_map:
+                return 'CL.LIKERT_SCALE'
+        
+        # Concern level questions
+        if any(word in name or word in description for word in ['concerned', 'not concerned', 'extremely concerned', 'moderately concerned', 'concern level']):
+            if 'CL.CONCERN_LEVEL' in codelist_map:
+                return 'CL.CONCERN_LEVEL'
+        
+        return None
     
     def _create_code_lists(self, parent: ET.Element, code_lists: List[Dict[str, Any]]):
         """Create CodeList elements."""

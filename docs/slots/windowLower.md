@@ -22,7 +22,7 @@ Alias: windowLower
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Timing](../classes/Timing.md) | A temporal element that describes the timing of an event or occurrence, which... |  no  |
+| [Timing](../classes/Timing.md) | A temporal element that describes the timing of an event or occurrence, which can be absolute, relative, or nominal |  no  |
 
 
 

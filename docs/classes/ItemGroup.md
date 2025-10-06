@@ -45,6 +45,11 @@ Comment {
     string description  
     string label  
     stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
 }
 Coding {
     string code  
@@ -117,9 +122,15 @@ WhereClause {
     string description  
     string label  
     stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
 }
 Condition {
     string implementsCondition  
+    LogicalOperator operator  
     string OID  
     string uuid  
     string name  
@@ -212,59 +223,73 @@ RangeCheck {
     stringList checkValues  
     string item  
     SoftHard softHard  
+    LogicalOperator operator  
 }
 
 ItemGroup ||--}o Item : "items"
 ItemGroup ||--|o ReifiedConcept : "implementsConcept"
-ItemGroup ||--|o WhereClause : "whereClause"
+ItemGroup ||--}o WhereClause : "applicableWhen"
 ItemGroup ||--}o Coding : "security"
 ItemGroup ||--|o Timing : "validityPeriod"
 ItemGroup ||--}o Coding : "coding"
-ItemGroup ||--}o Comment : "comment"
+ItemGroup ||--}o Comment : "comments"
+ItemGroup ||--}o Comment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
+Comment ||--}o Comment : "comments"
+Comment ||--}o Comment : "siteOrSponsorComments"
 DocumentReference ||--}o Coding : "coding"
 Timing ||--|o NominalOccurrence : "relativeTo"
 Timing ||--|o NominalOccurrence : "relativeFrom"
 Timing ||--|o Method : "imputation"
 Timing ||--}o Coding : "coding"
-Method ||--}o FormalExpression : "formalExpressions"
+Method ||--}o FormalExpression : "expressions"
 Method ||--|o DocumentReference : "document"
 Method ||--}o Coding : "coding"
-Method ||--}o Comment : "comment"
+Method ||--}o Comment : "comments"
+Method ||--}o Comment : "siteOrSponsorComments"
 NominalOccurrence ||--|| Timing : "timing"
 NominalOccurrence ||--}o Condition : "condition"
 NominalOccurrence ||--}o Coding : "coding"
-NominalOccurrence ||--}o Comment : "comment"
+NominalOccurrence ||--}o Comment : "comments"
+NominalOccurrence ||--}o Comment : "siteOrSponsorComments"
 WhereClause ||--}o Condition : "conditions"
 WhereClause ||--}o Coding : "coding"
+WhereClause ||--}o Comment : "comments"
+WhereClause ||--}o Comment : "siteOrSponsorComments"
 Condition ||--}o RangeCheck : "rangeChecks"
-Condition ||--}o FormalExpression : "formalExpression"
+Condition ||--}o FormalExpression : "expressions"
+Condition ||--}o Condition : "conditions"
 Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comment"
+Condition ||--}o Comment : "comments"
+Condition ||--}o Comment : "siteOrSponsorComments"
 ReifiedConcept ||--}o ConceptProperty : "properties"
 ReifiedConcept ||--}o Coding : "coding"
-ReifiedConcept ||--}o Comment : "comment"
+ReifiedConcept ||--}o Comment : "comments"
+ReifiedConcept ||--}o Comment : "siteOrSponsorComments"
 ConceptProperty ||--|o CodeList : "codeList"
 ConceptProperty ||--}o Coding : "coding"
-ConceptProperty ||--}o Comment : "comment"
+ConceptProperty ||--}o Comment : "comments"
+ConceptProperty ||--}o Comment : "siteOrSponsorComments"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--|o WhereClause : "whereClause"
+Item ||--}o WhereClause : "applicableWhen"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
 Item ||--|o CodeList : "roleCodeList"
 Item ||--|o Condition : "collectionExceptionCondition"
 Item ||--}o Coding : "coding"
-Item ||--}o Comment : "comment"
+Item ||--}o Comment : "comments"
+Item ||--}o Comment : "siteOrSponsorComments"
 CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
 CodeList ||--}o Coding : "coding"
-CodeList ||--}o Comment : "comment"
+CodeList ||--}o Comment : "comments"
+CodeList ||--}o Comment : "siteOrSponsorComments"
 Origin ||--}o SourceItem : "sourceItems"
 Origin ||--|o DocumentReference : "document"
-RangeCheck ||--}o FormalExpression : "formalExpression"
+RangeCheck ||--}o FormalExpression : "expressions"
 
 ```
 
@@ -282,19 +307,19 @@ RangeCheck ||--}o FormalExpression : "formalExpression"
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [domain](../slots/domain.md) | 0..1 <br/> [String](../types/String.md) | Domain abbreviation for the dataset | direct |
-| [structure](../slots/structure.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Data structure of the item group, indicating how the records are organized | direct |
-| [isReferenceData](../slots/isReferenceData.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Set to Yes if this is a reference item group | direct |
+| [domain](../slots/domain.md) | 0..1 <br/> [String](../types/String.md) | Domain abbreviation for the dataset. | direct |
+| [structure](../slots/structure.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Data structure of the item group, indicating how the records are organized. If this is a FHIR Resource, is it nested or flattened? If this is a structured concept, is it a Biomedical/Derivation/Analysis concept? | direct |
+| [isReferenceData](../slots/isReferenceData.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Set to Yes if this is a reference item group. | direct |
 | [type](../slots/type.md) | 0..1 <br/> [ItemGroupType](../enums/ItemGroupType.md) | Type of item group | direct |
 | [items](../slots/items.md) | * <br/> [Item](../classes/Item.md) | Items in this group | direct |
-| [children](../slots/children.md) | * <br/> [String](../types/String.md) | References to child ItemGroups (OIDs) within this item group | direct |
-| [implementsConcept](../slots/implementsConcept.md) | 0..1 <br/> [ReifiedConcept](../classes/ReifiedConcept.md) | Reference to a abstract concept topic that this item group is a specializatio... | direct |
-| [whereClause](../slots/whereClause.md) | 0..1 <br/> [WhereClause](../classes/WhereClause.md) | If nested in a parent ItemGroup context, conditions for when this group appli... | direct |
+| [children](../slots/children.md) | * <br/> [String](../types/String.md) | References to child ItemGroups (OIDs) within this item group. Use these OID references to look up the actual ItemGroup objects  from the top-level itemGroups collection. | direct |
+| [implementsConcept](../slots/implementsConcept.md) | 0..1 <br/> [ReifiedConcept](../classes/ReifiedConcept.md) | Reference to a abstract concept topic that this item group is a specialization of | direct |
+| [applicableWhen](../slots/applicableWhen.md) | * <br/> [WhereClause](../classes/WhereClause.md) | References to different situations that define when this item applies.<br>Multiple whereClauses are combined with OR logic: the item applies if ANY referenced WhereClause matches.<br>Within each WhereClause, conditions are combined with AND logic: all conditions must be true.<br><br>Example: whereClause: ["WC.SYSBP", "WC.DIABP"] means the item applies when<br>(all conditions in WC.SYSBP are true) OR (all conditions in WC.DIABP are true). | direct |
 | [profile](../slots/profile.md) | * <br/> [String](../types/String.md) | Profiles this resource claims to conform to | [IsProfile](../classes/IsProfile.md) |
 | [security](../slots/security.md) | * <br/> [Coding](../classes/Coding.md) | Security tags applied to this resource | [IsProfile](../classes/IsProfile.md) |
 | [authenticator](../slots/authenticator.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Who/what authenticated the resource | [IsProfile](../classes/IsProfile.md) |
 | [validityPeriod](../slots/validityPeriod.md) | 0..1 <br/> [Timing](../classes/Timing.md) | Time period during which the resouce is valid | [IsProfile](../classes/IsProfile.md) |
-| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context | [Identifiable](../classes/Identifiable.md) |
+| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
 | [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
 | [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
 | [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Detailed description, shown in tooltips | [Labelled](../classes/Labelled.md) |
@@ -302,13 +327,14 @@ RangeCheck ||--}o FormalExpression : "formalExpression"
 | [label](../slots/label.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Human-readable label, shown in UIs | [Labelled](../classes/Labelled.md) |
 | [aliases](../slots/aliases.md) | * <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Alternative name or identifier | [Labelled](../classes/Labelled.md) |
 | [mandatory](../slots/mandatory.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Is this element required? | [Governed](../classes/Governed.md) |
-| [comment](../slots/comment.md) | * <br/> [Comment](../classes/Comment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
+| [comments](../slots/comments.md) | * <br/> [Comment](../classes/Comment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
+| [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | * <br/> [Comment](../classes/Comment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
 | [purpose](../slots/purpose.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Purpose or rationale for this data element | [Governed](../classes/Governed.md) |
-| [lastUpdated](../slots/lastUpdated.md) | 0..1 <br/> [Datetime](../types/Datetime.md) | When the resource was last updated | [Governed](../classes/Governed.md) |
+| [lastUpdated](../slots/lastUpdated.md) | 1 <br/> [Datetime](../types/Datetime.md) | When the resource was last updated | [Governed](../classes/Governed.md) |
 | [owner](../slots/owner.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Party responsible for this element | [Governed](../classes/Governed.md) |
-| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[MetaDataVersion](../classes/MetaDataVersion.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[ReifiedConcept](../classes/ReifiedConcept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[Condition](../classes/Condition.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[NominalOccurrence](../classes/NominalOccurrence.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e | [Governed](../classes/Governed.md) |
+| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[MetaDataVersion](../classes/MetaDataVersion.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[ReifiedConcept](../classes/ReifiedConcept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[Condition](../classes/Condition.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[NominalOccurrence](../classes/NominalOccurrence.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
 | [version](../slots/version.md) | 0..1 <br/> [String](../types/String.md) | The version of the external resources | [Versioned](../classes/Versioned.md) |
-| [href](../slots/href.md) | 0..1 <br/> [String](../types/String.md) | Machine-readable instructions to obtain the resource e | [Versioned](../classes/Versioned.md) |
+| [href](../slots/href.md) | 0..1 <br/> [String](../types/String.md) | Machine-readable instructions to obtain the resource e.g. FHIR path, URL | [Versioned](../classes/Versioned.md) |
 
 
 
@@ -325,10 +351,13 @@ RangeCheck ||--}o FormalExpression : "formalExpression"
 | [Item](../classes/Item.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [ItemGroup](../classes/ItemGroup.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [CodeList](../classes/CodeList.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
+| [Comment](../classes/Comment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [ReifiedConcept](../classes/ReifiedConcept.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [ConceptProperty](../classes/ConceptProperty.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
+| [WhereClause](../classes/WhereClause.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [Condition](../classes/Condition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [Method](../classes/Method.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
+| [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [NominalOccurrence](../classes/NominalOccurrence.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [Dataflow](../classes/Dataflow.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
@@ -480,6 +509,7 @@ attributes:
     - ItemGroup
     range: string
     multivalued: true
+    inlined: false
   implementsConcept:
     name: implementsConcept
     description: Reference to a abstract concept topic that this item group is a specialization
@@ -489,17 +519,32 @@ attributes:
     domain_of:
     - ItemGroup
     range: ReifiedConcept
-  whereClause:
-    name: whereClause
-    description: If nested in a parent ItemGroup context, conditions for when this
-      group applies
+  applicableWhen:
+    name: applicableWhen
+    description: 'References to different situations that define when this item applies.
+
+      Multiple whereClauses are combined with OR logic: the item applies if ANY referenced
+      WhereClause matches.
+
+      Within each WhereClause, conditions are combined with AND logic: all conditions
+      must be true.
+
+
+      Example: whereClause: ["WC.SYSBP", "WC.DIABP"] means the item applies when
+
+      (all conditions in WC.SYSBP are true) OR (all conditions in WC.DIABP are true).
+
+      '
     from_schema: https://cdisc.org/define-json
     close_mappings:
     - fhir:StructureDefinition/context
     domain_of:
     - Item
     - ItemGroup
+    - Parameter
     range: WhereClause
+    multivalued: true
+    inlined: false
 
 ```
 </details>
@@ -616,6 +661,7 @@ attributes:
     - ItemGroup
     range: string
     multivalued: true
+    inlined: false
   implementsConcept:
     name: implementsConcept
     description: Reference to a abstract concept topic that this item group is a specialization
@@ -627,19 +673,34 @@ attributes:
     domain_of:
     - ItemGroup
     range: ReifiedConcept
-  whereClause:
-    name: whereClause
-    description: If nested in a parent ItemGroup context, conditions for when this
-      group applies
+  applicableWhen:
+    name: applicableWhen
+    description: 'References to different situations that define when this item applies.
+
+      Multiple whereClauses are combined with OR logic: the item applies if ANY referenced
+      WhereClause matches.
+
+      Within each WhereClause, conditions are combined with AND logic: all conditions
+      must be true.
+
+
+      Example: whereClause: ["WC.SYSBP", "WC.DIABP"] means the item applies when
+
+      (all conditions in WC.SYSBP are true) OR (all conditions in WC.DIABP are true).
+
+      '
     from_schema: https://cdisc.org/define-json
     close_mappings:
     - fhir:StructureDefinition/context
-    alias: whereClause
+    alias: applicableWhen
     owner: ItemGroup
     domain_of:
     - Item
     - ItemGroup
+    - Parameter
     range: WhereClause
+    multivalued: true
+    inlined: false
   profile:
     name: profile
     description: Profiles this resource claims to conform to
@@ -798,19 +859,32 @@ attributes:
     domain_of:
     - Governed
     range: boolean
-  comment:
-    name: comment
+  comments:
+    name: comments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
     from_schema: https://cdisc.org/define-json
     rank: 1000
-    alias: comment
+    alias: comments
     owner: ItemGroup
     domain_of:
     - Governed
-    - Standard
     range: Comment
     multivalued: true
+    inlined: false
+  siteOrSponsorComments:
+    name: siteOrSponsorComments
+    description: Comment on the element, such as a rationale for its inclusion or
+      exclusion
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    alias: siteOrSponsorComments
+    owner: ItemGroup
+    domain_of:
+    - Governed
+    range: Comment
+    multivalued: true
+    inlined: false
   purpose:
     name: purpose
     description: Purpose or rationale for this data element
@@ -834,6 +908,7 @@ attributes:
     domain_of:
     - Governed
     range: datetime
+    required: true
   owner:
     name: owner
     description: Party responsible for this element
