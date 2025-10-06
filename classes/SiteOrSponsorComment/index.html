@@ -76,6 +76,10 @@
 <ul class="nav flex-column">
 </ul>
 </li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#usages">Usages</a>
+<ul class="nav flex-column">
+</ul>
+</li>
 <li class="nav-item" data-bs-level="2"><a class="nav-link" href="#identifier-and-mapping-information">Identifier and Mapping Information</a>
 <ul class="nav flex-column">
 </ul>
@@ -152,11 +156,11 @@ DocumentReference {
 
 SiteOrSponsorComment ||--}o Coding : "coding"
 SiteOrSponsorComment ||--}o Comment : "comments"
-SiteOrSponsorComment ||--}o Comment : "siteOrSponsorComments"
+SiteOrSponsorComment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 Comment ||--}o Comment : "comments"
-Comment ||--}o Comment : "siteOrSponsorComments"
+Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 DocumentReference ||--}o Coding : "coding"
 
 </code></pre>
@@ -252,7 +256,7 @@ DocumentReference ||--}o Coding : "coding"
 </tr>
 <tr>
 <td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
-<td>* <br/> <a href="../Comment/">Comment</a></td>
+<td>* <br/> <a href="./">SiteOrSponsorComment</a></td>
 <td>Comment on the element, such as a rationale for its inclusion or exclusion</td>
 <td><a href="../Governed/">Governed</a></td>
 </tr>
@@ -279,6 +283,151 @@ DocumentReference ||--}o Coding : "coding"
 <td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../Item/">Item</a> or <br/><a href="../ItemGroup/">ItemGroup</a> or <br/><a href="../MetaDataVersion/">MetaDataVersion</a> or <br/><a href="../CodeList/">CodeList</a> or <br/><a href="../ReifiedConcept/">ReifiedConcept</a> or <br/><a href="../ConceptProperty/">ConceptProperty</a> or <br/><a href="../Condition/">Condition</a> or <br/><a href="../Method/">Method</a> or <br/><a href="../NominalOccurrence/">NominalOccurrence</a> or <br/><a href="../Dataflow/">Dataflow</a> or <br/><a href="../CubeComponent/">CubeComponent</a> or <br/><a href="../DataProduct/">DataProduct</a> or <br/><a href="../ProvisionAgreement/">ProvisionAgreement</a></td>
 <td>Reference to another item that this item implements or extends, e.g. a template Item definition.</td>
 <td><a href="../Governed/">Governed</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="usages">Usages</h2>
+<table>
+<thead>
+<tr>
+<th>used by</th>
+<th>used in</th>
+<th>type</th>
+<th>used</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../GovernedElement/">GovernedElement</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
+<td>range</td>
+<td><a href="./">SiteOrSponsorComment</a></td>
+</tr>
+<tr>
+<td><a href="../Governed/">Governed</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
+<td>range</td>
+<td><a href="./">SiteOrSponsorComment</a></td>
+</tr>
+<tr>
+<td><a href="../MetaDataVersion/">MetaDataVersion</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
+<td>range</td>
+<td><a href="./">SiteOrSponsorComment</a></td>
+</tr>
+<tr>
+<td><a href="../Item/">Item</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
+<td>range</td>
+<td><a href="./">SiteOrSponsorComment</a></td>
+</tr>
+<tr>
+<td><a href="../ItemGroup/">ItemGroup</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
+<td>range</td>
+<td><a href="./">SiteOrSponsorComment</a></td>
+</tr>
+<tr>
+<td><a href="../CodeList/">CodeList</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
+<td>range</td>
+<td><a href="./">SiteOrSponsorComment</a></td>
+</tr>
+<tr>
+<td><a href="../Comment/">Comment</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
+<td>range</td>
+<td><a href="./">SiteOrSponsorComment</a></td>
+</tr>
+<tr>
+<td><a href="../ReifiedConcept/">ReifiedConcept</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
+<td>range</td>
+<td><a href="./">SiteOrSponsorComment</a></td>
+</tr>
+<tr>
+<td><a href="../ConceptProperty/">ConceptProperty</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
+<td>range</td>
+<td><a href="./">SiteOrSponsorComment</a></td>
+</tr>
+<tr>
+<td><a href="../WhereClause/">WhereClause</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
+<td>range</td>
+<td><a href="./">SiteOrSponsorComment</a></td>
+</tr>
+<tr>
+<td><a href="../Condition/">Condition</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
+<td>range</td>
+<td><a href="./">SiteOrSponsorComment</a></td>
+</tr>
+<tr>
+<td><a href="../Method/">Method</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
+<td>range</td>
+<td><a href="./">SiteOrSponsorComment</a></td>
+</tr>
+<tr>
+<td><a href="./">SiteOrSponsorComment</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
+<td>range</td>
+<td><a href="./">SiteOrSponsorComment</a></td>
+</tr>
+<tr>
+<td><a href="../NominalOccurrence/">NominalOccurrence</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
+<td>range</td>
+<td><a href="./">SiteOrSponsorComment</a></td>
+</tr>
+<tr>
+<td><a href="../DataStructureDefinition/">DataStructureDefinition</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
+<td>range</td>
+<td><a href="./">SiteOrSponsorComment</a></td>
+</tr>
+<tr>
+<td><a href="../Dataflow/">Dataflow</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
+<td>range</td>
+<td><a href="./">SiteOrSponsorComment</a></td>
+</tr>
+<tr>
+<td><a href="../CubeComponent/">CubeComponent</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
+<td>range</td>
+<td><a href="./">SiteOrSponsorComment</a></td>
+</tr>
+<tr>
+<td><a href="../Measure/">Measure</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
+<td>range</td>
+<td><a href="./">SiteOrSponsorComment</a></td>
+</tr>
+<tr>
+<td><a href="../Dimension/">Dimension</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
+<td>range</td>
+<td><a href="./">SiteOrSponsorComment</a></td>
+</tr>
+<tr>
+<td><a href="../DataAttribute/">DataAttribute</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
+<td>range</td>
+<td><a href="./">SiteOrSponsorComment</a></td>
+</tr>
+<tr>
+<td><a href="../DataProduct/">DataProduct</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
+<td>range</td>
+<td><a href="./">SiteOrSponsorComment</a></td>
+</tr>
+<tr>
+<td><a href="../ProvisionAgreement/">ProvisionAgreement</a></td>
+<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
+<td>range</td>
+<td><a href="./">SiteOrSponsorComment</a></td>
 </tr>
 </tbody>
 </table>
@@ -527,7 +676,7 @@ DocumentReference ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SiteOrSponsorComment</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Comment</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SiteOrSponsorComment</span>
 <span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">  </span><span class="nt">purpose</span><span class="p">:</span>

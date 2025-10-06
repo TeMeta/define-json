@@ -138,6 +138,22 @@ Method {
     string owner  
     string wasDerivedFrom  
 }
+SiteOrSponsorComment {
+    string text  
+    OriginSource sourceType  
+    string source  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
 Comment {
     string text  
     string OID  
@@ -215,11 +231,14 @@ Method ||--}o FormalExpression : "expressions"
 Method ||--|o DocumentReference : "document"
 Method ||--}o Coding : "coding"
 Method ||--}o Comment : "comments"
-Method ||--}o Comment : "siteOrSponsorComments"
+Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+SiteOrSponsorComment ||--}o Coding : "coding"
+SiteOrSponsorComment ||--}o Comment : "comments"
+SiteOrSponsorComment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 Comment ||--}o Comment : "comments"
-Comment ||--}o Comment : "siteOrSponsorComments"
+Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 DocumentReference ||--}o Coding : "coding"
 FormalExpression ||--}o Parameter : "parameters"
 FormalExpression ||--|o ReturnValue : "returnValue"
@@ -229,13 +248,13 @@ NominalOccurrence ||--|| Timing : "timing"
 NominalOccurrence ||--}o Condition : "condition"
 NominalOccurrence ||--}o Coding : "coding"
 NominalOccurrence ||--}o Comment : "comments"
-NominalOccurrence ||--}o Comment : "siteOrSponsorComments"
+NominalOccurrence ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Condition ||--}o RangeCheck : "rangeChecks"
 Condition ||--}o FormalExpression : "expressions"
 Condition ||--}o Condition : "conditions"
 Condition ||--}o Coding : "coding"
 Condition ||--}o Comment : "comments"
-Condition ||--}o Comment : "siteOrSponsorComments"
+Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>

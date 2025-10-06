@@ -117,6 +117,22 @@ ConceptProperty {
     string owner  
     string wasDerivedFrom  
 }
+SiteOrSponsorComment {
+    string text  
+    OriginSource sourceType  
+    string source  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
 Comment {
     string text  
     string OID  
@@ -137,20 +153,6 @@ Coding {
     string codeSystem  
     string codeSystemVersion  
     AliasPredicate aliasType  
-}
-DocumentReference {
-    string title  
-    string leafID  
-    integerList pages  
-    string relationship  
-    string version  
-    string href  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
 }
 CodeList {
     DataType dataType  
@@ -193,17 +195,19 @@ CodeListItem {
 ConceptProperty ||--|o CodeList : "codeList"
 ConceptProperty ||--}o Coding : "coding"
 ConceptProperty ||--}o Comment : "comments"
-ConceptProperty ||--}o Comment : "siteOrSponsorComments"
+ConceptProperty ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+SiteOrSponsorComment ||--}o Coding : "coding"
+SiteOrSponsorComment ||--}o Comment : "comments"
+SiteOrSponsorComment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 Comment ||--}o Comment : "comments"
-Comment ||--}o Comment : "siteOrSponsorComments"
-DocumentReference ||--}o Coding : "coding"
+Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
 CodeList ||--}o Coding : "coding"
 CodeList ||--}o Comment : "comments"
-CodeList ||--}o Comment : "siteOrSponsorComments"
+CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Resource ||--}o FormalExpression : "selection"
 Resource ||--}o Coding : "coding"
 CodeListItem ||--|o Coding : "coding"
@@ -301,7 +305,7 @@ CodeListItem ||--|o Coding : "coding"
 </tr>
 <tr>
 <td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
-<td>* <br/> <a href="../Comment/">Comment</a></td>
+<td>* <br/> <a href="../SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
 <td>Comment on the element, such as a rationale for its inclusion or exclusion</td>
 <td><a href="../Governed/">Governed</a></td>
 </tr>
@@ -771,7 +775,7 @@ CodeListItem ||--|o Coding : "coding"
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ConceptProperty</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Comment</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SiteOrSponsorComment</span>
 <span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">  </span><span class="nt">purpose</span><span class="p">:</span>

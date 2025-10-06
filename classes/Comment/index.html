@@ -116,6 +116,22 @@ Comment {
     string owner  
     string wasDerivedFrom  
 }
+SiteOrSponsorComment {
+    string text  
+    OriginSource sourceType  
+    string source  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
 Coding {
     string code  
     string decode  
@@ -141,7 +157,10 @@ DocumentReference {
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 Comment ||--}o Comment : "comments"
-Comment ||--}o Comment : "siteOrSponsorComments"
+Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+SiteOrSponsorComment ||--}o Coding : "coding"
+SiteOrSponsorComment ||--}o Comment : "comments"
+SiteOrSponsorComment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 DocumentReference ||--}o Coding : "coding"
 
 </code></pre>
@@ -231,7 +250,7 @@ DocumentReference ||--}o Coding : "coding"
 </tr>
 <tr>
 <td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
-<td>* <br/> <a href="./">Comment</a></td>
+<td>* <br/> <a href="../SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
 <td>Comment on the element, such as a rationale for its inclusion or exclusion</td>
 <td><a href="../Governed/">Governed</a></td>
 </tr>
@@ -279,20 +298,8 @@ DocumentReference ||--}o Coding : "coding"
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
-<td><a href="../GovernedElement/">GovernedElement</a></td>
-<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
-<td>range</td>
-<td><a href="./">Comment</a></td>
-</tr>
-<tr>
 <td><a href="../Governed/">Governed</a></td>
 <td><a href="../../slots/comments/">comments</a></td>
-<td>range</td>
-<td><a href="./">Comment</a></td>
-</tr>
-<tr>
-<td><a href="../Governed/">Governed</a></td>
-<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
@@ -303,20 +310,8 @@ DocumentReference ||--}o Coding : "coding"
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
-<td><a href="../MetaDataVersion/">MetaDataVersion</a></td>
-<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
-<td>range</td>
-<td><a href="./">Comment</a></td>
-</tr>
-<tr>
 <td><a href="../Item/">Item</a></td>
 <td><a href="../../slots/comments/">comments</a></td>
-<td>range</td>
-<td><a href="./">Comment</a></td>
-</tr>
-<tr>
-<td><a href="../Item/">Item</a></td>
-<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
@@ -327,32 +322,14 @@ DocumentReference ||--}o Coding : "coding"
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
-<td><a href="../ItemGroup/">ItemGroup</a></td>
-<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
-<td>range</td>
-<td><a href="./">Comment</a></td>
-</tr>
-<tr>
 <td><a href="../CodeList/">CodeList</a></td>
 <td><a href="../../slots/comments/">comments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
-<td><a href="../CodeList/">CodeList</a></td>
-<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
-<td>range</td>
-<td><a href="./">Comment</a></td>
-</tr>
-<tr>
 <td><a href="./">Comment</a></td>
 <td><a href="../../slots/comments/">comments</a></td>
-<td>range</td>
-<td><a href="./">Comment</a></td>
-</tr>
-<tr>
-<td><a href="./">Comment</a></td>
-<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
@@ -363,20 +340,8 @@ DocumentReference ||--}o Coding : "coding"
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
-<td><a href="../ReifiedConcept/">ReifiedConcept</a></td>
-<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
-<td>range</td>
-<td><a href="./">Comment</a></td>
-</tr>
-<tr>
 <td><a href="../ConceptProperty/">ConceptProperty</a></td>
 <td><a href="../../slots/comments/">comments</a></td>
-<td>range</td>
-<td><a href="./">Comment</a></td>
-</tr>
-<tr>
-<td><a href="../ConceptProperty/">ConceptProperty</a></td>
-<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
@@ -387,20 +352,8 @@ DocumentReference ||--}o Coding : "coding"
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
-<td><a href="../WhereClause/">WhereClause</a></td>
-<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
-<td>range</td>
-<td><a href="./">Comment</a></td>
-</tr>
-<tr>
 <td><a href="../Condition/">Condition</a></td>
 <td><a href="../../slots/comments/">comments</a></td>
-<td>range</td>
-<td><a href="./">Comment</a></td>
-</tr>
-<tr>
-<td><a href="../Condition/">Condition</a></td>
-<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
@@ -411,20 +364,8 @@ DocumentReference ||--}o Coding : "coding"
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
-<td><a href="../Method/">Method</a></td>
-<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
-<td>range</td>
-<td><a href="./">Comment</a></td>
-</tr>
-<tr>
 <td><a href="../SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
 <td><a href="../../slots/comments/">comments</a></td>
-<td>range</td>
-<td><a href="./">Comment</a></td>
-</tr>
-<tr>
-<td><a href="../SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
-<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
@@ -435,20 +376,8 @@ DocumentReference ||--}o Coding : "coding"
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
-<td><a href="../NominalOccurrence/">NominalOccurrence</a></td>
-<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
-<td>range</td>
-<td><a href="./">Comment</a></td>
-</tr>
-<tr>
 <td><a href="../DataStructureDefinition/">DataStructureDefinition</a></td>
 <td><a href="../../slots/comments/">comments</a></td>
-<td>range</td>
-<td><a href="./">Comment</a></td>
-</tr>
-<tr>
-<td><a href="../DataStructureDefinition/">DataStructureDefinition</a></td>
-<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
@@ -459,20 +388,8 @@ DocumentReference ||--}o Coding : "coding"
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
-<td><a href="../Dataflow/">Dataflow</a></td>
-<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
-<td>range</td>
-<td><a href="./">Comment</a></td>
-</tr>
-<tr>
 <td><a href="../CubeComponent/">CubeComponent</a></td>
 <td><a href="../../slots/comments/">comments</a></td>
-<td>range</td>
-<td><a href="./">Comment</a></td>
-</tr>
-<tr>
-<td><a href="../CubeComponent/">CubeComponent</a></td>
-<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
@@ -483,20 +400,8 @@ DocumentReference ||--}o Coding : "coding"
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
-<td><a href="../Measure/">Measure</a></td>
-<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
-<td>range</td>
-<td><a href="./">Comment</a></td>
-</tr>
-<tr>
 <td><a href="../Dimension/">Dimension</a></td>
 <td><a href="../../slots/comments/">comments</a></td>
-<td>range</td>
-<td><a href="./">Comment</a></td>
-</tr>
-<tr>
-<td><a href="../Dimension/">Dimension</a></td>
-<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
@@ -507,32 +412,14 @@ DocumentReference ||--}o Coding : "coding"
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
-<td><a href="../DataAttribute/">DataAttribute</a></td>
-<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
-<td>range</td>
-<td><a href="./">Comment</a></td>
-</tr>
-<tr>
 <td><a href="../DataProduct/">DataProduct</a></td>
 <td><a href="../../slots/comments/">comments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
 <tr>
-<td><a href="../DataProduct/">DataProduct</a></td>
-<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
-<td>range</td>
-<td><a href="./">Comment</a></td>
-</tr>
-<tr>
 <td><a href="../ProvisionAgreement/">ProvisionAgreement</a></td>
 <td><a href="../../slots/comments/">comments</a></td>
-<td>range</td>
-<td><a href="./">Comment</a></td>
-</tr>
-<tr>
-<td><a href="../ProvisionAgreement/">ProvisionAgreement</a></td>
-<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
 <td>range</td>
 <td><a href="./">Comment</a></td>
 </tr>
@@ -773,7 +660,7 @@ DocumentReference ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Comment</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Comment</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SiteOrSponsorComment</span>
 <span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">  </span><span class="nt">purpose</span><span class="p">:</span>

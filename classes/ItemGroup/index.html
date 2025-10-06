@@ -124,6 +124,22 @@ ItemGroup {
     string version  
     string href  
 }
+SiteOrSponsorComment {
+    string text  
+    OriginSource sourceType  
+    string source  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
 Comment {
     string text  
     string OID  
@@ -144,20 +160,6 @@ Coding {
     string codeSystem  
     string codeSystemVersion  
     AliasPredicate aliasType  
-}
-DocumentReference {
-    string title  
-    string leafID  
-    integerList pages  
-    string relationship  
-    string version  
-    string href  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
 }
 Timing {
     TimingType type  
@@ -320,12 +322,14 @@ ItemGroup ||--}o Coding : "security"
 ItemGroup ||--|o Timing : "validityPeriod"
 ItemGroup ||--}o Coding : "coding"
 ItemGroup ||--}o Comment : "comments"
-ItemGroup ||--}o Comment : "siteOrSponsorComments"
+ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+SiteOrSponsorComment ||--}o Coding : "coding"
+SiteOrSponsorComment ||--}o Comment : "comments"
+SiteOrSponsorComment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 Comment ||--}o Comment : "comments"
-Comment ||--}o Comment : "siteOrSponsorComments"
-DocumentReference ||--}o Coding : "coding"
+Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Timing ||--|o NominalOccurrence : "relativeTo"
 Timing ||--|o NominalOccurrence : "relativeFrom"
 Timing ||--|o Method : "imputation"
@@ -334,30 +338,30 @@ Method ||--}o FormalExpression : "expressions"
 Method ||--|o DocumentReference : "document"
 Method ||--}o Coding : "coding"
 Method ||--}o Comment : "comments"
-Method ||--}o Comment : "siteOrSponsorComments"
+Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 NominalOccurrence ||--|| Timing : "timing"
 NominalOccurrence ||--}o Condition : "condition"
 NominalOccurrence ||--}o Coding : "coding"
 NominalOccurrence ||--}o Comment : "comments"
-NominalOccurrence ||--}o Comment : "siteOrSponsorComments"
+NominalOccurrence ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 WhereClause ||--}o Condition : "conditions"
 WhereClause ||--}o Coding : "coding"
 WhereClause ||--}o Comment : "comments"
-WhereClause ||--}o Comment : "siteOrSponsorComments"
+WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Condition ||--}o RangeCheck : "rangeChecks"
 Condition ||--}o FormalExpression : "expressions"
 Condition ||--}o Condition : "conditions"
 Condition ||--}o Coding : "coding"
 Condition ||--}o Comment : "comments"
-Condition ||--}o Comment : "siteOrSponsorComments"
+Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ReifiedConcept ||--}o ConceptProperty : "properties"
 ReifiedConcept ||--}o Coding : "coding"
 ReifiedConcept ||--}o Comment : "comments"
-ReifiedConcept ||--}o Comment : "siteOrSponsorComments"
+ReifiedConcept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ConceptProperty ||--|o CodeList : "codeList"
 ConceptProperty ||--}o Coding : "coding"
 ConceptProperty ||--}o Comment : "comments"
-ConceptProperty ||--}o Comment : "siteOrSponsorComments"
+ConceptProperty ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
@@ -368,12 +372,12 @@ Item ||--|o CodeList : "roleCodeList"
 Item ||--|o Condition : "collectionExceptionCondition"
 Item ||--}o Coding : "coding"
 Item ||--}o Comment : "comments"
-Item ||--}o Comment : "siteOrSponsorComments"
+Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
 CodeList ||--}o Coding : "coding"
 CodeList ||--}o Comment : "comments"
-CodeList ||--}o Comment : "siteOrSponsorComments"
+CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Origin ||--}o SourceItem : "sourceItems"
 Origin ||--|o DocumentReference : "document"
 RangeCheck ||--}o FormalExpression : "expressions"
@@ -528,7 +532,7 @@ RangeCheck ||--}o FormalExpression : "expressions"
 </tr>
 <tr>
 <td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
-<td>* <br/> <a href="../Comment/">Comment</a></td>
+<td>* <br/> <a href="../SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
 <td>Comment on the element, such as a rationale for its inclusion or exclusion</td>
 <td><a href="../Governed/">Governed</a></td>
 </tr>
@@ -1226,7 +1230,7 @@ RangeCheck ||--}o FormalExpression : "expressions"
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
-<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Comment</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SiteOrSponsorComment</span>
 <span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">  </span><span class="nt">purpose</span><span class="p">:</span>

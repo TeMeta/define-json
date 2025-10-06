@@ -219,6 +219,22 @@ DataStructureDefinition {
     string version  
     string href  
 }
+SiteOrSponsorComment {
+    string text  
+    OriginSource sourceType  
+    string source  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
 Comment {
     string text  
     string OID  
@@ -367,12 +383,12 @@ Method ||--}o FormalExpression : "expressions"
 Method ||--|o DocumentReference : "document"
 Method ||--}o Coding : "coding"
 Method ||--}o Comment : "comments"
-Method ||--}o Comment : "siteOrSponsorComments"
+Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 NominalOccurrence ||--|| Timing : "timing"
 NominalOccurrence ||--}o Condition : "condition"
 NominalOccurrence ||--}o Coding : "coding"
 NominalOccurrence ||--}o Comment : "comments"
-NominalOccurrence ||--}o Comment : "siteOrSponsorComments"
+NominalOccurrence ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Distribution ||--|o DataService : "accessService"
 Distribution ||--|o Dataset : "isDistributionOf"
 DataService ||--|o Distribution : "isAccessServiceOf"
@@ -389,19 +405,22 @@ DataStructureDefinition ||--}o Coding : "security"
 DataStructureDefinition ||--|o Timing : "validityPeriod"
 DataStructureDefinition ||--}o Coding : "coding"
 DataStructureDefinition ||--}o Comment : "comments"
-DataStructureDefinition ||--}o Comment : "siteOrSponsorComments"
+DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+SiteOrSponsorComment ||--}o Coding : "coding"
+SiteOrSponsorComment ||--}o Comment : "comments"
+SiteOrSponsorComment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 Comment ||--}o Comment : "comments"
-Comment ||--}o Comment : "siteOrSponsorComments"
+Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 WhereClause ||--}o Condition : "conditions"
 WhereClause ||--}o Coding : "coding"
 WhereClause ||--}o Comment : "comments"
-WhereClause ||--}o Comment : "siteOrSponsorComments"
+WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ReifiedConcept ||--}o ConceptProperty : "properties"
 ReifiedConcept ||--}o Coding : "coding"
 ReifiedConcept ||--}o Comment : "comments"
-ReifiedConcept ||--}o Comment : "siteOrSponsorComments"
+ReifiedConcept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
@@ -412,31 +431,31 @@ Item ||--|o CodeList : "roleCodeList"
 Item ||--|o Condition : "collectionExceptionCondition"
 Item ||--}o Coding : "coding"
 Item ||--}o Comment : "comments"
-Item ||--}o Comment : "siteOrSponsorComments"
+Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ComponentList ||--}o Coding : "coding"
 DataAttribute ||--|| Item : "item"
 DataAttribute ||--|o Method : "missingHandling"
 DataAttribute ||--|o Method : "imputation"
 DataAttribute ||--}o Coding : "coding"
 DataAttribute ||--}o Comment : "comments"
-DataAttribute ||--}o Comment : "siteOrSponsorComments"
+DataAttribute ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Measure ||--|| Item : "item"
 Measure ||--|o Method : "missingHandling"
 Measure ||--|o Method : "imputation"
 Measure ||--}o Coding : "coding"
 Measure ||--}o Comment : "comments"
-Measure ||--}o Comment : "siteOrSponsorComments"
+Measure ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Dimension ||--|| Item : "item"
 Dimension ||--|o Method : "missingHandling"
 Dimension ||--|o Method : "imputation"
 Dimension ||--}o Coding : "coding"
 Dimension ||--}o Comment : "comments"
-Dimension ||--}o Comment : "siteOrSponsorComments"
+Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Dataflow ||--|| DataStructureDefinition : "structure"
 Dataflow ||--}o Dimension : "dimensionConstraint"
 Dataflow ||--}o Coding : "coding"
 Dataflow ||--}o Comment : "comments"
-Dataflow ||--}o Comment : "siteOrSponsorComments"
+Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
