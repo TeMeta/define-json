@@ -127,6 +127,11 @@ Comment {
     string description  
     string label  
     stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
 }
 Coding {
     string code  
@@ -188,6 +193,8 @@ CodeList ||--}o Comment : "comments"
 CodeList ||--}o Comment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
+Comment ||--}o Comment : "comments"
+Comment ||--}o Comment : "siteOrSponsorComments"
 DocumentReference ||--}o Coding : "coding"
 Resource ||--}o FormalExpression : "selection"
 Resource ||--}o Coding : "coding"
@@ -320,7 +327,7 @@ CodeListItem ||--|o Coding : "coding"
 </tr>
 <tr>
 <td><a href="../../slots/lastUpdated/">lastUpdated</a></td>
-<td>0..1 <br/> <a href="../../types/Datetime/">Datetime</a></td>
+<td>1 <br/> <a href="../../types/Datetime/">Datetime</a></td>
 <td>When the resource was last updated</td>
 <td><a href="../Governed/">Governed</a></td>
 </tr>
@@ -410,6 +417,12 @@ CodeListItem ||--|o Coding : "coding"
 <td><a href="./">CodeList</a></td>
 </tr>
 <tr>
+<td><a href="../Comment/">Comment</a></td>
+<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
+<td>any_of[range]</td>
+<td><a href="./">CodeList</a></td>
+</tr>
+<tr>
 <td><a href="../ReifiedConcept/">ReifiedConcept</a></td>
 <td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
 <td>any_of[range]</td>
@@ -423,6 +436,12 @@ CodeListItem ||--|o Coding : "coding"
 </tr>
 <tr>
 <td><a href="../ConceptProperty/">ConceptProperty</a></td>
+<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
+<td>any_of[range]</td>
+<td><a href="./">CodeList</a></td>
+</tr>
+<tr>
+<td><a href="../WhereClause/">WhereClause</a></td>
 <td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
 <td>any_of[range]</td>
 <td><a href="./">CodeList</a></td>
@@ -863,6 +882,7 @@ CodeListItem ||--|o Coding : "coding"
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">datetime</span>
+<span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">owner</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">owner</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Party responsible for this element</span>

@@ -105,7 +105,9 @@
 Parameter {
     DataType dataType  
     string value  
+    string defaultValue  
     stringList items  
+    boolean required  
     string OID  
     string uuid  
     string name  
@@ -120,9 +122,9 @@ Coding {
     string codeSystemVersion  
     AliasPredicate aliasType  
 }
-ConceptProperty {
-    integer minOccurs  
-    integer maxOccurs  
+Condition {
+    string implementsCondition  
+    LogicalOperator operator  
     string OID  
     string uuid  
     string name  
@@ -143,6 +145,57 @@ Comment {
     string description  
     string label  
     stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+FormalExpression {
+    string context  
+    string expression  
+    string returnType  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+RangeCheck {
+    Comparator comparator  
+    stringList checkValues  
+    string item  
+    SoftHard softHard  
+    LogicalOperator operator  
+}
+WhereClause {
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+ConceptProperty {
+    integer minOccurs  
+    integer maxOccurs  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
 }
 CodeList {
     DataType dataType  
@@ -164,13 +217,32 @@ CodeList {
 
 Parameter ||--}o CodeList : "codeList"
 Parameter ||--}o ConceptProperty : "conceptProperty"
+Parameter ||--}o WhereClause : "applicableWhen"
+Parameter ||--}o Condition : "conditions"
 Parameter ||--}o Coding : "coding"
+Condition ||--}o RangeCheck : "rangeChecks"
+Condition ||--}o FormalExpression : "expressions"
+Condition ||--}o Condition : "conditions"
+Condition ||--}o Coding : "coding"
+Condition ||--}o Comment : "comments"
+Condition ||--}o Comment : "siteOrSponsorComments"
+Comment ||--}o DocumentReference : "documents"
+Comment ||--}o Coding : "coding"
+Comment ||--}o Comment : "comments"
+Comment ||--}o Comment : "siteOrSponsorComments"
+FormalExpression ||--}o Parameter : "parameters"
+FormalExpression ||--|o ReturnValue : "returnValue"
+FormalExpression ||--}o Resource : "externalCodeLibs"
+FormalExpression ||--}o Coding : "coding"
+RangeCheck ||--}o FormalExpression : "expressions"
+WhereClause ||--}o Condition : "conditions"
+WhereClause ||--}o Coding : "coding"
+WhereClause ||--}o Comment : "comments"
+WhereClause ||--}o Comment : "siteOrSponsorComments"
 ConceptProperty ||--|o CodeList : "codeList"
 ConceptProperty ||--}o Coding : "coding"
 ConceptProperty ||--}o Comment : "comments"
 ConceptProperty ||--}o Comment : "siteOrSponsorComments"
-Comment ||--}o DocumentReference : "documents"
-Comment ||--}o Coding : "coding"
 CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
 CodeList ||--}o Coding : "coding"
@@ -211,7 +283,13 @@ CodeList ||--}o Comment : "siteOrSponsorComments"
 <tr>
 <td><a href="../../slots/value/">value</a></td>
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>A specific value for the parameter.</td>
+<td>A specific bound value for the parameter.</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../../slots/defaultValue/">defaultValue</a></td>
+<td>0..1 <br/> <a href="../../types/String/">String</a></td>
+<td>A default value for the parameter.</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -224,6 +302,24 @@ CodeList ||--}o Comment : "siteOrSponsorComments"
 <td><a href="../../slots/conceptProperty/">conceptProperty</a></td>
 <td>* <br/> <a href="../ConceptProperty/">ConceptProperty</a></td>
 <td>Reference to a specific concept property that this parameter represents or modifies.</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../../slots/applicableWhen/">applicableWhen</a></td>
+<td>* <br/> <a href="../WhereClause/">WhereClause</a></td>
+<td>References to different situations that define when this parameter  is applicable or required in the containing expression. Multiple whereClauses are combined with OR logic: the parameter applies  if ANY referenced WhereClause matches.<br/>Within each WhereClause, conditions are combined with AND logic. Example: applicableWhen: ["WC.ADULT", "WC.PEDIATRIC"] means the parameter  is needed when (all conditions in WC.ADULT are true) OR  (all conditions in WC.PEDIATRIC are true).</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../../slots/conditions/">conditions</a></td>
+<td>* <br> <a href="../Condition/">Condition</a></br></td>
+<td>Validation conditions that constrain this parameter's value beyond controlled terminology. Multiple conditions are combined with AND logic: all must be satisfied. Use these for parameter validation rules, distinct from applicableWhen  which determines if the parameter is needed at all.<br/>Example: A parameter AGE might have conditions ensuring it's &gt;= 0 and &lt;= 120. or conditions might make up part of a componsed expression.</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../../slots/required/">required</a></td>
+<td>0..1 <br> <a href="../../types/Boolean/">Boolean</a></br></td>
+<td>Indicates whether this parameter must be provided when the  containing expression is evaluated (technical constraint).</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -344,12 +440,20 @@ CodeList ||--}o Comment : "siteOrSponsorComments"
 <span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">value</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A specific value for the parameter.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A specific bound value for the parameter.</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Translation</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Parameter</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Timing</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">  </span><span class="nt">defaultValue</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">defaultValue</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A default value for the parameter.</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Parameter</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 <span class="w">  </span><span class="nt">items</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">items</span>
@@ -377,6 +481,52 @@ CodeList ||--}o Comment : "siteOrSponsorComments"
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ConceptProperty</span>
 <span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">applicableWhen</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">applicableWhen</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'References</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">different</span><span class="nv"> </span><span class="s">situations</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">define</span><span class="nv"> </span><span class="s">when</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">parameter</span><span class="nv">  </span><span class="s">is</span>
+<span class="w">      </span><span class="s">applicable</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">required</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">containing</span><span class="nv"> </span><span class="s">expression.</span><span class="nv"> </span><span class="s">Multiple</span><span class="nv"> </span><span class="s">whereClauses</span><span class="nv"> </span><span class="s">are</span>
+<span class="w">      </span><span class="s">combined</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">OR</span><span class="nv"> </span><span class="s">logic:</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">parameter</span><span class="nv"> </span><span class="s">applies</span><span class="nv">  </span><span class="s">if</span><span class="nv"> </span><span class="s">ANY</span><span class="nv"> </span><span class="s">referenced</span><span class="nv"> </span><span class="s">WhereClause</span>
+<span class="w">      </span><span class="s">matches.</span>
+
+<span class="w">      </span><span class="s">Within</span><span class="nv"> </span><span class="s">each</span><span class="nv"> </span><span class="s">WhereClause,</span><span class="nv"> </span><span class="s">conditions</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">combined</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">AND</span><span class="nv"> </span><span class="s">logic.</span><span class="nv"> </span><span class="s">Example:</span><span class="nv"> </span><span class="s">applicableWhen:</span>
+<span class="w">      </span><span class="s">["WC.ADULT",</span><span class="nv"> </span><span class="s">"WC.PEDIATRIC"]</span><span class="nv"> </span><span class="s">means</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">parameter</span><span class="nv">  </span><span class="s">is</span><span class="nv"> </span><span class="s">needed</span><span class="nv"> </span><span class="s">when</span><span class="nv"> </span><span class="s">(all</span><span class="nv"> </span><span class="s">conditions</span>
+<span class="w">      </span><span class="s">in</span><span class="nv"> </span><span class="s">WC.ADULT</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">true)</span><span class="nv"> </span><span class="s">OR</span><span class="nv">  </span><span class="s">(all</span><span class="nv"> </span><span class="s">conditions</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">WC.PEDIATRIC</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">true).'</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Item</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Parameter</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WhereClause</span>
+<span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">conditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conditions</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Validation</span><span class="nv"> </span><span class="s">conditions</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">constrain</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">parameter</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">value</span><span class="nv"> </span><span class="s">beyond</span>
+<span class="w">      </span><span class="s">controlled</span><span class="nv"> </span><span class="s">terminology.</span><span class="nv"> </span><span class="s">Multiple</span><span class="nv"> </span><span class="s">conditions</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">combined</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">AND</span><span class="nv"> </span><span class="s">logic:</span><span class="nv"> </span><span class="s">all</span>
+<span class="w">      </span><span class="s">must</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">satisfied.</span><span class="nv"> </span><span class="s">Use</span><span class="nv"> </span><span class="s">these</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">parameter</span><span class="nv"> </span><span class="s">validation</span><span class="nv"> </span><span class="s">rules,</span><span class="nv"> </span><span class="s">distinct</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">applicableWhen</span><span class="nv">  </span><span class="s">which</span>
+<span class="w">      </span><span class="s">determines</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">parameter</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">needed</span><span class="nv"> </span><span class="s">at</span><span class="nv"> </span><span class="s">all.</span>
+
+<span class="w">      </span><span class="s">Example:</span><span class="nv"> </span><span class="s">A</span><span class="nv"> </span><span class="s">parameter</span><span class="nv"> </span><span class="s">AGE</span><span class="nv"> </span><span class="s">might</span><span class="nv"> </span><span class="s">have</span><span class="nv"> </span><span class="s">conditions</span><span class="nv"> </span><span class="s">ensuring</span><span class="nv"> </span><span class="s">it</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">&gt;=</span><span class="nv"> </span><span class="s">0</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">&lt;=</span><span class="nv"> </span><span class="s">120.</span>
+<span class="w">      </span><span class="s">or</span><span class="nv"> </span><span class="s">conditions</span><span class="nv"> </span><span class="s">might</span><span class="nv"> </span><span class="s">make</span><span class="nv"> </span><span class="s">up</span><span class="nv"> </span><span class="s">part</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">componsed</span><span class="nv"> </span><span class="s">expression.'</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MetaDataVersion</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WhereClause</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Condition</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Parameter</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Condition</span>
+<span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">required</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">required</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Indicates whether this parameter must be provided when the  containing</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">expression is evaluated (technical constraint).</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">ifabsent</span><span class="p">:</span><span class="w"> </span><span class="s">'False'</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Parameter</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">boolean</span>
 </code></pre></div>
 </details>
 <h3 id="induced">Induced</h3>
@@ -412,7 +562,7 @@ CodeList ||--}o Comment : "siteOrSponsorComments"
 <span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">value</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A specific value for the parameter.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A specific bound value for the parameter.</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Parameter</span>
@@ -420,6 +570,16 @@ CodeList ||--}o Comment : "siteOrSponsorComments"
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Translation</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Parameter</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Timing</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="w">  </span><span class="nt">defaultValue</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">defaultValue</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A default value for the parameter.</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">defaultValue</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Parameter</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Parameter</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 <span class="w">  </span><span class="nt">items</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">items</span>
@@ -451,6 +611,58 @@ CodeList ||--}o Comment : "siteOrSponsorComments"
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ConceptProperty</span>
 <span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">applicableWhen</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">applicableWhen</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'References</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">different</span><span class="nv"> </span><span class="s">situations</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">define</span><span class="nv"> </span><span class="s">when</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">parameter</span><span class="nv">  </span><span class="s">is</span>
+<span class="w">      </span><span class="s">applicable</span><span class="nv"> </span><span class="s">or</span><span class="nv"> </span><span class="s">required</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">containing</span><span class="nv"> </span><span class="s">expression.</span><span class="nv"> </span><span class="s">Multiple</span><span class="nv"> </span><span class="s">whereClauses</span><span class="nv"> </span><span class="s">are</span>
+<span class="w">      </span><span class="s">combined</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">OR</span><span class="nv"> </span><span class="s">logic:</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">parameter</span><span class="nv"> </span><span class="s">applies</span><span class="nv">  </span><span class="s">if</span><span class="nv"> </span><span class="s">ANY</span><span class="nv"> </span><span class="s">referenced</span><span class="nv"> </span><span class="s">WhereClause</span>
+<span class="w">      </span><span class="s">matches.</span>
+
+<span class="w">      </span><span class="s">Within</span><span class="nv"> </span><span class="s">each</span><span class="nv"> </span><span class="s">WhereClause,</span><span class="nv"> </span><span class="s">conditions</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">combined</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">AND</span><span class="nv"> </span><span class="s">logic.</span><span class="nv"> </span><span class="s">Example:</span><span class="nv"> </span><span class="s">applicableWhen:</span>
+<span class="w">      </span><span class="s">["WC.ADULT",</span><span class="nv"> </span><span class="s">"WC.PEDIATRIC"]</span><span class="nv"> </span><span class="s">means</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">parameter</span><span class="nv">  </span><span class="s">is</span><span class="nv"> </span><span class="s">needed</span><span class="nv"> </span><span class="s">when</span><span class="nv"> </span><span class="s">(all</span><span class="nv"> </span><span class="s">conditions</span>
+<span class="w">      </span><span class="s">in</span><span class="nv"> </span><span class="s">WC.ADULT</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">true)</span><span class="nv"> </span><span class="s">OR</span><span class="nv">  </span><span class="s">(all</span><span class="nv"> </span><span class="s">conditions</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">WC.PEDIATRIC</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">true).'</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">applicableWhen</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Parameter</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Item</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Parameter</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WhereClause</span>
+<span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">conditions</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conditions</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Validation</span><span class="nv"> </span><span class="s">conditions</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">constrain</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">parameter</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">value</span><span class="nv"> </span><span class="s">beyond</span>
+<span class="w">      </span><span class="s">controlled</span><span class="nv"> </span><span class="s">terminology.</span><span class="nv"> </span><span class="s">Multiple</span><span class="nv"> </span><span class="s">conditions</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">combined</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">AND</span><span class="nv"> </span><span class="s">logic:</span><span class="nv"> </span><span class="s">all</span>
+<span class="w">      </span><span class="s">must</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">satisfied.</span><span class="nv"> </span><span class="s">Use</span><span class="nv"> </span><span class="s">these</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">parameter</span><span class="nv"> </span><span class="s">validation</span><span class="nv"> </span><span class="s">rules,</span><span class="nv"> </span><span class="s">distinct</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">applicableWhen</span><span class="nv">  </span><span class="s">which</span>
+<span class="w">      </span><span class="s">determines</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">parameter</span><span class="nv"> </span><span class="s">is</span><span class="nv"> </span><span class="s">needed</span><span class="nv"> </span><span class="s">at</span><span class="nv"> </span><span class="s">all.</span>
+
+<span class="w">      </span><span class="s">Example:</span><span class="nv"> </span><span class="s">A</span><span class="nv"> </span><span class="s">parameter</span><span class="nv"> </span><span class="s">AGE</span><span class="nv"> </span><span class="s">might</span><span class="nv"> </span><span class="s">have</span><span class="nv"> </span><span class="s">conditions</span><span class="nv"> </span><span class="s">ensuring</span><span class="nv"> </span><span class="s">it</span><span class="se">''</span><span class="s">s</span><span class="nv"> </span><span class="s">&gt;=</span><span class="nv"> </span><span class="s">0</span><span class="nv"> </span><span class="s">and</span><span class="nv"> </span><span class="s">&lt;=</span><span class="nv"> </span><span class="s">120.</span>
+<span class="w">      </span><span class="s">or</span><span class="nv"> </span><span class="s">conditions</span><span class="nv"> </span><span class="s">might</span><span class="nv"> </span><span class="s">make</span><span class="nv"> </span><span class="s">up</span><span class="nv"> </span><span class="s">part</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">componsed</span><span class="nv"> </span><span class="s">expression.'</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conditions</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Parameter</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MetaDataVersion</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WhereClause</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Condition</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Parameter</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Condition</span>
+<span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">required</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">required</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Indicates whether this parameter must be provided when the  containing</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">expression is evaluated (technical constraint).</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">ifabsent</span><span class="p">:</span><span class="w"> </span><span class="s">'False'</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">required</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Parameter</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Parameter</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">boolean</span>
 <span class="w">  </span><span class="nt">OID</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OID</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Local identifier within this study/context. Use CDISC OID format</span>

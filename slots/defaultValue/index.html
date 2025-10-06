@@ -6,9 +6,9 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="CDISC" name="author"/>
-<link href="https://TeMeta.github.io/define-json/slots/attribute/" rel="canonical"/>
+<link href="https://TeMeta.github.io/define-json/slots/defaultValue/" rel="canonical"/>
 <link href="../../img/favicon.ico" rel="shortcut icon"/>
-<title>Slot: attribute - Define-JSON Documentation</title>
+<title>Slot: defaultValue - Define-JSON Documentation</title>
 <link href="../../css/bootstrap.min.css" rel="stylesheet"/>
 <link href="../../css/fontawesome.min.css" rel="stylesheet"/>
 <link href="../../css/brands.min.css" rel="stylesheet"/>
@@ -49,7 +49,7 @@
                             </a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="https://github.com/TeMeta/define-json/edit/main/slots/attribute.md">Edit on define-json
+<a class="nav-link" href="https://github.com/TeMeta/define-json/edit/main/slots/defaultValue.md">Edit on define-json
                                     </a>
 </li>
 </ul>
@@ -66,7 +66,7 @@
 </div>
 <div class="navbar-collapse collapse card bg-body-tertiary" id="toc-collapse">
 <ul class="nav flex-column">
-<li class="nav-item" data-bs-level="1"><a class="nav-link" href="#slot-attribute">Slot: attribute</a>
+<li class="nav-item" data-bs-level="1"><a class="nav-link" href="#slot-defaultvalue">Slot: defaultValue</a>
 <ul class="nav flex-column">
 <li class="nav-item" data-bs-level="2"><a class="nav-link" href="#applicable-classes">Applicable Classes</a>
 <ul class="nav flex-column">
@@ -94,9 +94,10 @@
 </div>
 </div></div>
 <div class="col-md-9" role="main">
-<h1 id="slot-attribute">Slot: attribute</h1>
-<p>URI: <a href="https://cdisc.org/odm2/slot/attribute">odm:slot/attribute</a>
-Alias: attribute</p>
+<h1 id="slot-defaultvalue">Slot: defaultValue</h1>
+<p><em>A default value for the parameter.</em></p>
+<p>URI: <a href="https://cdisc.org/odm2/slot/defaultValue">odm:slot/defaultValue</a>
+Alias: defaultValue</p>
 <!-- no inheritance hierarchy -->
 <h2 id="applicable-classes">Applicable Classes</h2>
 <table>
@@ -109,47 +110,21 @@ Alias: attribute</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../../classes/Resource/">Resource</a></td>
-<td>An external reference that serves as the source for a Dataset, ItemGroup, or Item</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/DataService/">DataService</a></td>
-<td>A service element that provides an API or endpoint for serving or receiving data</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/GroupRelationship/">GroupRelationship</a></td>
-<td>A relationship element that associates a DataAttribute with a set of Dimensions, used when attribute values vary based on all group dimension values</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/DataflowRelationship/">DataflowRelationship</a></td>
-<td>A relationship element that associates a DataAttribute with a Dataflow, reported at the Dataset level</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/MeasureRelationship/">MeasureRelationship</a></td>
-<td>A relationship element that associates a DataAttribute with a Measure</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/DimensionRelationship/">DimensionRelationship</a></td>
-<td>A relationship element that associates a DataAttribute with a specific Dimension at a specific level</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/ObservationRelationship/">ObservationRelationship</a></td>
-<td>A relationship element that associates a DataAttribute with an Observation, allowing value-level Items to be reused across multiple different Views</td>
+<td><a href="../../classes/Parameter/">Parameter</a></td>
+<td>A variable element that describes an input used in a formal expression</td>
 <td>no</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>Range: NONE</li>
+<li>Range: <a href="../../types/String/">String</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
+<h3 id="schema-source">Schema Source</h3>
+<ul>
+<li>from schema: https://cdisc.org/define-json</li>
+</ul>
 <h2 id="mappings">Mappings</h2>
 <table>
 <thead>
@@ -161,25 +136,25 @@ Alias: attribute</p>
 <tbody>
 <tr>
 <td>self</td>
-<td>odm:attribute</td>
+<td>odm:defaultValue</td>
 </tr>
 <tr>
 <td>native</td>
-<td>odm:attribute</td>
+<td>odm:defaultValue</td>
 </tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
-<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">attribute</span>
-<span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">attribute</span>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">defaultValue</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A default value for the parameter.</span>
+<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
+<span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">defaultValue</span>
+<span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Parameter</span>
 <span class="nt">domain_of</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Resource</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MeasureRelationship</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataflowRelationship</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GroupRelationship</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DimensionRelationship</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ObservationRelationship</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Parameter</span>
+<span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 </code></pre></div>
 </details></div>
 </div>

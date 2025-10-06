@@ -151,6 +151,11 @@ Comment {
     string description  
     string label  
     stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
 }
 Coding {
     string code  
@@ -283,13 +288,50 @@ ReturnValue {
 Parameter {
     DataType dataType  
     string value  
+    string defaultValue  
     stringList items  
+    boolean required  
     string OID  
     string uuid  
     string name  
     string description  
     string label  
     stringList aliases  
+}
+Condition {
+    string implementsCondition  
+    LogicalOperator operator  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+RangeCheck {
+    Comparator comparator  
+    stringList checkValues  
+    string item  
+    SoftHard softHard  
+    LogicalOperator operator  
+}
+WhereClause {
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
 }
 ConceptProperty {
     integer minOccurs  
@@ -345,28 +387,6 @@ NominalOccurrence {
     string owner  
     string wasDerivedFrom  
 }
-Condition {
-    string implementsCondition  
-    LogicalOperator operator  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-RangeCheck {
-    Comparator comparator  
-    stringList checkValues  
-    string item  
-    SoftHard softHard  
-    LogicalOperator operator  
-}
 Distribution {
     string conformsTo  
     string format  
@@ -407,14 +427,6 @@ DataStructureDefinition {
     string wasDerivedFrom  
     string version  
     string href  
-}
-WhereClause {
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
 }
 ReifiedConcept {
     string version  
@@ -609,6 +621,8 @@ MetaDataVersion ||--}o Comment : "comments"
 MetaDataVersion ||--}o Comment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
+Comment ||--}o Comment : "comments"
+Comment ||--}o Comment : "siteOrSponsorComments"
 DocumentReference ||--}o Coding : "coding"
 DataProduct ||--}o DataService : "inputPort"
 DataProduct ||--}o DataService : "outputPort"
@@ -627,7 +641,7 @@ Timing ||--|o NominalOccurrence : "relativeTo"
 Timing ||--|o NominalOccurrence : "relativeFrom"
 Timing ||--|o Method : "imputation"
 Timing ||--}o Coding : "coding"
-Method ||--}o FormalExpression : "formalExpressions"
+Method ||--}o FormalExpression : "expressions"
 Method ||--|o DocumentReference : "document"
 Method ||--}o Coding : "coding"
 Method ||--}o Comment : "comments"
@@ -641,7 +655,20 @@ Resource ||--}o Coding : "coding"
 ReturnValue ||--}o Coding : "coding"
 Parameter ||--}o CodeList : "codeList"
 Parameter ||--}o ConceptProperty : "conceptProperty"
+Parameter ||--}o WhereClause : "applicableWhen"
+Parameter ||--}o Condition : "conditions"
 Parameter ||--}o Coding : "coding"
+Condition ||--}o RangeCheck : "rangeChecks"
+Condition ||--}o FormalExpression : "expressions"
+Condition ||--}o Condition : "conditions"
+Condition ||--}o Coding : "coding"
+Condition ||--}o Comment : "comments"
+Condition ||--}o Comment : "siteOrSponsorComments"
+RangeCheck ||--}o FormalExpression : "expressions"
+WhereClause ||--}o Condition : "conditions"
+WhereClause ||--}o Coding : "coding"
+WhereClause ||--}o Comment : "comments"
+WhereClause ||--}o Comment : "siteOrSponsorComments"
 ConceptProperty ||--|o CodeList : "codeList"
 ConceptProperty ||--}o Coding : "coding"
 ConceptProperty ||--}o Comment : "comments"
@@ -657,13 +684,6 @@ NominalOccurrence ||--}o Condition : "condition"
 NominalOccurrence ||--}o Coding : "coding"
 NominalOccurrence ||--}o Comment : "comments"
 NominalOccurrence ||--}o Comment : "siteOrSponsorComments"
-Condition ||--}o RangeCheck : "rangeChecks"
-Condition ||--}o FormalExpression : "formalExpression"
-Condition ||--}o Condition : "conditions"
-Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comments"
-Condition ||--}o Comment : "siteOrSponsorComments"
-RangeCheck ||--}o FormalExpression : "formalExpression"
 Distribution ||--|o DataService : "accessService"
 Distribution ||--|o Dataset : "isDistributionOf"
 DataService ||--|o Distribution : "isAccessServiceOf"
@@ -675,14 +695,12 @@ DataStructureDefinition ||--}o DataAttribute : "attributes"
 DataStructureDefinition ||--|o ComponentList : "grouping"
 DataStructureDefinition ||--}o Item : "items"
 DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
-DataStructureDefinition ||--}o WhereClause : "whereClauses"
+DataStructureDefinition ||--}o WhereClause : "applicableWhen"
 DataStructureDefinition ||--}o Coding : "security"
 DataStructureDefinition ||--|o Timing : "validityPeriod"
 DataStructureDefinition ||--}o Coding : "coding"
 DataStructureDefinition ||--}o Comment : "comments"
 DataStructureDefinition ||--}o Comment : "siteOrSponsorComments"
-WhereClause ||--}o Condition : "conditions"
-WhereClause ||--}o Coding : "coding"
 ReifiedConcept ||--}o ConceptProperty : "properties"
 ReifiedConcept ||--}o Coding : "coding"
 ReifiedConcept ||--}o Comment : "comments"
@@ -690,7 +708,7 @@ ReifiedConcept ||--}o Comment : "siteOrSponsorComments"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--}o WhereClause : "whereClauses"
+Item ||--}o WhereClause : "applicableWhen"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
 Item ||--|o CodeList : "roleCodeList"
@@ -736,7 +754,7 @@ Relationship ||--}o Coding : "coding"
 IdentifiableElement ||--}o Coding : "coding"
 ItemGroup ||--}o Item : "items"
 ItemGroup ||--|o ReifiedConcept : "implementsConcept"
-ItemGroup ||--}o WhereClause : "whereClauses"
+ItemGroup ||--}o WhereClause : "applicableWhen"
 ItemGroup ||--}o Coding : "security"
 ItemGroup ||--|o Timing : "validityPeriod"
 ItemGroup ||--}o Coding : "coding"
@@ -800,6 +818,10 @@ ItemGroup ||--}o Comment : "siteOrSponsorComments"
 <tr>
 <td>        <a href="classes/CodeList/">CodeList</a></td>
 <td>A value set that defines a discrete collection of permissible values for an item, corresponding to the ODM CodeList construct</td>
+</tr>
+<tr>
+<td>        <a href="classes/Comment/">Comment</a></td>
+<td>A descriptive element that contains explanatory text provided by a data or metadata handler</td>
 </tr>
 <tr>
 <td>        <a href="classes/ConceptProperty/">ConceptProperty</a></td>
@@ -870,6 +892,10 @@ ItemGroup ||--}o Comment : "siteOrSponsorComments"
 <td>A feedback element that contains comments from a site or sponsor, distinct from the general Comment class</td>
 </tr>
 <tr>
+<td>        <a href="classes/WhereClause/">WhereClause</a></td>
+<td>A conditional element that describes the circumstances under which a containing context applies, linking conditions to structures where they are used</td>
+</tr>
+<tr>
 <td><a href="classes/GroupRelationship/">GroupRelationship</a></td>
 <td>A relationship element that associates a DataAttribute with a set of Dimensions, used when attribute values vary based on all group dimension values</td>
 </tr>
@@ -880,10 +906,6 @@ ItemGroup ||--}o Comment : "siteOrSponsorComments"
 <tr>
 <td><a href="classes/IdentifiableElement/">IdentifiableElement</a></td>
 <td></td>
-</tr>
-<tr>
-<td>        <a href="classes/Comment/">Comment</a></td>
-<td>A descriptive element that contains explanatory text provided by a data or metadata handler</td>
 </tr>
 <tr>
 <td>        <a href="classes/ComponentList/">ComponentList</a></td>
@@ -944,10 +966,6 @@ ItemGroup ||--}o Comment : "siteOrSponsorComments"
 <tr>
 <td>        <a href="classes/User/">User</a></td>
 <td>An entity that represents information about a specific user of a clinical data collection or data management system</td>
-</tr>
-<tr>
-<td>        <a href="classes/WhereClause/">WhereClause</a></td>
-<td>A conditional element that describes the circumstances under which a containing context applies, linking conditions to structures where they are used</td>
 </tr>
 <tr>
 <td><a href="classes/IsODMItem/">IsODMItem</a></td>
@@ -1273,6 +1291,10 @@ ItemGroup ||--}o Comment : "siteOrSponsorComments"
 <td>Range checks applied to this item (e.g. edit checks, CORE rules)</td>
 </tr>
 <tr>
+<td><a href="slots/applicableWhen/">applicableWhen</a></td>
+<td>References to different situations that define when this item applies.<br/>Multiple whereClauses are combined with OR logic: the item applies if ANY referenced WhereClause matches.<br/>Within each WhereClause, conditions are combined with AND logic: all conditions must be true.<br/><br/>Example: whereClause: ["WC.SYSBP", "WC.DIABP"] means the item applies when<br/>(all conditions in WC.SYSBP are true) OR (all conditions in WC.DIABP are true).</td>
+</tr>
+<tr>
 <td><a href="slots/origin/">origin</a></td>
 <td>The origin of the data</td>
 </tr>
@@ -1409,7 +1431,7 @@ ItemGroup ||--}o Comment : "siteOrSponsorComments"
 <td>Reference to a external (e.g. USDM) condition definition that this implements</td>
 </tr>
 <tr>
-<td><a href="slots/formalExpression/">formalExpression</a></td>
+<td><a href="slots/expressions/">expressions</a></td>
 <td>Logical expression, resolving to a boolean, that implements this condition in a specific context</td>
 </tr>
 <tr>
@@ -1453,16 +1475,20 @@ ItemGroup ||--}o Comment : "siteOrSponsorComments"
 <td>External code libraries referenced</td>
 </tr>
 <tr>
-<td><a href="slots/formalExpressions/">formalExpressions</a></td>
-<td>Formal expressions used by this method</td>
-</tr>
-<tr>
 <td><a href="slots/document/">document</a></td>
 <td>Reference to a document that describes this method in detail.</td>
 </tr>
 <tr>
 <td><a href="slots/resource/">resource</a></td>
 <td>Path to a resource (e.g. File, FHIR datasource) that is the source of this item</td>
+</tr>
+<tr>
+<td><a href="slots/defaultValue/">defaultValue</a></td>
+<td>A default value for the parameter.</td>
+</tr>
+<tr>
+<td><a href="slots/required/">required</a></td>
+<td>Indicates whether this parameter must be provided when the  containing expression is evaluated (technical constraint).</td>
 </tr>
 <tr>
 <td><a href="slots/valueList/">valueList</a></td>
@@ -2046,5 +2072,5 @@ ItemGroup ||--}o Comment : "siteOrSponsorComments"
 </html>
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-10-05 18:56:44.042612+00:00
+Build Date UTC : 2025-10-06 13:20:58.367450+00:00
 -->

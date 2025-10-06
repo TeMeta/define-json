@@ -6,9 +6,9 @@
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <meta content="CDISC" name="author"/>
-<link href="https://TeMeta.github.io/define-json/slots/formalExpressions/" rel="canonical"/>
+<link href="https://TeMeta.github.io/define-json/slots/expressions/" rel="canonical"/>
 <link href="../../img/favicon.ico" rel="shortcut icon"/>
-<title>Slot: formalExpressions - Define-JSON Documentation</title>
+<title>Slot: expressions - Define-JSON Documentation</title>
 <link href="../../css/bootstrap.min.css" rel="stylesheet"/>
 <link href="../../css/fontawesome.min.css" rel="stylesheet"/>
 <link href="../../css/brands.min.css" rel="stylesheet"/>
@@ -49,7 +49,7 @@
                             </a>
 </li>
 <li class="nav-item">
-<a class="nav-link" href="https://github.com/TeMeta/define-json/edit/main/slots/formalExpressions.md">Edit on define-json
+<a class="nav-link" href="https://github.com/TeMeta/define-json/edit/main/slots/expressions.md">Edit on define-json
                                     </a>
 </li>
 </ul>
@@ -66,7 +66,7 @@
 </div>
 <div class="navbar-collapse collapse card bg-body-tertiary" id="toc-collapse">
 <ul class="nav flex-column">
-<li class="nav-item" data-bs-level="1"><a class="nav-link" href="#slot-formalexpressions">Slot: formalExpressions</a>
+<li class="nav-item" data-bs-level="1"><a class="nav-link" href="#slot-expressions">Slot: expressions</a>
 <ul class="nav flex-column">
 <li class="nav-item" data-bs-level="2"><a class="nav-link" href="#applicable-classes">Applicable Classes</a>
 <ul class="nav flex-column">
@@ -94,10 +94,9 @@
 </div>
 </div></div>
 <div class="col-md-9" role="main">
-<h1 id="slot-formalexpressions">Slot: formalExpressions</h1>
-<p><em>Formal expressions used by this method</em></p>
-<p>URI: <a href="https://cdisc.org/odm2/slot/formalExpressions">odm:slot/formalExpressions</a>
-Alias: formalExpressions</p>
+<h1 id="slot-expressions">Slot: expressions</h1>
+<p>URI: <a href="https://cdisc.org/odm2/slot/expressions">odm:slot/expressions</a>
+Alias: expressions</p>
 <!-- no inheritance hierarchy -->
 <h2 id="applicable-classes">Applicable Classes</h2>
 <table>
@@ -110,26 +109,27 @@ Alias: formalExpressions</p>
 </thead>
 <tbody>
 <tr>
+<td><a href="../../classes/RangeCheck/">RangeCheck</a></td>
+<td>A validation element that performs a simple comparison check between a referenced item's value and specified values, resolving to a boolean result</td>
+<td>no</td>
+</tr>
+<tr>
 <td><a href="../../classes/Method/">Method</a></td>
 <td>A reusable computational procedure that describes how to derive values and can be referenced by Items</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/Condition/">Condition</a></td>
+<td>A reusable, composable, and nestable logical construct allowing for complex expressions. Conditions are most useful when given a meaningful name and linked to Study Definitions.</td>
 <td>no</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>
-<p>Range: <a href="../../classes/FormalExpression/">FormalExpression</a></p>
-</li>
-<li>
-<p>Multivalued: True</p>
-</li>
+<li>Range: NONE</li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="schema-source">Schema Source</h3>
-<ul>
-<li>from schema: https://cdisc.org/define-json</li>
-</ul>
 <h2 id="mappings">Mappings</h2>
 <table>
 <thead>
@@ -141,27 +141,22 @@ Alias: formalExpressions</p>
 <tbody>
 <tr>
 <td>self</td>
-<td>odm:formalExpressions</td>
+<td>odm:expressions</td>
 </tr>
 <tr>
 <td>native</td>
-<td>odm:formalExpressions</td>
+<td>odm:expressions</td>
 </tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
-<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">formalExpressions</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Formal expressions used by this method</span>
-<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
-<span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">formalExpressions</span>
-<span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Method</span>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">expressions</span>
+<span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">expressions</span>
 <span class="nt">domain_of</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Condition</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">RangeCheck</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Method</span>
-<span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FormalExpression</span>
-<span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 </details></div>
 </div>
