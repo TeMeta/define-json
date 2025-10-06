@@ -69,11 +69,11 @@ DocumentReference {
 
 SiteOrSponsorComment ||--}o Coding : "coding"
 SiteOrSponsorComment ||--}o Comment : "comments"
-SiteOrSponsorComment ||--}o Comment : "siteOrSponsorComments"
+SiteOrSponsorComment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 Comment ||--}o Comment : "comments"
-Comment ||--}o Comment : "siteOrSponsorComments"
+Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 DocumentReference ||--}o Coding : "coding"
 
 ```
@@ -103,7 +103,7 @@ DocumentReference ||--}o Coding : "coding"
 | [aliases](../slots/aliases.md) | * <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Alternative name or identifier | [Labelled](../classes/Labelled.md) |
 | [mandatory](../slots/mandatory.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Is this element required? | [Governed](../classes/Governed.md) |
 | [comments](../slots/comments.md) | * <br/> [Comment](../classes/Comment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
-| [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | * <br/> [Comment](../classes/Comment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
+| [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | * <br/> [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
 | [purpose](../slots/purpose.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Purpose or rationale for this data element | [Governed](../classes/Governed.md) |
 | [lastUpdated](../slots/lastUpdated.md) | 1 <br/> [Datetime](../types/Datetime.md) | When the resource was last updated | [Governed](../classes/Governed.md) |
 | [owner](../slots/owner.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Party responsible for this element | [Governed](../classes/Governed.md) |
@@ -111,6 +111,34 @@ DocumentReference ||--}o Coding : "coding"
 
 
 
+
+
+## Usages
+
+| used by | used in | type | used |
+| ---  | --- | --- | --- |
+| [GovernedElement](../classes/GovernedElement.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [Governed](../classes/Governed.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [MetaDataVersion](../classes/MetaDataVersion.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [Item](../classes/Item.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [ItemGroup](../classes/ItemGroup.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [CodeList](../classes/CodeList.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [Comment](../classes/Comment.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [ReifiedConcept](../classes/ReifiedConcept.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [ConceptProperty](../classes/ConceptProperty.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [WhereClause](../classes/WhereClause.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [Condition](../classes/Condition.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [Method](../classes/Method.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [NominalOccurrence](../classes/NominalOccurrence.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [DataStructureDefinition](../classes/DataStructureDefinition.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [Dataflow](../classes/Dataflow.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [CubeComponent](../classes/CubeComponent.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [Measure](../classes/Measure.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [Dimension](../classes/Dimension.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [DataAttribute](../classes/DataAttribute.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [DataProduct](../classes/DataProduct.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [ProvisionAgreement](../classes/ProvisionAgreement.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
 
 
 
@@ -375,7 +403,7 @@ attributes:
     owner: SiteOrSponsorComment
     domain_of:
     - Governed
-    range: Comment
+    range: SiteOrSponsorComment
     multivalued: true
     inlined: false
   purpose:

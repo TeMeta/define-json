@@ -17,10 +17,10 @@ Alias: dataType
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [CodeList](../classes/CodeList.md) | A value set that defines a discrete collection of permissible values for an item, corresponding to the ODM CodeList construct |  no  |
 | [Item](../classes/Item.md) | A data element that represents a specific piece of information within a defined context, with data type, constraints, and derivation methods |  no  |
-| [Parameter](../classes/Parameter.md) | A variable element that describes an input used in a formal expression |  no  |
+| [CodeList](../classes/CodeList.md) | A value set that defines a discrete collection of permissible values for an item, corresponding to the ODM CodeList construct |  no  |
 | [ReturnValue](../classes/ReturnValue.md) | An output specification that defines the details of what a formal expression returns |  no  |
+| [Parameter](../classes/Parameter.md) | A variable element that describes an input used in a formal expression |  no  |
 
 
 

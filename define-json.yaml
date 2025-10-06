@@ -78,7 +78,7 @@ classes:
       siteOrSponsorComments:
         description: >-
           Comment on the element, such as a rationale for its inclusion or exclusion
-        range: Comment
+        range: SiteOrSponsorComment
         multivalued: true 
         inlined: false
       purpose:

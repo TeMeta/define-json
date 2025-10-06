@@ -29,6 +29,22 @@ Comment {
     string owner  
     string wasDerivedFrom  
 }
+SiteOrSponsorComment {
+    string text  
+    OriginSource sourceType  
+    string source  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
 Coding {
     string code  
     string decode  
@@ -54,7 +70,10 @@ DocumentReference {
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 Comment ||--}o Comment : "comments"
-Comment ||--}o Comment : "siteOrSponsorComments"
+Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+SiteOrSponsorComment ||--}o Coding : "coding"
+SiteOrSponsorComment ||--}o Comment : "comments"
+SiteOrSponsorComment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 DocumentReference ||--}o Coding : "coding"
 
 ```
@@ -83,7 +102,7 @@ DocumentReference ||--}o Coding : "coding"
 | [aliases](../slots/aliases.md) | * <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Alternative name or identifier | [Labelled](../classes/Labelled.md) |
 | [mandatory](../slots/mandatory.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Is this element required? | [Governed](../classes/Governed.md) |
 | [comments](../slots/comments.md) | * <br/> [Comment](../classes/Comment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
-| [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | * <br/> [Comment](../classes/Comment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
+| [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | * <br/> [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
 | [purpose](../slots/purpose.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Purpose or rationale for this data element | [Governed](../classes/Governed.md) |
 | [lastUpdated](../slots/lastUpdated.md) | 1 <br/> [Datetime](../types/Datetime.md) | When the resource was last updated | [Governed](../classes/Governed.md) |
 | [owner](../slots/owner.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Party responsible for this element | [Governed](../classes/Governed.md) |
@@ -98,49 +117,27 @@ DocumentReference ||--}o Coding : "coding"
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
 | [GovernedElement](../classes/GovernedElement.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
-| [GovernedElement](../classes/GovernedElement.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [Comment](../classes/Comment.md) |
 | [Governed](../classes/Governed.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
-| [Governed](../classes/Governed.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [Comment](../classes/Comment.md) |
 | [MetaDataVersion](../classes/MetaDataVersion.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [Comment](../classes/Comment.md) |
 | [Item](../classes/Item.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
-| [Item](../classes/Item.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [Comment](../classes/Comment.md) |
 | [ItemGroup](../classes/ItemGroup.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
-| [ItemGroup](../classes/ItemGroup.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [Comment](../classes/Comment.md) |
 | [CodeList](../classes/CodeList.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
-| [CodeList](../classes/CodeList.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [Comment](../classes/Comment.md) |
 | [Comment](../classes/Comment.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
-| [Comment](../classes/Comment.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [Comment](../classes/Comment.md) |
 | [ReifiedConcept](../classes/ReifiedConcept.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
-| [ReifiedConcept](../classes/ReifiedConcept.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [Comment](../classes/Comment.md) |
 | [ConceptProperty](../classes/ConceptProperty.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
-| [ConceptProperty](../classes/ConceptProperty.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [Comment](../classes/Comment.md) |
 | [WhereClause](../classes/WhereClause.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
-| [WhereClause](../classes/WhereClause.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [Comment](../classes/Comment.md) |
 | [Condition](../classes/Condition.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
-| [Condition](../classes/Condition.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [Comment](../classes/Comment.md) |
 | [Method](../classes/Method.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
-| [Method](../classes/Method.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [Comment](../classes/Comment.md) |
 | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
-| [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [Comment](../classes/Comment.md) |
 | [NominalOccurrence](../classes/NominalOccurrence.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
-| [NominalOccurrence](../classes/NominalOccurrence.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [Comment](../classes/Comment.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
-| [DataStructureDefinition](../classes/DataStructureDefinition.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [Comment](../classes/Comment.md) |
 | [Dataflow](../classes/Dataflow.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
-| [Dataflow](../classes/Dataflow.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [Comment](../classes/Comment.md) |
 | [CubeComponent](../classes/CubeComponent.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
-| [CubeComponent](../classes/CubeComponent.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [Comment](../classes/Comment.md) |
 | [Measure](../classes/Measure.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
-| [Measure](../classes/Measure.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [Comment](../classes/Comment.md) |
 | [Dimension](../classes/Dimension.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
-| [Dimension](../classes/Dimension.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [Comment](../classes/Comment.md) |
 | [DataAttribute](../classes/DataAttribute.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
-| [DataAttribute](../classes/DataAttribute.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [Comment](../classes/Comment.md) |
 | [DataProduct](../classes/DataProduct.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
-| [DataProduct](../classes/DataProduct.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [Comment](../classes/Comment.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
-| [ProvisionAgreement](../classes/ProvisionAgreement.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [Comment](../classes/Comment.md) |
 
 
 
@@ -392,7 +389,7 @@ attributes:
     owner: Comment
     domain_of:
     - Governed
-    range: Comment
+    range: SiteOrSponsorComment
     multivalued: true
     inlined: false
   purpose:
