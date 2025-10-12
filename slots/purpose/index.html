@@ -110,8 +110,13 @@ Alias: purpose</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../../classes/ItemGroup/">ItemGroup</a></td>
-<td>A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections</td>
+<td><a href="../../classes/CodeList/">CodeList</a></td>
+<td>A value set that defines a discrete collection of permissible values for an item, corresponding to the ODM CodeList construct</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/DataProduct/">DataProduct</a></td>
+<td>A governed collection that represents a purpose-driven assembly of datasets and services with an owning team and lifecycle</td>
 <td>no</td>
 </tr>
 <tr>
@@ -120,33 +125,8 @@ Alias: purpose</p>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../../classes/Dimension/">Dimension</a></td>
-<td>A data cube property that describes a categorical or hierarchical dimension</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/DataStructureDefinition/">DataStructureDefinition</a></td>
-<td>A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/CodeList/">CodeList</a></td>
-<td>A value set that defines a discrete collection of permissible values for an item, corresponding to the ODM CodeList construct</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/Method/">Method</a></td>
-<td>A reusable computational procedure that describes how to derive values and can be referenced by Items</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/ReifiedConcept/">ReifiedConcept</a></td>
-<td>A canonical information layer that makes abstract concepts explicit and referenceable, showing how different data implementations represent the same underlying meanings through a star schema structure with multiple properties</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/ProvisionAgreement/">ProvisionAgreement</a></td>
-<td>An agreement element that describes the contractual relationship between a Data Provider and a Data Consumer regarding data provision</td>
+<td><a href="../../classes/NominalOccurrence/">NominalOccurrence</a></td>
+<td>An event element that represents occurrences such as planned or unplanned encounters or adverse events</td>
 <td>no</td>
 </tr>
 <tr>
@@ -165,8 +145,8 @@ Alias: purpose</p>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../../classes/DataAttribute/">DataAttribute</a></td>
-<td>A data cube property that describes additional characteristics or metadata about observations</td>
+<td><a href="../../classes/Governed/">Governed</a></td>
+<td>A mixin that provides slots for audit trail and standards governance, including mandatory status, comments, and attribution</td>
 <td>no</td>
 </tr>
 <tr>
@@ -175,8 +155,8 @@ Alias: purpose</p>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../../classes/DataProduct/">DataProduct</a></td>
-<td>A governed collection that represents a purpose-driven assembly of datasets and services with an owning team and lifecycle</td>
+<td><a href="../../classes/ProvisionAgreement/">ProvisionAgreement</a></td>
+<td>An agreement element that describes the contractual relationship between a Data Provider and a Data Consumer regarding data provision</td>
 <td>no</td>
 </tr>
 <tr>
@@ -185,18 +165,28 @@ Alias: purpose</p>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../../classes/NominalOccurrence/">NominalOccurrence</a></td>
-<td>An event element that represents occurrences such as planned or unplanned encounters or adverse events</td>
+<td><a href="../../classes/Dataflow/">Dataflow</a></td>
+<td>An abstract representation that defines data provision for different reference periods, where a Distribution and its Dataset are instances</td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../../classes/CubeComponent/">CubeComponent</a></td>
-<td>An abstract data field that represents a component in a data structure definition, referencing an Item for its definition</td>
+<td><a href="../../classes/ReifiedConcept/">ReifiedConcept</a></td>
+<td>A canonical information layer that makes abstract concepts explicit and referenceable, showing how different data implementations represent the same underlying meanings through a star schema structure with multiple properties</td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../../classes/Governed/">Governed</a></td>
-<td>A mixin that provides slots for audit trail and standards governance, including mandatory status, comments, and attribution</td>
+<td><a href="../../classes/Method/">Method</a></td>
+<td>A reusable computational procedure that describes how to derive values and can be referenced by Items</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/DataStructureDefinition/">DataStructureDefinition</a></td>
+<td>A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/ItemGroup/">ItemGroup</a></td>
+<td>A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections</td>
 <td>no</td>
 </tr>
 <tr>
@@ -210,13 +200,23 @@ Alias: purpose</p>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../../classes/Dataflow/">Dataflow</a></td>
-<td>An abstract representation that defines data provision for different reference periods, where a Distribution and its Dataset are instances</td>
+<td><a href="../../classes/Dimension/">Dimension</a></td>
+<td>A data cube property that describes a categorical or hierarchical dimension</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/DataAttribute/">DataAttribute</a></td>
+<td>A data cube property that describes additional characteristics or metadata about observations</td>
 <td>no</td>
 </tr>
 <tr>
 <td><a href="../../classes/Condition/">Condition</a></td>
 <td>A reusable, composable, and nestable logical construct allowing for complex expressions. Conditions are most useful when given a meaningful name and linked to Study Definitions.</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/CubeComponent/">CubeComponent</a></td>
+<td>An abstract data field that represents a component in a data structure definition, referencing an Item for its definition</td>
 <td>no</td>
 </tr>
 </tbody>
