@@ -89,7 +89,6 @@ classes:
       lastUpdated:
         description: When the resource was last updated
         range: datetime
-        required: true
       owner:
         description: Party responsible for this element
         narrow_mappings:
