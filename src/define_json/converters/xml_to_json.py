@@ -1,8 +1,7 @@
 """
 Define-XML to Define-JSON converter.
 
-Converter with no external dependencies that transforms Define-XML
-files into Define-JSON format while preserving all semantic information.
+Uses context-first slice structure for clean, database-friendly organization.
 """
 
 import json
@@ -10,12 +9,24 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Any, Optional
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class DefineXMLToJSONConverter:
-    """Define-XML to Define-JSON converter with no external dependencies."""
+    """Define-XML to Define-JSON converter with context-first slice structure."""
     
-    def __init__(self):
+    def __init__(self, infer_missing_attributes: bool = True):
+        """
+        Initialize the converter.
+        
+        Args:
+            infer_missing_attributes: If True, infer sensible defaults for missing 
+                                     Role and DataType attributes based on naming conventions.
+                                     Defaults to True.
+        """
+        self.infer_missing_attributes = infer_missing_attributes
         self.namespaces = {
             'odm': 'http://www.cdisc.org/ns/odm/v1.3',
             'def': 'http://www.cdisc.org/ns/def/v2.1',
@@ -72,22 +83,31 @@ class DefineXMLToJSONConverter:
         if not study or not mdv:
             raise ValueError("Could not find Study or MetaDataVersion in Define-XML")
         
-        # Build Define-JSON structure with required ODM metadata
-        define_json = {}
-        
-        # Extract ODM-level metadata
-        define_json['studyOID'] = study.get('OID')
-        define_json['fileOID'] = root.get('FileOID')
-        define_json['creationDateTime'] = root.get('CreationDateTime')
-        define_json['odmVersion'] = root.get('ODMVersion')
-        define_json['fileType'] = root.get('FileType')
-        
-        # Extract study-level metadata
-        define_json['studyName'] = self._get_study_name(study)
-        define_json['studyDescription'] = self._get_study_description(study)
-        define_json['protocolName'] = self._get_protocol_name(study)
-        define_json['metaDataVersionOID'] = mdv.get('OID')
-        define_json['metaDataVersionName'] = mdv.get('Name')
+        # Build Define-JSON structure with metadata directly in MetaDataVersion
+        define_json = {
+            # ODM File Metadata (from ODMFileMetadata mixin)
+            'fileOID': root.get('FileOID'),
+            'asOfDateTime': root.get('AsOfDateTime'),
+            'creationDateTime': root.get('CreationDateTime'),
+            'odmVersion': root.get('ODMVersion'),
+            'fileType': root.get('FileType'),
+            'originator': root.get('Originator'),
+            'sourceSystem': root.get('SourceSystem'),
+            'sourceSystemVersion': root.get('SourceSystemVersion'),
+            'context': root.get('{%s}Context' % active_namespaces['def']),
+            'defineVersion': mdv.get('{%s}DefineVersion' % active_namespaces['def']),
+            
+            # Study Metadata (from StudyMetadata mixin)
+            'studyOID': study.get('OID'),
+            'studyName': self._get_study_name(study),
+            'studyDescription': self._get_study_description(study),
+            'protocolName': self._get_protocol_name(study),
+            
+            # MetaDataVersion attributes (from GovernedElement)
+            'OID': mdv.get('OID'),
+            'name': mdv.get('Name', mdv.get('OID')),
+            'description': mdv.get('Description', '')
+        }
         
         # Process methods first to get derivation method map for linking
         methods, derivation_method_map = self._process_methods(mdv)
@@ -98,10 +118,11 @@ class DefineXMLToJSONConverter:
         define_json['items'] = self._process_items(mdv)  # Top-level items not in any group
         define_json['codeLists'] = self._process_code_lists(mdv)
         
-        # Process conditions and where clauses with proper separation
+        # Process conditions and where clauses
         conditions_and_where_clauses = self._process_conditions_and_where_clauses(mdv)
         define_json['conditions'] = conditions_and_where_clauses['conditions']
         define_json['whereClauses'] = conditions_and_where_clauses['whereClauses']
+        
         define_json['standards'] = self._process_standards(mdv)
         define_json['annotatedCRF'] = self._process_annotated_crf(mdv)
         
@@ -194,14 +215,30 @@ class DefineXMLToJSONConverter:
             'name': item_def.get('Name')
         }
         
-        # Add description (prefer def:Label, fallback to Description)
-        description = item_def.get('{%s}Label' % self.namespaces['def']) or self._get_description(item_def)
+        # Add label and description separately (both exist in Labelled mixin)
+        label = item_def.get('{%s}Label' % self.namespaces['def'])
+        description = self._get_description(item_def)
+        
+        # Store label if it exists
+        if label:
+            item_dict['label'] = label
+        
+        # Prefer full description over label for 'description' field
         if description:
             item_dict['description'] = description
+        elif label and not description:
+            # Fallback to label if no description element exists
+            item_dict['description'] = label
         
-        # Add required dataType
-        if item_def.get('DataType'):
-            item_dict['dataType'] = item_def.get('DataType')
+        # Handle DataType: use explicit value or infer sensible default
+        data_type = item_def.get('DataType')
+        if data_type:
+            item_dict['dataType'] = data_type
+        elif self.infer_missing_attributes:
+            # Infer sensible data type based on CDISC conventions
+            inferred_type = self._infer_data_type(item_dict.get('name', ''))
+            if inferred_type:
+                item_dict['dataType'] = inferred_type
         
         # Add non-null attributes
         if item_def.get('Length'):
@@ -215,27 +252,33 @@ class DefineXMLToJSONConverter:
             except (ValueError, TypeError):
                 pass
         
-        # Add CodeListRef if present
-        codelist_ref = item_def.find('def:CodeListRef', self.namespaces)
-        if codelist_ref is not None:
-            item_dict['codelist'] = codelist_ref.get('CodeListOID')
-        
-        # Add MethodRef if present
-        method_ref = item_def.find('def:MethodRef', self.namespaces)
-        if method_ref is not None:
-            item_dict['method'] = method_ref.get('MethodOID')
-        
         # Add origin if present
         origin = self._get_origin(item_def)
         if origin and any(v for v in origin.values() if v):
             item_dict['origin'] = origin
         
+        # Add CodeList reference if present
+        code_list_ref = item_def.find('odm:CodeListRef', self.namespaces)
+        if code_list_ref is not None:
+            code_list_oid = code_list_ref.get('CodeListOID')
+            if code_list_oid:
+                # Store as object reference (OID string) per schema definition
+                item_dict['codeList'] = code_list_oid
+        
         # Add ItemRef-specific properties if provided
         if item_ref is not None:
             if item_ref.get('Mandatory'):
                 item_dict['mandatory'] = item_ref.get('Mandatory', 'No')
-            if item_ref.get('Role'):
-                item_dict['role'] = item_ref.get('Role')
+            
+            # Handle Role: use explicit role or infer sensible default
+            role = item_ref.get('Role')
+            if role:
+                item_dict['role'] = role
+            elif self.infer_missing_attributes:
+                # Infer sensible role based on CDISC conventions
+                inferred_role = self._infer_variable_role(item_dict.get('name', ''))
+                if inferred_role:
+                    item_dict['role'] = inferred_role
             
             # Add WhereClause reference
             where_clause_ref = item_ref.find('def:WhereClauseRef', self.namespaces)
@@ -263,9 +306,34 @@ class DefineXMLToJSONConverter:
                 # Find the corresponding ItemDef
                 item_def = mdv.find(f'.//odm:ItemDef[@OID="{item_oid}"]', self.namespaces)
                 if item_def is not None:
-                    # Extract parameter from ItemOID (e.g., IT.VS.VSORRES.TEMP -> VS.TEMP)
+                    # Extract parameter from ItemOID
+                    # Handles both patterns:
+                    # - 3-part: ADLBC.A1HI.ALB (dataset.variable.parameter)
+                    # - 4+ part: LB.LBCAT.CHEMISTRY.LBTESTCD.ALB (domain.category.variable.testcd.parameter)
                     parts = item_oid.split('.')
-                    if len(parts) >= 4:
+                    
+                    if len(parts) == 3:
+                        # 3-part OID pattern (common in ADaM ValueLists)
+                        domain = parts[0]  # ADLBC, ADSL, etc.
+                        variable = parts[1]  # A1HI, A1LO, ABLFL, etc.
+                        parameter = parts[2]  # ALB, ALP, etc.
+                        
+                        param_key = f'{domain}.{variable}'
+                        if param_key not in all_items:
+                            all_items[param_key] = []
+                        
+                        # Create full Item object with ValueList-specific properties
+                        item_data = self._create_full_item_object(item_def, item_ref, derivation_method_map)
+                        
+                        # For 3-part OIDs, use the variable.parameter as WhereClause key
+                        shared_where_clause = f'WC.{domain}.{variable}'
+                        item_data['whereClause'] = shared_where_clause
+                        item_data['variable'] = variable
+                        
+                        all_items[param_key].append(item_data)
+                        
+                    elif len(parts) >= 4:
+                        # 4+ part OID pattern (common in SDTM ValueLists)
                         domain = parts[1]  # VS or LB
                         variable = parts[2]  # VSORRES, VSORRESU, LBORRES, LBORRESU
                         parameter = parts[3]  # TEMP, WEIGHT, ALT, etc.
@@ -511,7 +579,7 @@ class DefineXMLToJSONConverter:
         # Process standard MethodDef elements (Define-XML v2.1)
         for method in mdv.findall('.//odm:MethodDef', self.namespaces):
             method_dict = {
-                'oid': method.get('OID'),
+                'OID': method.get('OID'),
                 'name': method.get('Name'),
                 'type': method.get('Type'),
                 'description': self._get_description(method)
@@ -804,6 +872,86 @@ class DefineXMLToJSONConverter:
         decode = element.find('.//odm:Decode/odm:TranslatedText', self.namespaces)
         return decode.text if decode is not None else ''
     
+    def _infer_variable_role(self, variable_name: str) -> Optional[str]:
+        """
+        Infer sensible CDISC variable role based on naming conventions.
+        
+        Args:
+            variable_name: The variable name (e.g., STUDYID, DTHDAT, AETERM)
+            
+        Returns:
+            Inferred role or None if no clear pattern matches
+        """
+        if not variable_name:
+            return None
+        
+        var_upper = variable_name.upper()
+        
+        # Identifier patterns
+        identifier_patterns = ['STUDYID', 'DOMAIN', 'USUBJID', 'SUBJID', 'SITEID', 'INVID', 
+                             'POOLID', 'SPDEVID', 'SEQ', 'GRPID', 'REFID', 'SPID']
+        if any(var_upper.endswith(pattern) for pattern in identifier_patterns):
+            return 'Identifier'
+        
+        # Topic patterns (the primary focus of the domain)
+        topic_patterns = ['TERM', 'TRT', 'TESTCD', 'TEST', 'CAT', 'SCAT']
+        if any(pattern in var_upper for pattern in topic_patterns if pattern == var_upper or var_upper.startswith(var_upper.split(pattern)[0] + pattern)):
+            return 'Topic'
+        
+        # Timing patterns (dates, times, durations)
+        timing_patterns = ['DTC', 'DT', 'DAT', 'TM', 'DUR', 'TPT', 'ELTM', 'STDY', 'ENDY', 'DY']
+        if any(var_upper.endswith(pattern) for pattern in timing_patterns):
+            return 'Timing'
+        
+        # Qualifier patterns (modifies or further describes the topic)
+        qualifier_patterns = ['LOC', 'LAT', 'DIR', 'PORTOT', 'METHOD', 'LEAD', 'POS', 
+                            'ORNRLO', 'ORNRHI', 'STNRLO', 'STNRHI', 'FAST', 'SPEC',
+                            'RELUN', 'UNIT', 'UNK']  # Units and qualifiers
+        if any(var_upper.endswith(pattern) for pattern in qualifier_patterns):
+            return 'Qualifier'
+        
+        # Default to Variable for result/finding fields and unmatched variables
+        return 'Variable'
+    
+    def _infer_data_type(self, variable_name: str) -> Optional[str]:
+        """
+        Infer sensible CDISC data type based on variable naming conventions.
+        
+        Args:
+            variable_name: The variable name (e.g., AESEQ, AESTDTC, AETERM)
+            
+        Returns:
+            Inferred data type or None if no clear pattern matches
+        """
+        if not variable_name:
+            return None
+        
+        var_upper = variable_name.upper()
+        
+        # Integer patterns - sequence numbers and counters
+        integer_patterns = ['SEQ', 'NUM', 'CNT', 'NBR']
+        if any(var_upper.endswith(pattern) for pattern in integer_patterns):
+            return 'integer'
+        
+        # Study day variables (integer)
+        if var_upper.endswith('DY') and not var_upper.endswith('STDY'):
+            return 'integer'
+        
+        # Numeric result/value variables (float)
+        numeric_patterns = ['STRESN', 'STRESC', 'ORRES', 'VAL', 'RESULT']
+        # But exclude character results
+        if any(pattern in var_upper for pattern in numeric_patterns) and 'C' not in var_upper[-3:]:
+            return 'float'
+        
+        # All other variables default to text, including:
+        # - Date/time variables (DTC, DAT, TM, etc.) - stored as ISO 8601 text
+        # - Identifiers (ID suffixes)
+        # - Coded values (CD suffixes)
+        # - Flags (FL, YN suffixes)
+        # - Terms, categories, qualifiers
+        # - Character results (ORRESC, STRESC)
+        return 'text'
+    
     def _get_origin(self, element: ET.Element) -> Dict[str, Any]:
         """Extract origin information from both Origin elements and ItemDef attributes."""
         origin = {}
@@ -843,6 +991,7 @@ class DefineXMLToJSONConverter:
                 origin['type'] = 'Predecessor'
         
         return origin
+    
 
     def _process_computation_methods(self, mdv: ET.Element) -> List[Dict[str, Any]]:
         """Process ComputationMethod elements (Define-XML v1.0 style)."""

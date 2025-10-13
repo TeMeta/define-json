@@ -40,7 +40,7 @@ def main():
     print(f"📁 Roundtrip XML: {roundtrip_xml_path.name} (temp)")
     
     try:
-        # Step 1: XML → JSON Conversion
+        # Step 1: XML → JSON Conversion (with context-first slices)
         print(f"\n🔄 Step 1: Converting XML → JSON...")
         converter = DefineXMLToJSONConverter()
         data = converter.convert_file(xml_path, json_path)

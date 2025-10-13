@@ -17,9 +17,9 @@ Alias: document
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
+| [Origin](../classes/Origin.md) | A provenance element that describes the source of data for an item |  no  |
 | [SourceItem](../classes/SourceItem.md) | A data source that provides the origin of information for an item |  no  |
 | [Method](../classes/Method.md) | A reusable computational procedure that describes how to derive values and can be referenced by Items |  no  |
-| [Origin](../classes/Origin.md) | A provenance element that describes the source of data for an item |  no  |
 
 
 

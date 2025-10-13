@@ -1,8 +1,7 @@
 """
 Define-JSON to Define-XML converter.
 
-Converts Define-JSON format back to Define-XML for bidirectional roundtrip validation
-and legacy system compatibility.
+Projects context-first slices to Define-XML ValueLists.
 """
 
 import json
@@ -11,6 +10,9 @@ import xml.dom.minidom
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Any, Optional
+import logging
+
+logger = logging.getLogger(__name__)
 
 try:
     from lxml import etree
@@ -19,8 +21,13 @@ except ImportError:
     LXML_AVAILABLE = False
 
 
+# Type aliases for better code readability
+ItemGroupDict = Dict[str, Any]
+ItemDict = Dict[str, Any]
+
+
 class DefineJSONToXMLConverter:
-    """Convert Define-JSON back to Define-XML for true roundtrip validation."""
+    """Convert Define-JSON back to Define-XML with context-first slice structure."""
     
     def __init__(self, stylesheet_href: str = "define2-1.xsl"):
         """
@@ -28,11 +35,6 @@ class DefineJSONToXMLConverter:
         
         Args:
             stylesheet_href: The href attribute for the XML stylesheet processing instruction.
-                           Can be a relative path, absolute path, or URL.
-                           Examples:
-                           - "define2-1.xsl" (relative, default)
-                           - "./define2-1.xsl" (explicit relative)
-                           - "https://example.com/define2-1.xsl" (URL)
         """
         self.stylesheet_href = stylesheet_href
         self.namespaces = {
@@ -57,39 +59,51 @@ class DefineJSONToXMLConverter:
         root = ET.Element('ODM')
         root.set('xmlns', self.namespaces['odm'])
         
-        # Generate ODM metadata from JSON content (data-driven, not hardcoded)
-        study_info = self._extract_study_info(json_data)
+        # Extract metadata from flattened structure - NO HARDCODING!
+        # Set root attributes from ODMFileMetadata mixin attributes
+        if json_data.get('fileOID'):
+            root.set('FileOID', json_data['fileOID'])
+        if json_data.get('creationDateTime'):
+            root.set('CreationDateTime', json_data['creationDateTime'])
+        if json_data.get('asOfDateTime'):
+            root.set('AsOfDateTime', json_data['asOfDateTime'])
+        if json_data.get('odmVersion'):
+            root.set('ODMVersion', json_data['odmVersion'])
+        if json_data.get('fileType'):
+            root.set('FileType', json_data['fileType'])
+        if json_data.get('originator'):
+            root.set('Originator', json_data['originator'])
+        if json_data.get('sourceSystem'):
+            root.set('SourceSystem', json_data['sourceSystem'])
+        if json_data.get('sourceSystemVersion'):
+            root.set('SourceSystemVersion', json_data['sourceSystemVersion'])
+        if json_data.get('context'):
+            root.set('{%s}Context' % self.namespaces['def'], json_data['context'])
         
-        # Set ODM root attributes with generated metadata
-        root.set('FileOID', study_info['file_oid'])
-        root.set('CreationDateTime', datetime.now().isoformat())
-        root.set('AsOfDateTime', datetime.now().isoformat())
-        root.set('ODMVersion', '1.3.2')
-        root.set('FileType', 'Snapshot')
-        root.set('Originator', study_info['originator'])
-        root.set('SourceSystem', 'define-json')
-        root.set('SourceSystemVersion', '1.0.0')
-        root.set('{%s}Context' % self.namespaces['def'], 'Other')
-        
-        # Create Study element with generated metadata
+        # Create Study element using StudyMetadata mixin attributes
         study = ET.SubElement(root, 'Study')
-        study.set('OID', study_info['study_oid'])
+        study.set('OID', json_data.get('studyOID', 'UNKNOWN'))
         
-        # Global Variables with generated metadata
+        # Global Variables
         global_vars = ET.SubElement(study, 'GlobalVariables')
-        study_name = ET.SubElement(global_vars, 'StudyName')
-        study_name.text = study_info['study_name']
-        study_desc = ET.SubElement(global_vars, 'StudyDescription')
-        study_desc.text = study_info['study_description']
-        protocol = ET.SubElement(global_vars, 'ProtocolName')
-        protocol.text = study_info['protocol_name']
+        if json_data.get('studyName'):
+            study_name = ET.SubElement(global_vars, 'StudyName')
+            study_name.text = json_data['studyName']
+        if json_data.get('studyDescription'):
+            study_desc = ET.SubElement(global_vars, 'StudyDescription')
+            study_desc.text = json_data['studyDescription']
+        if json_data.get('protocolName'):
+            protocol = ET.SubElement(global_vars, 'ProtocolName')
+            protocol.text = json_data['protocolName']
         
-        # MetaDataVersion with generated metadata
+        # MetaDataVersion using flattened attributes
         mdv = ET.SubElement(study, 'MetaDataVersion')
-        mdv.set('OID', study_info['mdv_oid'])
-        mdv.set('Name', study_info['mdv_name'])
-        mdv.set('Description', study_info['mdv_description'])
-        mdv.set('{%s}DefineVersion' % self.namespaces['def'], '2.1.0')
+        mdv.set('OID', json_data.get('OID', 'MDV.ROUNDTRIP'))
+        mdv.set('Name', json_data.get('name', 'Roundtrip MetaDataVersion'))
+        if json_data.get('description'):
+            mdv.set('Description', json_data['description'])
+        if json_data.get('defineVersion'):
+            mdv.set('{%s}DefineVersion' % self.namespaces['def'], json_data['defineVersion'])
         
         # Process Standards first (they should be early in MetaDataVersion)
         self._create_standards(mdv, json_data.get('standards', []))
@@ -116,8 +130,12 @@ class DefineJSONToXMLConverter:
         domain_item_groups = [ig for ig in all_item_groups if ig.get('type') != 'DataSpecialization']
         value_list_item_groups = [ig for ig in all_item_groups if ig.get('type') == 'DataSpecialization']
         
-        # Create ValueLists first (they need to be before ItemGroups in XML)
-        self._create_value_lists(mdv, value_list_item_groups)
+        # Project context-first slices to ValueLists
+        if value_list_item_groups:
+            self._create_value_lists_from_slices(mdv, value_list_item_groups, domain_item_groups)
+        else:
+            # Fallback for data without slices
+            self._create_value_lists(mdv, value_list_item_groups)
         
         # Then create domain ItemGroups
         self._create_item_groups(mdv, domain_item_groups)
@@ -144,13 +162,13 @@ class DefineJSONToXMLConverter:
             if oid:
                 unique_items[oid] = item
         
-        self._create_item_defs(mdv, list(unique_items.values()), json_data.get('codeLists', []))
+        self._create_item_defs(mdv, list(unique_items.values()))
         
         # Process CodeLists
         self._create_code_lists(mdv, json_data.get('codeLists', []))
         
         # Process Methods
-        self._create_methods(mdv, json_data.get('methods', []))
+        self._create_methods(mdv, json_data.get('Methods', []))
         
         # Write to file with stylesheet processing instruction
         tree = ET.ElementTree(root)
@@ -333,8 +351,81 @@ class DefineJSONToXMLConverter:
                 if doc_ref.get('leafID'):
                     doc_ref_elem.set('leafID', doc_ref['leafID'])
     
+    def _create_value_lists_from_slices(self, parent: ET.Element, slices: List[Dict[str, Any]], domain_groups: List[Dict[str, Any]]) -> None:
+        """
+        Project context-first slices to variable-first ValueListDefs.
+        
+        Groups slice items by variable name across contexts to create proper ValueListDefs
+        that represent the same variable under different contexts.
+        """
+        # Group items by (domain, variable) to create ValueLists
+        var_to_contexts: Dict[tuple, List[Dict[str, Any]]] = {}
+        
+        for slice_ig in slices:
+            domain = slice_ig.get('domain', '')
+            where_clause = slice_ig.get('whereClause', '')
+            items = slice_ig.get('items', [])
+            
+            for item in items:
+                var_name = item.get('variable') or item.get('name', '')
+                if not var_name:
+                    continue
+                
+                key = (domain, var_name)
+                if key not in var_to_contexts:
+                    var_to_contexts[key] = []
+                
+                # Store item with its context
+                var_to_contexts[key].append({
+                    'item': item,
+                    'whereClause': where_clause or item.get('whereClause', '')
+                })
+        
+        # Create ValueListDefs for variables with multiple contexts
+        for (domain, var_name), contexts in sorted(var_to_contexts.items()):
+            if not contexts:
+                continue
+            
+            # Determine ValueList OID from variable pattern
+            # Use first item's OID as template
+            first_item_oid = contexts[0]['item'].get('OID') or contexts[0]['item'].get('itemOID', '')
+            
+            # Create ValueList OID
+            if '.' in first_item_oid:
+                parts = first_item_oid.split('.')
+                if len(parts) >= 3:
+                    vl_oid = f"VL.{domain}.{var_name}"
+                else:
+                    vl_oid = f"VL.{domain}.{var_name}"
+            else:
+                vl_oid = f"VL.{domain}.{var_name}"
+            
+            vl_elem = ET.SubElement(parent, '{%s}ValueListDef' % self.namespaces['def'])
+            vl_elem.set('OID', vl_oid)
+            
+            # Add description
+            desc = ET.SubElement(vl_elem, 'Description')
+            trans_text = ET.SubElement(desc, 'TranslatedText')
+            trans_text.text = f'Value list for {domain} {var_name} across contexts'
+            
+            # Add ItemRefs for each context
+            for ctx in contexts:
+                item = ctx['item']
+                where_clause = ctx['whereClause']
+                
+                item_ref = ET.SubElement(vl_elem, 'ItemRef')
+                item_oid = item.get('OID') or item.get('itemOID', '')
+                item_ref.set('ItemOID', item_oid)
+                item_ref.set('Mandatory', self._safe_str(item.get('mandatory', 'No')))
+                
+                if where_clause:
+                    wc_ref = ET.SubElement(item_ref, '{%s}WhereClauseRef' % self.namespaces['def'])
+                    wc_ref.set('WhereClauseOID', where_clause)
+        
+        logger.info(f"Projected {len(var_to_contexts)} variables to ValueLists")
+    
     def _create_value_lists(self, parent: ET.Element, value_lists: List[Dict[str, Any]]):
-        """Create ValueListDef elements."""
+        """Create ValueListDef elements (legacy path for non-canonical IR)."""
         for vl in value_lists:
             vl_elem = ET.SubElement(parent, '{%s}ValueListDef' % self.namespaces['def'])
             vl_elem.set('OID', vl.get('OID', ''))
@@ -347,18 +438,15 @@ class DefineJSONToXMLConverter:
             # Add ItemRefs
             for item in vl.get('items', []):
                 item_ref = ET.SubElement(vl_elem, 'ItemRef')
-                # Handle both OID and itemOID for compatibility
-                item_oid = item.get('OID') or item.get('itemOID', '')
-                item_ref.set('ItemOID', item_oid)
-                item_ref.set('Mandatory', item.get('mandatory', 'No'))
+                item_ref.set('ItemOID', item.get('itemOID', ''))
+                item_ref.set('Mandatory', self._safe_str(item.get('mandatory', 'No')))
                 
-                # Handle both whereClause and whereClauseOID for compatibility
-                where_clause = item.get('whereClause') or item.get('whereClauseOID')
-                if where_clause:
+                if item.get('whereClauseOID'):
                     wc_ref = ET.SubElement(item_ref, '{%s}WhereClauseRef' % self.namespaces['def'])
                     
                     # For Dataset Specialization: Convert shared WhereClause OID back to original format
-                    shared_wc_oid = where_clause
+                    shared_wc_oid = item['whereClauseOID']
+                    item_oid = item.get('itemOID', '')
                     
                     # Extract variable from ItemOID (e.g., IT.LB.LBORRES.AST -> LBORRES)
                     parts = item_oid.split('.')
@@ -374,81 +462,6 @@ class DefineJSONToXMLConverter:
                     else:
                         wc_ref.set('WhereClauseOID', shared_wc_oid)
     
-    def _extract_study_info(self, json_data: Dict[str, Any]) -> Dict[str, str]:
-        """Extract study information from JSON content, preserving existing names when available."""
-        # PREFER existing ODM metadata from JSON if available
-        # Otherwise, generate fallbacks based on content
-        
-        # Check for existing ODM metadata
-        study_oid = json_data.get('studyOID')
-        file_oid = json_data.get('fileOID')
-        mdv_oid = json_data.get('metaDataVersionOID')
-        
-        # If no existing metadata, extract domain information for fallback generation
-        if not study_oid or not file_oid or not mdv_oid:
-            domains = set()
-            item_count = 0
-            dataset_count = len(json_data.get('itemGroups', []))
-            
-            for ig in json_data.get('itemGroups', []):
-                domain = ig.get('name', '').upper()
-                # Check for traditional domain codes (DM, AE, etc.) or use first part of descriptive names
-                if domain and len(domain) <= 2:  # Traditional domain code
-                    domains.add(domain)
-                elif domain:  # Descriptive name - extract meaningful part
-                    # Extract first meaningful word (e.g., "Vital_Sign" -> "VS", "Randomization" -> "RAND")
-                    words = domain.split('_')
-                    if words:
-                        # Create abbreviation from first letters
-                        abbrev = ''.join(word[0] for word in words[:2] if word)
-                        if len(abbrev) <= 4:  # Reasonable abbreviation length
-                            domains.add(abbrev)
-                item_count += len(ig.get('items', []))
-            
-            # Generate meaningful identifiers based on content
-            domain_list = sorted(domains)
-            primary_domain = domain_list[0] if domain_list else 'STUDY'
-            
-            # Generate OIDs based on content only if not provided
-            if not file_oid:
-                file_oid = f"ODM.DEFINE.{primary_domain}.{datetime.now().strftime('%Y%m%d')}"
-            if not study_oid:
-                study_oid = f"ODM.STUDY.{primary_domain}"
-            if not mdv_oid:
-                mdv_oid = f"MDV.{primary_domain}"
-            
-            # PRESERVE existing names when available, generate meaningful defaults when missing
-            study_name = json_data.get('studyName') or (f"Multi-Domain Study ({len(domains)} domains)" if len(domains) > 1 else f"{primary_domain} Study")
-            study_description = json_data.get('studyDescription') or (f"Study containing {dataset_count} datasets with {item_count} variables across {len(domains)} domains" if len(domains) > 1 else f"Study containing {dataset_count} datasets with {item_count} variables")
-            protocol_name = json_data.get('protocolName') or f"Protocol {primary_domain}"
-            
-            # For MetaDataVersion, use existing name/description if available
-            mdv_name = json_data.get('metaDataVersionName') or f"MetaDataVersion {primary_domain}"
-            mdv_description = json_data.get('description') or (f"Data definitions for {', '.join(domain_list)} domains" if domain_list else f"Data definitions for {dataset_count} datasets")
-            
-            # Generate originator based on content
-            originator = f"Define-JSON Converter (Generated from {len(domains)} domains, {dataset_count} datasets)"
-        else:
-            # Use existing metadata
-            study_name = json_data.get('studyName', 'Study')
-            study_description = json_data.get('studyDescription', '')
-            protocol_name = json_data.get('protocolName', 'Protocol')
-            mdv_name = json_data.get('metaDataVersionName', 'MetaDataVersion')
-            mdv_description = json_data.get('description', '')
-            originator = "Define-JSON Converter"
-        
-        return {
-            'file_oid': file_oid,
-            'study_oid': study_oid,
-            'mdv_oid': mdv_oid,
-            'study_name': study_name,
-            'study_description': study_description,
-            'protocol_name': protocol_name,
-            'mdv_name': mdv_name,
-            'mdv_description': mdv_description,
-            'originator': originator
-        }
-
     def _create_conditions_and_where_clauses(self, parent: ET.Element, conditions: List[Dict[str, Any]], where_clauses: List[Dict[str, Any]], existing_item_oids: set = None):
         """Create WhereClauseDef elements from separated Conditions and WhereClauses."""
         # Create a lookup for conditions by OID
@@ -541,40 +554,35 @@ class DefineJSONToXMLConverter:
                     wc_ref = ET.SubElement(item_ref, '{%s}WhereClauseRef' % self.namespaces['def'])
                     wc_ref.set('WhereClauseOID', item['whereClauseOID'])
     
-    def _create_item_defs(self, parent: ET.Element, variables: List[Dict[str, Any]], available_code_lists: List[Dict[str, Any]] = None):
+    def _create_item_defs(self, parent: ET.Element, variables: List[Dict[str, Any]]):
         """Create ItemDef elements."""
         for var in variables:
             item_elem = ET.SubElement(parent, 'ItemDef')
             item_elem.set('OID', var.get('OID', ''))
             if var.get('name'):
                 item_elem.set('Name', var['name'])
-            if var.get('dataType'):
-                item_elem.set('DataType', var['dataType'])
+            # Default to text if dataType is missing (common for user-defined variables)
+            item_elem.set('DataType', var.get('dataType', 'text'))
             if var.get('length'):
                 item_elem.set('Length', str(var['length']))
             if var.get('significantDigits'):
                 item_elem.set('SignificantDigits', str(var['significantDigits']))
+            
+            # Add def:Label attribute if present
             if var.get('label'):
                 item_elem.set('{%s}Label' % self.namespaces['def'], var['label'])
             
+            # Add Description element if present (separate from label)
             if var.get('description'):
                 desc = ET.SubElement(item_elem, 'Description')
                 trans_text = ET.SubElement(desc, 'TranslatedText')
                 trans_text.text = var['description']
             
-            # Add CodeListRef if present or intelligently assign one
-            codelist_oid = var.get('codelist') or var.get('codeList')
-            if not codelist_oid and available_code_lists:
-                codelist_oid = self._intelligently_assign_codelist(var, available_code_lists)
-            
-            if codelist_oid:
-                cl_ref = ET.SubElement(item_elem, '{%s}CodeListRef' % self.namespaces['def'])
-                cl_ref.set('CodeListOID', codelist_oid)
-            
-            # Add MethodRef if present
-            if var.get('method'):
-                method_ref = ET.SubElement(item_elem, '{%s}MethodRef' % self.namespaces['def'])
-                method_ref.set('MethodOID', var['method'])
+            # Add CodeListRef if present
+            # The 'codeList' field is an object reference (stores the OID)
+            if var.get('codeList'):
+                code_list_ref = ET.SubElement(item_elem, 'CodeListRef')
+                code_list_ref.set('CodeListOID', var['codeList'])
             
             # Add Origin if present
             origin = var.get('origin', {})
@@ -585,53 +593,6 @@ class DefineJSONToXMLConverter:
                 if origin.get('source'):
                     origin_elem.set('Source', origin['source'])
     
-    def _intelligently_assign_codelist(self, item: Dict[str, Any], available_code_lists: List[Dict[str, Any]]) -> str:
-        """Intelligently assign a CodeList to an item based on content analysis."""
-        import re
-        
-        name = item.get('name', '').lower()
-        description = item.get('description', '').lower()
-        
-        # Create a mapping of CodeList OIDs to their names for pattern matching
-        codelist_map = {cl.get('oid', ''): cl.get('name', '').lower() for cl in available_code_lists}
-        
-        # Yes/No questions
-        if any(word in name or word in description for word in ['are you', 'do you', 'have you', 'would you', 'can you', 'will you', 'is', 'was', 'did', 'should', 'could']):
-            if 'CL.YESNO' in codelist_map:
-                return 'CL.YESNO'
-        
-        # Satisfaction questions
-        if any(word in name or word in description for word in ['satisfied', 'satisfaction', 'agree', 'disagree', 'comfortable', 'uncomfortable']):
-            if 'CL.SATISFACTION' in codelist_map:
-                return 'CL.SATISFACTION'
-        
-        # Likelihood questions
-        if any(word in name or word in description for word in ['likely', 'unlikely', 'neutral', 'extremely likely', 'extremely unlikely']):
-            if 'CL.LIKELIHOOD' in codelist_map:
-                return 'CL.LIKELIHOOD'
-        
-        # Comfort level questions
-        if any(word in name or word in description for word in ['comfortable', 'uncomfortable', 'very comfortable', 'very uncomfortable', 'comfort level']):
-            if 'CL.COMFORT_LEVEL' in codelist_map:
-                return 'CL.COMFORT_LEVEL'
-        
-        # Preference questions
-        if any(word in name or word in description for word in ['prefer', 'preference', 'indifferent', 'tampon', 'clinic']):
-            if 'CL.PREFERENCE' in codelist_map:
-                return 'CL.PREFERENCE'
-        
-        # Likert scale questions
-        if any(word in name or word in description for word in ['likert', 'scale', 'strongly agree', 'strongly disagree']):
-            if 'CL.LIKERT_SCALE' in codelist_map:
-                return 'CL.LIKERT_SCALE'
-        
-        # Concern level questions
-        if any(word in name or word in description for word in ['concerned', 'not concerned', 'extremely concerned', 'moderately concerned', 'concern level']):
-            if 'CL.CONCERN_LEVEL' in codelist_map:
-                return 'CL.CONCERN_LEVEL'
-        
-        return None
-    
     def _create_code_lists(self, parent: ET.Element, code_lists: List[Dict[str, Any]]):
         """Create CodeList elements."""
         for cl in code_lists:
@@ -641,6 +602,7 @@ class DefineJSONToXMLConverter:
             cl_elem.set('OID', oid)
             if cl.get('name'):
                 cl_elem.set('Name', cl['name'])
+            # Default to text if dataType is missing
             if cl.get('dataType'):
                 cl_elem.set('DataType', cl['dataType'])
             
@@ -659,9 +621,7 @@ class DefineJSONToXMLConverter:
         """Create MethodDef elements."""
         for method in methods:
             method_elem = ET.SubElement(parent, 'MethodDef')
-            # Handle both 'OID' and 'oid' field names
-            oid = method.get('OID') or method.get('oid', '')
-            method_elem.set('OID', oid)
+            method_elem.set('OID', method.get('oid', ''))
             if method.get('name'):
                 method_elem.set('Name', method['name'])
             if method.get('type'):
