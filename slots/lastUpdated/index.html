@@ -110,103 +110,8 @@ Alias: lastUpdated</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../../classes/CodeList/">CodeList</a></td>
-<td>A value set that defines a discrete collection of permissible values for an item, corresponding to the ODM CodeList construct</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/DataProduct/">DataProduct</a></td>
-<td>A governed collection that represents a purpose-driven assembly of datasets and services with an owning team and lifecycle</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/Comment/">Comment</a></td>
-<td>A descriptive element that contains explanatory text provided by a data or metadata handler</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/NominalOccurrence/">NominalOccurrence</a></td>
-<td>An event element that represents occurrences such as planned or unplanned encounters or adverse events</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/GovernedElement/">GovernedElement</a></td>
-<td></td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/Item/">Item</a></td>
-<td>A data element that represents a specific piece of information within a defined context, with data type, constraints, and derivation methods</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/ConceptProperty/">ConceptProperty</a></td>
-<td>A reified property concept that exists within the context of its containing topic concept</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/Governed/">Governed</a></td>
-<td>A mixin that provides slots for audit trail and standards governance, including mandatory status, comments, and attribution</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
-<td>A feedback element that contains comments from a site or sponsor, distinct from the general Comment class</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/ProvisionAgreement/">ProvisionAgreement</a></td>
-<td>An agreement element that describes the contractual relationship between a Data Provider and a Data Consumer regarding data provision</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/MetaDataVersion/">MetaDataVersion</a></td>
-<td>A container element that represents a given version of a specification, linking to a particular usage context such as a study, dataset, or data collection instrument.</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/Dataflow/">Dataflow</a></td>
-<td>An abstract representation that defines data provision for different reference periods, where a Distribution and its Dataset are instances</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/ReifiedConcept/">ReifiedConcept</a></td>
-<td>A canonical information layer that makes abstract concepts explicit and referenceable, showing how different data implementations represent the same underlying meanings through a star schema structure with multiple properties</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/Method/">Method</a></td>
-<td>A reusable computational procedure that describes how to derive values and can be referenced by Items</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/DataStructureDefinition/">DataStructureDefinition</a></td>
-<td>A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/ItemGroup/">ItemGroup</a></td>
-<td>A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/WhereClause/">WhereClause</a></td>
-<td>A conditional element that describes the circumstances under which a containing context applies, linking conditions to structures where they are used</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/Measure/">Measure</a></td>
-<td>A data cube property that describes a measurable quantity or value</td>
-<td>no</td>
-</tr>
-<tr>
 <td><a href="../../classes/Dimension/">Dimension</a></td>
 <td>A data cube property that describes a categorical or hierarchical dimension</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/DataAttribute/">DataAttribute</a></td>
-<td>A data cube property that describes additional characteristics or metadata about observations</td>
 <td>no</td>
 </tr>
 <tr>
@@ -215,20 +120,110 @@ Alias: lastUpdated</p>
 <td>no</td>
 </tr>
 <tr>
+<td><a href="../../classes/GovernedElement/">GovernedElement</a></td>
+<td></td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/ReifiedConcept/">ReifiedConcept</a></td>
+<td>A canonical information layer that makes abstract concepts explicit and referenceable, showing how different data implementations represent the same underlying meanings through a star schema structure with multiple properties</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/DataProduct/">DataProduct</a></td>
+<td>A governed collection that represents a purpose-driven assembly of datasets and services with an owning team and lifecycle</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/NominalOccurrence/">NominalOccurrence</a></td>
+<td>An event element that represents occurrences such as planned or unplanned encounters or adverse events</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/Item/">Item</a></td>
+<td>A data element that represents a specific piece of information within a defined context, with data type, constraints, and derivation methods</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/WhereClause/">WhereClause</a></td>
+<td>A conditional element that describes the circumstances under which a containing context applies, linking conditions to structures where they are used</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/ProvisionAgreement/">ProvisionAgreement</a></td>
+<td>An agreement element that describes the contractual relationship between a Data Provider and a Data Consumer regarding data provision</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/DataStructureDefinition/">DataStructureDefinition</a></td>
+<td>A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
+<td>A feedback element that contains comments from a site or sponsor, distinct from the general Comment class</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/Measure/">Measure</a></td>
+<td>A data cube property that describes a measurable quantity or value</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/Dataflow/">Dataflow</a></td>
+<td>An abstract representation that defines data provision for different reference periods, where a Distribution and its Dataset are instances</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/Governed/">Governed</a></td>
+<td>A mixin that provides slots for audit trail and standards governance, including mandatory status, comments, and attribution</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/ItemGroup/">ItemGroup</a></td>
+<td>A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/Comment/">Comment</a></td>
+<td>A descriptive element that contains explanatory text provided by a data or metadata handler</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/Method/">Method</a></td>
+<td>A reusable computational procedure that describes how to derive values and can be referenced by Items</td>
+<td>no</td>
+</tr>
+<tr>
 <td><a href="../../classes/CubeComponent/">CubeComponent</a></td>
 <td>An abstract data field that represents a component in a data structure definition, referencing an Item for its definition</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/DataAttribute/">DataAttribute</a></td>
+<td>A data cube property that describes additional characteristics or metadata about observations</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/CodeList/">CodeList</a></td>
+<td>A value set that defines a discrete collection of permissible values for an item, corresponding to the ODM CodeList construct</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/ConceptProperty/">ConceptProperty</a></td>
+<td>A reified property concept that exists within the context of its containing topic concept</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/MetaDataVersion/">MetaDataVersion</a></td>
+<td>A container element that represents a given version of a specification, linking to a particular usage context such as a study, dataset, or data collection instrument.</td>
 <td>no</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>
-<p>Range: <a href="../../types/Datetime/">Datetime</a></p>
-</li>
-<li>
-<p>Required: True</p>
-</li>
+<li>Range: <a href="../../types/Datetime/">Datetime</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -265,7 +260,6 @@ Alias: lastUpdated</p>
 <span class="nt">domain_of</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
 <span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">datetime</span>
-<span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 </details></div>
 </div>

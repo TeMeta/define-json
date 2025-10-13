@@ -112,6 +112,20 @@
 <p>It is being designed in a Clinical Trial context to supplement the CDISC Unified Study Definitions (<a href="https://github.com/cdisc-org/DDF-RA">USDM</a>) and <a href="https://github.com/cdisc-org/DataExchange-DatasetJson">Dataset-JSON</a>, providing a way to describe datasets and how they link causally to their context</p>
 <p><a href="https://temeta.github.io/define-json">Documentation Site</a></p>
 <h2 id="quick-start-xml-json-conversion">🔄 Quick Start: XML ↔ JSON Conversion</h2>
+<h3 id="ir-pipeline-slices-valuelist-xml-exports">IR Pipeline (slices + ValueList + XML exports)</h3>
+<p>Run the canonical IR pipeline using only the generated <code>define.py</code> classes:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Install deps</span>
+poetry<span class="w"> </span>install
+
+<span class="c1"># Run on a Define-JSON file</span>
+poetry<span class="w"> </span>run<span class="w"> </span>define-ir<span class="w"> </span>path/to/input.json<span class="w"> </span>--domains<span class="w"> </span>CE<span class="w"> </span>AE
+
+<span class="c1"># Outputs (alongside input unless --out is provided):</span>
+<span class="c1"># - input.canonical.json          (canonical ordering, registry applied)</span>
+<span class="c1"># - input.valuelist_projection.json (diagnostic per-domain variable-first contexts)</span>
+<span class="c1"># - input.define21.xml            (minimal Define-XML 2.1)</span>
+<span class="c1"># - input.define10.xml            (flattened Define-XML 1.0)</span>
+</code></pre></div>
 <p>For complete bidirectional conversion between Define-XML and Define-JSON, see:
 - <strong><a href="../CONVERSION_README/">CONVERSION_README.md</a></strong> - Complete guide
 - <strong><a href="../QUICK_REFERENCE/">QUICK_REFERENCE.md</a></strong> - Command cheat sheet</p>
