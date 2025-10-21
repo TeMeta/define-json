@@ -85,6 +85,10 @@ test-roundtrip:
 	@echo "Testing roundtrip functionality..."
 	poetry run python -c "from src.define_json.validation.roundtrip import validate_true_roundtrip; from pathlib import Path; result = validate_true_roundtrip(Path('data/define-360i.xml'), Path('data/define-360i-recreated.xml')); print('Roundtrip test passed' if result.get('passed') else 'Roundtrip test failed')"
 
+test-xml-roundtrip:
+	@echo "Testing XML→JSON→XML roundtrip conversion..."
+	poetry run python -m scripts.compare_xml_roundtrip data/define_LZZT_ADaM.xml data/define_LZZT_ADAM_roundtrip.xml --validate-only
+
 # Documentation generation (suppress gen-doc warnings)
 docs:
 	@echo "Generating LinkML documentation..."
