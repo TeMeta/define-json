@@ -192,141 +192,121 @@ class DefineXMLToJSONConverter:
                 elif 'v2.1' in uri:
                     namespace_metadata['defineVersion'] = '2.1'
         
-        # Find Study and MetaDataVersion using detected namespaces
-        def_ns = self.namespace_map.get('def', '')
-        odm_ns = self.namespace_map.get('default', self.namespace_map.get('', ''))
-        
-        # Find elements using flexible namespace matching
-        study = None
-        mdv = None
-        
-        for elem in root.iter():
-            if elem.tag.endswith('Study') or elem.tag == 'Study':
-                study = elem
-            if elem.tag.endswith('MetaDataVersion') or elem.tag == 'MetaDataVersion':
-                mdv = elem
-                break
-        
-        if not study or not mdv:
-            raise ValueError("Could not find Study or MetaDataVersion in Define-XML")
-        
-        # Extract root-level attributes
+        # Extract ODM root attributes
         root_attrs = self._extract_all_attributes(root)
         
-        # Build Define-JSON structure
+        # Get namespaces
+        odm_ns = self.namespace_map.get('default', '')
+        def_ns = self.namespace_map.get('def', '')
+        
+        # Build JSON structure
         define_json = {
             '_namespace_metadata': namespace_metadata,
-            '_root_attributes': root_attrs
+            '_root_attributes': root_attrs,
+            'fileOID': root.get('FileOID'),
+            'creationDateTime': root.get('CreationDateTime'),
+            'asOfDateTime': root.get('AsOfDateTime'),
+            'odmVersion': root.get('ODMVersion'),
+            'fileType': root.get('FileType'),
+            'originator': root.get('Originator'),
+            'sourceSystem': root.get('SourceSystem'),
+            'sourceSystemVersion': root.get('SourceSystemVersion')
         }
         
-        # Extract ODM attributes
-        define_json['fileOID'] = root.get('FileOID')
-        define_json['asOfDateTime'] = root.get('AsOfDateTime')
-        define_json['creationDateTime'] = root.get('CreationDateTime')
-        define_json['odmVersion'] = root.get('ODMVersion')
-        define_json['fileType'] = root.get('FileType')
-        define_json['originator'] = root.get('Originator')
-        define_json['sourceSystem'] = root.get('SourceSystem')
-        define_json['sourceSystemVersion'] = root.get('SourceSystemVersion')
-        
-        # Extract def:Context if present (check all possible namespace versions)
+        # Extract def:Context
         for ns_prefix, ns_uri in self.namespace_map.items():
             if 'def' in ns_prefix or 'def' in ns_uri.lower():
                 context = root.get(f'{{{ns_uri}}}Context')
                 if context:
                     define_json['context'] = context
-                    break
         
-        # Extract Study attributes
+        # Find Study element
+        study = None
+        for elem in root:
+            if elem.tag.endswith('Study'):
+                study = elem
+                break
+        
+        if study is None:
+            raise ValueError("No Study element found in ODM")
+        
         define_json['studyOID'] = study.get('OID')
+        
+        # Extract study metadata
         define_json['studyName'] = self._get_study_name(study, odm_ns)
         define_json['studyDescription'] = self._get_study_description(study, odm_ns)
         define_json['protocolName'] = self._get_protocol_name(study, odm_ns)
         
-        # Extract MetaDataVersion attributes (including all namespaced ones)
-        mdv_attrs = self._extract_all_attributes(mdv)
-        define_json['_mdv_attributes'] = mdv_attrs
+        # Find MetaDataVersion
+        mdv = None
+        for elem in study:
+            if elem.tag.endswith('MetaDataVersion'):
+                mdv = elem
+                break
+        
+        if mdv is None:
+            raise ValueError("No MetaDataVersion found in Study")
+        
+        # Store MetaDataVersion attributes
+        define_json['_mdv_attributes'] = self._extract_all_attributes(mdv)
         
         define_json['OID'] = mdv.get('OID')
-        define_json['name'] = mdv.get('Name', mdv.get('OID'))
-        define_json['description'] = mdv.get('Description', '')
+        define_json['name'] = mdv.get('Name')
+        define_json['description'] = mdv.get('Description')
         
-        # Extract def:DefineVersion from the correct namespace
+        # Extract DefineVersion
         for ns_prefix, ns_uri in self.namespace_map.items():
             if 'def' in ns_prefix or 'def' in ns_uri.lower():
-                def_version = mdv.get(f'{{{ns_uri}}}DefineVersion')
-                if def_version:
-                    define_json['defineVersion'] = def_version
-                    break
+                define_version = mdv.get(f'{{{ns_uri}}}DefineVersion')
+                if define_version:
+                    define_json['defineVersion'] = define_version
         
-        # Process all major element types
-        define_json['standards'] = self._process_standards(mdv, odm_ns, def_ns)
-        define_json['annotatedCRF'] = self._process_annotated_crf(mdv, odm_ns, def_ns)
-        define_json['supplementalDocs'] = self._process_supplemental_docs(mdv, odm_ns, def_ns)
+        # Process all elements in proper order
+        standards_data = self._process_standards(mdv, odm_ns, def_ns)
+        define_json['standards'] = standards_data['standards']
+        define_json['has_standards_container'] = standards_data['has_standards_container']
+        define_json['annotatedCRF'] = self._process_annotated_crf(mdv, def_ns)
+        define_json['supplementalDocs'] = self._process_supplemental_docs(mdv, def_ns)
         define_json['leaves'] = self._process_leaves(mdv, def_ns)
-        define_json['analysisResultDisplays'] = self._process_analysis_result_displays(mdv, def_ns)
+        define_json['conditions'] = self._process_conditions_and_where_clauses(mdv, odm_ns, def_ns)['conditions']
+        define_json['whereClauses'] = self._process_conditions_and_where_clauses(mdv, odm_ns, def_ns)['whereClauses']
         
-        # Process methods
-        methods, derivation_method_map = self._process_methods(mdv, odm_ns, def_ns)
+        # Process methods and item groups
+        methods, derivation_map = self._process_methods(mdv, odm_ns, def_ns)
         define_json['methods'] = methods
+        define_json['itemGroups'] = self._process_item_groups(mdv, odm_ns, def_ns, derivation_map)
         
-        # Process data structures
-        define_json['itemGroups'] = self._process_item_groups(mdv, odm_ns, def_ns, derivation_method_map)
+        # Process items and code lists
         define_json['items'] = self._process_items(mdv, odm_ns, def_ns)
         define_json['codeLists'] = self._process_code_lists(mdv, odm_ns, def_ns)
         
-        # Process conditions and where clauses
-        conditions_and_where = self._process_conditions_and_where_clauses(mdv, odm_ns, def_ns)
-        define_json['conditions'] = conditions_and_where['conditions']
-        define_json['whereClauses'] = conditions_and_where['whereClauses']
+        # Process ValueListDef to only get direct children
+        define_json['valueLists'] = self._process_value_list_defs(mdv, odm_ns, def_ns)
         
-        # Save to file
+        # Process analysis result displays
+        define_json['analysisResultDisplays'] = self._process_analysis_result_displays(mdv, def_ns)
+        
+        # Write JSON
         with open(output_path, 'w') as f:
             json.dump(define_json, f, indent=2)
         
         return define_json
     
-    def _process_supplemental_docs(self, mdv: ET.Element, odm_ns: str, def_ns: str) -> List[Dict[str, Any]]:
-        """Process SupplementalDoc elements."""
-        docs = []
-        
-        for doc_elem in mdv.iter():
-            if doc_elem.tag.endswith('SupplementalDoc'):
-                doc = {'_attributes': self._extract_all_attributes(doc_elem)}
-                
-                # Extract common attributes
-                doc['OID'] = doc_elem.get('OID')
-                
-                # Extract DocumentRef children
-                doc_refs = []
-                for ref_elem in doc_elem.iter():
-                    if ref_elem.tag.endswith('DocumentRef'):
-                        doc_ref = {'_attributes': self._extract_all_attributes(ref_elem)}
-                        doc_ref['leafID'] = ref_elem.get('leafID')
-                        doc_refs.append(doc_ref)
-                
-                if doc_refs:
-                    doc['documentRefs'] = doc_refs
-                
-                docs.append(doc)
-        
-        return docs
-    
     def _process_leaves(self, mdv: ET.Element, def_ns: str) -> List[Dict[str, Any]]:
-        """Process leaf elements (PDF references)."""
+        """Process leaf elements that are DIRECT children of MetaDataVersion only."""
         leaves = []
         
-        for leaf_elem in mdv.iter():
-            # Check for def:leaf or just leaf
-            if leaf_elem.tag.endswith('leaf') or 'leaf' in leaf_elem.tag.lower():
-                leaf = {'_attributes': self._extract_all_attributes(leaf_elem)}
+        # Only process direct children of MetaDataVersion
+        for child_elem in mdv:
+            if child_elem.tag.endswith('leaf'):
+                leaf = {'_attributes': self._extract_all_attributes(child_elem)}
                 
                 # Extract attributes
-                leaf['ID'] = leaf_elem.get('ID')
-                leaf['href'] = leaf_elem.get(f'{{{self.namespace_map.get("xlink", "")}}}href') or leaf_elem.get('href')
+                leaf['ID'] = child_elem.get('ID')
+                leaf['href'] = child_elem.get(f'{{{self.namespace_map.get("xlink", "")}}}href') or child_elem.get('href')
                 
                 # Extract title
-                for title_elem in leaf_elem.iter():
+                for title_elem in child_elem:
                     if title_elem.tag.endswith('title'):
                         leaf['title'] = title_elem.text
                         break
@@ -336,10 +316,24 @@ class DefineXMLToJSONConverter:
         return leaves
     
     def _process_analysis_result_displays(self, mdv: ET.Element, def_ns: str) -> List[Dict[str, Any]]:
-        """Process AnalysisResultDisplays elements."""
+        """Process AnalysisResultDisplays elements with CORRECT hierarchy.
+        
+        FIXED: Each AnalysisResults element IS a complete analysis result with its own OID.
+        Multiple AnalysisResults can be siblings under a ResultDisplay.
+        
+        Correct hierarchy:
+        AnalysisResultDisplays (OID, Name, Description)
+          └── ResultDisplay (OID, Name, Description)
+              ├── AnalysisResults (OID, Reason) [element 1]
+              │   ├── AnalysisVariable
+              │   ├── AnalysisDataset
+              │   └── ProgrammingCode
+              └── AnalysisResults (OID, Reason) [element 2, etc.]
+        """
         displays = []
         
-        for display_elem in mdv.iter():
+        # Only get direct children of MetaDataVersion
+        for display_elem in mdv:
             if display_elem.tag.endswith('AnalysisResultDisplays'):
                 display = {'_attributes': self._extract_all_attributes(display_elem)}
                 
@@ -347,47 +341,131 @@ class DefineXMLToJSONConverter:
                 display['OID'] = display_elem.get('OID')
                 display['name'] = display_elem.get('Name')
                 
-                # Extract description
-                display['description'] = self._get_description(display_elem, '')
+                # Extract description with attributes
+                display['description'], display['_translatedText_attributes'] = self._get_description(display_elem, '')
                 
-                # Extract AnalysisResults children
-                results = []
-                for result_elem in display_elem.iter():
-                    if result_elem.tag.endswith('AnalysisResult'):
-                        result = {'_attributes': self._extract_all_attributes(result_elem)}
-                        result['OID'] = result_elem.get('OID')
-                        result['description'] = self._get_description(result_elem, '')
+                # Extract ResultDisplay children (DIRECT children only)
+                result_displays = []
+                for rd_elem in display_elem:
+                    if rd_elem.tag.endswith('ResultDisplay'):
+                        rd = {'_attributes': self._extract_all_attributes(rd_elem)}
+                        rd['OID'] = rd_elem.get('OID')
+                        rd['name'] = rd_elem.get('Name')
+                        rd['description'], rd['_translatedText_attributes'] = self._get_description(rd_elem, '')
                         
-                        # Extract other nested elements as needed
-                        results.append(result)
+                        # Extract AnalysisResults elements (can be multiple per ResultDisplay)
+                        analysis_results = []
+                        for child_elem in rd_elem:
+                            if child_elem.tag.endswith('AnalysisResults'):
+                                # Each AnalysisResults element IS a complete analysis result
+                                result = {'_attributes': self._extract_all_attributes(child_elem)}
+                                result['OID'] = child_elem.get('OID')
+                                result['description'], result['_translatedText_attributes'] = self._get_description(child_elem, '')
+                                
+                                # Extract child elements recursively (AnalysisVariable, AnalysisDataset, etc.)
+                                self._extract_generic_children(child_elem, result, def_ns)
+                                
+                                analysis_results.append(result)
+                        
+                        # Store all AnalysisResults in the ResultDisplay
+                        if analysis_results:
+                            rd['analysisResults'] = analysis_results
+                        
+                        result_displays.append(rd)
                 
-                if results:
-                    display['analysisResults'] = results
+                if result_displays:
+                    display['resultDisplays'] = result_displays
                 
                 displays.append(display)
         
         return displays
     
-    def _process_standards(self, mdv: ET.Element, odm_ns: str, def_ns: str) -> List[Dict[str, Any]]:
-        """Process Standard elements."""
-        standards = []
+    def _extract_generic_children(self, parent_elem: ET.Element, parent_dict: Dict[str, Any], def_ns: str, depth: int = 0, max_depth: int = 5) -> None:
+        """Recursively extract child elements into a generic structure.
         
-        for std_elem in mdv.iter():
-            if std_elem.tag.endswith('Standard'):
-                standard = {'_attributes': self._extract_all_attributes(std_elem)}
-                
-                # Extract attributes (trying multiple namespace combinations)
-                standard['OID'] = std_elem.get('OID')
-                standard['name'] = std_elem.get('Name')
-                standard['type'] = std_elem.get('Type')
-                standard['version'] = std_elem.get('Version')
-                standard['status'] = std_elem.get('Status')
-                
-                standards.append(standard)
+        Args:
+            parent_elem: Parent XML element
+            parent_dict: Parent dictionary to store children in
+            def_ns: Define namespace
+            depth: Current recursion depth
+            max_depth: Maximum recursion depth
+        """
+        if depth >= max_depth:
+            return
         
-        return standards
+        for child_elem in parent_elem:
+            tag_name = child_elem.tag.split('}')[-1] if '}' in child_elem.tag else child_elem.tag
+            
+            # Skip Description as it's handled separately
+            if tag_name == 'Description':
+                continue
+            
+            # Create storage for this element type
+            storage_key = f'_{tag_name}_elements'
+            if storage_key not in parent_dict:
+                parent_dict[storage_key] = []
+            
+            # Extract element data
+            child_data = {
+                '_attributes': self._extract_all_attributes(child_elem)
+            }
+            
+            # Add text content if present
+            if child_elem.text and child_elem.text.strip():
+                child_data['_text'] = child_elem.text.strip()
+            
+            # Recursively process children
+            if len(child_elem) > 0:
+                self._extract_generic_children(child_elem, child_data, def_ns, depth + 1, max_depth)
+            
+            parent_dict[storage_key].append(child_data)
     
-    def _process_annotated_crf(self, mdv: ET.Element, odm_ns: str, def_ns: str) -> List[Dict[str, Any]]:
+    def _process_standards(self, mdv: ET.Element, odm_ns: str, def_ns: str) -> Dict[str, Any]:
+        """Process Standard elements and detect if they're wrapped in Standards container."""
+        standards_data = {
+            'standards': [],
+            'has_standards_container': False
+        }
+        
+        # Check for Standards container first
+        for child_elem in mdv:
+            if child_elem.tag.endswith('Standards'):
+                standards_data['has_standards_container'] = True
+                # Extract standards from within the container
+                for std_elem in child_elem:
+                    if std_elem.tag.endswith('Standard'):
+                        std = {'_attributes': self._extract_all_attributes(std_elem)}
+                        
+                        # Extract attributes
+                        std['OID'] = std_elem.get('OID')
+                        std['name'] = std_elem.get('Name')
+                        std['type'] = std_elem.get('Type')
+                        std['publishingSet'] = std_elem.get('PublishingSet')
+                        std['version'] = std_elem.get('Version')
+                        std['status'] = std_elem.get('Status')
+                        
+                        standards_data['standards'].append(std)
+                break
+        
+        # If no Standards container, look for direct Standard children
+        if not standards_data['has_standards_container']:
+            for std_elem in mdv:
+                if std_elem.tag.endswith('Standard'):
+                    std = {'_attributes': self._extract_all_attributes(std_elem)}
+                    
+                    # Extract attributes
+                    std['OID'] = std_elem.get('OID')
+                    std['name'] = std_elem.get('Name')
+                    std['type'] = std_elem.get('Type')
+                    std['publishingSet'] = std_elem.get('PublishingSet')
+                    std['version'] = std_elem.get('Version')
+                    std['status'] = std_elem.get('Status')
+                    
+                    standards_data['standards'].append(std)
+        
+        return standards_data
+    
+    def _process_annotated_crf(self, mdv: ET.Element, def_ns: str) -> List[Dict[str, Any]]:
         """Process AnnotatedCRF elements."""
         crfs = []
         
@@ -410,6 +488,29 @@ class DefineXMLToJSONConverter:
         
         return crfs
     
+    def _process_supplemental_docs(self, mdv: ET.Element, def_ns: str) -> List[Dict[str, Any]]:
+        """Process SupplementalDoc elements."""
+        docs = []
+        
+        for doc_elem in mdv.iter():
+            if doc_elem.tag.endswith('SupplementalDoc'):
+                doc = {'_attributes': self._extract_all_attributes(doc_elem)}
+                
+                # Extract DocumentRef children
+                doc_refs = []
+                for ref_elem in doc_elem.iter():
+                    if ref_elem.tag.endswith('DocumentRef'):
+                        doc_ref = {'_attributes': self._extract_all_attributes(ref_elem)}
+                        doc_ref['leafID'] = ref_elem.get('leafID')
+                        doc_refs.append(doc_ref)
+                
+                if doc_refs:
+                    doc['documentRefs'] = doc_refs
+                
+                docs.append(doc)
+        
+        return docs
+    
     def _process_methods(self, mdv: ET.Element, odm_ns: str, def_ns: str) -> Tuple[List[Dict[str, Any]], Dict[str, Dict]]:
         """Process both MethodDef and ComputationMethod elements.
         
@@ -429,10 +530,12 @@ class DefineXMLToJSONConverter:
                 method['type'] = method_elem.get('Type', 'Computation')
                 method['elementType'] = 'MethodDef'  # Store element type for roundtrip
                 
-                # Extract description
-                desc = self._get_description(method_elem, odm_ns)
+                # Extract description with attributes
+                desc, desc_attrs = self._get_description(method_elem, odm_ns)
                 if desc:
                     method['description'] = desc
+                    if desc_attrs:
+                        method['_translatedText_attributes'] = desc_attrs
                 
                 methods.append(method)
         
@@ -477,8 +580,19 @@ class DefineXMLToJSONConverter:
                         ig['label'] = ig_elem.get(f'{{{ns_uri}}}Label')
                         ig['archiveLocationID'] = ig_elem.get(f'{{{ns_uri}}}ArchiveLocationID')
                 
-                # Extract description
-                ig['description'] = self._get_description(ig_elem, odm_ns)
+                # Extract description with attributes
+                ig['description'], ig['_translatedText_attributes'] = self._get_description(ig_elem, odm_ns)
+                
+                # Extract child Class elements (not attributes)
+                class_elements = []
+                for child_elem in ig_elem:
+                    if child_elem.tag.endswith('Class'):
+                        class_elem = {'_attributes': self._extract_all_attributes(child_elem)}
+                        class_elem['name'] = child_elem.get('Name')
+                        class_elements.append(class_elem)
+                
+                if class_elements:
+                    ig['classElements'] = class_elements
                 
                 # Extract ItemRefs
                 items = []
@@ -498,9 +612,38 @@ class DefineXMLToJSONConverter:
                                 if method_oid:
                                     item_ref['method'] = method_oid
                         
+                        # Extract WhereClauseRef
+                        for wc_ref_elem in ref_elem:
+                            if wc_ref_elem.tag.endswith('WhereClauseRef'):
+                                item_ref['whereClauseRef'] = {
+                                    '_attributes': self._extract_all_attributes(wc_ref_elem),
+                                    'whereClauseOID': wc_ref_elem.get('WhereClauseOID')
+                                }
+                                break
+                        
                         items.append(item_ref)
                 
                 ig['items'] = items
+                
+                # Extract nested leaf elements
+                leaves = []
+                for child_elem in ig_elem:
+                    if child_elem.tag.endswith('leaf'):
+                        leaf = {'_attributes': self._extract_all_attributes(child_elem)}
+                        leaf['ID'] = child_elem.get('ID')
+                        leaf['href'] = child_elem.get(f'{{{self.namespace_map.get("xlink", "")}}}href') or child_elem.get('href')
+                        
+                        # Extract title
+                        for title_elem in child_elem:
+                            if title_elem.tag.endswith('title'):
+                                leaf['title'] = title_elem.text
+                                break
+                        
+                        leaves.append(leaf)
+                
+                if leaves:
+                    ig['leaves'] = leaves
+                
                 item_groups.append(ig)
         
         return item_groups
@@ -524,8 +667,8 @@ class DefineXMLToJSONConverter:
                     if 'def' in ns_prefix or 'def' in ns_uri.lower():
                         item['label'] = item_elem.get(f'{{{ns_uri}}}Label')
                 
-                # Extract description
-                item['description'] = self._get_description(item_elem, odm_ns)
+                # Extract description with attributes
+                item['description'], item['_translatedText_attributes'] = self._get_description(item_elem, odm_ns)
                 
                 # Extract CodeListRef
                 for ref_elem in item_elem.iter():
@@ -539,6 +682,46 @@ class DefineXMLToJSONConverter:
                         item['valueListOID'] = ref_elem.get('ValueListOID')
                         break
                 
+                # Extract Alias
+                aliases = []
+                for alias_elem in item_elem:
+                    if alias_elem.tag.endswith('Alias'):
+                        alias = {
+                            '_attributes': self._extract_all_attributes(alias_elem),
+                            'context': alias_elem.get('Context'),
+                            'name': alias_elem.get('Name')
+                        }
+                        aliases.append(alias)
+                
+                if aliases:
+                    item['aliases'] = aliases
+                
+                # Extract Origin elements - NEW FIX
+                origins = []
+                for origin_elem in item_elem:
+                    if origin_elem.tag.endswith('Origin'):
+                        origin = {
+                            '_attributes': self._extract_all_attributes(origin_elem),
+                            'type': origin_elem.get('Type'),
+                        }
+                        
+                        # Extract description with attributes
+                        origin['description'], origin['_translatedText_attributes'] = self._get_description(origin_elem, odm_ns)
+                        
+                        # Extract DocumentRef if present
+                        for doc_ref_elem in origin_elem:
+                            if doc_ref_elem.tag.endswith('DocumentRef'):
+                                origin['documentRef'] = {
+                                    '_attributes': self._extract_all_attributes(doc_ref_elem),
+                                    'leafID': doc_ref_elem.get('leafID')
+                                }
+                                break
+                        
+                        origins.append(origin)
+                
+                if origins:
+                    item['origins'] = origins
+                
                 items.append(item)
         
         return items
@@ -546,9 +729,8 @@ class DefineXMLToJSONConverter:
     def _process_code_lists(self, mdv: ET.Element, odm_ns: str, def_ns: str) -> List[Dict[str, Any]]:
         """Process CodeList elements with complete attribute preservation."""
         code_lists = []
-        
         for cl_elem in mdv.iter():
-            if cl_elem.tag.endswith('CodeList'):
+            if cl_elem.tag.endswith('CodeList') and not cl_elem.tag.endswith('ExternalCodeList'):
                 cl = {'_attributes': self._extract_all_attributes(cl_elem)}
                 
                 cl['OID'] = cl_elem.get('OID')
@@ -577,24 +759,141 @@ class DefineXMLToJSONConverter:
                                 for tt_elem in decode_elem.iter():
                                     if tt_elem.tag.endswith('TranslatedText'):
                                         cli['decode'] = tt_elem.text
-                                        
-                                        # Extract xml:lang attribute
                                         xml_ns = self.namespace_map.get('xml', 'http://www.w3.org/XML/1998/namespace')
                                         lang = tt_elem.get(f'{{{xml_ns}}}lang')
                                         if lang:
                                             cli['lang'] = lang
-                                        
-                                        # Store TranslatedText attributes
                                         cli['_translatedText_attributes'] = self._extract_all_attributes(tt_elem)
                                         break
                                 break
                         
+                        # Extract Alias
+                        aliases = []
+                        for alias_elem in cli_elem:
+                            if alias_elem.tag.endswith('Alias'):
+                                alias = {
+                                    '_attributes': self._extract_all_attributes(alias_elem),
+                                    'context': alias_elem.get('Context'),
+                                    'name': alias_elem.get('Name')
+                                }
+                                aliases.append(alias)
+                        
+                        if aliases:
+                            cli['aliases'] = aliases
+                        
                         items.append(cli)
                 
                 cl['codeListItems'] = items
+                
+                # Extract EnumeratedItem
+                enum_items = []
+                for ei_elem in cl_elem:
+                    if ei_elem.tag.endswith('EnumeratedItem'):
+                        ei = {
+                            '_attributes': self._extract_all_attributes(ei_elem),
+                            'codedValue': ei_elem.get('CodedValue')
+                        }
+                        
+                        # Extract def:Rank
+                        for ns_prefix, ns_uri in self.namespace_map.items():
+                            if 'def' in ns_prefix or 'def' in ns_uri.lower():
+                                rank = ei_elem.get(f'{{{ns_uri}}}Rank')
+                                if rank:
+                                    ei['rank'] = rank
+                                    break
+                        
+                        # Extract Alias
+                        aliases = []
+                        for alias_elem in ei_elem:
+                            if alias_elem.tag.endswith('Alias'):
+                                alias = {
+                                    '_attributes': self._extract_all_attributes(alias_elem),
+                                    'context': alias_elem.get('Context'),
+                                    'name': alias_elem.get('Name')
+                                }
+                                aliases.append(alias)
+                        
+                        if aliases:
+                            ei['aliases'] = aliases
+                        
+                        enum_items.append(ei)
+                
+                if enum_items:
+                    cl['enumeratedItems'] = enum_items
+                
+                # Extract ExternalCodeList
+                for child_elem in cl_elem:
+                    if child_elem.tag.endswith('ExternalCodeList'):
+                        cl['externalCodeList'] = {
+                            '_attributes': self._extract_all_attributes(child_elem),
+                            'dictionary': child_elem.get('Dictionary'),
+                            'version': child_elem.get('Version'),
+                            'ref': child_elem.get('ref')
+                        }
+                        break
+                
+                # Extract Alias at CodeList level
+                aliases = []
+                for alias_elem in cl_elem:
+                    if alias_elem.tag.endswith('Alias'):
+                        alias = {
+                            '_attributes': self._extract_all_attributes(alias_elem),
+                            'context': alias_elem.get('Context'),
+                            'name': alias_elem.get('Name')
+                        }
+                        aliases.append(alias)
+                
+                if aliases:
+                    cl['aliases'] = aliases
+                
                 code_lists.append(cl)
         
         return code_lists
+    
+    def _process_value_list_defs(self, mdv: ET.Element, odm_ns: str, def_ns: str) -> List[Dict[str, Any]]:
+        """Process ValueListDef elements to only get direct children."""
+        value_lists = []
+        
+        for vl_elem in mdv:
+            if vl_elem.tag.endswith('ValueListDef'):
+                vl = {'_attributes': self._extract_all_attributes(vl_elem)}
+                
+                vl['OID'] = vl_elem.get('OID')
+                
+                # Extract description with attributes
+                vl['description'], vl['_translatedText_attributes'] = self._get_description(vl_elem, odm_ns)
+                
+                # Extract ItemRef children
+                items = []
+                for ref_elem in vl_elem:
+                    if ref_elem.tag.endswith('ItemRef'):
+                        item_ref = {'_attributes': self._extract_all_attributes(ref_elem)}
+                        item_ref['OID'] = ref_elem.get('ItemOID')
+                        item_ref['mandatory'] = ref_elem.get('Mandatory', 'No')
+                        
+                        # Extract method references
+                        for ns_prefix, ns_uri in self.namespace_map.items():
+                            if 'def' in ns_prefix or 'def' in ns_uri.lower():
+                                method_oid = (ref_elem.get(f'{{{ns_uri}}}MethodOID') or 
+                                            ref_elem.get(f'{{{ns_uri}}}ComputationMethodOID'))
+                                if method_oid:
+                                    item_ref['method'] = method_oid
+                        
+                        # Extract WhereClauseRef
+                        for wc_ref_elem in ref_elem:
+                            if wc_ref_elem.tag.endswith('WhereClauseRef'):
+                                item_ref['whereClauseRef'] = {
+                                    '_attributes': self._extract_all_attributes(wc_ref_elem),
+                                    'whereClauseOID': wc_ref_elem.get('WhereClauseOID')
+                                }
+                                break
+                        
+                        items.append(item_ref)
+                
+                vl['itemRefs'] = items
+                value_lists.append(vl)
+        
+        return value_lists
     
     def _process_conditions_and_where_clauses(self, mdv: ET.Element, odm_ns: str, 
                                              def_ns: str) -> Dict[str, List[Dict[str, Any]]]:
@@ -607,7 +906,7 @@ class DefineXMLToJSONConverter:
                 condition = {'_attributes': self._extract_all_attributes(cond_elem)}
                 condition['OID'] = cond_elem.get('OID')
                 condition['name'] = cond_elem.get('Name')
-                condition['description'] = self._get_description(cond_elem, odm_ns)
+                condition['description'], condition['_translatedText_attributes'] = self._get_description(cond_elem, odm_ns)
                 conditions.append(condition)
         
         for wc_elem in mdv.iter():
@@ -615,11 +914,23 @@ class DefineXMLToJSONConverter:
                 wc = {'_attributes': self._extract_all_attributes(wc_elem)}
                 wc['OID'] = wc_elem.get('OID')
                 
-                # Extract RangeCheck children
+                # Extract RangeCheck children with CheckValue
                 checks = []
-                for check_elem in wc_elem.iter():
+                for check_elem in wc_elem:
                     if check_elem.tag.endswith('RangeCheck'):
                         check = {'_attributes': self._extract_all_attributes(check_elem)}
+                        
+                        # Extract CheckValue child elements
+                        check_values = []
+                        for cv_elem in check_elem:
+                            if cv_elem.tag.endswith('CheckValue'):
+                                check_value = {'_attributes': self._extract_all_attributes(cv_elem)}
+                                check_value['text'] = cv_elem.text
+                                check_values.append(check_value)
+                        
+                        if check_values:
+                            check['checkValues'] = check_values
+                        
                         checks.append(check)
                 
                 wc['rangeChecks'] = checks
@@ -654,14 +965,20 @@ class DefineXMLToJSONConverter:
                         return pn_elem.text
         return None
     
-    def _get_description(self, element: ET.Element, odm_ns: str) -> str:
-        """Extract description from TranslatedText."""
+    def _get_description(self, element: ET.Element, odm_ns: str) -> Tuple[str, Dict[str, Any]]:
+        """Extract description from TranslatedText with all attributes.
+        
+        Returns:
+            Tuple of (description_text, translated_text_attributes)
+        """
         for desc_elem in element.iter():
             if desc_elem.tag.endswith('Description'):
                 for tt_elem in desc_elem.iter():
                     if tt_elem.tag.endswith('TranslatedText'):
-                        return tt_elem.text if tt_elem.text else ''
-        return ''
+                        text = tt_elem.text if tt_elem.text else ''
+                        attrs = self._extract_all_attributes(tt_elem)
+                        return text, attrs
+        return '', {}
 
 
 def main():
@@ -685,6 +1002,7 @@ def main():
     print(f"  Item Groups: {len(result.get('itemGroups', []))}")
     print(f"  Items: {len(result.get('items', []))}")
     print(f"  Code Lists: {len(result.get('codeLists', []))}")
+    print(f"  Value Lists: {len(result.get('valueLists', []))}")
     print(f"  Methods: {len(result.get('methods', []))}")
     print(f"  Standards: {len(result.get('standards', []))}")
     print(f"  Leaves: {len(result.get('leaves', []))}")

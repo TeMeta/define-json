@@ -87,7 +87,15 @@ test-roundtrip:
 
 test-xml-roundtrip:
 	@echo "Testing XML→JSON→XML roundtrip conversion..."
+	poetry run python -m src.define_json xml2json data/define_LZZT_ADaM.xml data/define_LZZT_ADaM.json
+	poetry run python -m src.define_json json2xml data/define_LZZT_ADaM.json data/define_LZZT_ADaM_roundtrip.xml
 	poetry run python -m scripts.compare_xml_roundtrip data/define_LZZT_ADaM.xml data/define_LZZT_ADAM_roundtrip.xml --validate-only
+
+test-xml-roundtrip-360i:
+	@echo "Testing XML→JSON→XML roundtrip conversion..."
+	poetry run python -m src.define_json xml2json data/define-360i.xml data/define-360i.json
+	poetry run python -m src.define_json json2xml data/define-360i.json data/define-360i_roundtrip.xml
+	poetry run python -m scripts.compare_xml_roundtrip data/define-360i.xml data/define-360i_roundtrip.xml --validate-only
 
 # Documentation generation (suppress gen-doc warnings)
 docs:
