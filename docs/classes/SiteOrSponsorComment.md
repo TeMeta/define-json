@@ -139,6 +139,8 @@ DocumentReference ||--}o Coding : "coding"
 | [DataAttribute](../classes/DataAttribute.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
 | [DataProduct](../classes/DataProduct.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [Analysis](../classes/Analysis.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [Display](../classes/Display.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
 
 
 

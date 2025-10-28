@@ -80,6 +80,56 @@ Coding {
     string codeSystemVersion  
     AliasPredicate aliasType  
 }
+Display {
+    string displayType  
+    string version  
+    string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+DocumentReference {
+    string title  
+    string leafID  
+    integerList pages  
+    string relationship  
+    string version  
+    string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+Analysis {
+    string analysisReason  
+    string analysisPurpose  
+    string analysisMethod  
+    stringList inputData  
+    string version  
+    string href  
+    MethodType type  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
 DataProduct {
     string dataProductOwner  
     string domain  
@@ -130,20 +180,6 @@ DataService {
     string securitySchemaType  
     string resourceType  
     string attribute  
-    string version  
-    string href  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
-DocumentReference {
-    string title  
-    string leafID  
-    integerList pages  
-    string relationship  
     string version  
     string href  
     string OID  
@@ -390,6 +426,7 @@ MetaDataVersion ||--}o Item : "items"
 MetaDataVersion ||--}o Condition : "conditions"
 MetaDataVersion ||--}o WhereClause : "whereClauses"
 MetaDataVersion ||--}o Method : "methods"
+MetaDataVersion ||--}o Analysis : "analyses"
 MetaDataVersion ||--}o CodeList : "codeLists"
 MetaDataVersion ||--}o Coding : "codings"
 MetaDataVersion ||--}o ReifiedConcept : "concepts"
@@ -398,6 +435,7 @@ MetaDataVersion ||--}o Dictionary : "dictionaries"
 MetaDataVersion ||--}o Standard : "standards"
 MetaDataVersion ||--}o DocumentReference : "annotatedCRFs"
 MetaDataVersion ||--}o DataProduct : "dataProducts"
+MetaDataVersion ||--}o Display : "displays"
 MetaDataVersion ||--}o Coding : "coding"
 MetaDataVersion ||--}o Comment : "comments"
 MetaDataVersion ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -408,6 +446,19 @@ Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 Comment ||--}o Comment : "comments"
 Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Display ||--|o Analysis : "analysis"
+Display ||--}o DocumentReference : "location"
+Display ||--}o Coding : "coding"
+Display ||--}o Comment : "comments"
+Display ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+DocumentReference ||--}o Coding : "coding"
+Analysis ||--}o WhereClause : "applicableWhen"
+Analysis ||--}o FormalExpression : "expressions"
+Analysis ||--}o DocumentReference : "documents"
+Analysis ||--|o ReifiedConcept : "implementsConcept"
+Analysis ||--}o Coding : "coding"
+Analysis ||--}o Comment : "comments"
+Analysis ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 DataProduct ||--}o DataService : "inputPort"
 DataProduct ||--}o DataService : "outputPort"
 DataProduct ||--}o Dataset : "inputDataset"
@@ -424,7 +475,6 @@ Dataset ||--}o Coding : "coding"
 DataService ||--|o Distribution : "isAccessServiceOf"
 DataService ||--}o FormalExpression : "selection"
 DataService ||--}o Coding : "coding"
-DocumentReference ||--}o Coding : "coding"
 Standard ||--}o Coding : "coding"
 Dictionary ||--}o Coding : "terms"
 Dictionary ||--}o Coding : "coding"
@@ -449,7 +499,8 @@ Resource ||--}o FormalExpression : "selection"
 Resource ||--}o Coding : "coding"
 CodeListItem ||--|o Coding : "coding"
 Method ||--}o FormalExpression : "expressions"
-Method ||--|o DocumentReference : "document"
+Method ||--}o DocumentReference : "documents"
+Method ||--|o ReifiedConcept : "implementsConcept"
 Method ||--}o Coding : "coding"
 Method ||--}o Comment : "comments"
 Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -479,7 +530,7 @@ Item ||--}o Coding : "coding"
 Item ||--}o Comment : "comments"
 Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Origin ||--}o SourceItem : "sourceItems"
-Origin ||--|o DocumentReference : "document"
+Origin ||--}o DocumentReference : "documents"
 RangeCheck ||--}o FormalExpression : "expressions"
 ItemGroup ||--}o Item : "items"
 ItemGroup ||--|o ReifiedConcept : "implementsConcept"
@@ -511,10 +562,10 @@ Timing ||--}o Coding : "coding"
 | ---  | --- | --- | --- |
 | [itemGroups](../slots/itemGroups.md) | * <br/> [ItemGroup](../classes/ItemGroup.md) | Item groups, containing items, defined in this version of the metadata | direct |
 | [items](../slots/items.md) | * <br/> [Item](../classes/Item.md) | Template or top-level items (not belonging to any item group) defined in this version of the metadata | direct |
-| [resources](../slots/resources.md) | * <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[DocumentReference](../classes/DocumentReference.md)&nbsp;or&nbsp;<br />[Resource](../classes/Resource.md) | References to documents that describe this version of the metadata. | direct |
 | [conditions](../slots/conditions.md) | * <br/> [Condition](../classes/Condition.md) | Logical conditions that apply to this version of the metadata. | direct |
 | [whereClauses](../slots/whereClauses.md) | * <br/> [WhereClause](../classes/WhereClause.md) | Data contexts that apply to this version of the metadata. | direct |
 | [methods](../slots/methods.md) | * <br/> [Method](../classes/Method.md) | Methods defined in this version of the metadata. | direct |
+| [analyses](../slots/analyses.md) | * <br/> [Analysis](../classes/Analysis.md) | Analyses defined in this version of the metadata. | direct |
 | [codeLists](../slots/codeLists.md) | * <br/> [CodeList](../classes/CodeList.md) | Code lists defined in this version of the metadata. | direct |
 | [codings](../slots/codings.md) | * <br/> [Coding](../classes/Coding.md) | Codings defined in this version of the metadata | direct |
 | [concepts](../slots/concepts.md) | * <br/> [ReifiedConcept](../classes/ReifiedConcept.md) | Structured Concepts defined in this version of the metadata | direct |
@@ -522,7 +573,9 @@ Timing ||--}o Coding : "coding"
 | [dictionaries](../slots/dictionaries.md) | * <br/> [Dictionary](../classes/Dictionary.md) | Dictionaries defined in this version of the metadata | direct |
 | [standards](../slots/standards.md) | * <br/> [Standard](../classes/Standard.md) | Standards defined in this version of the metadata | direct |
 | [annotatedCRFs](../slots/annotatedCRFs.md) | * <br/> [DocumentReference](../classes/DocumentReference.md) | Reference to annotated case report forms | direct |
+| [resources](../slots/resources.md) | * <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[DocumentReference](../classes/DocumentReference.md)&nbsp;or&nbsp;<br />[Resource](../classes/Resource.md) | References to resources and documents that describe this version of the metadata. | direct |
 | [dataProducts](../slots/dataProducts.md) | * <br/> [DataProduct](../classes/DataProduct.md) | Indexed data flows with clear ownership | direct |
+| [displays](../slots/displays.md) | * <br/> [Display](../classes/Display.md) | Displays defined in this version of the metadata. | direct |
 | [fileOID](../slots/fileOID.md) | 1 <br/> [String](../types/String.md) | Unique identifier for the ODM file | [ODMFileMetadata](../classes/ODMFileMetadata.md) |
 | [asOfDateTime](../slots/asOfDateTime.md) | 0..1 <br/> [Datetime](../types/Datetime.md) | Date and time when the data snapshot was taken | [ODMFileMetadata](../classes/ODMFileMetadata.md) |
 | [creationDateTime](../slots/creationDateTime.md) | 1 <br/> [Datetime](../types/Datetime.md) | Date and time when the ODM file was created | [ODMFileMetadata](../classes/ODMFileMetadata.md) |
@@ -582,6 +635,8 @@ Timing ||--}o Coding : "coding"
 | [DataAttribute](../classes/DataAttribute.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
 | [DataProduct](../classes/DataProduct.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
+| [Analysis](../classes/Analysis.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
+| [Display](../classes/Display.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
 
 
 
@@ -663,19 +718,6 @@ attributes:
     multivalued: true
     inlined: true
     inlined_as_list: true
-  resources:
-    name: resources
-    description: References to documents that describe this version of the metadata.
-    from_schema: https://cdisc.org/define-json
-    rank: 1000
-    domain_of:
-    - MetaDataVersion
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-    any_of:
-    - range: DocumentReference
-    - range: Resource
   conditions:
     name: conditions
     description: Logical conditions that apply to this version of the metadata.
@@ -709,6 +751,17 @@ attributes:
     domain_of:
     - MetaDataVersion
     range: Method
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  analyses:
+    name: analyses
+    description: Analyses defined in this version of the metadata.
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    domain_of:
+    - MetaDataVersion
+    range: Analysis
     multivalued: true
     inlined: true
     inlined_as_list: true
@@ -788,6 +841,20 @@ attributes:
     multivalued: true
     inlined: true
     inlined_as_list: true
+  resources:
+    name: resources
+    description: References to resources and documents that describe this version
+      of the metadata.
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    domain_of:
+    - MetaDataVersion
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    any_of:
+    - range: DocumentReference
+    - range: Resource
   dataProducts:
     name: dataProducts
     description: Indexed data flows with clear ownership
@@ -796,6 +863,17 @@ attributes:
     domain_of:
     - MetaDataVersion
     range: DataProduct
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  displays:
+    name: displays
+    description: Displays defined in this version of the metadata.
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    domain_of:
+    - MetaDataVersion
+    range: Display
     multivalued: true
     inlined: true
     inlined_as_list: true
@@ -849,21 +927,6 @@ attributes:
     multivalued: true
     inlined: true
     inlined_as_list: true
-  resources:
-    name: resources
-    description: References to documents that describe this version of the metadata.
-    from_schema: https://cdisc.org/define-json
-    rank: 1000
-    alias: resources
-    owner: MetaDataVersion
-    domain_of:
-    - MetaDataVersion
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-    any_of:
-    - range: DocumentReference
-    - range: Resource
   conditions:
     name: conditions
     description: Logical conditions that apply to this version of the metadata.
@@ -903,6 +966,19 @@ attributes:
     domain_of:
     - MetaDataVersion
     range: Method
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  analyses:
+    name: analyses
+    description: Analyses defined in this version of the metadata.
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    alias: analyses
+    owner: MetaDataVersion
+    domain_of:
+    - MetaDataVersion
+    range: Analysis
     multivalued: true
     inlined: true
     inlined_as_list: true
@@ -996,6 +1072,22 @@ attributes:
     multivalued: true
     inlined: true
     inlined_as_list: true
+  resources:
+    name: resources
+    description: References to resources and documents that describe this version
+      of the metadata.
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    alias: resources
+    owner: MetaDataVersion
+    domain_of:
+    - MetaDataVersion
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    any_of:
+    - range: DocumentReference
+    - range: Resource
   dataProducts:
     name: dataProducts
     description: Indexed data flows with clear ownership
@@ -1006,6 +1098,19 @@ attributes:
     domain_of:
     - MetaDataVersion
     range: DataProduct
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  displays:
+    name: displays
+    description: Displays defined in this version of the metadata.
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    alias: displays
+    owner: MetaDataVersion
+    domain_of:
+    - MetaDataVersion
+    range: Display
     multivalued: true
     inlined: true
     inlined_as_list: true

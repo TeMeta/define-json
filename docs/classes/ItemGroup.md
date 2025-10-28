@@ -248,7 +248,8 @@ Timing ||--|o NominalOccurrence : "relativeFrom"
 Timing ||--|o Method : "imputation"
 Timing ||--}o Coding : "coding"
 Method ||--}o FormalExpression : "expressions"
-Method ||--|o DocumentReference : "document"
+Method ||--}o DocumentReference : "documents"
+Method ||--|o ReifiedConcept : "implementsConcept"
 Method ||--}o Coding : "coding"
 Method ||--}o Comment : "comments"
 Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -292,7 +293,7 @@ CodeList ||--}o Coding : "coding"
 CodeList ||--}o Comment : "comments"
 CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Origin ||--}o SourceItem : "sourceItems"
-Origin ||--|o DocumentReference : "document"
+Origin ||--}o DocumentReference : "documents"
 RangeCheck ||--}o FormalExpression : "expressions"
 
 ```
@@ -371,6 +372,9 @@ RangeCheck ||--}o FormalExpression : "expressions"
 | [DataAttribute](../classes/DataAttribute.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [DataProduct](../classes/DataProduct.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
+| [Analysis](../classes/Analysis.md) | [inputData](../slots/inputData.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
+| [Analysis](../classes/Analysis.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
+| [Display](../classes/Display.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 
 
 
@@ -522,6 +526,7 @@ attributes:
     rank: 1000
     domain_of:
     - ItemGroup
+    - Method
     range: ReifiedConcept
   applicableWhen:
     name: applicableWhen
@@ -546,6 +551,7 @@ attributes:
     - Item
     - ItemGroup
     - Parameter
+    - Analysis
     range: WhereClause
     multivalued: true
     inlined: false
@@ -676,6 +682,7 @@ attributes:
     owner: ItemGroup
     domain_of:
     - ItemGroup
+    - Method
     range: ReifiedConcept
   applicableWhen:
     name: applicableWhen
@@ -702,6 +709,7 @@ attributes:
     - Item
     - ItemGroup
     - Parameter
+    - Analysis
     range: WhereClause
     multivalued: true
     inlined: false

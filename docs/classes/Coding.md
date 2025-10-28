@@ -96,6 +96,8 @@ Coding {
 | [DataService](../classes/DataService.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
 | [DataProvider](../classes/DataProvider.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
+| [Analysis](../classes/Analysis.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
+| [Display](../classes/Display.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
 
 
 

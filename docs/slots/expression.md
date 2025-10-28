@@ -38,6 +38,11 @@ Alias: expression
 
 
 
+## Aliases
+
+
+* code
+
 
 
 ## Identifier and Mapping Information
@@ -73,6 +78,8 @@ Alias: expression
 name: expression
 description: The actual text of the formal expression (renamed from 'code' for disambiguation).
 from_schema: https://cdisc.org/define-json
+aliases:
+- code
 rank: 1000
 alias: expression
 owner: FormalExpression

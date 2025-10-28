@@ -3,7 +3,9 @@
 # Class: Method 
 
 
-_A reusable computational procedure that describes how to derive values and can be referenced by Items_
+_A reusable computational procedure that describes how to derive values and can be referenced by Items._
+
+_Analysis and Derivation concepts can be implemented by a Method. Properties can be referenced by Parameters in its expressions._
 
 
 
@@ -65,6 +67,36 @@ Coding {
     string codeSystem  
     string codeSystemVersion  
     AliasPredicate aliasType  
+}
+ReifiedConcept {
+    string version  
+    string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+ConceptProperty {
+    integer minOccurs  
+    integer maxOccurs  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
 }
 DocumentReference {
     string title  
@@ -128,7 +160,8 @@ Parameter {
 }
 
 Method ||--}o FormalExpression : "expressions"
-Method ||--|o DocumentReference : "document"
+Method ||--}o DocumentReference : "documents"
+Method ||--|o ReifiedConcept : "implementsConcept"
 Method ||--}o Coding : "coding"
 Method ||--}o Comment : "comments"
 Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -139,6 +172,14 @@ Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 Comment ||--}o Comment : "comments"
 Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+ReifiedConcept ||--}o ConceptProperty : "properties"
+ReifiedConcept ||--}o Coding : "coding"
+ReifiedConcept ||--}o Comment : "comments"
+ReifiedConcept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+ConceptProperty ||--|o CodeList : "codeList"
+ConceptProperty ||--}o Coding : "coding"
+ConceptProperty ||--}o Comment : "comments"
+ConceptProperty ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 DocumentReference ||--}o Coding : "coding"
 FormalExpression ||--}o Parameter : "parameters"
 FormalExpression ||--|o ReturnValue : "returnValue"
@@ -161,6 +202,7 @@ Parameter ||--}o Coding : "coding"
 ## Inheritance
 * [GovernedElement](../classes/GovernedElement.md) [ [Identifiable](../classes/Identifiable.md) [Labelled](../classes/Labelled.md) [Governed](../classes/Governed.md)]
     * **Method**
+        * [Analysis](../classes/Analysis.md) [ [Versioned](../classes/Versioned.md)]
 
 
 
@@ -168,9 +210,10 @@ Parameter ||--}o Coding : "coding"
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [type](../slots/type.md) | 0..1 <br/> [MethodType](../enums/MethodType.md) | The type of method: Computation, Imputation, or Transformation. | direct |
+| [type](../slots/type.md) | 0..1 <br/> [MethodType](../enums/MethodType.md) | The type of method e.g. Computation, Imputation, Transformation. | direct |
 | [expressions](../slots/expressions.md) | * <br/> [FormalExpression](../classes/FormalExpression.md) | Formal expressions used by this method | direct |
-| [document](../slots/document.md) | 0..1 <br/> [DocumentReference](../classes/DocumentReference.md) | Reference to a document that describes this method in detail. | direct |
+| [documents](../slots/documents.md) | * <br/> [DocumentReference](../classes/DocumentReference.md) | Reference to a document that describes this method in detail. | direct |
+| [implementsConcept](../slots/implementsConcept.md) | 0..1 <br/> [ReifiedConcept](../classes/ReifiedConcept.md) | Reference to a specific concept that this Method implements. | direct |
 | [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
 | [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
 | [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
@@ -227,6 +270,8 @@ Parameter ||--}o Coding : "coding"
 | [DataAttribute](../classes/DataAttribute.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
 | [DataProduct](../classes/DataProduct.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [Analysis](../classes/Analysis.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [Display](../classes/Display.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
 
 
 
@@ -273,8 +318,11 @@ Parameter ||--}o Coding : "coding"
 <details>
 ```yaml
 name: Method
-description: A reusable computational procedure that describes how to derive values
-  and can be referenced by Items
+description: 'A reusable computational procedure that describes how to derive values
+  and can be referenced by Items.
+
+  Analysis and Derivation concepts can be implemented by a Method. Properties can
+  be referenced by Parameters in its expressions.'
 from_schema: https://cdisc.org/define-json
 exact_mappings:
 - odm:MethodRef
@@ -286,7 +334,7 @@ is_a: GovernedElement
 attributes:
   type:
     name: type
-    description: 'The type of method: Computation, Imputation, or Transformation.'
+    description: The type of method e.g. Computation, Imputation, Transformation.
     from_schema: https://cdisc.org/define-json
     domain_of:
     - ItemGroup
@@ -308,16 +356,27 @@ attributes:
     multivalued: true
     inlined: true
     inlined_as_list: true
-  document:
-    name: document
+  documents:
+    name: documents
     description: Reference to a document that describes this method in detail.
     from_schema: https://cdisc.org/define-json
-    rank: 1000
     domain_of:
+    - Comment
     - Method
-    - SourceItem
     - Origin
     range: DocumentReference
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  implementsConcept:
+    name: implementsConcept
+    description: Reference to a specific concept that this Method implements.
+    from_schema: https://cdisc.org/define-json
+    domain_of:
+    - ItemGroup
+    - Method
+    range: ReifiedConcept
+    inlined: false
 
 ```
 </details>
@@ -327,8 +386,11 @@ attributes:
 <details>
 ```yaml
 name: Method
-description: A reusable computational procedure that describes how to derive values
-  and can be referenced by Items
+description: 'A reusable computational procedure that describes how to derive values
+  and can be referenced by Items.
+
+  Analysis and Derivation concepts can be implemented by a Method. Properties can
+  be referenced by Parameters in its expressions.'
 from_schema: https://cdisc.org/define-json
 exact_mappings:
 - odm:MethodRef
@@ -340,7 +402,7 @@ is_a: GovernedElement
 attributes:
   type:
     name: type
-    description: 'The type of method: Computation, Imputation, or Transformation.'
+    description: The type of method e.g. Computation, Imputation, Transformation.
     from_schema: https://cdisc.org/define-json
     alias: type
     owner: Method
@@ -366,18 +428,31 @@ attributes:
     multivalued: true
     inlined: true
     inlined_as_list: true
-  document:
-    name: document
+  documents:
+    name: documents
     description: Reference to a document that describes this method in detail.
     from_schema: https://cdisc.org/define-json
-    rank: 1000
-    alias: document
+    alias: documents
     owner: Method
     domain_of:
+    - Comment
     - Method
-    - SourceItem
     - Origin
     range: DocumentReference
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  implementsConcept:
+    name: implementsConcept
+    description: Reference to a specific concept that this Method implements.
+    from_schema: https://cdisc.org/define-json
+    alias: implementsConcept
+    owner: Method
+    domain_of:
+    - ItemGroup
+    - Method
+    range: ReifiedConcept
+    inlined: false
   OID:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format

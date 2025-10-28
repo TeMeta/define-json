@@ -3,11 +3,6 @@
 # Slot: implementsConcept 
 
 
-_Reference to a abstract concept topic that this item group is a specialization of_
-
-
-
-
 
 URI: [odm:slot/implementsConcept](https://cdisc.org/odm2/slot/implementsConcept)
 Alias: implementsConcept
@@ -22,8 +17,10 @@ Alias: implementsConcept
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [DataStructureDefinition](../classes/DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures |  no  |
 | [ItemGroup](../classes/ItemGroup.md) | A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections |  no  |
+| [Analysis](../classes/Analysis.md) | Analysis extends Method to capture analysis-specific metadata including the reason for analysis, its purpose, and data traceability for the results used.<br>Expressions and parameters from Method can be generic or implementation-specific. |  no  |
+| [DataStructureDefinition](../classes/DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures |  no  |
+| [Method](../classes/Method.md) | A reusable computational procedure that describes how to derive values and can be referenced by Items.<br>Analysis and Derivation concepts can be implemented by a Method. Properties can be referenced by Parameters in its expressions. |  no  |
 
 
 
@@ -33,7 +30,7 @@ Alias: implementsConcept
 
 ## Properties
 
-* Range: [ReifiedConcept](../classes/ReifiedConcept.md)
+* Range: NONE
 
 
 
@@ -44,13 +41,6 @@ Alias: implementsConcept
 
 
 
-
-
-
-### Schema Source
-
-
-* from schema: https://cdisc.org/define-json
 
 
 
@@ -70,15 +60,10 @@ Alias: implementsConcept
 <details>
 ```yaml
 name: implementsConcept
-description: Reference to a abstract concept topic that this item group is a specialization
-  of
-from_schema: https://cdisc.org/define-json
-rank: 1000
 alias: implementsConcept
-owner: ItemGroup
 domain_of:
 - ItemGroup
-range: ReifiedConcept
+- Method
 
 ```
 </details>

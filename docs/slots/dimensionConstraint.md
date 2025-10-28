@@ -3,6 +3,11 @@
 # Slot: dimensionConstraint 
 
 
+_Subset of dimensions that are agreed upon by the dataflow and must be included._
+
+
+
+
 
 URI: [odm:slot/dimensionConstraint](https://cdisc.org/odm2/slot/dimensionConstraint)
 Alias: dimensionConstraint
@@ -66,6 +71,8 @@ Alias: dimensionConstraint
 <details>
 ```yaml
 name: dimensionConstraint
+description: Subset of dimensions that are agreed upon by the dataflow and must be
+  included.
 from_schema: https://cdisc.org/define-json
 rank: 1000
 alias: dimensionConstraint

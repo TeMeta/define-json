@@ -352,15 +352,6 @@ classes:
         multivalued: true
         inlined: true
         inlined_as_list: true
-      resources:
-        description: >-
-          References to documents that describe this version of the metadata.
-        any_of:
-          - range: DocumentReference
-          - range: Resource
-        multivalued: true
-        inlined: true
-        inlined_as_list: true
       conditions:
         description: >-
           Logical conditions that apply to this version of the metadata.
@@ -379,6 +370,13 @@ classes:
         description: >-
           Methods defined in this version of the metadata.
         range: Method
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      analyses:
+        description: >-
+          Analyses defined in this version of the metadata.
+        range: Analysis
         multivalued: true
         inlined: true
         inlined_as_list: true
@@ -426,6 +424,15 @@ classes:
         multivalued: true
         inlined: true
         inlined_as_list: true
+      resources:
+        description: >-
+          References to resources and documents that describe this version of the metadata.
+        any_of:
+          - range: DocumentReference
+          - range: Resource
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
       dataProducts:
         description: >-
           Indexed data flows with clear ownership
@@ -433,7 +440,14 @@ classes:
         multivalued: true
         inlined: true
         inlined_as_list: true
-
+      displays:
+        description: >-
+          Displays defined in this version of the metadata.
+        range: Display
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+        
   Item:
     description: >-
       A data element that represents a specific piece of information within a defined context, with data type, constraints, and derivation methods
@@ -759,6 +773,8 @@ classes:
           References to documents that contain or are referenced by this comment
         range: DocumentReference
         multivalued: true
+        inlined: true
+        inlined_as_list: true
 
   Coding:
     description: >-
@@ -1009,6 +1025,7 @@ classes:
         description: >-
           The actual text of the formal expression (renamed from 'code' for disambiguation).
         range: string
+        aliases: [code]
         required: true
       returnType:
         description: Return type of the expression
@@ -1029,7 +1046,10 @@ classes:
 
   Method:
     description: >-
-      A reusable computational procedure that describes how to derive values and can be referenced by Items
+      A reusable computational procedure that describes how to derive values and can be referenced by Items.
+
+      Analysis and Derivation concepts can be implemented by a Method.
+      Properties can be referenced by Parameters in its expressions.
     exact_mappings:
       - odm:MethodRef
       - odm:MethodDef
@@ -1040,7 +1060,7 @@ classes:
     attributes:
       type:
         description: >-
-          The type of method: Computation, Imputation, or Transformation.
+          The type of method e.g. Computation, Imputation, Transformation.
         range: MethodType
       expressions:
         description: >-
@@ -1049,10 +1069,18 @@ classes:
         multivalued: true
         inlined: true
         inlined_as_list: true
-      document:
+      documents:
         description: >-
           Reference to a document that describes this method in detail.
         range: DocumentReference
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      implementsConcept:
+        description: >-
+          Reference to a specific concept that this Method implements.
+        range: ReifiedConcept
+        inlined: false
 
   SourceItem:
     description: >-
@@ -1065,6 +1093,9 @@ classes:
       document:
         description: Reference to an external document
         range: DocumentReference
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
       resource:
         description: Path to a resource (e.g. File, FHIR datasource) that is the source of this item
         any_of:
@@ -1185,10 +1216,13 @@ classes:
         multivalued: true
         inlined: true
         inlined_as_list: true
-      document:
+      documents:
         description: >-
           Reference to a document that describes this origin in detail.
         range: DocumentReference
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
 
   SiteOrSponsorComment:
     description: >-
@@ -1533,12 +1567,19 @@ classes:
       - Versioned
     attributes:
       structure:
-        description: Structured component specification for this flow
+        description: >-
+         Structured component specification for this flow
         range: DataStructureDefinition
         required: true
       dimensionConstraint:
+        description: >-
+          Subset of dimensions that are agreed upon by the dataflow and must be included.
         range: Dimension
         multivalued: true
+      analysisMethod:
+        description: >-
+          Metadata about the analysis method used to produce the data in this dataflow.
+        range: Analysis
 
   IsSdmxDataset:
     mixin: true
@@ -1965,6 +2006,67 @@ classes:
           The source of the data provided under this agreement
         range: Resource
 
+  Analysis:
+    description: >-
+      Analysis extends Method to capture analysis-specific metadata
+      including the reason for analysis, its purpose, and data traceability
+      for the results used.
+
+      Expressions and parameters from Method can be generic or implementation-specific.
+    is_a: Method
+    mixins:
+      - Versioned
+    attributes:
+      analysisReason:
+        description: >-
+          The reason this analysis was performed.  
+      analysisPurpose:
+        description: >-
+          The purpose or role of this analysis in the study.
+      analysisMethod:
+        description: >-
+          Generic method used to perform this analysis.
+          any_of:
+            - range: Method
+            - range: AnalysisMethod
+      applicableWhen:
+        description: >-
+          The conditions (e.g. population, time period etc.) that must be met for this analysis to be applicable.
+        range: WhereClause
+        multivalued: true
+        inlined: false
+      inputData:
+        description: >-
+          Datasets or slices/subsets of datasets asked for by this analysis.
+          If a Item is referenced by a Parameter e.g. Analysis Variable, make sure to include its parent ItemGroup here.
+        any_of:
+          - range: ItemGroup
+          - range: Dataset
+        multivalued: true
+        inlined: false
+
+  Display:
+    description: >-
+      A rendered output of an analysis result.
+    is_a: GovernedElement
+    mixins:
+      - Versioned
+    attributes:
+      analysis:
+        description: >-
+          Analysis result this display represents.
+        range: Analysis
+      displayType:
+        description: >-
+          The type of display this result represents.
+          e.g. table, listing, figure, dashboard.
+      location:
+        description: >-
+          Reference to documents / location containing the display.
+        range: DocumentReference
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
 enums:
   AliasPredicate:
     description: >-
@@ -2052,6 +2154,12 @@ enums:
       Transformation:
         description: >-
           Transformation of the item's value according to a standard algorithm, such as a change in units.
+      Analysis:
+        description: >-
+          Creation of analysis results dataset.
+      Display:
+        description: >-
+          Creation of rendered output for display.
 
   DataType:
     description: >-

@@ -76,12 +76,14 @@ DocumentReference ||--}o Coding : "coding"
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | [resources](../slots/resources.md) | any_of[range] | [DocumentReference](../classes/DocumentReference.md) |
 | [MetaDataVersion](../classes/MetaDataVersion.md) | [annotatedCRFs](../slots/annotatedCRFs.md) | range | [DocumentReference](../classes/DocumentReference.md) |
+| [MetaDataVersion](../classes/MetaDataVersion.md) | [resources](../slots/resources.md) | any_of[range] | [DocumentReference](../classes/DocumentReference.md) |
 | [Comment](../classes/Comment.md) | [documents](../slots/documents.md) | range | [DocumentReference](../classes/DocumentReference.md) |
-| [Method](../classes/Method.md) | [document](../slots/document.md) | range | [DocumentReference](../classes/DocumentReference.md) |
+| [Method](../classes/Method.md) | [documents](../slots/documents.md) | range | [DocumentReference](../classes/DocumentReference.md) |
 | [SourceItem](../classes/SourceItem.md) | [document](../slots/document.md) | range | [DocumentReference](../classes/DocumentReference.md) |
-| [Origin](../classes/Origin.md) | [document](../slots/document.md) | range | [DocumentReference](../classes/DocumentReference.md) |
+| [Origin](../classes/Origin.md) | [documents](../slots/documents.md) | range | [DocumentReference](../classes/DocumentReference.md) |
+| [Analysis](../classes/Analysis.md) | [documents](../slots/documents.md) | range | [DocumentReference](../classes/DocumentReference.md) |
+| [Display](../classes/Display.md) | [location](../slots/location.md) | range | [DocumentReference](../classes/DocumentReference.md) |
 
 
 

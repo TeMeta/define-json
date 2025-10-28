@@ -180,7 +180,7 @@ Method {
 }
 
 SourceItem ||--|o Item : "item"
-SourceItem ||--|o DocumentReference : "document"
+SourceItem ||--}o DocumentReference : "document"
 SourceItem ||--}o Coding : "coding"
 DocumentReference ||--}o Coding : "coding"
 Item ||--|o CodeList : "codeList"
@@ -217,14 +217,15 @@ ConceptProperty ||--}o Coding : "coding"
 ConceptProperty ||--}o Comment : "comments"
 ConceptProperty ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Origin ||--}o SourceItem : "sourceItems"
-Origin ||--|o DocumentReference : "document"
+Origin ||--}o DocumentReference : "documents"
 WhereClause ||--}o Condition : "conditions"
 WhereClause ||--}o Coding : "coding"
 WhereClause ||--}o Comment : "comments"
 WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 RangeCheck ||--}o FormalExpression : "expressions"
 Method ||--}o FormalExpression : "expressions"
-Method ||--|o DocumentReference : "document"
+Method ||--}o DocumentReference : "documents"
+Method ||--|o ReifiedConcept : "implementsConcept"
 Method ||--}o Coding : "coding"
 Method ||--}o Comment : "comments"
 Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -241,7 +242,7 @@ Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
 | [item](../slots/item.md) | 0..1 <br/> [Item](../classes/Item.md) | Reference to an item | direct |
-| [document](../slots/document.md) | 0..1 <br/> [DocumentReference](../classes/DocumentReference.md) | Reference to an external document | direct |
+| [document](../slots/document.md) | * <br/> [DocumentReference](../classes/DocumentReference.md) | Reference to an external document | direct |
 | [resource](../slots/resource.md) | * <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Resource](../classes/Resource.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Path to a resource (e.g. File, FHIR datasource) that is the source of this item | direct |
 | [coding](../slots/coding.md) | * <br/> [Coding](../classes/Coding.md) | A coding that describes the source of the item | direct |
 
@@ -316,11 +317,13 @@ attributes:
     name: document
     description: Reference to an external document
     from_schema: https://cdisc.org/define-json
+    rank: 1000
     domain_of:
-    - Method
     - SourceItem
-    - Origin
     range: DocumentReference
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
   resource:
     name: resource
     description: Path to a resource (e.g. File, FHIR datasource) that is the source
@@ -375,13 +378,15 @@ attributes:
     name: document
     description: Reference to an external document
     from_schema: https://cdisc.org/define-json
+    rank: 1000
     alias: document
     owner: SourceItem
     domain_of:
-    - Method
     - SourceItem
-    - Origin
     range: DocumentReference
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
   resource:
     name: resource
     description: Path to a resource (e.g. File, FHIR datasource) that is the source

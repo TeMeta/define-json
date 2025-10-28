@@ -114,6 +114,8 @@ Organization ||--}o Coding : "coding"
 | [DataProduct](../classes/DataProduct.md) | [dataProductOwner](../slots/dataProductOwner.md) | any_of[range] | [User](../classes/User.md) |
 | [DataProduct](../classes/DataProduct.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
+| [Analysis](../classes/Analysis.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
+| [Display](../classes/Display.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 
 
 

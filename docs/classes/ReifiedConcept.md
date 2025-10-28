@@ -175,6 +175,7 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | [ConceptProperty](../classes/ConceptProperty.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
 | [WhereClause](../classes/WhereClause.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
 | [Condition](../classes/Condition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
+| [Method](../classes/Method.md) | [implementsConcept](../slots/implementsConcept.md) | range | [ReifiedConcept](../classes/ReifiedConcept.md) |
 | [Method](../classes/Method.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
 | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
 | [NominalOccurrence](../classes/NominalOccurrence.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
@@ -187,6 +188,9 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | [DataAttribute](../classes/DataAttribute.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
 | [DataProduct](../classes/DataProduct.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
+| [Analysis](../classes/Analysis.md) | [implementsConcept](../slots/implementsConcept.md) | range | [ReifiedConcept](../classes/ReifiedConcept.md) |
+| [Analysis](../classes/Analysis.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
+| [Display](../classes/Display.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
 
 
 

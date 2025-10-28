@@ -305,7 +305,8 @@ Timing ||--|o NominalOccurrence : "relativeFrom"
 Timing ||--|o Method : "imputation"
 Timing ||--}o Coding : "coding"
 Method ||--}o FormalExpression : "expressions"
-Method ||--|o DocumentReference : "document"
+Method ||--}o DocumentReference : "documents"
+Method ||--|o ReifiedConcept : "implementsConcept"
 Method ||--}o Coding : "coding"
 Method ||--}o Comment : "comments"
 Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -349,7 +350,7 @@ CodeList ||--}o Coding : "coding"
 CodeList ||--}o Comment : "comments"
 CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Origin ||--}o SourceItem : "sourceItems"
-Origin ||--|o DocumentReference : "document"
+Origin ||--}o DocumentReference : "documents"
 RangeCheck ||--}o FormalExpression : "expressions"
 ComponentList ||--}o Coding : "coding"
 DataAttribute ||--|| Item : "item"
@@ -689,6 +690,7 @@ attributes:
     owner: DataStructureDefinition
     domain_of:
     - ItemGroup
+    - Method
     range: ReifiedConcept
   applicableWhen:
     name: applicableWhen
@@ -715,6 +717,7 @@ attributes:
     - Item
     - ItemGroup
     - Parameter
+    - Analysis
     range: WhereClause
     multivalued: true
     inlined: false

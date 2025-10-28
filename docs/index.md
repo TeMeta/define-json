@@ -91,6 +91,178 @@ DocumentReference {
     string label  
     stringList aliases  
 }
+Display {
+    string displayType  
+    string version  
+    string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+Analysis {
+    string analysisReason  
+    string analysisPurpose  
+    string analysisMethod  
+    stringList inputData  
+    string version  
+    string href  
+    MethodType type  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+ReifiedConcept {
+    string version  
+    string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+ConceptProperty {
+    integer minOccurs  
+    integer maxOccurs  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+CodeList {
+    DataType dataType  
+    string formatName  
+    string version  
+    string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+Resource {
+    string resourceType  
+    string attribute  
+    string version  
+    string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+FormalExpression {
+    string context  
+    string expression  
+    string returnType  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+ReturnValue {
+    DataType dataType  
+    stringList valueList  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+Parameter {
+    DataType dataType  
+    string value  
+    string defaultValue  
+    stringList items  
+    boolean required  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+Condition {
+    string implementsCondition  
+    LogicalOperator operator  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+RangeCheck {
+    Comparator comparator  
+    stringList checkValues  
+    string item  
+    SoftHard softHard  
+    LogicalOperator operator  
+}
+WhereClause {
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+CodeListItem {
+    string codedValue  
+    string decode  
+    string description  
+    stringList aliases  
+    decimal weight  
+    boolean other  
+}
 DataProduct {
     string dataProductOwner  
     string domain  
@@ -165,127 +337,6 @@ Method {
     string owner  
     string wasDerivedFrom  
 }
-FormalExpression {
-    string context  
-    string expression  
-    string returnType  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
-Resource {
-    string resourceType  
-    string attribute  
-    string version  
-    string href  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
-ReturnValue {
-    DataType dataType  
-    stringList valueList  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
-Parameter {
-    DataType dataType  
-    string value  
-    string defaultValue  
-    stringList items  
-    boolean required  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
-Condition {
-    string implementsCondition  
-    LogicalOperator operator  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-RangeCheck {
-    Comparator comparator  
-    stringList checkValues  
-    string item  
-    SoftHard softHard  
-    LogicalOperator operator  
-}
-WhereClause {
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-ConceptProperty {
-    integer minOccurs  
-    integer maxOccurs  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-CodeList {
-    DataType dataType  
-    string formatName  
-    string version  
-    string href  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-CodeListItem {
-    string codedValue  
-    string decode  
-    string description  
-    stringList aliases  
-    decimal weight  
-    boolean other  
-}
 NominalOccurrence {
     string event  
     string OID  
@@ -340,21 +391,6 @@ DataStructureDefinition {
     string wasDerivedFrom  
     string version  
     string href  
-}
-ReifiedConcept {
-    string version  
-    string href  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
 }
 Item {
     DataType dataType  
@@ -521,6 +557,7 @@ MetaDataVersion ||--}o Item : "items"
 MetaDataVersion ||--}o Condition : "conditions"
 MetaDataVersion ||--}o WhereClause : "whereClauses"
 MetaDataVersion ||--}o Method : "methods"
+MetaDataVersion ||--}o Analysis : "analyses"
 MetaDataVersion ||--}o CodeList : "codeLists"
 MetaDataVersion ||--}o Coding : "codings"
 MetaDataVersion ||--}o ReifiedConcept : "concepts"
@@ -529,6 +566,7 @@ MetaDataVersion ||--}o Dictionary : "dictionaries"
 MetaDataVersion ||--}o Standard : "standards"
 MetaDataVersion ||--}o DocumentReference : "annotatedCRFs"
 MetaDataVersion ||--}o DataProduct : "dataProducts"
+MetaDataVersion ||--}o Display : "displays"
 MetaDataVersion ||--}o Coding : "coding"
 MetaDataVersion ||--}o Comment : "comments"
 MetaDataVersion ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -540,6 +578,55 @@ Comment ||--}o Coding : "coding"
 Comment ||--}o Comment : "comments"
 Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 DocumentReference ||--}o Coding : "coding"
+Display ||--|o Analysis : "analysis"
+Display ||--}o DocumentReference : "location"
+Display ||--}o Coding : "coding"
+Display ||--}o Comment : "comments"
+Display ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Analysis ||--}o WhereClause : "applicableWhen"
+Analysis ||--}o FormalExpression : "expressions"
+Analysis ||--}o DocumentReference : "documents"
+Analysis ||--|o ReifiedConcept : "implementsConcept"
+Analysis ||--}o Coding : "coding"
+Analysis ||--}o Comment : "comments"
+Analysis ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+ReifiedConcept ||--}o ConceptProperty : "properties"
+ReifiedConcept ||--}o Coding : "coding"
+ReifiedConcept ||--}o Comment : "comments"
+ReifiedConcept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+ConceptProperty ||--|o CodeList : "codeList"
+ConceptProperty ||--}o Coding : "coding"
+ConceptProperty ||--}o Comment : "comments"
+ConceptProperty ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+CodeList ||--}o CodeListItem : "codeListItems"
+CodeList ||--|o Resource : "externalCodeList"
+CodeList ||--}o Coding : "coding"
+CodeList ||--}o Comment : "comments"
+CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Resource ||--}o FormalExpression : "selection"
+Resource ||--}o Coding : "coding"
+FormalExpression ||--}o Parameter : "parameters"
+FormalExpression ||--|o ReturnValue : "returnValue"
+FormalExpression ||--}o Resource : "externalCodeLibs"
+FormalExpression ||--}o Coding : "coding"
+ReturnValue ||--}o Coding : "coding"
+Parameter ||--}o CodeList : "codeList"
+Parameter ||--}o ConceptProperty : "conceptProperty"
+Parameter ||--}o WhereClause : "applicableWhen"
+Parameter ||--}o Condition : "conditions"
+Parameter ||--}o Coding : "coding"
+Condition ||--}o RangeCheck : "rangeChecks"
+Condition ||--}o FormalExpression : "expressions"
+Condition ||--}o Condition : "conditions"
+Condition ||--}o Coding : "coding"
+Condition ||--}o Comment : "comments"
+Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+RangeCheck ||--}o FormalExpression : "expressions"
+WhereClause ||--}o Condition : "conditions"
+WhereClause ||--}o Coding : "coding"
+WhereClause ||--}o Comment : "comments"
+WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+CodeListItem ||--|o Coding : "coding"
 DataProduct ||--}o DataService : "inputPort"
 DataProduct ||--}o DataService : "outputPort"
 DataProduct ||--}o Dataset : "inputDataset"
@@ -558,43 +645,11 @@ Timing ||--|o NominalOccurrence : "relativeFrom"
 Timing ||--|o Method : "imputation"
 Timing ||--}o Coding : "coding"
 Method ||--}o FormalExpression : "expressions"
-Method ||--|o DocumentReference : "document"
+Method ||--}o DocumentReference : "documents"
+Method ||--|o ReifiedConcept : "implementsConcept"
 Method ||--}o Coding : "coding"
 Method ||--}o Comment : "comments"
 Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-FormalExpression ||--}o Parameter : "parameters"
-FormalExpression ||--|o ReturnValue : "returnValue"
-FormalExpression ||--}o Resource : "externalCodeLibs"
-FormalExpression ||--}o Coding : "coding"
-Resource ||--}o FormalExpression : "selection"
-Resource ||--}o Coding : "coding"
-ReturnValue ||--}o Coding : "coding"
-Parameter ||--}o CodeList : "codeList"
-Parameter ||--}o ConceptProperty : "conceptProperty"
-Parameter ||--}o WhereClause : "applicableWhen"
-Parameter ||--}o Condition : "conditions"
-Parameter ||--}o Coding : "coding"
-Condition ||--}o RangeCheck : "rangeChecks"
-Condition ||--}o FormalExpression : "expressions"
-Condition ||--}o Condition : "conditions"
-Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comments"
-Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-RangeCheck ||--}o FormalExpression : "expressions"
-WhereClause ||--}o Condition : "conditions"
-WhereClause ||--}o Coding : "coding"
-WhereClause ||--}o Comment : "comments"
-WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-ConceptProperty ||--|o CodeList : "codeList"
-ConceptProperty ||--}o Coding : "coding"
-ConceptProperty ||--}o Comment : "comments"
-ConceptProperty ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-CodeList ||--}o CodeListItem : "codeListItems"
-CodeList ||--|o Resource : "externalCodeList"
-CodeList ||--}o Coding : "coding"
-CodeList ||--}o Comment : "comments"
-CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-CodeListItem ||--|o Coding : "coding"
 NominalOccurrence ||--|| Timing : "timing"
 NominalOccurrence ||--}o Condition : "condition"
 NominalOccurrence ||--}o Coding : "coding"
@@ -617,10 +672,6 @@ DataStructureDefinition ||--|o Timing : "validityPeriod"
 DataStructureDefinition ||--}o Coding : "coding"
 DataStructureDefinition ||--}o Comment : "comments"
 DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-ReifiedConcept ||--}o ConceptProperty : "properties"
-ReifiedConcept ||--}o Coding : "coding"
-ReifiedConcept ||--}o Comment : "comments"
-ReifiedConcept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
@@ -633,9 +684,9 @@ Item ||--}o Coding : "coding"
 Item ||--}o Comment : "comments"
 Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Origin ||--}o SourceItem : "sourceItems"
-Origin ||--|o DocumentReference : "document"
+Origin ||--}o DocumentReference : "documents"
 SourceItem ||--|o Item : "item"
-SourceItem ||--|o DocumentReference : "document"
+SourceItem ||--}o DocumentReference : "document"
 SourceItem ||--}o Coding : "coding"
 ComponentList ||--}o Coding : "coding"
 DataAttribute ||--|| Item : "item"
@@ -658,6 +709,7 @@ Dimension ||--}o Comment : "comments"
 Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Dataflow ||--|| DataStructureDefinition : "structure"
 Dataflow ||--}o Dimension : "dimensionConstraint"
+Dataflow ||--|o Analysis : "analysisMethod"
 Dataflow ||--}o Coding : "coding"
 Dataflow ||--}o Comment : "comments"
 Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -705,11 +757,13 @@ ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Measure](classes/Measure.md) | A data cube property that describes a measurable quantity or value |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Dataflow](classes/Dataflow.md) | An abstract representation that defines data provision for different reference periods, where a Distribution and its Dataset are instances |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[DataProduct](classes/DataProduct.md) | A governed collection that represents a purpose-driven assembly of datasets and services with an owning team and lifecycle |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Display](classes/Display.md) | A rendered output of an analysis result. |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Item](classes/Item.md) | A data element that represents a specific piece of information within a defined context, with data type, constraints, and derivation methods |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ItemGroup](classes/ItemGroup.md) | A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[DataStructureDefinition](classes/DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[MetaDataVersion](classes/MetaDataVersion.md) | A container element that represents a given version of a specification, linking to a particular usage context such as a study, dataset, or data collection instrument. |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Method](classes/Method.md) | A reusable computational procedure that describes how to derive values and can be referenced by Items |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Method](classes/Method.md) | A reusable computational procedure that describes how to derive values and can be referenced by Items.<br>Analysis and Derivation concepts can be implemented by a Method. Properties can be referenced by Parameters in its expressions. |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Analysis](classes/Analysis.md) | Analysis extends Method to capture analysis-specific metadata including the reason for analysis, its purpose, and data traceability for the results used.<br>Expressions and parameters from Method can be generic or implementation-specific. |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[NominalOccurrence](classes/NominalOccurrence.md) | An event element that represents occurrences such as planned or unplanned encounters or adverse events |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ProvisionAgreement](classes/ProvisionAgreement.md) | An agreement element that describes the contractual relationship between a Data Provider and a Data Consumer regarding data provision |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ReifiedConcept](classes/ReifiedConcept.md) | A canonical information layer that makes abstract concepts explicit and referenceable, showing how different data implementations represent the same underlying meanings through a star schema structure with multiple properties |
@@ -801,10 +855,10 @@ ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | [protocolName](slots/protocolName.md) | Protocol name for the study |
 | [itemGroups](slots/itemGroups.md) | Item groups, containing items, defined in this version of the metadata |
 | [items](slots/items.md) | Template or top-level items (not belonging to any item group) defined in this version of the metadata |
-| [resources](slots/resources.md) | References to documents that describe this version of the metadata. |
 | [conditions](slots/conditions.md) | Logical conditions that apply to this version of the metadata. |
 | [whereClauses](slots/whereClauses.md) | Data contexts that apply to this version of the metadata. |
 | [methods](slots/methods.md) | Methods defined in this version of the metadata. |
+| [analyses](slots/analyses.md) | Analyses defined in this version of the metadata. |
 | [codeLists](slots/codeLists.md) | Code lists defined in this version of the metadata. |
 | [codings](slots/codings.md) | Codings defined in this version of the metadata |
 | [concepts](slots/concepts.md) | Structured Concepts defined in this version of the metadata |
@@ -812,7 +866,9 @@ ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | [dictionaries](slots/dictionaries.md) | Dictionaries defined in this version of the metadata |
 | [standards](slots/standards.md) | Standards defined in this version of the metadata |
 | [annotatedCRFs](slots/annotatedCRFs.md) | Reference to annotated case report forms |
+| [resources](slots/resources.md) | References to resources and documents that describe this version of the metadata. |
 | [dataProducts](slots/dataProducts.md) | Indexed data flows with clear ownership |
+| [displays](slots/displays.md) | Displays defined in this version of the metadata. |
 | [dataType](slots/dataType.md) | The data type of the item. |
 | [length](slots/length.md) | The maximum length of the data item in characters. |
 | [codeList](slots/codeList.md) | Reference to the CodeList that constrains the item values. |
@@ -864,7 +920,7 @@ ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | [parameters](slots/parameters.md) | Parameters used in the expression |
 | [returnValue](slots/returnValue.md) | Return value details |
 | [externalCodeLibs](slots/externalCodeLibs.md) | External code libraries referenced |
-| [document](slots/document.md) | Reference to a document that describes this method in detail. |
+| [document](slots/document.md) | Reference to an external document |
 | [resource](slots/resource.md) | Path to a resource (e.g. File, FHIR datasource) that is the source of this item |
 | [defaultValue](slots/defaultValue.md) | A default value for the parameter. |
 | [required](slots/required.md) | Indicates whether this parameter must be provided when the  containing expression is evaluated (technical constraint). |
@@ -904,7 +960,8 @@ ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | [attributes](slots/attributes.md) |  |
 | [grouping](slots/grouping.md) | An association to a set of metadata concepts that have an identified structural role in a Data Structure Definition. |
 | [evolvingStructure](slots/evolvingStructure.md) |  |
-| [dimensionConstraint](slots/dimensionConstraint.md) |  |
+| [dimensionConstraint](slots/dimensionConstraint.md) | Subset of dimensions that are agreed upon by the dataflow and must be included. |
+| [analysisMethod](slots/analysisMethod.md) | Metadata about the analysis method used to produce the data in this dataflow. |
 | [action](slots/action.md) | Defines the action to be taken by the recipient system (information, append, replace, delete) |
 | [reportingBegin](slots/reportingBegin.md) | A specific time period in a known system of time periods that identifies the start period of a report. |
 | [reportingEnd](slots/reportingEnd.md) | A specific time period in a known system of time periods that identifies the end period of a report. |
@@ -944,6 +1001,11 @@ ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | [providesDataFor](slots/providesDataFor.md) | The Dataflows that this provider supplies data for |
 | [provisionAgreements](slots/provisionAgreements.md) | The ProvisionAgreements that this provider has with Data Consumers |
 | [provider](slots/provider.md) | The Data Provider that is part of this agreement |
+| [analysisReason](slots/analysisReason.md) | The reason this analysis was performed. |
+| [analysisPurpose](slots/analysisPurpose.md) | The purpose or role of this analysis in the study. |
+| [inputData](slots/inputData.md) | Datasets or slices/subsets of datasets asked for by this analysis. If a Item is referenced by a Parameter e.g. Analysis Variable, make sure to include its parent ItemGroup here. |
+| [analysis](slots/analysis.md) | Analysis result this display represents. |
+| [displayType](slots/displayType.md) | The type of display this result represents. e.g. table, listing, figure, dashboard. |
 
 
 ## Enumerations

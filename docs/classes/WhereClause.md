@@ -166,6 +166,7 @@ RangeCheck ||--}o FormalExpression : "expressions"
 | [ItemGroup](../classes/ItemGroup.md) | [applicableWhen](../slots/applicableWhen.md) | range | [WhereClause](../classes/WhereClause.md) |
 | [Parameter](../classes/Parameter.md) | [applicableWhen](../slots/applicableWhen.md) | range | [WhereClause](../classes/WhereClause.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [applicableWhen](../slots/applicableWhen.md) | range | [WhereClause](../classes/WhereClause.md) |
+| [Analysis](../classes/Analysis.md) | [applicableWhen](../slots/applicableWhen.md) | range | [WhereClause](../classes/WhereClause.md) |
 
 
 

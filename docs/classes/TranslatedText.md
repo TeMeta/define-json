@@ -194,6 +194,14 @@ TranslatedText ||--}o Translation : "translations"
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Analysis](../classes/Analysis.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Analysis](../classes/Analysis.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Analysis](../classes/Analysis.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Analysis](../classes/Analysis.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Display](../classes/Display.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Display](../classes/Display.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Display](../classes/Display.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Display](../classes/Display.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 
 
 

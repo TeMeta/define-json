@@ -203,6 +203,7 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | [Method](../classes/Method.md) | [expressions](../slots/expressions.md) | range | [FormalExpression](../classes/FormalExpression.md) |
 | [Resource](../classes/Resource.md) | [selection](../slots/selection.md) | range | [FormalExpression](../classes/FormalExpression.md) |
 | [DataService](../classes/DataService.md) | [selection](../slots/selection.md) | range | [FormalExpression](../classes/FormalExpression.md) |
+| [Analysis](../classes/Analysis.md) | [expressions](../slots/expressions.md) | range | [FormalExpression](../classes/FormalExpression.md) |
 
 
 
@@ -273,6 +274,8 @@ attributes:
     description: The actual text of the formal expression (renamed from 'code' for
       disambiguation).
     from_schema: https://cdisc.org/define-json
+    aliases:
+    - code
     rank: 1000
     domain_of:
     - FormalExpression
@@ -350,6 +353,8 @@ attributes:
     description: The actual text of the formal expression (renamed from 'code' for
       disambiguation).
     from_schema: https://cdisc.org/define-json
+    aliases:
+    - code
     rank: 1000
     alias: expression
     owner: FormalExpression

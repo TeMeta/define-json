@@ -138,6 +138,8 @@ DocumentReference ||--}o Coding : "coding"
 | [DataAttribute](../classes/DataAttribute.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
 | [DataProduct](../classes/DataProduct.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
+| [Analysis](../classes/Analysis.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
+| [Display](../classes/Display.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
 
 
 
@@ -212,8 +214,12 @@ attributes:
     rank: 1000
     domain_of:
     - Comment
+    - Method
+    - Origin
     range: DocumentReference
     multivalued: true
+    inlined: true
+    inlined_as_list: true
 
 ```
 </details>
@@ -256,8 +262,12 @@ attributes:
     owner: Comment
     domain_of:
     - Comment
+    - Method
+    - Origin
     range: DocumentReference
     multivalued: true
+    inlined: true
+    inlined_as_list: true
   OID:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format

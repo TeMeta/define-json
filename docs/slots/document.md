@@ -3,6 +3,11 @@
 # Slot: document 
 
 
+_Reference to an external document_
+
+
+
+
 
 URI: [odm:slot/document](https://cdisc.org/odm2/slot/document)
 Alias: document
@@ -17,9 +22,7 @@ Alias: document
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Method](../classes/Method.md) | A reusable computational procedure that describes how to derive values and can be referenced by Items |  no  |
 | [SourceItem](../classes/SourceItem.md) | A data source that provides the origin of information for an item |  no  |
-| [Origin](../classes/Origin.md) | A provenance element that describes the source of data for an item |  no  |
 
 
 
@@ -29,7 +32,9 @@ Alias: document
 
 ## Properties
 
-* Range: NONE
+* Range: [DocumentReference](../classes/DocumentReference.md)
+
+* Multivalued: True
 
 
 
@@ -40,6 +45,13 @@ Alias: document
 
 
 
+
+
+
+### Schema Source
+
+
+* from schema: https://cdisc.org/define-json
 
 
 
@@ -59,11 +71,17 @@ Alias: document
 <details>
 ```yaml
 name: document
+description: Reference to an external document
+from_schema: https://cdisc.org/define-json
+rank: 1000
 alias: document
+owner: SourceItem
 domain_of:
-- Method
 - SourceItem
-- Origin
+range: DocumentReference
+multivalued: true
+inlined: true
+inlined_as_list: true
 
 ```
 </details>

@@ -97,6 +97,7 @@ Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
     * [CubeComponent](../classes/CubeComponent.md)
     * [DataProduct](../classes/DataProduct.md) [ [Versioned](../classes/Versioned.md)]
     * [ProvisionAgreement](../classes/ProvisionAgreement.md) [ [Versioned](../classes/Versioned.md)]
+    * [Display](../classes/Display.md) [ [Versioned](../classes/Versioned.md)]
 
 
 

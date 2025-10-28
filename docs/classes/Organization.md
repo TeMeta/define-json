@@ -108,6 +108,8 @@ Organization ||--}o Coding : "coding"
 | [DataProduct](../classes/DataProduct.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [DataProvider](../classes/DataProvider.md) | [partOfOrganization](../slots/partOfOrganization.md) | range | [Organization](../classes/Organization.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
+| [Analysis](../classes/Analysis.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
+| [Display](../classes/Display.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
 
 
 
@@ -193,6 +195,7 @@ attributes:
     rank: 1000
     domain_of:
     - Organization
+    - Display
     range: string
   address:
     name: address
@@ -265,6 +268,7 @@ attributes:
     owner: Organization
     domain_of:
     - Organization
+    - Display
     range: string
   address:
     name: address

@@ -348,6 +348,7 @@ attributes:
     - Item
     - ItemGroup
     - Parameter
+    - Analysis
     range: WhereClause
     multivalued: true
     inlined: false
@@ -484,6 +485,7 @@ attributes:
     - Item
     - ItemGroup
     - Parameter
+    - Analysis
     range: WhereClause
     multivalued: true
     inlined: false
