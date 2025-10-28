@@ -307,6 +307,7 @@ DataStructureDefinition ||--}o Comment : "comments"
 DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Dataflow ||--|| DataStructureDefinition : "structure"
 Dataflow ||--}o Dimension : "dimensionConstraint"
+Dataflow ||--|o Analysis : "analysisMethod"
 Dataflow ||--}o Coding : "coding"
 Dataflow ||--}o Comment : "comments"
 Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -628,6 +629,18 @@ FormalExpression ||--}o Coding : "coding"
 </tr>
 <tr>
 <td><a href="../ProvisionAgreement/">ProvisionAgreement</a></td>
+<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
+<td>any_of[range]</td>
+<td><a href="./">DataProduct</a></td>
+</tr>
+<tr>
+<td><a href="../Analysis/">Analysis</a></td>
+<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
+<td>any_of[range]</td>
+<td><a href="./">DataProduct</a></td>
+</tr>
+<tr>
+<td><a href="../Display/">Display</a></td>
 <td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
 <td>any_of[range]</td>
 <td><a href="./">DataProduct</a></td>

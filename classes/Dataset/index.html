@@ -368,6 +368,26 @@ Dataflow {
     string owner  
     string wasDerivedFrom  
 }
+Analysis {
+    string analysisReason  
+    string analysisPurpose  
+    string analysisMethod  
+    stringList inputData  
+    string version  
+    string href  
+    MethodType type  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
 
 Dataset ||--|o Dataflow : "describedBy"
 Dataset ||--|o DataStructureDefinition : "structuredBy"
@@ -380,7 +400,8 @@ Timing ||--|o NominalOccurrence : "relativeFrom"
 Timing ||--|o Method : "imputation"
 Timing ||--}o Coding : "coding"
 Method ||--}o FormalExpression : "expressions"
-Method ||--|o DocumentReference : "document"
+Method ||--}o DocumentReference : "documents"
+Method ||--|o ReifiedConcept : "implementsConcept"
 Method ||--}o Coding : "coding"
 Method ||--}o Comment : "comments"
 Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -453,9 +474,17 @@ Dimension ||--}o Comment : "comments"
 Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Dataflow ||--|| DataStructureDefinition : "structure"
 Dataflow ||--}o Dimension : "dimensionConstraint"
+Dataflow ||--|o Analysis : "analysisMethod"
 Dataflow ||--}o Coding : "coding"
 Dataflow ||--}o Comment : "comments"
 Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Analysis ||--}o WhereClause : "applicableWhen"
+Analysis ||--}o FormalExpression : "expressions"
+Analysis ||--}o DocumentReference : "documents"
+Analysis ||--|o ReifiedConcept : "implementsConcept"
+Analysis ||--}o Coding : "coding"
+Analysis ||--}o Comment : "comments"
+Analysis ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
@@ -685,6 +714,12 @@ Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <td><a href="../Distribution/">Distribution</a></td>
 <td><a href="../../slots/isDistributionOf/">isDistributionOf</a></td>
 <td>range</td>
+<td><a href="./">Dataset</a></td>
+</tr>
+<tr>
+<td><a href="../Analysis/">Analysis</a></td>
+<td><a href="../../slots/inputData/">inputData</a></td>
+<td>any_of[range]</td>
 <td><a href="./">Dataset</a></td>
 </tr>
 </tbody>

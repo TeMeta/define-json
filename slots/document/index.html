@@ -95,6 +95,7 @@
 </div></div>
 <div class="col-md-9" role="main">
 <h1 id="slot-document">Slot: document</h1>
+<p><em>Reference to an external document</em></p>
 <p>URI: <a href="https://cdisc.org/odm2/slot/document">odm:slot/document</a>
 Alias: document</p>
 <!-- no inheritance hierarchy -->
@@ -109,27 +110,26 @@ Alias: document</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../../classes/Method/">Method</a></td>
-<td>A reusable computational procedure that describes how to derive values and can be referenced by Items</td>
-<td>no</td>
-</tr>
-<tr>
 <td><a href="../../classes/SourceItem/">SourceItem</a></td>
 <td>A data source that provides the origin of information for an item</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/Origin/">Origin</a></td>
-<td>A provenance element that describes the source of data for an item</td>
 <td>no</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>Range: NONE</li>
+<li>
+<p>Range: <a href="../../classes/DocumentReference/">DocumentReference</a></p>
+</li>
+<li>
+<p>Multivalued: True</p>
+</li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
+<h3 id="schema-source">Schema Source</h3>
+<ul>
+<li>from schema: https://cdisc.org/define-json</li>
+</ul>
 <h2 id="mappings">Mappings</h2>
 <table>
 <thead>
@@ -152,11 +152,17 @@ Alias: document</p>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">document</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reference to an external document</span>
+<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
+<span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">document</span>
+<span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SourceItem</span>
 <span class="nt">domain_of</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Method</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SourceItem</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Origin</span>
+<span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DocumentReference</span>
+<span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 </details></div>
 </div>

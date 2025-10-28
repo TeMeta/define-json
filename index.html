@@ -194,6 +194,178 @@ DocumentReference {
     string label  
     stringList aliases  
 }
+Display {
+    string displayType  
+    string version  
+    string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+Analysis {
+    string analysisReason  
+    string analysisPurpose  
+    string analysisMethod  
+    stringList inputData  
+    string version  
+    string href  
+    MethodType type  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+ReifiedConcept {
+    string version  
+    string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+ConceptProperty {
+    integer minOccurs  
+    integer maxOccurs  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+CodeList {
+    DataType dataType  
+    string formatName  
+    string version  
+    string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+Resource {
+    string resourceType  
+    string attribute  
+    string version  
+    string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+FormalExpression {
+    string context  
+    string expression  
+    string returnType  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+ReturnValue {
+    DataType dataType  
+    stringList valueList  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+Parameter {
+    DataType dataType  
+    string value  
+    string defaultValue  
+    stringList items  
+    boolean required  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+Condition {
+    string implementsCondition  
+    LogicalOperator operator  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+RangeCheck {
+    Comparator comparator  
+    stringList checkValues  
+    string item  
+    SoftHard softHard  
+    LogicalOperator operator  
+}
+WhereClause {
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+CodeListItem {
+    string codedValue  
+    string decode  
+    string description  
+    stringList aliases  
+    decimal weight  
+    boolean other  
+}
 DataProduct {
     string dataProductOwner  
     string domain  
@@ -268,127 +440,6 @@ Method {
     string owner  
     string wasDerivedFrom  
 }
-FormalExpression {
-    string context  
-    string expression  
-    string returnType  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
-Resource {
-    string resourceType  
-    string attribute  
-    string version  
-    string href  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
-ReturnValue {
-    DataType dataType  
-    stringList valueList  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
-Parameter {
-    DataType dataType  
-    string value  
-    string defaultValue  
-    stringList items  
-    boolean required  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
-Condition {
-    string implementsCondition  
-    LogicalOperator operator  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-RangeCheck {
-    Comparator comparator  
-    stringList checkValues  
-    string item  
-    SoftHard softHard  
-    LogicalOperator operator  
-}
-WhereClause {
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-ConceptProperty {
-    integer minOccurs  
-    integer maxOccurs  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-CodeList {
-    DataType dataType  
-    string formatName  
-    string version  
-    string href  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-CodeListItem {
-    string codedValue  
-    string decode  
-    string description  
-    stringList aliases  
-    decimal weight  
-    boolean other  
-}
 NominalOccurrence {
     string event  
     string OID  
@@ -443,21 +494,6 @@ DataStructureDefinition {
     string wasDerivedFrom  
     string version  
     string href  
-}
-ReifiedConcept {
-    string version  
-    string href  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
 }
 Item {
     DataType dataType  
@@ -624,6 +660,7 @@ MetaDataVersion ||--}o Item : "items"
 MetaDataVersion ||--}o Condition : "conditions"
 MetaDataVersion ||--}o WhereClause : "whereClauses"
 MetaDataVersion ||--}o Method : "methods"
+MetaDataVersion ||--}o Analysis : "analyses"
 MetaDataVersion ||--}o CodeList : "codeLists"
 MetaDataVersion ||--}o Coding : "codings"
 MetaDataVersion ||--}o ReifiedConcept : "concepts"
@@ -632,6 +669,7 @@ MetaDataVersion ||--}o Dictionary : "dictionaries"
 MetaDataVersion ||--}o Standard : "standards"
 MetaDataVersion ||--}o DocumentReference : "annotatedCRFs"
 MetaDataVersion ||--}o DataProduct : "dataProducts"
+MetaDataVersion ||--}o Display : "displays"
 MetaDataVersion ||--}o Coding : "coding"
 MetaDataVersion ||--}o Comment : "comments"
 MetaDataVersion ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -643,6 +681,55 @@ Comment ||--}o Coding : "coding"
 Comment ||--}o Comment : "comments"
 Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 DocumentReference ||--}o Coding : "coding"
+Display ||--|o Analysis : "analysis"
+Display ||--}o DocumentReference : "location"
+Display ||--}o Coding : "coding"
+Display ||--}o Comment : "comments"
+Display ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Analysis ||--}o WhereClause : "applicableWhen"
+Analysis ||--}o FormalExpression : "expressions"
+Analysis ||--}o DocumentReference : "documents"
+Analysis ||--|o ReifiedConcept : "implementsConcept"
+Analysis ||--}o Coding : "coding"
+Analysis ||--}o Comment : "comments"
+Analysis ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+ReifiedConcept ||--}o ConceptProperty : "properties"
+ReifiedConcept ||--}o Coding : "coding"
+ReifiedConcept ||--}o Comment : "comments"
+ReifiedConcept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+ConceptProperty ||--|o CodeList : "codeList"
+ConceptProperty ||--}o Coding : "coding"
+ConceptProperty ||--}o Comment : "comments"
+ConceptProperty ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+CodeList ||--}o CodeListItem : "codeListItems"
+CodeList ||--|o Resource : "externalCodeList"
+CodeList ||--}o Coding : "coding"
+CodeList ||--}o Comment : "comments"
+CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Resource ||--}o FormalExpression : "selection"
+Resource ||--}o Coding : "coding"
+FormalExpression ||--}o Parameter : "parameters"
+FormalExpression ||--|o ReturnValue : "returnValue"
+FormalExpression ||--}o Resource : "externalCodeLibs"
+FormalExpression ||--}o Coding : "coding"
+ReturnValue ||--}o Coding : "coding"
+Parameter ||--}o CodeList : "codeList"
+Parameter ||--}o ConceptProperty : "conceptProperty"
+Parameter ||--}o WhereClause : "applicableWhen"
+Parameter ||--}o Condition : "conditions"
+Parameter ||--}o Coding : "coding"
+Condition ||--}o RangeCheck : "rangeChecks"
+Condition ||--}o FormalExpression : "expressions"
+Condition ||--}o Condition : "conditions"
+Condition ||--}o Coding : "coding"
+Condition ||--}o Comment : "comments"
+Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+RangeCheck ||--}o FormalExpression : "expressions"
+WhereClause ||--}o Condition : "conditions"
+WhereClause ||--}o Coding : "coding"
+WhereClause ||--}o Comment : "comments"
+WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+CodeListItem ||--|o Coding : "coding"
 DataProduct ||--}o DataService : "inputPort"
 DataProduct ||--}o DataService : "outputPort"
 DataProduct ||--}o Dataset : "inputDataset"
@@ -661,43 +748,11 @@ Timing ||--|o NominalOccurrence : "relativeFrom"
 Timing ||--|o Method : "imputation"
 Timing ||--}o Coding : "coding"
 Method ||--}o FormalExpression : "expressions"
-Method ||--|o DocumentReference : "document"
+Method ||--}o DocumentReference : "documents"
+Method ||--|o ReifiedConcept : "implementsConcept"
 Method ||--}o Coding : "coding"
 Method ||--}o Comment : "comments"
 Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-FormalExpression ||--}o Parameter : "parameters"
-FormalExpression ||--|o ReturnValue : "returnValue"
-FormalExpression ||--}o Resource : "externalCodeLibs"
-FormalExpression ||--}o Coding : "coding"
-Resource ||--}o FormalExpression : "selection"
-Resource ||--}o Coding : "coding"
-ReturnValue ||--}o Coding : "coding"
-Parameter ||--}o CodeList : "codeList"
-Parameter ||--}o ConceptProperty : "conceptProperty"
-Parameter ||--}o WhereClause : "applicableWhen"
-Parameter ||--}o Condition : "conditions"
-Parameter ||--}o Coding : "coding"
-Condition ||--}o RangeCheck : "rangeChecks"
-Condition ||--}o FormalExpression : "expressions"
-Condition ||--}o Condition : "conditions"
-Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comments"
-Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-RangeCheck ||--}o FormalExpression : "expressions"
-WhereClause ||--}o Condition : "conditions"
-WhereClause ||--}o Coding : "coding"
-WhereClause ||--}o Comment : "comments"
-WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-ConceptProperty ||--|o CodeList : "codeList"
-ConceptProperty ||--}o Coding : "coding"
-ConceptProperty ||--}o Comment : "comments"
-ConceptProperty ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-CodeList ||--}o CodeListItem : "codeListItems"
-CodeList ||--|o Resource : "externalCodeList"
-CodeList ||--}o Coding : "coding"
-CodeList ||--}o Comment : "comments"
-CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-CodeListItem ||--|o Coding : "coding"
 NominalOccurrence ||--|| Timing : "timing"
 NominalOccurrence ||--}o Condition : "condition"
 NominalOccurrence ||--}o Coding : "coding"
@@ -720,10 +775,6 @@ DataStructureDefinition ||--|o Timing : "validityPeriod"
 DataStructureDefinition ||--}o Coding : "coding"
 DataStructureDefinition ||--}o Comment : "comments"
 DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-ReifiedConcept ||--}o ConceptProperty : "properties"
-ReifiedConcept ||--}o Coding : "coding"
-ReifiedConcept ||--}o Comment : "comments"
-ReifiedConcept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
@@ -736,9 +787,9 @@ Item ||--}o Coding : "coding"
 Item ||--}o Comment : "comments"
 Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Origin ||--}o SourceItem : "sourceItems"
-Origin ||--|o DocumentReference : "document"
+Origin ||--}o DocumentReference : "documents"
 SourceItem ||--|o Item : "item"
-SourceItem ||--|o DocumentReference : "document"
+SourceItem ||--}o DocumentReference : "document"
 SourceItem ||--}o Coding : "coding"
 ComponentList ||--}o Coding : "coding"
 DataAttribute ||--|| Item : "item"
@@ -761,6 +812,7 @@ Dimension ||--}o Comment : "comments"
 Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Dataflow ||--|| DataStructureDefinition : "structure"
 Dataflow ||--}o Dimension : "dimensionConstraint"
+Dataflow ||--|o Analysis : "analysisMethod"
 Dataflow ||--}o Coding : "coding"
 Dataflow ||--}o Comment : "comments"
 Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -875,6 +927,10 @@ ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <td>A governed collection that represents a purpose-driven assembly of datasets and services with an owning team and lifecycle</td>
 </tr>
 <tr>
+<td>        <a href="classes/Display/">Display</a></td>
+<td>A rendered output of an analysis result.</td>
+</tr>
+<tr>
 <td>        <a href="classes/Item/">Item</a></td>
 <td>A data element that represents a specific piece of information within a defined context, with data type, constraints, and derivation methods</td>
 </tr>
@@ -892,7 +948,11 @@ ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 </tr>
 <tr>
 <td>        <a href="classes/Method/">Method</a></td>
-<td>A reusable computational procedure that describes how to derive values and can be referenced by Items</td>
+<td>A reusable computational procedure that describes how to derive values and can be referenced by Items.<br/>Analysis and Derivation concepts can be implemented by a Method. Properties can be referenced by Parameters in its expressions.</td>
+</tr>
+<tr>
+<td>                <a href="classes/Analysis/">Analysis</a></td>
+<td>Analysis extends Method to capture analysis-specific metadata including the reason for analysis, its purpose, and data traceability for the results used.<br/>Expressions and parameters from Method can be generic or implementation-specific.</td>
 </tr>
 <tr>
 <td>        <a href="classes/NominalOccurrence/">NominalOccurrence</a></td>
@@ -1242,10 +1302,6 @@ ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <td>Template or top-level items (not belonging to any item group) defined in this version of the metadata</td>
 </tr>
 <tr>
-<td><a href="slots/resources/">resources</a></td>
-<td>References to documents that describe this version of the metadata.</td>
-</tr>
-<tr>
 <td><a href="slots/conditions/">conditions</a></td>
 <td>Logical conditions that apply to this version of the metadata.</td>
 </tr>
@@ -1256,6 +1312,10 @@ ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <tr>
 <td><a href="slots/methods/">methods</a></td>
 <td>Methods defined in this version of the metadata.</td>
+</tr>
+<tr>
+<td><a href="slots/analyses/">analyses</a></td>
+<td>Analyses defined in this version of the metadata.</td>
 </tr>
 <tr>
 <td><a href="slots/codeLists/">codeLists</a></td>
@@ -1286,8 +1346,16 @@ ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <td>Reference to annotated case report forms</td>
 </tr>
 <tr>
+<td><a href="slots/resources/">resources</a></td>
+<td>References to resources and documents that describe this version of the metadata.</td>
+</tr>
+<tr>
 <td><a href="slots/dataProducts/">dataProducts</a></td>
 <td>Indexed data flows with clear ownership</td>
+</tr>
+<tr>
+<td><a href="slots/displays/">displays</a></td>
+<td>Displays defined in this version of the metadata.</td>
 </tr>
 <tr>
 <td><a href="slots/dataType/">dataType</a></td>
@@ -1495,7 +1563,7 @@ ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 </tr>
 <tr>
 <td><a href="slots/document/">document</a></td>
-<td>Reference to a document that describes this method in detail.</td>
+<td>Reference to an external document</td>
 </tr>
 <tr>
 <td><a href="slots/resource/">resource</a></td>
@@ -1655,7 +1723,11 @@ ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 </tr>
 <tr>
 <td><a href="slots/dimensionConstraint/">dimensionConstraint</a></td>
-<td></td>
+<td>Subset of dimensions that are agreed upon by the dataflow and must be included.</td>
+</tr>
+<tr>
+<td><a href="slots/analysisMethod/">analysisMethod</a></td>
+<td>Metadata about the analysis method used to produce the data in this dataflow.</td>
 </tr>
 <tr>
 <td><a href="slots/action/">action</a></td>
@@ -1812,6 +1884,26 @@ ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <tr>
 <td><a href="slots/provider/">provider</a></td>
 <td>The Data Provider that is part of this agreement</td>
+</tr>
+<tr>
+<td><a href="slots/analysisReason/">analysisReason</a></td>
+<td>The reason this analysis was performed.</td>
+</tr>
+<tr>
+<td><a href="slots/analysisPurpose/">analysisPurpose</a></td>
+<td>The purpose or role of this analysis in the study.</td>
+</tr>
+<tr>
+<td><a href="slots/inputData/">inputData</a></td>
+<td>Datasets or slices/subsets of datasets asked for by this analysis. If a Item is referenced by a Parameter e.g. Analysis Variable, make sure to include its parent ItemGroup here.</td>
+</tr>
+<tr>
+<td><a href="slots/analysis/">analysis</a></td>
+<td>Analysis result this display represents.</td>
+</tr>
+<tr>
+<td><a href="slots/displayType/">displayType</a></td>
+<td>The type of display this result represents. e.g. table, listing, figure, dashboard.</td>
 </tr>
 </tbody>
 </table>
@@ -2091,5 +2183,5 @@ ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 </html>
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-10-13 14:11:28.654654+00:00
+Build Date UTC : 2025-10-28 18:10:58.787071+00:00
 -->

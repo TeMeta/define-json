@@ -95,7 +95,6 @@
 </div></div>
 <div class="col-md-9" role="main">
 <h1 id="slot-location">Slot: location</h1>
-<p><em>The physical location of the organization.</em></p>
 <p>URI: <a href="https://cdisc.org/odm2/slot/location">odm:slot/location</a>
 Alias: location</p>
 <!-- no inheritance hierarchy -->
@@ -110,6 +109,11 @@ Alias: location</p>
 </thead>
 <tbody>
 <tr>
+<td><a href="../../classes/Display/">Display</a></td>
+<td>A rendered output of an analysis result.</td>
+<td>no</td>
+</tr>
+<tr>
 <td><a href="../../classes/DataProvider/">DataProvider</a></td>
 <td>An organization element that provides data to a Data Consumer, which can be a sponsor, site, or any other entity that supplies data</td>
 <td>no</td>
@@ -123,13 +127,9 @@ Alias: location</p>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>Range: <a href="../../types/String/">String</a></li>
+<li>Range: NONE</li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="schema-source">Schema Source</h3>
-<ul>
-<li>from schema: https://cdisc.org/define-json</li>
-</ul>
 <h2 id="mappings">Mappings</h2>
 <table>
 <thead>
@@ -152,14 +152,10 @@ Alias: location</p>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">location</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The physical location of the organization.</span>
-<span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
-<span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">location</span>
-<span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Organization</span>
 <span class="nt">domain_of</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Organization</span>
-<span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Display</span>
 </code></pre></div>
 </details></div>
 </div>
