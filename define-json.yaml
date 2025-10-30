@@ -2252,6 +2252,9 @@ enums:
       DataSpecialization:
         description: >-
           A data specialization of a concept.
+      ValueList:
+        description: >-
+          A list of topic-specific items for a specific column (from Define-XML).
       Section:
         description: >-
           A section of a form.

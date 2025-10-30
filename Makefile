@@ -56,8 +56,8 @@ linkml-lint:
 
 generate-json-schema:
 	@echo "Generating JSON Schema from LinkML..."
-	poetry run linkml generate json-schema define-json.yaml > generated/json-schema.json
-	@echo "JSON Schema generated: generated/json-schema.json"
+	poetry run linkml generate json-schema define-json.yaml > generated/define-json-schema.json
+	@echo "JSON Schema generated: generated/define-json-schema.json"
 
 generate-pydantic:
 	@echo "Generating Pydantic models from LinkML..."

@@ -11,6 +11,7 @@ from typing import Optional
 
 from ..converters.xml_to_json import DefineXMLToJSONConverter
 from ..converters.json_to_xml import DefineJSONToXMLConverter
+from ..converters.html_generator import DefineHTMLGenerator, json_to_html
 from ..validation.roundtrip import run_roundtrip_test, validate_true_roundtrip, run_true_roundtrip_test
 from ..validation.schema import validate_define_json
 
@@ -51,6 +52,7 @@ Examples:
     xml2json_parser = subparsers.add_parser('xml2json', help='Convert Define-XML to Define-JSON')
     xml2json_parser.add_argument('input', type=Path, help='Input Define-XML file')
     xml2json_parser.add_argument('output', type=Path, help='Output Define-JSON file')
+    xml2json_parser.add_argument('--strict', action='store_true', help='Strict conversion (no inference)')
     
     # JSON to XML conversion
     json2xml_parser = subparsers.add_parser('json2xml', help='Convert Define-JSON to Define-XML')
@@ -92,10 +94,13 @@ def cmd_xml2json(args) -> int:
     """Convert XML to JSON."""
     try:
         converter = DefineXMLToJSONConverter()
-        data = converter.convert_file(args.input, args.output)
+        data = converter.convert_file(
+                args.input, args.output, 
+                enable_inference=False,
+                enable_fallbacks=False)
         
         print(f"Converted: {args.input} → {args.output}")
-        print(f"Datasets: {len(data.get('itemGroups', []))}, Variables: {len(data.get('items', []))}, Size: {args.output.stat().st_size:,} bytes")
+        print(f"ItemGroups: {len(data.get('itemGroups', []))}, Size: {args.output.stat().st_size:,} bytes")
         
         return 0
     except Exception as e:
@@ -121,8 +126,8 @@ def cmd_json2xml(args) -> int:
 def cmd_json2html(args) -> int:
     """Convert JSON to HTML using XSL transformation."""
     try:
-        converter = DefineJSONToXMLConverter()
-        success = converter.convert_to_html(args.input, args.output, args.xsl)
+        converter = DefineHTMLGenerator()
+        success = converter.json_to_html(args.input, args.output, args.xsl)
         
         if success:
             print(f"Converted: {args.input} → {args.output}")
@@ -141,7 +146,7 @@ def cmd_json2html(args) -> int:
 def cmd_xml2html(args) -> int:
     """Convert XML to HTML using XSL transformation."""
     try:
-        converter = DefineJSONToXMLConverter()
+        converter = DefineHTMLGenerator()
         success = converter.xml_to_html(args.input, args.output, args.xsl)
         
         if success:

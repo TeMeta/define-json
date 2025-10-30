@@ -17,6 +17,7 @@ URI: [ItemGroupType](../enums/ItemGroupType.md)
 | Table | None | A simple table or data frame. |
 | Object | None | An object or profile of a FHIR resource. |
 | DataSpecialization | None | A data specialization of a concept. |
+| ValueList | None | A list of topic-specific items for a specific column (from Define-XML). |
 | Section | None | A section of a form. |
 | Form | None | A data collection form. |
 
@@ -75,6 +76,9 @@ permissible_values:
   DataSpecialization:
     text: DataSpecialization
     description: A data specialization of a concept.
+  ValueList:
+    text: ValueList
+    description: A list of topic-specific items for a specific column (from Define-XML).
   Section:
     text: Section
     description: A section of a form.
