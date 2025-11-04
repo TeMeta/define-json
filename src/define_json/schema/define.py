@@ -1483,16 +1483,18 @@ class Coding(ConfiguredBaseModel):
     aliasType: Optional[AliasPredicate] = Field(default=None, description="""How this coding is related in the context of its parent element""", json_schema_extra = { "linkml_meta": {'alias': 'aliasType', 'domain_of': ['Coding']} })
 
 
-class Dictionary(IdentifiableElement):
+class Dictionary(Versioned, IdentifiableElement):
     """
     A dictionary that defines a set of codes and their meanings
     """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://cdisc.org/define-json'})
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://cdisc.org/define-json', 'mixins': ['Versioned']})
 
     terms: Optional[list[Coding]] = Field(default=None, description="""Terms in this dictionary - leave this empty in most cases to keep the file small""", json_schema_extra = { "linkml_meta": {'alias': 'terms', 'domain_of': ['Dictionary']} })
     publishedBy: Optional[str] = Field(default=None, description="""Associates the Data Provider that reports/publishes the data.""", json_schema_extra = { "linkml_meta": {'alias': 'publishedBy',
          'any_of': [{'range': 'Organization'}, {'range': 'string'}],
          'domain_of': ['Dictionary', 'Dataset']} })
+    version: Optional[str] = Field(default=None, description="""The version of the external resources""", json_schema_extra = { "linkml_meta": {'alias': 'version', 'domain_of': ['Versioned', 'Standard']} })
+    href: Optional[str] = Field(default=None, description="""Machine-readable instructions to obtain the resource e.g. FHIR path, URL""", json_schema_extra = { "linkml_meta": {'alias': 'href', 'domain_of': ['Versioned']} })
     OID: str = Field(default=..., description="""Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.""", json_schema_extra = { "linkml_meta": {'alias': 'OID', 'domain_of': ['Identifiable']} })
     uuid: Optional[str] = Field(default=None, description="""Universal unique identifier""", json_schema_extra = { "linkml_meta": {'alias': 'uuid', 'domain_of': ['Identifiable']} })
     name: Optional[str] = Field(default=None, description="""Short name or identifier, used for field names""", json_schema_extra = { "linkml_meta": {'alias': 'name', 'domain_of': ['Labelled', 'Standard']} })

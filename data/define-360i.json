@@ -1,53 +1,1768 @@
 {
+  "OID": "MDV.LZZT",
+  "name": "MDV LZZT",
+  "description": "Data Definitions for LZZT",
   "fileOID": "ODM.DEFINE21.360i.001",
-  "creationDateTime": null,
+  "asOfDateTime": "2025-10-30T21:50:55.795429",
+  "creationDateTime": "2025-10-30T21:50:55.795415",
   "odmVersion": "1.3.2",
   "fileType": "Snapshot",
-  "studyOID": "ODM.LZZT",
-  "OID": "MDV.LZZT",
-  "asOfDateTime": null,
   "originator": "360i Define-XML Team",
   "sourceSystem": "odmlib",
   "sourceSystemVersion": "0.2",
   "context": "Other",
   "defineVersion": "2.1.0",
+  "studyOID": "ODM.LZZT",
   "studyName": "LZZT",
   "studyDescription": "Safety and Efficacy of the Xanomeline Transdermal Therapeutic System (TTS) in Patients\n                with Mild to Moderate Alzheimer's Disease\n            ",
   "protocolName": "LZZT",
-  "name": "MDV LZZT",
-  "description": "Data Definitions for LZZT",
   "itemGroups": [
-    "OID='IG.DM' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='DM' description='Demographics' coding=None label=None aliases=None version=None href=None profile=None security=None authenticator=None validityPeriod=None domain='DM' structure='One record per subject' isReferenceData=None type=None items=[Item(OID='IT.DM.STUDYID', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='STUDYID', description='Study Identifier', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Identifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.DM.DOMAIN', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='DOMAIN', description='Domain Abbreviation', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Identifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.DM.USUBJID', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='USUBJID', description='Unique Subject Identifier', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Identifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.DM.SUBJID', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='SUBJID', description='Subject Identifier for the Study', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Topic', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.DM.RFSTDTC', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='RFSTDTC', description='Subject Reference Start Date/Time', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.DM.RFENDTC', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='RFENDTC', description='Subject Reference End Date/Time', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.DM.RFXSTDTC', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='RFXSTDTC', description='Date/Time of First Study Treatment', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.DM.RFXENDTC', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='RFXENDTC', description='Date/Time of Last Study Treatment', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.DM.RFICDTC', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='RFICDTC', description='Date/Time of Informed Consent', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.DM.RFPENDTC', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='RFPENDTC', description='Date/Time of End of Participation', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.DM.DTHDTC', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='DTHDTC', description='Date/Time of Death', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.DM.DTHFL', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='DTHFL', description='Subject Death Flag', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.NY', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.DM.SITEID', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='SITEID', description='Study Site Identifier', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.DM.AGE', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AGE', description='Age', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='float', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.DM.AGEU', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AGEU', description='Age Units', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Variable Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.AGEU', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.DM.SEX', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='SEX', description='Sex', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.SEX', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.DM.RACE', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='RACE', description='Race', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.RACE', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.DM.ARMCD', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='ARMCD', description='Planned Arm Code', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.DM.ARM', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='ARM', description='Description of Planned Arm', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Synonym Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.DM.ACTARMCD', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='ACTARMCD', description='Actual Arm Code', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.DM.ACTARM', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='ACTARM', description='Description of Actual Arm', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Synonym Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.DM.ARMNRS', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='ARMNRS', description='Reason Arm and/or Actual Arm is Null', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.ARMNULRS', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.DM.ACTARMUD', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='ACTARMUD', description='Description of Unplanned Actual Arm', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.DM.COUNTRY', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='COUNTRY', description='Country', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.DM.DMDTC', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='DMDTC', description='Date/Time of Collection', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Timing', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None)] children=None implementsConcept=None applicableWhen=None",
-    "OID='IG.VS' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='VS' description='Vital Signs' coding=None label=None aliases=None version=None href=None profile=None security=None authenticator=None validityPeriod=None domain='VS' structure='One record per vital sign measurement per time point per visit per subject' isReferenceData=None type=None items=[Item(OID='IT.VS.STUDYID', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='STUDYID', description='Study Identifier', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Identifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.VS.DOMAIN', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='DOMAIN', description='Domain Abbreviation', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Identifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.VS.USUBJID', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='USUBJID', description='Unique Subject Identifier', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Identifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.VS.VSSEQ', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='VSSEQ', description='Sequence Number', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Identifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='float', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.VS.VSTESTCD', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='VSTESTCD', description='Vital Signs Test Short Name', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Topic', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.VSTESTCD', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.VS.VSTEST', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='VSTEST', description='Vital Signs Test Name', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Synonym Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.VSTEST', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.VS.VSPOS', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='VSPOS', description='Vital Signs Position of Subject', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.POSITION', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.VS.VSORRES', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='VSORRES', description='Result or Finding in Original Units', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Result Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.VS.VSORRESU', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='VSORRESU', description='Original Units', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Variable Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.VSRESU', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.VS.VSSTRESC', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='VSSTRESC', description='Character Result/Finding in Std Format', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Result Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.VS.VSSTRESN', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='VSSTRESN', description='Numeric Result/Finding in Standard Units', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Result Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='float', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.VS.VSSTRESU', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='VSSTRESU', description='Standard Units', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Variable Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.VSRESU', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.VS.VSLOC', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='VSLOC', description='Location of Vital Signs Measurement', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.LOC', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.VS.VSLAT', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='VSLAT', description='Laterality', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Result Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.LAT', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.VS.VSLOBXFL', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='VSLOBXFL', description='Last Observation Before Exposure Flag', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.NY', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.VS.VISITNUM', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='VISITNUM', description='Visit Number', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Timing', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='float', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.VS.VSDTC', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='VSDTC', description='Date/Time of Measurements', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Timing', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None)] children=None implementsConcept=None applicableWhen=None",
-    "OID='IG.LB' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='LB' description='Laboratory Test Results' coding=None label=None aliases=None version=None href=None profile=None security=None authenticator=None validityPeriod=None domain='LB' structure='One record per lab test per time point per visit per subject' isReferenceData=None type=None items=[Item(OID='IT.LB.STUDYID', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='STUDYID', description='Study Identifier', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Identifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.LB.DOMAIN', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='DOMAIN', description='Domain Abbreviation', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Identifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.LB.USUBJID', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='USUBJID', description='Unique Subject Identifier', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Identifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.LB.LBSEQ', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBSEQ', description='Sequence Number', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Identifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='float', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.LB.LBTESTCD', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBTESTCD', description='Lab Test or Examination Short Name', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Topic', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.LBTESTCD', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.LB.LBTEST', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBTEST', description='Lab Test or Examination Name', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Synonym Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.LBTEST', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.LB.LBCAT', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBCAT', description='Category for Lab Test', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Grouping Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.LB.LBORRES', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBORRES', description='Result or Finding in Original Units', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Result Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.LB.LBORRESU', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBORRESU', description='Original Units', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Variable Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.UNIT', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.LB.LBORNRLO', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBORNRLO', description='Reference Range Lower Limit in Orig Unit', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Variable Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.LB.LBORNRHI', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBORNRHI', description='Reference Range Upper Limit in Orig Unit', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Variable Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.LB.LBSTRESC', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBSTRESC', description='Character Result/Finding in Std Format', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Result Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.LBSTRESC', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.LB.LBSTRESN', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBSTRESN', description='Numeric Result/Finding in Standard Units', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Result Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='float', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.LB.LBSTRESU', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBSTRESU', description='Standard Units', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Variable Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.UNIT', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.LB.LBSTNRLO', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBSTNRLO', description='Reference Range Lower Limit-Std Units', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Variable Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='float', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.LB.LBSTNRHI', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBSTNRHI', description='Reference Range Upper Limit-Std Units', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Variable Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='float', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.LB.LBNRIND', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBNRIND', description='Reference Range Indicator', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Variable Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.NRIND', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.LB.LBSPEC', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBSPEC', description='Specimen Type', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.SPECTYPE', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.LB.LBLOBXFL', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBLOBXFL', description='Last Observation Before Exposure Flag', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.NY', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.LB.LBFAST', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBFAST', description='Fasting Status', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.NY', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.LB.VISITNUM', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='VISITNUM', description='Visit Number', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Timing', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='float', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.LB.LBDTC', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBDTC', description='Date/Time of Specimen Collection', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Timing', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None)] children=None implementsConcept=None applicableWhen=None",
-    "OID='IG.AE' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='AE' description='Adverse Events' coding=None label=None aliases=None version=None href=None profile=None security=None authenticator=None validityPeriod=None domain='AE' structure='One record per adverse event per subject' isReferenceData=None type=None items=[Item(OID='IT.AE.STUDYID', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='STUDYID', description='Study Identifier', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Identifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.DOMAIN', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='DOMAIN', description='Domain Abbreviation', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Identifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.USUBJID', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='USUBJID', description='Unique Subject Identifier', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Identifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AESEQ', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AESEQ', description='Sequence Number', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Identifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='float', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AETERM', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AETERM', description='Reported Term for the Adverse Event', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Topic', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AELLT', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AELLT', description='Lowest Level Term', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Variable Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AELLTCD', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AELLTCD', description='Lowest Level Term Code', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Variable Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='float', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AEDECOD', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AEDECOD', description='Dictionary-Derived Term', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Synonym Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AEPTCD', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AEPTCD', description='Preferred Term Code', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Variable Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='float', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AEHLT', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AEHLT', description='High Level Term', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Variable Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AEHLTCD', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AEHLTCD', description='High Level Term Code', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Variable Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='float', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AEHLGT', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AEHLGT', description='High Level Group Term', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Variable Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AEHLGTCD', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AEHLGTCD', description='High Level Group Term Code', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Variable Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='float', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AECAT', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AECAT', description='Category for Adverse Event', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Grouping Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AESCAT', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AESCAT', description='Subcategory for Adverse Event', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Grouping Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AEPRESP', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AEPRESP', description='Pre-Specified Adverse Event', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Variable Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.NY', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AEBODSYS', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AEBODSYS', description='Body System or Organ Class', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AEBDSYCD', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AEBDSYCD', description='Body System or Organ Class Code', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Variable Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='float', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AESOC', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AESOC', description='Primary System Organ Class', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Variable Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AESOCCD', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AESOCCD', description='Primary System Organ Class Code', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Variable Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='float', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AELOC', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AELOC', description='Location of Event', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.LOC', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AESEV', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AESEV', description='Severity/Intensity', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.AESEV', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AESER', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AESER', description='Serious Event', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.NY', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AEACN', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AEACN', description='Action Taken with Study Treatment', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.ACN', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AEACNOTH', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AEACNOTH', description='Other Action Taken', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AEREL', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AEREL', description='Causality', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AERELNST', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AERELNST', description='Relationship to Non-Study Treatment', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AEPATT', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AEPATT', description='Pattern of Adverse Event', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AEOUT', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AEOUT', description='Outcome of Adverse Event', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.OUT', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AESCAN', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AESCAN', description='Involves Cancer', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.NY', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AESCONG', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AESCONG', description='Congenital Anomaly or Birth Defect', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.NY', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AESDISAB', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AESDISAB', description='Persist or Signif Disability/Incapacity', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.NY', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AESDTH', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AESDTH', description='Results in Death', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.NY', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AESHOSP', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AESHOSP', description='Requires or Prolongs Hospitalization', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.NY', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AESLIFE', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AESLIFE', description='Is Life Threatening', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.NY', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AESOD', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AESOD', description='Occurred with Overdose', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.NY', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AESMIE', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AESMIE', description='Other Medically Important Serious Event', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.NY', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AECONTRT', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AECONTRT', description='Concomitant or Additional Trtmnt Given', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.NY', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AETOXGR', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AETOXGR', description='Standard Toxicity Grade', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Record Qualifier', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AESTDTC', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AESTDTC', description='Start Date/Time of Adverse Event', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Timing', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AEENDTC', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AEENDTC', description='End Date/Time of Adverse Event', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Timing', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AEENRF', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AEENRF', description='End Relative to Reference Period', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Timing', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.STENRF', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AEENRTPT', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AEENRTPT', description='End Relative to Reference Time Point', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Timing', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList='CL.STENRF', method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None), Item(OID='IT.AE.AEENTPT', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='AEENTPT', description='End Reference Time Point', coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role='Timing', roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=None, origin=None, conceptProperty=None)] children=None implementsConcept=None applicableWhen=None",
-    "OID='VL.VS.VSORRES' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='VL_VS_VSORRES' description=None coding=None label=None aliases=None version=None href=None profile=None security=None authenticator=None validityPeriod=None domain=None structure=None isReferenceData=None type='ValueList' items=[Item(OID='IT.VS.VSORRES.TEMP', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='VSORRES', description=None, coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=3, role=None, roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='float', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=['WC.VS.VSORRES.TEMP'], origin=None, conceptProperty=None), Item(OID='IT.VS.VSORRES.WEIGHT', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='VSORRES', description=None, coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=3, role=None, roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='float', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=['WC.VS.VSORRES.WEIGHT'], origin=None, conceptProperty=None), Item(OID='IT.VS.VSORRES.HEIGHT', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='VSORRES', description=None, coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=3, role=None, roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='float', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=['WC.VS.VSORRES.HEIGHT'], origin=None, conceptProperty=None), Item(OID='IT.VS.VSORRES.SYSBP', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='VSORRES', description=None, coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role=None, roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='integer', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=['WC.VS.VSORRES.SYSBP'], origin=None, conceptProperty=None), Item(OID='IT.VS.VSORRES.DIABP', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='VSORRES', description=None, coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role=None, roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='integer', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=['WC.VS.VSORRES.DIABP'], origin=None, conceptProperty=None), Item(OID='IT.VS.VSORRES.HR', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='VSORRES', description=None, coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role=None, roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='integer', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=['WC.VS.VSORRES.HR'], origin=None, conceptProperty=None)] children=None implementsConcept=None applicableWhen=None",
-    "OID='VL.VS.VSORRESU' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='VL_VS_VSORRESU' description=None coding=None label=None aliases=None version=None href=None profile=None security=None authenticator=None validityPeriod=None domain=None structure=None isReferenceData=None type='ValueList' items=[Item(OID='IT.VS.VSORRESU.TEMP', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='VSORRESU', description=None, coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role=None, roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=['WC.VS.VSORRESU.TEMP'], origin=None, conceptProperty=None), Item(OID='IT.VS.VSORRESU.WEIGHT', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='VSORRESU', description=None, coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role=None, roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=['WC.VS.VSORRESU.WEIGHT'], origin=None, conceptProperty=None), Item(OID='IT.VS.VSORRESU.HEIGHT', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='VSORRESU', description=None, coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role=None, roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=['WC.VS.VSORRESU.HEIGHT'], origin=None, conceptProperty=None), Item(OID='IT.VS.VSORRESU.SYSBP', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='VSORRESU', description=None, coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role=None, roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=['WC.VS.VSORRESU.SYSBP'], origin=None, conceptProperty=None), Item(OID='IT.VS.VSORRESU.DIABP', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='VSORRESU', description=None, coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role=None, roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=['WC.VS.VSORRESU.DIABP'], origin=None, conceptProperty=None), Item(OID='IT.VS.VSORRESU.HR', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='VSORRESU', description=None, coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role=None, roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=['WC.VS.VSORRESU.HR'], origin=None, conceptProperty=None)] children=None implementsConcept=None applicableWhen=None",
-    "OID='VL.LB.LBORRES' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='VL_LB_LBORRES' description=None coding=None label=None aliases=None version=None href=None profile=None security=None authenticator=None validityPeriod=None domain=None structure=None isReferenceData=None type='ValueList' items=[Item(OID='IT.LB.LBORRES.ALT', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBORRES', description=None, coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=4, role=None, roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='float', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=['WC.LB.LBORRES.ALT'], origin=None, conceptProperty=None), Item(OID='IT.LB.LBORRES.ALB', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBORRES', description=None, coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=4, role=None, roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=['WC.LB.LBORRES.ALB'], origin=None, conceptProperty=None), Item(OID='IT.LB.LBORRES.ALP', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBORRES', description=None, coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=4, role=None, roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='float', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=['WC.LB.LBORRES.ALP'], origin=None, conceptProperty=None), Item(OID='IT.LB.LBORRES.AST', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBORRES', description=None, coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=4, role=None, roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='float', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=['WC.LB.LBORRES.AST'], origin=None, conceptProperty=None), Item(OID='IT.LB.LBORRES.CREAT', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBORRES', description=None, coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=4, role=None, roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='float', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=['WC.LB.LBORRES.CREAT'], origin=None, conceptProperty=None), Item(OID='IT.LB.LBORRES.K', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBORRES', description=None, coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=4, role=None, roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='float', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=['WC.LB.LBORRES.K'], origin=None, conceptProperty=None), Item(OID='IT.LB.LBORRES.SODIUM', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBORRES', description=None, coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=4, role=None, roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='float', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=['WC.LB.LBORRES.SODIUM'], origin=None, conceptProperty=None), Item(OID='IT.LB.LBORRES.HBA1C', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBORRES', description=None, coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=4, role=None, roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='float', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=['WC.LB.LBORRES.HBA1C'], origin=None, conceptProperty=None)] children=None implementsConcept=None applicableWhen=None",
-    "OID='VL.LB.LBORRESU' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='VL_LB_LBORRESU' description=None coding=None label=None aliases=None version=None href=None profile=None security=None authenticator=None validityPeriod=None domain=None structure=None isReferenceData=None type='ValueList' items=[Item(OID='IT.LB.LBORRESU.ALT', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBORRESU', description=None, coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role=None, roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=['WC.LB.LBORRESU.ALT'], origin=None, conceptProperty=None), Item(OID='IT.LB.LBORRESU.ALP', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBORRESU', description=None, coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role=None, roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=['WC.LB.LBORRESU.ALP'], origin=None, conceptProperty=None), Item(OID='IT.LB.LBORRESU.AST', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBORRESU', description=None, coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role=None, roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=['WC.LB.LBORRESU.AST'], origin=None, conceptProperty=None), Item(OID='IT.LB.LBORRESU.CREAT', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBORRESU', description=None, coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role=None, roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=['WC.LB.LBORRESU.CREAT'], origin=None, conceptProperty=None), Item(OID='IT.LB.LBORRESU.K', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBORRESU', description=None, coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role=None, roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=['WC.LB.LBORRESU.K'], origin=None, conceptProperty=None), Item(OID='IT.LB.LBORRESU.SODIUM', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBORRESU', description=None, coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role=None, roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=['WC.LB.LBORRESU.SODIUM'], origin=None, conceptProperty=None), Item(OID='IT.LB.LBORRESU.HBA1C', uuid=None, mandatory=False, comments=None, siteOrSponsorComments=None, purpose=None, lastUpdated=None, owner=None, wasDerivedFrom=None, name='LBORRESU', description=None, coding=None, label=None, aliases=None, decimalDigits=None, displayFormat=None, significantDigits=None, role=None, roleCodeList=None, hasNoData=None, crfCompletionInstructions=None, cdiscNotes=None, implementationNotes=None, collectionExceptionCondition=None, preSpecifiedValue=None, dataType='text', length=None, codeList=None, method=None, rangeChecks=None, applicableWhen=['WC.LB.LBORRESU.HBA1C'], origin=None, conceptProperty=None)] children=None implementsConcept=None applicableWhen=None"
+    {
+      "OID": "IG.DM",
+      "name": "DM",
+      "description": "Demographics",
+      "domain": "DM",
+      "structure": "One record per subject",
+      "items": [
+        {
+          "OID": "IT.DM.STUDYID",
+          "mandatory": false,
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "role": "Identifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.DM.DOMAIN",
+          "mandatory": false,
+          "name": "DOMAIN",
+          "description": "Domain Abbreviation",
+          "role": "Identifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.DM.USUBJID",
+          "mandatory": false,
+          "name": "USUBJID",
+          "description": "Unique Subject Identifier",
+          "role": "Identifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.DM.SUBJID",
+          "mandatory": false,
+          "name": "SUBJID",
+          "description": "Subject Identifier for the Study",
+          "role": "Topic",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.DM.RFSTDTC",
+          "mandatory": false,
+          "name": "RFSTDTC",
+          "description": "Subject Reference Start Date/Time",
+          "role": "Record Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.DM.RFENDTC",
+          "mandatory": false,
+          "name": "RFENDTC",
+          "description": "Subject Reference End Date/Time",
+          "role": "Record Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.DM.RFXSTDTC",
+          "mandatory": false,
+          "name": "RFXSTDTC",
+          "description": "Date/Time of First Study Treatment",
+          "role": "Record Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.DM.RFXENDTC",
+          "mandatory": false,
+          "name": "RFXENDTC",
+          "description": "Date/Time of Last Study Treatment",
+          "role": "Record Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.DM.RFICDTC",
+          "mandatory": false,
+          "name": "RFICDTC",
+          "description": "Date/Time of Informed Consent",
+          "role": "Record Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.DM.RFPENDTC",
+          "mandatory": false,
+          "name": "RFPENDTC",
+          "description": "Date/Time of End of Participation",
+          "role": "Record Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.DM.DTHDTC",
+          "mandatory": false,
+          "name": "DTHDTC",
+          "description": "Date/Time of Death",
+          "role": "Record Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.DM.DTHFL",
+          "mandatory": false,
+          "name": "DTHFL",
+          "description": "Subject Death Flag",
+          "role": "Record Qualifier",
+          "dataType": "text",
+          "codeList": "CL.NY"
+        },
+        {
+          "OID": "IT.DM.SITEID",
+          "mandatory": false,
+          "name": "SITEID",
+          "description": "Study Site Identifier",
+          "role": "Record Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.DM.AGE",
+          "mandatory": false,
+          "name": "AGE",
+          "description": "Age",
+          "role": "Record Qualifier",
+          "dataType": "float"
+        },
+        {
+          "OID": "IT.DM.AGEU",
+          "mandatory": false,
+          "name": "AGEU",
+          "description": "Age Units",
+          "role": "Variable Qualifier",
+          "dataType": "text",
+          "codeList": "CL.AGEU"
+        },
+        {
+          "OID": "IT.DM.SEX",
+          "mandatory": false,
+          "name": "SEX",
+          "description": "Sex",
+          "role": "Record Qualifier",
+          "dataType": "text",
+          "codeList": "CL.SEX"
+        },
+        {
+          "OID": "IT.DM.RACE",
+          "mandatory": false,
+          "name": "RACE",
+          "description": "Race",
+          "role": "Record Qualifier",
+          "dataType": "text",
+          "codeList": "CL.RACE"
+        },
+        {
+          "OID": "IT.DM.ARMCD",
+          "mandatory": false,
+          "name": "ARMCD",
+          "description": "Planned Arm Code",
+          "role": "Record Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.DM.ARM",
+          "mandatory": false,
+          "name": "ARM",
+          "description": "Description of Planned Arm",
+          "role": "Synonym Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.DM.ACTARMCD",
+          "mandatory": false,
+          "name": "ACTARMCD",
+          "description": "Actual Arm Code",
+          "role": "Record Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.DM.ACTARM",
+          "mandatory": false,
+          "name": "ACTARM",
+          "description": "Description of Actual Arm",
+          "role": "Synonym Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.DM.ARMNRS",
+          "mandatory": false,
+          "name": "ARMNRS",
+          "description": "Reason Arm and/or Actual Arm is Null",
+          "role": "Record Qualifier",
+          "dataType": "text",
+          "codeList": "CL.ARMNULRS"
+        },
+        {
+          "OID": "IT.DM.ACTARMUD",
+          "mandatory": false,
+          "name": "ACTARMUD",
+          "description": "Description of Unplanned Actual Arm",
+          "role": "Record Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.DM.COUNTRY",
+          "mandatory": false,
+          "name": "COUNTRY",
+          "description": "Country",
+          "role": "Record Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.DM.DMDTC",
+          "mandatory": false,
+          "name": "DMDTC",
+          "description": "Date/Time of Collection",
+          "role": "Timing",
+          "dataType": "text"
+        }
+      ]
+    },
+    {
+      "OID": "IG.VS",
+      "name": "VS",
+      "description": "Vital Signs",
+      "domain": "VS",
+      "structure": "One record per vital sign measurement per time point per visit per subject",
+      "items": [
+        {
+          "OID": "IT.VS.STUDYID",
+          "mandatory": false,
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "role": "Identifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.VS.DOMAIN",
+          "mandatory": false,
+          "name": "DOMAIN",
+          "description": "Domain Abbreviation",
+          "role": "Identifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.VS.USUBJID",
+          "mandatory": false,
+          "name": "USUBJID",
+          "description": "Unique Subject Identifier",
+          "role": "Identifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.VS.VSSEQ",
+          "mandatory": false,
+          "name": "VSSEQ",
+          "description": "Sequence Number",
+          "role": "Identifier",
+          "dataType": "float"
+        },
+        {
+          "OID": "IT.VS.VSTESTCD",
+          "mandatory": false,
+          "name": "VSTESTCD",
+          "description": "Vital Signs Test Short Name",
+          "role": "Topic",
+          "dataType": "text",
+          "codeList": "CL.VSTESTCD"
+        },
+        {
+          "OID": "IT.VS.VSTEST",
+          "mandatory": false,
+          "name": "VSTEST",
+          "description": "Vital Signs Test Name",
+          "role": "Synonym Qualifier",
+          "dataType": "text",
+          "codeList": "CL.VSTEST"
+        },
+        {
+          "OID": "IT.VS.VSPOS",
+          "mandatory": false,
+          "name": "VSPOS",
+          "description": "Vital Signs Position of Subject",
+          "role": "Record Qualifier",
+          "dataType": "text",
+          "codeList": "CL.POSITION"
+        },
+        {
+          "OID": "IT.VS.VSORRES",
+          "mandatory": false,
+          "name": "VSORRES",
+          "description": "Result or Finding in Original Units",
+          "role": "Result Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.VS.VSORRESU",
+          "mandatory": false,
+          "name": "VSORRESU",
+          "description": "Original Units",
+          "role": "Variable Qualifier",
+          "dataType": "text",
+          "codeList": "CL.VSRESU"
+        },
+        {
+          "OID": "IT.VS.VSSTRESC",
+          "mandatory": false,
+          "name": "VSSTRESC",
+          "description": "Character Result/Finding in Std Format",
+          "role": "Result Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.VS.VSSTRESN",
+          "mandatory": false,
+          "name": "VSSTRESN",
+          "description": "Numeric Result/Finding in Standard Units",
+          "role": "Result Qualifier",
+          "dataType": "float"
+        },
+        {
+          "OID": "IT.VS.VSSTRESU",
+          "mandatory": false,
+          "name": "VSSTRESU",
+          "description": "Standard Units",
+          "role": "Variable Qualifier",
+          "dataType": "text",
+          "codeList": "CL.VSRESU"
+        },
+        {
+          "OID": "IT.VS.VSLOC",
+          "mandatory": false,
+          "name": "VSLOC",
+          "description": "Location of Vital Signs Measurement",
+          "role": "Record Qualifier",
+          "dataType": "text",
+          "codeList": "CL.LOC"
+        },
+        {
+          "OID": "IT.VS.VSLAT",
+          "mandatory": false,
+          "name": "VSLAT",
+          "description": "Laterality",
+          "role": "Result Qualifier",
+          "dataType": "text",
+          "codeList": "CL.LAT"
+        },
+        {
+          "OID": "IT.VS.VSLOBXFL",
+          "mandatory": false,
+          "name": "VSLOBXFL",
+          "description": "Last Observation Before Exposure Flag",
+          "role": "Record Qualifier",
+          "dataType": "text",
+          "codeList": "CL.NY"
+        },
+        {
+          "OID": "IT.VS.VISITNUM",
+          "mandatory": false,
+          "name": "VISITNUM",
+          "description": "Visit Number",
+          "role": "Timing",
+          "dataType": "float"
+        },
+        {
+          "OID": "IT.VS.VSDTC",
+          "mandatory": false,
+          "name": "VSDTC",
+          "description": "Date/Time of Measurements",
+          "role": "Timing",
+          "dataType": "text"
+        }
+      ],
+      "children": [
+        "VL.VS.VSORRES",
+        "VL.VS.VSORRESU"
+      ]
+    },
+    {
+      "OID": "IG.LB",
+      "name": "LB",
+      "description": "Laboratory Test Results",
+      "domain": "LB",
+      "structure": "One record per lab test per time point per visit per subject",
+      "items": [
+        {
+          "OID": "IT.LB.STUDYID",
+          "mandatory": false,
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "role": "Identifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.LB.DOMAIN",
+          "mandatory": false,
+          "name": "DOMAIN",
+          "description": "Domain Abbreviation",
+          "role": "Identifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.LB.USUBJID",
+          "mandatory": false,
+          "name": "USUBJID",
+          "description": "Unique Subject Identifier",
+          "role": "Identifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.LB.LBSEQ",
+          "mandatory": false,
+          "name": "LBSEQ",
+          "description": "Sequence Number",
+          "role": "Identifier",
+          "dataType": "float"
+        },
+        {
+          "OID": "IT.LB.LBTESTCD",
+          "mandatory": false,
+          "name": "LBTESTCD",
+          "description": "Lab Test or Examination Short Name",
+          "role": "Topic",
+          "dataType": "text",
+          "codeList": "CL.LBTESTCD"
+        },
+        {
+          "OID": "IT.LB.LBTEST",
+          "mandatory": false,
+          "name": "LBTEST",
+          "description": "Lab Test or Examination Name",
+          "role": "Synonym Qualifier",
+          "dataType": "text",
+          "codeList": "CL.LBTEST"
+        },
+        {
+          "OID": "IT.LB.LBCAT",
+          "mandatory": false,
+          "name": "LBCAT",
+          "description": "Category for Lab Test",
+          "role": "Grouping Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.LB.LBORRES",
+          "mandatory": false,
+          "name": "LBORRES",
+          "description": "Result or Finding in Original Units",
+          "role": "Result Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.LB.LBORRESU",
+          "mandatory": false,
+          "name": "LBORRESU",
+          "description": "Original Units",
+          "role": "Variable Qualifier",
+          "dataType": "text",
+          "codeList": "CL.UNIT"
+        },
+        {
+          "OID": "IT.LB.LBORNRLO",
+          "mandatory": false,
+          "name": "LBORNRLO",
+          "description": "Reference Range Lower Limit in Orig Unit",
+          "role": "Variable Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.LB.LBORNRHI",
+          "mandatory": false,
+          "name": "LBORNRHI",
+          "description": "Reference Range Upper Limit in Orig Unit",
+          "role": "Variable Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.LB.LBSTRESC",
+          "mandatory": false,
+          "name": "LBSTRESC",
+          "description": "Character Result/Finding in Std Format",
+          "role": "Result Qualifier",
+          "dataType": "text",
+          "codeList": "CL.LBSTRESC"
+        },
+        {
+          "OID": "IT.LB.LBSTRESN",
+          "mandatory": false,
+          "name": "LBSTRESN",
+          "description": "Numeric Result/Finding in Standard Units",
+          "role": "Result Qualifier",
+          "dataType": "float"
+        },
+        {
+          "OID": "IT.LB.LBSTRESU",
+          "mandatory": false,
+          "name": "LBSTRESU",
+          "description": "Standard Units",
+          "role": "Variable Qualifier",
+          "dataType": "text",
+          "codeList": "CL.UNIT"
+        },
+        {
+          "OID": "IT.LB.LBSTNRLO",
+          "mandatory": false,
+          "name": "LBSTNRLO",
+          "description": "Reference Range Lower Limit-Std Units",
+          "role": "Variable Qualifier",
+          "dataType": "float"
+        },
+        {
+          "OID": "IT.LB.LBSTNRHI",
+          "mandatory": false,
+          "name": "LBSTNRHI",
+          "description": "Reference Range Upper Limit-Std Units",
+          "role": "Variable Qualifier",
+          "dataType": "float"
+        },
+        {
+          "OID": "IT.LB.LBNRIND",
+          "mandatory": false,
+          "name": "LBNRIND",
+          "description": "Reference Range Indicator",
+          "role": "Variable Qualifier",
+          "dataType": "text",
+          "codeList": "CL.NRIND"
+        },
+        {
+          "OID": "IT.LB.LBSPEC",
+          "mandatory": false,
+          "name": "LBSPEC",
+          "description": "Specimen Type",
+          "role": "Record Qualifier",
+          "dataType": "text",
+          "codeList": "CL.SPECTYPE"
+        },
+        {
+          "OID": "IT.LB.LBLOBXFL",
+          "mandatory": false,
+          "name": "LBLOBXFL",
+          "description": "Last Observation Before Exposure Flag",
+          "role": "Record Qualifier",
+          "dataType": "text",
+          "codeList": "CL.NY"
+        },
+        {
+          "OID": "IT.LB.LBFAST",
+          "mandatory": false,
+          "name": "LBFAST",
+          "description": "Fasting Status",
+          "role": "Record Qualifier",
+          "dataType": "text",
+          "codeList": "CL.NY"
+        },
+        {
+          "OID": "IT.LB.VISITNUM",
+          "mandatory": false,
+          "name": "VISITNUM",
+          "description": "Visit Number",
+          "role": "Timing",
+          "dataType": "float"
+        },
+        {
+          "OID": "IT.LB.LBDTC",
+          "mandatory": false,
+          "name": "LBDTC",
+          "description": "Date/Time of Specimen Collection",
+          "role": "Timing",
+          "dataType": "text"
+        }
+      ],
+      "children": [
+        "VL.LB.LBORRES",
+        "VL.LB.LBORRESU"
+      ]
+    },
+    {
+      "OID": "IG.AE",
+      "name": "AE",
+      "description": "Adverse Events",
+      "domain": "AE",
+      "structure": "One record per adverse event per subject",
+      "items": [
+        {
+          "OID": "IT.AE.STUDYID",
+          "mandatory": false,
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "role": "Identifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.AE.DOMAIN",
+          "mandatory": false,
+          "name": "DOMAIN",
+          "description": "Domain Abbreviation",
+          "role": "Identifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.AE.USUBJID",
+          "mandatory": false,
+          "name": "USUBJID",
+          "description": "Unique Subject Identifier",
+          "role": "Identifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.AE.AESEQ",
+          "mandatory": false,
+          "name": "AESEQ",
+          "description": "Sequence Number",
+          "role": "Identifier",
+          "dataType": "float"
+        },
+        {
+          "OID": "IT.AE.AETERM",
+          "mandatory": false,
+          "name": "AETERM",
+          "description": "Reported Term for the Adverse Event",
+          "role": "Topic",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.AE.AELLT",
+          "mandatory": false,
+          "name": "AELLT",
+          "description": "Lowest Level Term",
+          "role": "Variable Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.AE.AELLTCD",
+          "mandatory": false,
+          "name": "AELLTCD",
+          "description": "Lowest Level Term Code",
+          "role": "Variable Qualifier",
+          "dataType": "float"
+        },
+        {
+          "OID": "IT.AE.AEDECOD",
+          "mandatory": false,
+          "name": "AEDECOD",
+          "description": "Dictionary-Derived Term",
+          "role": "Synonym Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.AE.AEPTCD",
+          "mandatory": false,
+          "name": "AEPTCD",
+          "description": "Preferred Term Code",
+          "role": "Variable Qualifier",
+          "dataType": "float"
+        },
+        {
+          "OID": "IT.AE.AEHLT",
+          "mandatory": false,
+          "name": "AEHLT",
+          "description": "High Level Term",
+          "role": "Variable Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.AE.AEHLTCD",
+          "mandatory": false,
+          "name": "AEHLTCD",
+          "description": "High Level Term Code",
+          "role": "Variable Qualifier",
+          "dataType": "float"
+        },
+        {
+          "OID": "IT.AE.AEHLGT",
+          "mandatory": false,
+          "name": "AEHLGT",
+          "description": "High Level Group Term",
+          "role": "Variable Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.AE.AEHLGTCD",
+          "mandatory": false,
+          "name": "AEHLGTCD",
+          "description": "High Level Group Term Code",
+          "role": "Variable Qualifier",
+          "dataType": "float"
+        },
+        {
+          "OID": "IT.AE.AECAT",
+          "mandatory": false,
+          "name": "AECAT",
+          "description": "Category for Adverse Event",
+          "role": "Grouping Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.AE.AESCAT",
+          "mandatory": false,
+          "name": "AESCAT",
+          "description": "Subcategory for Adverse Event",
+          "role": "Grouping Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.AE.AEPRESP",
+          "mandatory": false,
+          "name": "AEPRESP",
+          "description": "Pre-Specified Adverse Event",
+          "role": "Variable Qualifier",
+          "dataType": "text",
+          "codeList": "CL.NY"
+        },
+        {
+          "OID": "IT.AE.AEBODSYS",
+          "mandatory": false,
+          "name": "AEBODSYS",
+          "description": "Body System or Organ Class",
+          "role": "Record Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.AE.AEBDSYCD",
+          "mandatory": false,
+          "name": "AEBDSYCD",
+          "description": "Body System or Organ Class Code",
+          "role": "Variable Qualifier",
+          "dataType": "float"
+        },
+        {
+          "OID": "IT.AE.AESOC",
+          "mandatory": false,
+          "name": "AESOC",
+          "description": "Primary System Organ Class",
+          "role": "Variable Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.AE.AESOCCD",
+          "mandatory": false,
+          "name": "AESOCCD",
+          "description": "Primary System Organ Class Code",
+          "role": "Variable Qualifier",
+          "dataType": "float"
+        },
+        {
+          "OID": "IT.AE.AELOC",
+          "mandatory": false,
+          "name": "AELOC",
+          "description": "Location of Event",
+          "role": "Record Qualifier",
+          "dataType": "text",
+          "codeList": "CL.LOC"
+        },
+        {
+          "OID": "IT.AE.AESEV",
+          "mandatory": false,
+          "name": "AESEV",
+          "description": "Severity/Intensity",
+          "role": "Record Qualifier",
+          "dataType": "text",
+          "codeList": "CL.AESEV"
+        },
+        {
+          "OID": "IT.AE.AESER",
+          "mandatory": false,
+          "name": "AESER",
+          "description": "Serious Event",
+          "role": "Record Qualifier",
+          "dataType": "text",
+          "codeList": "CL.NY"
+        },
+        {
+          "OID": "IT.AE.AEACN",
+          "mandatory": false,
+          "name": "AEACN",
+          "description": "Action Taken with Study Treatment",
+          "role": "Record Qualifier",
+          "dataType": "text",
+          "codeList": "CL.ACN"
+        },
+        {
+          "OID": "IT.AE.AEACNOTH",
+          "mandatory": false,
+          "name": "AEACNOTH",
+          "description": "Other Action Taken",
+          "role": "Record Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.AE.AEREL",
+          "mandatory": false,
+          "name": "AEREL",
+          "description": "Causality",
+          "role": "Record Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.AE.AERELNST",
+          "mandatory": false,
+          "name": "AERELNST",
+          "description": "Relationship to Non-Study Treatment",
+          "role": "Record Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.AE.AEPATT",
+          "mandatory": false,
+          "name": "AEPATT",
+          "description": "Pattern of Adverse Event",
+          "role": "Record Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.AE.AEOUT",
+          "mandatory": false,
+          "name": "AEOUT",
+          "description": "Outcome of Adverse Event",
+          "role": "Record Qualifier",
+          "dataType": "text",
+          "codeList": "CL.OUT"
+        },
+        {
+          "OID": "IT.AE.AESCAN",
+          "mandatory": false,
+          "name": "AESCAN",
+          "description": "Involves Cancer",
+          "role": "Record Qualifier",
+          "dataType": "text",
+          "codeList": "CL.NY"
+        },
+        {
+          "OID": "IT.AE.AESCONG",
+          "mandatory": false,
+          "name": "AESCONG",
+          "description": "Congenital Anomaly or Birth Defect",
+          "role": "Record Qualifier",
+          "dataType": "text",
+          "codeList": "CL.NY"
+        },
+        {
+          "OID": "IT.AE.AESDISAB",
+          "mandatory": false,
+          "name": "AESDISAB",
+          "description": "Persist or Signif Disability/Incapacity",
+          "role": "Record Qualifier",
+          "dataType": "text",
+          "codeList": "CL.NY"
+        },
+        {
+          "OID": "IT.AE.AESDTH",
+          "mandatory": false,
+          "name": "AESDTH",
+          "description": "Results in Death",
+          "role": "Record Qualifier",
+          "dataType": "text",
+          "codeList": "CL.NY"
+        },
+        {
+          "OID": "IT.AE.AESHOSP",
+          "mandatory": false,
+          "name": "AESHOSP",
+          "description": "Requires or Prolongs Hospitalization",
+          "role": "Record Qualifier",
+          "dataType": "text",
+          "codeList": "CL.NY"
+        },
+        {
+          "OID": "IT.AE.AESLIFE",
+          "mandatory": false,
+          "name": "AESLIFE",
+          "description": "Is Life Threatening",
+          "role": "Record Qualifier",
+          "dataType": "text",
+          "codeList": "CL.NY"
+        },
+        {
+          "OID": "IT.AE.AESOD",
+          "mandatory": false,
+          "name": "AESOD",
+          "description": "Occurred with Overdose",
+          "role": "Record Qualifier",
+          "dataType": "text",
+          "codeList": "CL.NY"
+        },
+        {
+          "OID": "IT.AE.AESMIE",
+          "mandatory": false,
+          "name": "AESMIE",
+          "description": "Other Medically Important Serious Event",
+          "role": "Record Qualifier",
+          "dataType": "text",
+          "codeList": "CL.NY"
+        },
+        {
+          "OID": "IT.AE.AECONTRT",
+          "mandatory": false,
+          "name": "AECONTRT",
+          "description": "Concomitant or Additional Trtmnt Given",
+          "role": "Record Qualifier",
+          "dataType": "text",
+          "codeList": "CL.NY"
+        },
+        {
+          "OID": "IT.AE.AETOXGR",
+          "mandatory": false,
+          "name": "AETOXGR",
+          "description": "Standard Toxicity Grade",
+          "role": "Record Qualifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.AE.AESTDTC",
+          "mandatory": false,
+          "name": "AESTDTC",
+          "description": "Start Date/Time of Adverse Event",
+          "role": "Timing",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.AE.AEENDTC",
+          "mandatory": false,
+          "name": "AEENDTC",
+          "description": "End Date/Time of Adverse Event",
+          "role": "Timing",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.AE.AEENRF",
+          "mandatory": false,
+          "name": "AEENRF",
+          "description": "End Relative to Reference Period",
+          "role": "Timing",
+          "dataType": "text",
+          "codeList": "CL.STENRF"
+        },
+        {
+          "OID": "IT.AE.AEENRTPT",
+          "mandatory": false,
+          "name": "AEENRTPT",
+          "description": "End Relative to Reference Time Point",
+          "role": "Timing",
+          "dataType": "text",
+          "codeList": "CL.STENRF"
+        },
+        {
+          "OID": "IT.AE.AEENTPT",
+          "mandatory": false,
+          "name": "AEENTPT",
+          "description": "End Reference Time Point",
+          "role": "Timing",
+          "dataType": "text"
+        }
+      ]
+    },
+    {
+      "OID": "VL.VS.VSORRES",
+      "name": "VL_VS_VSORRES",
+      "type": "ValueList",
+      "items": [
+        {
+          "OID": "IT.VS.VSORRES.TEMP",
+          "mandatory": false,
+          "name": "VSORRES",
+          "significantDigits": 3,
+          "dataType": "float",
+          "applicableWhen": [
+            "WC.VS.VSORRES.TEMP"
+          ],
+          "origin": {
+            "type": "CRF",
+            "source": "Investigator"
+          }
+        },
+        {
+          "OID": "IT.VS.VSORRES.WEIGHT",
+          "mandatory": false,
+          "name": "VSORRES",
+          "significantDigits": 3,
+          "dataType": "float",
+          "applicableWhen": [
+            "WC.VS.VSORRES.WEIGHT"
+          ],
+          "origin": {
+            "type": "CRF",
+            "source": "Investigator"
+          }
+        },
+        {
+          "OID": "IT.VS.VSORRES.HEIGHT",
+          "mandatory": false,
+          "name": "VSORRES",
+          "significantDigits": 3,
+          "dataType": "float",
+          "applicableWhen": [
+            "WC.VS.VSORRES.HEIGHT"
+          ],
+          "origin": {
+            "type": "CRF",
+            "source": "Investigator"
+          }
+        },
+        {
+          "OID": "IT.VS.VSORRES.SYSBP",
+          "mandatory": false,
+          "name": "VSORRES",
+          "dataType": "integer",
+          "applicableWhen": [
+            "WC.VS.VSORRES.SYSBP"
+          ],
+          "origin": {
+            "type": "CRF",
+            "source": "Investigator"
+          }
+        },
+        {
+          "OID": "IT.VS.VSORRES.DIABP",
+          "mandatory": false,
+          "name": "VSORRES",
+          "dataType": "integer",
+          "applicableWhen": [
+            "WC.VS.VSORRES.DIABP"
+          ],
+          "origin": {
+            "type": "CRF",
+            "source": "Investigator"
+          }
+        },
+        {
+          "OID": "IT.VS.VSORRES.HR",
+          "mandatory": false,
+          "name": "VSORRES",
+          "dataType": "integer",
+          "applicableWhen": [
+            "WC.VS.VSORRES.HR"
+          ],
+          "origin": {
+            "type": "CRF",
+            "source": "Investigator"
+          }
+        }
+      ]
+    },
+    {
+      "OID": "VL.VS.VSORRESU",
+      "name": "VL_VS_VSORRESU",
+      "type": "ValueList",
+      "items": [
+        {
+          "OID": "IT.VS.VSORRESU.TEMP",
+          "mandatory": false,
+          "name": "VSORRESU",
+          "dataType": "text",
+          "applicableWhen": [
+            "WC.VS.VSORRESU.TEMP"
+          ]
+        },
+        {
+          "OID": "IT.VS.VSORRESU.WEIGHT",
+          "mandatory": false,
+          "name": "VSORRESU",
+          "dataType": "text",
+          "applicableWhen": [
+            "WC.VS.VSORRESU.WEIGHT"
+          ]
+        },
+        {
+          "OID": "IT.VS.VSORRESU.HEIGHT",
+          "mandatory": false,
+          "name": "VSORRESU",
+          "dataType": "text",
+          "applicableWhen": [
+            "WC.VS.VSORRESU.HEIGHT"
+          ]
+        },
+        {
+          "OID": "IT.VS.VSORRESU.SYSBP",
+          "mandatory": false,
+          "name": "VSORRESU",
+          "dataType": "text",
+          "applicableWhen": [
+            "WC.VS.VSORRESU.SYSBP"
+          ]
+        },
+        {
+          "OID": "IT.VS.VSORRESU.DIABP",
+          "mandatory": false,
+          "name": "VSORRESU",
+          "dataType": "text",
+          "applicableWhen": [
+            "WC.VS.VSORRESU.DIABP"
+          ]
+        },
+        {
+          "OID": "IT.VS.VSORRESU.HR",
+          "mandatory": false,
+          "name": "VSORRESU",
+          "dataType": "text",
+          "applicableWhen": [
+            "WC.VS.VSORRESU.HR"
+          ]
+        }
+      ]
+    },
+    {
+      "OID": "VL.LB.LBORRES",
+      "name": "VL_LB_LBORRES",
+      "type": "ValueList",
+      "items": [
+        {
+          "OID": "IT.LB.LBORRES.ALT",
+          "mandatory": false,
+          "name": "LBORRES",
+          "significantDigits": 4,
+          "dataType": "float",
+          "applicableWhen": [
+            "WC.LB.LBORRES.ALT"
+          ],
+          "origin": {
+            "type": "CRF",
+            "source": "Vendor"
+          }
+        },
+        {
+          "OID": "IT.LB.LBORRES.ALB",
+          "mandatory": false,
+          "name": "LBORRES",
+          "significantDigits": 4,
+          "dataType": "text",
+          "applicableWhen": [
+            "WC.LB.LBORRES.ALB"
+          ],
+          "origin": {
+            "type": "CRF",
+            "source": "Vendor"
+          }
+        },
+        {
+          "OID": "IT.LB.LBORRES.ALP",
+          "mandatory": false,
+          "name": "LBORRES",
+          "significantDigits": 4,
+          "dataType": "float",
+          "applicableWhen": [
+            "WC.LB.LBORRES.ALP"
+          ],
+          "origin": {
+            "type": "CRF",
+            "source": "Vendor"
+          }
+        },
+        {
+          "OID": "IT.LB.LBORRES.AST",
+          "mandatory": false,
+          "name": "LBORRES",
+          "significantDigits": 4,
+          "dataType": "float",
+          "applicableWhen": [
+            "WC.LB.LBORRES.AST"
+          ],
+          "origin": {
+            "type": "CRF",
+            "source": "Vendor"
+          }
+        },
+        {
+          "OID": "IT.LB.LBORRES.CREAT",
+          "mandatory": false,
+          "name": "LBORRES",
+          "significantDigits": 4,
+          "dataType": "float",
+          "applicableWhen": [
+            "WC.LB.LBORRES.CREAT"
+          ],
+          "origin": {
+            "type": "CRF",
+            "source": "Vendor"
+          }
+        },
+        {
+          "OID": "IT.LB.LBORRES.K",
+          "mandatory": false,
+          "name": "LBORRES",
+          "significantDigits": 4,
+          "dataType": "float",
+          "applicableWhen": [
+            "WC.LB.LBORRES.K"
+          ],
+          "origin": {
+            "type": "CRF",
+            "source": "Vendor"
+          }
+        },
+        {
+          "OID": "IT.LB.LBORRES.SODIUM",
+          "mandatory": false,
+          "name": "LBORRES",
+          "significantDigits": 4,
+          "dataType": "float",
+          "applicableWhen": [
+            "WC.LB.LBORRES.SODIUM"
+          ],
+          "origin": {
+            "type": "CRF",
+            "source": "Vendor"
+          }
+        },
+        {
+          "OID": "IT.LB.LBORRES.HBA1C",
+          "mandatory": false,
+          "name": "LBORRES",
+          "significantDigits": 4,
+          "dataType": "float",
+          "applicableWhen": [
+            "WC.LB.LBORRES.HBA1C"
+          ],
+          "origin": {
+            "type": "CRF",
+            "source": "Vendor"
+          }
+        }
+      ]
+    },
+    {
+      "OID": "VL.LB.LBORRESU",
+      "name": "VL_LB_LBORRESU",
+      "type": "ValueList",
+      "items": [
+        {
+          "OID": "IT.LB.LBORRESU.ALT",
+          "mandatory": false,
+          "name": "LBORRESU",
+          "dataType": "text",
+          "applicableWhen": [
+            "WC.LB.LBORRESU.ALT"
+          ]
+        },
+        {
+          "OID": "IT.LB.LBORRESU.ALP",
+          "mandatory": false,
+          "name": "LBORRESU",
+          "dataType": "text",
+          "applicableWhen": [
+            "WC.LB.LBORRESU.ALP"
+          ]
+        },
+        {
+          "OID": "IT.LB.LBORRESU.AST",
+          "mandatory": false,
+          "name": "LBORRESU",
+          "dataType": "text",
+          "applicableWhen": [
+            "WC.LB.LBORRESU.AST"
+          ]
+        },
+        {
+          "OID": "IT.LB.LBORRESU.CREAT",
+          "mandatory": false,
+          "name": "LBORRESU",
+          "dataType": "text",
+          "applicableWhen": [
+            "WC.LB.LBORRESU.CREAT"
+          ]
+        },
+        {
+          "OID": "IT.LB.LBORRESU.K",
+          "mandatory": false,
+          "name": "LBORRESU",
+          "dataType": "text",
+          "applicableWhen": [
+            "WC.LB.LBORRESU.K"
+          ]
+        },
+        {
+          "OID": "IT.LB.LBORRESU.SODIUM",
+          "mandatory": false,
+          "name": "LBORRESU",
+          "dataType": "text",
+          "applicableWhen": [
+            "WC.LB.LBORRESU.SODIUM"
+          ]
+        },
+        {
+          "OID": "IT.LB.LBORRESU.HBA1C",
+          "mandatory": false,
+          "name": "LBORRESU",
+          "dataType": "text",
+          "applicableWhen": [
+            "WC.LB.LBORRESU.HBA1C"
+          ]
+        }
+      ]
+    }
   ],
   "codeLists": [
-    "OID='CL.NY' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='No Yes Response' description=None coding=None label=None aliases=None version=None href=None dataType='text' formatName=None codeListItems=[CodeListItem(codedValue='N', decode='No', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='NA', decode='NA', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='U', decode='U', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='Y', decode='Yes', description=None, coding=None, aliases=None, weight=None, other=None)] externalCodeList=None",
-    "OID='CL.AGEU' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='Age Unit' description=None coding=None label=None aliases=None version=None href=None dataType='text' formatName=None codeListItems=None externalCodeList=None",
-    "OID='CL.SEX' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='Sex' description=None coding=None label=None aliases=None version=None href=None dataType='text' formatName=None codeListItems=[CodeListItem(codedValue='F', decode='Female', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='M', decode='Male', description=None, coding=None, aliases=None, weight=None, other=None)] externalCodeList=None",
-    "OID='CL.RACE' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='Race' description=None coding=None label=None aliases=None version=None href=None dataType='text' formatName=None codeListItems=None externalCodeList=None",
-    "OID='CL.ARMNULRS' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='Arm Null Reason' description=None coding=None label=None aliases=None version=None href=None dataType='text' formatName=None codeListItems=None externalCodeList=None",
-    "OID='CL.VSTESTCD' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='Vital Signs Test Code' description=None coding=None label=None aliases=None version=None href=None dataType='text' formatName=None codeListItems=[CodeListItem(codedValue='DIABP', decode='Diastolic Blood Pressure', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='HEIGHT', decode='Height', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='HR', decode='Heart Rate', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='SYSBP', decode='Systolic Blood Pressure', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='TEMP', decode='Body Temperature', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='WEIGHT', decode='Weight', description=None, coding=None, aliases=None, weight=None, other=None)] externalCodeList=None",
-    "OID='CL.VSTEST' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='Vital Signs Test Name' description=None coding=None label=None aliases=None version=None href=None dataType='text' formatName=None codeListItems=[CodeListItem(codedValue='Diastolic Blood Pressure', decode='Diastolic Blood Pressure', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='Heart Rate', decode='Heart Rate', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='Height', decode='Height', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='Systolic Blood Pressure', decode='Systolic Blood Pressure', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='Temperature', decode='Body Temperature', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='Weight', decode='Weight', description=None, coding=None, aliases=None, weight=None, other=None)] externalCodeList=None",
-    "OID='CL.POSITION' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='Position' description=None coding=None label=None aliases=None version=None href=None dataType='text' formatName=None codeListItems=[CodeListItem(codedValue='PRONE', decode='Prone', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='SEMI-RECUMBENT', decode='Semi-Supine', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='SITTING', decode='Sitting', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='STANDING', decode='Orthostatic', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='SUPINE', decode='Supine', description=None, coding=None, aliases=None, weight=None, other=None)] externalCodeList=None",
-    "OID='CL.VSRESU' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='Units for Vital Signs Results' description=None coding=None label=None aliases=None version=None href=None dataType='text' formatName=None codeListItems=[CodeListItem(codedValue='C', decode='Degree Celsius', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='cm', decode='Centimeter', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='F', decode='Degree Fahrenheit', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='g', decode='Gram', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='in', decode='Inch', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='K', decode='Kelvin', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='kg', decode='Kilogram', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='LB', decode='lb', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='m', decode='Meter', description=None, coding=None, aliases=None, weight=None, other=None)] externalCodeList=None",
-    "OID='CL.LOC' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='Anatomical Location' description=None coding=None label=None aliases=None version=None href=None dataType='text' formatName=None codeListItems=[CodeListItem(codedValue='AXILLA', decode='Armpit', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='BRACHIAL ARTERY', decode='BRACHIAL ARTERY', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='CAROTID ARTERY', decode='Common Carotid Artery', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='CEREBRAL ARTERY', decode='CEREBRAL ARTERY', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='DORSALIS PEDIS ARTERY', decode='Dorsal Pedal Artery', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='EAR', decode='EAR', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='FEMORAL ARTERY', decode='FEMORAL ARTERY', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='FINGER', decode='Finger', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='FOREHEAD', decode='Forehead', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='ORAL CAVITY', decode='Buccal cavity', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='RADIAL ARTERY', decode='Radial Artery', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='RECTUM', decode='RECTUM', description=None, coding=None, aliases=None, weight=None, other=None)] externalCodeList=None",
-    "OID='CL.LAT' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='Laterality' description=None coding=None label=None aliases=None version=None href=None dataType='text' formatName=None codeListItems=None externalCodeList=None",
-    "OID='CL.LBTESTCD' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='Laboratory Test Code' description=None coding=None label=None aliases=None version=None href=None dataType='text' formatName=None codeListItems=[CodeListItem(codedValue='ALB', decode='Albumin', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='ALP', decode='Alkaline Phosphatase', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='ALT', decode='Alanine Aminotransferase', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='AST', decode='Aspartate Aminotransferase', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='CREAT', decode='Creatinine', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='HBA1C', decode='HbA1c', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='K', decode='Potassium', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='SODIUM', decode='Sodium', description=None, coding=None, aliases=None, weight=None, other=None)] externalCodeList=None",
-    "OID='CL.LBTEST' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='Laboratory Test Name' description=None coding=None label=None aliases=None version=None href=None dataType='text' formatName=None codeListItems=[CodeListItem(codedValue='Alanine Aminotransferase', decode='Alanine Aminotransferase', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='Albumin', decode='Albumin', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='Alkaline Phosphatase', decode='Alkaline Phosphatase', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='Aspartate Aminotransferase', decode='Aspartate Aminotransferase', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='Creatinine', decode='Creatinine', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='Hemoglobin A1C', decode='HbA1c', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='Potassium', decode='Potassium', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='Sodium', decode='Sodium', description=None, coding=None, aliases=None, weight=None, other=None)] externalCodeList=None",
-    "OID='CL.UNIT' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='Unit' description=None coding=None label=None aliases=None version=None href=None dataType='text' formatName=None codeListItems=[CodeListItem(codedValue='IU/L', decode='IE/L', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='mEq/dL', decode='Milliequivalent per Deciliter', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='mEq/L', decode='Milliequivalent Per Liter', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='mg/dL', decode='mg%', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='mg/L', decode='g/m3', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='mmol/L', decode='mcmol/mL', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='nkat/L', decode='Nanokatal per Liter', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='U/L', decode='mU/mL', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='ukat/L', decode='mckat/L', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='umol/L', decode='nmol/mL', description=None, coding=None, aliases=None, weight=None, other=None)] externalCodeList=None",
-    "OID='CL.LBSTRESC' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='Laboratory Test Standard Character Result' description=None coding=None label=None aliases=None version=None href=None dataType='text' formatName=None codeListItems=None externalCodeList=None",
-    "OID='CL.NRIND' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='Reference Range Indicator' description=None coding=None label=None aliases=None version=None href=None dataType='text' formatName=None codeListItems=None externalCodeList=None",
-    "OID='CL.SPECTYPE' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='Specimen Type' description=None coding=None label=None aliases=None version=None href=None dataType='text' formatName=None codeListItems=[CodeListItem(codedValue='BLOOD', decode='Peripheral Blood', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='SERUM OR PLASMA', decode='Ser/Plas', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='URINE', decode='URINE', description=None, coding=None, aliases=None, weight=None, other=None)] externalCodeList=None",
-    "OID='CL.AESEV' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='Severity/Intensity Scale for Adverse Events' description=None coding=None label=None aliases=None version=None href=None dataType='text' formatName=None codeListItems=[CodeListItem(codedValue='MILD', decode='1', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='MODERATE', decode='2', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='SEVERE', decode='3', description=None, coding=None, aliases=None, weight=None, other=None)] externalCodeList=None",
-    "OID='CL.ACN' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='Action Taken with Study Treatment' description=None coding=None label=None aliases=None version=None href=None dataType='text' formatName=None codeListItems=None externalCodeList=None",
-    "OID='CL.OUT' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='Outcome of Event' description=None coding=None label=None aliases=None version=None href=None dataType='text' formatName=None codeListItems=[CodeListItem(codedValue='FATAL', decode='5', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='NOT RECOVERED/NOT RESOLVED', decode='NOT RECOVERED/NOT RESOLVED', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='RECOVERED/RESOLVED WITH SEQUELAE', decode='RECOVERED/RESOLVED WITH SEQUELAE', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='RECOVERED/RESOLVED', decode='RECOVERED/RESOLVED', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='RECOVERING/RESOLVING', decode='RECOVERING/RESOLVING', description=None, coding=None, aliases=None, weight=None, other=None), CodeListItem(codedValue='UNKNOWN', decode='U', description=None, coding=None, aliases=None, weight=None, other=None)] externalCodeList=None",
-    "OID='CL.STENRF' uuid=None mandatory=None comments=None siteOrSponsorComments=None purpose=None lastUpdated=None owner=None wasDerivedFrom=None name='Relation to Reference Period' description=None coding=None label=None aliases=None version=None href=None dataType='text' formatName=None codeListItems=None externalCodeList=None"
+    {
+      "OID": "CL.NY",
+      "name": "No Yes Response",
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "N",
+          "decode": "No"
+        },
+        {
+          "codedValue": "NA",
+          "decode": "NA"
+        },
+        {
+          "codedValue": "U",
+          "decode": "U"
+        },
+        {
+          "codedValue": "Y",
+          "decode": "Yes"
+        }
+      ]
+    },
+    {
+      "OID": "CL.AGEU",
+      "name": "Age Unit",
+      "dataType": "text"
+    },
+    {
+      "OID": "CL.SEX",
+      "name": "Sex",
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "F",
+          "decode": "Female"
+        },
+        {
+          "codedValue": "M",
+          "decode": "Male"
+        }
+      ]
+    },
+    {
+      "OID": "CL.RACE",
+      "name": "Race",
+      "dataType": "text"
+    },
+    {
+      "OID": "CL.ARMNULRS",
+      "name": "Arm Null Reason",
+      "dataType": "text"
+    },
+    {
+      "OID": "CL.VSTESTCD",
+      "name": "Vital Signs Test Code",
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "DIABP",
+          "decode": "Diastolic Blood Pressure"
+        },
+        {
+          "codedValue": "HEIGHT",
+          "decode": "Height"
+        },
+        {
+          "codedValue": "HR",
+          "decode": "Heart Rate"
+        },
+        {
+          "codedValue": "SYSBP",
+          "decode": "Systolic Blood Pressure"
+        },
+        {
+          "codedValue": "TEMP",
+          "decode": "Body Temperature"
+        },
+        {
+          "codedValue": "WEIGHT",
+          "decode": "Weight"
+        }
+      ]
+    },
+    {
+      "OID": "CL.VSTEST",
+      "name": "Vital Signs Test Name",
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "Diastolic Blood Pressure",
+          "decode": "Diastolic Blood Pressure"
+        },
+        {
+          "codedValue": "Heart Rate",
+          "decode": "Heart Rate"
+        },
+        {
+          "codedValue": "Height",
+          "decode": "Height"
+        },
+        {
+          "codedValue": "Systolic Blood Pressure",
+          "decode": "Systolic Blood Pressure"
+        },
+        {
+          "codedValue": "Temperature",
+          "decode": "Body Temperature"
+        },
+        {
+          "codedValue": "Weight",
+          "decode": "Weight"
+        }
+      ]
+    },
+    {
+      "OID": "CL.POSITION",
+      "name": "Position",
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "PRONE",
+          "decode": "Prone"
+        },
+        {
+          "codedValue": "SEMI-RECUMBENT",
+          "decode": "Semi-Supine"
+        },
+        {
+          "codedValue": "SITTING",
+          "decode": "Sitting"
+        },
+        {
+          "codedValue": "STANDING",
+          "decode": "Orthostatic"
+        },
+        {
+          "codedValue": "SUPINE",
+          "decode": "Supine"
+        }
+      ]
+    },
+    {
+      "OID": "CL.VSRESU",
+      "name": "Units for Vital Signs Results",
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "C",
+          "decode": "Degree Celsius"
+        },
+        {
+          "codedValue": "cm",
+          "decode": "Centimeter"
+        },
+        {
+          "codedValue": "F",
+          "decode": "Degree Fahrenheit"
+        },
+        {
+          "codedValue": "g",
+          "decode": "Gram"
+        },
+        {
+          "codedValue": "in",
+          "decode": "Inch"
+        },
+        {
+          "codedValue": "K",
+          "decode": "Kelvin"
+        },
+        {
+          "codedValue": "kg",
+          "decode": "Kilogram"
+        },
+        {
+          "codedValue": "LB",
+          "decode": "lb"
+        },
+        {
+          "codedValue": "m",
+          "decode": "Meter"
+        }
+      ]
+    },
+    {
+      "OID": "CL.LOC",
+      "name": "Anatomical Location",
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "AXILLA",
+          "decode": "Armpit"
+        },
+        {
+          "codedValue": "BRACHIAL ARTERY",
+          "decode": "BRACHIAL ARTERY"
+        },
+        {
+          "codedValue": "CAROTID ARTERY",
+          "decode": "Common Carotid Artery"
+        },
+        {
+          "codedValue": "CEREBRAL ARTERY",
+          "decode": "CEREBRAL ARTERY"
+        },
+        {
+          "codedValue": "DORSALIS PEDIS ARTERY",
+          "decode": "Dorsal Pedal Artery"
+        },
+        {
+          "codedValue": "EAR",
+          "decode": "EAR"
+        },
+        {
+          "codedValue": "FEMORAL ARTERY",
+          "decode": "FEMORAL ARTERY"
+        },
+        {
+          "codedValue": "FINGER",
+          "decode": "Finger"
+        },
+        {
+          "codedValue": "FOREHEAD",
+          "decode": "Forehead"
+        },
+        {
+          "codedValue": "ORAL CAVITY",
+          "decode": "Buccal cavity"
+        },
+        {
+          "codedValue": "RADIAL ARTERY",
+          "decode": "Radial Artery"
+        },
+        {
+          "codedValue": "RECTUM",
+          "decode": "RECTUM"
+        }
+      ]
+    },
+    {
+      "OID": "CL.LAT",
+      "name": "Laterality",
+      "dataType": "text"
+    },
+    {
+      "OID": "CL.LBTESTCD",
+      "name": "Laboratory Test Code",
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "ALB",
+          "decode": "Albumin"
+        },
+        {
+          "codedValue": "ALP",
+          "decode": "Alkaline Phosphatase"
+        },
+        {
+          "codedValue": "ALT",
+          "decode": "Alanine Aminotransferase"
+        },
+        {
+          "codedValue": "AST",
+          "decode": "Aspartate Aminotransferase"
+        },
+        {
+          "codedValue": "CREAT",
+          "decode": "Creatinine"
+        },
+        {
+          "codedValue": "HBA1C",
+          "decode": "HbA1c"
+        },
+        {
+          "codedValue": "K",
+          "decode": "Potassium"
+        },
+        {
+          "codedValue": "SODIUM",
+          "decode": "Sodium"
+        }
+      ]
+    },
+    {
+      "OID": "CL.LBTEST",
+      "name": "Laboratory Test Name",
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "Alanine Aminotransferase",
+          "decode": "Alanine Aminotransferase"
+        },
+        {
+          "codedValue": "Albumin",
+          "decode": "Albumin"
+        },
+        {
+          "codedValue": "Alkaline Phosphatase",
+          "decode": "Alkaline Phosphatase"
+        },
+        {
+          "codedValue": "Aspartate Aminotransferase",
+          "decode": "Aspartate Aminotransferase"
+        },
+        {
+          "codedValue": "Creatinine",
+          "decode": "Creatinine"
+        },
+        {
+          "codedValue": "Hemoglobin A1C",
+          "decode": "HbA1c"
+        },
+        {
+          "codedValue": "Potassium",
+          "decode": "Potassium"
+        },
+        {
+          "codedValue": "Sodium",
+          "decode": "Sodium"
+        }
+      ]
+    },
+    {
+      "OID": "CL.UNIT",
+      "name": "Unit",
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "IU/L",
+          "decode": "IE/L"
+        },
+        {
+          "codedValue": "mEq/dL",
+          "decode": "Milliequivalent per Deciliter"
+        },
+        {
+          "codedValue": "mEq/L",
+          "decode": "Milliequivalent Per Liter"
+        },
+        {
+          "codedValue": "mg/dL",
+          "decode": "mg%"
+        },
+        {
+          "codedValue": "mg/L",
+          "decode": "g/m3"
+        },
+        {
+          "codedValue": "mmol/L",
+          "decode": "mcmol/mL"
+        },
+        {
+          "codedValue": "nkat/L",
+          "decode": "Nanokatal per Liter"
+        },
+        {
+          "codedValue": "U/L",
+          "decode": "mU/mL"
+        },
+        {
+          "codedValue": "ukat/L",
+          "decode": "mckat/L"
+        },
+        {
+          "codedValue": "umol/L",
+          "decode": "nmol/mL"
+        }
+      ]
+    },
+    {
+      "OID": "CL.LBSTRESC",
+      "name": "Laboratory Test Standard Character Result",
+      "dataType": "text"
+    },
+    {
+      "OID": "CL.NRIND",
+      "name": "Reference Range Indicator",
+      "dataType": "text"
+    },
+    {
+      "OID": "CL.SPECTYPE",
+      "name": "Specimen Type",
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "BLOOD",
+          "decode": "Peripheral Blood"
+        },
+        {
+          "codedValue": "SERUM OR PLASMA",
+          "decode": "Ser/Plas"
+        },
+        {
+          "codedValue": "URINE",
+          "decode": "URINE"
+        }
+      ]
+    },
+    {
+      "OID": "CL.AESEV",
+      "name": "Severity/Intensity Scale for Adverse Events",
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "MILD",
+          "decode": "1"
+        },
+        {
+          "codedValue": "MODERATE",
+          "decode": "2"
+        },
+        {
+          "codedValue": "SEVERE",
+          "decode": "3"
+        }
+      ]
+    },
+    {
+      "OID": "CL.ACN",
+      "name": "Action Taken with Study Treatment",
+      "dataType": "text"
+    },
+    {
+      "OID": "CL.OUT",
+      "name": "Outcome of Event",
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "FATAL",
+          "decode": "5"
+        },
+        {
+          "codedValue": "NOT RECOVERED/NOT RESOLVED",
+          "decode": "NOT RECOVERED/NOT RESOLVED"
+        },
+        {
+          "codedValue": "RECOVERED/RESOLVED WITH SEQUELAE",
+          "decode": "RECOVERED/RESOLVED WITH SEQUELAE"
+        },
+        {
+          "codedValue": "RECOVERED/RESOLVED",
+          "decode": "RECOVERED/RESOLVED"
+        },
+        {
+          "codedValue": "RECOVERING/RESOLVING",
+          "decode": "RECOVERING/RESOLVING"
+        },
+        {
+          "codedValue": "UNKNOWN",
+          "decode": "U"
+        }
+      ]
+    },
+    {
+      "OID": "CL.STENRF",
+      "name": "Relation to Reference Period",
+      "dataType": "text"
+    }
   ],
   "_xmlMetadata": {
     "namespaces": {
@@ -83,88 +1798,36 @@
     },
     "codeListSupplemental": {},
     "methodSupplemental": {},
-    "conditionSupplemental": {
-      "WC.VS.VSORRES.TEMP": {
-        "OID": "WC.VS.VSORRES.TEMP"
+    "conditionSupplemental": {},
+    "inferenceLog": [
+      {
+        "operation": "valuelist_domain_link_inference",
+        "valuelist_oid": "VL.VS.VSORRES",
+        "domain_oid": "IG.VS",
+        "matched_item_oid": "IT.VS.VSORRES",
+        "reason": "Item OID \"IT.VS.VSORRES\" matches ValueList OID pattern"
       },
-      "WC.VS.VSORRES.WEIGHT": {
-        "OID": "WC.VS.VSORRES.WEIGHT"
+      {
+        "operation": "valuelist_domain_link_inference",
+        "valuelist_oid": "VL.VS.VSORRESU",
+        "domain_oid": "IG.VS",
+        "matched_item_oid": "IT.VS.VSORRES",
+        "reason": "Item OID \"IT.VS.VSORRES\" matches ValueList OID pattern"
       },
-      "WC.VS.VSORRES.HEIGHT": {
-        "OID": "WC.VS.VSORRES.HEIGHT"
+      {
+        "operation": "valuelist_domain_link_inference",
+        "valuelist_oid": "VL.LB.LBORRES",
+        "domain_oid": "IG.LB",
+        "matched_item_oid": "IT.LB.LBORRES",
+        "reason": "Item OID \"IT.LB.LBORRES\" matches ValueList OID pattern"
       },
-      "WC.VS.VSORRES.SYSBP": {
-        "OID": "WC.VS.VSORRES.SYSBP"
-      },
-      "WC.VS.VSORRES.DIABP": {
-        "OID": "WC.VS.VSORRES.DIABP"
-      },
-      "WC.VS.VSORRES.HR": {
-        "OID": "WC.VS.VSORRES.HR"
-      },
-      "WC.VS.VSORRESU.TEMP": {
-        "OID": "WC.VS.VSORRESU.TEMP"
-      },
-      "WC.VS.VSORRESU.WEIGHT": {
-        "OID": "WC.VS.VSORRESU.WEIGHT"
-      },
-      "WC.VS.VSORRESU.HEIGHT": {
-        "OID": "WC.VS.VSORRESU.HEIGHT"
-      },
-      "WC.VS.VSORRESU.SYSBP": {
-        "OID": "WC.VS.VSORRESU.SYSBP"
-      },
-      "WC.VS.VSORRESU.DIABP": {
-        "OID": "WC.VS.VSORRESU.DIABP"
-      },
-      "WC.VS.VSORRESU.HR": {
-        "OID": "WC.VS.VSORRESU.HR"
-      },
-      "WC.LB.LBORRES.ALT": {
-        "OID": "WC.LB.LBORRES.ALT"
-      },
-      "WC.LB.LBORRES.ALB": {
-        "OID": "WC.LB.LBORRES.ALB"
-      },
-      "WC.LB.LBORRES.ALP": {
-        "OID": "WC.LB.LBORRES.ALP"
-      },
-      "WC.LB.LBORRES.AST": {
-        "OID": "WC.LB.LBORRES.AST"
-      },
-      "WC.LB.LBORRES.CREAT": {
-        "OID": "WC.LB.LBORRES.CREAT"
-      },
-      "WC.LB.LBORRES.K": {
-        "OID": "WC.LB.LBORRES.K"
-      },
-      "WC.LB.LBORRES.SODIUM": {
-        "OID": "WC.LB.LBORRES.SODIUM"
-      },
-      "WC.LB.LBORRES.HBA1C": {
-        "OID": "WC.LB.LBORRES.HBA1C"
-      },
-      "WC.LB.LBORRESU.ALT": {
-        "OID": "WC.LB.LBORRESU.ALT"
-      },
-      "WC.LB.LBORRESU.ALP": {
-        "OID": "WC.LB.LBORRESU.ALP"
-      },
-      "WC.LB.LBORRESU.AST": {
-        "OID": "WC.LB.LBORRESU.AST"
-      },
-      "WC.LB.LBORRESU.CREAT": {
-        "OID": "WC.LB.LBORRESU.CREAT"
-      },
-      "WC.LB.LBORRESU.K": {
-        "OID": "WC.LB.LBORRESU.K"
-      },
-      "WC.LB.LBORRESU.SODIUM": {
-        "OID": "WC.LB.LBORRESU.SODIUM"
-      },
-      "WC.LB.LBORRESU.HBA1C": {
-        "OID": "WC.LB.LBORRESU.HBA1C"
+      {
+        "operation": "valuelist_domain_link_inference",
+        "valuelist_oid": "VL.LB.LBORRESU",
+        "domain_oid": "IG.LB",
+        "matched_item_oid": "IT.LB.LBORRES",
+        "reason": "Item OID \"IT.LB.LBORRES\" matches ValueList OID pattern"
       }
-    }
+    ]
   }
 }

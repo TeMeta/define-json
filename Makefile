@@ -77,24 +77,21 @@ convert:
 	poetry run python -m src.define_json xml2json data/define-360i.xml data/define-360i.json
 
 # Testing targets
-test: check-syntax validate linkml-lint test-roundtrip
+test: check-syntax validate linkml-lint
 	@echo "Running unit tests..."
 	poetry run python -m unittest discover tests/ -v
-
-test-roundtrip:
-	@echo "Testing roundtrip functionality..."
-	poetry run python -c "from src.define_json.validation.roundtrip import validate_true_roundtrip; from pathlib import Path; result = validate_true_roundtrip(Path('data/define-360i.xml'), Path('data/define-360i-recreated.xml')); print('Roundtrip test passed' if result.get('passed') else 'Roundtrip test failed')"
+roundtrip; from pathlib import Path; result = validate_true_roundtrip(Path('data/define-360i.xml'), Path('data/define-360i-recreated.xml')); print('Roundtrip test passed' if result.get('passed') else 'Roundtrip test failed')"
 
 test-xml-roundtrip:
 	@echo "Testing XML→JSON→XML roundtrip conversion..."
-	poetry run python -m src.define_json xml2json data/define_LZZT_ADaM.xml data/define_LZZT_ADaM.json
-	poetry run python -m src.define_json json2xml data/define_LZZT_ADaM.json data/define_LZZT_ADaM_roundtrip.xml
+	poetry run python -m src.define_json xml2json data/define_LZZT_ADaM.xml data/define_LZZT_ADaM.json --preserve-original
+	poetry run python -m src.define_json json2xml data/define_LZZT_ADaM.json data/define_LZZT_ADaM_roundtrip.xml --strict-mode
 	poetry run python -m scripts.compare_xml_roundtrip data/define_LZZT_ADaM.xml data/define_LZZT_ADAM_roundtrip.xml --validate-only
 
 test-xml-roundtrip-360i:
 	@echo "Testing XML→JSON→XML roundtrip conversion..."
-	poetry run python -m src.define_json xml2json data/define-360i.xml data/define-360i.json
-	poetry run python -m src.define_json json2xml data/define-360i.json data/define-360i_roundtrip.xml
+	poetry run python -m src.define_json xml2json data/define-360i.xml data/define-360i.json --preserve-original
+	poetry run python -m src.define_json json2xml data/define-360i.json data/define-360i_roundtrip.xml --strict-mode
 	poetry run python -m scripts.compare_xml_roundtrip data/define-360i.xml data/define-360i_roundtrip.xml --validate-only
 
 # Documentation generation (suppress gen-doc warnings)

@@ -44,6 +44,7 @@ Versioned {
 | --- | --- |
 | [IsProfile](../classes/IsProfile.md) | A mixin that provides additional metadata for FHIR resources and Data Products, including profiles, security tags, and validity periods |
 | [CodeList](../classes/CodeList.md) | A value set that defines a discrete collection of permissible values for an item, corresponding to the ODM CodeList construct |
+| [Dictionary](../classes/Dictionary.md) | A dictionary that defines a set of codes and their meanings |
 | [ReifiedConcept](../classes/ReifiedConcept.md) | A canonical information layer that makes abstract concepts explicit and referenceable, showing how different data implementations represent the same underlying meanings through a star schema structure with multiple properties |
 | [Resource](../classes/Resource.md) | An external reference that serves as the source for a Dataset, ItemGroup, or Item |
 | [DocumentReference](../classes/DocumentReference.md) | A comprehensive reference element that points to an external document, combining elements from ODM and FHIR |

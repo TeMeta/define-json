@@ -821,6 +821,8 @@ classes:
     description: >-
       A dictionary that defines a set of codes and their meanings
     is_a: IdentifiableElement
+    mixins:
+      - Versioned
     attributes:
       terms:
         description: Terms in this dictionary - leave this empty in most cases to keep the file small
@@ -1333,6 +1335,7 @@ classes:
         description: >-
           Status of an Implementation Guide or of a Controlled Terminology
         range: StandardStatus
+
   Resource:
     description: >-
       An external reference that serves as the source for a Dataset, ItemGroup, or Item

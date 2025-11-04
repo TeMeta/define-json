@@ -17,6 +17,8 @@ URI: [odm:class/Dictionary](https://cdisc.org/odm2/class/Dictionary)
 erDiagram
 Dictionary {
     string publishedBy  
+    string version  
+    string href  
     string OID  
     string uuid  
     string name  
@@ -42,7 +44,7 @@ Dictionary ||--}o Coding : "coding"
 
 ## Inheritance
 * [IdentifiableElement](../classes/IdentifiableElement.md) [ [Identifiable](../classes/Identifiable.md) [Labelled](../classes/Labelled.md)]
-    * **Dictionary**
+    * **Dictionary** [ [Versioned](../classes/Versioned.md)]
 
 
 
@@ -52,6 +54,8 @@ Dictionary ||--}o Coding : "coding"
 | ---  | --- | --- | --- |
 | [terms](../slots/terms.md) | * <br/> [Coding](../classes/Coding.md) | Terms in this dictionary - leave this empty in most cases to keep the file small | direct |
 | [publishedBy](../slots/publishedBy.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Associates the Data Provider that reports/publishes the data. | direct |
+| [version](../slots/version.md) | 0..1 <br/> [String](../types/String.md) | The version of the external resources | [Versioned](../classes/Versioned.md) |
+| [href](../slots/href.md) | 0..1 <br/> [String](../types/String.md) | Machine-readable instructions to obtain the resource e.g. FHIR path, URL | [Versioned](../classes/Versioned.md) |
 | [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
 | [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
 | [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
@@ -116,6 +120,8 @@ name: Dictionary
 description: A dictionary that defines a set of codes and their meanings
 from_schema: https://cdisc.org/define-json
 is_a: IdentifiableElement
+mixins:
+- Versioned
 attributes:
   terms:
     name: terms
@@ -152,6 +158,8 @@ name: Dictionary
 description: A dictionary that defines a set of codes and their meanings
 from_schema: https://cdisc.org/define-json
 is_a: IdentifiableElement
+mixins:
+- Versioned
 attributes:
   terms:
     name: terms
@@ -180,6 +188,29 @@ attributes:
     any_of:
     - range: Organization
     - range: string
+  version:
+    name: version
+    description: The version of the external resources
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    alias: version
+    owner: Dictionary
+    domain_of:
+    - Versioned
+    - Standard
+    range: string
+  href:
+    name: href
+    description: Machine-readable instructions to obtain the resource e.g. FHIR path,
+      URL
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    alias: href
+    owner: Dictionary
+    domain_of:
+    - Versioned
+    range: string
+    required: false
   OID:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format

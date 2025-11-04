@@ -203,6 +203,8 @@ Standard {
 }
 Dictionary {
     string publishedBy  
+    string version  
+    string href  
     string OID  
     string uuid  
     string name  

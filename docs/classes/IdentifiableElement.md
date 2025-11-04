@@ -38,7 +38,7 @@ IdentifiableElement ||--}o Coding : "coding"
 ## Inheritance
 * **IdentifiableElement** [ [Identifiable](../classes/Identifiable.md) [Labelled](../classes/Labelled.md)]
     * [Relationship](../classes/Relationship.md)
-    * [Dictionary](../classes/Dictionary.md)
+    * [Dictionary](../classes/Dictionary.md) [ [Versioned](../classes/Versioned.md)]
     * [FormalExpression](../classes/FormalExpression.md)
     * [Parameter](../classes/Parameter.md)
     * [ReturnValue](../classes/ReturnValue.md)

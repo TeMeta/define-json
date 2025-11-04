@@ -3174,6 +3174,13 @@
                     ],
                     "description": "Detailed description, shown in tooltips"
                 },
+                "href": {
+                    "description": "Machine-readable instructions to obtain the resource e.g. FHIR path, URL",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "label": {
                     "anyOf": [
                         {
@@ -3221,6 +3228,13 @@
                 },
                 "uuid": {
                     "description": "Universal unique identifier",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "version": {
+                    "description": "The version of the external resources",
                     "type": [
                         "string",
                         "null"
