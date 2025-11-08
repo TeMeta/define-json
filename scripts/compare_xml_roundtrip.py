@@ -14,10 +14,11 @@ import sys
 class RoundtripValidator:
     """Validates XML roundtrip fidelity."""
     
-    def __init__(self):
+    def __init__(self, ignore_order_numbers: bool = False):
         self.differences = []
         self.stats_original = {}
         self.stats_roundtrip = {}
+        self.ignore_order_numbers = ignore_order_numbers
     
     def validate_files(self, original_path: Path, roundtrip_path: Path) -> Dict:
         """
@@ -119,11 +120,17 @@ class RoundtripValidator:
         # Normalize attributes (remove namespaces for comparison)
         for key, value in orig.attrib.items():
             clean_key = self._clean_tag(key)
+            # Skip OrderNumber if ignore flag is set
+            if self.ignore_order_numbers and clean_key == 'OrderNumber':
+                continue
             # Store with namespace info for accurate reporting
             orig_attrs[key] = value
         
         for key, value in rt.attrib.items():
             clean_key = self._clean_tag(key)
+            # Skip OrderNumber if ignore flag is set
+            if self.ignore_order_numbers and clean_key == 'OrderNumber':
+                continue
             rt_attrs[key] = value
         
         # Find missing and different attributes
@@ -285,7 +292,7 @@ class RoundtripValidator:
         return report['is_valid']
 
 
-def test_roundtrip(original_xml: Path, json_output: Path, roundtrip_xml: Path):
+def test_roundtrip(original_xml: Path, json_output: Path, roundtrip_xml: Path, ignore_order_numbers: bool = False):
     """Test the complete roundtrip process."""
     from xml_to_json import DefineXMLToJSONConverter
     from json_to_xml import DefineJSONToXMLConverter
@@ -322,7 +329,7 @@ def test_roundtrip(original_xml: Path, json_output: Path, roundtrip_xml: Path):
     
     # Step 3: Validate
     print("\nStep 3: Validating roundtrip...")
-    validator = RoundtripValidator()
+    validator = RoundtripValidator(ignore_order_numbers=ignore_order_numbers)
     report = validator.validate_files(original_xml, roundtrip_xml)
     is_valid = validator.print_report(report)
     
@@ -333,11 +340,12 @@ def main():
     """Main entry point."""
     if len(sys.argv) < 2:
         print("Usage:")
-        print("  Test roundtrip:  python test_roundtrip.py <original.xml>")
-        print("  Validate only:   python test_roundtrip.py <original.xml> <roundtrip.xml> --validate-only")
+        print("  Test roundtrip:  python test_roundtrip.py <original.xml> [--ignore-order-numbers]")
+        print("  Validate only:   python test_roundtrip.py <original.xml> <roundtrip.xml> --validate-only [--ignore-order-numbers]")
         sys.exit(1)
     
     original_xml = Path(sys.argv[1])
+    ignore_order_numbers = '--ignore-order-numbers' in sys.argv
     
     if not original_xml.exists():
         print(f"Error: File not found: {original_xml}")
@@ -346,7 +354,7 @@ def main():
     if len(sys.argv) >= 3 and '--validate-only' in sys.argv:
         # Validation only mode
         roundtrip_xml = Path(sys.argv[2])
-        validator = RoundtripValidator()
+        validator = RoundtripValidator(ignore_order_numbers=ignore_order_numbers)
         report = validator.validate_files(original_xml, roundtrip_xml)
         is_valid = validator.print_report(report)
         sys.exit(0 if is_valid else 1)
@@ -355,7 +363,7 @@ def main():
         json_output = original_xml.parent / f"{original_xml.stem}_converted.json"
         roundtrip_xml = original_xml.parent / f"{original_xml.stem}_roundtrip.xml"
         
-        success = test_roundtrip(original_xml, json_output, roundtrip_xml)
+        success = test_roundtrip(original_xml, json_output, roundtrip_xml, ignore_order_numbers=ignore_order_numbers)
         sys.exit(0 if success else 1)
 
 

@@ -584,12 +584,17 @@ classes:
         inlined_as_list: true
       children:
         description: >-
-          References to child ItemGroups (OIDs) within this item group.
-          Use these OID references to look up the actual ItemGroup objects 
-          from the top-level itemGroups collection.
-        range: string
+          Child ItemGroups nested within this item group (e.g., ValueLists under parent domains).
+          Can be either:
+          - Full ItemGroup objects (preferred for hierarchical nesting)
+          - OID string references (for cross-references to avoid duplication)
+        range: ItemGroup
         multivalued: true
-        inlined: false
+        inlined: true
+        inlined_as_list: true
+        any_of:
+          - range: ItemGroup
+          - range: string
       implementsConcept:
         description: >-
           Reference to a abstract concept topic that this item group is a specialization of

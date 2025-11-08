@@ -282,10 +282,13 @@ class DefineJSONToXMLConverter:
             'origin',  # origin is a nested object, handle separately
             'codeList',  # codeList is handled as CodeListRef child element
             'mandatory',  # mandatory is handled explicitly in ItemRef creation, skip in ItemDef
+            'role',  # role is ItemRef attribute, not ItemDef - handled explicitly in ItemRef creation
             'wasDerivedFrom',  # wasDerivedFrom is provenance, handled as ExternalCodeList, not XML attribute
             # Skip def: namespaced fields that are handled explicitly
-            'defLabel', 'defClass', 'defDomainKeys', 'comment', 'itemOrderNumbers',
-            'elementType', 'originalType', 'leaf', 'externalCodeList'
+            'defClass', 'defDomainKeys', 'comment',
+            'leaf', 'externalCodeList', 'sourceResourceOID', 'leafID',
+            'displayFormat',  # displayFormat (def:DisplayFormat) is handled explicitly for ItemDefs
+            'classIsAttribute',  # classIsAttribute is metadata to track attribute vs element form
         }
         
         # Context-specific field exclusions
@@ -487,8 +490,11 @@ class DefineJSONToXMLConverter:
                 mdv.set(f'{{{def_ns}}}DefineVersion', define_version)
         
         # Add def:StandardName and def:StandardVersion from standards array
+        # BUT only if Standards was NOT an element (i.e., it was represented as attributes)
         standards = json_data.get('standards', [])
-        if standards and len(standards) > 0:
+        has_standards_element = xml_metadata.get('hasStandardsElement', False)
+        
+        if standards and len(standards) > 0 and not has_standards_element:
             standard = standards[0]
             def_ns = self._get_namespace_uri('def')
             if def_ns:
@@ -507,14 +513,18 @@ class DefineJSONToXMLConverter:
                 if standard.get('version'):
                     mdv.set(f'{{{def_ns}}}StandardVersion', standard['version'])
         
-        # Process Standards
+        # Process Standards element (only if it was an element in the original)
         self._create_standards(mdv, json_data.get('standards', []))
         
-        # Process AnnotatedCRF
-        self._create_annotated_crf(mdv, json_data.get('annotatedCRF', []))
+        # Get xml_metadata early for AnnotatedCRF and other supplemental elements
+        xml_metadata = json_data.get('_xmlMetadata', {})
+        
+        # Process AnnotatedCRF (from xml_metadata)
+        annotated_crf_data = xml_metadata.get('annotatedCRF', {})
+        if annotated_crf_data:
+            self._create_annotated_crf(mdv, annotated_crf_data.get('documentRefs', []))
         
         # Fix #4: Process SupplementalDoc (from xml_metadata)
-        xml_metadata = json_data.get('_xmlMetadata', {})
         self._create_supplemental_doc(mdv, xml_metadata.get('supplementalDoc'))
         
         # Fix #3: Process AnalysisResultDisplays (from xml_metadata)
@@ -531,10 +541,11 @@ class DefineJSONToXMLConverter:
         
         # Process ItemGroups and ValueLists
         all_item_groups = json_data.get('itemGroups', [])
-        self._process_item_groups_and_value_lists(mdv, all_item_groups)
+        # Process ItemGroups/ValueLists and get flattened list (includes nested children)
+        flattened_item_groups = self._process_item_groups_and_value_lists(mdv, all_item_groups, json_data)
         
-        # Process ItemDefs
-        self._process_item_defs(mdv, json_data, all_item_groups)
+        # Process ItemDefs using flattened list (includes items from nested ValueLists)
+        self._process_item_defs(mdv, json_data, flattened_item_groups)
         
         # Process CodeLists
         self._create_code_lists(mdv, json_data.get('codeLists', []))
@@ -542,10 +553,40 @@ class DefineJSONToXMLConverter:
         # Process Methods
         self._create_methods(mdv, json_data.get('methods', []))
         
-        # Add MetaDataVersion-level leaf elements (for display references)
-        mdv_leaves = xml_metadata.get('mdvLeaves', [])
-        if mdv_leaves:
-            self._create_mdv_leaves(mdv, mdv_leaves)
+        # Add MetaDataVersion-level leaf elements from resources (for display references)
+        # Convert resources back to leaf elements
+        resources = json_data.get('resources', [])
+        if resources:
+            # Collect all sourceResourceOIDs from ItemGroups to exclude them from mdv leaves
+            item_groups = json_data.get('itemGroups', [])
+            item_group_resource_oids = set()
+            for ig in item_groups:
+                ig_supp = xml_metadata.get('itemGroupSupplemental', {}).get(ig.get('OID', ''), {})
+                if ig_supp.get('sourceResourceOID'):
+                    item_group_resource_oids.add(ig_supp['sourceResourceOID'])
+            
+            # Filter resources that are from MetaDataVersion-level leaves only
+            # (exclude those referenced by ItemGroups via sourceResourceOID)
+            mdv_resources = [
+                r for r in resources 
+                if r.get('OID', '').startswith('RES.') 
+                and r.get('OID') not in item_group_resource_oids
+            ]
+            if mdv_resources:
+                mdv_leaves = []
+                for resource in mdv_resources:
+                    leaf_data = {
+                        'ID': resource.get('OID', '').replace('RES.', ''),
+                        'href': resource.get('href'),
+                        'title': resource.get('label') or resource.get('name')
+                    }
+                    mdv_leaves.append(leaf_data)
+                self._create_mdv_leaves(mdv, mdv_leaves)
+        
+        # Also handle legacy mdvLeaves from _xmlMetadata
+        mdv_leaves_legacy = xml_metadata.get('mdvLeaves', [])
+        if mdv_leaves_legacy:
+            self._create_mdv_leaves(mdv, mdv_leaves_legacy)
         
         # Write XML to file
         self._write_xml(root, output_path)
@@ -605,7 +646,23 @@ class DefineJSONToXMLConverter:
         
         for standard in standards:
             standard_elem = ET.SubElement(standards_elem, f'{{{def_ns}}}Standard' if def_ns else 'Standard')
-            self._apply_mapped_attributes(standard_elem, standard)
+            
+            # Handle Status and Type with proper case mapping
+            standard_copy = dict(standard)
+            
+            # Map Status enum back to original case
+            if 'status' in standard_copy:
+                status_value = str(standard_copy['status'])
+                # Reverse mapping: FINAL → Final, DRAFT → Draft
+                if status_value == 'FINAL':
+                    standard_copy['status'] = 'Final'
+                elif status_value == 'DRAFT':
+                    standard_copy['status'] = 'Draft'
+            
+            # Type is already in correct format (IG, CT, etc.) - just ensure it's uppercase if needed
+            # Actually Type values like "IG", "CT" should remain as-is
+            
+            self._apply_mapped_attributes(standard_elem, standard_copy)
     
     def _create_annotated_crf(self, parent: ET.Element, annotated_crf: List[Dict[str, Any]]) -> None:
         """Create def:AnnotatedCRF section."""
@@ -620,6 +677,10 @@ class DefineJSONToXMLConverter:
         
         for doc_ref in annotated_crf:
             doc_ref_elem = ET.SubElement(crf_elem, f'{{{def_ns}}}DocumentRef' if def_ns else 'DocumentRef')
+            # Add leafID attribute (no namespace prefix needed)
+            if doc_ref.get('leafID'):
+                doc_ref_elem.set('leafID', doc_ref['leafID'])
+            # Apply any other attributes
             self._apply_mapped_attributes(doc_ref_elem, doc_ref)
     
     def _collect_item_oids(self, json_data: Dict[str, Any]) -> Set[str]:
@@ -740,12 +801,30 @@ class DefineJSONToXMLConverter:
         """Add RangeCheck elements from a condition."""
         for range_check_data in condition.get('rangeChecks', []):
             range_check = ET.SubElement(wc_elem, 'RangeCheck')
-            range_check.set('Comparator', range_check_data.get('comparator', 'EQ'))
             
-            # RangeCheck uses 'ItemOID' attribute in Define-XML
+            # SoftHard attribute (optional, written first for proper attribute order)
+            if range_check_data.get('softHard'):
+                range_check.set('SoftHard', range_check_data['softHard'])
+            
+            # RangeCheck uses 'def:ItemOID' attribute in Define-XML 2.x
             item_ref = range_check_data.get('item')
             if item_ref:
-                range_check.set('ItemOID', item_ref)
+                # Use def:ItemOID for Define-XML 2.x
+                def_ns = self._get_namespace_uri('def')
+                if def_ns:
+                    range_check.set(f'{{{def_ns}}}ItemOID', item_ref)
+                else:
+                    range_check.set('ItemOID', item_ref)
+            
+            # Comparator attribute
+            range_check.set('Comparator', range_check_data.get('comparator', 'EQ'))
+            
+            # Add CheckValue child element (Define-JSON stores as checkValues list)
+            check_values = range_check_data.get('checkValues', [])
+            if check_values:
+                # Use first value (typically only one per RangeCheck)
+                check_value_elem = ET.SubElement(range_check, 'CheckValue')
+                check_value_elem.text = str(check_values[0])
             
     def _create_supplemental_doc(self, parent: ET.Element, supplemental_doc: Optional[Dict[str, Any]]) -> None:
         """
@@ -836,24 +915,84 @@ class DefineJSONToXMLConverter:
                 if ar.get(attr):
                     ar_elem.set(attr, ar[attr])
     
+    def _flatten_nested_itemgroups(self, item_groups: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """
+        Extract nested ItemGroups from children and flatten to top level.
+        
+        Recursively traverses children arrays to find nested ValueLists and other ItemGroups.
+        Modifies parent children arrays to contain only OID references (for roundtrip).
+        
+        Args:
+            item_groups: List of top-level ItemGroups (may contain nested children)
+            
+        Returns:
+            Flat list of all ItemGroups (domains + nested ValueLists)
+        """
+        flattened = []
+        
+        for ig in item_groups:
+            # Add this ItemGroup to flat list
+            flattened.append(ig)
+            
+            # Check for nested children (could be ItemGroup objects or OID strings)
+            children = ig.get('children', [])
+            if not children:
+                continue
+            
+            # Separate nested ItemGroups from OID references
+            nested_igs = []
+            oid_refs = []
+            
+            for child in children:
+                if isinstance(child, dict):
+                    # It's a nested ItemGroup object - extract it
+                    nested_igs.append(child)
+                    # Replace with OID reference for parent's children array
+                    oid_refs.append(child.get('OID', ''))
+                elif isinstance(child, str):
+                    # It's already an OID reference - keep it
+                    oid_refs.append(child)
+            
+            # Update parent's children to only contain OID references (for XML writing)
+            if nested_igs:
+                ig['children'] = oid_refs
+                logger.info(f"    - Extracted {len(nested_igs)} nested ItemGroups from {ig.get('OID')}")
+            
+            # Recursively flatten any nested ItemGroups
+            if nested_igs:
+                flattened.extend(self._flatten_nested_itemgroups(nested_igs))
+        
+        return flattened
+    
     def _process_item_groups_and_value_lists(
         self, 
         parent: ET.Element, 
-        all_item_groups: List[Dict[str, Any]]
-    ) -> None:
+        all_item_groups: List[Dict[str, Any]],
+        json_data: Dict[str, Any] = None
+    ) -> List[Dict[str, Any]]:
+        json_data = json_data or {}
         """
         Process ItemGroups and ValueLists with intelligent handling.
         
         Strategy:
-        1. Separate by type field ('ValueList', 'DataSpecialization', or regular)
-        2. Create ValueListDef elements for type='ValueList'
-        3. Create ItemGroupDef elements for regular ItemGroups
-        4. Handle DataSpecialization slices if inference enabled
+        1. Flatten nested ValueLists from children to top level
+        2. Separate by type field ('ValueList', 'DataSpecialization', or regular)
+        3. Create ValueListDef elements for type='ValueList'
+        4. Create ItemGroupDef elements for regular ItemGroups
+        5. Handle DataSpecialization slices if inference enabled
+        
+        Returns:
+            Flattened list of all ItemGroups (for ItemDef processing)
         """
+        # Flatten any nested ItemGroups (ValueLists nested under parents) to top level
+        logger.info(f"Flattening {len(all_item_groups)} top-level ItemGroups (may contain nested ValueLists)...")
+        flattened_item_groups = self._flatten_nested_itemgroups(all_item_groups)
+        logger.info(f"  - Flattened to {len(flattened_item_groups)} total ItemGroups")
+        
         # Separate ItemGroups by type field
-        value_list_groups = [ig for ig in all_item_groups if ig.get('type') == 'ValueList']
-        slice_item_groups = [ig for ig in all_item_groups if ig.get('type') == 'DataSpecialization']
-        domain_item_groups = [ig for ig in all_item_groups 
+        value_list_groups = [ig for ig in flattened_item_groups if ig.get('type') == 'ValueList']
+        slice_item_groups = [ig for ig in flattened_item_groups if ig.get('type') == 'DataSpecialization']
+        domain_item_groups = [ig for ig in flattened_item_groups 
                               if ig.get('type') not in ('ValueList', 'DataSpecialization')]
         
         # Build map of ValueList OIDs for reference in ItemDef creation
@@ -882,8 +1021,11 @@ class DefineJSONToXMLConverter:
             domain_item_groups.extend(slice_item_groups)
         
         # Create domain ItemGroups
-        self._create_item_groups(parent, domain_item_groups)
+        self._create_item_groups(parent, domain_item_groups, json_data)
         logger.info(f"Created {len(domain_item_groups)} ItemGroupDef elements")
+        
+        # Return flattened list for ItemDef processing
+        return flattened_item_groups
     
     def _create_value_lists_from_slices(
         self,
@@ -938,7 +1080,7 @@ class DefineJSONToXMLConverter:
             trans_text = ET.SubElement(desc, 'TranslatedText')
             trans_text.text = f'Value list for {domain} {var_name} across contexts'
             
-            # Add ItemRefs for each context
+            # Add ItemRefs for each context - order inferred from array position
             for idx, ctx in enumerate(contexts, start=1):
                 item = ctx['item']
                 where_clause = ctx['whereClause']
@@ -946,8 +1088,6 @@ class DefineJSONToXMLConverter:
                 item_ref = ET.SubElement(vl_elem, 'ItemRef')
                 item_oid = item.get('OID') or item.get('itemOID', '')
                 item_ref.set('ItemOID', item_oid)
-                
-                # OrderNumber based on position
                 item_ref.set('OrderNumber', str(idx))
                 
                 # Only set Mandatory if explicitly present
@@ -980,19 +1120,15 @@ class DefineJSONToXMLConverter:
                 trans_text = ET.SubElement(desc, 'TranslatedText')
                 trans_text.text = vl['description']
             
-            # Merge supplemental data to get OrderNumbers
+            # Merge supplemental data
             merged_vl = self._merge_supplemental_data(vl, 'itemGroup')
-            item_order_numbers = merged_vl.get('itemOrderNumbers', {})
             
-            # Add ItemRefs
+            # Add ItemRefs - order is inferred from array position
             for idx, item in enumerate(merged_vl.get('items', []), start=1):
                 item_ref = ET.SubElement(vl_elem, 'ItemRef')
                 item_oid = item.get('itemOID') or item.get('OID', '')
                 item_ref.set('ItemOID', item_oid)
-                
-                # Use stored OrderNumber if available, otherwise use position
-                order_number = item_order_numbers.get(item_oid, idx)
-                item_ref.set('OrderNumber', str(order_number))
+                item_ref.set('OrderNumber', str(idx))
                 
                 # Only set Mandatory if explicitly present
                 if 'mandatory' in item:
@@ -1001,13 +1137,22 @@ class DefineJSONToXMLConverter:
                 if item.get('role'):
                     item_ref.set('Role', item['role'])
                 
-                if item.get('whereClauseOID'):
+                # WhereClauseRef (from whereClauseOID or applicableWhen)
+                where_clause_oid = item.get('whereClauseOID')
+                if not where_clause_oid and item.get('applicableWhen'):
+                    # applicableWhen is a list of WhereClause OIDs
+                    applicable_when = item.get('applicableWhen', [])
+                    if applicable_when:
+                        where_clause_oid = applicable_when[0]  # Use first one
+                
+                if where_clause_oid:
                     wc_ref = ET.SubElement(item_ref, f'{{{def_ns}}}WhereClauseRef' if def_ns else 'WhereClauseRef')
-                    wc_ref.set('WhereClauseOID', item['whereClauseOID'])
+                    wc_ref.set('WhereClauseOID', where_clause_oid)
     
-    def _create_item_groups(self, parent: ET.Element, datasets: List[Dict[str, Any]]) -> None:
+    def _create_item_groups(self, parent: ET.Element, datasets: List[Dict[str, Any]], json_data: Dict[str, Any] = None) -> None:
         """Create ItemGroupDef elements."""
         def_ns = self._get_namespace_uri('def')
+        json_data = json_data or {}
         
         for ds in datasets:
             ig_elem = ET.SubElement(parent, 'ItemGroupDef')
@@ -1020,66 +1165,95 @@ class DefineJSONToXMLConverter:
             
             # Write def: namespaced attributes from supplemental data
             if def_ns:
-                if merged_ds.get('defLabel'):
+                # Use native label if available, otherwise fall back to supplemental
+                if merged_ds.get('label'):
+                    ig_elem.set(f'{{{def_ns}}}Label', str(merged_ds['label']))
+                elif merged_ds.get('defLabel'):
                     ig_elem.set(f'{{{def_ns}}}Label', merged_ds['defLabel'])
-                if merged_ds.get('defClass'):
+                # def:Class - write as attribute if it was an attribute in original
+                if merged_ds.get('defClass') and merged_ds.get('classIsAttribute'):
                     ig_elem.set(f'{{{def_ns}}}Class', merged_ds['defClass'])
                 if merged_ds.get('defDomainKeys'):
                     ig_elem.set(f'{{{def_ns}}}DomainKeys', merged_ds['defDomainKeys'])
                 if merged_ds.get('structure'):
-                    ig_elem.set(f'{{{def_ns}}}Structure', merged_ds['structure'])
+                    ig_elem.set(f'{{{def_ns}}}Structure', str(merged_ds['structure']))
                 if merged_ds.get('archiveLocationID'):
                     ig_elem.set(f'{{{def_ns}}}ArchiveLocationID', merged_ds['archiveLocationID'])
             
-            # Write Comment attribute (including empty values)
-            if 'comment' in merged_ds:
+            # Write Comment attribute - prefer native comments array, fall back to supplemental
+            if merged_ds.get('comments') and len(merged_ds['comments']) > 0:
+                # Use first comment as Comment attribute
+                ig_elem.set('Comment', str(merged_ds['comments'][0]))
+            elif 'comment' in merged_ds:
                 ig_elem.set('Comment', merged_ds['comment'])
+            
+            # Write Repeating attribute from supplemental
+            if merged_ds.get('repeating'):
+                ig_elem.set('Repeating', merged_ds['repeating'])
             
             # Add Description if present
             if merged_ds.get('description'):
                 desc = ET.SubElement(ig_elem, 'Description')
                 self._create_translated_text(desc, merged_ds['description'])
             
-            # Get stored OrderNumbers from supplemental data (if available)
-            item_order_numbers = merged_ds.get('itemOrderNumbers', {})
-            ig_oid = merged_ds.get('OID', '')
-            
-            # Add ItemRefs with OrderNumber from supplemental or fallback to position
+            # Add ItemRefs - order is preserved by array ordering
             items = merged_ds.get('items', [])
             for idx, item in enumerate(items, start=1):
-                item_oid = item.get('OID') or item.get('itemOID', '')
-                # Use stored OrderNumber if available, otherwise use position
-                order_number = item_order_numbers.get(item_oid, idx)
-                self._create_item_ref(ig_elem, item, def_ns, order_number=order_number)
+                self._create_item_ref(ig_elem, item, def_ns, order_number=idx)
             
-            # Add def:leaf element if present in supplemental data
-            if merged_ds.get('leaf'):
+            # Add def:leaf element - check for Resource reference or legacy leaf data
+            if merged_ds.get('sourceResourceOID'):
+                # Look up Resource from resources array
+                resources = json_data.get('resources', [])
+                resource = next((r for r in resources if r.get('OID') == merged_ds['sourceResourceOID']), None)
+                if resource:
+                    # Convert Resource back to leaf
+                    leaf_data = {
+                        'ID': merged_ds.get('leafID', resource.get('OID', '').replace('RES.', '')),
+                        'href': resource.get('href'),
+                        'title': resource.get('label') or resource.get('name')
+                    }
+                    self._create_leaf_element(ig_elem, leaf_data, def_ns)
+            elif merged_ds.get('leaf'):
+                # Legacy leaf data
                 self._create_leaf_element(ig_elem, merged_ds['leaf'], def_ns)
+            
+            # Add def:Class child element (only if it was a child element in original)
+            if def_ns and merged_ds.get('defClass') and not merged_ds.get('classIsAttribute'):
+                class_elem = ET.SubElement(ig_elem, f'{{{def_ns}}}Class')
+                class_elem.set('Name', merged_ds['defClass'])
     
     def _create_item_ref(self, parent: ET.Element, item: Dict[str, Any], def_ns: str, order_number: int = None) -> None:
-        """Create an ItemRef element."""
+        """Create an ItemRef element. Order is inferred from array position."""
         item_ref = ET.SubElement(parent, 'ItemRef')
         
         # ItemOID
         item_oid = item.get('OID') or item.get('itemOID', '')
         item_ref.set('ItemOID', item_oid)
         
+        # OrderNumber - inferred from array position
+        if order_number is not None:
+            item_ref.set('OrderNumber', str(order_number))
+        
         # Mandatory - only set if explicitly present
         if 'mandatory' in item:
             item_ref.set('Mandatory', self._safe_str(item['mandatory']))
-        
-        # OrderNumber - use provided order_number (position in array)
-        if order_number is not None:
-            item_ref.set('OrderNumber', str(order_number))
         
         # Role
         if item.get('role'):
             item_ref.set('Role', item['role'])
         
-        # WhereClauseRef
-        if item.get('whereClauseOID'):
+        # WhereClauseRef (from whereClauseOID or applicableWhen)
+        where_clause_oid = item.get('whereClauseOID')
+        if not where_clause_oid and item.get('applicableWhen'):
+            # applicableWhen is a list of WhereClause OIDs
+            applicable_when = item.get('applicableWhen', [])
+            if applicable_when:
+                where_clause_oid = applicable_when[0]  # Use first one
+        
+        if where_clause_oid:
             wc_ref = ET.SubElement(item_ref, f'{{{def_ns}}}WhereClauseRef' if def_ns else 'WhereClauseRef')
-            wc_ref.set('WhereClauseOID', item['whereClauseOID'])
+            wc_ref.set('WhereClauseOID', where_clause_oid)
         
         # MethodRef
         if item.get('methodOID'):
@@ -1109,6 +1283,36 @@ class DefineJSONToXMLConverter:
             title_elem = ET.SubElement(leaf_elem, f'{{{def_ns}}}title')
             title_elem.text = leaf_data['title']
     
+    def _extract_items_recursively(self, item_group: Dict[str, Any]) -> List[Dict[str, Any]]:
+        """
+        Recursively extract items from an ItemGroup and its nested children.
+        
+        Args:
+            item_group: ItemGroup dictionary (may contain nested children)
+            
+        Returns:
+            List of all items from this ItemGroup and its nested children
+        """
+        items = []
+        
+        # Extract items from this ItemGroup
+        for item in item_group.get('items', []):
+            # Normalize OID field
+            if 'itemOID' in item and 'OID' not in item:
+                item = item.copy()
+                item['OID'] = item['itemOID']
+            items.append(item)
+        
+        # Recursively extract from nested children
+        children = item_group.get('children', [])
+        for child in children:
+            if isinstance(child, dict):
+                # It's a nested ItemGroup - recurse into it
+                items.extend(self._extract_items_recursively(child))
+            # Skip OID string references - they've already been processed
+        
+        return items
+    
     def _process_item_defs(
         self,
         parent: ET.Element,
@@ -1119,20 +1323,17 @@ class DefineJSONToXMLConverter:
         Process ItemDefs with intelligent deduplication.
         
         Combines top-level items with items nested in ItemGroups,
-        removing duplicates by OID.
+        removing duplicates by OID. Recursively extracts items from
+        nested children (e.g., ValueLists nested under parent domains).
         """
         # Get top-level items
         items = json_data.get('items', [])
         
         # ALWAYS extract nested items to create ItemDef elements (required by Define-XML spec)
+        # Recursively extract from all ItemGroups including nested children
         nested_items = []
         for ig in all_item_groups:
-            for item in ig.get('items', []):
-                # Normalize OID field
-                if 'itemOID' in item and 'OID' not in item:
-                    item = item.copy()
-                    item['OID'] = item['itemOID']
-                nested_items.append(item)
+            nested_items.extend(self._extract_items_recursively(ig))
         
         # Combine and deduplicate
         all_items = items + nested_items
@@ -1173,6 +1374,13 @@ class DefineJSONToXMLConverter:
             # Apply basic attributes
             self._apply_mapped_attributes(item_elem, var)
             
+            # SASFieldName is redundant with Name - add it only if original file had them
+            xml_metadata = getattr(self, '_current_xml_metadata', {})
+            has_sas_field_name = xml_metadata.get('hasSASFieldName', False)
+            name_value = var.get('name')
+            if has_sas_field_name and name_value and not item_elem.get('SASFieldName'):
+                item_elem.set('SASFieldName', name_value)
+            
             # Handle DataType - required field
             if not var.get('dataType'):
                 if self.enable_fallbacks:
@@ -1204,16 +1412,18 @@ class DefineJSONToXMLConverter:
                 code_list_ref = ET.SubElement(item_elem, 'CodeListRef')
                 code_list_ref.set('CodeListOID', var['codeList'])
             
-            # Add ValueListRef if a ValueList exists for this item
-            # Pattern: ItemDef OID "ADLBC.AVAL" -> ValueList OID "ValueList.ADLBC.AVAL"
+            # Add ValueListRef from supplemental data
             var_oid = var.get('OID', '')
-            if var_oid:
-                expected_value_list_oid = f"ValueList.{var_oid}"
-                value_list_oids = getattr(self, '_value_list_oids', set())
+            if var_oid and def_ns:
+                # Check supplemental data for valueListOID
+                xml_metadata = getattr(self, '_current_xml_metadata', {})
+                item_origin_metadata = xml_metadata.get('itemGroupSupplemental', {}).get('_itemOriginMetadata', {})
+                item_metadata = item_origin_metadata.get(var_oid, {})
+                value_list_oid = item_metadata.get('valueListOID')
                 
-                if expected_value_list_oid in value_list_oids and def_ns:
+                if value_list_oid:
                     vl_ref_elem = ET.SubElement(item_elem, f'{{{def_ns}}}ValueListRef')
-                    vl_ref_elem.set('ValueListOID', expected_value_list_oid)
+                    vl_ref_elem.set('ValueListOID', value_list_oid)
             
             # Add Origin if present
             origin = var.get('origin', {})
@@ -1224,18 +1434,41 @@ class DefineJSONToXMLConverter:
             item_origin_metadata = item_group_supp.get('_itemOriginMetadata', {})
             origin_metadata = item_origin_metadata.get(var.get('OID'), {})
             
+            # Extract comment from Comment objects (prefer over supplemental)
+            comment_text = None
+            comments = var.get('comments', [])
+            if comments:
+                # Look for origin-related comments (OID contains "ORIGIN")
+                for comment in comments:
+                    if isinstance(comment, dict):
+                        comment_oid = comment.get('OID', '')
+                        if 'ORIGIN' in comment_oid:
+                            comment_text = comment.get('text', '')
+                            break
+                    elif hasattr(comment, 'OID') and 'ORIGIN' in getattr(comment, 'OID', ''):
+                        comment_text = getattr(comment, 'text', '')
+                        break
+            
+            # Fallback to supplemental if not found in comments
+            if not comment_text:
+                comment_text = origin_metadata.get('comment')
+            
             # Check if we have origin data or metadata
-            if origin or origin_metadata:
+            if origin or origin_metadata or comment_text:
                 # Check if original was element-based or attribute-based
                 was_element = origin_metadata.get('wasElement', False)
-                comment_text = origin_metadata.get('comment')
                 
                 if origin and (origin.get('type') or origin.get('source')):
                     if was_element:
                         # v2.x style: Create Origin child element
                         origin_elem = ET.SubElement(item_elem, f'{{{def_ns}}}Origin' if def_ns else 'Origin')
                         if origin.get('type'):
-                            origin_elem.set('Type', origin['type'])
+                            # Check if there's an original non-standard OriginType in supplemental
+                            original_origin_type = origin_metadata.get('originalOriginType')
+                            if original_origin_type:
+                                origin_elem.set('Type', original_origin_type)
+                            else:
+                                origin_elem.set('Type', origin['type'])
                         if origin.get('source'):
                             origin_elem.set('Source', origin['source'])
                         
@@ -1330,10 +1563,41 @@ class DefineJSONToXMLConverter:
                     logger.info(f"Creating ExternalCodeList for {cl_oid} from supplemental: {cl_supp['externalCodeList']}")
                     self._create_external_code_list(cl_elem, cl_supp['externalCodeList'])
             
-            # Add CodeListItems
+            # Add Alias elements for CodeList (from string aliases)
+            aliases = cl.get('aliases', [])
+            for alias_str in aliases:
+                alias_elem = ET.SubElement(cl_elem, 'Alias')
+                # Parse "context|||name" format (using ||| as delimiter)
+                if '|||' in alias_str:
+                    context, name = alias_str.split('|||', 1)
+                    alias_elem.set('Context', context)
+                    alias_elem.set('Name', name)
+                else:
+                    alias_elem.set('Name', alias_str)
+            
+            # Add CodeListItems or EnumeratedItems based on original element type
             items = cl.get('codeListItems') or cl.get('items', [])
+            # Get element types from supplemental data
+            xml_metadata = getattr(self, '_current_xml_metadata', {})
+            cl_supplemental = xml_metadata.get('codeListSupplemental', {})
+            cl_supp = cl_supplemental.get(cl_oid, {})
+            # Determine element types based on optimized storage
+            item_element_types = cl_supp.get('itemElementTypes', {})
+            is_enumerated_list = cl_supp.get('isEnumeratedList', False)
+            
             for item in items:
-                cli_elem = ET.SubElement(cl_elem, 'CodeListItem')
+                coded_value = item.get('codedValue')
+                # Determine element type using optimized logic:
+                # 1. If mixed list (has itemElementTypes) - use mapping
+                # 2. If isEnumeratedList flag - all are EnumeratedItem
+                # 3. Default - all are CodeListItem
+                if item_element_types:
+                    element_type = item_element_types.get(coded_value, 'CodeListItem')
+                elif is_enumerated_list:
+                    element_type = 'EnumeratedItem'
+                else:
+                    element_type = 'CodeListItem'
+                cli_elem = ET.SubElement(cl_elem, element_type)
                 cli_elem.set('CodedValue', item.get('codedValue', ''))
                 
                 # Add def:Rank from weight field
@@ -1344,11 +1608,21 @@ class DefineJSONToXMLConverter:
                     else:
                         cli_elem.set('Rank', str(weight))
                 
-                if item.get('decode'):
+                # Add Decode element (only for CodeListItem, not EnumeratedItem)
+                if item.get('decode') and element_type == 'CodeListItem':
                     decode = ET.SubElement(cli_elem, 'Decode')
                     trans_text = ET.SubElement(decode, 'TranslatedText')
                     trans_text.set('{http://www.w3.org/XML/1998/namespace}lang', 'en')
                     trans_text.text = item['decode']
+                
+                # Add Alias element from coding field (semantic reference)
+                coding = item.get('coding', {})
+                if coding and (coding.get('codeSystem') or coding.get('code')):
+                    alias_elem = ET.SubElement(cli_elem, 'Alias')
+                    if coding.get('codeSystem'):
+                        alias_elem.set('Context', coding['codeSystem'])
+                    if coding.get('code'):
+                        alias_elem.set('Name', coding['code'])
     
     def _create_external_code_list(self, parent: ET.Element, ext_cl_data: Dict[str, Any]) -> None:
         """Create an ExternalCodeList element."""

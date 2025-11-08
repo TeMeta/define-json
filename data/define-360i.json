@@ -3,8 +3,8 @@
   "name": "MDV LZZT",
   "description": "Data Definitions for LZZT",
   "fileOID": "ODM.DEFINE21.360i.001",
-  "asOfDateTime": "2025-10-30T21:50:55.795429",
-  "creationDateTime": "2025-10-30T21:50:55.795415",
+  "asOfDateTime": "2025-11-08T01:05:34.072987",
+  "creationDateTime": "2025-11-08T01:05:34.072965",
   "odmVersion": "1.3.2",
   "fileType": "Snapshot",
   "originator": "360i Define-XML Team",
@@ -384,8 +384,158 @@
         }
       ],
       "children": [
-        "VL.VS.VSORRES",
-        "VL.VS.VSORRESU"
+        {
+          "OID": "VL.VS.VSORRES",
+          "name": "VL_VS_VSORRES",
+          "type": "ValueList",
+          "items": [
+            {
+              "OID": "IT.VS.VSORRES.TEMP",
+              "mandatory": false,
+              "name": "VSORRES",
+              "displayFormat": "8.3",
+              "significantDigits": 3,
+              "dataType": "float",
+              "applicableWhen": [
+                "WC.VS.VSORRES.TEMP"
+              ],
+              "origin": {
+                "type": "CRF",
+                "source": "Investigator"
+              }
+            },
+            {
+              "OID": "IT.VS.VSORRES.WEIGHT",
+              "mandatory": false,
+              "name": "VSORRES",
+              "displayFormat": "8.3",
+              "significantDigits": 3,
+              "dataType": "float",
+              "applicableWhen": [
+                "WC.VS.VSORRES.WEIGHT"
+              ],
+              "origin": {
+                "type": "CRF",
+                "source": "Investigator"
+              }
+            },
+            {
+              "OID": "IT.VS.VSORRES.HEIGHT",
+              "mandatory": false,
+              "name": "VSORRES",
+              "displayFormat": "8.3",
+              "significantDigits": 3,
+              "dataType": "float",
+              "applicableWhen": [
+                "WC.VS.VSORRES.HEIGHT"
+              ],
+              "origin": {
+                "type": "CRF",
+                "source": "Investigator"
+              }
+            },
+            {
+              "OID": "IT.VS.VSORRES.SYSBP",
+              "mandatory": false,
+              "name": "VSORRES",
+              "dataType": "integer",
+              "applicableWhen": [
+                "WC.VS.VSORRES.SYSBP"
+              ],
+              "origin": {
+                "type": "CRF",
+                "source": "Investigator"
+              }
+            },
+            {
+              "OID": "IT.VS.VSORRES.DIABP",
+              "mandatory": false,
+              "name": "VSORRES",
+              "dataType": "integer",
+              "applicableWhen": [
+                "WC.VS.VSORRES.DIABP"
+              ],
+              "origin": {
+                "type": "CRF",
+                "source": "Investigator"
+              }
+            },
+            {
+              "OID": "IT.VS.VSORRES.HR",
+              "mandatory": false,
+              "name": "VSORRES",
+              "dataType": "integer",
+              "applicableWhen": [
+                "WC.VS.VSORRES.HR"
+              ],
+              "origin": {
+                "type": "CRF",
+                "source": "Investigator"
+              }
+            }
+          ]
+        },
+        {
+          "OID": "VL.VS.VSORRESU",
+          "name": "VL_VS_VSORRESU",
+          "type": "ValueList",
+          "items": [
+            {
+              "OID": "IT.VS.VSORRESU.TEMP",
+              "mandatory": false,
+              "name": "VSORRESU",
+              "dataType": "text",
+              "applicableWhen": [
+                "WC.VS.VSORRESU.TEMP"
+              ]
+            },
+            {
+              "OID": "IT.VS.VSORRESU.WEIGHT",
+              "mandatory": false,
+              "name": "VSORRESU",
+              "dataType": "text",
+              "applicableWhen": [
+                "WC.VS.VSORRESU.WEIGHT"
+              ]
+            },
+            {
+              "OID": "IT.VS.VSORRESU.HEIGHT",
+              "mandatory": false,
+              "name": "VSORRESU",
+              "dataType": "text",
+              "applicableWhen": [
+                "WC.VS.VSORRESU.HEIGHT"
+              ]
+            },
+            {
+              "OID": "IT.VS.VSORRESU.SYSBP",
+              "mandatory": false,
+              "name": "VSORRESU",
+              "dataType": "text",
+              "applicableWhen": [
+                "WC.VS.VSORRESU.SYSBP"
+              ]
+            },
+            {
+              "OID": "IT.VS.VSORRESU.DIABP",
+              "mandatory": false,
+              "name": "VSORRESU",
+              "dataType": "text",
+              "applicableWhen": [
+                "WC.VS.VSORRESU.DIABP"
+              ]
+            },
+            {
+              "OID": "IT.VS.VSORRESU.HR",
+              "mandatory": false,
+              "name": "VSORRESU",
+              "dataType": "text",
+              "applicableWhen": [
+                "WC.VS.VSORRESU.HR"
+              ]
+            }
+          ]
+        }
       ]
     },
     {
@@ -582,8 +732,202 @@
         }
       ],
       "children": [
-        "VL.LB.LBORRES",
-        "VL.LB.LBORRESU"
+        {
+          "OID": "VL.LB.LBORRES",
+          "name": "VL_LB_LBORRES",
+          "type": "ValueList",
+          "items": [
+            {
+              "OID": "IT.LB.LBORRES.ALT",
+              "mandatory": false,
+              "name": "LBORRES",
+              "displayFormat": "12.4",
+              "significantDigits": 4,
+              "dataType": "float",
+              "applicableWhen": [
+                "WC.LB.LBORRES.ALT"
+              ],
+              "origin": {
+                "type": "CRF",
+                "source": "Vendor"
+              }
+            },
+            {
+              "OID": "IT.LB.LBORRES.ALB",
+              "mandatory": false,
+              "name": "LBORRES",
+              "significantDigits": 4,
+              "dataType": "text",
+              "applicableWhen": [
+                "WC.LB.LBORRES.ALB"
+              ],
+              "origin": {
+                "type": "CRF",
+                "source": "Vendor"
+              }
+            },
+            {
+              "OID": "IT.LB.LBORRES.ALP",
+              "mandatory": false,
+              "name": "LBORRES",
+              "displayFormat": "12.4",
+              "significantDigits": 4,
+              "dataType": "float",
+              "applicableWhen": [
+                "WC.LB.LBORRES.ALP"
+              ],
+              "origin": {
+                "type": "CRF",
+                "source": "Vendor"
+              }
+            },
+            {
+              "OID": "IT.LB.LBORRES.AST",
+              "mandatory": false,
+              "name": "LBORRES",
+              "displayFormat": "12.4",
+              "significantDigits": 4,
+              "dataType": "float",
+              "applicableWhen": [
+                "WC.LB.LBORRES.AST"
+              ],
+              "origin": {
+                "type": "CRF",
+                "source": "Vendor"
+              }
+            },
+            {
+              "OID": "IT.LB.LBORRES.CREAT",
+              "mandatory": false,
+              "name": "LBORRES",
+              "displayFormat": "12.4",
+              "significantDigits": 4,
+              "dataType": "float",
+              "applicableWhen": [
+                "WC.LB.LBORRES.CREAT"
+              ],
+              "origin": {
+                "type": "CRF",
+                "source": "Vendor"
+              }
+            },
+            {
+              "OID": "IT.LB.LBORRES.K",
+              "mandatory": false,
+              "name": "LBORRES",
+              "displayFormat": "12.4",
+              "significantDigits": 4,
+              "dataType": "float",
+              "applicableWhen": [
+                "WC.LB.LBORRES.K"
+              ],
+              "origin": {
+                "type": "CRF",
+                "source": "Vendor"
+              }
+            },
+            {
+              "OID": "IT.LB.LBORRES.SODIUM",
+              "mandatory": false,
+              "name": "LBORRES",
+              "displayFormat": "12.4",
+              "significantDigits": 4,
+              "dataType": "float",
+              "applicableWhen": [
+                "WC.LB.LBORRES.SODIUM"
+              ],
+              "origin": {
+                "type": "CRF",
+                "source": "Vendor"
+              }
+            },
+            {
+              "OID": "IT.LB.LBORRES.HBA1C",
+              "mandatory": false,
+              "name": "LBORRES",
+              "displayFormat": "12.4",
+              "significantDigits": 4,
+              "dataType": "float",
+              "applicableWhen": [
+                "WC.LB.LBORRES.HBA1C"
+              ],
+              "origin": {
+                "type": "CRF",
+                "source": "Vendor"
+              }
+            }
+          ]
+        },
+        {
+          "OID": "VL.LB.LBORRESU",
+          "name": "VL_LB_LBORRESU",
+          "type": "ValueList",
+          "items": [
+            {
+              "OID": "IT.LB.LBORRESU.ALT",
+              "mandatory": false,
+              "name": "LBORRESU",
+              "dataType": "text",
+              "applicableWhen": [
+                "WC.LB.LBORRESU.ALT"
+              ]
+            },
+            {
+              "OID": "IT.LB.LBORRESU.ALP",
+              "mandatory": false,
+              "name": "LBORRESU",
+              "dataType": "text",
+              "applicableWhen": [
+                "WC.LB.LBORRESU.ALP"
+              ]
+            },
+            {
+              "OID": "IT.LB.LBORRESU.AST",
+              "mandatory": false,
+              "name": "LBORRESU",
+              "dataType": "text",
+              "applicableWhen": [
+                "WC.LB.LBORRESU.AST"
+              ]
+            },
+            {
+              "OID": "IT.LB.LBORRESU.CREAT",
+              "mandatory": false,
+              "name": "LBORRESU",
+              "dataType": "text",
+              "applicableWhen": [
+                "WC.LB.LBORRESU.CREAT"
+              ]
+            },
+            {
+              "OID": "IT.LB.LBORRESU.K",
+              "mandatory": false,
+              "name": "LBORRESU",
+              "dataType": "text",
+              "applicableWhen": [
+                "WC.LB.LBORRESU.K"
+              ]
+            },
+            {
+              "OID": "IT.LB.LBORRESU.SODIUM",
+              "mandatory": false,
+              "name": "LBORRESU",
+              "dataType": "text",
+              "applicableWhen": [
+                "WC.LB.LBORRESU.SODIUM"
+              ]
+            },
+            {
+              "OID": "IT.LB.LBORRESU.HBA1C",
+              "mandatory": false,
+              "name": "LBORRESU",
+              "dataType": "text",
+              "applicableWhen": [
+                "WC.LB.LBORRESU.HBA1C"
+              ]
+            }
+          ]
+        }
       ]
     },
     {
@@ -963,343 +1307,522 @@
           "dataType": "text"
         }
       ]
-    },
+    }
+  ],
+  "conditions": [
     {
-      "OID": "VL.VS.VSORRES",
-      "name": "VL_VS_VSORRES",
-      "type": "ValueList",
-      "items": [
+      "OID": "COND.VS.VSORRES.TEMP",
+      "rangeChecks": [
         {
-          "OID": "IT.VS.VSORRES.TEMP",
-          "mandatory": false,
-          "name": "VSORRES",
-          "significantDigits": 3,
-          "dataType": "float",
-          "applicableWhen": [
-            "WC.VS.VSORRES.TEMP"
+          "comparator": "EQ",
+          "checkValues": [
+            "TEMP"
           ],
-          "origin": {
-            "type": "CRF",
-            "source": "Investigator"
-          }
-        },
-        {
-          "OID": "IT.VS.VSORRES.WEIGHT",
-          "mandatory": false,
-          "name": "VSORRES",
-          "significantDigits": 3,
-          "dataType": "float",
-          "applicableWhen": [
-            "WC.VS.VSORRES.WEIGHT"
-          ],
-          "origin": {
-            "type": "CRF",
-            "source": "Investigator"
-          }
-        },
-        {
-          "OID": "IT.VS.VSORRES.HEIGHT",
-          "mandatory": false,
-          "name": "VSORRES",
-          "significantDigits": 3,
-          "dataType": "float",
-          "applicableWhen": [
-            "WC.VS.VSORRES.HEIGHT"
-          ],
-          "origin": {
-            "type": "CRF",
-            "source": "Investigator"
-          }
-        },
-        {
-          "OID": "IT.VS.VSORRES.SYSBP",
-          "mandatory": false,
-          "name": "VSORRES",
-          "dataType": "integer",
-          "applicableWhen": [
-            "WC.VS.VSORRES.SYSBP"
-          ],
-          "origin": {
-            "type": "CRF",
-            "source": "Investigator"
-          }
-        },
-        {
-          "OID": "IT.VS.VSORRES.DIABP",
-          "mandatory": false,
-          "name": "VSORRES",
-          "dataType": "integer",
-          "applicableWhen": [
-            "WC.VS.VSORRES.DIABP"
-          ],
-          "origin": {
-            "type": "CRF",
-            "source": "Investigator"
-          }
-        },
-        {
-          "OID": "IT.VS.VSORRES.HR",
-          "mandatory": false,
-          "name": "VSORRES",
-          "dataType": "integer",
-          "applicableWhen": [
-            "WC.VS.VSORRES.HR"
-          ],
-          "origin": {
-            "type": "CRF",
-            "source": "Investigator"
-          }
+          "item": "IT.VS.VSTESTCD",
+          "softHard": "Soft"
         }
       ]
     },
     {
-      "OID": "VL.VS.VSORRESU",
-      "name": "VL_VS_VSORRESU",
-      "type": "ValueList",
-      "items": [
+      "OID": "COND.VS.VSORRES.WEIGHT",
+      "rangeChecks": [
         {
-          "OID": "IT.VS.VSORRESU.TEMP",
-          "mandatory": false,
-          "name": "VSORRESU",
-          "dataType": "text",
-          "applicableWhen": [
-            "WC.VS.VSORRESU.TEMP"
-          ]
-        },
-        {
-          "OID": "IT.VS.VSORRESU.WEIGHT",
-          "mandatory": false,
-          "name": "VSORRESU",
-          "dataType": "text",
-          "applicableWhen": [
-            "WC.VS.VSORRESU.WEIGHT"
-          ]
-        },
-        {
-          "OID": "IT.VS.VSORRESU.HEIGHT",
-          "mandatory": false,
-          "name": "VSORRESU",
-          "dataType": "text",
-          "applicableWhen": [
-            "WC.VS.VSORRESU.HEIGHT"
-          ]
-        },
-        {
-          "OID": "IT.VS.VSORRESU.SYSBP",
-          "mandatory": false,
-          "name": "VSORRESU",
-          "dataType": "text",
-          "applicableWhen": [
-            "WC.VS.VSORRESU.SYSBP"
-          ]
-        },
-        {
-          "OID": "IT.VS.VSORRESU.DIABP",
-          "mandatory": false,
-          "name": "VSORRESU",
-          "dataType": "text",
-          "applicableWhen": [
-            "WC.VS.VSORRESU.DIABP"
-          ]
-        },
-        {
-          "OID": "IT.VS.VSORRESU.HR",
-          "mandatory": false,
-          "name": "VSORRESU",
-          "dataType": "text",
-          "applicableWhen": [
-            "WC.VS.VSORRESU.HR"
-          ]
+          "comparator": "EQ",
+          "checkValues": [
+            "WEIGHT"
+          ],
+          "item": "IT.VS.VSTESTCD",
+          "softHard": "Soft"
         }
       ]
     },
     {
-      "OID": "VL.LB.LBORRES",
-      "name": "VL_LB_LBORRES",
-      "type": "ValueList",
-      "items": [
+      "OID": "COND.VS.VSORRES.HEIGHT",
+      "rangeChecks": [
         {
-          "OID": "IT.LB.LBORRES.ALT",
-          "mandatory": false,
-          "name": "LBORRES",
-          "significantDigits": 4,
-          "dataType": "float",
-          "applicableWhen": [
-            "WC.LB.LBORRES.ALT"
+          "comparator": "EQ",
+          "checkValues": [
+            "HEIGHT"
           ],
-          "origin": {
-            "type": "CRF",
-            "source": "Vendor"
-          }
-        },
-        {
-          "OID": "IT.LB.LBORRES.ALB",
-          "mandatory": false,
-          "name": "LBORRES",
-          "significantDigits": 4,
-          "dataType": "text",
-          "applicableWhen": [
-            "WC.LB.LBORRES.ALB"
-          ],
-          "origin": {
-            "type": "CRF",
-            "source": "Vendor"
-          }
-        },
-        {
-          "OID": "IT.LB.LBORRES.ALP",
-          "mandatory": false,
-          "name": "LBORRES",
-          "significantDigits": 4,
-          "dataType": "float",
-          "applicableWhen": [
-            "WC.LB.LBORRES.ALP"
-          ],
-          "origin": {
-            "type": "CRF",
-            "source": "Vendor"
-          }
-        },
-        {
-          "OID": "IT.LB.LBORRES.AST",
-          "mandatory": false,
-          "name": "LBORRES",
-          "significantDigits": 4,
-          "dataType": "float",
-          "applicableWhen": [
-            "WC.LB.LBORRES.AST"
-          ],
-          "origin": {
-            "type": "CRF",
-            "source": "Vendor"
-          }
-        },
-        {
-          "OID": "IT.LB.LBORRES.CREAT",
-          "mandatory": false,
-          "name": "LBORRES",
-          "significantDigits": 4,
-          "dataType": "float",
-          "applicableWhen": [
-            "WC.LB.LBORRES.CREAT"
-          ],
-          "origin": {
-            "type": "CRF",
-            "source": "Vendor"
-          }
-        },
-        {
-          "OID": "IT.LB.LBORRES.K",
-          "mandatory": false,
-          "name": "LBORRES",
-          "significantDigits": 4,
-          "dataType": "float",
-          "applicableWhen": [
-            "WC.LB.LBORRES.K"
-          ],
-          "origin": {
-            "type": "CRF",
-            "source": "Vendor"
-          }
-        },
-        {
-          "OID": "IT.LB.LBORRES.SODIUM",
-          "mandatory": false,
-          "name": "LBORRES",
-          "significantDigits": 4,
-          "dataType": "float",
-          "applicableWhen": [
-            "WC.LB.LBORRES.SODIUM"
-          ],
-          "origin": {
-            "type": "CRF",
-            "source": "Vendor"
-          }
-        },
-        {
-          "OID": "IT.LB.LBORRES.HBA1C",
-          "mandatory": false,
-          "name": "LBORRES",
-          "significantDigits": 4,
-          "dataType": "float",
-          "applicableWhen": [
-            "WC.LB.LBORRES.HBA1C"
-          ],
-          "origin": {
-            "type": "CRF",
-            "source": "Vendor"
-          }
+          "item": "IT.VS.VSTESTCD",
+          "softHard": "Soft"
         }
       ]
     },
     {
-      "OID": "VL.LB.LBORRESU",
-      "name": "VL_LB_LBORRESU",
-      "type": "ValueList",
-      "items": [
+      "OID": "COND.VS.VSORRES.SYSBP",
+      "rangeChecks": [
         {
-          "OID": "IT.LB.LBORRESU.ALT",
-          "mandatory": false,
-          "name": "LBORRESU",
-          "dataType": "text",
-          "applicableWhen": [
-            "WC.LB.LBORRESU.ALT"
-          ]
-        },
-        {
-          "OID": "IT.LB.LBORRESU.ALP",
-          "mandatory": false,
-          "name": "LBORRESU",
-          "dataType": "text",
-          "applicableWhen": [
-            "WC.LB.LBORRESU.ALP"
-          ]
-        },
-        {
-          "OID": "IT.LB.LBORRESU.AST",
-          "mandatory": false,
-          "name": "LBORRESU",
-          "dataType": "text",
-          "applicableWhen": [
-            "WC.LB.LBORRESU.AST"
-          ]
-        },
-        {
-          "OID": "IT.LB.LBORRESU.CREAT",
-          "mandatory": false,
-          "name": "LBORRESU",
-          "dataType": "text",
-          "applicableWhen": [
-            "WC.LB.LBORRESU.CREAT"
-          ]
-        },
-        {
-          "OID": "IT.LB.LBORRESU.K",
-          "mandatory": false,
-          "name": "LBORRESU",
-          "dataType": "text",
-          "applicableWhen": [
-            "WC.LB.LBORRESU.K"
-          ]
-        },
-        {
-          "OID": "IT.LB.LBORRESU.SODIUM",
-          "mandatory": false,
-          "name": "LBORRESU",
-          "dataType": "text",
-          "applicableWhen": [
-            "WC.LB.LBORRESU.SODIUM"
-          ]
-        },
-        {
-          "OID": "IT.LB.LBORRESU.HBA1C",
-          "mandatory": false,
-          "name": "LBORRESU",
-          "dataType": "text",
-          "applicableWhen": [
-            "WC.LB.LBORRESU.HBA1C"
-          ]
+          "comparator": "EQ",
+          "checkValues": [
+            "SYSBP"
+          ],
+          "item": "IT.VS.VSTESTCD",
+          "softHard": "Soft"
         }
+      ]
+    },
+    {
+      "OID": "COND.VS.VSORRES.DIABP",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "DIABP"
+          ],
+          "item": "IT.VS.VSTESTCD",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.VS.VSORRES.HR",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "HR"
+          ],
+          "item": "IT.VS.VSTESTCD",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.VS.VSORRESU.TEMP",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "TEMP"
+          ],
+          "item": "IT.VS.VSTESTCD",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.VS.VSORRESU.WEIGHT",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "WEIGHT"
+          ],
+          "item": "IT.VS.VSTESTCD",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.VS.VSORRESU.HEIGHT",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "HEIGHT"
+          ],
+          "item": "IT.VS.VSTESTCD",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.VS.VSORRESU.SYSBP",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "SYSBP"
+          ],
+          "item": "IT.VS.VSTESTCD",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.VS.VSORRESU.DIABP",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "DIABP"
+          ],
+          "item": "IT.VS.VSTESTCD",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.VS.VSORRESU.HR",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "HR"
+          ],
+          "item": "IT.VS.VSTESTCD",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.LB.LBORRES.ALT",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "ALT"
+          ],
+          "item": "IT.LB.LBTESTCD",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.LB.LBORRES.ALB",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "ALB"
+          ],
+          "item": "IT.LB.LBTESTCD",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.LB.LBORRES.ALP",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "ALP"
+          ],
+          "item": "IT.LB.LBTESTCD",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.LB.LBORRES.AST",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "AST"
+          ],
+          "item": "IT.LB.LBTESTCD",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.LB.LBORRES.CREAT",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "CREAT"
+          ],
+          "item": "IT.LB.LBTESTCD",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.LB.LBORRES.K",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "K"
+          ],
+          "item": "IT.LB.LBTESTCD",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.LB.LBORRES.SODIUM",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "SODIUM"
+          ],
+          "item": "IT.LB.LBTESTCD",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.LB.LBORRES.HBA1C",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "HBA1C"
+          ],
+          "item": "IT.LB.LBTESTCD",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.LB.LBORRESU.ALT",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "ALT"
+          ],
+          "item": "IT.LB.LBTESTCD",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.LB.LBORRESU.ALP",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "ALP"
+          ],
+          "item": "IT.LB.LBTESTCD",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.LB.LBORRESU.AST",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "AST"
+          ],
+          "item": "IT.LB.LBTESTCD",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.LB.LBORRESU.CREAT",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "CREAT"
+          ],
+          "item": "IT.LB.LBTESTCD",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.LB.LBORRESU.K",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "K"
+          ],
+          "item": "IT.LB.LBTESTCD",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.LB.LBORRESU.SODIUM",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "SODIUM"
+          ],
+          "item": "IT.LB.LBTESTCD",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.LB.LBORRESU.HBA1C",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "HBA1C"
+          ],
+          "item": "IT.LB.LBTESTCD",
+          "softHard": "Soft"
+        }
+      ]
+    }
+  ],
+  "whereClauses": [
+    {
+      "OID": "WC.VS.VSORRES.TEMP",
+      "conditions": [
+        "COND.VS.VSORRES.TEMP"
+      ]
+    },
+    {
+      "OID": "WC.VS.VSORRES.WEIGHT",
+      "conditions": [
+        "COND.VS.VSORRES.WEIGHT"
+      ]
+    },
+    {
+      "OID": "WC.VS.VSORRES.HEIGHT",
+      "conditions": [
+        "COND.VS.VSORRES.HEIGHT"
+      ]
+    },
+    {
+      "OID": "WC.VS.VSORRES.SYSBP",
+      "conditions": [
+        "COND.VS.VSORRES.SYSBP"
+      ]
+    },
+    {
+      "OID": "WC.VS.VSORRES.DIABP",
+      "conditions": [
+        "COND.VS.VSORRES.DIABP"
+      ]
+    },
+    {
+      "OID": "WC.VS.VSORRES.HR",
+      "conditions": [
+        "COND.VS.VSORRES.HR"
+      ]
+    },
+    {
+      "OID": "WC.VS.VSORRESU.TEMP",
+      "conditions": [
+        "COND.VS.VSORRESU.TEMP"
+      ]
+    },
+    {
+      "OID": "WC.VS.VSORRESU.WEIGHT",
+      "conditions": [
+        "COND.VS.VSORRESU.WEIGHT"
+      ]
+    },
+    {
+      "OID": "WC.VS.VSORRESU.HEIGHT",
+      "conditions": [
+        "COND.VS.VSORRESU.HEIGHT"
+      ]
+    },
+    {
+      "OID": "WC.VS.VSORRESU.SYSBP",
+      "conditions": [
+        "COND.VS.VSORRESU.SYSBP"
+      ]
+    },
+    {
+      "OID": "WC.VS.VSORRESU.DIABP",
+      "conditions": [
+        "COND.VS.VSORRESU.DIABP"
+      ]
+    },
+    {
+      "OID": "WC.VS.VSORRESU.HR",
+      "conditions": [
+        "COND.VS.VSORRESU.HR"
+      ]
+    },
+    {
+      "OID": "WC.LB.LBORRES.ALT",
+      "conditions": [
+        "COND.LB.LBORRES.ALT"
+      ]
+    },
+    {
+      "OID": "WC.LB.LBORRES.ALB",
+      "conditions": [
+        "COND.LB.LBORRES.ALB"
+      ]
+    },
+    {
+      "OID": "WC.LB.LBORRES.ALP",
+      "conditions": [
+        "COND.LB.LBORRES.ALP"
+      ]
+    },
+    {
+      "OID": "WC.LB.LBORRES.AST",
+      "conditions": [
+        "COND.LB.LBORRES.AST"
+      ]
+    },
+    {
+      "OID": "WC.LB.LBORRES.CREAT",
+      "conditions": [
+        "COND.LB.LBORRES.CREAT"
+      ]
+    },
+    {
+      "OID": "WC.LB.LBORRES.K",
+      "conditions": [
+        "COND.LB.LBORRES.K"
+      ]
+    },
+    {
+      "OID": "WC.LB.LBORRES.SODIUM",
+      "conditions": [
+        "COND.LB.LBORRES.SODIUM"
+      ]
+    },
+    {
+      "OID": "WC.LB.LBORRES.HBA1C",
+      "conditions": [
+        "COND.LB.LBORRES.HBA1C"
+      ]
+    },
+    {
+      "OID": "WC.LB.LBORRESU.ALT",
+      "conditions": [
+        "COND.LB.LBORRESU.ALT"
+      ]
+    },
+    {
+      "OID": "WC.LB.LBORRESU.ALP",
+      "conditions": [
+        "COND.LB.LBORRESU.ALP"
+      ]
+    },
+    {
+      "OID": "WC.LB.LBORRESU.AST",
+      "conditions": [
+        "COND.LB.LBORRESU.AST"
+      ]
+    },
+    {
+      "OID": "WC.LB.LBORRESU.CREAT",
+      "conditions": [
+        "COND.LB.LBORRESU.CREAT"
+      ]
+    },
+    {
+      "OID": "WC.LB.LBORRESU.K",
+      "conditions": [
+        "COND.LB.LBORRESU.K"
+      ]
+    },
+    {
+      "OID": "WC.LB.LBORRESU.SODIUM",
+      "conditions": [
+        "COND.LB.LBORRESU.SODIUM"
+      ]
+    },
+    {
+      "OID": "WC.LB.LBORRESU.HBA1C",
+      "conditions": [
+        "COND.LB.LBORRESU.HBA1C"
       ]
     }
   ],
@@ -1307,527 +1830,1600 @@
     {
       "OID": "CL.NY",
       "name": "No Yes Response",
+      "aliases": [
+        "nci:ExtCodeID|||C66742"
+      ],
       "dataType": "text",
       "codeListItems": [
         {
           "codedValue": "N",
-          "decode": "No"
+          "decode": "No",
+          "coding": {
+            "code": "C49487",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "NA",
-          "decode": "NA"
+          "decode": "NA",
+          "coding": {
+            "code": "C48660",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "U",
-          "decode": "U"
+          "decode": "U",
+          "coding": {
+            "code": "C17998",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "Y",
-          "decode": "Yes"
+          "decode": "Yes",
+          "coding": {
+            "code": "C49488",
+            "codeSystem": "nci:ExtCodeID"
+          }
         }
       ]
     },
     {
       "OID": "CL.AGEU",
       "name": "Age Unit",
-      "dataType": "text"
+      "aliases": [
+        "nci:ExtCodeID|||C66781"
+      ],
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "DAYS",
+          "coding": {
+            "code": "C25301",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "HOURS",
+          "coding": {
+            "code": "C25529",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "MONTHS",
+          "coding": {
+            "code": "C29846",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "WEEKS",
+          "coding": {
+            "code": "C29844",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "YEARS",
+          "coding": {
+            "code": "C29848",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        }
+      ]
     },
     {
       "OID": "CL.SEX",
       "name": "Sex",
+      "aliases": [
+        "nci:ExtCodeID|||C66731"
+      ],
       "dataType": "text",
       "codeListItems": [
         {
           "codedValue": "F",
-          "decode": "Female"
+          "decode": "Female",
+          "coding": {
+            "code": "C16576",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "M",
-          "decode": "Male"
+          "decode": "Male",
+          "coding": {
+            "code": "C20197",
+            "codeSystem": "nci:ExtCodeID"
+          }
         }
       ]
     },
     {
       "OID": "CL.RACE",
       "name": "Race",
-      "dataType": "text"
+      "aliases": [
+        "nci:ExtCodeID|||C74457"
+      ],
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "AMERICAN INDIAN OR ALASKA NATIVE",
+          "coding": {
+            "code": "C41259",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "ASIAN",
+          "coding": {
+            "code": "C41260",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "BLACK OR AFRICAN AMERICAN",
+          "coding": {
+            "code": "C16352",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER",
+          "coding": {
+            "code": "C41219",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "NOT REPORTED",
+          "coding": {
+            "code": "C43234",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "OTHER",
+          "coding": {
+            "code": "C17649",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "UNKNOWN",
+          "coding": {
+            "code": "C17998",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "WHITE",
+          "coding": {
+            "code": "C41261",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        }
+      ]
     },
     {
       "OID": "CL.ARMNULRS",
       "name": "Arm Null Reason",
-      "dataType": "text"
+      "aliases": [
+        "nci:ExtCodeID|||C142179"
+      ],
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "ASSIGNED, NOT TREATED",
+          "coding": {
+            "code": "C142238",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "NOT ASSIGNED",
+          "coding": {
+            "code": "C142239",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "SCREEN FAILURE",
+          "coding": {
+            "code": "C49628",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "UNPLANNED TREATMENT",
+          "coding": {
+            "code": "C142240",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        }
+      ]
     },
     {
       "OID": "CL.VSTESTCD",
       "name": "Vital Signs Test Code",
+      "aliases": [
+        "nci:ExtCodeID|||C66741"
+      ],
       "dataType": "text",
       "codeListItems": [
         {
           "codedValue": "DIABP",
-          "decode": "Diastolic Blood Pressure"
+          "decode": "Diastolic Blood Pressure",
+          "coding": {
+            "code": "C25299",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "HEIGHT",
-          "decode": "Height"
+          "decode": "Height",
+          "coding": {
+            "code": "C25347",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "HR",
-          "decode": "Heart Rate"
+          "decode": "Heart Rate",
+          "coding": {
+            "code": "C49677",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "SYSBP",
-          "decode": "Systolic Blood Pressure"
+          "decode": "Systolic Blood Pressure",
+          "coding": {
+            "code": "C25298",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "TEMP",
-          "decode": "Body Temperature"
+          "decode": "Body Temperature",
+          "coding": {
+            "code": "C174446",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "WEIGHT",
-          "decode": "Weight"
+          "decode": "Weight",
+          "coding": {
+            "code": "C25208",
+            "codeSystem": "nci:ExtCodeID"
+          }
         }
       ]
     },
     {
       "OID": "CL.VSTEST",
       "name": "Vital Signs Test Name",
+      "aliases": [
+        "nci:ExtCodeID|||C67153"
+      ],
       "dataType": "text",
       "codeListItems": [
         {
           "codedValue": "Diastolic Blood Pressure",
-          "decode": "Diastolic Blood Pressure"
+          "decode": "Diastolic Blood Pressure",
+          "coding": {
+            "code": "C25299",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "Heart Rate",
-          "decode": "Heart Rate"
+          "decode": "Heart Rate",
+          "coding": {
+            "code": "C49677",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "Height",
-          "decode": "Height"
+          "decode": "Height",
+          "coding": {
+            "code": "C25347",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "Systolic Blood Pressure",
-          "decode": "Systolic Blood Pressure"
+          "decode": "Systolic Blood Pressure",
+          "coding": {
+            "code": "C25298",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "Temperature",
-          "decode": "Body Temperature"
+          "decode": "Body Temperature",
+          "coding": {
+            "code": "C174446",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "Weight",
-          "decode": "Weight"
+          "decode": "Weight",
+          "coding": {
+            "code": "C25208",
+            "codeSystem": "nci:ExtCodeID"
+          }
         }
       ]
     },
     {
       "OID": "CL.POSITION",
       "name": "Position",
+      "aliases": [
+        "nci:ExtCodeID|||C71148"
+      ],
       "dataType": "text",
       "codeListItems": [
         {
           "codedValue": "PRONE",
-          "decode": "Prone"
+          "decode": "Prone",
+          "coding": {
+            "code": "C62165",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "SEMI-RECUMBENT",
-          "decode": "Semi-Supine"
+          "decode": "Semi-Supine",
+          "coding": {
+            "code": "C111310",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "SITTING",
-          "decode": "Sitting"
+          "decode": "Sitting",
+          "coding": {
+            "code": "C62122",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "STANDING",
-          "decode": "Orthostatic"
+          "decode": "Orthostatic",
+          "coding": {
+            "code": "C62166",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "SUPINE",
-          "decode": "Supine"
+          "decode": "Supine",
+          "coding": {
+            "code": "C62167",
+            "codeSystem": "nci:ExtCodeID"
+          }
         }
       ]
     },
     {
       "OID": "CL.VSRESU",
       "name": "Units for Vital Signs Results",
+      "aliases": [
+        "nci:ExtCodeID|||C66770"
+      ],
       "dataType": "text",
       "codeListItems": [
         {
           "codedValue": "C",
-          "decode": "Degree Celsius"
+          "decode": "Degree Celsius",
+          "coding": {
+            "code": "C42559",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "cm",
-          "decode": "Centimeter"
+          "decode": "Centimeter",
+          "coding": {
+            "code": "C49668",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "F",
-          "decode": "Degree Fahrenheit"
+          "decode": "Degree Fahrenheit",
+          "coding": {
+            "code": "C44277",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "g",
-          "decode": "Gram"
+          "decode": "Gram",
+          "coding": {
+            "code": "C48155",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "in",
-          "decode": "Inch"
+          "decode": "Inch",
+          "coding": {
+            "code": "C48500",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "K",
-          "decode": "Kelvin"
+          "decode": "Kelvin",
+          "coding": {
+            "code": "C42537",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "kg",
-          "decode": "Kilogram"
+          "decode": "Kilogram",
+          "coding": {
+            "code": "C28252",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "LB",
-          "decode": "lb"
+          "decode": "lb",
+          "coding": {
+            "code": "C48531",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "m",
-          "decode": "Meter"
+          "decode": "Meter",
+          "coding": {
+            "code": "C41139",
+            "codeSystem": "nci:ExtCodeID"
+          }
         }
       ]
     },
     {
       "OID": "CL.LOC",
       "name": "Anatomical Location",
+      "aliases": [
+        "nci:ExtCodeID|||C74456"
+      ],
       "dataType": "text",
       "codeListItems": [
         {
           "codedValue": "AXILLA",
-          "decode": "Armpit"
+          "decode": "Armpit",
+          "coding": {
+            "code": "C12674",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "BRACHIAL ARTERY",
-          "decode": "BRACHIAL ARTERY"
+          "decode": "BRACHIAL ARTERY",
+          "coding": {
+            "code": "C12681",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "CAROTID ARTERY",
-          "decode": "Common Carotid Artery"
+          "decode": "Common Carotid Artery",
+          "coding": {
+            "code": "C12687",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "CEREBRAL ARTERY",
-          "decode": "CEREBRAL ARTERY"
+          "decode": "CEREBRAL ARTERY",
+          "coding": {
+            "code": "C12691",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "DORSALIS PEDIS ARTERY",
-          "decode": "Dorsal Pedal Artery"
+          "decode": "Dorsal Pedal Artery",
+          "coding": {
+            "code": "C32478",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "EAR",
-          "decode": "EAR"
+          "decode": "EAR",
+          "coding": {
+            "code": "C12394",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "FEMORAL ARTERY",
-          "decode": "FEMORAL ARTERY"
+          "decode": "FEMORAL ARTERY",
+          "coding": {
+            "code": "C12715",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "FINGER",
-          "decode": "Finger"
+          "decode": "Finger",
+          "coding": {
+            "code": "C32608",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "FOREHEAD",
-          "decode": "Forehead"
+          "decode": "Forehead",
+          "coding": {
+            "code": "C89803",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "ORAL CAVITY",
-          "decode": "Buccal cavity"
+          "decode": "Buccal cavity",
+          "coding": {
+            "code": "C12421",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "RADIAL ARTERY",
-          "decode": "Radial Artery"
+          "decode": "Radial Artery",
+          "coding": {
+            "code": "C12838",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "RECTUM",
-          "decode": "RECTUM"
+          "decode": "RECTUM",
+          "coding": {
+            "code": "C12390",
+            "codeSystem": "nci:ExtCodeID"
+          }
         }
       ]
     },
     {
       "OID": "CL.LAT",
       "name": "Laterality",
-      "dataType": "text"
+      "aliases": [
+        "nci:ExtCodeID|||C99073"
+      ],
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "LEFT",
+          "coding": {
+            "code": "C25229",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "RIGHT",
+          "coding": {
+            "code": "C25228",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        }
+      ]
     },
     {
       "OID": "CL.LBTESTCD",
       "name": "Laboratory Test Code",
+      "aliases": [
+        "nci:ExtCodeID|||C65047"
+      ],
       "dataType": "text",
       "codeListItems": [
         {
           "codedValue": "ALB",
-          "decode": "Albumin"
+          "decode": "Albumin",
+          "coding": {
+            "code": "C64431",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "ALP",
-          "decode": "Alkaline Phosphatase"
+          "decode": "Alkaline Phosphatase",
+          "coding": {
+            "code": "C64432",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "ALT",
-          "decode": "Alanine Aminotransferase"
+          "decode": "Alanine Aminotransferase",
+          "coding": {
+            "code": "C64433",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "AST",
-          "decode": "Aspartate Aminotransferase"
+          "decode": "Aspartate Aminotransferase",
+          "coding": {
+            "code": "C64467",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "CREAT",
-          "decode": "Creatinine"
+          "decode": "Creatinine",
+          "coding": {
+            "code": "C64547",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "HBA1C",
-          "decode": "HbA1c"
+          "decode": "HbA1c",
+          "coding": {
+            "code": "C64849",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "K",
-          "decode": "Potassium"
+          "decode": "Potassium",
+          "coding": {
+            "code": "C64853",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "SODIUM",
-          "decode": "Sodium"
+          "decode": "Sodium",
+          "coding": {
+            "code": "C64809",
+            "codeSystem": "nci:ExtCodeID"
+          }
         }
       ]
     },
     {
       "OID": "CL.LBTEST",
       "name": "Laboratory Test Name",
+      "aliases": [
+        "nci:ExtCodeID|||C67154"
+      ],
       "dataType": "text",
       "codeListItems": [
         {
           "codedValue": "Alanine Aminotransferase",
-          "decode": "Alanine Aminotransferase"
+          "decode": "Alanine Aminotransferase",
+          "coding": {
+            "code": "C64433",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "Albumin",
-          "decode": "Albumin"
+          "decode": "Albumin",
+          "coding": {
+            "code": "C64431",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "Alkaline Phosphatase",
-          "decode": "Alkaline Phosphatase"
+          "decode": "Alkaline Phosphatase",
+          "coding": {
+            "code": "C64432",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "Aspartate Aminotransferase",
-          "decode": "Aspartate Aminotransferase"
+          "decode": "Aspartate Aminotransferase",
+          "coding": {
+            "code": "C64467",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "Creatinine",
-          "decode": "Creatinine"
+          "decode": "Creatinine",
+          "coding": {
+            "code": "C64547",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "Hemoglobin A1C",
-          "decode": "HbA1c"
+          "decode": "HbA1c",
+          "coding": {
+            "code": "C64849",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "Potassium",
-          "decode": "Potassium"
+          "decode": "Potassium",
+          "coding": {
+            "code": "C64853",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "Sodium",
-          "decode": "Sodium"
+          "decode": "Sodium",
+          "coding": {
+            "code": "C64809",
+            "codeSystem": "nci:ExtCodeID"
+          }
         }
       ]
     },
     {
       "OID": "CL.UNIT",
       "name": "Unit",
+      "aliases": [
+        "nci:ExtCodeID|||C71620"
+      ],
       "dataType": "text",
       "codeListItems": [
         {
           "codedValue": "IU/L",
-          "decode": "IE/L"
+          "decode": "IE/L",
+          "coding": {
+            "code": "C67376",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "mEq/dL",
-          "decode": "Milliequivalent per Deciliter"
+          "decode": "Milliequivalent per Deciliter",
+          "coding": {
+            "code": "C67473",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "mEq/L",
-          "decode": "Milliequivalent Per Liter"
+          "decode": "Milliequivalent Per Liter",
+          "coding": {
+            "code": "C67474",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "mg/dL",
-          "decode": "mg%"
+          "decode": "mg%",
+          "coding": {
+            "code": "C67015",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "mg/L",
-          "decode": "g/m3"
+          "decode": "g/m3",
+          "coding": {
+            "code": "C64572",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "mmol/L",
-          "decode": "mcmol/mL"
+          "decode": "mcmol/mL",
+          "coding": {
+            "code": "C64387",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "nkat/L",
-          "decode": "Nanokatal per Liter"
+          "decode": "Nanokatal per Liter",
+          "coding": {
+            "code": "C70510",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "U/L",
-          "decode": "mU/mL"
+          "decode": "mU/mL",
+          "coding": {
+            "code": "C67456",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "ukat/L",
-          "decode": "mckat/L"
+          "decode": "mckat/L",
+          "coding": {
+            "code": "C67397",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "umol/L",
-          "decode": "nmol/mL"
+          "decode": "nmol/mL",
+          "coding": {
+            "code": "C48508",
+            "codeSystem": "nci:ExtCodeID"
+          }
         }
       ]
     },
     {
       "OID": "CL.LBSTRESC",
       "name": "Laboratory Test Standard Character Result",
-      "dataType": "text"
+      "aliases": [
+        "nci:ExtCodeID|||C102580"
+      ],
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "ABNORMAL",
+          "coding": {
+            "code": "C25401",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "ABSENT",
+          "coding": {
+            "code": "C48190",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "BORDERLINE",
+          "coding": {
+            "code": "C14157",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "DETECTED",
+          "coding": {
+            "code": "C191719",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "INDETERMINATE",
+          "coding": {
+            "code": "C48658",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "NEGATIVE",
+          "coding": {
+            "code": "C38757",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "NORMAL",
+          "coding": {
+            "code": "C14165",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "NOT DETECTED",
+          "coding": {
+            "code": "C191300",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "POSITIVE",
+          "coding": {
+            "code": "C38758",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "PRESENT",
+          "coding": {
+            "code": "C25626",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "STRONGLY POSITIVE",
+          "coding": {
+            "code": "C191301",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "TOO NUMEROUS TO COUNT",
+          "coding": {
+            "code": "C191303",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "TRACE",
+          "coding": {
+            "code": "C80218",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "WEAKLY POSITIVE",
+          "coding": {
+            "code": "C191302",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        }
+      ]
     },
     {
       "OID": "CL.NRIND",
       "name": "Reference Range Indicator",
-      "dataType": "text"
+      "aliases": [
+        "nci:ExtCodeID|||C78736"
+      ],
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "ABNORMAL",
+          "coding": {
+            "code": "C78802",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "HIGH",
+          "coding": {
+            "code": "C78800",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "LOW",
+          "coding": {
+            "code": "C78801",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "NORMAL",
+          "coding": {
+            "code": "C78727",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        }
+      ]
     },
     {
       "OID": "CL.SPECTYPE",
       "name": "Specimen Type",
+      "aliases": [
+        "nci:ExtCodeID|||C78734"
+      ],
       "dataType": "text",
       "codeListItems": [
         {
           "codedValue": "BLOOD",
-          "decode": "Peripheral Blood"
+          "decode": "Peripheral Blood",
+          "coding": {
+            "code": "C12434",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "SERUM OR PLASMA",
-          "decode": "Ser/Plas"
+          "decode": "Ser/Plas",
+          "coding": {
+            "code": "C105706",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "URINE",
-          "decode": "URINE"
+          "decode": "URINE",
+          "coding": {
+            "code": "C13283",
+            "codeSystem": "nci:ExtCodeID"
+          }
         }
       ]
     },
     {
       "OID": "CL.AESEV",
       "name": "Severity/Intensity Scale for Adverse Events",
+      "aliases": [
+        "nci:ExtCodeID|||C66769"
+      ],
       "dataType": "text",
       "codeListItems": [
         {
           "codedValue": "MILD",
-          "decode": "1"
+          "decode": "1",
+          "coding": {
+            "code": "C41338",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "MODERATE",
-          "decode": "2"
+          "decode": "2",
+          "coding": {
+            "code": "C41339",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "SEVERE",
-          "decode": "3"
+          "decode": "3",
+          "coding": {
+            "code": "C41340",
+            "codeSystem": "nci:ExtCodeID"
+          }
         }
       ]
     },
     {
       "OID": "CL.ACN",
       "name": "Action Taken with Study Treatment",
-      "dataType": "text"
+      "aliases": [
+        "nci:ExtCodeID|||C66767"
+      ],
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "DOSE INCREASED",
+          "coding": {
+            "code": "C49503",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "DOSE NOT CHANGED",
+          "coding": {
+            "code": "C49504",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "DOSE RATE REDUCED",
+          "coding": {
+            "code": "C150826",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "DOSE REDUCED",
+          "coding": {
+            "code": "C49505",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "DRUG INTERRUPTED",
+          "coding": {
+            "code": "C49501",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "DRUG WITHDRAWN",
+          "coding": {
+            "code": "C49502",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "NOT APPLICABLE",
+          "coding": {
+            "code": "C48660",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "UNKNOWN",
+          "coding": {
+            "code": "C17998",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        }
+      ]
     },
     {
       "OID": "CL.OUT",
       "name": "Outcome of Event",
+      "aliases": [
+        "nci:ExtCodeID|||C66768"
+      ],
       "dataType": "text",
       "codeListItems": [
         {
           "codedValue": "FATAL",
-          "decode": "5"
+          "decode": "5",
+          "coding": {
+            "code": "C48275",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "NOT RECOVERED/NOT RESOLVED",
-          "decode": "NOT RECOVERED/NOT RESOLVED"
+          "decode": "NOT RECOVERED/NOT RESOLVED",
+          "coding": {
+            "code": "C49494",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "RECOVERED/RESOLVED WITH SEQUELAE",
-          "decode": "RECOVERED/RESOLVED WITH SEQUELAE"
+          "decode": "RECOVERED/RESOLVED WITH SEQUELAE",
+          "coding": {
+            "code": "C49495",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "RECOVERED/RESOLVED",
-          "decode": "RECOVERED/RESOLVED"
+          "decode": "RECOVERED/RESOLVED",
+          "coding": {
+            "code": "C49498",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "RECOVERING/RESOLVING",
-          "decode": "RECOVERING/RESOLVING"
+          "decode": "RECOVERING/RESOLVING",
+          "coding": {
+            "code": "C49496",
+            "codeSystem": "nci:ExtCodeID"
+          }
         },
         {
           "codedValue": "UNKNOWN",
-          "decode": "U"
+          "decode": "U",
+          "coding": {
+            "code": "C17998",
+            "codeSystem": "nci:ExtCodeID"
+          }
         }
       ]
     },
     {
       "OID": "CL.STENRF",
       "name": "Relation to Reference Period",
-      "dataType": "text"
+      "aliases": [
+        "nci:ExtCodeID|||C66728"
+      ],
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "AFTER",
+          "coding": {
+            "code": "C38008",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "BEFORE",
+          "coding": {
+            "code": "C25629",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "BEFORE/DURING",
+          "coding": {
+            "code": "C184710",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "COINCIDENT",
+          "coding": {
+            "code": "C25456",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "DURING",
+          "coding": {
+            "code": "C25490",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "DURING/AFTER",
+          "coding": {
+            "code": "C49640",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "ONGOING",
+          "coding": {
+            "code": "C53279",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "UNKNOWN",
+          "coding": {
+            "code": "C17998",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        }
+      ]
+    }
+  ],
+  "standards": [
+    {
+      "OID": "ST.1",
+      "name": "SDTMIG",
+      "type": "IG",
+      "version": "3.4",
+      "status": "FINAL"
+    },
+    {
+      "OID": "ST.2",
+      "name": "CDISC/NCI",
+      "type": "CT",
+      "publishingSet": "SDTM",
+      "version": "2025-03-28",
+      "status": "FINAL"
+    }
+  ],
+  "resources": [
+    {
+      "OID": "RES.LF.DM",
+      "name": "dm.xpt",
+      "label": "dm.xpt",
+      "href": "dm.xpt",
+      "resourceType": "ODM"
+    },
+    {
+      "OID": "RES.LF.VS",
+      "name": "vs.xpt",
+      "label": "vs.xpt",
+      "href": "vs.xpt",
+      "resourceType": "ODM"
+    },
+    {
+      "OID": "RES.LF.LB",
+      "name": "lb.xpt",
+      "label": "lb.xpt",
+      "href": "lb.xpt",
+      "resourceType": "ODM"
+    },
+    {
+      "OID": "RES.LF.AE",
+      "name": "ae.xpt",
+      "label": "ae.xpt",
+      "href": "ae.xpt",
+      "resourceType": "ODM"
     }
   ],
   "_xmlMetadata": {
     "namespaces": {
       "odm": "http://www.cdisc.org/ns/odm/v1.3",
-      "def": "http://www.cdisc.org/ns/def/v2.1",
-      "xlink": "http://www.w3.org/1999/xlink"
+      "xs": "http://www.w3.org/2001/XMLSchema-instance",
+      "xml": "http://www.w3.org/XML/1998/namespace",
+      "xlink": "http://www.w3.org/1999/xlink",
+      "def": "http://www.cdisc.org/ns/def/v2.1"
     },
+    "_odmMetadata": {
+      "Name": "MDV LZZT",
+      "DefineVersion": "2.1.0",
+      "StudyName": "LZZT",
+      "StudyDescription": "Safety and Efficacy of the Xanomeline Transdermal Therapeutic System (TTS) in Patients\n                with Mild to Moderate Alzheimer's Disease\n            ",
+      "ProtocolName": "LZZT"
+    },
+    "itemDefOrder": [
+      "IT.DM.STUDYID",
+      "IT.DM.DOMAIN",
+      "IT.DM.USUBJID",
+      "IT.DM.SUBJID",
+      "IT.DM.RFSTDTC",
+      "IT.DM.RFENDTC",
+      "IT.DM.RFXSTDTC",
+      "IT.DM.RFXENDTC",
+      "IT.DM.RFICDTC",
+      "IT.DM.RFPENDTC",
+      "IT.DM.DTHDTC",
+      "IT.DM.DTHFL",
+      "IT.DM.SITEID",
+      "IT.DM.AGE",
+      "IT.DM.AGEU",
+      "IT.DM.SEX",
+      "IT.DM.RACE",
+      "IT.DM.ARMCD",
+      "IT.DM.ARM",
+      "IT.DM.ACTARMCD",
+      "IT.DM.ACTARM",
+      "IT.DM.ARMNRS",
+      "IT.DM.ACTARMUD",
+      "IT.DM.COUNTRY",
+      "IT.DM.DMDTC",
+      "IT.VS.STUDYID",
+      "IT.VS.DOMAIN",
+      "IT.VS.USUBJID",
+      "IT.VS.VSSEQ",
+      "IT.VS.VSTESTCD",
+      "IT.VS.VSTEST",
+      "IT.VS.VSPOS",
+      "IT.VS.VSORRES",
+      "IT.VS.VSORRES.TEMP",
+      "IT.VS.VSORRES.WEIGHT",
+      "IT.VS.VSORRES.HEIGHT",
+      "IT.VS.VSORRES.SYSBP",
+      "IT.VS.VSORRES.DIABP",
+      "IT.VS.VSORRES.HR",
+      "IT.VS.VSORRESU",
+      "IT.VS.VSORRESU.TEMP",
+      "IT.VS.VSORRESU.WEIGHT",
+      "IT.VS.VSORRESU.HEIGHT",
+      "IT.VS.VSORRESU.SYSBP",
+      "IT.VS.VSORRESU.DIABP",
+      "IT.VS.VSORRESU.HR",
+      "IT.VS.VSSTRESC",
+      "IT.VS.VSSTRESN",
+      "IT.VS.VSSTRESU",
+      "IT.VS.VSLOC",
+      "IT.VS.VSLAT",
+      "IT.VS.VSLOBXFL",
+      "IT.VS.VISITNUM",
+      "IT.VS.VSDTC",
+      "IT.LB.STUDYID",
+      "IT.LB.DOMAIN",
+      "IT.LB.USUBJID",
+      "IT.LB.LBSEQ",
+      "IT.LB.LBTESTCD",
+      "IT.LB.LBTEST",
+      "IT.LB.LBCAT",
+      "IT.LB.LBORRES",
+      "IT.LB.LBORRES.ALT",
+      "IT.LB.LBORRES.ALB",
+      "IT.LB.LBORRES.ALP",
+      "IT.LB.LBORRES.AST",
+      "IT.LB.LBORRES.CREAT",
+      "IT.LB.LBORRES.K",
+      "IT.LB.LBORRES.SODIUM",
+      "IT.LB.LBORRES.HBA1C",
+      "IT.LB.LBORRESU",
+      "IT.LB.LBORRESU.ALT",
+      "IT.LB.LBORRESU.ALP",
+      "IT.LB.LBORRESU.AST",
+      "IT.LB.LBORRESU.CREAT",
+      "IT.LB.LBORRESU.K",
+      "IT.LB.LBORRESU.SODIUM",
+      "IT.LB.LBORRESU.HBA1C",
+      "IT.LB.LBORNRLO",
+      "IT.LB.LBORNRHI",
+      "IT.LB.LBSTRESC",
+      "IT.LB.LBSTRESN",
+      "IT.LB.LBSTRESU",
+      "IT.LB.LBSTNRLO",
+      "IT.LB.LBSTNRHI",
+      "IT.LB.LBNRIND",
+      "IT.LB.LBSPEC",
+      "IT.LB.LBLOBXFL",
+      "IT.LB.LBFAST",
+      "IT.LB.VISITNUM",
+      "IT.LB.LBDTC",
+      "IT.AE.STUDYID",
+      "IT.AE.DOMAIN",
+      "IT.AE.USUBJID",
+      "IT.AE.AESEQ",
+      "IT.AE.AETERM",
+      "IT.AE.AELLT",
+      "IT.AE.AELLTCD",
+      "IT.AE.AEDECOD",
+      "IT.AE.AEPTCD",
+      "IT.AE.AEHLT",
+      "IT.AE.AEHLTCD",
+      "IT.AE.AEHLGT",
+      "IT.AE.AEHLGTCD",
+      "IT.AE.AECAT",
+      "IT.AE.AESCAT",
+      "IT.AE.AEPRESP",
+      "IT.AE.AEBODSYS",
+      "IT.AE.AEBDSYCD",
+      "IT.AE.AESOC",
+      "IT.AE.AESOCCD",
+      "IT.AE.AELOC",
+      "IT.AE.AESEV",
+      "IT.AE.AESER",
+      "IT.AE.AEACN",
+      "IT.AE.AEACNOTH",
+      "IT.AE.AEREL",
+      "IT.AE.AERELNST",
+      "IT.AE.AEPATT",
+      "IT.AE.AEOUT",
+      "IT.AE.AESCAN",
+      "IT.AE.AESCONG",
+      "IT.AE.AESDISAB",
+      "IT.AE.AESDTH",
+      "IT.AE.AESHOSP",
+      "IT.AE.AESLIFE",
+      "IT.AE.AESOD",
+      "IT.AE.AESMIE",
+      "IT.AE.AECONTRT",
+      "IT.AE.AETOXGR",
+      "IT.AE.AESTDTC",
+      "IT.AE.AEENDTC",
+      "IT.AE.AEENRF",
+      "IT.AE.AEENRTPT",
+      "IT.AE.AEENTPT"
+    ],
+    "hasStandardsElement": true,
+    "annotatedCRF": {
+      "documentRefs": [
+        {
+          "leafID": "LF.acrf"
+        }
+      ]
+    },
+    "hasSASFieldName": true,
     "itemGroupSupplemental": {
       "IG.DM": {
         "OID": "IG.DM",
+        "defClass": "SPECIAL PURPOSE",
+        "classIsAttribute": false,
         "repeating": "No",
         "sasDatasetName": "DM",
-        "archiveLocationID": "LF.DM"
+        "archiveLocationID": "LF.DM",
+        "sourceResourceOID": "RES.LF.DM",
+        "leafID": "LF.DM"
       },
       "IG.VS": {
         "OID": "IG.VS",
+        "defClass": "FINDINGS",
+        "classIsAttribute": false,
         "repeating": "No",
         "sasDatasetName": "VS",
-        "archiveLocationID": "LF.VS"
+        "archiveLocationID": "LF.VS",
+        "sourceResourceOID": "RES.LF.VS",
+        "leafID": "LF.VS"
       },
       "IG.LB": {
         "OID": "IG.LB",
+        "defClass": "FINDINGS",
+        "classIsAttribute": false,
         "repeating": "No",
         "sasDatasetName": "LB",
-        "archiveLocationID": "LF.LB"
+        "archiveLocationID": "LF.LB",
+        "sourceResourceOID": "RES.LF.LB",
+        "leafID": "LF.LB"
       },
       "IG.AE": {
         "OID": "IG.AE",
+        "defClass": "EVENTS",
+        "classIsAttribute": false,
         "repeating": "No",
         "sasDatasetName": "AE",
-        "archiveLocationID": "LF.AE"
+        "archiveLocationID": "LF.AE",
+        "sourceResourceOID": "RES.LF.AE",
+        "leafID": "LF.AE"
+      },
+      "VL.VS.VSORRES": {},
+      "VL.VS.VSORRESU": {},
+      "VL.LB.LBORRES": {},
+      "VL.LB.LBORRESU": {},
+      "_itemOriginMetadata": {
+        "IT.VS.VSORRES": {
+          "valueListOID": "VL.VS.VSORRES"
+        },
+        "IT.VS.VSORRESU": {
+          "valueListOID": "VL.VS.VSORRESU"
+        },
+        "IT.LB.LBORRES": {
+          "valueListOID": "VL.LB.LBORRES"
+        },
+        "IT.LB.LBORRESU": {
+          "valueListOID": "VL.LB.LBORRESU"
+        },
+        "IT.VS.VSORRES.TEMP": {
+          "originalOriginType": "Collected",
+          "wasElement": true
+        },
+        "IT.VS.VSORRES.WEIGHT": {
+          "originalOriginType": "Collected",
+          "wasElement": true
+        },
+        "IT.VS.VSORRES.HEIGHT": {
+          "originalOriginType": "Collected",
+          "wasElement": true
+        },
+        "IT.VS.VSORRES.SYSBP": {
+          "originalOriginType": "Collected",
+          "wasElement": true
+        },
+        "IT.VS.VSORRES.DIABP": {
+          "originalOriginType": "Collected",
+          "wasElement": true
+        },
+        "IT.VS.VSORRES.HR": {
+          "originalOriginType": "Collected",
+          "wasElement": true
+        },
+        "IT.LB.LBORRES.ALT": {
+          "originalOriginType": "Collected",
+          "wasElement": true
+        },
+        "IT.LB.LBORRES.ALB": {
+          "originalOriginType": "Collected",
+          "wasElement": true
+        },
+        "IT.LB.LBORRES.ALP": {
+          "originalOriginType": "Collected",
+          "wasElement": true
+        },
+        "IT.LB.LBORRES.AST": {
+          "originalOriginType": "Collected",
+          "wasElement": true
+        },
+        "IT.LB.LBORRES.CREAT": {
+          "originalOriginType": "Collected",
+          "wasElement": true
+        },
+        "IT.LB.LBORRES.K": {
+          "originalOriginType": "Collected",
+          "wasElement": true
+        },
+        "IT.LB.LBORRES.SODIUM": {
+          "originalOriginType": "Collected",
+          "wasElement": true
+        },
+        "IT.LB.LBORRES.HBA1C": {
+          "originalOriginType": "Collected",
+          "wasElement": true
+        }
       }
     },
-    "codeListSupplemental": {},
-    "methodSupplemental": {},
-    "conditionSupplemental": {},
-    "inferenceLog": [
-      {
-        "operation": "valuelist_domain_link_inference",
-        "valuelist_oid": "VL.VS.VSORRES",
-        "domain_oid": "IG.VS",
-        "matched_item_oid": "IT.VS.VSORRES",
-        "reason": "Item OID \"IT.VS.VSORRES\" matches ValueList OID pattern"
+    "codeListSupplemental": {
+      "CL.AGEU": {
+        "OID": "CL.AGEU",
+        "isEnumeratedList": true
       },
-      {
-        "operation": "valuelist_domain_link_inference",
-        "valuelist_oid": "VL.VS.VSORRESU",
-        "domain_oid": "IG.VS",
-        "matched_item_oid": "IT.VS.VSORRES",
-        "reason": "Item OID \"IT.VS.VSORRES\" matches ValueList OID pattern"
+      "CL.RACE": {
+        "OID": "CL.RACE",
+        "isEnumeratedList": true
       },
-      {
-        "operation": "valuelist_domain_link_inference",
-        "valuelist_oid": "VL.LB.LBORRES",
-        "domain_oid": "IG.LB",
-        "matched_item_oid": "IT.LB.LBORRES",
-        "reason": "Item OID \"IT.LB.LBORRES\" matches ValueList OID pattern"
+      "CL.ARMNULRS": {
+        "OID": "CL.ARMNULRS",
+        "isEnumeratedList": true
       },
-      {
-        "operation": "valuelist_domain_link_inference",
-        "valuelist_oid": "VL.LB.LBORRESU",
-        "domain_oid": "IG.LB",
-        "matched_item_oid": "IT.LB.LBORRES",
-        "reason": "Item OID \"IT.LB.LBORRES\" matches ValueList OID pattern"
+      "CL.LAT": {
+        "OID": "CL.LAT",
+        "isEnumeratedList": true
+      },
+      "CL.LBSTRESC": {
+        "OID": "CL.LBSTRESC",
+        "isEnumeratedList": true
+      },
+      "CL.NRIND": {
+        "OID": "CL.NRIND",
+        "isEnumeratedList": true
+      },
+      "CL.ACN": {
+        "OID": "CL.ACN",
+        "isEnumeratedList": true
+      },
+      "CL.STENRF": {
+        "OID": "CL.STENRF",
+        "isEnumeratedList": true
       }
-    ]
+    },
+    "methodSupplemental": {},
+    "conditionSupplemental": {}
   }
 }

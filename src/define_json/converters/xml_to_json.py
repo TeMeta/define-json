@@ -46,6 +46,11 @@ from pathlib import Path
 from typing import Dict, List, Any, Optional, Tuple
 from datetime import datetime
 import logging
+import warnings
+
+# Suppress Pydantic serialization warnings for Union[ItemGroup, str] in children field
+# (nested ItemGroups serialize correctly, warning is cosmetic due to self-referential model)
+warnings.filterwarnings('ignore', category=UserWarning, message='.*Pydantic serializer warnings.*')
 
 # Import Pydantic models from define.py
 import sys
@@ -72,6 +77,7 @@ from ..schema.define import (
     OriginType,
     OriginSource,
     Comment,
+    Resource,
 )
 
 logger = logging.getLogger(__name__)
@@ -286,49 +292,142 @@ class DefineXMLToJSONConverter:
         standards_element = mdv.find('odm:Standards', self.active_namespaces) or mdv.find('def:Standards', self.active_namespaces)
         has_standards_element = standards_element is not None
         
-        if standard_name or standard_version:
-            standard_data = {
-                'OID': 'STD.001',  # Generate a simple OID for the standard
-            }
+        standards_list = []
+        
+        # Process Standards element if it exists
+        if standards_element is not None:
+            # Try def:Standard first, then odm:Standard
+            std_elems = standards_element.findall('def:Standard', self.active_namespaces)
+            if not std_elems:
+                std_elems = standards_element.findall('odm:Standard', self.active_namespaces)
             
-            # Map common standard name variations to enum values
-            standard_name_map = {
-                'CDISC ADaM': 'ADaMIG',
-                'ADaM': 'ADaMIG',
-                'CDISC SDTM': 'SDTMIG',
-                'SDTM': 'SDTMIG',
-                'CDISC SEND': 'SENDIG',
-                'SEND': 'SENDIG',
+            for std_elem in std_elems:
+                std_oid = std_elem.get('OID', '')
+                std_name = std_elem.get('Name', '')
+                std_type = std_elem.get('Type', '')
+                std_version = std_elem.get('Version', '')
+                std_status = std_elem.get('Status', '')
+                std_publishing_set = std_elem.get('PublishingSet', '')
+                
+                standard_data = {
+                    'OID': std_oid or f'STD.{len(standards_list) + 1}',
+                }
+                
+                if std_name:
+                    # Map common standard name variations to enum values
+                    standard_name_map = {
+                        'CDISC ADaM': 'ADaMIG',
+                        'ADaM': 'ADaMIG',
+                        'CDISC SDTM': 'SDTMIG',
+                        'SDTM': 'SDTMIG',
+                        'CDISC SEND': 'SENDIG',
+                        'SEND': 'SENDIG',
+                        'CDISC/NCI': 'CDISCSOLIDUSNCI',  # Map slash to enum name
+                    }
+                    mapped_name = standard_name_map.get(std_name, std_name)
+                    try:
+                        standard_data['name'] = StandardName(mapped_name)
+                    except ValueError:
+                        # Store as string if not valid enum
+                        standard_data['name'] = std_name
+                
+                if std_version:
+                    standard_data['version'] = std_version
+                if std_status:
+                    # Map status values to enum
+                    status_map = {
+                        'Final': 'FINAL',
+                        'final': 'FINAL',
+                        'Draft': 'DRAFT',
+                        'draft': 'DRAFT',
+                    }
+                    mapped_status = status_map.get(std_status, std_status.upper() if std_status else None)
+                    try:
+                        from ..schema.define import StandardStatus
+                        standard_data['status'] = StandardStatus(mapped_status)
+                    except (ValueError, AttributeError):
+                        # Store as string if not valid enum
+                        standard_data['status'] = std_status
+                if std_type:
+                    try:
+                        from ..schema.define import StandardType
+                        standard_data['type'] = StandardType(std_type)
+                    except (ValueError, AttributeError):
+                        standard_data['type'] = std_type
+                if std_publishing_set:
+                    try:
+                        from ..schema.define import PublishingSet
+                        standard_data['publishingSet'] = PublishingSet(std_publishing_set)
+                    except (ValueError, AttributeError):
+                        standard_data['publishingSet'] = std_publishing_set
+                
+                try:
+                    standard_obj = Standard(**standard_data)
+                    standards_list.append(standard_obj)
+                except Exception as e:
+                    logger.warning(f"Failed to create Standard object {std_oid}: {e}")
+        
+        # Fallback to attributes if no Standards element
+        if not standards_list and (standard_name or standard_version):
+            standard_data = {
+                'OID': 'STD.001',
             }
             
             if standard_name:
+                standard_name_map = {
+                    'CDISC ADaM': 'ADaMIG',
+                    'ADaM': 'ADaMIG',
+                    'CDISC SDTM': 'SDTMIG',
+                    'SDTM': 'SDTMIG',
+                    'CDISC SEND': 'SENDIG',
+                    'SEND': 'SENDIG',
+                }
                 mapped_name = standard_name_map.get(standard_name, standard_name)
                 try:
                     standard_data['name'] = StandardName(mapped_name)
                 except ValueError:
-                    # If not a valid enum value, store in xml_metadata instead
-                    logger.warning(f"StandardName '{standard_name}' not in enum, storing in xml_metadata")
                     xml_metadata['standardName'] = standard_name
-                    standard_name = None  # Don't create Standard object
+                    standard_name = None
             
-            if standard_version and standard_name:  # Only if name was valid
+            if standard_version and standard_name:
                 standard_data['version'] = standard_version
             
-            if standard_name:  # Only create if we have a valid name
+            if standard_name:
                 try:
                     standard_obj = Standard(**standard_data)
-                    mdv_data['standards'] = [standard_obj]
-                    logger.info(f"  - Created Standard: {standard_data.get('name')} v{standard_version}")
-                    # Mark whether Standards was an element or just attributes
-                    xml_metadata['hasStandardsElement'] = has_standards_element
+                    standards_list.append(standard_obj)
                 except Exception as e:
                     logger.warning(f"Failed to create Standard object: {e}")
                     xml_metadata['standardName'] = mdv.get('{%s}StandardName' % self.active_namespaces['def'])
                     xml_metadata['standardVersion'] = standard_version
-            elif standard_version:
-                # Have version but no valid name
-                xml_metadata['standardVersion'] = standard_version
-                xml_metadata['hasStandardsElement'] = has_standards_element
+        
+        if standards_list:
+            mdv_data['standards'] = standards_list
+            logger.info(f"  - Created {len(standards_list)} Standard objects")
+            xml_metadata['hasStandardsElement'] = has_standards_element
+        elif standard_version:
+            xml_metadata['standardVersion'] = standard_version
+            xml_metadata['hasStandardsElement'] = has_standards_element
+        
+        # Process AnnotatedCRF element (simple DocumentRef container)
+        annotated_crf_elem = mdv.find('def:AnnotatedCRF', self.active_namespaces)
+        if annotated_crf_elem is not None:
+            # AnnotatedCRF contains DocumentRef elements with leafID
+            doc_ref_elems = annotated_crf_elem.findall('def:DocumentRef', self.active_namespaces)
+            if doc_ref_elems:
+                annotated_crf_data = {'documentRefs': []}
+                for doc_ref in doc_ref_elems:
+                    leaf_id = doc_ref.get('leafID') or doc_ref.get('{%s}leafID' % self.active_namespaces['def'])
+                    if leaf_id:
+                        annotated_crf_data['documentRefs'].append({'leafID': leaf_id})
+                if annotated_crf_data['documentRefs']:
+                    xml_metadata['annotatedCRF'] = annotated_crf_data
+                    logger.info(f"  - Captured AnnotatedCRF with {len(annotated_crf_data['documentRefs'])} DocumentRefs")
+        
+        # Check if any ItemDef has SASFieldName to decide whether to write them back
+        has_sas_field_name = any(item_def.get('SASFieldName') for item_def in mdv.findall('.//odm:ItemDef', self.active_namespaces))
+        if has_sas_field_name:
+            xml_metadata['hasSASFieldName'] = True
         
         # Process methods first to build derivation method map
         logger.info("Processing methods...")
@@ -339,12 +438,18 @@ class DefineXMLToJSONConverter:
         
         # Process item groups with nested items (using structured approach)
         logger.info("Processing item groups with nested items...")
-        item_groups, ig_supplemental = self._process_item_groups_with_hierarchy(mdv, derivation_method_map)
+        item_groups, ig_supplemental, ig_resources = self._process_item_groups_with_hierarchy(mdv, derivation_method_map)
         if item_groups:
             mdv_data['itemGroups'] = item_groups
             logger.info(f"  - Created {len(item_groups)} item groups")
             total_items = sum(len(ig.items or []) for ig in item_groups)
             logger.info(f"  - Total items nested in groups: {total_items}")
+        
+        # Collect resources from ItemGroup leaves
+        if ig_resources:
+            if 'resources' not in mdv_data:
+                mdv_data['resources'] = []
+            mdv_data['resources'].extend([r.model_dump(mode='json', exclude_none=True) if hasattr(r, 'model_dump') else r for r in ig_resources])
         
         # Process code lists
         logger.info("Processing code lists...")
@@ -370,31 +475,20 @@ class DefineXMLToJSONConverter:
             xml_metadata['analysisResultDisplays'] = analysis_displays
             logger.info(f"  - Found {len(analysis_displays)} AnalysisResultDisplays containers")
         
-        # Capture MetaDataVersion-level def:leaf elements (document references, display locations)
+        # Capture MetaDataVersion-level def:leaf elements and convert to Resources
         logger.info("Processing MetaDataVersion-level leaf elements...")
-        mdv_leaves = []
+        mdv_resources = []
         for leaf_elem in mdv.findall('def:leaf', self.active_namespaces):
-            leaf_data = {}
-            leaf_id = leaf_elem.get('ID')
-            if leaf_id:
-                leaf_data['ID'] = leaf_id
-            
-            # xlink:href attribute
-            href = leaf_elem.get('{%s}href' % self.active_namespaces['xlink'])
-            if href:
-                leaf_data['href'] = href
-            
-            # def:title child element
-            title_elem = leaf_elem.find('def:title', self.active_namespaces)
-            if title_elem is not None and title_elem.text:
-                leaf_data['title'] = title_elem.text
-            
-            if leaf_data:
-                mdv_leaves.append(leaf_data)
+            resource = self._leaf_to_resource(leaf_elem)
+            if resource:
+                mdv_resources.append(resource)
         
-        if mdv_leaves:
-            xml_metadata['mdvLeaves'] = mdv_leaves
-            logger.info(f"  - Found {len(mdv_leaves)} MetaDataVersion-level leaf elements")
+        if mdv_resources:
+            # Store in resources array (will be added to mdv_data)
+            if 'resources' not in mdv_data:
+                mdv_data['resources'] = []
+            mdv_data['resources'].extend([r.model_dump(mode='json', exclude_none=True) if hasattr(r, 'model_dump') else r for r in mdv_resources])
+            logger.info(f"  - Converted {len(mdv_resources)} MetaDataVersion-level leaf elements to Resources")
         
         # Process conditions and where clauses
         logger.info("Processing conditions and where clauses...")
@@ -436,8 +530,8 @@ class DefineXMLToJSONConverter:
         
         # Save to file
         logger.info(f"Writing output to {output_path}")
-        with open(output_path, 'w') as f:
-            json.dump(result, f, indent=2, default=str)
+        with open(output_path, 'w', encoding='utf-8') as f:
+            json.dump(result, f, indent=2, default=str, ensure_ascii=False)
         
         logger.info("Conversion complete!")
         return result
@@ -463,6 +557,36 @@ class DefineXMLToJSONConverter:
         except (ValueError, AttributeError) as e:
             logger.warning(f"Failed to parse datetime '{dt_str}': {e}, using current datetime")
             return datetime.now()
+    
+    def _leaf_to_resource(self, leaf_elem: ET.Element) -> Optional[Resource]:
+        """Convert a def:leaf element to a Resource object."""
+        leaf_id = leaf_elem.get('ID')
+        if not leaf_id:
+            return None
+        
+        # Get href
+        href = leaf_elem.get('{%s}href' % self.active_namespaces.get('xlink', ''))
+        
+        # Get title
+        title_elem = leaf_elem.find('def:title', self.active_namespaces)
+        title = title_elem.text if title_elem is not None and title_elem.text else None
+        
+        # Create Resource - use leaf ID as OID, title as name/label
+        resource_data = {
+            'OID': f"RES.{leaf_id}",  # Prefix to ensure valid OID format
+            'name': title or leaf_id,
+            'href': href,
+            'resourceType': 'ODM',  # Default for Define-XML leaf elements
+        }
+        
+        if title:
+            resource_data['label'] = title
+        
+        try:
+            return Resource(**resource_data)
+        except Exception as e:
+            logger.warning(f"Failed to create Resource from leaf {leaf_id}: {e}")
+            return None
     
     def _process_methods(self, mdv: ET.Element) -> Tuple[List[Method], Dict[str, Dict], Dict]:
         """
@@ -580,20 +704,23 @@ class DefineXMLToJSONConverter:
         
         return None
     
-    def _process_item_groups_with_hierarchy(self, mdv: ET.Element, derivation_method_map: Dict) -> Tuple[List[ItemGroup], Dict]:
+    def _process_item_groups_with_hierarchy(self, mdv: ET.Element, derivation_method_map: Dict) -> Tuple[List[ItemGroup], Dict, List[Resource]]:
         """
         Process ItemGroupDef elements with items nested inside (using ItemGroup.items field).
         Also establishes parent-child relationships with ValueLists.
         
         Returns:
-            Tuple of (item_groups_list, supplemental_data)
+            Tuple of (item_groups_list, supplemental_data, resources_from_leaves)
         """
         item_groups = []
         supplemental = {}
         
         # Process domain-level ItemGroups
-        domain_igs, domain_supp = self._process_domain_item_groups(mdv, derivation_method_map)
+        domain_igs, domain_supp, domain_resources = self._process_domain_item_groups(mdv, derivation_method_map)
         item_groups.extend(domain_igs)
+        
+        # Collect resources from ItemGroup leaves
+        all_resources = domain_resources.copy() if domain_resources else []
         
         # Extract and merge item origin metadata
         domain_origin_meta = domain_supp.pop('_itemOriginMetadata', {})
@@ -645,25 +772,27 @@ class DefineXMLToJSONConverter:
                 # Method 2: Check the ItemDef itself for ValueList reference
                 item_def = mdv.find(f'.//odm:ItemDef[@OID="{item_oid}"]', self.active_namespaces)
                 if item_def is not None:
-                    vl_ref = item_def.get('{%s}ValueListOID' % self.active_namespaces['def'])
-                    if not vl_ref:
-                        vl_ref = item_def.get('{%s}ValueListRef' % self.active_namespaces['def'])
-                    
-                    if vl_ref:
-                        if vl_ref not in valuelist_to_parent:
-                            valuelist_to_parent[vl_ref] = []
-                        if ig_oid not in valuelist_to_parent[vl_ref]:
-                            valuelist_to_parent[vl_ref].append(ig_oid)
-                            logger.info(f"    - ItemDef {item_oid} references ValueList {vl_ref}, parent is {ig_oid}")
+                    # Check for def:ValueListRef child element (correct approach)
+                    vl_ref_elem = item_def.find('def:ValueListRef', self.active_namespaces)
+                    if vl_ref_elem is not None:
+                        vl_ref = vl_ref_elem.get('ValueListOID')
+                        if vl_ref:
+                            if vl_ref not in valuelist_to_parent:
+                                valuelist_to_parent[vl_ref] = []
+                            if ig_oid not in valuelist_to_parent[vl_ref]:
+                                valuelist_to_parent[vl_ref].append(ig_oid)
+                                logger.info(f"    - ItemDef {item_oid} references ValueList {vl_ref}, parent is {ig_oid}")
         
         # Log summary of ValueList parent relationships
         for vl_oid, parent_oids in valuelist_to_parent.items():
             if len(parent_oids) > 1:
                 logger.info(f"    - ValueList {vl_oid} has multiple parents: {parent_oids}")
         
-        # Add ValueList OIDs as children to their parent domains
-        # A ValueList can have multiple parents (used in multiple domains)
+        # Nest ValueList ItemGroups under their parent domains (not just OID references!)
+        # A ValueList can have multiple parents - if so, nest under first, reference from others
         children_added = 0
+        nested_valuelist_oids = set()  # Track which ValueLists have been nested
+        
         for vl_ig in value_list_igs:
             parent_oids = valuelist_to_parent.get(vl_ig.OID, [])
             
@@ -671,26 +800,51 @@ class DefineXMLToJSONConverter:
             if isinstance(parent_oids, str):
                 parent_oids = [parent_oids]
             
-            for parent_oid in parent_oids:
-                # Find the parent domain ItemGroup and add this ValueList as a child
+            if not parent_oids:
+                logger.warning(f"    - ValueList {vl_ig.OID} has no parent, will remain at top level")
+                continue
+            
+            # Nest under FIRST parent (full object)
+            first_parent_oid = parent_oids[0]
+            for domain_ig in domain_igs:
+                if domain_ig.OID == first_parent_oid:
+                    if domain_ig.children is None:
+                        domain_ig.children = []
+                    # Nest the ACTUAL ValueList object, not just OID
+                    domain_ig.children.append(vl_ig)
+                    nested_valuelist_oids.add(vl_ig.OID)
+                    children_added += 1
+                    logger.info(f"    - Nested {vl_ig.OID} under parent {first_parent_oid}")
+                    break
+            
+            # For additional parents (if any), just add OID reference
+            for parent_oid in parent_oids[1:]:
                 for domain_ig in domain_igs:
                     if domain_ig.OID == parent_oid:
                         if domain_ig.children is None:
                             domain_ig.children = []
+                        # Additional parents get OID reference (avoid duplication)
                         if vl_ig.OID not in domain_ig.children:
                             domain_ig.children.append(vl_ig.OID)
-                            children_added += 1
-                            logger.info(f"    - Added {vl_ig.OID} as child of {parent_oid}")
+                            logger.info(f"    - Added OID reference {vl_ig.OID} to additional parent {parent_oid}")
                         break
         
-        logger.info(f"  - Added {children_added} ValueList children to parent domains")
+        logger.info(f"  - Nested {children_added} ValueLists under parent domains")
         
         # If inference is enabled, try to infer ValueList -> Domain links based on OID substring matching
         if not self.preserve_original:
             inferred_links = self._infer_valuelist_domain_links(value_list_igs, domain_igs, valuelist_to_parent)
             logger.info(f"  - Inferred {inferred_links} additional ValueList links via OID matching")
         
-        return item_groups, supplemental
+        # Return only domain ItemGroups at top level (ValueLists are now nested in children)
+        # Keep orphaned ValueLists (no parent) at top level
+        orphaned_valuelists = [vl for vl in value_list_igs if vl.OID not in nested_valuelist_oids]
+        top_level_item_groups = domain_igs + orphaned_valuelists
+        
+        if orphaned_valuelists:
+            logger.warning(f"  - {len(orphaned_valuelists)} ValueLists remain at top level (no parent detected)")
+        
+        return top_level_item_groups, supplemental, all_resources
     
     def _infer_valuelist_domain_links(
         self, 
@@ -791,11 +945,16 @@ class DefineXMLToJSONConverter:
         
         return inferred_count
     
-    def _process_domain_item_groups(self, mdv: ET.Element, derivation_method_map: Dict) -> Tuple[List[ItemGroup], Dict]:
-        """Process domain-level ItemGroupDef elements as Pydantic ItemGroup objects."""
+    def _process_domain_item_groups(self, mdv: ET.Element, derivation_method_map: Dict) -> Tuple[List[ItemGroup], Dict, List[Resource]]:
+        """Process domain-level ItemGroupDef elements as Pydantic ItemGroup objects.
+        
+        Returns:
+            Tuple of (item_groups, supplemental_data, resources_from_leaves)
+        """
         item_groups = []
         supplemental = {}
         item_origin_metadata = {}  # Track origin metadata for all items
+        resources = []  # Collect resources from leaf elements
         
         for ig_elem in mdv.findall('.//odm:ItemGroupDef', self.active_namespaces):
             ig_oid = ig_elem.get('OID')
@@ -836,23 +995,33 @@ class DefineXMLToJSONConverter:
                 ig_data['purpose'] = purpose
             
             # Store def: namespaced attributes in supplemental for roundtrip
-            # def:Class
+            # def:Class - can be either attribute or child element
             class_attr = ig_elem.get('{%s}Class' % self.active_namespaces['def'])
             if class_attr:
                 ig_supp['defClass'] = class_attr
+                ig_supp['classIsAttribute'] = True  # Track that it was an attribute
+            else:
+                # Check for def:Class child element
+                class_elem = ig_elem.find('def:Class', self.active_namespaces)
+                if class_elem is not None:
+                    class_name = class_elem.get('Name')
+                    if class_name:
+                        ig_supp['defClass'] = class_name
+                        ig_supp['classIsAttribute'] = False  # Track that it was a child element
             
             # def:DomainKeys
             domain_keys = ig_elem.get('{%s}DomainKeys' % self.active_namespaces['def'])
             if domain_keys:
                 ig_supp['defDomainKeys'] = domain_keys
             
-            # def:Label (already captured above but ensure it's in supplemental too)
-            if label:
-                ig_supp['defLabel'] = label
+            # Note: def:Label is already captured in native 'label' field above, no need for defLabel in supplemental
             
-            # Comment attribute (including empty values like " ")
+            # Comment attribute -> use native comments array
             comment = ig_elem.get('Comment')
             if comment is not None:  # Check for None, not truthiness (to capture empty strings)
+                if comment.strip():  # Only add non-empty comments
+                    ig_data['comments'] = [comment]
+                # Store empty comment in supplemental for roundtrip
                 ig_supp['comment'] = comment
             
             # Repeating (store in supplemental as string for roundtrip)
@@ -875,37 +1044,25 @@ class DefineXMLToJSONConverter:
             if archive_loc:
                 ig_supp['archiveLocationID'] = archive_loc
             
-            # Capture def:leaf elements (for dataset locations)
+            # Capture def:leaf elements and convert to Resource
+            # Store Resource OID reference in supplemental for roundtrip
             leaf_elem = ig_elem.find('def:leaf', self.active_namespaces)
             if leaf_elem is not None:
-                leaf_data = {}
-                leaf_id = leaf_elem.get('ID')
-                if leaf_id:
-                    leaf_data['ID'] = leaf_id
-                
-                # xlink:href attribute
-                href = leaf_elem.get('{%s}href' % self.active_namespaces['xlink'])
-                if href:
-                    leaf_data['href'] = href
-                
-                # def:title child element
-                title_elem = leaf_elem.find('def:title', self.active_namespaces)
-                if title_elem is not None and title_elem.text:
-                    leaf_data['title'] = title_elem.text
-                
-                if leaf_data:
-                    ig_supp['leaf'] = leaf_data
+                resource = self._leaf_to_resource(leaf_elem)
+                if resource:
+                    resources.append(resource)  # Collect for resources array
+                    # Store Resource OID reference for roundtrip
+                    ig_supp['sourceResourceOID'] = resource.OID
+                    # Also store original leaf data for roundtrip
+                    leaf_id = leaf_elem.get('ID')
+                    if leaf_id:
+                        ig_supp['leafID'] = leaf_id
             
             # Process ItemRefs - create full Item objects nested in items list
+            # Order is preserved by array ordering, no need to track OrderNumber
             items = []
-            item_order_numbers = {}  # Track OrderNumber for each item
             for item_ref in ig_elem.findall('odm:ItemRef', self.active_namespaces):
                 item_oid = item_ref.get('ItemOID')
-                
-                # Capture OrderNumber if present (for exact roundtrip)
-                order_number = item_ref.get('OrderNumber')
-                if order_number:
-                    item_order_numbers[item_oid] = order_number
                 
                 item_def = mdv.find(f'.//odm:ItemDef[@OID="{item_oid}"]', self.active_namespaces)
                 
@@ -913,16 +1070,17 @@ class DefineXMLToJSONConverter:
                     item_obj, item_supp = self._create_item_object(item_def, item_ref, derivation_method_map)
                     if item_obj:
                         items.append(item_obj)
-                        # Collect origin metadata
+                        # Collect supplemental metadata (origin metadata, valueListOID, etc.)
+                        supp_data = {}
                         if 'originMetadata' in item_supp:
-                            item_origin_metadata[item_oid] = item_supp['originMetadata']
+                            supp_data.update(item_supp['originMetadata'])
+                        if 'valueListOID' in item_supp:
+                            supp_data['valueListOID'] = item_supp['valueListOID']
+                        if supp_data:
+                            item_origin_metadata[item_oid] = supp_data
             
             if items:
                 ig_data['items'] = items
-            
-            # Store OrderNumbers in supplemental for exact roundtrip
-            if item_order_numbers:
-                ig_supp['itemOrderNumbers'] = item_order_numbers
             
             # Create ItemGroup Pydantic object
             try:
@@ -937,7 +1095,7 @@ class DefineXMLToJSONConverter:
         if item_origin_metadata:
             supplemental['_itemOriginMetadata'] = item_origin_metadata
         
-        return item_groups, supplemental
+        return item_groups, supplemental, resources
     
     def _create_item_object(self, item_def: ET.Element, item_ref: ET.Element = None, 
                            derivation_method_map: Dict = None) -> Tuple[Optional[Item], Dict]:
@@ -1009,8 +1167,15 @@ class DefineXMLToJSONConverter:
         if display_format:
             item_data['displayFormat'] = display_format
         
+        # SASFieldName is redundant - it's always the same as Name, so we don't need to store it
+        # It will be written back from the name field during XML generation
+        
         # Origin - properly handled (Origin itself has no description field)
-        origin_data = self._get_origin(item_def)
+        origin_data, origin_metadata_from_get = self._get_origin(item_def)
+        
+        # Merge origin metadata
+        if origin_metadata_from_get:
+            origin_metadata.update(origin_metadata_from_get)
         
         # Extract metadata fields that don't belong in Origin Pydantic model
         if origin_data:
@@ -1019,9 +1184,13 @@ class DefineXMLToJSONConverter:
             was_element = origin_data.pop('_wasElement', None)
             comment_for_linking = origin_data.pop('_commentForMethodLinking', None)
             
-            # Store in supplemental for roundtrip
+            # Store comment in supplemental for roundtrip
+            # Note: Item.comments expects list[str], not Comment objects
+            # Origin comments are stored in supplemental metadata, not in Item.comments
             if comment:
                 origin_metadata['comment'] = comment
+            
+            # Store metadata flags in supplemental for roundtrip
             if was_element is not None:
                 origin_metadata['wasElement'] = was_element
             if comment_for_linking:
@@ -1058,6 +1227,13 @@ class DefineXMLToJSONConverter:
                 wc_oid = where_clause_ref.get('WhereClauseOID')
                 if wc_oid:
                     item_data['applicableWhen'] = [wc_oid]
+        
+        # Check for def:ValueListRef child element on ItemDef
+        vl_ref_elem = item_def.find('def:ValueListRef', self.active_namespaces)
+        if vl_ref_elem is not None:
+            vl_oid = vl_ref_elem.get('ValueListOID')
+            if vl_oid:
+                item_supp['valueListOID'] = vl_oid
         
         # Link to methods based on derivation descriptions (only if not preserving original)
         if not self.preserve_original and derivation_method_map and (origin_data or origin_metadata):
@@ -1104,6 +1280,7 @@ class DefineXMLToJSONConverter:
         """
         origin = {}
         has_origin_element = False  # Track if origin was an element vs attribute
+        origin_metadata = {}  # Initialize for storing non-standard values
         
         # Check for def:Origin element (v2.x style)
         origin_elem = item_def.find('.//def:Origin', self.active_namespaces)
@@ -1111,16 +1288,14 @@ class DefineXMLToJSONConverter:
             has_origin_element = True
             origin_type = origin_elem.get('Type')
             if origin_type:
-                # Map "Collected" to "CRF" since collected data typically comes from CRFs
-                if origin_type == "Collected":
-                    logger.info(f"Mapping OriginType 'Collected' to 'CRF' for item {item_def.get('OID')}")
-                    origin_type = "CRF"
-                
                 try:
                     origin['type'] = OriginType(origin_type)
                 except ValueError:
-                    logger.warning(f"Invalid OriginType: {origin_type}")
-                    origin['type'] = origin_type
+                    # Store original invalid value in metadata for perfect roundtrip
+                    logger.warning(f"Invalid OriginType '{origin_type}' for item {item_def.get('OID')}, storing in supplemental")
+                    origin_metadata['originalOriginType'] = origin_type
+                    # Use CRF as fallback for the model  
+                    origin['type'] = OriginType.CRF
             
             source = origin_elem.get('Source')
             if source:
@@ -1167,7 +1342,7 @@ class DefineXMLToJSONConverter:
         if self.preserve_original and origin:
             origin['_wasElement'] = has_origin_element
         
-        return origin
+        return origin, origin_metadata
     
     def _process_value_lists_as_item_groups(self, mdv: ET.Element, derivation_method_map: Dict) -> Tuple[List[ItemGroup], Dict]:
         """
@@ -1189,18 +1364,13 @@ class DefineXMLToJSONConverter:
                 continue
             
             # Collect items for this specific ValueListDef
+            # Order is preserved by array ordering, no need to track OrderNumber
             items = []
-            item_order_numbers = {}  # Track OrderNumbers for each ItemRef
             
             for item_ref in vl_elem.findall('odm:ItemRef', self.active_namespaces):
                 item_oid = item_ref.get('ItemOID')
                 if not item_oid:
                     continue
-                
-                # Capture OrderNumber attribute (critical for ValueLists!)
-                order_num = item_ref.get('OrderNumber')
-                if order_num:
-                    item_order_numbers[item_oid] = order_num
                     
                 item_def = mdv.find(f'.//odm:ItemDef[@OID="{item_oid}"]', self.active_namespaces)
                 
@@ -1231,14 +1401,8 @@ class DefineXMLToJSONConverter:
                 vl_ig = ItemGroup(**ig_data)
                 value_list_igs.append(vl_ig)
                 logger.info(f"  - Created ValueList ItemGroup {vl_oid} with {len(items)} items")
-                # Fix #2: Track that this ItemGroup is actually a ValueListDef
-                supplemental[vl_oid] = {
-                    'elementType': 'ValueListDef',
-                    'originalType': 'ValueList'
-                }
-                # Store OrderNumbers for perfect roundtrip
-                if item_order_numbers:
-                    supplemental[vl_oid]['itemOrderNumbers'] = item_order_numbers
+                # No supplemental data needed - ValueList is identified by type='ValueList'
+                supplemental[vl_oid] = {}
             except Exception as e:
                 logger.error(f"Failed to create ValueList ItemGroup {vl_oid}: {e}")
                 logger.error(f"  ig_data keys: {ig_data.keys()}")
@@ -1247,7 +1411,7 @@ class DefineXMLToJSONConverter:
                     logger.error(f"  first item type: {type(items[0])}")
                 import traceback
                 logger.error(f"  Full traceback: {traceback.format_exc()}")
-                ig_data['elementType'] = 'ValueListDef'  # Still track for failed items
+                # Store failed item data in supplemental for debugging only
                 supplemental[vl_oid] = ig_data
         
         # Store item origin metadata at top level
@@ -1298,6 +1462,20 @@ class DefineXMLToJSONConverter:
             description = self._get_description(cl_elem)
             if description:
                 cl_data['description'] = description
+            
+            # Process Alias elements on CodeList - store as simple string aliases
+            # Format: "context|||name" using ||| as delimiter to avoid conflicts with : in context
+            aliases = []
+            for alias_elem in cl_elem.findall('odm:Alias', self.active_namespaces):
+                context = alias_elem.get('Context')
+                name = alias_elem.get('Name')
+                if context and name:
+                    # Use ||| as delimiter (unlikely to appear in real data)
+                    aliases.append(f"{context}|||{name}")
+                elif name:
+                    aliases.append(name)
+            if aliases:
+                cl_data['aliases'] = aliases
             
             # Check for ExternalCodeList - convert to Dictionary object
             external_cl = cl_elem.find('odm:ExternalCodeList', self.active_namespaces)
@@ -1350,12 +1528,17 @@ class DefineXMLToJSONConverter:
             
             # Process CodeListItem/EnumeratedItem as proper Pydantic objects
             code_list_items = []
+            # Track element type for each item (CodeListItem vs EnumeratedItem)
+            item_element_types = {}
+            
+            # Process both CodeListItem and EnumeratedItem
             for item_elem in cl_elem.findall('.//odm:CodeListItem', self.active_namespaces):
                 coded_value = item_elem.get('CodedValue')
                 if not coded_value:
                     continue
                     
                 item_data = {'codedValue': coded_value}
+                item_element_types[coded_value] = 'CodeListItem'
                 
                 # Decode
                 decode = self._get_decode(item_elem)
@@ -1375,6 +1558,19 @@ class DefineXMLToJSONConverter:
                     except ValueError:
                         item_data['weight'] = float(rank)
                 
+                # Process Alias elements - store as coding (semantic reference)
+                # Only take the first one as coding (ODM allows multiple, but schema expects single Coding)
+                for alias_elem in item_elem.findall('odm:Alias', self.active_namespaces):
+                    context = alias_elem.get('Context')
+                    name = alias_elem.get('Name')
+                    if context and name and 'coding' not in item_data:
+                        # Map to Coding structure: Context → codeSystem, Name → code
+                        item_data['coding'] = Coding(
+                            codeSystem=context,
+                            code=name
+                        )
+                        break  # Only take first alias as primary coding
+                
                 # Try to create CodeListItem Pydantic object
                 try:
                     cli_obj = CodeListItem(**item_data)
@@ -1385,6 +1581,46 @@ class DefineXMLToJSONConverter:
                     if 'failed_items' not in cl_supp:
                         cl_supp['failed_items'] = []
                     cl_supp['failed_items'].append(item_data)
+            
+            # Process EnumeratedItem elements (simpler, no Decode)
+            for item_elem in cl_elem.findall('.//odm:EnumeratedItem', self.active_namespaces):
+                coded_value = item_elem.get('CodedValue')
+                if not coded_value:
+                    continue
+                    
+                item_data = {'codedValue': coded_value}
+                item_element_types[coded_value] = 'EnumeratedItem'
+                
+                # EnumeratedItem has Alias but no Decode
+                for alias_elem in item_elem.findall('odm:Alias', self.active_namespaces):
+                    context = alias_elem.get('Context')
+                    name = alias_elem.get('Name')
+                    if context and name and 'coding' not in item_data:
+                        item_data['coding'] = Coding(
+                            codeSystem=context,
+                            code=name
+                        )
+                        break
+                
+                try:
+                    cli_obj = CodeListItem(**item_data)
+                    code_list_items.append(cli_obj)
+                except Exception as e:
+                    logger.warning(f"Failed to create CodeListItem from EnumeratedItem {coded_value}: {e}")
+            
+            # Store element types ONLY if needed for roundtrip
+            # Only store if: (1) Mixed CodeList (has both types) OR (2) All EnumeratedItems
+            if item_element_types:
+                has_code_list_item = 'CodeListItem' in item_element_types.values()
+                has_enumerated_item = 'EnumeratedItem' in item_element_types.values()
+                
+                # Case 1: Mixed - store all mappings
+                if has_code_list_item and has_enumerated_item:
+                    cl_supp['itemElementTypes'] = item_element_types
+                # Case 2: Pure EnumeratedItem - store flag only
+                elif has_enumerated_item:
+                    cl_supp['isEnumeratedList'] = True
+                # Case 3: Pure CodeListItem - store nothing (default assumption)
             
             if code_list_items:
                 cl_data['codeListItems'] = code_list_items
@@ -1450,7 +1686,8 @@ class DefineXMLToJSONConverter:
             range_checks = []
             for rc in wc_elem.findall('.//odm:RangeCheck', self.active_namespaces):
                 comparator = rc.get('Comparator')
-                item_oid = rc.get('ItemOID')
+                # ItemOID can be either 'ItemOID' or 'def:ItemOID'
+                item_oid = rc.get('ItemOID') or rc.get('{%s}ItemOID' % self.active_namespaces.get('def', ''))
                 
                 # Get CheckValue
                 check_value_elem = rc.find('.//odm:CheckValue', self.active_namespaces)
@@ -1464,6 +1701,11 @@ class DefineXMLToJSONConverter:
                     # Use checkValues (plural) list to match Define-JSON schema
                     if check_value:
                         range_check_data['checkValues'] = [check_value]
+                    
+                    # SoftHard attribute (optional)
+                    soft_hard = rc.get('SoftHard')
+                    if soft_hard:
+                        range_check_data['softHard'] = soft_hard
                     
                     range_checks.append(range_check_data)
             
