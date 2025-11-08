@@ -16130,6 +16130,1337 @@
       "type": "Computation"
     }
   ],
+  "analyses": [
+    {
+      "OID": "Table_14-1.01.R.1",
+      "description": "[leafID: SAP_SEC_9.1]",
+      "type": "Computation",
+      "analysisReason": "pre-specified in SAP",
+      "analysisMethod": "Table_14-1.01.R.1",
+      "inputData": [
+        "ADSL.ITTFL",
+        "ADSL.SAFFL",
+        "ADSL.EFFFL",
+        "ADSL.COMP24FL",
+        "ADSL.DISCONFL",
+        "ADSL"
+      ]
+    },
+    {
+      "OID": "Table_14-1.02.R.1",
+      "description": "Reasons for discontinuation are summarized for subjects discontinuing before Week 24 (visit 12) (i.e. COMP24FL ne =\"Y\" and VISNUMEN less than 12)",
+      "type": "Computation",
+      "analysisReason": "pre-specified in SAP",
+      "analysisMethod": "Table_14-1.02.R.1",
+      "applicableWhen": [
+        "Table_14-1.02.R.1.SC1"
+      ],
+      "inputData": [
+        "ADSL.COMP24FL",
+        "ADSL.DCREASCD",
+        "ADSL"
+      ]
+    },
+    {
+      "OID": "Table_14-2.01.R.1",
+      "name": "treatment group comparison for continuous variables",
+      "description": "ANOVA treatment group comparison",
+      "type": "Computation",
+      "analysisReason": "pre-specified in protocol",
+      "applicableWhen": [
+        "Table_14-2.01.R.1.SC1"
+      ],
+      "inputData": [
+        "ADSL.AGE",
+        "ADSL.MMSETOT",
+        "ADSL.DURDIS",
+        "ADSL.EDUCLVL",
+        "ADSL.WEIGHTBL",
+        "ADSL.HEIGHTBL",
+        "ADSL.BMIBL",
+        "ADSL"
+      ]
+    },
+    {
+      "OID": "Table_14-2.01.R.2",
+      "name": "treatment group comparison for categorical variables",
+      "description": "Pearson s chisquare test",
+      "type": "Computation",
+      "analysisReason": "pre-specified in protocol",
+      "applicableWhen": [
+        "Table_14-2.01.R.2.SC1"
+      ],
+      "inputData": [
+        "ADSL.AGEGR1",
+        "ADSL.SEX",
+        "ADSL.RACE",
+        "ADSL.DURDSGR1",
+        "ADSL.BMIBLGR1",
+        "ADSL"
+      ]
+    },
+    {
+      "OID": "Table_14-3.01.R.1",
+      "name": "dose response analysis for ADAS-Cog changes from baseline",
+      "description": "Linear model analysis of CHG for dose response; using randomized dose (0 for placebo; 54 for low dose; 81 for high dose) and site group in model. Used PROC GLM in SAS to produce p-value (from Type III SS for treatment dose).",
+      "type": "Computation",
+      "expressions": [
+        {
+          "OID": "Table_14-3.01.R.1.EXPR",
+          "expression": "ParameterList",
+          "parameters": [
+            {
+              "OID": "PARAM.ACTOT",
+              "name": "Adas-Cog(11) Subscore",
+              "required": false
+            }
+          ]
+        }
+      ],
+      "analysisReason": "Primary Endpoint Analysis; pre-specified in SAP",
+      "analysisMethod": "Table_14-3.01.R.1",
+      "applicableWhen": [
+        "Table_14-3.01.R.1.SC1"
+      ],
+      "inputData": [
+        "ADQSADAS.CHG",
+        "ADQSADAS"
+      ]
+    },
+    {
+      "OID": "Table_14-3.01.R.2",
+      "name": "pairwise comparisons to placebo for ADAS-Cog changes from baseline",
+      "description": "ANCOVA analysis of CHG performed to provide pairwise comparisons among treatment groups and adjusted means; using randomized treatment as class variable and site group as class variable in model and the baseline value as a covariate.",
+      "type": "Computation",
+      "expressions": [
+        {
+          "OID": "Table_14-3.01.R.2.EXPR",
+          "expression": "ParameterList",
+          "parameters": [
+            {
+              "OID": "PARAM.ACTOT",
+              "name": "Adas-Cog(11) Subscore",
+              "required": false
+            }
+          ]
+        }
+      ],
+      "analysisReason": "Primary Endpoint Analysis; pre-specified in SAP",
+      "analysisMethod": "Table_14-3.01.R.2",
+      "applicableWhen": [
+        "Table_14-3.01.R.2.SC1"
+      ],
+      "inputData": [
+        "ADQSADAS.CHG",
+        "ADQSADAS"
+      ]
+    },
+    {
+      "OID": "Table_14-3.02.R.1",
+      "name": "dose response analysis for CIBIC+ values",
+      "description": "Summary statistics of AVAL at Week 24. Linear model analysis of AVAL for dose response; using randomized dose (0 for placebo; 54 for low dose; 81 for high dose) and site group in model. Used PROC GLM in SAS to produce p-value (from Type III SS for treatment dose);",
+      "type": "Computation",
+      "expressions": [
+        {
+          "OID": "Table_14-3.02.R.1.EXPR",
+          "expression": "ParameterList",
+          "parameters": [
+            {
+              "OID": "PARAM.CIBICVAL",
+              "name": "CIBIC Score",
+              "required": false
+            }
+          ]
+        }
+      ],
+      "analysisReason": "Primary Endpoint Analysis; pre-specified in SAP",
+      "analysisMethod": "Table_14-3.02.R.1",
+      "applicableWhen": [
+        "Table_14-3.02.R.1.SC1"
+      ],
+      "inputData": [
+        "ADQSCIBC.AVAL",
+        "ADQSCIBC"
+      ]
+    },
+    {
+      "OID": "Table_14-3.02.R.2",
+      "name": "pairwise comparisons to placebo for CIBIC+ values",
+      "description": "ANCOVA analysis of AVAL performed to provide pairwise comparisons among treatment groups and adjusted means; using randomized treatment as class variable and site group as class variable in model and the baseline value as a covariate.",
+      "type": "Computation",
+      "expressions": [
+        {
+          "OID": "Table_14-3.02.R.2.EXPR",
+          "expression": "ParameterList",
+          "parameters": [
+            {
+              "OID": "PARAM.CIBICVAL",
+              "name": "CIBIC Score",
+              "required": false
+            }
+          ]
+        }
+      ],
+      "analysisReason": "Primary Endpoint Analysis; pre-specified in SAP",
+      "analysisMethod": "Table_14-3.02.R.2",
+      "applicableWhen": [
+        "Table_14-3.02.R.2.SC1"
+      ],
+      "inputData": [
+        "ADQSCIBC.AVAL",
+        "ADQSCIBC"
+      ]
+    },
+    {
+      "OID": "Table_14-3.12.R.1",
+      "name": "Descriptive statistics (n, mean, standard deviation, median, min, and max)",
+      "description": "[leafID: SAP_SEC_10.2]",
+      "type": "Computation",
+      "expressions": [
+        {
+          "OID": "Table_14-3.12.R.1.EXPR",
+          "expression": "ParameterList",
+          "parameters": [
+            {
+              "OID": "PARAM.NPTOTMN",
+              "name": "Mean NPI-X (9) Total (Week 4 to 24)",
+              "required": false
+            }
+          ]
+        }
+      ],
+      "analysisReason": "pre-specified in SAP",
+      "analysisMethod": "Table_14-3.12.R.1",
+      "applicableWhen": [
+        "Table_14-3.12.R.1.SC1"
+      ],
+      "inputData": [
+        "ADQSNPIX.AVAL",
+        "ADQSNPIX.BASE",
+        "ADQSNPIX"
+      ]
+    },
+    {
+      "OID": "Table_14-3.12.R.2",
+      "name": "p-values, difference of LS means , their standard error and 95% confidence intervals",
+      "description": "[leafID: SAP_SEC_10.2]",
+      "type": "Computation",
+      "expressions": [
+        {
+          "OID": "Table_14-3.12.R.2.EXPR",
+          "expression": "ParameterList",
+          "parameters": [
+            {
+              "OID": "PARAM.NPTOTMN",
+              "name": "Mean NPI-X (9) Total (Week 4 to 24)",
+              "required": false
+            }
+          ]
+        }
+      ],
+      "analysisReason": "pre-specified in SAP",
+      "analysisMethod": "Table_14-3.12.R.2",
+      "applicableWhen": [
+        "Table_14-3.12.R.2.SC1"
+      ],
+      "inputData": [
+        "ADQSNPIX.AVAL",
+        "ADQSNPIX"
+      ]
+    },
+    {
+      "OID": "Table_14-5.02.R.1",
+      "description": "Unique count of subjects that experienced an Adverse Event by Preferred Term, System Organ Class, and Treatment Group and percentages based on the number of subjects in the safety population within each treatment group. The total number of times an event occurred was recorded by Preferred Term, System Organ Class, and Treatment Group. Fishers exact test was used for treatment comparison.",
+      "type": "Computation",
+      "analysisReason": "pre-specified in SAP",
+      "applicableWhen": [
+        "Table_14-5.02.R.1.SC1",
+        "Table_14-5.02.R.1.SC2"
+      ],
+      "inputData": [
+        "ADAE.TRTA",
+        "ADAE.AEBODSYS",
+        "ADAE.AEDECOD",
+        "ADAE",
+        "ADSL"
+      ]
+    },
+    {
+      "OID": "Table_14-6.01.R.1",
+      "name": "Summary statistics for each laboratory parameter (numeric results) and change from baseline, provided for each scheduled visit",
+      "description": "[leafID: SAP_SEC_11.5]",
+      "type": "Computation",
+      "expressions": [
+        {
+          "OID": "Table_14-6.01.R.1.EXPR",
+          "expression": "ParameterList",
+          "parameters": [
+            {
+              "OID": "PARAM.ALB",
+              "name": "Albumin (g/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.ALP",
+              "name": "Alkaline Phosphatase (U/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.ALT",
+              "name": "Alanine Aminotransferase (U/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.AST",
+              "name": "Aspartate Aminotransferase (U/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.BILI",
+              "name": "Bilirubin (umol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.BUN",
+              "name": "Blood Urea Nitrogen (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.CA",
+              "name": "Calcium (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.CHOL",
+              "name": "Cholesterol (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.CK",
+              "name": "Creatine Kinase (U/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.CL",
+              "name": "Chloride (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.CREAT",
+              "name": "Creatinine (umol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.GGT",
+              "name": "Gamma Glutamyl Transferase (U/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.GLUC",
+              "name": "Glucose (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.K",
+              "name": "Potassium (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.PHOS",
+              "name": "Phosphate (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.PROT",
+              "name": "Protein (g/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.SODIUM",
+              "name": "Sodium (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.URATE",
+              "name": "Urate (umol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.ANISO",
+              "name": "Anisocytes",
+              "required": false
+            },
+            {
+              "OID": "PARAM.BASO",
+              "name": "Basophils (GI/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.EOS",
+              "name": "Eosinophils (GI/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.HCT",
+              "name": "Hematocrit",
+              "required": false
+            },
+            {
+              "OID": "PARAM.HGB",
+              "name": "Hemoglobin (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.LYM",
+              "name": "Lymphocytes (GI/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.MACROCY",
+              "name": "Macrocytes",
+              "required": false
+            },
+            {
+              "OID": "PARAM.MCH",
+              "name": "Ery. Mean Corpuscular Hemoglobin (fmol(Fe))",
+              "required": false
+            },
+            {
+              "OID": "PARAM.MCHC",
+              "name": "Ery. Mean Corpuscular HGB Concentration(mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.MCV",
+              "name": "Ery. Mean Corpuscular Volume (fL)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.MICROCY",
+              "name": "Microcytes",
+              "required": false
+            },
+            {
+              "OID": "PARAM.MONO",
+              "name": "Monocytes (GI/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.PLAT",
+              "name": "Platelet (GI/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.POIKILO",
+              "name": "Poikilocytes",
+              "required": false
+            },
+            {
+              "OID": "PARAM.POLICHR",
+              "name": "Polychromasia",
+              "required": false
+            },
+            {
+              "OID": "PARAM.RBC",
+              "name": "Erythrocytes (TI/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.WBC",
+              "name": "Leukocytes (GI/L)",
+              "required": false
+            }
+          ]
+        }
+      ],
+      "analysisReason": "pre-specified in SAP",
+      "applicableWhen": [
+        "Table_14-6.01.R.1.SC1",
+        "Table_14-6.01.R.1.SC2",
+        "Table_14-6.01.R.1.SC3"
+      ],
+      "inputData": [
+        "ADLBC.AVAL",
+        "ADLBC.CHG",
+        "ADLBC",
+        "ADLBH",
+        "ADSL"
+      ]
+    },
+    {
+      "OID": "Table_14-6.02.R.1",
+      "name": "Frequency counts of normal and abnormal lab values including treatment comparisons using Fisher's Exact tests",
+      "description": "[leafID: SAP_SEC_11.5]",
+      "type": "Computation",
+      "expressions": [
+        {
+          "OID": "Table_14-6.02.R.1.EXPR",
+          "expression": "ParameterList",
+          "parameters": [
+            {
+              "OID": "PARAM.ALB",
+              "name": "Albumin (g/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.ALP",
+              "name": "Alkaline Phosphatase (U/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.ALT",
+              "name": "Alanine Aminotransferase (U/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.AST",
+              "name": "Aspartate Aminotransferase (U/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.BILI",
+              "name": "Bilirubin (umol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.BUN",
+              "name": "Blood Urea Nitrogen (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.CA",
+              "name": "Calcium (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.CHOL",
+              "name": "Cholesterol (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.CK",
+              "name": "Creatine Kinase (U/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.CL",
+              "name": "Chloride (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.CREAT",
+              "name": "Creatinine (umol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.GGT",
+              "name": "Gamma Glutamyl Transferase (U/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.GLUC",
+              "name": "Glucose (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.K",
+              "name": "Potassium (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.PHOS",
+              "name": "Phosphate (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.PROT",
+              "name": "Protein (g/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.SODIUM",
+              "name": "Sodium (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.URATE",
+              "name": "Urate (umol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.ANISO",
+              "name": "Anisocytes",
+              "required": false
+            },
+            {
+              "OID": "PARAM.BASO",
+              "name": "Basophils (GI/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.EOS",
+              "name": "Eosinophils (GI/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.HCT",
+              "name": "Hematocrit",
+              "required": false
+            },
+            {
+              "OID": "PARAM.HGB",
+              "name": "Hemoglobin (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.LYM",
+              "name": "Lymphocytes (GI/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.MACROCY",
+              "name": "Macrocytes",
+              "required": false
+            },
+            {
+              "OID": "PARAM.MCH",
+              "name": "Ery. Mean Corpuscular Hemoglobin (fmol(Fe))",
+              "required": false
+            },
+            {
+              "OID": "PARAM.MCHC",
+              "name": "Ery. Mean Corpuscular HGB Concentration(mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.MCV",
+              "name": "Ery. Mean Corpuscular Volume (fL)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.MICROCY",
+              "name": "Microcytes",
+              "required": false
+            },
+            {
+              "OID": "PARAM.MONO",
+              "name": "Monocytes (GI/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.PLAT",
+              "name": "Platelet (GI/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.POIKILO",
+              "name": "Poikilocytes",
+              "required": false
+            },
+            {
+              "OID": "PARAM.POLICHR",
+              "name": "Polychromasia",
+              "required": false
+            },
+            {
+              "OID": "PARAM.RBC",
+              "name": "Erythrocytes (TI/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.WBC",
+              "name": "Leukocytes (GI/L)",
+              "required": false
+            }
+          ]
+        }
+      ],
+      "analysisReason": "pre-specified in SAP",
+      "analysisMethod": "Table_14-6.02.R.1",
+      "applicableWhen": [
+        "Table_14-6.02.R.1.SC1",
+        "Table_14-6.02.R.1.SC2",
+        "Table_14-6.02.R.1.SC3"
+      ],
+      "inputData": [
+        "ADLBC.LBNRIND",
+        "ADLBC",
+        "ADLBH",
+        "ADSL"
+      ]
+    },
+    {
+      "OID": "Table_14-6.03.R.1",
+      "name": "Frequency counts of clinically significant lab values including treatment comparisons using Fisher's Exact tests",
+      "description": "[leafID: SAP_SEC_11.5]",
+      "type": "Computation",
+      "expressions": [
+        {
+          "OID": "Table_14-6.03.R.1.EXPR",
+          "expression": "ParameterList",
+          "parameters": [
+            {
+              "OID": "PARAM._ALB",
+              "name": "Albumin (g/L) change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._ALP",
+              "name": "Alkaline Phosphatase (U/L) change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._ALT",
+              "name": "Alanine Aminotransferase (U/L) change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._AST",
+              "name": "Aspartate Aminotransferase (U/L) change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._BILI",
+              "name": "Bilirubin (umol/L) change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._BUN",
+              "name": "Blood Urea Nitrogen (mmol/L) change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._CA",
+              "name": "Calcium (mmol/L) change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._CHOL",
+              "name": "Cholesterol (mmol/L) change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._CK",
+              "name": "Creatine Kinase (U/L) change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._CL",
+              "name": "Chloride (mmol/L) change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._CREAT",
+              "name": "Creatinine (umol/L) change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._GGT",
+              "name": "Gamma Glutamyl Transferase (U/L) change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._GLUC",
+              "name": "Glucose (mmol/L) change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._K",
+              "name": "Potassium (mmol/L) change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._PHOS",
+              "name": "Phosphate (mmol/L) change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._PROT",
+              "name": "Protein (g/L) change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._SODIUM",
+              "name": "Sodium (mmol/L) change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._URATE",
+              "name": "Urate (umol/L) change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._ANISO",
+              "name": "Anisocytes change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._BASO",
+              "name": "Basophils (GI/L) change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._EOS",
+              "name": "Eosinophils (GI/L) change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._HCT",
+              "name": "Hematocrit change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._HGB",
+              "name": "Hemoglobin (mmol/L) change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._LYM",
+              "name": "Lymphocytes (GI/L) change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._MACROCY",
+              "name": "Macrocytes change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._MCH",
+              "name": "Ery. Mean Corpuscular Hemoglobin (fmol(Fe)) change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._MCHC",
+              "name": "Ery. Mean Corpuscular HGB Concentration(mmol/L) change from previous visit, relative to normal rang",
+              "required": false
+            },
+            {
+              "OID": "PARAM._MCV",
+              "name": "Ery. Mean Corpuscular Volume (fL) change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._MICROCY",
+              "name": "Microcytes change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._MONO",
+              "name": "Monocytes (GI/L) change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._PLAT",
+              "name": "Platelet (GI/L) change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._POIKILO",
+              "name": "Poikilocytes change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._POLICHR",
+              "name": "Polychromasia change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._RBC",
+              "name": "Erythrocytes (TI/L) change from previous visit, relative to normal range",
+              "required": false
+            },
+            {
+              "OID": "PARAM._WBC",
+              "name": "Leukocytes (GI/L) change from previous visit, relative to normal range",
+              "required": false
+            }
+          ]
+        }
+      ],
+      "analysisReason": "pre-specified in SAP",
+      "analysisMethod": "Table_14-6.03.R.1",
+      "applicableWhen": [
+        "Table_14-6.03.R.1.SC1",
+        "Table_14-6.03.R.1.SC2",
+        "Table_14-6.03.R.1.SC3"
+      ],
+      "inputData": [
+        "ADLBC.ANRIND",
+        "ADLBC",
+        "ADLBH",
+        "ADSL"
+      ]
+    },
+    {
+      "OID": "Table_14-6.04.R.1",
+      "name": "Frequency counts of change in threshold ranges by visit and treatment",
+      "description": "[leafID: SAP_SEC_11.5]",
+      "type": "Computation",
+      "expressions": [
+        {
+          "OID": "Table_14-6.04.R.1.EXPR",
+          "expression": "ParameterList",
+          "parameters": [
+            {
+              "OID": "PARAM.ALB",
+              "name": "Albumin (g/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.ALP",
+              "name": "Alkaline Phosphatase (U/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.ALT",
+              "name": "Alanine Aminotransferase (U/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.AST",
+              "name": "Aspartate Aminotransferase (U/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.BILI",
+              "name": "Bilirubin (umol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.BUN",
+              "name": "Blood Urea Nitrogen (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.CA",
+              "name": "Calcium (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.CHOL",
+              "name": "Cholesterol (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.CK",
+              "name": "Creatine Kinase (U/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.CL",
+              "name": "Chloride (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.CREAT",
+              "name": "Creatinine (umol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.GGT",
+              "name": "Gamma Glutamyl Transferase (U/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.GLUC",
+              "name": "Glucose (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.K",
+              "name": "Potassium (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.PHOS",
+              "name": "Phosphate (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.PROT",
+              "name": "Protein (g/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.SODIUM",
+              "name": "Sodium (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.URATE",
+              "name": "Urate (umol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.ANISO",
+              "name": "Anisocytes",
+              "required": false
+            },
+            {
+              "OID": "PARAM.BASO",
+              "name": "Basophils (GI/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.EOS",
+              "name": "Eosinophils (GI/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.HCT",
+              "name": "Hematocrit",
+              "required": false
+            },
+            {
+              "OID": "PARAM.HGB",
+              "name": "Hemoglobin (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.LYM",
+              "name": "Lymphocytes (GI/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.MACROCY",
+              "name": "Macrocytes",
+              "required": false
+            },
+            {
+              "OID": "PARAM.MCH",
+              "name": "Ery. Mean Corpuscular Hemoglobin (fmol(Fe))",
+              "required": false
+            },
+            {
+              "OID": "PARAM.MCHC",
+              "name": "Ery. Mean Corpuscular HGB Concentration(mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.MCV",
+              "name": "Ery. Mean Corpuscular Volume (fL)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.MICROCY",
+              "name": "Microcytes",
+              "required": false
+            },
+            {
+              "OID": "PARAM.MONO",
+              "name": "Monocytes (GI/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.PLAT",
+              "name": "Platelet (GI/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.POIKILO",
+              "name": "Poikilocytes",
+              "required": false
+            },
+            {
+              "OID": "PARAM.POLICHR",
+              "name": "Polychromasia",
+              "required": false
+            },
+            {
+              "OID": "PARAM.RBC",
+              "name": "Erythrocytes (TI/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.WBC",
+              "name": "Leukocytes (GI/L)",
+              "required": false
+            }
+          ]
+        }
+      ],
+      "analysisReason": "pre-specified in SAP",
+      "analysisMethod": "Table_14-6.04.R.1",
+      "applicableWhen": [
+        "Table_14-6.04.R.1.SC1",
+        "Table_14-6.04.R.1.SC2",
+        "Table_14-6.04.R.1.SC3"
+      ],
+      "inputData": [
+        "ADLBC.ANRIND",
+        "ADLBC.BNRIND",
+        "ADLBC",
+        "ADLBH",
+        "ADSL"
+      ]
+    },
+    {
+      "OID": "Table_14-6.05.R.1",
+      "name": "Frequency counts of change in threshold ranges by treatment including comparison of treatment with Fisher's Exact test",
+      "description": "[leafID: SAP_SEC_11.5]",
+      "type": "Computation",
+      "expressions": [
+        {
+          "OID": "Table_14-6.05.R.1.EXPR",
+          "expression": "ParameterList",
+          "parameters": [
+            {
+              "OID": "PARAM.ALB",
+              "name": "Albumin (g/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.ALP",
+              "name": "Alkaline Phosphatase (U/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.ALT",
+              "name": "Alanine Aminotransferase (U/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.AST",
+              "name": "Aspartate Aminotransferase (U/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.BILI",
+              "name": "Bilirubin (umol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.BUN",
+              "name": "Blood Urea Nitrogen (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.CA",
+              "name": "Calcium (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.CHOL",
+              "name": "Cholesterol (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.CK",
+              "name": "Creatine Kinase (U/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.CL",
+              "name": "Chloride (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.CREAT",
+              "name": "Creatinine (umol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.GGT",
+              "name": "Gamma Glutamyl Transferase (U/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.GLUC",
+              "name": "Glucose (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.K",
+              "name": "Potassium (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.PHOS",
+              "name": "Phosphate (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.PROT",
+              "name": "Protein (g/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.SODIUM",
+              "name": "Sodium (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.URATE",
+              "name": "Urate (umol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.ANISO",
+              "name": "Anisocytes",
+              "required": false
+            },
+            {
+              "OID": "PARAM.BASO",
+              "name": "Basophils (GI/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.EOS",
+              "name": "Eosinophils (GI/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.HCT",
+              "name": "Hematocrit",
+              "required": false
+            },
+            {
+              "OID": "PARAM.HGB",
+              "name": "Hemoglobin (mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.LYM",
+              "name": "Lymphocytes (GI/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.MACROCY",
+              "name": "Macrocytes",
+              "required": false
+            },
+            {
+              "OID": "PARAM.MCH",
+              "name": "Ery. Mean Corpuscular Hemoglobin (fmol(Fe))",
+              "required": false
+            },
+            {
+              "OID": "PARAM.MCHC",
+              "name": "Ery. Mean Corpuscular HGB Concentration(mmol/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.MCV",
+              "name": "Ery. Mean Corpuscular Volume (fL)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.MICROCY",
+              "name": "Microcytes",
+              "required": false
+            },
+            {
+              "OID": "PARAM.MONO",
+              "name": "Monocytes (GI/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.PLAT",
+              "name": "Platelet (GI/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.POIKILO",
+              "name": "Poikilocytes",
+              "required": false
+            },
+            {
+              "OID": "PARAM.POLICHR",
+              "name": "Polychromasia",
+              "required": false
+            },
+            {
+              "OID": "PARAM.RBC",
+              "name": "Erythrocytes (TI/L)",
+              "required": false
+            },
+            {
+              "OID": "PARAM.WBC",
+              "name": "Leukocytes (GI/L)",
+              "required": false
+            }
+          ]
+        }
+      ],
+      "analysisReason": "pre-specified in SAP",
+      "analysisMethod": "Table_14-6.05.R.1",
+      "applicableWhen": [
+        "Table_14-6.05.R.1.SC1",
+        "Table_14-6.05.R.1.SC2",
+        "Table_14-6.05.R.1.SC3"
+      ],
+      "inputData": [
+        "ADLBC.ANRIND",
+        "ADLBC.BNRIND",
+        "ADLBC",
+        "ADLBH",
+        "ADSL"
+      ]
+    },
+    {
+      "OID": "Table_14-6.06.R.1",
+      "name": "Frequency counts of change in Hy's Law abnormalities by treatment including comparison of treatment with Fisher's Exact test",
+      "description": "Take the maximum AVAL per patient when patients were on treatment (AVISITN in (2,4,6,8,12,16,20,24,26)) for the Hy's Law parameters then perform a frequency count by treatment with Fisher's Exact test.",
+      "type": "Computation",
+      "expressions": [
+        {
+          "OID": "Table_14-6.06.R.1.EXPR",
+          "expression": "ParameterList",
+          "parameters": [
+            {
+              "OID": "PARAM.TRANSHY",
+              "name": "Transaminase 1.5 x ULN",
+              "required": false
+            },
+            {
+              "OID": "PARAM.HYLAW",
+              "name": "Total Bili 1.5 x ULN and Transaminase 1.5 x ULN",
+              "required": false
+            }
+          ]
+        }
+      ],
+      "analysisReason": "pre-specified in SAP",
+      "applicableWhen": [
+        "Table_14-6.06.R.1.SC1",
+        "Table_14-6.06.R.1.SC2"
+      ],
+      "inputData": [
+        "ADLBHY.AVAL",
+        "ADLBHY",
+        "ADSL"
+      ]
+    },
+    {
+      "OID": "Figure_14-1.R.1",
+      "name": "treatment group comparison for time to event variables",
+      "description": "Kaplan-Meier estimates and log-rank analysis of time to first dermatological adverse event, safety population",
+      "type": "Computation",
+      "expressions": [
+        {
+          "OID": "Figure_14-1.R.1.EXPR",
+          "expression": "ParameterList",
+          "parameters": [
+            {
+              "OID": "PARAM.TTDE",
+              "name": "Time to First Dermatological Event",
+              "required": false
+            }
+          ]
+        }
+      ],
+      "analysisReason": "pre-specified in SAP",
+      "analysisMethod": "Figure_14-1.R.1",
+      "applicableWhen": [
+        "Figure_14-1.R.1.SC1"
+      ],
+      "inputData": [
+        "ADTTE.AVAL",
+        "ADTTE.CNSR",
+        "ADTTE"
+      ]
+    }
+  ],
   "codeLists": [
     {
       "OID": "ADLBCAT",
@@ -19464,6 +20795,176 @@
       "resourceType": "ODM"
     }
   ],
+  "displays": [
+    {
+      "OID": "Table_14-1.01",
+      "name": "Table_14-1.01",
+      "label": "Summary of Populations",
+      "analysis": "Table_14-1.01.R.1",
+      "location": [
+        {
+          "OID": "DOC.DISPLAY.Table_14-1.01",
+          "leafID": "Table_14-1.01"
+        }
+      ]
+    },
+    {
+      "OID": "Table_14-1.02",
+      "name": "Table_14-1.02",
+      "label": "Summary of End of Study Data (ITT population)",
+      "analysis": "Table_14-1.02.R.1",
+      "location": [
+        {
+          "OID": "DOC.DISPLAY.Table_14-1.02",
+          "leafID": "Table_14-1.02"
+        }
+      ]
+    },
+    {
+      "OID": "Table_14-2.01",
+      "name": "Table_14-2.01",
+      "label": "Summary of Demographic and Baseline Characteristics (ITT population)",
+      "analysis": "Table_14-2.01.R.1",
+      "location": [
+        {
+          "OID": "DOC.DISPLAY.Table_14-2.01",
+          "leafID": "Table_14-2.01"
+        }
+      ]
+    },
+    {
+      "OID": "Table_14-3.01",
+      "name": "Table_14-3.01",
+      "label": "Primary Endpoint Analysis: ADAS-Cog - Summary at Week 24 - LOCF (Efficacy Population)",
+      "analysis": "Table_14-3.01.R.1",
+      "location": [
+        {
+          "OID": "DOC.DISPLAY.Table_14-3.01",
+          "leafID": "Table_14-3.01"
+        }
+      ]
+    },
+    {
+      "OID": "Table_14-3.02",
+      "name": "Table_14-3.02",
+      "label": "Primary Endpoint Analysis: CIBIC+ - Summary at Week 24 - LOCF (Efficacy Population)",
+      "analysis": "Table_14-3.02.R.1",
+      "location": [
+        {
+          "OID": "DOC.DISPLAY.Table_14-3.02",
+          "leafID": "Table_14-3.02"
+        }
+      ]
+    },
+    {
+      "OID": "Table_14-3.12",
+      "name": "Table_14-3.12",
+      "label": "Mean NPI-X total score from Weeks 4 through Week 24 - Windowed (Efficacy Population)",
+      "analysis": "Table_14-3.12.R.1",
+      "location": [
+        {
+          "OID": "DOC.DISPLAY.Table_14-3.12",
+          "leafID": "Table_14-3.12"
+        }
+      ]
+    },
+    {
+      "OID": "Table_14-5.02",
+      "name": "Table_14-5.02",
+      "label": "Incidence of Treatment Emergent Serious Adverse Events by Treatment Group",
+      "analysis": "Table_14-5.02.R.1",
+      "location": [
+        {
+          "OID": "DOC.DISPLAY.Table_14-5.02",
+          "leafID": "Table_14-5.02"
+        }
+      ]
+    },
+    {
+      "OID": "Table_14-6.01",
+      "name": "Table_14-6.01",
+      "label": "Summary Statistics for Continuous Laboratory Values (Safety Population)",
+      "analysis": "Table_14-6.01.R.1",
+      "location": [
+        {
+          "OID": "DOC.DISPLAY.Table_14-6.01",
+          "leafID": "Table_14-6.01"
+        }
+      ]
+    },
+    {
+      "OID": "Table_14-6.02",
+      "name": "Table_14-6.02",
+      "label": "Frequency of Normal and Abnormal (Beyond Normal Range) Laboratory Values During Treatment (Safety Population)",
+      "analysis": "Table_14-6.02.R.1",
+      "location": [
+        {
+          "OID": "DOC.DISPLAY.Table_14-6.02",
+          "leafID": "Table_14-6.02"
+        }
+      ]
+    },
+    {
+      "OID": "Table_14-6.03",
+      "name": "Table_14-6.03",
+      "label": "Frequency of Normal and Abnormal (Clinically Significant Change from Previous Observation) Laboratory Values During Treatment (Safety Population)",
+      "analysis": "Table_14-6.03.R.1",
+      "location": [
+        {
+          "OID": "DOC.DISPLAY.Table_14-6.03",
+          "leafID": "Table_14-6.03"
+        }
+      ]
+    },
+    {
+      "OID": "Table_14-6.04",
+      "name": "Table_14-6.04",
+      "label": "Shifts of Laboratory Values During Treatment, Categorized Based on Threshold Ranges, by Visit (Safety Population)",
+      "analysis": "Table_14-6.04.R.1",
+      "location": [
+        {
+          "OID": "DOC.DISPLAY.Table_14-6.04",
+          "leafID": "Table_14-6.04"
+        }
+      ]
+    },
+    {
+      "OID": "Table_14-6.05",
+      "name": "Table_14-6.05",
+      "label": "Shifts of Laboratory Values During Treatment, Categorized Based on Threshold Ranges (Safety Population)",
+      "analysis": "Table_14-6.05.R.1",
+      "location": [
+        {
+          "OID": "DOC.DISPLAY.Table_14-6.05",
+          "leafID": "Table_14-6.05"
+        }
+      ]
+    },
+    {
+      "OID": "Table_14-6.06",
+      "name": "Table_14-6.06",
+      "label": "Shifts of Hy's Law Values During Treatment (Safety Population)",
+      "analysis": "Table_14-6.06.R.1",
+      "location": [
+        {
+          "OID": "DOC.DISPLAY.Table_14-6.06",
+          "leafID": "Table_14-6.06"
+        }
+      ]
+    },
+    {
+      "OID": "Figure_14-1",
+      "name": "Figure_14-1",
+      "label": "Time to Dermatologic Event by Treatment Group",
+      "analysis": "Figure_14-1.R.1",
+      "location": [
+        {
+          "OID": "DOC.DISPLAY.Figure_14-1",
+          "leafID": "Figure_14-1"
+        }
+      ]
+    }
+  ],
   "_xmlMetadata": {
     "namespaces": {
       "odm": "http://www.cdisc.org/ns/odm/v1.2",
@@ -20801,78 +22302,928 @@
       "ADVS.CHG.WEIGHT"
     ],
     "hasStandardsElement": false,
-    "analysisResultDisplays": [
-      {
-        "_containerType": "AnalysisResultDisplays",
-        "_namespace": "adamref",
-        "_xmlContent": "<ns0:AnalysisResultDisplays xmlns:ns0=\"http://www.cdisc.org/ns/ADaMRes/DRAFT\" xmlns:ns1=\"http://www.cdisc.org/ns/odm/v1.2\" xmlns:ns2=\"http://www.cdisc.org/ns/def/v1.0\">\n        <ns0:ResultDisplay DisplayIdentifier=\"Table_14-1.01\" OID=\"Table_14-1.01\" DisplayLabel=\"Summary of Populations\" leafID=\"Table_14-1.01\">    \n          <ns0:AnalysisResults OID=\"Table_14-1.01.R.1\" Reason=\"pre-specified in SAP\">\n            \n            \n            <ns0:AnalysisVariable ItemOID=\"ADSL.ITTFL\" />\n            <ns0:AnalysisVariable ItemOID=\"ADSL.SAFFL\" />\n            <ns0:AnalysisVariable ItemOID=\"ADSL.EFFFL\" />\n            <ns0:AnalysisVariable ItemOID=\"ADSL.COMP24FL\" />\n            <ns0:AnalysisVariable ItemOID=\"ADSL.DISCONFL\" />\n            \n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADSL\" Mandatory=\"No\" />\n            </ns0:AnalysisDataset>\n            <ns0:Documentation leafID=\"SAP_SEC_9.1\">\n            </ns0:Documentation>\n            <ns0:ProgrammingCode>\n              <ns2:ComputationMethod OID=\"Table_14-1.01.R.1\">\nproc freq data = pilot.adsl;\n  tables (ittfl saffl efffl comp24fl disconfl)*trt01pn / missing;\nrun;</ns2:ComputationMethod>\n            </ns0:ProgrammingCode>\n          </ns0:AnalysisResults>\n        </ns0:ResultDisplay>\n      </ns0:AnalysisResultDisplays>\n      "
-      },
-      {
-        "_containerType": "AnalysisResultDisplays",
-        "_namespace": "adamref",
-        "_xmlContent": "<ns0:AnalysisResultDisplays xmlns:ns0=\"http://www.cdisc.org/ns/ADaMRes/DRAFT\" xmlns:ns1=\"http://www.cdisc.org/ns/odm/v1.2\" xmlns:ns2=\"http://www.cdisc.org/ns/def/v1.0\">\n        <ns0:ResultDisplay DisplayIdentifier=\"Table_14-1.02\" OID=\"Table_14-1.02\" DisplayLabel=\"Summary of End of Study Data (ITT population)\" leafID=\"Table_14-1.02\">    \n          <ns0:AnalysisResults OID=\"Table_14-1.02.R.1\" Reason=\"pre-specified in SAP\">\n            \n            \n            <ns0:AnalysisVariable ItemOID=\"ADSL.COMP24FL\" />\n            <ns0:AnalysisVariable ItemOID=\"ADSL.DCREASCD\" />\n            \n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADSL\" Mandatory=\"No\" />\n              <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Table_14-1.02.R.1.SC1\" Name=\"Selection Criteria 1\">[ ITTFL=\"Y\" ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n            </ns0:AnalysisDataset>\n            <ns0:Documentation leafID=\"SAP_SEC_9.1\">\n              <ns1:TranslatedText xml:lang=\"en\">Reasons for discontinuation are summarized for subjects discontinuing before Week 24 (visit 12) (i.e. COMP24FL ne =\"Y\" and VISNUMEN less than 12)\n              </ns1:TranslatedText>\n            </ns0:Documentation>\n            <ns0:ProgrammingCode>\n              <ns2:ComputationMethod OID=\"Table_14-1.02.R.1\">\nproc freq data=adsl;\n  table COMP24FL*TRT01P/chisq fisher exact;\nrun;\n\nproc freq data=adsl;\n  where COMP24FL=\"N\";\n  table DCREASCD* TRT01P/ chisq fisher exact;\nrun;</ns2:ComputationMethod>\n            </ns0:ProgrammingCode>\n          </ns0:AnalysisResults>\n        </ns0:ResultDisplay>\n      </ns0:AnalysisResultDisplays>\n      "
-      },
-      {
-        "_containerType": "AnalysisResultDisplays",
-        "_namespace": "adamref",
-        "_xmlContent": "<ns0:AnalysisResultDisplays xmlns:ns0=\"http://www.cdisc.org/ns/ADaMRes/DRAFT\" xmlns:ns1=\"http://www.cdisc.org/ns/odm/v1.2\" xmlns:ns2=\"http://www.cdisc.org/ns/def/v1.0\">\n        <ns0:ResultDisplay DisplayIdentifier=\"Table_14-2.01\" OID=\"Table_14-2.01\" DisplayLabel=\"Summary of Demographic and Baseline Characteristics (ITT population)\" leafID=\"Table_14-2.01\">    \n          <ns0:AnalysisResults OID=\"Table_14-2.01.R.1\" ResultIdentifier=\"treatment group comparison for continuous variables\" Reason=\"pre-specified in protocol\">\n            \n            \n            <ns0:AnalysisVariable ItemOID=\"ADSL.AGE\" />\n            <ns0:AnalysisVariable ItemOID=\"ADSL.MMSETOT\" />\n            <ns0:AnalysisVariable ItemOID=\"ADSL.DURDIS\" />\n            <ns0:AnalysisVariable ItemOID=\"ADSL.EDUCLVL\" />\n            <ns0:AnalysisVariable ItemOID=\"ADSL.WEIGHTBL\" />\n            <ns0:AnalysisVariable ItemOID=\"ADSL.HEIGHTBL\" />\n            <ns0:AnalysisVariable ItemOID=\"ADSL.BMIBL\" />\n            \n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADSL\" Mandatory=\"No\" />\n              <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Table_14-2.01.R.1.SC1\" Name=\"Selection Criteria 1\">[ ITTFL=\"Y\" ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n            </ns0:AnalysisDataset>\n            <ns0:Documentation>\n              <ns1:TranslatedText xml:lang=\"en\">ANOVA treatment group comparison\n              </ns1:TranslatedText>\n            </ns0:Documentation>\n          </ns0:AnalysisResults>\n          <ns0:AnalysisResults OID=\"Table_14-2.01.R.2\" ResultIdentifier=\"treatment group comparison for categorical variables\" Reason=\"pre-specified in protocol\">\n            \n            \n            <ns0:AnalysisVariable ItemOID=\"ADSL.AGEGR1\" />\n            <ns0:AnalysisVariable ItemOID=\"ADSL.SEX\" />\n            <ns0:AnalysisVariable ItemOID=\"ADSL.RACE\" />\n            <ns0:AnalysisVariable ItemOID=\"ADSL.DURDSGR1\" />\n            <ns0:AnalysisVariable ItemOID=\"ADSL.BMIBLGR1\" />\n            \n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADSL\" Mandatory=\"No\" />\n              <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Table_14-2.01.R.2.SC1\" Name=\"Selection Criteria 1\">[ ITTFL=\"Y\" ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n            </ns0:AnalysisDataset>\n            <ns0:Documentation>\n              <ns1:TranslatedText xml:lang=\"en\">Pearson s chisquare test\n              </ns1:TranslatedText>\n            </ns0:Documentation>\n          </ns0:AnalysisResults>\n        </ns0:ResultDisplay>\n      </ns0:AnalysisResultDisplays>\n      "
-      },
-      {
-        "_containerType": "AnalysisResultDisplays",
-        "_namespace": "adamref",
-        "_xmlContent": "<ns0:AnalysisResultDisplays xmlns:ns0=\"http://www.cdisc.org/ns/ADaMRes/DRAFT\" xmlns:ns1=\"http://www.cdisc.org/ns/odm/v1.2\" xmlns:ns2=\"http://www.cdisc.org/ns/def/v1.0\">\n        <ns0:ResultDisplay DisplayIdentifier=\"Table_14-3.01\" OID=\"Table_14-3.01\" DisplayLabel=\"Primary Endpoint Analysis: ADAS-Cog - Summary at Week 24 - LOCF (Efficacy Population)\" leafID=\"Table_14-3.01\">    \n          <ns0:AnalysisResults OID=\"Table_14-3.01.R.1\" ResultIdentifier=\"dose response analysis for ADAS-Cog changes from baseline\" Reason=\"Primary Endpoint Analysis; pre-specified in SAP\">\n            \n            \n\n            <ns0:ParameterList>\n              <ns0:Parameter ParamCD=\"ACTOT\" Param=\"Adas-Cog(11) Subscore\" />\n            </ns0:ParameterList>\n            \n            \n            <ns0:AnalysisVariable ItemOID=\"ADQSADAS.CHG\" />\n            \n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADQSADAS\" Mandatory=\"No\" />\n              <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Table_14-3.01.R.1.SC1\" Name=\"Selection Criteria\">[ EFFFL=\"Y\" and ANL01FL=\"Y\" and AVISIT=\"Week 24\" and PARAMCD=\"ATOT\" ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n            </ns0:AnalysisDataset>\n            <ns0:Documentation leafID=\"SAP_SEC_10.1.1\">\n              <ns1:TranslatedText xml:lang=\"en\">Linear model analysis of CHG for dose response; using randomized dose (0 for placebo; 54 for low dose; 81 for high dose) and site group in model. Used PROC GLM in SAS to produce p-value (from Type III SS for treatment dose). \n              </ns1:TranslatedText>\n            </ns0:Documentation>\n            <ns0:ProgrammingCode>\n              <ns2:ComputationMethod OID=\"Table_14-3.01.R.1\">\nproc glm data = ADQSADAS;\n  where EFFFL='Y' and ANL01FL='Y' and AVISIT='Week 24' and PARAMCD=\"ATOT\";\n  class sitegr1;\n  model CHG = trtpn sitegr1;\nrun;</ns2:ComputationMethod>\n            </ns0:ProgrammingCode>\n          </ns0:AnalysisResults>\n          <ns0:AnalysisResults OID=\"Table_14-3.01.R.2\" ResultIdentifier=\"pairwise comparisons to placebo for ADAS-Cog changes from baseline\" Reason=\"Primary Endpoint Analysis; pre-specified in SAP\">\n            \n            \n\n            <ns0:ParameterList>\n              <ns0:Parameter ParamCD=\"ACTOT\" Param=\"Adas-Cog(11) Subscore\" />\n            </ns0:ParameterList>\n            \n            \n            <ns0:AnalysisVariable ItemOID=\"ADQSADAS.CHG\" />\n            \n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADQSADAS\" Mandatory=\"No\" />\n              <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Table_14-3.01.R.2.SC1\" Name=\"Selection Criteria\">[ EFFFL=\"Y\" and ANL01FL=\"Y\" and AVISIT=\"Week 24\" and PARAMCD=\"ATOT\" ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n            </ns0:AnalysisDataset>\n            <ns0:Documentation leafID=\"SAP_SEC_10.1.1\">\n              <ns1:TranslatedText xml:lang=\"en\">ANCOVA analysis of CHG performed to provide pairwise comparisons among treatment groups and adjusted means; using randomized treatment as class variable and site group as class variable in model and the baseline value as a covariate.  \n              </ns1:TranslatedText>\n            </ns0:Documentation>\n            <ns0:ProgrammingCode>\n              <ns2:ComputationMethod OID=\"Table_14-3.01.R.2\">\nproc glm data = ADQSADAS;\n  where EFFFL='Y' and ANL01FL='Y' and AVISIT='Week 24' and PARAMCD=\"ATOT\";\n  class trtpn sitegr1;\n  model CHG = trtpn sitegr1 base;\n  means trtpn;\n  lsmeans trtpn / OM STDERR PDIFF CL;\nrun;</ns2:ComputationMethod>\n            </ns0:ProgrammingCode>\n          </ns0:AnalysisResults>\n        </ns0:ResultDisplay>\n      </ns0:AnalysisResultDisplays>\n      "
-      },
-      {
-        "_containerType": "AnalysisResultDisplays",
-        "_namespace": "adamref",
-        "_xmlContent": "<ns0:AnalysisResultDisplays xmlns:ns0=\"http://www.cdisc.org/ns/ADaMRes/DRAFT\" xmlns:ns1=\"http://www.cdisc.org/ns/odm/v1.2\" xmlns:ns2=\"http://www.cdisc.org/ns/def/v1.0\">\n        <ns0:ResultDisplay DisplayIdentifier=\"Table_14-3.02\" OID=\"Table_14-3.02\" DisplayLabel=\"Primary Endpoint Analysis: CIBIC+ - Summary at Week 24 - LOCF (Efficacy Population)\" leafID=\"Table_14-3.02\">    \n          <ns0:AnalysisResults OID=\"Table_14-3.02.R.1\" ResultIdentifier=\"dose response analysis for CIBIC+ values\" Reason=\"Primary Endpoint Analysis; pre-specified in SAP\">\n            \n            \n\n            <ns0:ParameterList>\n              <ns0:Parameter ParamCD=\"CIBICVAL\" Param=\"CIBIC Score\" />\n            </ns0:ParameterList>\n            \n            \n            <ns0:AnalysisVariable ItemOID=\"ADQSCIBC.AVAL\" />\n            \n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADQSCIBC\" Mandatory=\"No\" />\n              <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Table_14-3.02.R.1.SC1\" Name=\"Selection Criteria\">[ EFFFL=\"Y\" and ANL01FL=\"Y\" and AVISIT=\"Week 24\" and PARAMCD=\"CIBICVAL\" ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n            </ns0:AnalysisDataset>\n            <ns0:Documentation leafID=\"SAP_SEC_10.1.2\">\n              <ns1:TranslatedText xml:lang=\"en\">Summary statistics of AVAL at Week 24. Linear model analysis of AVAL for dose response; using randomized dose (0 for placebo; 54 for low dose; 81 for high dose) and site group in model. Used PROC GLM in SAS to produce p-value (from Type III SS for treatment dose); \n              </ns1:TranslatedText>\n            </ns0:Documentation>\n            <ns0:ProgrammingCode>\n              <ns2:ComputationMethod OID=\"Table_14-3.02.R.1\">\nproc glm data = ADQSCIBC;\n  where EFFFL='Y' and ANL01FL='Y' and AVISIT='Week 24' and PARAMCD=\"CIBICVAL\";\n  class sitegr1;\n  model AVAL = trtpn sitegr1;\nrun;</ns2:ComputationMethod>\n            </ns0:ProgrammingCode>\n          </ns0:AnalysisResults>\n          <ns0:AnalysisResults OID=\"Table_14-3.02.R.2\" ResultIdentifier=\"pairwise comparisons to placebo for CIBIC+ values\" Reason=\"Primary Endpoint Analysis; pre-specified in SAP\">\n            \n            \n\n            <ns0:ParameterList>\n              <ns0:Parameter ParamCD=\"CIBICVAL\" Param=\"CIBIC Score\" />\n            </ns0:ParameterList>\n            \n            \n            <ns0:AnalysisVariable ItemOID=\"ADQSCIBC.AVAL\" />\n            \n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADQSCIBC\" Mandatory=\"No\" />\n              <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Table_14-3.02.R.2.SC1\" Name=\"Selection Criteria\">[ EFFFL=\"Y\" and ANL01FL=\"Y\" and AVISIT=\"Week 24\" and PARAMCD=\"CIBICVAL\" ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n            </ns0:AnalysisDataset>\n            <ns0:Documentation leafID=\"SAP_SEC_10.1.2\">\n              <ns1:TranslatedText xml:lang=\"en\">ANCOVA analysis of AVAL performed to provide pairwise comparisons among treatment groups and adjusted means; using randomized treatment as class variable and site group as class variable in model and the baseline value as a covariate.  \n              </ns1:TranslatedText>\n            </ns0:Documentation>\n            <ns0:ProgrammingCode>\n              <ns2:ComputationMethod OID=\"Table_14-3.02.R.2\">\nproc glm data = ADQSCIBC;\n   where EFFFL='Y' and ANL01FL='Y' and AVISIT='Week 24' and PARAMCD=\"CIBICVAL\";\n   class trtpn sitegr1; \n   model AVAL = trtpn sitegr1;\n   means trtpn;\n   lsmeans trtpn / OM STDERR PDIFF CL;\nrun;</ns2:ComputationMethod>\n            </ns0:ProgrammingCode>\n          </ns0:AnalysisResults>\n        </ns0:ResultDisplay>\n      </ns0:AnalysisResultDisplays>\n      "
-      },
-      {
-        "_containerType": "AnalysisResultDisplays",
-        "_namespace": "adamref",
-        "_xmlContent": "<ns0:AnalysisResultDisplays xmlns:ns0=\"http://www.cdisc.org/ns/ADaMRes/DRAFT\" xmlns:ns1=\"http://www.cdisc.org/ns/odm/v1.2\" xmlns:ns2=\"http://www.cdisc.org/ns/def/v1.0\">\n        <ns0:ResultDisplay DisplayIdentifier=\"Table_14-3.12\" OID=\"Table_14-3.12\" DisplayLabel=\"Mean NPI-X total score from Weeks 4 through Week 24 - Windowed (Efficacy Population)\" leafID=\"Table_14-3.12\">    \n          <ns0:AnalysisResults OID=\"Table_14-3.12.R.1\" ResultIdentifier=\"Descriptive statistics (n, mean, standard deviation, median, min, and max)\" Reason=\"pre-specified in SAP\">\n            \n            \n\n            <ns0:ParameterList>\n              <ns0:Parameter ParamCD=\"NPTOTMN\" Param=\"Mean NPI-X (9) Total (Week 4 to 24)\" />\n            </ns0:ParameterList>\n            \n            \n            <ns0:AnalysisVariable ItemOID=\"ADQSNPIX.AVAL\" />\n            <ns0:AnalysisVariable ItemOID=\"ADQSNPIX.BASE\" />\n            \n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADQSNPIX\" Mandatory=\"No\" />\n              <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Table_14-3.12.R.1.SC1\" Name=\"Selection Criteria\">[ EFFFL=\"Y\" and PARAMCD=\"NPTOTMN\" and AVISIT=\"Weeks 4-24\" and ANL01FL=\"Y\" ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n            </ns0:AnalysisDataset>\n            <ns0:Documentation leafID=\"SAP_SEC_10.2\">\n            </ns0:Documentation>\n            <ns0:ProgrammingCode>\n              <ns2:ComputationMethod OID=\"Table_14-3.12.R.1\">\nPROC UNIVARIATE data= ADQSNPIX (where =(EFFFL = 'Y' and PARAMCD = 'NPTOTMN' and AVISIT='Weeks 4-24' and ANL01FL= 'Y')); \n Var BASE AVAL;\n By TRTPN;\nRun;</ns2:ComputationMethod>\n            </ns0:ProgrammingCode>\n          </ns0:AnalysisResults>\n          <ns0:AnalysisResults OID=\"Table_14-3.12.R.2\" ResultIdentifier=\"p-values, difference of LS means , their standard error and 95% confidence intervals\" Reason=\"pre-specified in SAP\">\n            \n            \n\n            <ns0:ParameterList>\n              <ns0:Parameter ParamCD=\"NPTOTMN\" Param=\"Mean NPI-X (9) Total (Week 4 to 24)\" />\n            </ns0:ParameterList>\n            \n            \n            <ns0:AnalysisVariable ItemOID=\"ADQSNPIX.AVAL\" />\n            \n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADQSNPIX\" Mandatory=\"No\" />\n              <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Table_14-3.12.R.2.SC1\" Name=\"Selection Criteria\">[ EFFFL=\"Y\" and PARAMCD=\"NPTOTMN\" and AVISIT=\"Weeks 4-24\" and ANL01FL=\"Y\" ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n            </ns0:AnalysisDataset>\n            <ns0:Documentation leafID=\"SAP_SEC_10.2\">\n            </ns0:Documentation>\n            <ns0:ProgrammingCode>\n              <ns2:ComputationMethod OID=\"Table_14-3.12.R.2\">\nPROC MIXED data= ADQSNPIX (where =(EFFFL = 'Y' and PARAMCD = 'NPTOTMN' and AVISIT = 'Weeks 4-24' and ANL01FL= 'Y'));\n  class sitegr1 trtpn;\n  model aval = trtpn sitegr1 base;\n  lsmeans trtpn / diff pdiff cl;\nRun;</ns2:ComputationMethod>\n            </ns0:ProgrammingCode>\n          </ns0:AnalysisResults>\n        </ns0:ResultDisplay>\n      </ns0:AnalysisResultDisplays>\n      "
-      },
-      {
-        "_containerType": "AnalysisResultDisplays",
-        "_namespace": "adamref",
-        "_xmlContent": "<ns0:AnalysisResultDisplays xmlns:ns0=\"http://www.cdisc.org/ns/ADaMRes/DRAFT\" xmlns:ns1=\"http://www.cdisc.org/ns/odm/v1.2\" xmlns:ns2=\"http://www.cdisc.org/ns/def/v1.0\">\n        <ns0:ResultDisplay DisplayIdentifier=\"Table_14-5.02\" OID=\"Table_14-5.02\" DisplayLabel=\"Incidence of Treatment Emergent Serious Adverse Events by Treatment Group\" leafID=\"Table_14-5.02\">    \n          <ns0:AnalysisResults OID=\"Table_14-5.02.R.1\" Reason=\"pre-specified in SAP\">\n            \n            \n            <ns0:AnalysisVariable ItemOID=\"ADAE.TRTA\" />\n            <ns0:AnalysisVariable ItemOID=\"ADAE.AEBODSYS\" />\n            <ns0:AnalysisVariable ItemOID=\"ADAE.AEDECOD\" />\n            \n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADAE\" Mandatory=\"No\" />\n              <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Table_14-5.02.R.1.SC1\" Name=\"Selection Criteria 3\">[ TRTEMFL=\"Y\" and AESER=\"Y\" ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n            </ns0:AnalysisDataset>\n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADSL\" Mandatory=\"No\" />\n              <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Table_14-5.02.R.1.SC2\" Name=\"Selection Criteria 4\">[ SAFFL=\"Y\" ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n           </ns0:AnalysisDataset>\n            <ns0:Documentation leafID=\"SAP_SEC_11.2\">\n              <ns1:TranslatedText xml:lang=\"en\">Unique count of subjects that experienced an Adverse Event by Preferred Term, System Organ Class, and Treatment Group and percentages based on the number of subjects in the safety population within each treatment group. The total number of times an event occurred was recorded by Preferred Term, System Organ Class, and Treatment Group. Fishers exact test was used for treatment comparison. \n              </ns1:TranslatedText>\n            </ns0:Documentation>\n            <ns0:ProgrammingCode leafID=\"at14-5-02.sas\">\n            </ns0:ProgrammingCode>\n          </ns0:AnalysisResults>\n        </ns0:ResultDisplay>\n      </ns0:AnalysisResultDisplays>\n\n      "
-      },
-      {
-        "_containerType": "AnalysisResultDisplays",
-        "_namespace": "adamref",
-        "_xmlContent": "<ns0:AnalysisResultDisplays xmlns:ns0=\"http://www.cdisc.org/ns/ADaMRes/DRAFT\" xmlns:ns1=\"http://www.cdisc.org/ns/odm/v1.2\" xmlns:ns2=\"http://www.cdisc.org/ns/def/v1.0\">\n        <ns0:ResultDisplay DisplayIdentifier=\"Table_14-6.01\" OID=\"Table_14-6.01\" DisplayLabel=\"Summary Statistics for Continuous Laboratory Values (Safety Population)\" leafID=\"Table_14-6.01\">    \n          <ns0:AnalysisResults OID=\"Table_14-6.01.R.1\" ResultIdentifier=\"Summary statistics for each laboratory parameter (numeric results) and change from baseline, provided for each scheduled visit\" Reason=\"pre-specified in SAP\">\n            \n            \n\n            <ns0:ParameterList>\n              <ns0:Parameter ParamCD=\"ALB\" Param=\"Albumin (g/L)\" />\n              <ns0:Parameter ParamCD=\"ALP\" Param=\"Alkaline Phosphatase (U/L)\" />\n              <ns0:Parameter ParamCD=\"ALT\" Param=\"Alanine Aminotransferase (U/L)\" />\n              <ns0:Parameter ParamCD=\"AST\" Param=\"Aspartate Aminotransferase (U/L)\" />\n              <ns0:Parameter ParamCD=\"BILI\" Param=\"Bilirubin (umol/L)\" />\n              <ns0:Parameter ParamCD=\"BUN\" Param=\"Blood Urea Nitrogen (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"CA\" Param=\"Calcium (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"CHOL\" Param=\"Cholesterol (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"CK\" Param=\"Creatine Kinase (U/L)\" />\n              <ns0:Parameter ParamCD=\"CL\" Param=\"Chloride (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"CREAT\" Param=\"Creatinine (umol/L)\" />\n              <ns0:Parameter ParamCD=\"GGT\" Param=\"Gamma Glutamyl Transferase (U/L)\" />\n              <ns0:Parameter ParamCD=\"GLUC\" Param=\"Glucose (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"K\" Param=\"Potassium (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"PHOS\" Param=\"Phosphate (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"PROT\" Param=\"Protein (g/L)\" />\n              <ns0:Parameter ParamCD=\"SODIUM\" Param=\"Sodium (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"URATE\" Param=\"Urate (umol/L)\" />\n              <ns0:Parameter ParamCD=\"ANISO\" Param=\"Anisocytes\" />\n              <ns0:Parameter ParamCD=\"BASO\" Param=\"Basophils (GI/L)\" />\n              <ns0:Parameter ParamCD=\"EOS\" Param=\"Eosinophils (GI/L)\" />\n              <ns0:Parameter ParamCD=\"HCT\" Param=\"Hematocrit\" />\n              <ns0:Parameter ParamCD=\"HGB\" Param=\"Hemoglobin (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"LYM\" Param=\"Lymphocytes (GI/L)\" />\n              <ns0:Parameter ParamCD=\"MACROCY\" Param=\"Macrocytes\" />\n              <ns0:Parameter ParamCD=\"MCH\" Param=\"Ery. Mean Corpuscular Hemoglobin (fmol(Fe))\" />\n              <ns0:Parameter ParamCD=\"MCHC\" Param=\"Ery. Mean Corpuscular HGB Concentration(mmol/L)\" />\n              <ns0:Parameter ParamCD=\"MCV\" Param=\"Ery. Mean Corpuscular Volume (fL)\" />\n              <ns0:Parameter ParamCD=\"MICROCY\" Param=\"Microcytes\" />\n              <ns0:Parameter ParamCD=\"MONO\" Param=\"Monocytes (GI/L)\" />\n              <ns0:Parameter ParamCD=\"PLAT\" Param=\"Platelet (GI/L)\" />\n              <ns0:Parameter ParamCD=\"POIKILO\" Param=\"Poikilocytes\" />\n              <ns0:Parameter ParamCD=\"POLICHR\" Param=\"Polychromasia\" />\n              <ns0:Parameter ParamCD=\"RBC\" Param=\"Erythrocytes (TI/L)\" />\n              <ns0:Parameter ParamCD=\"WBC\" Param=\"Leukocytes (GI/L)\" />\n            </ns0:ParameterList>\n            \n            \n            <ns0:AnalysisVariable ItemOID=\"ADLBC.AVAL\" />\n            <ns0:AnalysisVariable ItemOID=\"ADLBC.CHG\" />\n            \n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADLBC\" Mandatory=\"No\" />\n              <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Table_14-6.01.R.1.SC1\" Name=\"Selection Criteria\">[ PARAMCD not contains \"_\" ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n            </ns0:AnalysisDataset>\n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADLBH\" Mandatory=\"No\" />\n                <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Table_14-6.01.R.1.SC2\" Name=\"Selection Criteria\">[ PARAMCD not contains \"_\" ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n            </ns0:AnalysisDataset>\n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADSL\" Mandatory=\"No\" />\n              <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Table_14-6.01.R.1.SC3\" Name=\"Selection Criteria\">[ SAFFL=\"Y\" ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n            </ns0:AnalysisDataset>\n            <ns0:Documentation leafID=\"SAP_SEC_11.5\">\n            </ns0:Documentation>\n          </ns0:AnalysisResults>\n        </ns0:ResultDisplay>\n      </ns0:AnalysisResultDisplays>\n\n      "
-      },
-      {
-        "_containerType": "AnalysisResultDisplays",
-        "_namespace": "adamref",
-        "_xmlContent": "<ns0:AnalysisResultDisplays xmlns:ns0=\"http://www.cdisc.org/ns/ADaMRes/DRAFT\" xmlns:ns1=\"http://www.cdisc.org/ns/odm/v1.2\" xmlns:ns2=\"http://www.cdisc.org/ns/def/v1.0\">\n        <ns0:ResultDisplay DisplayIdentifier=\"Table_14-6.02\" OID=\"Table_14-6.02\" DisplayLabel=\"Frequency of Normal and Abnormal (Beyond Normal Range) Laboratory Values During Treatment (Safety Population)\" leafID=\"Table_14-6.02\">    \n          <ns0:AnalysisResults OID=\"Table_14-6.02.R.1\" ResultIdentifier=\"Frequency counts of normal and abnormal lab values including treatment comparisons using Fisher's Exact tests\" Reason=\"pre-specified in SAP\">\n            \n            \n\n            <ns0:ParameterList>\n              <ns0:Parameter ParamCD=\"ALB\" Param=\"Albumin (g/L)\" />\n              <ns0:Parameter ParamCD=\"ALP\" Param=\"Alkaline Phosphatase (U/L)\" />\n              <ns0:Parameter ParamCD=\"ALT\" Param=\"Alanine Aminotransferase (U/L)\" />\n              <ns0:Parameter ParamCD=\"AST\" Param=\"Aspartate Aminotransferase (U/L)\" />\n              <ns0:Parameter ParamCD=\"BILI\" Param=\"Bilirubin (umol/L)\" />\n              <ns0:Parameter ParamCD=\"BUN\" Param=\"Blood Urea Nitrogen (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"CA\" Param=\"Calcium (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"CHOL\" Param=\"Cholesterol (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"CK\" Param=\"Creatine Kinase (U/L)\" />\n              <ns0:Parameter ParamCD=\"CL\" Param=\"Chloride (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"CREAT\" Param=\"Creatinine (umol/L)\" />\n              <ns0:Parameter ParamCD=\"GGT\" Param=\"Gamma Glutamyl Transferase (U/L)\" />\n              <ns0:Parameter ParamCD=\"GLUC\" Param=\"Glucose (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"K\" Param=\"Potassium (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"PHOS\" Param=\"Phosphate (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"PROT\" Param=\"Protein (g/L)\" />\n              <ns0:Parameter ParamCD=\"SODIUM\" Param=\"Sodium (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"URATE\" Param=\"Urate (umol/L)\" />\n              <ns0:Parameter ParamCD=\"ANISO\" Param=\"Anisocytes\" />\n              <ns0:Parameter ParamCD=\"BASO\" Param=\"Basophils (GI/L)\" />\n              <ns0:Parameter ParamCD=\"EOS\" Param=\"Eosinophils (GI/L)\" />\n              <ns0:Parameter ParamCD=\"HCT\" Param=\"Hematocrit\" />\n              <ns0:Parameter ParamCD=\"HGB\" Param=\"Hemoglobin (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"LYM\" Param=\"Lymphocytes (GI/L)\" />\n              <ns0:Parameter ParamCD=\"MACROCY\" Param=\"Macrocytes\" />\n              <ns0:Parameter ParamCD=\"MCH\" Param=\"Ery. Mean Corpuscular Hemoglobin (fmol(Fe))\" />\n              <ns0:Parameter ParamCD=\"MCHC\" Param=\"Ery. Mean Corpuscular HGB Concentration(mmol/L)\" />\n              <ns0:Parameter ParamCD=\"MCV\" Param=\"Ery. Mean Corpuscular Volume (fL)\" />\n              <ns0:Parameter ParamCD=\"MICROCY\" Param=\"Microcytes\" />\n              <ns0:Parameter ParamCD=\"MONO\" Param=\"Monocytes (GI/L)\" />\n              <ns0:Parameter ParamCD=\"PLAT\" Param=\"Platelet (GI/L)\" />\n              <ns0:Parameter ParamCD=\"POIKILO\" Param=\"Poikilocytes\" />\n              <ns0:Parameter ParamCD=\"POLICHR\" Param=\"Polychromasia\" />\n              <ns0:Parameter ParamCD=\"RBC\" Param=\"Erythrocytes (TI/L)\" />\n              <ns0:Parameter ParamCD=\"WBC\" Param=\"Leukocytes (GI/L)\" />\n            </ns0:ParameterList>\n            \n            \n            <ns0:AnalysisVariable ItemOID=\"ADLBC.LBNRIND\" />\n            \n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADLBC\" Mandatory=\"No\" />\n              <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Table_14-6.02.R.1.SC1\" Name=\"Selection Criteria\">[ ANL01FL=\"Y\" and PARAMCD not contains \"_\" ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n            </ns0:AnalysisDataset>\n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADLBH\" Mandatory=\"No\" />\n              <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Table_14-6.02.R.1.SC2\" Name=\"Selection Criteria\">[ ANL01FL=\"Y\" and PARAMCD not contains \"_\" ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n            </ns0:AnalysisDataset>\n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADSL\" Mandatory=\"No\" />\n              <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Table_14-6.02.R.1.SC3\" Name=\"Selection Criteria\">[ SAFFL=\"Y\" ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n            </ns0:AnalysisDataset>\n            <ns0:Documentation leafID=\"SAP_SEC_11.5\">\n            </ns0:Documentation>\n            <ns0:ProgrammingCode>\n              <ns2:ComputationMethod OID=\"Table_14-6.02.R.1\">\nPROC FREQ (WHERE=(SAFFL=\"Y\" and ANL01FL =\"Y\" and index(PARAMCD,\"_\")=0));\n  BY PARCAT1 PARAMCD;\n  TABLES TRTPN*LBNRIND/ALL FISHER;\nrun; </ns2:ComputationMethod>\n            </ns0:ProgrammingCode>\n          </ns0:AnalysisResults>\n        </ns0:ResultDisplay>\n      </ns0:AnalysisResultDisplays>\n      "
-      },
-      {
-        "_containerType": "AnalysisResultDisplays",
-        "_namespace": "adamref",
-        "_xmlContent": "<ns0:AnalysisResultDisplays xmlns:ns0=\"http://www.cdisc.org/ns/ADaMRes/DRAFT\" xmlns:ns1=\"http://www.cdisc.org/ns/odm/v1.2\" xmlns:ns2=\"http://www.cdisc.org/ns/def/v1.0\">\n        <ns0:ResultDisplay DisplayIdentifier=\"Table_14-6.03\" OID=\"Table_14-6.03\" DisplayLabel=\"Frequency of Normal and Abnormal (Clinically Significant Change from Previous Observation) Laboratory Values During Treatment (Safety Population)\" leafID=\"Table_14-6.03\">    \n          <ns0:AnalysisResults OID=\"Table_14-6.03.R.1\" ResultIdentifier=\"Frequency counts of clinically significant lab values including treatment comparisons using Fisher's Exact tests\" Reason=\"pre-specified in SAP\">\n            \n            \n\n            <ns0:ParameterList>\n              <ns0:Parameter ParamCD=\"_ALB\" Param=\"Albumin (g/L) change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_ALP\" Param=\"Alkaline Phosphatase (U/L) change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_ALT\" Param=\"Alanine Aminotransferase (U/L) change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_AST\" Param=\"Aspartate Aminotransferase (U/L) change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_BILI\" Param=\"Bilirubin (umol/L) change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_BUN\" Param=\"Blood Urea Nitrogen (mmol/L) change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_CA\" Param=\"Calcium (mmol/L) change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_CHOL\" Param=\"Cholesterol (mmol/L) change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_CK\" Param=\"Creatine Kinase (U/L) change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_CL\" Param=\"Chloride (mmol/L) change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_CREAT\" Param=\"Creatinine (umol/L) change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_GGT\" Param=\"Gamma Glutamyl Transferase (U/L) change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_GLUC\" Param=\"Glucose (mmol/L) change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_K\" Param=\"Potassium (mmol/L) change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_PHOS\" Param=\"Phosphate (mmol/L) change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_PROT\" Param=\"Protein (g/L) change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_SODIUM\" Param=\"Sodium (mmol/L) change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_URATE\" Param=\"Urate (umol/L) change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_ANISO\" Param=\"Anisocytes change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_BASO\" Param=\"Basophils (GI/L) change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_EOS\" Param=\"Eosinophils (GI/L) change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_HCT\" Param=\"Hematocrit change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_HGB\" Param=\"Hemoglobin (mmol/L) change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_LYM\" Param=\"Lymphocytes (GI/L) change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_MACROCY\" Param=\"Macrocytes change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_MCH\" Param=\"Ery. Mean Corpuscular Hemoglobin (fmol(Fe)) change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_MCHC\" Param=\"Ery. Mean Corpuscular HGB Concentration(mmol/L) change from previous visit, relative to normal rang\" />\n              <ns0:Parameter ParamCD=\"_MCV\" Param=\"Ery. Mean Corpuscular Volume (fL) change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_MICROCY\" Param=\"Microcytes change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_MONO\" Param=\"Monocytes (GI/L) change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_PLAT\" Param=\"Platelet (GI/L) change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_POIKILO\" Param=\"Poikilocytes change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_POLICHR\" Param=\"Polychromasia change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_RBC\" Param=\"Erythrocytes (TI/L) change from previous visit, relative to normal range\" />\n              <ns0:Parameter ParamCD=\"_WBC\" Param=\"Leukocytes (GI/L) change from previous visit, relative to normal range\" />\n            </ns0:ParameterList>\n            \n            \n            <ns0:AnalysisVariable ItemOID=\"ADLBC.ANRIND\" />\n            \n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADLBC\" Mandatory=\"No\" />\n              <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Table_14-6.03.R.1.SC1\" Name=\"Selection Criteria\">[ ANL01FL=\"Y\" and PARAMCD contains \"_\" ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n            </ns0:AnalysisDataset>\n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADLBH\" Mandatory=\"No\" />\n              <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Table_14-6.03.R.1.SC2\" Name=\"Selection Criteria\">[ ANL01FL=\"Y\" and PARAMCD contains \"_\" ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n            </ns0:AnalysisDataset>\n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADSL\" Mandatory=\"No\" />\n              <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Table_14-6.03.R.1.SC3\" Name=\"Selection Criteria\">[ SAFFL=\"Y\" ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n            </ns0:AnalysisDataset>\n            <ns0:Documentation leafID=\"SAP_SEC_11.5\">\n            </ns0:Documentation>\n            <ns0:ProgrammingCode>\n              <ns2:ComputationMethod OID=\"Table_14-6.03.R.1\">\nPROC  FREQ(WHERE=(SAFFL=\"Y\" and ANL01FL =\"Y\" and index(PARAMCD,\"_\")));\n  BY PARCAT1 PARAMCD;\n  TABLES TRTPN*ANRIND/ALL FISHER;\nRUN; </ns2:ComputationMethod>\n            </ns0:ProgrammingCode>\n          </ns0:AnalysisResults>\n        </ns0:ResultDisplay>\n      </ns0:AnalysisResultDisplays>\n      "
-      },
-      {
-        "_containerType": "AnalysisResultDisplays",
-        "_namespace": "adamref",
-        "_xmlContent": "<ns0:AnalysisResultDisplays xmlns:ns0=\"http://www.cdisc.org/ns/ADaMRes/DRAFT\" xmlns:ns1=\"http://www.cdisc.org/ns/odm/v1.2\" xmlns:ns2=\"http://www.cdisc.org/ns/def/v1.0\">\n        <ns0:ResultDisplay DisplayIdentifier=\"Table_14-6.04\" OID=\"Table_14-6.04\" DisplayLabel=\"Shifts of Laboratory Values During Treatment, Categorized Based on Threshold Ranges, by Visit (Safety Population)\" leafID=\"Table_14-6.04\">    \n          <ns0:AnalysisResults OID=\"Table_14-6.04.R.1\" ResultIdentifier=\"Frequency counts of change in threshold ranges by visit and treatment\" Reason=\"pre-specified in SAP\">\n            \n            \n\n            <ns0:ParameterList>\n              <ns0:Parameter ParamCD=\"ALB\" Param=\"Albumin (g/L)\" />\n              <ns0:Parameter ParamCD=\"ALP\" Param=\"Alkaline Phosphatase (U/L)\" />\n              <ns0:Parameter ParamCD=\"ALT\" Param=\"Alanine Aminotransferase (U/L)\" />\n              <ns0:Parameter ParamCD=\"AST\" Param=\"Aspartate Aminotransferase (U/L)\" />\n              <ns0:Parameter ParamCD=\"BILI\" Param=\"Bilirubin (umol/L)\" />\n              <ns0:Parameter ParamCD=\"BUN\" Param=\"Blood Urea Nitrogen (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"CA\" Param=\"Calcium (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"CHOL\" Param=\"Cholesterol (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"CK\" Param=\"Creatine Kinase (U/L)\" />\n              <ns0:Parameter ParamCD=\"CL\" Param=\"Chloride (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"CREAT\" Param=\"Creatinine (umol/L)\" />\n              <ns0:Parameter ParamCD=\"GGT\" Param=\"Gamma Glutamyl Transferase (U/L)\" />\n              <ns0:Parameter ParamCD=\"GLUC\" Param=\"Glucose (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"K\" Param=\"Potassium (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"PHOS\" Param=\"Phosphate (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"PROT\" Param=\"Protein (g/L)\" />\n              <ns0:Parameter ParamCD=\"SODIUM\" Param=\"Sodium (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"URATE\" Param=\"Urate (umol/L)\" />\n              <ns0:Parameter ParamCD=\"ANISO\" Param=\"Anisocytes\" />\n              <ns0:Parameter ParamCD=\"BASO\" Param=\"Basophils (GI/L)\" />\n              <ns0:Parameter ParamCD=\"EOS\" Param=\"Eosinophils (GI/L)\" />\n              <ns0:Parameter ParamCD=\"HCT\" Param=\"Hematocrit\" />\n              <ns0:Parameter ParamCD=\"HGB\" Param=\"Hemoglobin (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"LYM\" Param=\"Lymphocytes (GI/L)\" />\n              <ns0:Parameter ParamCD=\"MACROCY\" Param=\"Macrocytes\" />\n              <ns0:Parameter ParamCD=\"MCH\" Param=\"Ery. Mean Corpuscular Hemoglobin (fmol(Fe))\" />\n              <ns0:Parameter ParamCD=\"MCHC\" Param=\"Ery. Mean Corpuscular HGB Concentration(mmol/L)\" />\n              <ns0:Parameter ParamCD=\"MCV\" Param=\"Ery. Mean Corpuscular Volume (fL)\" />\n              <ns0:Parameter ParamCD=\"MICROCY\" Param=\"Microcytes\" />\n              <ns0:Parameter ParamCD=\"MONO\" Param=\"Monocytes (GI/L)\" />\n              <ns0:Parameter ParamCD=\"PLAT\" Param=\"Platelet (GI/L)\" />\n              <ns0:Parameter ParamCD=\"POIKILO\" Param=\"Poikilocytes\" />\n              <ns0:Parameter ParamCD=\"POLICHR\" Param=\"Polychromasia\" />\n              <ns0:Parameter ParamCD=\"RBC\" Param=\"Erythrocytes (TI/L)\" />\n              <ns0:Parameter ParamCD=\"WBC\" Param=\"Leukocytes (GI/L)\" />\n            </ns0:ParameterList>\n            \n            \n            <ns0:AnalysisVariable ItemOID=\"ADLBC.ANRIND\" />\n            <ns0:AnalysisVariable ItemOID=\"ADLBC.BNRIND\" />\n            \n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADLBC\" Mandatory=\"No\" />\n              <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Table_14-6.04.R.1.SC1\" Name=\"Selection Criteria\">[ PARAMCD not contains \"_\" ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n            </ns0:AnalysisDataset>\n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADLBH\" Mandatory=\"No\" />\n              <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Table_14-6.04.R.1.SC2\" Name=\"Selection Criteria\">[ PARAMCD not contains \"_\" ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n            </ns0:AnalysisDataset>\n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADSL\" Mandatory=\"No\" />\n              <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Table_14-6.04.R.1.SC3\" Name=\"Selection Criteria\">[ SAFFL=\"Y\" ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n            </ns0:AnalysisDataset>\n            <ns0:Documentation leafID=\"SAP_SEC_11.5\">\n            </ns0:Documentation>\n            <ns0:ProgrammingCode>\n              <ns2:ComputationMethod OID=\"Table_14-6.04.R.1\">\nPROC FREQ (WHERE=(SAFFL=\"Y\" and index(PARAMCD,\"_\")=0));\n  TABLES PARCAT1*PARAMCD*AVISITN*TRTPN*BNRIND*ANRIND;\nRUN; </ns2:ComputationMethod>\n            </ns0:ProgrammingCode>\n          </ns0:AnalysisResults>\n        </ns0:ResultDisplay>\n      </ns0:AnalysisResultDisplays>\n      "
-      },
-      {
-        "_containerType": "AnalysisResultDisplays",
-        "_namespace": "adamref",
-        "_xmlContent": "<ns0:AnalysisResultDisplays xmlns:ns0=\"http://www.cdisc.org/ns/ADaMRes/DRAFT\" xmlns:ns1=\"http://www.cdisc.org/ns/odm/v1.2\" xmlns:ns2=\"http://www.cdisc.org/ns/def/v1.0\">\n        <ns0:ResultDisplay DisplayIdentifier=\"Table_14-6.05\" OID=\"Table_14-6.05\" DisplayLabel=\"Shifts of Laboratory Values During Treatment, Categorized Based on Threshold Ranges (Safety Population)\" leafID=\"Table_14-6.05\">    \n          <ns0:AnalysisResults OID=\"Table_14-6.05.R.1\" ResultIdentifier=\"Frequency counts of change in threshold ranges by treatment including comparison of treatment with Fisher's Exact test\" Reason=\"pre-specified in SAP\">\n            \n            \n\n            <ns0:ParameterList>\n              <ns0:Parameter ParamCD=\"ALB\" Param=\"Albumin (g/L)\" />\n              <ns0:Parameter ParamCD=\"ALP\" Param=\"Alkaline Phosphatase (U/L)\" />\n              <ns0:Parameter ParamCD=\"ALT\" Param=\"Alanine Aminotransferase (U/L)\" />\n              <ns0:Parameter ParamCD=\"AST\" Param=\"Aspartate Aminotransferase (U/L)\" />\n              <ns0:Parameter ParamCD=\"BILI\" Param=\"Bilirubin (umol/L)\" />\n              <ns0:Parameter ParamCD=\"BUN\" Param=\"Blood Urea Nitrogen (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"CA\" Param=\"Calcium (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"CHOL\" Param=\"Cholesterol (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"CK\" Param=\"Creatine Kinase (U/L)\" />\n              <ns0:Parameter ParamCD=\"CL\" Param=\"Chloride (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"CREAT\" Param=\"Creatinine (umol/L)\" />\n              <ns0:Parameter ParamCD=\"GGT\" Param=\"Gamma Glutamyl Transferase (U/L)\" />\n              <ns0:Parameter ParamCD=\"GLUC\" Param=\"Glucose (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"K\" Param=\"Potassium (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"PHOS\" Param=\"Phosphate (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"PROT\" Param=\"Protein (g/L)\" />\n              <ns0:Parameter ParamCD=\"SODIUM\" Param=\"Sodium (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"URATE\" Param=\"Urate (umol/L)\" />\n              <ns0:Parameter ParamCD=\"ANISO\" Param=\"Anisocytes\" />\n              <ns0:Parameter ParamCD=\"BASO\" Param=\"Basophils (GI/L)\" />\n              <ns0:Parameter ParamCD=\"EOS\" Param=\"Eosinophils (GI/L)\" />\n              <ns0:Parameter ParamCD=\"HCT\" Param=\"Hematocrit\" />\n              <ns0:Parameter ParamCD=\"HGB\" Param=\"Hemoglobin (mmol/L)\" />\n              <ns0:Parameter ParamCD=\"LYM\" Param=\"Lymphocytes (GI/L)\" />\n              <ns0:Parameter ParamCD=\"MACROCY\" Param=\"Macrocytes\" />\n              <ns0:Parameter ParamCD=\"MCH\" Param=\"Ery. Mean Corpuscular Hemoglobin (fmol(Fe))\" />\n              <ns0:Parameter ParamCD=\"MCHC\" Param=\"Ery. Mean Corpuscular HGB Concentration(mmol/L)\" />\n              <ns0:Parameter ParamCD=\"MCV\" Param=\"Ery. Mean Corpuscular Volume (fL)\" />\n              <ns0:Parameter ParamCD=\"MICROCY\" Param=\"Microcytes\" />\n              <ns0:Parameter ParamCD=\"MONO\" Param=\"Monocytes (GI/L)\" />\n              <ns0:Parameter ParamCD=\"PLAT\" Param=\"Platelet (GI/L)\" />\n              <ns0:Parameter ParamCD=\"POIKILO\" Param=\"Poikilocytes\" />\n              <ns0:Parameter ParamCD=\"POLICHR\" Param=\"Polychromasia\" />\n              <ns0:Parameter ParamCD=\"RBC\" Param=\"Erythrocytes (TI/L)\" />\n              <ns0:Parameter ParamCD=\"WBC\" Param=\"Leukocytes (GI/L)\" />\n            </ns0:ParameterList>\n            \n            \n            <ns0:AnalysisVariable ItemOID=\"ADLBC.ANRIND\" />\n            <ns0:AnalysisVariable ItemOID=\"ADLBC.BNRIND\" />\n            \n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADLBC\" Mandatory=\"No\" />\n              <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Table_14-6.05.R.1.SC1\" Name=\"Selection Criteria\">[ ANL01FL=\"Y\" and PARAMCD not contains \"_\" ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n            </ns0:AnalysisDataset>\n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADLBH\" Mandatory=\"No\" />\n              <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Table_14-6.05.R.1.SC2\" Name=\"Selection Criteria\">[ ANL01FL=\"Y\" and PARAMCD not contains \"_\" ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n            </ns0:AnalysisDataset>\n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADSL\" Mandatory=\"No\" />\n              <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Table_14-6.05.R.1.SC3\" Name=\"Selection Criteria\">[ SAFFL=\"Y\" ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n            </ns0:AnalysisDataset>\n            <ns0:Documentation leafID=\"SAP_SEC_11.5\">\n            </ns0:Documentation>\n            <ns0:ProgrammingCode>\n              <ns2:ComputationMethod OID=\"Table_14-6.05.R.1\">\nPROC  FREQ(WHERE=(SAFFL=\"Y\" and ANL01FL=\"Y\" and index(PARAMCD,\"_\")=0)) t;\n  BY PARCAT1 PARAMCD;\n TABLES BNRIND*TRTPN*ANRIND / cmh ;\nRUN; </ns2:ComputationMethod>\n            </ns0:ProgrammingCode>\n          </ns0:AnalysisResults>\n        </ns0:ResultDisplay>\n      </ns0:AnalysisResultDisplays>\n      "
-      },
-      {
-        "_containerType": "AnalysisResultDisplays",
-        "_namespace": "adamref",
-        "_xmlContent": "<ns0:AnalysisResultDisplays xmlns:ns0=\"http://www.cdisc.org/ns/ADaMRes/DRAFT\" xmlns:ns1=\"http://www.cdisc.org/ns/odm/v1.2\" xmlns:ns2=\"http://www.cdisc.org/ns/def/v1.0\">\n        <ns0:ResultDisplay DisplayIdentifier=\"Table_14-6.06\" OID=\"Table_14-6.06\" DisplayLabel=\"Shifts of Hy's Law Values During Treatment (Safety Population)\" leafID=\"Table_14-6.06\">    \n          <ns0:AnalysisResults OID=\"Table_14-6.06.R.1\" ResultIdentifier=\"Frequency counts of change in Hy's Law abnormalities by treatment including comparison of treatment with Fisher's Exact test\" Reason=\"pre-specified in SAP\">\n            \n            \n\n            <ns0:ParameterList>\n              <ns0:Parameter ParamCD=\"TRANSHY\" Param=\"Transaminase 1.5 x ULN\" />\n              <ns0:Parameter ParamCD=\"HYLAW\" Param=\"Total Bili 1.5 x ULN and Transaminase 1.5 x ULN\" />\n            </ns0:ParameterList>\n            \n            \n            <ns0:AnalysisVariable ItemOID=\"ADLBHY.AVAL\" />\n            \n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADLBHY\" Mandatory=\"No\" />\n              <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Table_14-6.06.R.1.SC1\" Name=\"Selection Criteria\">[ PARAMCD in(\"TRANSHY\",\"HYLAW\") ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n            </ns0:AnalysisDataset>\n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADSL\" Mandatory=\"No\" />\n              <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Table_14-6.06.R.1.SC2\" Name=\"Selection Criteria\">[ SAFFL=\"Y\" ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n            </ns0:AnalysisDataset>\n            <ns0:Documentation leafID=\"SAP_SEC_11.5\">\n              <ns1:TranslatedText xml:lang=\"en\">Take the maximum AVAL per patient when patients were on treatment (AVISITN in (2,4,6,8,12,16,20,24,26)) for the Hy's Law parameters then perform a frequency count by treatment with Fisher's Exact test.\n              </ns1:TranslatedText>\n            </ns0:Documentation>\n          </ns0:AnalysisResults>\n        </ns0:ResultDisplay>\n      </ns0:AnalysisResultDisplays>\n      "
-      },
-      {
-        "_containerType": "AnalysisResultDisplays",
-        "_namespace": "adamref",
-        "_xmlContent": "<ns0:AnalysisResultDisplays xmlns:ns0=\"http://www.cdisc.org/ns/ADaMRes/DRAFT\" xmlns:ns1=\"http://www.cdisc.org/ns/odm/v1.2\" xmlns:ns2=\"http://www.cdisc.org/ns/def/v1.0\">\n        <ns0:ResultDisplay DisplayIdentifier=\"Figure_14-1\" OID=\"Figure_14-1\" DisplayLabel=\"Time to Dermatologic Event by Treatment Group\" leafID=\"Figure_14-1\">    \n          <ns0:AnalysisResults OID=\"Figure_14-1.R.1\" ResultIdentifier=\"treatment group comparison for time to event variables\" Reason=\"pre-specified in SAP\">\n            \n            \n\n            <ns0:ParameterList>\n              <ns0:Parameter ParamCD=\"TTDE\" Param=\"Time to First Dermatological Event\" />\n            </ns0:ParameterList>\n            \n            \n            <ns0:AnalysisVariable ItemOID=\"ADTTE.AVAL\" />\n            <ns0:AnalysisVariable ItemOID=\"ADTTE.CNSR\" />\n            \n            <ns0:AnalysisDataset>\n              <ns1:ItemGroupRef ItemGroupOID=\"ADTTE\" Mandatory=\"No\" />\n              <ns0:SelectionCriteria>         \n                <ns2:ComputationMethod OID=\"Figure_14-1.R.1.SC1\" Name=\"Selection Criteria\">[ SAFFL=\"Y\" ]</ns2:ComputationMethod>           \n              </ns0:SelectionCriteria> \n            </ns0:AnalysisDataset>\n            <ns0:Documentation leafID=\"SAP_SEC_11.2\">\n              <ns1:TranslatedText xml:lang=\"en\">Kaplan-Meier estimates and log-rank analysis of time to first dermatological adverse event, safety population \n              </ns1:TranslatedText>\n            </ns0:Documentation>\n            <ns0:ProgrammingCode>\n              <ns2:ComputationMethod OID=\"Figure_14-1.R.1\">\nproc lifetest data = adtte (where=(saffl=\"Y\"))  plots=s;\n id usubjid;\n strata trtan;\n time aval*cnsr(1);\n test trtan;\nrun; </ns2:ComputationMethod>\n            </ns0:ProgrammingCode>\n          </ns0:AnalysisResults>\n        </ns0:ResultDisplay>\n      </ns0:AnalysisResultDisplays>\n\n\n  "
+    "displaySupplemental": {
+      "multipleAnalyses": {
+        "Table_14-2.01": [
+          "Table_14-2.01.R.1",
+          "Table_14-2.01.R.2"
+        ],
+        "Table_14-3.01": [
+          "Table_14-3.01.R.1",
+          "Table_14-3.01.R.2"
+        ],
+        "Table_14-3.02": [
+          "Table_14-3.02.R.1",
+          "Table_14-3.02.R.2"
+        ],
+        "Table_14-3.12": [
+          "Table_14-3.12.R.1",
+          "Table_14-3.12.R.2"
+        ]
       }
-    ],
+    },
+    "analysisSupplemental": {
+      "datasetCriteria": {
+        "Table_14-1.02.R.1": {
+          "ADSL": [
+            "Table_14-1.02.R.1.SC1"
+          ]
+        },
+        "Table_14-2.01.R.1": {
+          "ADSL": [
+            "Table_14-2.01.R.1.SC1"
+          ]
+        },
+        "Table_14-2.01.R.2": {
+          "ADSL": [
+            "Table_14-2.01.R.2.SC1"
+          ]
+        },
+        "Table_14-3.01.R.1": {
+          "ADQSADAS": [
+            "Table_14-3.01.R.1.SC1"
+          ]
+        },
+        "Table_14-3.01.R.2": {
+          "ADQSADAS": [
+            "Table_14-3.01.R.2.SC1"
+          ]
+        },
+        "Table_14-3.02.R.1": {
+          "ADQSCIBC": [
+            "Table_14-3.02.R.1.SC1"
+          ]
+        },
+        "Table_14-3.02.R.2": {
+          "ADQSCIBC": [
+            "Table_14-3.02.R.2.SC1"
+          ]
+        },
+        "Table_14-3.12.R.1": {
+          "ADQSNPIX": [
+            "Table_14-3.12.R.1.SC1"
+          ]
+        },
+        "Table_14-3.12.R.2": {
+          "ADQSNPIX": [
+            "Table_14-3.12.R.2.SC1"
+          ]
+        },
+        "Table_14-5.02.R.1": {
+          "ADAE": [
+            "Table_14-5.02.R.1.SC1"
+          ],
+          "ADSL": [
+            "Table_14-5.02.R.1.SC2"
+          ]
+        },
+        "Table_14-6.01.R.1": {
+          "ADLBC": [
+            "Table_14-6.01.R.1.SC1"
+          ],
+          "ADLBH": [
+            "Table_14-6.01.R.1.SC2"
+          ],
+          "ADSL": [
+            "Table_14-6.01.R.1.SC3"
+          ]
+        },
+        "Table_14-6.02.R.1": {
+          "ADLBC": [
+            "Table_14-6.02.R.1.SC1"
+          ],
+          "ADLBH": [
+            "Table_14-6.02.R.1.SC2"
+          ],
+          "ADSL": [
+            "Table_14-6.02.R.1.SC3"
+          ]
+        },
+        "Table_14-6.03.R.1": {
+          "ADLBC": [
+            "Table_14-6.03.R.1.SC1"
+          ],
+          "ADLBH": [
+            "Table_14-6.03.R.1.SC2"
+          ],
+          "ADSL": [
+            "Table_14-6.03.R.1.SC3"
+          ]
+        },
+        "Table_14-6.04.R.1": {
+          "ADLBC": [
+            "Table_14-6.04.R.1.SC1"
+          ],
+          "ADLBH": [
+            "Table_14-6.04.R.1.SC2"
+          ],
+          "ADSL": [
+            "Table_14-6.04.R.1.SC3"
+          ]
+        },
+        "Table_14-6.05.R.1": {
+          "ADLBC": [
+            "Table_14-6.05.R.1.SC1"
+          ],
+          "ADLBH": [
+            "Table_14-6.05.R.1.SC2"
+          ],
+          "ADSL": [
+            "Table_14-6.05.R.1.SC3"
+          ]
+        },
+        "Table_14-6.06.R.1": {
+          "ADLBHY": [
+            "Table_14-6.06.R.1.SC1"
+          ],
+          "ADSL": [
+            "Table_14-6.06.R.1.SC2"
+          ]
+        },
+        "Figure_14-1.R.1": {
+          "ADTTE": [
+            "Figure_14-1.R.1.SC1"
+          ]
+        }
+      },
+      "parameters": {
+        "Table_14-3.01.R.1": [
+          {
+            "paramCD": "ACTOT",
+            "param": "Adas-Cog(11) Subscore"
+          }
+        ],
+        "Table_14-3.01.R.2": [
+          {
+            "paramCD": "ACTOT",
+            "param": "Adas-Cog(11) Subscore"
+          }
+        ],
+        "Table_14-3.02.R.1": [
+          {
+            "paramCD": "CIBICVAL",
+            "param": "CIBIC Score"
+          }
+        ],
+        "Table_14-3.02.R.2": [
+          {
+            "paramCD": "CIBICVAL",
+            "param": "CIBIC Score"
+          }
+        ],
+        "Table_14-3.12.R.1": [
+          {
+            "paramCD": "NPTOTMN",
+            "param": "Mean NPI-X (9) Total (Week 4 to 24)"
+          }
+        ],
+        "Table_14-3.12.R.2": [
+          {
+            "paramCD": "NPTOTMN",
+            "param": "Mean NPI-X (9) Total (Week 4 to 24)"
+          }
+        ],
+        "Table_14-6.01.R.1": [
+          {
+            "paramCD": "ALB",
+            "param": "Albumin (g/L)"
+          },
+          {
+            "paramCD": "ALP",
+            "param": "Alkaline Phosphatase (U/L)"
+          },
+          {
+            "paramCD": "ALT",
+            "param": "Alanine Aminotransferase (U/L)"
+          },
+          {
+            "paramCD": "AST",
+            "param": "Aspartate Aminotransferase (U/L)"
+          },
+          {
+            "paramCD": "BILI",
+            "param": "Bilirubin (umol/L)"
+          },
+          {
+            "paramCD": "BUN",
+            "param": "Blood Urea Nitrogen (mmol/L)"
+          },
+          {
+            "paramCD": "CA",
+            "param": "Calcium (mmol/L)"
+          },
+          {
+            "paramCD": "CHOL",
+            "param": "Cholesterol (mmol/L)"
+          },
+          {
+            "paramCD": "CK",
+            "param": "Creatine Kinase (U/L)"
+          },
+          {
+            "paramCD": "CL",
+            "param": "Chloride (mmol/L)"
+          },
+          {
+            "paramCD": "CREAT",
+            "param": "Creatinine (umol/L)"
+          },
+          {
+            "paramCD": "GGT",
+            "param": "Gamma Glutamyl Transferase (U/L)"
+          },
+          {
+            "paramCD": "GLUC",
+            "param": "Glucose (mmol/L)"
+          },
+          {
+            "paramCD": "K",
+            "param": "Potassium (mmol/L)"
+          },
+          {
+            "paramCD": "PHOS",
+            "param": "Phosphate (mmol/L)"
+          },
+          {
+            "paramCD": "PROT",
+            "param": "Protein (g/L)"
+          },
+          {
+            "paramCD": "SODIUM",
+            "param": "Sodium (mmol/L)"
+          },
+          {
+            "paramCD": "URATE",
+            "param": "Urate (umol/L)"
+          },
+          {
+            "paramCD": "ANISO",
+            "param": "Anisocytes"
+          },
+          {
+            "paramCD": "BASO",
+            "param": "Basophils (GI/L)"
+          },
+          {
+            "paramCD": "EOS",
+            "param": "Eosinophils (GI/L)"
+          },
+          {
+            "paramCD": "HCT",
+            "param": "Hematocrit"
+          },
+          {
+            "paramCD": "HGB",
+            "param": "Hemoglobin (mmol/L)"
+          },
+          {
+            "paramCD": "LYM",
+            "param": "Lymphocytes (GI/L)"
+          },
+          {
+            "paramCD": "MACROCY",
+            "param": "Macrocytes"
+          },
+          {
+            "paramCD": "MCH",
+            "param": "Ery. Mean Corpuscular Hemoglobin (fmol(Fe))"
+          },
+          {
+            "paramCD": "MCHC",
+            "param": "Ery. Mean Corpuscular HGB Concentration(mmol/L)"
+          },
+          {
+            "paramCD": "MCV",
+            "param": "Ery. Mean Corpuscular Volume (fL)"
+          },
+          {
+            "paramCD": "MICROCY",
+            "param": "Microcytes"
+          },
+          {
+            "paramCD": "MONO",
+            "param": "Monocytes (GI/L)"
+          },
+          {
+            "paramCD": "PLAT",
+            "param": "Platelet (GI/L)"
+          },
+          {
+            "paramCD": "POIKILO",
+            "param": "Poikilocytes"
+          },
+          {
+            "paramCD": "POLICHR",
+            "param": "Polychromasia"
+          },
+          {
+            "paramCD": "RBC",
+            "param": "Erythrocytes (TI/L)"
+          },
+          {
+            "paramCD": "WBC",
+            "param": "Leukocytes (GI/L)"
+          }
+        ],
+        "Table_14-6.02.R.1": [
+          {
+            "paramCD": "ALB",
+            "param": "Albumin (g/L)"
+          },
+          {
+            "paramCD": "ALP",
+            "param": "Alkaline Phosphatase (U/L)"
+          },
+          {
+            "paramCD": "ALT",
+            "param": "Alanine Aminotransferase (U/L)"
+          },
+          {
+            "paramCD": "AST",
+            "param": "Aspartate Aminotransferase (U/L)"
+          },
+          {
+            "paramCD": "BILI",
+            "param": "Bilirubin (umol/L)"
+          },
+          {
+            "paramCD": "BUN",
+            "param": "Blood Urea Nitrogen (mmol/L)"
+          },
+          {
+            "paramCD": "CA",
+            "param": "Calcium (mmol/L)"
+          },
+          {
+            "paramCD": "CHOL",
+            "param": "Cholesterol (mmol/L)"
+          },
+          {
+            "paramCD": "CK",
+            "param": "Creatine Kinase (U/L)"
+          },
+          {
+            "paramCD": "CL",
+            "param": "Chloride (mmol/L)"
+          },
+          {
+            "paramCD": "CREAT",
+            "param": "Creatinine (umol/L)"
+          },
+          {
+            "paramCD": "GGT",
+            "param": "Gamma Glutamyl Transferase (U/L)"
+          },
+          {
+            "paramCD": "GLUC",
+            "param": "Glucose (mmol/L)"
+          },
+          {
+            "paramCD": "K",
+            "param": "Potassium (mmol/L)"
+          },
+          {
+            "paramCD": "PHOS",
+            "param": "Phosphate (mmol/L)"
+          },
+          {
+            "paramCD": "PROT",
+            "param": "Protein (g/L)"
+          },
+          {
+            "paramCD": "SODIUM",
+            "param": "Sodium (mmol/L)"
+          },
+          {
+            "paramCD": "URATE",
+            "param": "Urate (umol/L)"
+          },
+          {
+            "paramCD": "ANISO",
+            "param": "Anisocytes"
+          },
+          {
+            "paramCD": "BASO",
+            "param": "Basophils (GI/L)"
+          },
+          {
+            "paramCD": "EOS",
+            "param": "Eosinophils (GI/L)"
+          },
+          {
+            "paramCD": "HCT",
+            "param": "Hematocrit"
+          },
+          {
+            "paramCD": "HGB",
+            "param": "Hemoglobin (mmol/L)"
+          },
+          {
+            "paramCD": "LYM",
+            "param": "Lymphocytes (GI/L)"
+          },
+          {
+            "paramCD": "MACROCY",
+            "param": "Macrocytes"
+          },
+          {
+            "paramCD": "MCH",
+            "param": "Ery. Mean Corpuscular Hemoglobin (fmol(Fe))"
+          },
+          {
+            "paramCD": "MCHC",
+            "param": "Ery. Mean Corpuscular HGB Concentration(mmol/L)"
+          },
+          {
+            "paramCD": "MCV",
+            "param": "Ery. Mean Corpuscular Volume (fL)"
+          },
+          {
+            "paramCD": "MICROCY",
+            "param": "Microcytes"
+          },
+          {
+            "paramCD": "MONO",
+            "param": "Monocytes (GI/L)"
+          },
+          {
+            "paramCD": "PLAT",
+            "param": "Platelet (GI/L)"
+          },
+          {
+            "paramCD": "POIKILO",
+            "param": "Poikilocytes"
+          },
+          {
+            "paramCD": "POLICHR",
+            "param": "Polychromasia"
+          },
+          {
+            "paramCD": "RBC",
+            "param": "Erythrocytes (TI/L)"
+          },
+          {
+            "paramCD": "WBC",
+            "param": "Leukocytes (GI/L)"
+          }
+        ],
+        "Table_14-6.03.R.1": [
+          {
+            "paramCD": "_ALB",
+            "param": "Albumin (g/L) change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_ALP",
+            "param": "Alkaline Phosphatase (U/L) change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_ALT",
+            "param": "Alanine Aminotransferase (U/L) change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_AST",
+            "param": "Aspartate Aminotransferase (U/L) change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_BILI",
+            "param": "Bilirubin (umol/L) change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_BUN",
+            "param": "Blood Urea Nitrogen (mmol/L) change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_CA",
+            "param": "Calcium (mmol/L) change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_CHOL",
+            "param": "Cholesterol (mmol/L) change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_CK",
+            "param": "Creatine Kinase (U/L) change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_CL",
+            "param": "Chloride (mmol/L) change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_CREAT",
+            "param": "Creatinine (umol/L) change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_GGT",
+            "param": "Gamma Glutamyl Transferase (U/L) change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_GLUC",
+            "param": "Glucose (mmol/L) change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_K",
+            "param": "Potassium (mmol/L) change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_PHOS",
+            "param": "Phosphate (mmol/L) change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_PROT",
+            "param": "Protein (g/L) change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_SODIUM",
+            "param": "Sodium (mmol/L) change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_URATE",
+            "param": "Urate (umol/L) change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_ANISO",
+            "param": "Anisocytes change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_BASO",
+            "param": "Basophils (GI/L) change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_EOS",
+            "param": "Eosinophils (GI/L) change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_HCT",
+            "param": "Hematocrit change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_HGB",
+            "param": "Hemoglobin (mmol/L) change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_LYM",
+            "param": "Lymphocytes (GI/L) change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_MACROCY",
+            "param": "Macrocytes change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_MCH",
+            "param": "Ery. Mean Corpuscular Hemoglobin (fmol(Fe)) change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_MCHC",
+            "param": "Ery. Mean Corpuscular HGB Concentration(mmol/L) change from previous visit, relative to normal rang"
+          },
+          {
+            "paramCD": "_MCV",
+            "param": "Ery. Mean Corpuscular Volume (fL) change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_MICROCY",
+            "param": "Microcytes change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_MONO",
+            "param": "Monocytes (GI/L) change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_PLAT",
+            "param": "Platelet (GI/L) change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_POIKILO",
+            "param": "Poikilocytes change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_POLICHR",
+            "param": "Polychromasia change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_RBC",
+            "param": "Erythrocytes (TI/L) change from previous visit, relative to normal range"
+          },
+          {
+            "paramCD": "_WBC",
+            "param": "Leukocytes (GI/L) change from previous visit, relative to normal range"
+          }
+        ],
+        "Table_14-6.04.R.1": [
+          {
+            "paramCD": "ALB",
+            "param": "Albumin (g/L)"
+          },
+          {
+            "paramCD": "ALP",
+            "param": "Alkaline Phosphatase (U/L)"
+          },
+          {
+            "paramCD": "ALT",
+            "param": "Alanine Aminotransferase (U/L)"
+          },
+          {
+            "paramCD": "AST",
+            "param": "Aspartate Aminotransferase (U/L)"
+          },
+          {
+            "paramCD": "BILI",
+            "param": "Bilirubin (umol/L)"
+          },
+          {
+            "paramCD": "BUN",
+            "param": "Blood Urea Nitrogen (mmol/L)"
+          },
+          {
+            "paramCD": "CA",
+            "param": "Calcium (mmol/L)"
+          },
+          {
+            "paramCD": "CHOL",
+            "param": "Cholesterol (mmol/L)"
+          },
+          {
+            "paramCD": "CK",
+            "param": "Creatine Kinase (U/L)"
+          },
+          {
+            "paramCD": "CL",
+            "param": "Chloride (mmol/L)"
+          },
+          {
+            "paramCD": "CREAT",
+            "param": "Creatinine (umol/L)"
+          },
+          {
+            "paramCD": "GGT",
+            "param": "Gamma Glutamyl Transferase (U/L)"
+          },
+          {
+            "paramCD": "GLUC",
+            "param": "Glucose (mmol/L)"
+          },
+          {
+            "paramCD": "K",
+            "param": "Potassium (mmol/L)"
+          },
+          {
+            "paramCD": "PHOS",
+            "param": "Phosphate (mmol/L)"
+          },
+          {
+            "paramCD": "PROT",
+            "param": "Protein (g/L)"
+          },
+          {
+            "paramCD": "SODIUM",
+            "param": "Sodium (mmol/L)"
+          },
+          {
+            "paramCD": "URATE",
+            "param": "Urate (umol/L)"
+          },
+          {
+            "paramCD": "ANISO",
+            "param": "Anisocytes"
+          },
+          {
+            "paramCD": "BASO",
+            "param": "Basophils (GI/L)"
+          },
+          {
+            "paramCD": "EOS",
+            "param": "Eosinophils (GI/L)"
+          },
+          {
+            "paramCD": "HCT",
+            "param": "Hematocrit"
+          },
+          {
+            "paramCD": "HGB",
+            "param": "Hemoglobin (mmol/L)"
+          },
+          {
+            "paramCD": "LYM",
+            "param": "Lymphocytes (GI/L)"
+          },
+          {
+            "paramCD": "MACROCY",
+            "param": "Macrocytes"
+          },
+          {
+            "paramCD": "MCH",
+            "param": "Ery. Mean Corpuscular Hemoglobin (fmol(Fe))"
+          },
+          {
+            "paramCD": "MCHC",
+            "param": "Ery. Mean Corpuscular HGB Concentration(mmol/L)"
+          },
+          {
+            "paramCD": "MCV",
+            "param": "Ery. Mean Corpuscular Volume (fL)"
+          },
+          {
+            "paramCD": "MICROCY",
+            "param": "Microcytes"
+          },
+          {
+            "paramCD": "MONO",
+            "param": "Monocytes (GI/L)"
+          },
+          {
+            "paramCD": "PLAT",
+            "param": "Platelet (GI/L)"
+          },
+          {
+            "paramCD": "POIKILO",
+            "param": "Poikilocytes"
+          },
+          {
+            "paramCD": "POLICHR",
+            "param": "Polychromasia"
+          },
+          {
+            "paramCD": "RBC",
+            "param": "Erythrocytes (TI/L)"
+          },
+          {
+            "paramCD": "WBC",
+            "param": "Leukocytes (GI/L)"
+          }
+        ],
+        "Table_14-6.05.R.1": [
+          {
+            "paramCD": "ALB",
+            "param": "Albumin (g/L)"
+          },
+          {
+            "paramCD": "ALP",
+            "param": "Alkaline Phosphatase (U/L)"
+          },
+          {
+            "paramCD": "ALT",
+            "param": "Alanine Aminotransferase (U/L)"
+          },
+          {
+            "paramCD": "AST",
+            "param": "Aspartate Aminotransferase (U/L)"
+          },
+          {
+            "paramCD": "BILI",
+            "param": "Bilirubin (umol/L)"
+          },
+          {
+            "paramCD": "BUN",
+            "param": "Blood Urea Nitrogen (mmol/L)"
+          },
+          {
+            "paramCD": "CA",
+            "param": "Calcium (mmol/L)"
+          },
+          {
+            "paramCD": "CHOL",
+            "param": "Cholesterol (mmol/L)"
+          },
+          {
+            "paramCD": "CK",
+            "param": "Creatine Kinase (U/L)"
+          },
+          {
+            "paramCD": "CL",
+            "param": "Chloride (mmol/L)"
+          },
+          {
+            "paramCD": "CREAT",
+            "param": "Creatinine (umol/L)"
+          },
+          {
+            "paramCD": "GGT",
+            "param": "Gamma Glutamyl Transferase (U/L)"
+          },
+          {
+            "paramCD": "GLUC",
+            "param": "Glucose (mmol/L)"
+          },
+          {
+            "paramCD": "K",
+            "param": "Potassium (mmol/L)"
+          },
+          {
+            "paramCD": "PHOS",
+            "param": "Phosphate (mmol/L)"
+          },
+          {
+            "paramCD": "PROT",
+            "param": "Protein (g/L)"
+          },
+          {
+            "paramCD": "SODIUM",
+            "param": "Sodium (mmol/L)"
+          },
+          {
+            "paramCD": "URATE",
+            "param": "Urate (umol/L)"
+          },
+          {
+            "paramCD": "ANISO",
+            "param": "Anisocytes"
+          },
+          {
+            "paramCD": "BASO",
+            "param": "Basophils (GI/L)"
+          },
+          {
+            "paramCD": "EOS",
+            "param": "Eosinophils (GI/L)"
+          },
+          {
+            "paramCD": "HCT",
+            "param": "Hematocrit"
+          },
+          {
+            "paramCD": "HGB",
+            "param": "Hemoglobin (mmol/L)"
+          },
+          {
+            "paramCD": "LYM",
+            "param": "Lymphocytes (GI/L)"
+          },
+          {
+            "paramCD": "MACROCY",
+            "param": "Macrocytes"
+          },
+          {
+            "paramCD": "MCH",
+            "param": "Ery. Mean Corpuscular Hemoglobin (fmol(Fe))"
+          },
+          {
+            "paramCD": "MCHC",
+            "param": "Ery. Mean Corpuscular HGB Concentration(mmol/L)"
+          },
+          {
+            "paramCD": "MCV",
+            "param": "Ery. Mean Corpuscular Volume (fL)"
+          },
+          {
+            "paramCD": "MICROCY",
+            "param": "Microcytes"
+          },
+          {
+            "paramCD": "MONO",
+            "param": "Monocytes (GI/L)"
+          },
+          {
+            "paramCD": "PLAT",
+            "param": "Platelet (GI/L)"
+          },
+          {
+            "paramCD": "POIKILO",
+            "param": "Poikilocytes"
+          },
+          {
+            "paramCD": "POLICHR",
+            "param": "Polychromasia"
+          },
+          {
+            "paramCD": "RBC",
+            "param": "Erythrocytes (TI/L)"
+          },
+          {
+            "paramCD": "WBC",
+            "param": "Leukocytes (GI/L)"
+          }
+        ],
+        "Table_14-6.06.R.1": [
+          {
+            "paramCD": "TRANSHY",
+            "param": "Transaminase 1.5 x ULN"
+          },
+          {
+            "paramCD": "HYLAW",
+            "param": "Total Bili 1.5 x ULN and Transaminase 1.5 x ULN"
+          }
+        ],
+        "Figure_14-1.R.1": [
+          {
+            "paramCD": "TTDE",
+            "param": "Time to First Dermatological Event"
+          }
+        ]
+      },
+      "docLeafIDs": {
+        "Table_14-1.02.R.1": "SAP_SEC_9.1",
+        "Table_14-3.01.R.1": "SAP_SEC_10.1.1",
+        "Table_14-3.01.R.2": "SAP_SEC_10.1.1",
+        "Table_14-3.02.R.1": "SAP_SEC_10.1.2",
+        "Table_14-3.02.R.2": "SAP_SEC_10.1.2",
+        "Table_14-5.02.R.1": "SAP_SEC_11.2",
+        "Table_14-6.06.R.1": "SAP_SEC_11.5",
+        "Figure_14-1.R.1": "SAP_SEC_11.2"
+      },
+      "progcodeLeafIDs": {
+        "Table_14-5.02.R.1": "at14-5-02.sas"
+      }
+    },
     "itemGroupSupplemental": {
       "ADSL": {
         "OID": "ADSL",

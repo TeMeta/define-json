@@ -527,8 +527,8 @@ class DefineJSONToXMLConverter:
         # Process SupplementalDoc from DocumentReference objects in resources
         self._create_supplemental_doc(mdv, json_data)
         
-        # Fix #3: Process AnalysisResultDisplays (from xml_metadata)
-        self._create_analysis_result_displays(mdv, xml_metadata.get('analysisResultDisplays'))
+        # Process AnalysisResultDisplays from native Display and Analysis objects
+        self._create_analysis_result_displays_from_objects(mdv, json_data)
         
         # Process Conditions and WhereClauses
         existing_item_oids = self._collect_item_oids(json_data)
@@ -572,8 +572,8 @@ class DefineJSONToXMLConverter:
                 if r.get('OID', '').startswith('RES.') 
                 and r.get('OID') not in item_group_resource_oids
             ]
+            mdv_leaves = []
             if mdv_resources:
-                mdv_leaves = []
                 for resource in mdv_resources:
                     leaf_data = {
                         'ID': resource.get('OID', '').replace('RES.', ''),
@@ -581,6 +581,7 @@ class DefineJSONToXMLConverter:
                         'title': resource.get('label') or resource.get('name')
                     }
                     mdv_leaves.append(leaf_data)
+            if mdv_leaves:
                 self._create_mdv_leaves(mdv, mdv_leaves)
         
         # Also handle legacy mdvLeaves from _xmlMetadata
@@ -855,8 +856,223 @@ class DefineJSONToXMLConverter:
                 doc_ref_elem = ET.SubElement(supp_doc_elem, f'{{{def_ns}}}DocumentRef')
                 doc_ref_elem.set('leafID', leaf_id)
     
+    def _create_analysis_result_displays_from_objects(self, parent: ET.Element, json_data: Dict[str, Any]) -> None:
+        """
+        Create AnalysisResultDisplays from native Display and Analysis objects.
+        
+        ARM Structure:
+          AnalysisResultDisplays (container per ResultDisplay)
+            └─ ResultDisplay (from Display object)
+                └─ AnalysisResults (from Analysis objects) *
+        
+        Args:
+            parent: Parent MetaDataVersion element
+            json_data: Full JSON data with displays and analyses arrays
+        """
+        displays = json_data.get('displays', [])
+        analyses = json_data.get('analyses', [])
+        
+        if not displays:
+            return
+        
+        # Create analysis lookup for quick access
+        analysis_lookup = {a.get('OID'): a for a in analyses}
+        
+        # Get display→analyses mapping from supplemental data (for Displays with multiple Analyses)
+        xml_metadata = json_data.get('_xmlMetadata', {})
+        display_supplemental = xml_metadata.get('displaySupplemental', {})
+        display_to_analyses = display_supplemental.get('multipleAnalyses', {})
+        
+        # Get analysis supplemental data for perfect roundtrip
+        analysis_supplemental = xml_metadata.get('analysisSupplemental', {})
+        analysis_dataset_criteria = analysis_supplemental.get('datasetCriteria', {})
+        analysis_parameters = analysis_supplemental.get('parameters', {})
+        analysis_doc_leafids = analysis_supplemental.get('docLeafIDs', {})
+        analysis_progcode_leafids = analysis_supplemental.get('progcodeLeafIDs', {})
+        
+        # Get ARM namespace (try adamref first, fallback to arm)
+        arm_ns = self._get_namespace_uri('adamref') or self._get_namespace_uri('arm')
+        if not arm_ns:
+            logger.warning("No ARM namespace found, skipping AnalysisResultDisplays")
+            return
+        
+        # Create one AnalysisResultDisplays container per Display (ARM standard)
+        for display in displays:
+            # Create AnalysisResultDisplays container
+            ard_container = ET.SubElement(parent, f'{{{arm_ns}}}AnalysisResultDisplays')
+            
+            # Create ResultDisplay element
+            rd_elem = ET.SubElement(ard_container, f'{{{arm_ns}}}ResultDisplay')
+            rd_elem.set('OID', display.get('OID', ''))
+            if display.get('name'):
+                rd_elem.set('DisplayIdentifier', display.get('name'))
+            if display.get('label'):
+                rd_elem.set('DisplayLabel', display.get('label'))
+            
+            # Handle location (leafID)
+            locations = display.get('location', [])
+            if locations:
+                leaf_id = locations[0].get('leafID') if isinstance(locations[0], dict) else None
+                if leaf_id:
+                    rd_elem.set('leafID', leaf_id)
+            
+            # Get linked Analysis object(s)
+            # Check supplemental data first for multiple analyses, fallback to display.analysis field
+            display_oid = display.get('OID')
+            if display_oid in display_to_analyses:
+                # Use full list from supplemental data
+                analysis_oids = display_to_analyses[display_oid]
+            else:
+                # Use single analysis from display.analysis field
+                analysis_ref = display.get('analysis')
+                if not analysis_ref:
+                    continue
+                analysis_oids = [analysis_ref] if isinstance(analysis_ref, str) else [analysis_ref]
+            
+            for analysis_oid in analysis_oids:
+                analysis = analysis_lookup.get(analysis_oid)
+                if not analysis:
+                    logger.warning(f"Analysis {analysis_oid} not found for Display {display.get('OID')}")
+                    continue
+                
+                # Create AnalysisResults element
+                ar_elem = ET.SubElement(rd_elem, f'{{{arm_ns}}}AnalysisResults')
+                ar_elem.set('OID', analysis.get('OID', ''))
+                
+                if analysis.get('analysisReason'):
+                    ar_elem.set('Reason', analysis.get('analysisReason'))
+                if analysis.get('name'):
+                    ar_elem.set('ResultIdentifier', analysis.get('name'))
+                
+                # Add ParameterList if parameters exist (extract from expressions)
+                parameters = []
+                expressions = analysis.get('expressions', [])
+                for expr in expressions:
+                    if 'parameters' in expr:
+                        parameters.extend(expr['parameters'])
+                
+                if parameters:
+                    param_list_elem = ET.SubElement(ar_elem, f'{{{arm_ns}}}ParameterList')
+                    # Get original parameter metadata from supplemental
+                    analysis_oid = analysis.get('OID')
+                    param_metadata = analysis_parameters.get(analysis_oid, [])
+                    param_lookup = {pm['paramCD']: pm for pm in param_metadata}
+                    
+                    for param in parameters:
+                        param_elem = ET.SubElement(param_list_elem, f'{{{arm_ns}}}Parameter')
+                        # Extract ParamCD from OID or use stored metadata
+                        param_oid = param.get('OID', '')
+                        param_cd = param_oid.replace('PARAM.', '') if 'PARAM.' in param_oid else param.get('name', '')
+                        
+                        # Use original metadata if available
+                        if param_cd in param_lookup:
+                            param_elem.set('ParamCD', param_cd)
+                            param_elem.set('Param', param_lookup[param_cd]['param'])
+                        else:
+                            # Fallback
+                            param_elem.set('ParamCD', param_cd)
+                            param_elem.set('Param', param.get('name', param_cd))
+                
+                # Add AnalysisVariable elements (from inputData)
+                input_data = analysis.get('inputData', [])
+                for item_oid in input_data:
+                    # Check if it's an Item OID (contains dot) - these become AnalysisVariable
+                    if '.' in item_oid:
+                        av_elem = ET.SubElement(ar_elem, f'{{{arm_ns}}}AnalysisVariable')
+                        av_elem.set('ItemOID', item_oid)
+                
+                # Add AnalysisDataset elements
+                # ItemGroup OIDs from inputData become AnalysisDataset/ItemGroupRef
+                # Get dataset→criteria mapping for THIS analysis from supplemental
+                analysis_oid = analysis.get('OID')
+                dataset_criteria_map = analysis_dataset_criteria.get(analysis_oid, {})
+                
+                for item_oid in input_data:
+                    if '.' not in item_oid:  # It's an ItemGroup OID (dataset)
+                        ad_elem = ET.SubElement(ar_elem, f'{{{arm_ns}}}AnalysisDataset')
+                        igr_elem = ET.SubElement(ad_elem, 'ItemGroupRef')
+                        igr_elem.set('ItemGroupOID', item_oid)
+                        igr_elem.set('Mandatory', 'No')
+                        
+                        # Add SelectionCriteria ONLY for THIS dataset (from supplemental mapping)
+                        dataset_criteria = dataset_criteria_map.get(item_oid, [])
+                        if dataset_criteria:
+                            sc_elem = ET.SubElement(ad_elem, f'{{{arm_ns}}}SelectionCriteria')
+                            def_ns = self._get_namespace_uri('def')
+                            
+                            # Get method details from methods array
+                            methods_array = json_data.get('methods', [])
+                            method_lookup = {m.get('OID'): m for m in methods_array}
+                            
+                            for method_oid in dataset_criteria:
+                                if def_ns:
+                                    method = method_lookup.get(method_oid)
+                                    cm_elem = ET.SubElement(sc_elem, f'{{{def_ns}}}ComputationMethod')
+                                    cm_elem.set('OID', method_oid)
+                                    # Get Name from method if available
+                                    if method and method.get('name'):
+                                        cm_elem.set('Name', method['name'])
+                                    else:
+                                        cm_elem.set('Name', 'Selection Criteria')
+                                    # Get text from method description
+                                    if method and method.get('description'):
+                                        cm_elem.text = method['description']
+                
+                # Add Documentation if description exists
+                description = analysis.get('description', '')
+                if description:
+                    doc_elem = ET.SubElement(ar_elem, f'{{{arm_ns}}}Documentation')
+                    # Check if description is a leafID-only marker
+                    if description.startswith('[leafID: ') and description.endswith(']'):
+                        # Extract leafID and set as attribute (empty Documentation)
+                        leaf_id = description[9:-1]  # Remove '[leafID: ' and ']'
+                        doc_elem.set('leafID', leaf_id)
+                    else:
+                        # Regular description with TranslatedText
+                        # Check if leafID exists in supplemental (Documentation with BOTH leafID and text)
+                        analysis_oid = analysis.get('OID')
+                        doc_leaf_id = analysis_doc_leafids.get(analysis_oid)
+                        if doc_leaf_id:
+                            doc_elem.set('leafID', doc_leaf_id)
+                        
+                        # Add TranslatedText child
+                        trans_text = ET.SubElement(doc_elem, 'TranslatedText')
+                        trans_text.set('{http://www.w3.org/XML/1998/namespace}lang', 'en')
+                        trans_text.text = description
+                
+                # Add ProgrammingCode (link to analysisMethod OR empty with leafID)
+                analysis_method_oid = analysis.get('analysisMethod')
+                analysis_oid = analysis.get('OID')
+                progcode_leaf_id = analysis_progcode_leafids.get(analysis_oid)
+                
+                if analysis_method_oid:
+                    # ProgrammingCode with ComputationMethod
+                    # Look up the method to get its code text
+                    method = None
+                    methods_array = json_data.get('methods', [])
+                    for m in methods_array:
+                        if m.get('OID') == analysis_method_oid:
+                            method = m
+                            break
+                    
+                    # Write ProgrammingCode with method text
+                    pc_elem = ET.SubElement(ar_elem, f'{{{arm_ns}}}ProgrammingCode')
+                    def_ns = self._get_namespace_uri('def')
+                    if def_ns:
+                        cm_elem = ET.SubElement(pc_elem, f'{{{def_ns}}}ComputationMethod')
+                        cm_elem.set('OID', analysis_method_oid)
+                        # Add method code text if available
+                        if method and method.get('description'):
+                            cm_elem.text = method['description']
+                elif progcode_leaf_id:
+                    # Empty ProgrammingCode with only leafID
+                    pc_elem = ET.SubElement(ar_elem, f'{{{arm_ns}}}ProgrammingCode')
+                    pc_elem.set('leafID', progcode_leaf_id)
+    
     def _create_analysis_result_displays(self, parent: ET.Element, analysis_displays: Optional[List[Dict[str, Any]]]) -> None:
         """
+        DEPRECATED: Old XML blob-based creator. Keep for backward compatibility.
+        
         Fix #3: Create AnalysisResultDisplays (ARM/AdamRef Extensions).
         
         Recreates the complete structure from serialized XML containers.

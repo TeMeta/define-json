@@ -78,6 +78,8 @@ from ..schema.define import (
     OriginSource,
     Comment,
     Resource,
+    Analysis,
+    Display,
 )
 
 logger = logging.getLogger(__name__)
@@ -406,8 +408,8 @@ class DefineXMLToJSONConverter:
             logger.info(f"  - Created {len(standards_list)} Standard objects")
             xml_metadata['hasStandardsElement'] = has_standards_element
         elif standard_version:
-            xml_metadata['standardVersion'] = standard_version
-            xml_metadata['hasStandardsElement'] = has_standards_element
+            xml_metadata["standardVersion"] = standard_version
+            xml_metadata["hasStandardsElement"] = has_standards_element
         
         # Process AnnotatedCRF element (simple DocumentRef container)
         annotated_crf_elem = mdv.find('def:AnnotatedCRF', self.active_namespaces)
@@ -471,12 +473,44 @@ class DefineXMLToJSONConverter:
             mdv_data['resources'].extend([r.model_dump(mode='json', exclude_none=True) if hasattr(r, 'model_dump') else r for r in supp_doc_refs])
             logger.info(f"  - Converted {len(supp_doc_refs)} SupplementalDoc refs to DocumentReference objects")
         
-        # Fix #3: Process AnalysisResultDisplays (store in xml_metadata)
+        # Process AnalysisResultDisplays as native Analysis and Display objects
         logger.info("Processing analysis result displays...")
-        analysis_displays = self._process_analysis_result_displays(mdv)
-        if analysis_displays:
-            xml_metadata['analysisResultDisplays'] = analysis_displays
-            logger.info(f"  - Found {len(analysis_displays)} AnalysisResultDisplays containers")
+        displays, analyses, display_to_analyses = self._process_analysis_result_displays_native(mdv)
+        if displays:
+            mdv_data['displays'] = [d.model_dump(mode='json', exclude_none=True) if hasattr(d, 'model_dump') else d for d in displays]
+            logger.info(f"  - Created {len(displays)} Display objects")
+        if analyses:
+            # Add analyses to analyses array (MetaDataVersion has separate analyses field)
+            mdv_data['analyses'] = [a.model_dump(mode='json', exclude_none=True) if hasattr(a, 'model_dump') else a for a in analyses]
+            logger.info(f"  - Created {len(analyses)} Analysis objects")
+        # Store display→analyses mapping in supplemental data (for Displays with multiple Analyses)
+        if display_to_analyses:
+            xml_metadata['displaySupplemental'] = {'multipleAnalyses': display_to_analyses}
+            logger.info(f"  - Stored {len(display_to_analyses)} Display→Analyses mappings")
+        
+        # Store analysis→dataset→criteria mapping for perfect SelectionCriteria roundtrip
+        analysis_supplemental = {}
+        if hasattr(self, '_analysis_dataset_criteria') and self._analysis_dataset_criteria:
+            analysis_supplemental['datasetCriteria'] = self._analysis_dataset_criteria
+            logger.info(f"  - Stored {len(self._analysis_dataset_criteria)} Analysis dataset-criteria mappings")
+        
+        # Store analysis→parameters mapping (ParamCD/Param attrs) for perfect ParameterList roundtrip
+        if hasattr(self, '_analysis_parameters') and self._analysis_parameters:
+            analysis_supplemental['parameters'] = self._analysis_parameters
+            logger.info(f"  - Stored {len(self._analysis_parameters)} Analysis parameter mappings")
+        
+        # Store analysis→leafID mapping for Documentation elements with both leafID and text
+        if hasattr(self, '_analysis_doc_leafids') and self._analysis_doc_leafids:
+            analysis_supplemental['docLeafIDs'] = self._analysis_doc_leafids
+            logger.info(f"  - Stored {len(self._analysis_doc_leafids)} Analysis Documentation leafID mappings")
+        
+        # Store analysis→leafID mapping for empty ProgrammingCode elements with only leafID
+        if hasattr(self, '_analysis_progcode_leafids') and self._analysis_progcode_leafids:
+            analysis_supplemental['progcodeLeafIDs'] = self._analysis_progcode_leafids
+            logger.info(f"  - Stored {len(self._analysis_progcode_leafids)} Analysis ProgrammingCode leafID mappings")
+        
+        if analysis_supplemental:
+            xml_metadata['analysisSupplemental'] = analysis_supplemental
         
         # Capture MetaDataVersion-level def:leaf elements and convert to Resources
         logger.info("Processing MetaDataVersion-level leaf elements...")
@@ -553,11 +587,18 @@ class DefineXMLToJSONConverter:
             return generated_dt
             
         try:
-            # Handle ISO format with T separator
+            # Strip timezone to create naive datetime (Define-XML doesn't require TZ awareness)
+            # This ensures consistent serialization format
             if 'T' in dt_str:
-                # Remove timezone info if present for simplicity
-                dt_str = dt_str.split('+')[0].split('-')[0] if '+' in dt_str or dt_str.count('-') > 2 else dt_str
-                return datetime.fromisoformat(dt_str.replace('T', ' '))
+                # Remove timezone: +HH:MM, -HH:MM, Z, or +HH:MM:SS
+                dt_no_tz = dt_str.split('+')[0].split('Z')[0]
+                # Also handle -HH:MM timezone format by finding last dash after 'T'
+                if '-' in dt_no_tz and 'T' in dt_no_tz:
+                    time_part_start = dt_no_tz.index('T')
+                    last_dash = dt_no_tz.rfind('-')
+                    if last_dash > time_part_start:
+                        dt_no_tz = dt_no_tz[:last_dash]
+                return datetime.fromisoformat(dt_no_tz)
             return datetime.fromisoformat(dt_str)
         except (ValueError, AttributeError) as e:
             logger.warning(f"Failed to parse datetime '{dt_str}': {e}, using current datetime")
@@ -777,12 +818,12 @@ class DefineXMLToJSONConverter:
                     vl_ref_elem = item_def.find('def:ValueListRef', self.active_namespaces)
                     if vl_ref_elem is not None:
                         vl_ref = vl_ref_elem.get('ValueListOID')
-                        if vl_ref:
-                            if vl_ref not in valuelist_to_parent:
-                                valuelist_to_parent[vl_ref] = []
-                            if ig_oid not in valuelist_to_parent[vl_ref]:
-                                valuelist_to_parent[vl_ref].append(ig_oid)
-                                logger.info(f"    - ItemDef {item_oid} references ValueList {vl_ref}, parent is {ig_oid}")
+                    if vl_ref:
+                        if vl_ref not in valuelist_to_parent:
+                            valuelist_to_parent[vl_ref] = []
+                        if ig_oid not in valuelist_to_parent[vl_ref]:
+                            valuelist_to_parent[vl_ref].append(ig_oid)
+                            logger.info(f"    - ItemDef {item_oid} references ValueList {vl_ref}, parent is {ig_oid}")
         
         # Log summary of ValueList parent relationships
         for vl_oid, parent_oids in valuelist_to_parent.items():
@@ -1055,8 +1096,8 @@ class DefineXMLToJSONConverter:
                     # Store Resource OID reference for roundtrip
                     ig_supp['sourceResourceOID'] = resource.OID
                     # Also store original leaf data for roundtrip
-                    leaf_id = leaf_elem.get('ID')
-                    if leaf_id:
+                leaf_id = leaf_elem.get('ID')
+                if leaf_id:
                         ig_supp['leafID'] = leaf_id
             
             # Process ItemRefs - create full Item objects nested in items list
@@ -1826,6 +1867,231 @@ class DefineXMLToJSONConverter:
                     logger.warning(f"Failed to create DocumentReference for {leaf_id}: {e}")
         
         return doc_refs if doc_refs else None
+    
+    def _process_analysis_result_displays_native(self, mdv: ET.Element) -> Tuple[List[Display], List[Analysis], Dict[str, List[str]]]:
+        """
+        Process AnalysisResultDisplays as native Analysis and Display objects.
+        
+        ARM Structure:
+          AnalysisResultDisplays
+            └─ ResultDisplay (→ Display)
+                └─ AnalysisResults (→ Analysis) *
+        
+        Returns:
+            Tuple of (Display objects, Analysis objects, display_to_analyses_map)
+        """
+        displays = []
+        analyses = []
+        display_to_analyses = {}  # Map Display OID → list of Analysis OIDs
+        
+        # Find all AnalysisResultDisplays containers
+        for prefix, uri in self.active_namespaces.items():
+            if prefix not in ['arm', 'adamref', 'def']:
+                continue
+                
+            ard_elements = mdv.findall(f'{{{uri}}}AnalysisResultDisplays')
+            
+            for ard_container in ard_elements:
+                # Find all ResultDisplay elements
+                result_displays = ard_container.findall(f'{{{uri}}}ResultDisplay')
+                
+                for rd_elem in result_displays:
+                    # Create Display object
+                    display_oid = rd_elem.get('OID')
+                    if not display_oid:
+                        continue
+                    
+                    display_data = {
+                        'OID': display_oid,
+                        'name': rd_elem.get('DisplayIdentifier', ''),
+                        'label': rd_elem.get('DisplayLabel', ''),
+                    }
+                    
+                    # Handle leafID → DocumentReference location
+                    leaf_id = rd_elem.get('leafID') or rd_elem.get(f'{{{uri}}}leafID')
+                    if leaf_id:
+                        # Create DocumentReference for the location
+                        doc_ref_data = {
+                            'OID': f'DOC.DISPLAY.{leaf_id}',
+                            'leafID': leaf_id
+                        }
+                        try:
+                            doc_ref = DocumentReference(**doc_ref_data)
+                            display_data['location'] = [doc_ref]
+                        except Exception as e:
+                            logger.warning(f"Failed to create DocumentReference for display {display_oid}: {e}")
+                    
+                    # Find all AnalysisResults within this ResultDisplay
+                    analysis_results = rd_elem.findall(f'{{{uri}}}AnalysisResults')
+                    analysis_oids = []
+                    
+                    for ar_elem in analysis_results:
+                        analysis_oid = ar_elem.get('OID')
+                        if not analysis_oid:
+                            continue
+                        
+                        analysis_oids.append(analysis_oid)
+                        
+                        # Create Analysis object
+                        analysis_data = {
+                            'OID': analysis_oid,
+                            'type': 'Computation',  # ARM analyses are computational
+                        }
+                        
+                        # Map ARM attributes to Analysis fields
+                        if ar_elem.get('Reason'):
+                            analysis_data['analysisReason'] = ar_elem.get('Reason')
+                        if ar_elem.get('ResultIdentifier'):
+                            analysis_data['name'] = ar_elem.get('ResultIdentifier')
+                        
+                        # Extract ParameterList → parameters (stored in expressions as per schema)
+                        param_list = ar_elem.find(f'{{{uri}}}ParameterList')
+                        if param_list is not None:
+                            parameters = []
+                            for param_elem in param_list.findall(f'{{{uri}}}Parameter'):
+                                param_cd = param_elem.get('ParamCD')
+                                param_name = param_elem.get('Param')
+                                if param_cd:
+                                    param_data = {
+                                        'OID': f'PARAM.{param_cd}',
+                                        'name': param_name or param_cd
+                                    }
+                                    # Store original ParamCD for roundtrip (supplemental)
+                                    if param_cd and analysis_oid:
+                                        if not hasattr(self, '_analysis_parameters'):
+                                            self._analysis_parameters = {}
+                                        if analysis_oid not in self._analysis_parameters:
+                                            self._analysis_parameters[analysis_oid] = []
+                                        self._analysis_parameters[analysis_oid].append({'paramCD': param_cd, 'param': param_name})
+                                    parameters.append(param_data)
+                            if parameters:
+                                # Parameters go inside expressions (FormalExpression has parameters field)
+                                # FormalExpression requires OID and expression fields
+                                if 'expressions' not in analysis_data:
+                                    analysis_data['expressions'] = []
+                                # Create or append to first expression
+                                if not analysis_data['expressions']:
+                                    expr_data = {
+                                        'OID': f'{analysis_oid}.EXPR',
+                                        'expression': 'ParameterList',  # Placeholder
+                                        'parameters': parameters
+                                    }
+                                    analysis_data['expressions'].append(expr_data)
+                                else:
+                                    analysis_data['expressions'][0]['parameters'] = parameters
+                        
+                        # Extract Documentation → description (with optional leafID for supplemental)
+                        doc_elem = ar_elem.find(f'{{{uri}}}Documentation')
+                        doc_leaf_id = None
+                        if doc_elem is not None:
+                            doc_leaf_id = doc_elem.get('leafID') or doc_elem.get(f'{{{uri}}}leafID')
+                            # TranslatedText might be in ODM namespace or no namespace
+                            trans_text = doc_elem.find('.//TranslatedText') or doc_elem.find('.//odm:TranslatedText', self.active_namespaces)
+                            
+                            # Check for text content (after stripping whitespace)
+                            has_text = trans_text is not None and trans_text.text and trans_text.text.strip()
+                            
+                            if has_text:
+                                # Has TranslatedText content - store it
+                                analysis_data['description'] = trans_text.text.strip()
+                                # Also store leafID in supplemental if present
+                                if doc_leaf_id and analysis_oid:
+                                    if not hasattr(self, '_analysis_doc_leafids'):
+                                        self._analysis_doc_leafids = {}
+                                    self._analysis_doc_leafids[analysis_oid] = doc_leaf_id
+                                    logger.info(f"      - Stored leafID {doc_leaf_id} for Analysis {analysis_oid}")
+                            elif doc_leaf_id:
+                                # Empty Documentation with just leafID - store marker in description
+                                analysis_data['description'] = f'[leafID: {doc_leaf_id}]'
+                        
+                        # Extract ProgrammingCode/ComputationMethod → link to existing Method
+                        # ProgrammingCode can also be empty with just leafID attribute
+                        prog_code = ar_elem.find(f'{{{uri}}}ProgrammingCode')
+                        if prog_code is not None:
+                            prog_code_leaf_id = prog_code.get('leafID') or prog_code.get(f'{{{uri}}}leafID')
+                            comp_method = prog_code.find('.//def:ComputationMethod', self.active_namespaces)
+                            
+                            if comp_method is not None:
+                                method_oid = comp_method.get('OID')
+                                if method_oid:
+                                    # Store as analysisMethod reference (will link to existing Method)
+                                    analysis_data['analysisMethod'] = method_oid
+                            elif prog_code_leaf_id and analysis_oid:
+                                # Empty ProgrammingCode with just leafID - store in supplemental
+                                if not hasattr(self, '_analysis_progcode_leafids'):
+                                    self._analysis_progcode_leafids = {}
+                                self._analysis_progcode_leafids[analysis_oid] = prog_code_leaf_id
+                                logger.info(f"      - Stored ProgrammingCode leafID {prog_code_leaf_id} for Analysis {analysis_oid}")
+                        
+                        # Store inputData references (AnalysisVariable and AnalysisDataset)
+                        # These are Item and ItemGroup OIDs
+                        input_refs = []
+                        
+                        # AnalysisVariable → Item references
+                        for av in ar_elem.findall(f'{{{uri}}}AnalysisVariable'):
+                            item_oid = av.get('ItemOID')
+                            if item_oid:
+                                input_refs.append(item_oid)
+                        
+                        # AnalysisDataset/ItemGroupRef → ItemGroup references + SelectionCriteria mapping
+                        # Need to preserve which SelectionCriteria belongs to which dataset
+                        # ItemGroupRef is in ODM namespace, not ARM namespace
+                        dataset_criteria_map = {}  # {dataset_oid: [criteria_oid1, ...]}
+                        all_criteria = []
+                        
+                        for ad in ar_elem.findall(f'{{{uri}}}AnalysisDataset'):
+                            # Get ItemGroup OID
+                            igr_elems = ad.findall('.//ItemGroupRef') or ad.findall('.//odm:ItemGroupRef', self.active_namespaces)
+                            for igr in igr_elems:
+                                ig_oid = igr.get('ItemGroupOID')
+                                if ig_oid:
+                                    input_refs.append(ig_oid)
+                                    
+                                    # Get SelectionCriteria for THIS dataset
+                                    sc_elem = ad.find(f'{{{uri}}}SelectionCriteria')
+                                    if sc_elem is not None:
+                                        dataset_criteria = []
+                                        for cm in sc_elem.findall('.//def:ComputationMethod', self.active_namespaces):
+                                            cm_oid = cm.get('OID')
+                                            if cm_oid:
+                                                dataset_criteria.append(cm_oid)
+                                                all_criteria.append(cm_oid)
+                                        if dataset_criteria:
+                                            dataset_criteria_map[ig_oid] = dataset_criteria
+                        
+                        if input_refs:
+                            analysis_data['inputData'] = input_refs
+                        
+                        # Store all criteria in applicableWhen (for schema compliance)
+                        if all_criteria:
+                            analysis_data['applicableWhen'] = all_criteria
+                        
+                        # Store dataset→criteria mapping in supplemental for roundtrip
+                        if dataset_criteria_map and analysis_oid:
+                            if not hasattr(self, '_analysis_dataset_criteria'):
+                                self._analysis_dataset_criteria = {}
+                            self._analysis_dataset_criteria[analysis_oid] = dataset_criteria_map
+                        
+                        try:
+                            analysis_obj = Analysis(**analysis_data)
+                            analyses.append(analysis_obj)
+                        except Exception as e:
+                            logger.warning(f"Failed to create Analysis {analysis_oid}: {e}")
+                    
+                    # Link Display to its first analysis (Display.analysis expects string, not list)
+                    if analysis_oids:
+                        display_data['analysis'] = analysis_oids[0]
+                        # Store ALL analysis OIDs for supplemental metadata
+                        if len(analysis_oids) > 1:
+                            display_to_analyses[display_oid] = analysis_oids
+                    
+                    try:
+                        display_obj = Display(**display_data)
+                        displays.append(display_obj)
+                    except Exception as e:
+                        logger.warning(f"Failed to create Display {display_oid}: {e}")
+        
+        return displays, analyses, display_to_analyses
     
     def _process_analysis_result_displays(self, mdv: ET.Element) -> Optional[List[Dict[str, Any]]]:
         """
