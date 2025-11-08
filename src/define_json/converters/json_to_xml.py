@@ -524,8 +524,8 @@ class DefineJSONToXMLConverter:
         if annotated_crf_data:
             self._create_annotated_crf(mdv, annotated_crf_data.get('documentRefs', []))
         
-        # Fix #4: Process SupplementalDoc (from xml_metadata)
-        self._create_supplemental_doc(mdv, xml_metadata.get('supplementalDoc'))
+        # Process SupplementalDoc from DocumentReference objects in resources
+        self._create_supplemental_doc(mdv, json_data)
         
         # Fix #3: Process AnalysisResultDisplays (from xml_metadata)
         self._create_analysis_result_displays(mdv, xml_metadata.get('analysisResultDisplays'))
@@ -826,19 +826,20 @@ class DefineJSONToXMLConverter:
                 check_value_elem = ET.SubElement(range_check, 'CheckValue')
                 check_value_elem.text = str(check_values[0])
             
-    def _create_supplemental_doc(self, parent: ET.Element, supplemental_doc: Optional[Dict[str, Any]]) -> None:
+    def _create_supplemental_doc(self, parent: ET.Element, json_data: Dict[str, Any]) -> None:
         """
-        Fix #4: Create SupplementalDoc element.
+        Create SupplementalDoc element from DocumentReference objects in resources.
         
         Args:
             parent: Parent MetaDataVersion element
-            supplemental_doc: Dict with documentRefs list
+            json_data: Full JSON data dict with resources array
         """
-        if not supplemental_doc:
-            return
+        # Extract DocumentReference objects from resources that came from SupplementalDoc
+        # (identified by OID pattern DOC.SUPP.*)
+        resources = json_data.get('resources', [])
+        supp_doc_refs = [r for r in resources if isinstance(r, dict) and r.get('OID', '').startswith('DOC.SUPP.')]
         
-        doc_refs = supplemental_doc.get('documentRefs', [])
-        if not doc_refs:
+        if not supp_doc_refs:
             return
         
         def_ns = self._get_namespace_uri('def')
@@ -848,11 +849,11 @@ class DefineJSONToXMLConverter:
         
         supp_doc_elem = ET.SubElement(parent, f'{{{def_ns}}}SupplementalDoc')
         
-        for doc_ref in doc_refs:
+        for doc_ref in supp_doc_refs:
             leaf_id = doc_ref.get('leafID')
             if leaf_id:
                 doc_ref_elem = ET.SubElement(supp_doc_elem, f'{{{def_ns}}}DocumentRef')
-                doc_ref_elem.set(f'{{{def_ns}}}leafID', leaf_id)
+                doc_ref_elem.set('leafID', leaf_id)
     
     def _create_analysis_result_displays(self, parent: ET.Element, analysis_displays: Optional[List[Dict[str, Any]]]) -> None:
         """
@@ -1663,6 +1664,41 @@ class DefineJSONToXMLConverter:
                 title_elem = ET.SubElement(leaf_elem, f'{{{def_ns}}}title')
                 title_elem.text = leaf_data['title']
     
+    def _collect_referenced_method_oids(self) -> set:
+        """
+        Collect all method OIDs referenced by ItemDefs.
+        
+        ComputationMethods (ARM-specific) are NOT referenced by ItemDefs.
+        Only true MethodDef elements are referenced.
+        
+        Returns:
+            Set of method OIDs that should be created as top-level MethodDef elements
+        """
+        referenced = set()
+        json_data = getattr(self, '_current_json_data', {})
+        
+        # Check top-level items
+        for item in json_data.get('items', []):
+            method_oid = item.get('methodOID')
+            if method_oid:
+                referenced.add(method_oid)
+        
+        # Check items within ItemGroups (including nested ValueLists)
+        def collect_from_itemgroup(ig):
+            for item in ig.get('items', []):
+                method_oid = item.get('methodOID')
+                if method_oid:
+                    referenced.add(method_oid)
+            # Recursively check children
+            for child in ig.get('children', []):
+                if isinstance(child, dict):
+                    collect_from_itemgroup(child)
+        
+        for ig in json_data.get('itemGroups', []):
+            collect_from_itemgroup(ig)
+        
+        return referenced
+    
     def _create_methods(self, parent: ET.Element, methods: List[Dict[str, Any]]) -> None:
         """Create MethodDef elements, skipping synthetic methods and ComputationMethods."""
         def_ns = self._get_namespace_uri('def')
@@ -1670,6 +1706,10 @@ class DefineJSONToXMLConverter:
         # Get supplemental method data for checking markers
         xml_metadata = getattr(self, '_current_xml_metadata', {})
         method_supplemental = xml_metadata.get('methodSupplemental', {})
+        
+        # INFER ComputationMethods: Collect all method OIDs referenced by ItemDefs
+        # ComputationMethods (ARM-specific) have NO ItemDef references
+        referenced_method_oids = self._collect_referenced_method_oids()
         
         for method in methods:
             method_oid = method.get('OID', '')
@@ -1681,8 +1721,9 @@ class DefineJSONToXMLConverter:
             if method_supp.get('_isSynthetic', False):
                 continue
             
-            # Skip ComputationMethod elements (they're part of ARM, not top-level MethodDefs)
-            if method_supp.get('_isComputationMethod', False):
+            # INFER: Skip ComputationMethod elements (ARM-specific, not referenced by ItemDefs)
+            # If method has no ItemDef references, it's a ComputationMethod (part of ARM Analysis Results)
+            if method_oid not in referenced_method_oids:
                 continue
             
             # Skip auto-generated method OIDs

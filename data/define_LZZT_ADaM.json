@@ -19305,6 +19305,11 @@
       "resourceType": "ODM"
     },
     {
+      "OID": "DOC.SUPP.Suppdoc",
+      "title": "Data Guide",
+      "leafID": "Suppdoc"
+    },
+    {
       "OID": "RES.Suppdoc",
       "name": "Data Guide",
       "label": "Data Guide",
@@ -20796,13 +20801,6 @@
       "ADVS.CHG.WEIGHT"
     ],
     "hasStandardsElement": false,
-    "supplementalDoc": {
-      "documentRefs": [
-        {
-          "leafID": "Suppdoc"
-        }
-      ]
-    },
     "analysisResultDisplays": [
       {
         "_containerType": "AnalysisResultDisplays",
@@ -26354,136 +26352,6 @@
           "wasElement": false
         }
       }
-    },
-    "codeListSupplemental": {},
-    "methodSupplemental": {
-      "Table_14-1.01.R.1": {
-        "_isComputationMethod": true
-      },
-      "Table_14-1.02.R.1.SC1": {
-        "_isComputationMethod": true
-      },
-      "Table_14-1.02.R.1": {
-        "_isComputationMethod": true
-      },
-      "Table_14-2.01.R.1.SC1": {
-        "_isComputationMethod": true
-      },
-      "Table_14-2.01.R.2.SC1": {
-        "_isComputationMethod": true
-      },
-      "Table_14-3.01.R.1.SC1": {
-        "_isComputationMethod": true
-      },
-      "Table_14-3.01.R.1": {
-        "_isComputationMethod": true
-      },
-      "Table_14-3.01.R.2.SC1": {
-        "_isComputationMethod": true
-      },
-      "Table_14-3.01.R.2": {
-        "_isComputationMethod": true
-      },
-      "Table_14-3.02.R.1.SC1": {
-        "_isComputationMethod": true
-      },
-      "Table_14-3.02.R.1": {
-        "_isComputationMethod": true
-      },
-      "Table_14-3.02.R.2.SC1": {
-        "_isComputationMethod": true
-      },
-      "Table_14-3.02.R.2": {
-        "_isComputationMethod": true
-      },
-      "Table_14-3.12.R.1.SC1": {
-        "_isComputationMethod": true
-      },
-      "Table_14-3.12.R.1": {
-        "_isComputationMethod": true
-      },
-      "Table_14-3.12.R.2.SC1": {
-        "_isComputationMethod": true
-      },
-      "Table_14-3.12.R.2": {
-        "_isComputationMethod": true
-      },
-      "Table_14-5.02.R.1.SC1": {
-        "_isComputationMethod": true
-      },
-      "Table_14-5.02.R.1.SC2": {
-        "_isComputationMethod": true
-      },
-      "Table_14-6.01.R.1.SC1": {
-        "_isComputationMethod": true
-      },
-      "Table_14-6.01.R.1.SC2": {
-        "_isComputationMethod": true
-      },
-      "Table_14-6.01.R.1.SC3": {
-        "_isComputationMethod": true
-      },
-      "Table_14-6.02.R.1.SC1": {
-        "_isComputationMethod": true
-      },
-      "Table_14-6.02.R.1.SC2": {
-        "_isComputationMethod": true
-      },
-      "Table_14-6.02.R.1.SC3": {
-        "_isComputationMethod": true
-      },
-      "Table_14-6.02.R.1": {
-        "_isComputationMethod": true
-      },
-      "Table_14-6.03.R.1.SC1": {
-        "_isComputationMethod": true
-      },
-      "Table_14-6.03.R.1.SC2": {
-        "_isComputationMethod": true
-      },
-      "Table_14-6.03.R.1.SC3": {
-        "_isComputationMethod": true
-      },
-      "Table_14-6.03.R.1": {
-        "_isComputationMethod": true
-      },
-      "Table_14-6.04.R.1.SC1": {
-        "_isComputationMethod": true
-      },
-      "Table_14-6.04.R.1.SC2": {
-        "_isComputationMethod": true
-      },
-      "Table_14-6.04.R.1.SC3": {
-        "_isComputationMethod": true
-      },
-      "Table_14-6.04.R.1": {
-        "_isComputationMethod": true
-      },
-      "Table_14-6.05.R.1.SC1": {
-        "_isComputationMethod": true
-      },
-      "Table_14-6.05.R.1.SC2": {
-        "_isComputationMethod": true
-      },
-      "Table_14-6.05.R.1.SC3": {
-        "_isComputationMethod": true
-      },
-      "Table_14-6.05.R.1": {
-        "_isComputationMethod": true
-      },
-      "Table_14-6.06.R.1.SC1": {
-        "_isComputationMethod": true
-      },
-      "Table_14-6.06.R.1.SC2": {
-        "_isComputationMethod": true
-      },
-      "Figure_14-1.R.1.SC1": {
-        "_isComputationMethod": true
-      },
-      "Figure_14-1.R.1": {
-        "_isComputationMethod": true
-      }
-    },
-    "conditionSupplemental": {}
+    }
   }
 }

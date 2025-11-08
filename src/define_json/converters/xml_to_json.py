@@ -461,12 +461,15 @@ class DefineXMLToJSONConverter:
             mdv_data['dictionaries'] = dictionaries
             logger.info(f"  - Created {len(dictionaries)} dictionaries")
         
-        # Fix #4: Process SupplementalDoc (store in xml_metadata)
+        # Process SupplementalDoc as DocumentReference objects (native Define structure)
         logger.info("Processing supplemental doc...")
-        supplemental_doc = self._process_supplemental_doc(mdv)
-        if supplemental_doc:
-            xml_metadata['supplementalDoc'] = supplemental_doc
-            logger.info(f"  - Found SupplementalDoc with {len(supplemental_doc.get('documentRefs', []))} references")
+        supp_doc_refs = self._process_supplemental_doc(mdv)
+        if supp_doc_refs:
+            # Add to resources array (not _xmlMetadata)
+            if 'resources' not in mdv_data:
+                mdv_data['resources'] = []
+            mdv_data['resources'].extend([r.model_dump(mode='json', exclude_none=True) if hasattr(r, 'model_dump') else r for r in supp_doc_refs])
+            logger.info(f"  - Converted {len(supp_doc_refs)} SupplementalDoc refs to DocumentReference objects")
         
         # Fix #3: Process AnalysisResultDisplays (store in xml_metadata)
         logger.info("Processing analysis result displays...")
@@ -513,13 +516,15 @@ class DefineXMLToJSONConverter:
             # Fall back to raw data
             result = mdv_data
         
-        # Add supplemental XML metadata for roundtrip
-        xml_metadata.update({
-            'itemGroupSupplemental': ig_supplemental,
-            'codeListSupplemental': cl_supplemental,
-            'methodSupplemental': methods_supplemental,
-            'conditionSupplemental': cond_supplemental,
-        })
+        # Add supplemental XML metadata for roundtrip (only if non-empty)
+        if ig_supplemental:
+            xml_metadata['itemGroupSupplemental'] = ig_supplemental
+        if cl_supplemental:
+            xml_metadata['codeListSupplemental'] = cl_supplemental
+        if methods_supplemental:
+            xml_metadata['methodSupplemental'] = methods_supplemental
+        if cond_supplemental:
+            xml_metadata['conditionSupplemental'] = cond_supplemental
         
         # Add inference log if preserve_original is False
         if not self.preserve_original and self.inference_log:
@@ -678,15 +683,11 @@ class DefineXMLToJSONConverter:
             try:
                 method_obj = Method(**method_data)
                 methods.append(method_obj)
-                # Mark as ComputationMethod (not MethodDef) - don't create MethodDef in roundtrip
-                if method_oid not in supplemental:
-                    supplemental[method_oid] = {}
-                supplemental[method_oid]['_isComputationMethod'] = True
-                # Don't mark as _isFromXML since these aren't MethodDef elements
+                # NO FLAG NEEDED: ComputationMethod elements are inferred during XML write
+                # If a method has no ItemDef references, it's a ComputationMethod (ARM-specific)
+                # and won't be written as a top-level MethodDef element
             except Exception as e:
                 logger.warning(f"Failed to create Method {method_oid}: {e}")
-                method_data['_isComputationMethod'] = True
-                supplemental[method_oid] = method_data
         
         return methods, derivation_map, supplemental
     
@@ -1784,30 +1785,47 @@ class DefineXMLToJSONConverter:
         decode = element.find('.//odm:Decode/odm:TranslatedText', self.active_namespaces)
         return decode.text if decode is not None else None
     
-    def _process_supplemental_doc(self, mdv: ET.Element) -> Optional[Dict[str, Any]]:
+    def _process_supplemental_doc(self, mdv: ET.Element) -> Optional[List[DocumentReference]]:
         """
-        Fix #4: Process SupplementalDoc element.
+        Process SupplementalDoc element as DocumentReference objects.
         
         Returns:
-            Dict with documentRefs list, or None if not found
+            List of DocumentReference objects, or None if not found
         """
         # Find SupplementalDoc element
         supp_doc = mdv.find('.//def:SupplementalDoc', self.active_namespaces)
         if not supp_doc:
             return None
         
-        # Extract DocumentRef children
+        # Extract DocumentRef children and create DocumentReference objects
         doc_refs = []
         for doc_ref in supp_doc.findall('.//def:DocumentRef', self.active_namespaces):
             leaf_id = doc_ref.get('{%s}leafID' % self.active_namespaces.get('def', ''))
             if not leaf_id:
                 leaf_id = doc_ref.get('leafID')  # Fallback without namespace
+            
             if leaf_id:
-                doc_refs.append({'leafID': leaf_id})
+                # Look up the actual leaf element to get title and href
+                leaf_elem = mdv.find(f'.//def:leaf[@ID="{leaf_id}"]', self.active_namespaces)
+                
+                doc_ref_data = {
+                    'OID': f'DOC.SUPP.{leaf_id}',  # Generate OID for DocumentReference
+                    'leafID': leaf_id
+                }
+                
+                # Extract title from leaf
+                if leaf_elem is not None:
+                    title_elem = leaf_elem.find('def:title', self.active_namespaces)
+                    if title_elem is not None and title_elem.text:
+                        doc_ref_data['title'] = title_elem.text.strip()
+                
+                try:
+                    doc_ref_obj = DocumentReference(**doc_ref_data)
+                    doc_refs.append(doc_ref_obj)
+                except Exception as e:
+                    logger.warning(f"Failed to create DocumentReference for {leaf_id}: {e}")
         
-        if doc_refs:
-            return {'documentRefs': doc_refs}
-        return None
+        return doc_refs if doc_refs else None
     
     def _process_analysis_result_displays(self, mdv: ET.Element) -> Optional[List[Dict[str, Any]]]:
         """
