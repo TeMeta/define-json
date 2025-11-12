@@ -22,7 +22,7 @@ Alias: other
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [CodeListItem](../classes/CodeListItem.md) | A structured member of a CodeList that extends the Coding class with addition... |  no  |
+| [CodeListItem](../classes/CodeListItem.md) | A structured member of a CodeList that extends the Coding class with additional context-specific properties |  no  |
 
 
 

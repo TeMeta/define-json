@@ -23,7 +23,7 @@ URI: [SoftHard](../enums/SoftHard.md)
 
 | Name | Description |
 | ---  | --- |
-| [softHard](../slots/softHard.md) | Indicates whether a validation check is an error ("Hard") or a warning ("Soft... |
+| [softHard](../slots/softHard.md) | Indicates whether a validation check is an error ("Hard") or a warning ("Soft") |
 
 
 

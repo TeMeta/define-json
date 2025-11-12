@@ -36,3 +36,6 @@ mkdocs-mermaid2-plugin = "^1.2.2"
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
+[tool.poetry.scripts]
+define-ir = "cli.ir_cli:main"
+

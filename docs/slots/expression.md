@@ -22,7 +22,7 @@ Alias: expression
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [FormalExpression](../classes/FormalExpression.md) | A computational element that defines the execution of a data derivation withi... |  no  |
+| [FormalExpression](../classes/FormalExpression.md) | A computational element that defines the execution of a data derivation within a specific context |  no  |
 
 
 
@@ -37,6 +37,11 @@ Alias: expression
 * Required: True
 
 
+
+## Aliases
+
+
+* code
 
 
 
@@ -73,6 +78,8 @@ Alias: expression
 name: expression
 description: The actual text of the formal expression (renamed from 'code' for disambiguation).
 from_schema: https://cdisc.org/define-json
+aliases:
+- code
 rank: 1000
 alias: expression
 owner: FormalExpression

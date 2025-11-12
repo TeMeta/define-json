@@ -22,7 +22,7 @@ Alias: publishingSet
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Standard](../classes/Standard.md) | A collection element that groups related standards within a specific context,... |  no  |
+| [Standard](../classes/Standard.md) | A collection element that groups related standards within a specific context, used for defining CDISC implementation guides and controlled terminologies |  no  |
 
 
 

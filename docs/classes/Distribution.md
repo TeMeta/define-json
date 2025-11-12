@@ -73,7 +73,6 @@ DataStructureDefinition {
     string structure  
     boolean isReferenceData  
     ItemGroupType type  
-    stringList children  
     stringList profile  
     string authenticator  
     string OID  
@@ -148,16 +147,20 @@ DataStructureDefinition ||--}o Measure : "measures"
 DataStructureDefinition ||--}o DataAttribute : "attributes"
 DataStructureDefinition ||--|o ComponentList : "grouping"
 DataStructureDefinition ||--}o Item : "items"
+DataStructureDefinition ||--}o ItemGroup : "children"
 DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
-DataStructureDefinition ||--|o WhereClause : "whereClause"
+DataStructureDefinition ||--}o WhereClause : "applicableWhen"
 DataStructureDefinition ||--}o Coding : "security"
 DataStructureDefinition ||--|o Timing : "validityPeriod"
 DataStructureDefinition ||--}o Coding : "coding"
-DataStructureDefinition ||--}o Comment : "comment"
+DataStructureDefinition ||--}o Comment : "comments"
+DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Dataflow ||--|| DataStructureDefinition : "structure"
 Dataflow ||--}o Dimension : "dimensionConstraint"
+Dataflow ||--|o Analysis : "analysisMethod"
 Dataflow ||--}o Coding : "coding"
-Dataflow ||--}o Comment : "comment"
+Dataflow ||--}o Comment : "comments"
+Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 DataService ||--|o Distribution : "isAccessServiceOf"
 DataService ||--}o FormalExpression : "selection"
 DataService ||--}o Coding : "coding"

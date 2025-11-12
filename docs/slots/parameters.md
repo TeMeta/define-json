@@ -22,7 +22,7 @@ Alias: parameters
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [FormalExpression](../classes/FormalExpression.md) | A computational element that defines the execution of a data derivation withi... |  no  |
+| [FormalExpression](../classes/FormalExpression.md) | A computational element that defines the execution of a data derivation within a specific context |  no  |
 
 
 
@@ -80,6 +80,8 @@ domain_of:
 - FormalExpression
 range: Parameter
 multivalued: true
+inlined: true
+inlined_as_list: true
 
 ```
 </details>

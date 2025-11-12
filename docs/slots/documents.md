@@ -3,11 +3,6 @@
 # Slot: documents 
 
 
-_References to documents that contain or are referenced by this comment_
-
-
-
-
 
 URI: [odm:slot/documents](https://cdisc.org/odm2/slot/documents)
 Alias: documents
@@ -22,7 +17,10 @@ Alias: documents
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Comment](../classes/Comment.md) | A descriptive element that contains explanatory text provided by a data or me... |  no  |
+| [Analysis](../classes/Analysis.md) | Analysis extends Method to capture analysis-specific metadata including the reason for analysis, its purpose, and data traceability for the results used.<br>Expressions and parameters from Method can be generic or implementation-specific. |  no  |
+| [Origin](../classes/Origin.md) | A provenance element that describes the source of data for an item |  no  |
+| [Comment](../classes/Comment.md) | A descriptive element that contains explanatory text provided by a data or metadata handler |  no  |
+| [Method](../classes/Method.md) | A reusable computational procedure that describes how to derive values and can be referenced by Items.<br>Analysis and Derivation concepts can be implemented by a Method. Properties can be referenced by Parameters in its expressions. |  no  |
 
 
 
@@ -32,9 +30,7 @@ Alias: documents
 
 ## Properties
 
-* Range: [DocumentReference](../classes/DocumentReference.md)
-
-* Multivalued: True
+* Range: NONE
 
 
 
@@ -45,13 +41,6 @@ Alias: documents
 
 
 
-
-
-
-### Schema Source
-
-
-* from schema: https://cdisc.org/define-json
 
 
 
@@ -71,15 +60,11 @@ Alias: documents
 <details>
 ```yaml
 name: documents
-description: References to documents that contain or are referenced by this comment
-from_schema: https://cdisc.org/define-json
-rank: 1000
 alias: documents
-owner: Comment
 domain_of:
 - Comment
-range: DocumentReference
-multivalued: true
+- Method
+- Origin
 
 ```
 </details>

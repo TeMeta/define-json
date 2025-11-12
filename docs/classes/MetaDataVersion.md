@@ -43,6 +43,22 @@ MetaDataVersion {
     string owner  
     string wasDerivedFrom  
 }
+SiteOrSponsorComment {
+    string text  
+    OriginSource sourceType  
+    string source  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
 Comment {
     string text  
     string OID  
@@ -51,6 +67,11 @@ Comment {
     string description  
     string label  
     stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
 }
 Coding {
     string code  
@@ -59,11 +80,106 @@ Coding {
     string codeSystemVersion  
     AliasPredicate aliasType  
 }
+Display {
+    string displayType  
+    string version  
+    string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
 DocumentReference {
     string title  
     string leafID  
     integerList pages  
     string relationship  
+    string version  
+    string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+Analysis {
+    string analysisReason  
+    string analysisPurpose  
+    string analysisMethod  
+    stringList inputData  
+    string version  
+    string href  
+    MethodType type  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+DataProduct {
+    string dataProductOwner  
+    string domain  
+    DataProductLifecycleStatus lifecycleStatus  
+    stringList hasPolicy  
+    string version  
+    string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+Dataset {
+    string publishedBy  
+    stringList keys  
+    string datasetType  
+    string conformsTo  
+    stringList hasPolicy  
+    string informationSensitivityClassification  
+    string version  
+    string href  
+    stringList profile  
+    string authenticator  
+    string action  
+    string reportingBegin  
+    string reportingEnd  
+    string dataExtractionDate  
+    string validFrom  
+    string validTo  
+    string publicationYear  
+    string publicationPeriod  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+DataService {
+    string protocol  
+    string securitySchemaType  
+    string resourceType  
+    string attribute  
     string version  
     string href  
     string OID  
@@ -87,6 +203,8 @@ Standard {
 }
 Dictionary {
     string publishedBy  
+    string version  
+    string href  
     string OID  
     string uuid  
     string name  
@@ -211,9 +329,15 @@ WhereClause {
     string description  
     string label  
     stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
 }
 Condition {
     string implementsCondition  
+    LogicalOperator operator  
     string OID  
     string uuid  
     string name  
@@ -259,13 +383,13 @@ RangeCheck {
     stringList checkValues  
     string item  
     SoftHard softHard  
+    LogicalOperator operator  
 }
 ItemGroup {
     string domain  
     string structure  
     boolean isReferenceData  
     ItemGroupType type  
-    stringList children  
     stringList profile  
     string authenticator  
     string OID  
@@ -303,19 +427,55 @@ MetaDataVersion ||--}o Item : "items"
 MetaDataVersion ||--}o Condition : "conditions"
 MetaDataVersion ||--}o WhereClause : "whereClauses"
 MetaDataVersion ||--}o Method : "methods"
+MetaDataVersion ||--}o Analysis : "analyses"
 MetaDataVersion ||--}o CodeList : "codeLists"
 MetaDataVersion ||--}o Coding : "codings"
 MetaDataVersion ||--}o ReifiedConcept : "concepts"
 MetaDataVersion ||--}o Relationship : "relationships"
 MetaDataVersion ||--}o Dictionary : "dictionaries"
 MetaDataVersion ||--}o Standard : "standards"
-MetaDataVersion ||--}o DocumentReference : "annotatedCRF"
+MetaDataVersion ||--}o DocumentReference : "annotatedCRFs"
+MetaDataVersion ||--}o DataProduct : "dataProducts"
+MetaDataVersion ||--}o Display : "displays"
 MetaDataVersion ||--}o Coding : "coding"
-MetaDataVersion ||--}o Comment : "comment"
+MetaDataVersion ||--}o Comment : "comments"
+MetaDataVersion ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+SiteOrSponsorComment ||--}o Coding : "coding"
+SiteOrSponsorComment ||--}o Comment : "comments"
+SiteOrSponsorComment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
+Comment ||--}o Comment : "comments"
+Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Display ||--|o Analysis : "analysis"
+Display ||--}o DocumentReference : "location"
+Display ||--}o Coding : "coding"
+Display ||--}o Comment : "comments"
+Display ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 DocumentReference ||--}o Coding : "coding"
-Standard ||--}o Comment : "comment"
+Analysis ||--}o WhereClause : "applicableWhen"
+Analysis ||--}o FormalExpression : "expressions"
+Analysis ||--}o DocumentReference : "documents"
+Analysis ||--|o ReifiedConcept : "implementsConcept"
+Analysis ||--}o Coding : "coding"
+Analysis ||--}o Comment : "comments"
+Analysis ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+DataProduct ||--}o DataService : "inputPort"
+DataProduct ||--}o DataService : "outputPort"
+DataProduct ||--}o Dataset : "inputDataset"
+DataProduct ||--}o Dataset : "outputDataset"
+DataProduct ||--}o Coding : "coding"
+DataProduct ||--}o Comment : "comments"
+DataProduct ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Dataset ||--|o Dataflow : "describedBy"
+Dataset ||--|o DataStructureDefinition : "structuredBy"
+Dataset ||--}o Distribution : "distribution"
+Dataset ||--}o Coding : "security"
+Dataset ||--|o Timing : "validityPeriod"
+Dataset ||--}o Coding : "coding"
+DataService ||--|o Distribution : "isAccessServiceOf"
+DataService ||--}o FormalExpression : "selection"
+DataService ||--}o Coding : "coding"
 Standard ||--}o Coding : "coding"
 Dictionary ||--}o Coding : "terms"
 Dictionary ||--}o Coding : "coding"
@@ -325,51 +485,63 @@ Relationship ||--}o Coding : "coding"
 IdentifiableElement ||--}o Coding : "coding"
 ReifiedConcept ||--}o ConceptProperty : "properties"
 ReifiedConcept ||--}o Coding : "coding"
-ReifiedConcept ||--}o Comment : "comment"
+ReifiedConcept ||--}o Comment : "comments"
+ReifiedConcept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ConceptProperty ||--|o CodeList : "codeList"
 ConceptProperty ||--}o Coding : "coding"
-ConceptProperty ||--}o Comment : "comment"
+ConceptProperty ||--}o Comment : "comments"
+ConceptProperty ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
 CodeList ||--}o Coding : "coding"
-CodeList ||--}o Comment : "comment"
+CodeList ||--}o Comment : "comments"
+CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Resource ||--}o FormalExpression : "selection"
 Resource ||--}o Coding : "coding"
 CodeListItem ||--|o Coding : "coding"
-Method ||--}o FormalExpression : "formalExpressions"
-Method ||--|o DocumentReference : "document"
+Method ||--}o FormalExpression : "expressions"
+Method ||--}o DocumentReference : "documents"
+Method ||--|o ReifiedConcept : "implementsConcept"
 Method ||--}o Coding : "coding"
-Method ||--}o Comment : "comment"
+Method ||--}o Comment : "comments"
+Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 FormalExpression ||--}o Parameter : "parameters"
 FormalExpression ||--|o ReturnValue : "returnValue"
 FormalExpression ||--}o Resource : "externalCodeLibs"
 FormalExpression ||--}o Coding : "coding"
 WhereClause ||--}o Condition : "conditions"
 WhereClause ||--}o Coding : "coding"
+WhereClause ||--}o Comment : "comments"
+WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Condition ||--}o RangeCheck : "rangeChecks"
-Condition ||--}o FormalExpression : "formalExpression"
+Condition ||--}o FormalExpression : "expressions"
+Condition ||--}o Condition : "conditions"
 Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comment"
+Condition ||--}o Comment : "comments"
+Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--|o WhereClause : "whereClause"
+Item ||--}o WhereClause : "applicableWhen"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
 Item ||--|o CodeList : "roleCodeList"
 Item ||--|o Condition : "collectionExceptionCondition"
 Item ||--}o Coding : "coding"
-Item ||--}o Comment : "comment"
+Item ||--}o Comment : "comments"
+Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Origin ||--}o SourceItem : "sourceItems"
-Origin ||--|o DocumentReference : "document"
-RangeCheck ||--}o FormalExpression : "formalExpression"
+Origin ||--}o DocumentReference : "documents"
+RangeCheck ||--}o FormalExpression : "expressions"
 ItemGroup ||--}o Item : "items"
+ItemGroup ||--}o ItemGroup : "children"
 ItemGroup ||--|o ReifiedConcept : "implementsConcept"
-ItemGroup ||--|o WhereClause : "whereClause"
+ItemGroup ||--}o WhereClause : "applicableWhen"
 ItemGroup ||--}o Coding : "security"
 ItemGroup ||--|o Timing : "validityPeriod"
 ItemGroup ||--}o Coding : "coding"
-ItemGroup ||--}o Comment : "comment"
+ItemGroup ||--}o Comment : "comments"
+ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Timing ||--|o NominalOccurrence : "relativeTo"
 Timing ||--|o NominalOccurrence : "relativeFrom"
 Timing ||--|o Method : "imputation"
@@ -391,23 +563,26 @@ Timing ||--}o Coding : "coding"
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
 | [itemGroups](../slots/itemGroups.md) | * <br/> [ItemGroup](../classes/ItemGroup.md) | Item groups, containing items, defined in this version of the metadata | direct |
-| [items](../slots/items.md) | * <br/> [Item](../classes/Item.md) | Template or top-level items (not belonging to any item group) defined in this... | direct |
-| [resources](../slots/resources.md) | * <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[DocumentReference](../classes/DocumentReference.md)&nbsp;or&nbsp;<br />[Resource](../classes/Resource.md) | References to documents that describe this version of the metadata | direct |
-| [conditions](../slots/conditions.md) | * <br/> [Condition](../classes/Condition.md) | Logical conditions that apply to this version of the metadata | direct |
-| [whereClauses](../slots/whereClauses.md) | * <br/> [WhereClause](../classes/WhereClause.md) | Data contexts that apply to this version of the metadata | direct |
-| [methods](../slots/methods.md) | * <br/> [Method](../classes/Method.md) | Methods defined in this version of the metadata | direct |
-| [codeLists](../slots/codeLists.md) | * <br/> [CodeList](../classes/CodeList.md) | Code lists defined in this version of the metadata | direct |
+| [items](../slots/items.md) | * <br/> [Item](../classes/Item.md) | Template or top-level items (not belonging to any item group) defined in this version of the metadata | direct |
+| [conditions](../slots/conditions.md) | * <br/> [Condition](../classes/Condition.md) | Logical conditions that apply to this version of the metadata. | direct |
+| [whereClauses](../slots/whereClauses.md) | * <br/> [WhereClause](../classes/WhereClause.md) | Data contexts that apply to this version of the metadata. | direct |
+| [methods](../slots/methods.md) | * <br/> [Method](../classes/Method.md) | Methods defined in this version of the metadata. | direct |
+| [analyses](../slots/analyses.md) | * <br/> [Analysis](../classes/Analysis.md) | Analyses defined in this version of the metadata. | direct |
+| [codeLists](../slots/codeLists.md) | * <br/> [CodeList](../classes/CodeList.md) | Code lists defined in this version of the metadata. | direct |
 | [codings](../slots/codings.md) | * <br/> [Coding](../classes/Coding.md) | Codings defined in this version of the metadata | direct |
 | [concepts](../slots/concepts.md) | * <br/> [ReifiedConcept](../classes/ReifiedConcept.md) | Structured Concepts defined in this version of the metadata | direct |
-| [relationships](../slots/relationships.md) | * <br/> [Relationship](../classes/Relationship.md) | Relationships between items, item groups, and other elements in this version ... | direct |
+| [relationships](../slots/relationships.md) | * <br/> [Relationship](../classes/Relationship.md) | Relationships between items, item groups, and other elements in this version of the metadata. | direct |
 | [dictionaries](../slots/dictionaries.md) | * <br/> [Dictionary](../classes/Dictionary.md) | Dictionaries defined in this version of the metadata | direct |
 | [standards](../slots/standards.md) | * <br/> [Standard](../classes/Standard.md) | Standards defined in this version of the metadata | direct |
-| [annotatedCRF](../slots/annotatedCRF.md) | * <br/> [DocumentReference](../classes/DocumentReference.md) | Reference to annotated case report forms | direct |
+| [annotatedCRFs](../slots/annotatedCRFs.md) | * <br/> [DocumentReference](../classes/DocumentReference.md) | Reference to annotated case report forms | direct |
+| [resources](../slots/resources.md) | * <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[DocumentReference](../classes/DocumentReference.md)&nbsp;or&nbsp;<br />[Resource](../classes/Resource.md) | References to resources and documents that describe this version of the metadata. | direct |
+| [dataProducts](../slots/dataProducts.md) | * <br/> [DataProduct](../classes/DataProduct.md) | Indexed data flows with clear ownership | direct |
+| [displays](../slots/displays.md) | * <br/> [Display](../classes/Display.md) | Displays defined in this version of the metadata. | direct |
 | [fileOID](../slots/fileOID.md) | 1 <br/> [String](../types/String.md) | Unique identifier for the ODM file | [ODMFileMetadata](../classes/ODMFileMetadata.md) |
 | [asOfDateTime](../slots/asOfDateTime.md) | 0..1 <br/> [Datetime](../types/Datetime.md) | Date and time when the data snapshot was taken | [ODMFileMetadata](../classes/ODMFileMetadata.md) |
 | [creationDateTime](../slots/creationDateTime.md) | 1 <br/> [Datetime](../types/Datetime.md) | Date and time when the ODM file was created | [ODMFileMetadata](../classes/ODMFileMetadata.md) |
 | [odmVersion](../slots/odmVersion.md) | 1 <br/> [String](../types/String.md) | Version of the ODM standard used | [ODMFileMetadata](../classes/ODMFileMetadata.md) |
-| [fileType](../slots/fileType.md) | 1 <br/> [String](../types/String.md) | Type of ODM file (e | [ODMFileMetadata](../classes/ODMFileMetadata.md) |
+| [fileType](../slots/fileType.md) | 1 <br/> [String](../types/String.md) | Type of ODM file (e.g., Snapshot, Transactional) | [ODMFileMetadata](../classes/ODMFileMetadata.md) |
 | [originator](../slots/originator.md) | 0..1 <br/> [String](../types/String.md) | Organization or system that created the ODM file | [ODMFileMetadata](../classes/ODMFileMetadata.md) |
 | [sourceSystem](../slots/sourceSystem.md) | 0..1 <br/> [String](../types/String.md) | Source system that generated the data | [ODMFileMetadata](../classes/ODMFileMetadata.md) |
 | [sourceSystemVersion](../slots/sourceSystemVersion.md) | 0..1 <br/> [String](../types/String.md) | Version of the source system | [ODMFileMetadata](../classes/ODMFileMetadata.md) |
@@ -417,7 +592,7 @@ Timing ||--}o Coding : "coding"
 | [studyName](../slots/studyName.md) | 0..1 <br/> [String](../types/String.md) | Name of the study | [StudyMetadata](../classes/StudyMetadata.md) |
 | [studyDescription](../slots/studyDescription.md) | 0..1 <br/> [String](../types/String.md) | Description of the study | [StudyMetadata](../classes/StudyMetadata.md) |
 | [protocolName](../slots/protocolName.md) | 0..1 <br/> [String](../types/String.md) | Protocol name for the study | [StudyMetadata](../classes/StudyMetadata.md) |
-| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context | [Identifiable](../classes/Identifiable.md) |
+| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
 | [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
 | [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
 | [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Detailed description, shown in tooltips | [Labelled](../classes/Labelled.md) |
@@ -425,11 +600,12 @@ Timing ||--}o Coding : "coding"
 | [label](../slots/label.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Human-readable label, shown in UIs | [Labelled](../classes/Labelled.md) |
 | [aliases](../slots/aliases.md) | * <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Alternative name or identifier | [Labelled](../classes/Labelled.md) |
 | [mandatory](../slots/mandatory.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Is this element required? | [Governed](../classes/Governed.md) |
-| [comment](../slots/comment.md) | * <br/> [Comment](../classes/Comment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
+| [comments](../slots/comments.md) | * <br/> [Comment](../classes/Comment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
+| [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | * <br/> [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
 | [purpose](../slots/purpose.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Purpose or rationale for this data element | [Governed](../classes/Governed.md) |
 | [lastUpdated](../slots/lastUpdated.md) | 0..1 <br/> [Datetime](../types/Datetime.md) | When the resource was last updated | [Governed](../classes/Governed.md) |
 | [owner](../slots/owner.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Party responsible for this element | [Governed](../classes/Governed.md) |
-| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[MetaDataVersion](../classes/MetaDataVersion.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[ReifiedConcept](../classes/ReifiedConcept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[Condition](../classes/Condition.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[NominalOccurrence](../classes/NominalOccurrence.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e | [Governed](../classes/Governed.md) |
+| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[MetaDataVersion](../classes/MetaDataVersion.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[ReifiedConcept](../classes/ReifiedConcept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[Condition](../classes/Condition.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[NominalOccurrence](../classes/NominalOccurrence.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
 
 
 
@@ -445,10 +621,13 @@ Timing ||--}o Coding : "coding"
 | [Item](../classes/Item.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
 | [ItemGroup](../classes/ItemGroup.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
 | [CodeList](../classes/CodeList.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
+| [Comment](../classes/Comment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
 | [ReifiedConcept](../classes/ReifiedConcept.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
 | [ConceptProperty](../classes/ConceptProperty.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
+| [WhereClause](../classes/WhereClause.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
 | [Condition](../classes/Condition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
 | [Method](../classes/Method.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
+| [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
 | [NominalOccurrence](../classes/NominalOccurrence.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
 | [Dataflow](../classes/Dataflow.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
@@ -458,6 +637,8 @@ Timing ||--}o Coding : "coding"
 | [DataAttribute](../classes/DataAttribute.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
 | [DataProduct](../classes/DataProduct.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
+| [Analysis](../classes/Analysis.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
+| [Display](../classes/Display.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
 
 
 
@@ -539,19 +720,6 @@ attributes:
     multivalued: true
     inlined: true
     inlined_as_list: true
-  resources:
-    name: resources
-    description: References to documents that describe this version of the metadata.
-    from_schema: https://cdisc.org/define-json
-    rank: 1000
-    domain_of:
-    - MetaDataVersion
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-    any_of:
-    - range: DocumentReference
-    - range: Resource
   conditions:
     name: conditions
     description: Logical conditions that apply to this version of the metadata.
@@ -560,6 +728,8 @@ attributes:
     domain_of:
     - MetaDataVersion
     - WhereClause
+    - Condition
+    - Parameter
     range: Condition
     multivalued: true
     inlined: true
@@ -583,6 +753,17 @@ attributes:
     domain_of:
     - MetaDataVersion
     range: Method
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  analyses:
+    name: analyses
+    description: Analyses defined in this version of the metadata.
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    domain_of:
+    - MetaDataVersion
+    range: Analysis
     multivalued: true
     inlined: true
     inlined_as_list: true
@@ -651,14 +832,50 @@ attributes:
     multivalued: true
     inlined: true
     inlined_as_list: true
-  annotatedCRF:
-    name: annotatedCRF
+  annotatedCRFs:
+    name: annotatedCRFs
     description: Reference to annotated case report forms
     from_schema: https://cdisc.org/define-json
     rank: 1000
     domain_of:
     - MetaDataVersion
     range: DocumentReference
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  resources:
+    name: resources
+    description: References to resources and documents that describe this version
+      of the metadata.
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    domain_of:
+    - MetaDataVersion
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    any_of:
+    - range: DocumentReference
+    - range: Resource
+  dataProducts:
+    name: dataProducts
+    description: Indexed data flows with clear ownership
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    domain_of:
+    - MetaDataVersion
+    range: DataProduct
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  displays:
+    name: displays
+    description: Displays defined in this version of the metadata.
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    domain_of:
+    - MetaDataVersion
+    range: Display
     multivalued: true
     inlined: true
     inlined_as_list: true
@@ -712,21 +929,6 @@ attributes:
     multivalued: true
     inlined: true
     inlined_as_list: true
-  resources:
-    name: resources
-    description: References to documents that describe this version of the metadata.
-    from_schema: https://cdisc.org/define-json
-    rank: 1000
-    alias: resources
-    owner: MetaDataVersion
-    domain_of:
-    - MetaDataVersion
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-    any_of:
-    - range: DocumentReference
-    - range: Resource
   conditions:
     name: conditions
     description: Logical conditions that apply to this version of the metadata.
@@ -737,6 +939,8 @@ attributes:
     domain_of:
     - MetaDataVersion
     - WhereClause
+    - Condition
+    - Parameter
     range: Condition
     multivalued: true
     inlined: true
@@ -764,6 +968,19 @@ attributes:
     domain_of:
     - MetaDataVersion
     range: Method
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  analyses:
+    name: analyses
+    description: Analyses defined in this version of the metadata.
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    alias: analyses
+    owner: MetaDataVersion
+    domain_of:
+    - MetaDataVersion
+    range: Analysis
     multivalued: true
     inlined: true
     inlined_as_list: true
@@ -844,16 +1061,58 @@ attributes:
     multivalued: true
     inlined: true
     inlined_as_list: true
-  annotatedCRF:
-    name: annotatedCRF
+  annotatedCRFs:
+    name: annotatedCRFs
     description: Reference to annotated case report forms
     from_schema: https://cdisc.org/define-json
     rank: 1000
-    alias: annotatedCRF
+    alias: annotatedCRFs
     owner: MetaDataVersion
     domain_of:
     - MetaDataVersion
     range: DocumentReference
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  resources:
+    name: resources
+    description: References to resources and documents that describe this version
+      of the metadata.
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    alias: resources
+    owner: MetaDataVersion
+    domain_of:
+    - MetaDataVersion
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    any_of:
+    - range: DocumentReference
+    - range: Resource
+  dataProducts:
+    name: dataProducts
+    description: Indexed data flows with clear ownership
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    alias: dataProducts
+    owner: MetaDataVersion
+    domain_of:
+    - MetaDataVersion
+    range: DataProduct
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  displays:
+    name: displays
+    description: Displays defined in this version of the metadata.
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    alias: displays
+    owner: MetaDataVersion
+    domain_of:
+    - MetaDataVersion
+    range: Display
     multivalued: true
     inlined: true
     inlined_as_list: true
@@ -1111,19 +1370,32 @@ attributes:
     domain_of:
     - Governed
     range: boolean
-  comment:
-    name: comment
+  comments:
+    name: comments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
     from_schema: https://cdisc.org/define-json
     rank: 1000
-    alias: comment
+    alias: comments
     owner: MetaDataVersion
     domain_of:
     - Governed
-    - Standard
     range: Comment
     multivalued: true
+    inlined: false
+  siteOrSponsorComments:
+    name: siteOrSponsorComments
+    description: Comment on the element, such as a rationale for its inclusion or
+      exclusion
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    alias: siteOrSponsorComments
+    owner: MetaDataVersion
+    domain_of:
+    - Governed
+    range: SiteOrSponsorComment
+    multivalued: true
+    inlined: false
   purpose:
     name: purpose
     description: Purpose or rationale for this data element

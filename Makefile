@@ -56,14 +56,13 @@ linkml-lint:
 
 generate-json-schema:
 	@echo "Generating JSON Schema from LinkML..."
-	poetry run linkml generate json-schema define-json.yaml > generated/json-schema.json
-	@echo "JSON Schema generated: generated/json-schema.json"
+	poetry run linkml generate json-schema define-json.yaml > generated/define-json-schema.json
+	@echo "JSON Schema generated: generated/define-json-schema.json"
 
 generate-pydantic:
 	@echo "Generating Pydantic models from LinkML..."
 	poetry run linkml generate pydantic --meta AUTO define-json.yaml > generated/define.py
 	@echo "Pydantic models generated: generated/define.py"
-
 # Main functionality targets
 demo:
 	@echo "Running complete XML<->JSON conversion demo..."
@@ -78,13 +77,22 @@ convert:
 	poetry run python -m src.define_json xml2json data/define-360i.xml data/define-360i.json
 
 # Testing targets
-test: check-syntax validate linkml-lint test-roundtrip
+test: check-syntax validate linkml-lint
 	@echo "Running unit tests..."
 	poetry run python -m unittest discover tests/ -v
+roundtrip; from pathlib import Path; result = validate_true_roundtrip(Path('data/define-360i.xml'), Path('data/define-360i-recreated.xml')); print('Roundtrip test passed' if result.get('passed') else 'Roundtrip test failed')"
 
-test-roundtrip:
-	@echo "Testing roundtrip functionality..."
-	poetry run python -c "from src.define_json.validation.roundtrip import validate_true_roundtrip; from pathlib import Path; result = validate_true_roundtrip(Path('data/define-360i.xml'), Path('data/define-360i-recreated.xml')); print('Roundtrip test passed' if result.get('passed') else 'Roundtrip test failed')"
+test-xml-roundtrip:
+	@echo "Testing XML→JSON→XML roundtrip conversion..."
+	poetry run python -m src.define_json xml2json data/define_LZZT_ADaM.xml data/define_LZZT_ADaM.json --preserve-original
+	poetry run python -m src.define_json json2xml data/define_LZZT_ADaM.json data/define_LZZT_ADaM_roundtrip.xml --strict-mode
+	poetry run python -m scripts.compare_xml_roundtrip data/define_LZZT_ADaM.xml data/define_LZZT_ADAM_roundtrip.xml --validate-only --ignore-order-numbers
+
+test-xml-roundtrip-360i:
+	@echo "Testing XML→JSON→XML roundtrip conversion..."
+	poetry run python -m src.define_json xml2json data/define-360i.xml data/define-360i.json --preserve-original
+	poetry run python -m src.define_json json2xml data/define-360i.json data/define-360i_roundtrip.xml --strict-mode
+	poetry run python -m scripts.compare_xml_roundtrip data/define-360i.xml data/define-360i_roundtrip.xml --validate-only --ignore-order-numbers
 
 # Documentation generation (suppress gen-doc warnings)
 docs:
@@ -95,7 +103,8 @@ docs:
 	cp src/js/* docs/js/;
 	cp CONVERSION_README.md docs/CONVERSION_README.md;
 	cp QUICK_REFERENCE.md docs/QUICK_REFERENCE.md;
-	poetry run gen-doc define-json.yaml --directory docs/ --subfolder-type-separation --hierarchical-class-view --diagram-type er_diagram --sort-by rank --include-top-level-diagram 2>/dev/null || poetry run gen-doc define-json.yaml --directory docs/ --subfolder-type-separation --hierarchical-class-view --diagram-type er_diagram --sort-by rank --include-top-level-diagram
+	poetry run gen-doc define-json.yaml --directory docs/ --subfolder-type-separation --hierarchical-class-view --diagram-type er_diagram \
+	--sort-by rank --include-top-level-diagram --truncate-descriptions false
 
 docs-serve:
 	@echo "Serving documentation with MkDocs..."
@@ -130,3 +139,6 @@ setup: install
 	@echo "Setting up development environment..."
 	mkdir -p data generated docs
 	@echo "Development environment ready"
+# Generate all together, stop if any fail
+generate-all: validate clean docs docs-build docs-deploy generate-json-schema generate-pydantic
+	@echo "All generators complete"

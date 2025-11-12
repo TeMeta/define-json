@@ -39,6 +39,22 @@ Item {
     string owner  
     string wasDerivedFrom  
 }
+SiteOrSponsorComment {
+    string text  
+    OriginSource sourceType  
+    string source  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
 Comment {
     string text  
     string OID  
@@ -47,6 +63,11 @@ Comment {
     string description  
     string label  
     stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
 }
 Coding {
     string code  
@@ -55,22 +76,9 @@ Coding {
     string codeSystemVersion  
     AliasPredicate aliasType  
 }
-DocumentReference {
-    string title  
-    string leafID  
-    integerList pages  
-    string relationship  
-    string version  
-    string href  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
 Condition {
     string implementsCondition  
+    LogicalOperator operator  
     string OID  
     string uuid  
     string name  
@@ -99,6 +107,7 @@ RangeCheck {
     stringList checkValues  
     string item  
     SoftHard softHard  
+    LogicalOperator operator  
 }
 CodeList {
     DataType dataType  
@@ -156,6 +165,20 @@ Origin {
     OriginType type  
     OriginSource source  
 }
+DocumentReference {
+    string title  
+    string leafID  
+    integerList pages  
+    string relationship  
+    string version  
+    string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
 SourceItem {
     stringList resource  
 }
@@ -166,9 +189,29 @@ WhereClause {
     string description  
     string label  
     stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
 }
 Method {
     MethodType type  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+ReifiedConcept {
+    string version  
+    string href  
     string OID  
     string uuid  
     string name  
@@ -185,46 +228,64 @@ Method {
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--|o WhereClause : "whereClause"
+Item ||--}o WhereClause : "applicableWhen"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
 Item ||--|o CodeList : "roleCodeList"
 Item ||--|o Condition : "collectionExceptionCondition"
 Item ||--}o Coding : "coding"
-Item ||--}o Comment : "comment"
+Item ||--}o Comment : "comments"
+Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+SiteOrSponsorComment ||--}o Coding : "coding"
+SiteOrSponsorComment ||--}o Comment : "comments"
+SiteOrSponsorComment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
-DocumentReference ||--}o Coding : "coding"
+Comment ||--}o Comment : "comments"
+Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Condition ||--}o RangeCheck : "rangeChecks"
-Condition ||--}o FormalExpression : "formalExpression"
+Condition ||--}o FormalExpression : "expressions"
+Condition ||--}o Condition : "conditions"
 Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comment"
+Condition ||--}o Comment : "comments"
+Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 FormalExpression ||--}o Parameter : "parameters"
 FormalExpression ||--|o ReturnValue : "returnValue"
 FormalExpression ||--}o Resource : "externalCodeLibs"
 FormalExpression ||--}o Coding : "coding"
-RangeCheck ||--}o FormalExpression : "formalExpression"
+RangeCheck ||--}o FormalExpression : "expressions"
 CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
 CodeList ||--}o Coding : "coding"
-CodeList ||--}o Comment : "comment"
+CodeList ||--}o Comment : "comments"
+CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Resource ||--}o FormalExpression : "selection"
 Resource ||--}o Coding : "coding"
 CodeListItem ||--|o Coding : "coding"
 ConceptProperty ||--|o CodeList : "codeList"
 ConceptProperty ||--}o Coding : "coding"
-ConceptProperty ||--}o Comment : "comment"
+ConceptProperty ||--}o Comment : "comments"
+ConceptProperty ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Origin ||--}o SourceItem : "sourceItems"
-Origin ||--|o DocumentReference : "document"
+Origin ||--}o DocumentReference : "documents"
+DocumentReference ||--}o Coding : "coding"
 SourceItem ||--|o Item : "item"
-SourceItem ||--|o DocumentReference : "document"
+SourceItem ||--}o DocumentReference : "document"
 SourceItem ||--}o Coding : "coding"
 WhereClause ||--}o Condition : "conditions"
 WhereClause ||--}o Coding : "coding"
-Method ||--}o FormalExpression : "formalExpressions"
-Method ||--|o DocumentReference : "document"
+WhereClause ||--}o Comment : "comments"
+WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Method ||--}o FormalExpression : "expressions"
+Method ||--}o DocumentReference : "documents"
+Method ||--|o ReifiedConcept : "implementsConcept"
 Method ||--}o Coding : "coding"
-Method ||--}o Comment : "comment"
+Method ||--}o Comment : "comments"
+Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+ReifiedConcept ||--}o ConceptProperty : "properties"
+ReifiedConcept ||--}o Coding : "coding"
+ReifiedConcept ||--}o Comment : "comments"
+ReifiedConcept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 ```
 
@@ -241,26 +302,26 @@ Method ||--}o Comment : "comment"
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [dataType](../slots/dataType.md) | 1 <br/> [DataType](../enums/DataType.md) | The data type of the item | direct |
-| [length](../slots/length.md) | 0..1 <br/> [Integer](../types/Integer.md) | The maximum length of the data item in characters | direct |
-| [codeList](../slots/codeList.md) | 0..1 <br/> [CodeList](../classes/CodeList.md) | Reference to the CodeList that constrains the item values | direct |
-| [method](../slots/method.md) | 0..1 <br/> [Method](../classes/Method.md) | Reference to the Method element that describes how to derive this item's valu... | direct |
-| [rangeChecks](../slots/rangeChecks.md) | * <br/> [RangeCheck](../classes/RangeCheck.md) | Range checks applied to this item (e | direct |
-| [whereClause](../slots/whereClause.md) | 0..1 <br/> [WhereClause](../classes/WhereClause.md) | Conditions for when this item definition applies | direct |
+| [dataType](../slots/dataType.md) | 1 <br/> [DataType](../enums/DataType.md) | The data type of the item. | direct |
+| [length](../slots/length.md) | 0..1 <br/> [Integer](../types/Integer.md) | The maximum length of the data item in characters. | direct |
+| [codeList](../slots/codeList.md) | 0..1 <br/> [CodeList](../classes/CodeList.md) | Reference to the CodeList that constrains the item values. | direct |
+| [method](../slots/method.md) | 0..1 <br/> [Method](../classes/Method.md) | Reference to the Method element that describes how to derive this item's value. | direct |
+| [rangeChecks](../slots/rangeChecks.md) | * <br/> [RangeCheck](../classes/RangeCheck.md) | Range checks applied to this item (e.g. edit checks, CORE rules) | direct |
+| [applicableWhen](../slots/applicableWhen.md) | * <br/> [WhereClause](../classes/WhereClause.md) | References to different situations that define when this item applies.<br>Multiple whereClauses are combined with OR logic: the item applies if ANY referenced WhereClause matches.<br>Within each WhereClause, conditions are combined with AND logic: all conditions must be true.<br><br>Example: whereClause: ["WC.SYSBP", "WC.DIABP"] means the item applies when<br>(all conditions in WC.SYSBP are true) OR (all conditions in WC.DIABP are true). | direct |
 | [origin](../slots/origin.md) | 0..1 <br/> [Origin](../classes/Origin.md) | The origin of the data | direct |
-| [conceptProperty](../slots/conceptProperty.md) | 0..1 <br/> [ConceptProperty](../classes/ConceptProperty.md) | Reference to a abstract concept property that this item is a specialization /... | direct |
-| [role](../slots/role.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Identifies the role of the item within the containing context, taken from the... | [IsODMItem](../classes/IsODMItem.md) |
+| [conceptProperty](../slots/conceptProperty.md) | 0..1 <br/> [ConceptProperty](../classes/ConceptProperty.md) | Reference to a abstract concept property that this item is a specialization / instance of. | direct |
+| [role](../slots/role.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Identifies the role of the item within the containing context, taken from the roleCodeList | [IsODMItem](../classes/IsODMItem.md) |
 | [roleCodeList](../slots/roleCodeList.md) | 0..1 <br/> [CodeList](../classes/CodeList.md) | Reference to the CodeList that defines the roles for this item | [IsODMItem](../classes/IsODMItem.md) |
 | [hasNoData](../slots/hasNoData.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Set to Yes if this is a manifest and there is no data for this item | [IsODMItem](../classes/IsODMItem.md) |
-| [crfCompletionInstructions](../slots/crfCompletionInstructions.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | CRFCompletionInstructions reference: Instructions for the clinical site on ho... | [IsODMItem](../classes/IsODMItem.md) |
+| [crfCompletionInstructions](../slots/crfCompletionInstructions.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | CRFCompletionInstructions reference: Instructions for the clinical site on how to enter collected information on the CRF | [IsODMItem](../classes/IsODMItem.md) |
 | [cdiscNotes](../slots/cdiscNotes.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | CDISCNotes reference: Explanatory text for the variable | [IsODMItem](../classes/IsODMItem.md) |
-| [implementationNotes](../slots/implementationNotes.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | ImplementationNotes reference: Further information, such as rationale and imp... | [IsODMItem](../classes/IsODMItem.md) |
+| [implementationNotes](../slots/implementationNotes.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | ImplementationNotes reference: Further information, such as rationale and implementation instructions, on how to implement the CRF data collection fields | [IsODMItem](../classes/IsODMItem.md) |
 | [collectionExceptionCondition](../slots/collectionExceptionCondition.md) | 0..1 <br/> [Condition](../classes/Condition.md) | Condition that defines when collection may be exempted | [IsODMItem](../classes/IsODMItem.md) |
-| [preSpecifiedValue](../slots/preSpecifiedValue.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Prefill value or a default value for a field that is automatically populated | [IsODMItem](../classes/IsODMItem.md) |
+| [preSpecifiedValue](../slots/preSpecifiedValue.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Prefill value or a default value for a field that is automatically populated. | [IsODMItem](../classes/IsODMItem.md) |
 | [decimalDigits](../slots/decimalDigits.md) | 0..1 <br/> [Integer](../types/Integer.md) | For decimal values, the number of digits after the decimal point | [Formatted](../classes/Formatted.md) |
 | [displayFormat](../slots/displayFormat.md) | 0..1 <br/> [String](../types/String.md) | A display format for the item | [Formatted](../classes/Formatted.md) |
 | [significantDigits](../slots/significantDigits.md) | 0..1 <br/> [Integer](../types/Integer.md) | For numeric values, the number of significant digits | [Formatted](../classes/Formatted.md) |
-| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context | [Identifiable](../classes/Identifiable.md) |
+| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
 | [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
 | [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
 | [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Detailed description, shown in tooltips | [Labelled](../classes/Labelled.md) |
@@ -268,11 +329,12 @@ Method ||--}o Comment : "comment"
 | [label](../slots/label.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Human-readable label, shown in UIs | [Labelled](../classes/Labelled.md) |
 | [aliases](../slots/aliases.md) | * <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Alternative name or identifier | [Labelled](../classes/Labelled.md) |
 | [mandatory](../slots/mandatory.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Is this element required? | [Governed](../classes/Governed.md) |
-| [comment](../slots/comment.md) | * <br/> [Comment](../classes/Comment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
+| [comments](../slots/comments.md) | * <br/> [Comment](../classes/Comment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
+| [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | * <br/> [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
 | [purpose](../slots/purpose.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Purpose or rationale for this data element | [Governed](../classes/Governed.md) |
 | [lastUpdated](../slots/lastUpdated.md) | 0..1 <br/> [Datetime](../types/Datetime.md) | When the resource was last updated | [Governed](../classes/Governed.md) |
 | [owner](../slots/owner.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Party responsible for this element | [Governed](../classes/Governed.md) |
-| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[MetaDataVersion](../classes/MetaDataVersion.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[ReifiedConcept](../classes/ReifiedConcept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[Condition](../classes/Condition.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[NominalOccurrence](../classes/NominalOccurrence.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e | [Governed](../classes/Governed.md) |
+| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[MetaDataVersion](../classes/MetaDataVersion.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[ReifiedConcept](../classes/ReifiedConcept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[Condition](../classes/Condition.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[NominalOccurrence](../classes/NominalOccurrence.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
 
 
 
@@ -290,13 +352,16 @@ Method ||--}o Comment : "comment"
 | [ItemGroup](../classes/ItemGroup.md) | [items](../slots/items.md) | range | [Item](../classes/Item.md) |
 | [ItemGroup](../classes/ItemGroup.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Item](../classes/Item.md) |
 | [CodeList](../classes/CodeList.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Item](../classes/Item.md) |
+| [Comment](../classes/Comment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Item](../classes/Item.md) |
 | [ReifiedConcept](../classes/ReifiedConcept.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Item](../classes/Item.md) |
 | [ConceptProperty](../classes/ConceptProperty.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Item](../classes/Item.md) |
+| [WhereClause](../classes/WhereClause.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Item](../classes/Item.md) |
 | [Condition](../classes/Condition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Item](../classes/Item.md) |
 | [RangeCheck](../classes/RangeCheck.md) | [item](../slots/item.md) | any_of[range] | [Item](../classes/Item.md) |
 | [Method](../classes/Method.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Item](../classes/Item.md) |
 | [SourceItem](../classes/SourceItem.md) | [item](../slots/item.md) | range | [Item](../classes/Item.md) |
-| [Parameter](../classes/Parameter.md) | [items](../slots/items.md) | range | [Item](../classes/Item.md) |
+| [Parameter](../classes/Parameter.md) | [items](../slots/items.md) | any_of[range] | [Item](../classes/Item.md) |
+| [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Item](../classes/Item.md) |
 | [NominalOccurrence](../classes/NominalOccurrence.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Item](../classes/Item.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [items](../slots/items.md) | range | [Item](../classes/Item.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Item](../classes/Item.md) |
@@ -312,6 +377,8 @@ Method ||--}o Comment : "comment"
 | [ObservationRelationship](../classes/ObservationRelationship.md) | [item](../slots/item.md) | range | [Item](../classes/Item.md) |
 | [DataProduct](../classes/DataProduct.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Item](../classes/Item.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Item](../classes/Item.md) |
+| [Analysis](../classes/Analysis.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Item](../classes/Item.md) |
+| [Display](../classes/Display.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Item](../classes/Item.md) |
 
 
 
@@ -444,17 +511,34 @@ attributes:
     multivalued: true
     inlined: true
     inlined_as_list: true
-  whereClause:
-    name: whereClause
-    description: Conditions for when this item definition applies
+  applicableWhen:
+    name: applicableWhen
+    description: 'References to different situations that define when this item applies.
+
+      Multiple whereClauses are combined with OR logic: the item applies if ANY referenced
+      WhereClause matches.
+
+      Within each WhereClause, conditions are combined with AND logic: all conditions
+      must be true.
+
+
+      Example: whereClause: ["WC.SYSBP", "WC.DIABP"] means the item applies when
+
+      (all conditions in WC.SYSBP are true) OR (all conditions in WC.DIABP are true).
+
+      '
     from_schema: https://cdisc.org/define-json
+    close_mappings:
+    - fhir:StructureDefinition/context
     rank: 1000
     domain_of:
     - Item
     - ItemGroup
+    - Parameter
+    - Analysis
     range: WhereClause
-    inlined: true
-    inlined_as_list: true
+    multivalued: true
+    inlined: false
   origin:
     name: origin
     description: The origin of the data
@@ -578,19 +662,36 @@ attributes:
     multivalued: true
     inlined: true
     inlined_as_list: true
-  whereClause:
-    name: whereClause
-    description: Conditions for when this item definition applies
+  applicableWhen:
+    name: applicableWhen
+    description: 'References to different situations that define when this item applies.
+
+      Multiple whereClauses are combined with OR logic: the item applies if ANY referenced
+      WhereClause matches.
+
+      Within each WhereClause, conditions are combined with AND logic: all conditions
+      must be true.
+
+
+      Example: whereClause: ["WC.SYSBP", "WC.DIABP"] means the item applies when
+
+      (all conditions in WC.SYSBP are true) OR (all conditions in WC.DIABP are true).
+
+      '
     from_schema: https://cdisc.org/define-json
+    close_mappings:
+    - fhir:StructureDefinition/context
     rank: 1000
-    alias: whereClause
+    alias: applicableWhen
     owner: Item
     domain_of:
     - Item
     - ItemGroup
+    - Parameter
+    - Analysis
     range: WhereClause
-    inlined: true
-    inlined_as_list: true
+    multivalued: true
+    inlined: false
   origin:
     name: origin
     description: The origin of the data
@@ -854,19 +955,32 @@ attributes:
     domain_of:
     - Governed
     range: boolean
-  comment:
-    name: comment
+  comments:
+    name: comments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
     from_schema: https://cdisc.org/define-json
     rank: 1000
-    alias: comment
+    alias: comments
     owner: Item
     domain_of:
     - Governed
-    - Standard
     range: Comment
     multivalued: true
+    inlined: false
+  siteOrSponsorComments:
+    name: siteOrSponsorComments
+    description: Comment on the element, such as a rationale for its inclusion or
+      exclusion
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    alias: siteOrSponsorComments
+    owner: Item
+    domain_of:
+    - Governed
+    range: SiteOrSponsorComment
+    multivalued: true
+    inlined: false
   purpose:
     name: purpose
     description: Purpose or rationale for this data element

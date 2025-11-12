@@ -13,18 +13,74 @@ It is being designed in a Clinical Trial context to supplement the CDISC Unified
 
 ## 🔄 Quick Start: XML ↔ JSON Conversion
 
+### IR Pipeline (slices + ValueList + XML exports)
+
+Run the canonical IR pipeline using only the generated `define.py` classes:
+
+```bash
+# Install deps
+poetry install
+
+# Run on a Define-JSON file
+poetry run define-ir path/to/input.json --domains CE AE
+
+# Outputs (alongside input unless --out is provided):
+# - input.canonical.json          (canonical ordering, registry applied)
+# - input.valuelist_projection.json (diagnostic per-domain variable-first contexts)
+# - input.define21.xml            (minimal Define-XML 2.1)
+# - input.define10.xml            (flattened Define-XML 1.0)
+```
+
 For complete bidirectional conversion between Define-XML and Define-JSON, see:
 - **[CONVERSION_README.md](CONVERSION_README.md)** - Complete guide
 - **[QUICK_REFERENCE.md](QUICK_REFERENCE.md)** - Command cheat sheet
 
 ### Basic Usage
 ```bash
-# From project directory
-python -m define_json xml2json data/define.xml data/output.json
-python -m define_json json2xml data/input.json data/output.xml
+# Recommended: Use Poetry (handles virtual environment automatically)
+poetry run python -m define_json xml2json data/define.xml data/output.json
+poetry run python -m define_json json2xml data/input.json data/output.xml
 
-# From any other directory (see CONVERSION_README.md for details)
-PYTHONPATH=/path/to/define-json python -c "from src.define_json.converters.xml_to_json import DefineXMLToJSONConverter; ..."
+# Alternative: Set PYTHONPATH manually
+PYTHONPATH=src python -m define_json xml2json data/define.xml data/output.json
+PYTHONPATH=src python -m define_json json2xml data/input.json data/output.xml
+
+# From any other directory
+PYTHONPATH=/path/to/define-json/src python -m define_json xml2json data/define.xml data/output.json
+```
+
+### Viewing XML Files with Stylesheets
+
+Generated XML files include an XSL stylesheet reference for proper rendering. Due to browser security policies, you may encounter CORS errors when opening XML files directly. Here are the solutions:
+
+#### Option 1: Use a Local Web Server (Recommended)
+```bash
+# Navigate to your XML file directory
+cd /path/to/your/xml/files
+python -m http.server 8000
+
+# Then open: http://localhost:8000/your-file.xml
+```
+
+#### Option 2: Generate HTML Directly (Recommended)
+```bash
+# Convert JSON directly to HTML (no CORS issues!)
+poetry run python -m define_json json2html input.json output.html
+
+# Convert existing XML to HTML
+poetry run python -m define_json xml2html input.xml output.html
+
+# Use custom XSL stylesheet
+poetry run python -m define_json json2html input.json output.html --xsl ./custom-style.xsl
+```
+
+#### Option 3: Configure Stylesheet Path
+```bash
+# Use relative path (works when XSL is in same directory)
+poetry run python -m define_json json2xml input.json output.xml --stylesheet "./define2-1.xsl"
+
+# Use absolute URL (if you have XSL hosted online)
+poetry run python -m define_json json2xml input.json output.xml --stylesheet "https://example.com/define2-1.xsl"
 ```
 
 ## Context is everything
@@ -63,7 +119,7 @@ Being able to iterate rapidly is important to the early stages of development of
 
 Define-JSON details implementation, but also links to `Coding`, `ReifiedConcept` and `ConceptProperty` for structured semantic connections, i.e. enabling each data element to be mapped unambiguously to standard dictionaries/ontologies, abstract concepts, and their properties.
 
-Tof [something] combines its abstract / template form with a context, then fleshes out that combined context.
+The definition of [something] combines its abstract / template form with a context, then fleshes out that combined context.
 
 * FHIR Profile is a implementation of a FHIR Resource template in the context of some healthcare or research authority
 * A granular definition for some Biomedical Concept (BC) is an implementation of a property of that BC in context of the standard being implemented

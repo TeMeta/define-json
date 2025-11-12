@@ -13,9 +13,11 @@ URI: [MethodType](../enums/MethodType.md)
 
 | Value | Meaning | Description |
 | --- | --- | --- |
-| Computation | None | Mathematical computation using values of other items |
-| Imputation | None | Assignment of a value based on a estimation (imputation) procedure |
-| Transformation | None | Transformation of the item's value according to a standard algorithm, such as... |
+| Computation | None | Mathematical computation using values of other items. |
+| Imputation | None | Assignment of a value based on a estimation (imputation) procedure. |
+| Transformation | None | Transformation of the item's value according to a standard algorithm, such as a change in units. |
+| Analysis | None | Creation of analysis results dataset. |
+| Display | None | Creation of rendered output for display. |
 
 
 
@@ -63,6 +65,12 @@ permissible_values:
     text: Transformation
     description: Transformation of the item's value according to a standard algorithm,
       such as a change in units.
+  Analysis:
+    text: Analysis
+    description: Creation of analysis results dataset.
+  Display:
+    text: Display
+    description: Creation of rendered output for display.
 
 ```
 </details>

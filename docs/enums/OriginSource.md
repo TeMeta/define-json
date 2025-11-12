@@ -25,8 +25,8 @@ URI: [OriginSource](../enums/OriginSource.md)
 
 | Name | Description |
 | ---  | --- |
-| [source](../slots/source.md) | The source of the data, such as Investigator, Sponsor, Subject, or Vendor |
-| [sourceType](../slots/sourceType.md) | who made the comment, such as Investigator, Sponsor |
+| [source](../slots/source.md) | The source of the data, such as Investigator, Sponsor, Subject, or Vendor. |
+| [sourceType](../slots/sourceType.md) | who made the comment, such as Investigator, Sponsor. |
 
 
 

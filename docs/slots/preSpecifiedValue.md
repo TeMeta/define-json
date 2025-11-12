@@ -22,8 +22,8 @@ Alias: preSpecifiedValue
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Item](../classes/Item.md) | A data element that represents a specific piece of information within a defin... |  no  |
-| [IsODMItem](../classes/IsODMItem.md) | A mixin that provides additional attributes for CDISC Operational Data Model ... |  no  |
+| [Item](../classes/Item.md) | A data element that represents a specific piece of information within a defined context, with data type, constraints, and derivation methods |  no  |
+| [IsODMItem](../classes/IsODMItem.md) | A mixin that provides additional attributes for CDISC Operational Data Model items, including roles, completion instructions, and implementation notes |  no  |
 
 
 

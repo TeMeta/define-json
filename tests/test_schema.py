@@ -6,13 +6,17 @@ Test suite for Define-JSON schema validation.
 import unittest
 import yaml
 from pathlib import Path
+import logging
+
+# Configure logger
+logger = logging.getLogger(__name__)
 
 try:
     from linkml_runtime import SchemaView
     LINKML_AVAILABLE = True
 except ImportError:
     LINKML_AVAILABLE = False
-    print("Warning: LinkML not available. Schema structure tests will be skipped.")
+    logger.warning("LinkML not available. Schema structure tests will be skipped.")
 
 class TestDefineJSONSchema(unittest.TestCase):
     """Test suite for Define-JSON schema validation."""

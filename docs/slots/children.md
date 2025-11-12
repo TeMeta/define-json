@@ -3,7 +3,7 @@
 # Slot: children 
 
 
-_References to child ItemGroups (OIDs) within this item group. Use these OID references to look up the actual ItemGroup objects  from the top-level itemGroups collection._
+_Child ItemGroups nested within this item group (e.g., ValueLists under parent domains). Can be either: - Full ItemGroup objects (preferred for hierarchical nesting) - OID string references (for cross-references to avoid duplication)_
 
 
 
@@ -22,8 +22,8 @@ Alias: children
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [DataStructureDefinition](../classes/DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysi... |  no  |
-| [ItemGroup](../classes/ItemGroup.md) | A collection element that groups related items or subgroups within a specific... |  no  |
+| [ItemGroup](../classes/ItemGroup.md) | A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections |  no  |
+| [DataStructureDefinition](../classes/DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures |  no  |
 
 
 
@@ -33,7 +33,7 @@ Alias: children
 
 ## Properties
 
-* Range: [String](../types/String.md)
+* Range: [ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[String](../types/String.md)
 
 * Multivalued: True
 
@@ -72,17 +72,22 @@ Alias: children
 <details>
 ```yaml
 name: children
-description: References to child ItemGroups (OIDs) within this item group. Use these
-  OID references to look up the actual ItemGroup objects  from the top-level itemGroups
-  collection.
+description: 'Child ItemGroups nested within this item group (e.g., ValueLists under
+  parent domains). Can be either: - Full ItemGroup objects (preferred for hierarchical
+  nesting) - OID string references (for cross-references to avoid duplication)'
 from_schema: https://cdisc.org/define-json
 rank: 1000
 alias: children
 owner: ItemGroup
 domain_of:
 - ItemGroup
-range: string
+range: ItemGroup
 multivalued: true
+inlined: true
+inlined_as_list: true
+any_of:
+- range: ItemGroup
+- range: string
 
 ```
 </details>

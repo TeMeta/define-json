@@ -22,7 +22,7 @@ Alias: providesDataFor
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [DataProvider](../classes/DataProvider.md) | An organization element that provides data to a Data Consumer, which can be a... |  no  |
+| [DataProvider](../classes/DataProvider.md) | An organization element that provides data to a Data Consumer, which can be a sponsor, site, or any other entity that supplies data |  no  |
 
 
 

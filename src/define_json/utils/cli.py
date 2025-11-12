@@ -11,6 +11,7 @@ from typing import Optional
 
 from ..converters.xml_to_json import DefineXMLToJSONConverter
 from ..converters.json_to_xml import DefineJSONToXMLConverter
+from ..converters.html_generator import DefineHTMLGenerator, json_to_html
 from ..validation.roundtrip import run_roundtrip_test, validate_true_roundtrip, run_true_roundtrip_test
 from ..validation.schema import validate_define_json
 
@@ -22,8 +23,11 @@ def create_cli_parser() -> argparse.ArgumentParser:
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  # Convert XML to JSON
+  # Convert XML to JSON (strict mode, default)
   define-json xml2json define.xml output.json
+  
+  # Convert XML to JSON with inference enabled
+  define-json xml2json define.xml output.json --enable-inference
   
   # Convert JSON to XML  
   define-json json2xml define.json output.xml
@@ -51,6 +55,9 @@ Examples:
     xml2json_parser = subparsers.add_parser('xml2json', help='Convert Define-XML to Define-JSON')
     xml2json_parser.add_argument('input', type=Path, help='Input Define-XML file')
     xml2json_parser.add_argument('output', type=Path, help='Output Define-JSON file')
+    xml2json_parser.add_argument('--preserve-original', action='store_true', 
+                                help='Preserve original XML structure for perfect roundtrip (default: infer for one-way conversion)')
+
     
     # JSON to XML conversion
     json2xml_parser = subparsers.add_parser('json2xml', help='Convert Define-JSON to Define-XML')
@@ -58,6 +65,8 @@ Examples:
     json2xml_parser.add_argument('output', type=Path, help='Output Define-XML file')
     json2xml_parser.add_argument('--stylesheet', type=str, default='define2-1.xsl', 
                                 help='XSL stylesheet href (default: define2-1.xsl)')
+    json2xml_parser.add_argument('--strict-mode', action='store_true',
+                            help='Disable inference/fallbacks for strict roundtrip (default: inference enabled)')
     
     # JSON to HTML conversion
     json2html_parser = subparsers.add_parser('json2html', help='Convert Define-JSON to HTML using XSL transformation')
@@ -91,11 +100,12 @@ Examples:
 def cmd_xml2json(args) -> int:
     """Convert XML to JSON."""
     try:
-        converter = DefineXMLToJSONConverter()
+        converter = DefineXMLToJSONConverter(preserve_original=args.preserve_original)
         data = converter.convert_file(args.input, args.output)
         
-        print(f"Converted: {args.input} → {args.output}")
-        print(f"Datasets: {len(data.get('itemGroups', []))}, Variables: {len(data.get('items', []))}, Size: {args.output.stat().st_size:,} bytes")
+        mode = "preserve-original (perfect roundtrip)" if args.preserve_original else "infer (one-way conversion)"
+        print(f"Converted ({mode}): {args.input} → {args.output}")
+        print(f"ItemGroups: {len(data.get('itemGroups', []))}, Size: {args.output.stat().st_size:,} bytes")
         
         return 0
     except Exception as e:
@@ -106,10 +116,15 @@ def cmd_xml2json(args) -> int:
 def cmd_json2xml(args) -> int:
     """Convert JSON to XML."""
     try:
-        converter = DefineJSONToXMLConverter(stylesheet_href=args.stylesheet)
+        converter = DefineJSONToXMLConverter(
+            stylesheet_href=args.stylesheet,
+            enable_inference=not args.strict_mode,  # Invert the flag
+            enable_fallbacks=not args.strict_mode   # Invert the flag
+        )
         root = converter.convert_file(args.input, args.output)
         
-        print(f"Converted: {args.input} → {args.output}")
+        mode = "strict mode (perfect roundtrip)" if args.strict_mode else "with inference"
+        print(f"Converted ({mode}): {args.input} → {args.output}")
         print(f"Size: {args.output.stat().st_size:,} bytes")
         
         return 0
@@ -121,42 +136,55 @@ def cmd_json2xml(args) -> int:
 def cmd_json2html(args) -> int:
     """Convert JSON to HTML using XSL transformation."""
     try:
-        converter = DefineJSONToXMLConverter()
-        success = converter.convert_to_html(args.input, args.output, args.xsl)
+        converter = DefineHTMLGenerator()
+        result = converter.json_to_html(args.input, args.output, args.xsl)
         
-        if success:
-            print(f"Converted: {args.input} → {args.output}")
-            print(f"Size: {args.output.stat().st_size:,} bytes")
+        if result['success']:
+            print(f"Converted: {args.input} -> {args.output}")
+            if args.output.exists():
+                print(f"Size: {args.output.stat().st_size:,} bytes")
             print(f"Open in browser: file://{args.output.absolute()}")
             return 0
         else:
             print("HTML conversion failed", file=sys.stderr)
+            if result.get('errors'):
+                for error in result['errors']:
+                    print(f"  Error: {error}", file=sys.stderr)
+            if result.get('warnings'):
+                for warning in result['warnings']:
+                    print(f"  Warning: {warning}", file=sys.stderr)
             return 1
             
     except Exception as e:
-        print(f"❌ Error: {e}", file=sys.stderr)
+        print(f"Error: {e}", file=sys.stderr)
         return 1
 
 
 def cmd_xml2html(args) -> int:
     """Convert XML to HTML using XSL transformation."""
     try:
-        converter = DefineJSONToXMLConverter()
-        success = converter.xml_to_html(args.input, args.output, args.xsl)
+        converter = DefineHTMLGenerator()
+        result = converter.xml_to_html(args.input, args.output, args.xsl)
         
-        if success:
-            print(f"Converted: {args.input} → {args.output}")
-            print(f"Size: {args.output.stat().st_size:,} bytes")
+        if result['success']:
+            print(f"Converted: {args.input} -> {args.output}")
+            if args.output.exists():
+                print(f"Size: {args.output.stat().st_size:,} bytes")
             print(f"Open in browser: file://{args.output.absolute()}")
             return 0
         else:
             print("HTML conversion failed", file=sys.stderr)
+            if result.get('errors'):
+                for error in result['errors']:
+                    print(f"  Error: {error}", file=sys.stderr)
+            if result.get('warnings'):
+                for warning in result['warnings']:
+                    print(f"  Warning: {warning}", file=sys.stderr)
             return 1
             
     except Exception as e:
-        print(f"❌ Error: {e}", file=sys.stderr)
+        print(f"Error: {e}", file=sys.stderr)
         return 1
-
 
 def cmd_roundtrip(args) -> int:
     """Run roundtrip validation."""

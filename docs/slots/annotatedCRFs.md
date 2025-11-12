@@ -1,6 +1,6 @@
 
 
-# Slot: annotatedCRF 
+# Slot: annotatedCRFs 
 
 
 _Reference to annotated case report forms_
@@ -9,8 +9,8 @@ _Reference to annotated case report forms_
 
 
 
-URI: [odm:slot/annotatedCRF](https://cdisc.org/odm2/slot/annotatedCRF)
-Alias: annotatedCRF
+URI: [odm:slot/annotatedCRFs](https://cdisc.org/odm2/slot/annotatedCRFs)
+Alias: annotatedCRFs
 
 <!-- no inheritance hierarchy -->
 
@@ -22,7 +22,7 @@ Alias: annotatedCRF
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | A container element that represents a given version of a specification, linki... |  no  |
+| [MetaDataVersion](../classes/MetaDataVersion.md) | A container element that represents a given version of a specification, linking to a particular usage context such as a study, dataset, or data collection instrument. |  no  |
 
 
 
@@ -60,8 +60,8 @@ Alias: annotatedCRF
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:annotatedCRF |
-| native | odm:annotatedCRF |
+| self | odm:annotatedCRFs |
+| native | odm:annotatedCRFs |
 
 
 
@@ -70,11 +70,11 @@ Alias: annotatedCRF
 
 <details>
 ```yaml
-name: annotatedCRF
+name: annotatedCRFs
 description: Reference to annotated case report forms
 from_schema: https://cdisc.org/define-json
 rank: 1000
-alias: annotatedCRF
+alias: annotatedCRFs
 owner: MetaDataVersion
 domain_of:
 - MetaDataVersion

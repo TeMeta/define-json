@@ -13,6 +13,24 @@ It is being designed in a Clinical Trial context to supplement the CDISC Unified
 
 ## 🔄 Quick Start: XML ↔ JSON Conversion
 
+### IR Pipeline (slices + ValueList + XML exports)
+
+Run the canonical IR pipeline using only the generated `define.py` classes:
+
+```bash
+# Install deps
+poetry install
+
+# Run on a Define-JSON file
+poetry run define-ir path/to/input.json --domains CE AE
+
+# Outputs (alongside input unless --out is provided):
+# - input.canonical.json          (canonical ordering, registry applied)
+# - input.valuelist_projection.json (diagnostic per-domain variable-first contexts)
+# - input.define21.xml            (minimal Define-XML 2.1)
+# - input.define10.xml            (flattened Define-XML 1.0)
+```
+
 For complete bidirectional conversion between Define-XML and Define-JSON, see:
 - **[CONVERSION_README.md](CONVERSION_README.md)** - Complete guide
 - **[QUICK_REFERENCE.md](QUICK_REFERENCE.md)** - Command cheat sheet

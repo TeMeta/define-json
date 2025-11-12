@@ -17,8 +17,8 @@ Alias: decode
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [CodeListItem](../classes/CodeListItem.md) | A structured member of a CodeList that extends the Coding class with addition... |  no  |
-| [Coding](../classes/Coding.md) | A semantic reference that provides standardized codes and their meanings from... |  no  |
+| [CodeListItem](../classes/CodeListItem.md) | A structured member of a CodeList that extends the Coding class with additional context-specific properties |  no  |
+| [Coding](../classes/Coding.md) | A semantic reference that provides standardized codes and their meanings from controlled vocabularies |  no  |
 
 
 

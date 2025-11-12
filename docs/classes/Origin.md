@@ -69,21 +69,22 @@ Item {
 }
 
 Origin ||--}o SourceItem : "sourceItems"
-Origin ||--|o DocumentReference : "document"
+Origin ||--}o DocumentReference : "documents"
 DocumentReference ||--}o Coding : "coding"
 SourceItem ||--|o Item : "item"
-SourceItem ||--|o DocumentReference : "document"
+SourceItem ||--}o DocumentReference : "document"
 SourceItem ||--}o Coding : "coding"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--|o WhereClause : "whereClause"
+Item ||--}o WhereClause : "applicableWhen"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
 Item ||--|o CodeList : "roleCodeList"
 Item ||--|o Condition : "collectionExceptionCondition"
 Item ||--}o Coding : "coding"
-Item ||--}o Comment : "comment"
+Item ||--}o Comment : "comments"
+Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 ```
 
@@ -96,10 +97,10 @@ Item ||--}o Comment : "comment"
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [type](../slots/type.md) | 0..1 <br/> [OriginType](../enums/OriginType.md) | The type of origin: CRF, Derived, Protocol, eDT, Predecessor | direct |
-| [source](../slots/source.md) | 0..1 <br/> [OriginSource](../enums/OriginSource.md) | The source of the data, such as Investigator, Sponsor, Subject, or Vendor | direct |
+| [type](../slots/type.md) | 0..1 <br/> [OriginType](../enums/OriginType.md) | The type of origin: Assigned, Collected, Derived, Protocol, Predecessor, Not Available, or Other. | direct |
+| [source](../slots/source.md) | 0..1 <br/> [OriginSource](../enums/OriginSource.md) | The source of the data, such as Investigator, Sponsor, Subject, or Vendor. | direct |
 | [sourceItems](../slots/sourceItems.md) | * <br/> [SourceItem](../classes/SourceItem.md) | Source items for this origin | direct |
-| [document](../slots/document.md) | 0..1 <br/> [DocumentReference](../classes/DocumentReference.md) | Reference to a document that describes this origin in detail | direct |
+| [documents](../slots/documents.md) | * <br/> [DocumentReference](../classes/DocumentReference.md) | Reference to a document that describes this origin in detail. | direct |
 
 
 
@@ -159,7 +160,8 @@ from_schema: https://cdisc.org/define-json
 attributes:
   type:
     name: type
-    description: 'The type of origin: CRF, Derived, Protocol, eDT, Predecessor.'
+    description: 'The type of origin: Assigned, Collected, Derived, Protocol, Predecessor,
+      Not Available, or Other.'
     from_schema: https://cdisc.org/define-json
     domain_of:
     - ItemGroup
@@ -192,15 +194,18 @@ attributes:
     multivalued: true
     inlined: true
     inlined_as_list: true
-  document:
-    name: document
+  documents:
+    name: documents
     description: Reference to a document that describes this origin in detail.
     from_schema: https://cdisc.org/define-json
     domain_of:
+    - Comment
     - Method
-    - SourceItem
     - Origin
     range: DocumentReference
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
 
 ```
 </details>
@@ -215,7 +220,8 @@ from_schema: https://cdisc.org/define-json
 attributes:
   type:
     name: type
-    description: 'The type of origin: CRF, Derived, Protocol, eDT, Predecessor.'
+    description: 'The type of origin: Assigned, Collected, Derived, Protocol, Predecessor,
+      Not Available, or Other.'
     from_schema: https://cdisc.org/define-json
     alias: type
     owner: Origin
@@ -254,17 +260,20 @@ attributes:
     multivalued: true
     inlined: true
     inlined_as_list: true
-  document:
-    name: document
+  documents:
+    name: documents
     description: Reference to a document that describes this origin in detail.
     from_schema: https://cdisc.org/define-json
-    alias: document
+    alias: documents
     owner: Origin
     domain_of:
+    - Comment
     - Method
-    - SourceItem
     - Origin
     range: DocumentReference
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
 
 ```
 </details>

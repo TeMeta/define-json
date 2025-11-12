@@ -22,7 +22,7 @@ Alias: timing
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [NominalOccurrence](../classes/NominalOccurrence.md) | An event element that represents occurrences such as planned or unplanned enc... |  no  |
+| [NominalOccurrence](../classes/NominalOccurrence.md) | An event element that represents occurrences such as planned or unplanned encounters or adverse events |  no  |
 
 
 

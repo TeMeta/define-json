@@ -72,6 +72,9 @@ ReturnValue {
 Parameter {
     DataType dataType  
     string value  
+    string defaultValue  
+    stringList items  
+    boolean required  
     string OID  
     string uuid  
     string name  
@@ -121,8 +124,9 @@ Resource ||--}o FormalExpression : "selection"
 Resource ||--}o Coding : "coding"
 ReturnValue ||--}o Coding : "coding"
 Parameter ||--}o CodeList : "codeList"
-Parameter ||--}o Item : "items"
 Parameter ||--}o ConceptProperty : "conceptProperty"
+Parameter ||--}o WhereClause : "applicableWhen"
+Parameter ||--}o Condition : "conditions"
 Parameter ||--}o Coding : "coding"
 Distribution ||--|o DataService : "accessService"
 Distribution ||--|o Dataset : "isDistributionOf"
@@ -150,14 +154,14 @@ Dataset ||--}o Coding : "coding"
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
 | [isAccessServiceOf](../slots/isAccessServiceOf.md) | 0..1 <br/> [Distribution](../classes/Distribution.md) | Distribution(s) for which this service provides access | direct |
-| [protocol](../slots/protocol.md) | 0..1 <br/> [String](../types/String.md) | Protocol used by the service (e | direct |
-| [securitySchemaType](../slots/securitySchemaType.md) | 0..1 <br/> [String](../types/String.md) | Security or authentication method used (e | direct |
-| [resourceType](../slots/resourceType.md) | 0..1 <br/> [String](../types/String.md) | Type of resource (e | [Resource](../classes/Resource.md) |
-| [attribute](../slots/attribute.md) | 0..1 <br/> [String](../types/String.md) | Field provided by the Name attribute where the data or information can be obt... | [Resource](../classes/Resource.md) |
-| [selection](../slots/selection.md) | * <br/> [FormalExpression](../classes/FormalExpression.md) | Machine-executable instructions for selecting data from the resource | [Resource](../classes/Resource.md) |
+| [protocol](../slots/protocol.md) | 0..1 <br/> [String](../types/String.md) | Protocol used by the service (e.g., HTTPS, FTP) | direct |
+| [securitySchemaType](../slots/securitySchemaType.md) | 0..1 <br/> [String](../types/String.md) | Security or authentication method used (e.g., OAuth2) | direct |
+| [resourceType](../slots/resourceType.md) | 0..1 <br/> [String](../types/String.md) | Type of resource (e.g.,  "ODM", "HL7-FHIR", "HL7-CDA", "HL7-v2", "OpenEHR-extract") | [Resource](../classes/Resource.md) |
+| [attribute](../slots/attribute.md) | 0..1 <br/> [String](../types/String.md) | Field provided by the Name attribute where the data or information can be obtained. Examples are "valueQuantity.value" or "valueQuantity.unit". | [Resource](../classes/Resource.md) |
+| [selection](../slots/selection.md) | * <br/> [FormalExpression](../classes/FormalExpression.md) | Machine-executable instructions for selecting data from the resource. | [Resource](../classes/Resource.md) |
 | [version](../slots/version.md) | 0..1 <br/> [String](../types/String.md) | The version of the external resources | [Versioned](../classes/Versioned.md) |
-| [href](../slots/href.md) | 0..1 <br/> [String](../types/String.md) | Machine-readable instructions to obtain the resource e | [Versioned](../classes/Versioned.md) |
-| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context | [Identifiable](../classes/Identifiable.md) |
+| [href](../slots/href.md) | 0..1 <br/> [String](../types/String.md) | Machine-readable instructions to obtain the resource e.g. FHIR path, URL | [Versioned](../classes/Versioned.md) |
+| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
 | [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
 | [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
 | [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Detailed description, shown in tooltips | [Labelled](../classes/Labelled.md) |

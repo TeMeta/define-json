@@ -34,35 +34,8 @@ Coding {
     string codeSystemVersion  
     AliasPredicate aliasType  
 }
-Comment {
-    string text  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
-DocumentReference {
-    string title  
-    string leafID  
-    integerList pages  
-    string relationship  
-    string version  
-    string href  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
 
-Standard ||--}o Comment : "comment"
 Standard ||--}o Coding : "coding"
-Comment ||--}o DocumentReference : "documents"
-Comment ||--}o Coding : "coding"
-DocumentReference ||--}o Coding : "coding"
 
 ```
 
@@ -84,8 +57,7 @@ DocumentReference ||--}o Coding : "coding"
 | [publishingSet](../slots/publishingSet.md) | 0..1 <br/> [PublishingSet](../enums/PublishingSet.md) | Publishing Set of a Controlled Terminology | direct |
 | [version](../slots/version.md) | 0..1 <br/> [String](../types/String.md) | Version of an Implementation Guide or of a Controlled Terminology | direct |
 | [status](../slots/status.md) | 0..1 <br/> [StandardStatus](../enums/StandardStatus.md) | Status of an Implementation Guide or of a Controlled Terminology | direct |
-| [comment](../slots/comment.md) | * <br/> [Comment](../classes/Comment.md) | Comment on the standard | direct |
-| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context | [Identifiable](../classes/Identifiable.md) |
+| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
 | [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
 | [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Detailed description, shown in tooltips | [Labelled](../classes/Labelled.md) |
 | [coding](../slots/coding.md) | * <br/> [Coding](../classes/Coding.md) | Semantic tags for this element | [Labelled](../classes/Labelled.md) |
@@ -194,15 +166,6 @@ attributes:
     domain_of:
     - Standard
     range: StandardStatus
-  comment:
-    name: comment
-    description: Comment on the standard
-    from_schema: https://cdisc.org/define-json
-    domain_of:
-    - Governed
-    - Standard
-    range: Comment
-    multivalued: true
 
 ```
 </details>
@@ -271,17 +234,6 @@ attributes:
     domain_of:
     - Standard
     range: StandardStatus
-  comment:
-    name: comment
-    description: Comment on the standard
-    from_schema: https://cdisc.org/define-json
-    alias: comment
-    owner: Standard
-    domain_of:
-    - Governed
-    - Standard
-    range: Comment
-    multivalued: true
   OID:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format

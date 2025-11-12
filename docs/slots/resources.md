@@ -3,7 +3,7 @@
 # Slot: resources 
 
 
-_References to documents that describe this version of the metadata._
+_References to resources and documents that describe this version of the metadata._
 
 
 
@@ -22,7 +22,7 @@ Alias: resources
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | A container element that represents a given version of a specification, linki... |  no  |
+| [MetaDataVersion](../classes/MetaDataVersion.md) | A container element that represents a given version of a specification, linking to a particular usage context such as a study, dataset, or data collection instrument. |  no  |
 
 
 
@@ -71,7 +71,8 @@ Alias: resources
 <details>
 ```yaml
 name: resources
-description: References to documents that describe this version of the metadata.
+description: References to resources and documents that describe this version of the
+  metadata.
 from_schema: https://cdisc.org/define-json
 rank: 1000
 alias: resources

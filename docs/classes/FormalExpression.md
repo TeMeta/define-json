@@ -58,6 +58,9 @@ ReturnValue {
 Parameter {
     DataType dataType  
     string value  
+    string defaultValue  
+    stringList items  
+    boolean required  
     string OID  
     string uuid  
     string name  
@@ -65,9 +68,9 @@ Parameter {
     string label  
     stringList aliases  
 }
-ConceptProperty {
-    integer minOccurs  
-    integer maxOccurs  
+Condition {
+    string implementsCondition  
+    LogicalOperator operator  
     string OID  
     string uuid  
     string name  
@@ -80,18 +83,22 @@ ConceptProperty {
     string owner  
     string wasDerivedFrom  
 }
-Item {
-    DataType dataType  
-    integer length  
-    string role  
-    boolean hasNoData  
-    string crfCompletionInstructions  
-    string cdiscNotes  
-    string implementationNotes  
-    string preSpecifiedValue  
-    integer decimalDigits  
-    string displayFormat  
-    integer significantDigits  
+WhereClause {
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+ConceptProperty {
+    integer minOccurs  
+    integer maxOccurs  
     string OID  
     string uuid  
     string name  
@@ -130,26 +137,29 @@ Resource ||--}o FormalExpression : "selection"
 Resource ||--}o Coding : "coding"
 ReturnValue ||--}o Coding : "coding"
 Parameter ||--}o CodeList : "codeList"
-Parameter ||--}o Item : "items"
 Parameter ||--}o ConceptProperty : "conceptProperty"
+Parameter ||--}o WhereClause : "applicableWhen"
+Parameter ||--}o Condition : "conditions"
 Parameter ||--}o Coding : "coding"
+Condition ||--}o RangeCheck : "rangeChecks"
+Condition ||--}o FormalExpression : "expressions"
+Condition ||--}o Condition : "conditions"
+Condition ||--}o Coding : "coding"
+Condition ||--}o Comment : "comments"
+Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+WhereClause ||--}o Condition : "conditions"
+WhereClause ||--}o Coding : "coding"
+WhereClause ||--}o Comment : "comments"
+WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ConceptProperty ||--|o CodeList : "codeList"
 ConceptProperty ||--}o Coding : "coding"
-ConceptProperty ||--}o Comment : "comment"
-Item ||--|o CodeList : "codeList"
-Item ||--|o Method : "method"
-Item ||--}o RangeCheck : "rangeChecks"
-Item ||--|o WhereClause : "whereClause"
-Item ||--|o Origin : "origin"
-Item ||--|o ConceptProperty : "conceptProperty"
-Item ||--|o CodeList : "roleCodeList"
-Item ||--|o Condition : "collectionExceptionCondition"
-Item ||--}o Coding : "coding"
-Item ||--}o Comment : "comment"
+ConceptProperty ||--}o Comment : "comments"
+ConceptProperty ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
 CodeList ||--}o Coding : "coding"
-CodeList ||--}o Comment : "comment"
+CodeList ||--}o Comment : "comments"
+CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 ```
 
@@ -166,13 +176,13 @@ CodeList ||--}o Comment : "comment"
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [context](../slots/context.md) | 0..1 <br/> [String](../types/String.md) | The specific context within the containing element to which this formal expre... | direct |
-| [expression](../slots/expression.md) | 1 <br/> [String](../types/String.md) | The actual text of the formal expression (renamed from 'code' for disambiguat... | direct |
+| [context](../slots/context.md) | 0..1 <br/> [String](../types/String.md) | The specific context within the containing element to which this formal expression applies. | direct |
+| [expression](../slots/expression.md) | 1 <br/> [String](../types/String.md) | The actual text of the formal expression (renamed from 'code' for disambiguation). | direct |
 | [returnType](../slots/returnType.md) | 0..1 <br/> [String](../types/String.md) | Return type of the expression | direct |
 | [parameters](../slots/parameters.md) | * <br/> [Parameter](../classes/Parameter.md) | Parameters used in the expression | direct |
 | [returnValue](../slots/returnValue.md) | 0..1 <br/> [ReturnValue](../classes/ReturnValue.md) | Return value details | direct |
 | [externalCodeLibs](../slots/externalCodeLibs.md) | * <br/> [Resource](../classes/Resource.md) | External code libraries referenced | direct |
-| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context | [Identifiable](../classes/Identifiable.md) |
+| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
 | [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
 | [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
 | [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Detailed description, shown in tooltips | [Labelled](../classes/Labelled.md) |
@@ -188,11 +198,12 @@ CodeList ||--}o Comment : "comment"
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
-| [Condition](../classes/Condition.md) | [formalExpression](../slots/formalExpression.md) | range | [FormalExpression](../classes/FormalExpression.md) |
-| [RangeCheck](../classes/RangeCheck.md) | [formalExpression](../slots/formalExpression.md) | range | [FormalExpression](../classes/FormalExpression.md) |
-| [Method](../classes/Method.md) | [formalExpressions](../slots/formalExpressions.md) | range | [FormalExpression](../classes/FormalExpression.md) |
+| [Condition](../classes/Condition.md) | [expressions](../slots/expressions.md) | range | [FormalExpression](../classes/FormalExpression.md) |
+| [RangeCheck](../classes/RangeCheck.md) | [expressions](../slots/expressions.md) | range | [FormalExpression](../classes/FormalExpression.md) |
+| [Method](../classes/Method.md) | [expressions](../slots/expressions.md) | range | [FormalExpression](../classes/FormalExpression.md) |
 | [Resource](../classes/Resource.md) | [selection](../slots/selection.md) | range | [FormalExpression](../classes/FormalExpression.md) |
 | [DataService](../classes/DataService.md) | [selection](../slots/selection.md) | range | [FormalExpression](../classes/FormalExpression.md) |
+| [Analysis](../classes/Analysis.md) | [expressions](../slots/expressions.md) | range | [FormalExpression](../classes/FormalExpression.md) |
 
 
 
@@ -263,6 +274,8 @@ attributes:
     description: The actual text of the formal expression (renamed from 'code' for
       disambiguation).
     from_schema: https://cdisc.org/define-json
+    aliases:
+    - code
     rank: 1000
     domain_of:
     - FormalExpression
@@ -285,6 +298,8 @@ attributes:
     - FormalExpression
     range: Parameter
     multivalued: true
+    inlined: true
+    inlined_as_list: true
   returnValue:
     name: returnValue
     description: Return value details
@@ -338,6 +353,8 @@ attributes:
     description: The actual text of the formal expression (renamed from 'code' for
       disambiguation).
     from_schema: https://cdisc.org/define-json
+    aliases:
+    - code
     rank: 1000
     alias: expression
     owner: FormalExpression
@@ -366,6 +383,8 @@ attributes:
     - FormalExpression
     range: Parameter
     multivalued: true
+    inlined: true
+    inlined_as_list: true
   returnValue:
     name: returnValue
     description: Return value details

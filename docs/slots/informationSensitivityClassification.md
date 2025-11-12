@@ -22,7 +22,7 @@ Alias: informationSensitivityClassification
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Dataset](../classes/Dataset.md) | A collection element that groups observations sharing the same dimensionality... |  no  |
+| [Dataset](../classes/Dataset.md) | A collection element that groups observations sharing the same dimensionality, expressed as a set of unique dimensions within a Data Product context |  no  |
 
 
 

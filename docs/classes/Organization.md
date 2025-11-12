@@ -54,12 +54,12 @@ Organization ||--}o Coding : "coding"
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [role](../slots/role.md) | 0..1 <br/> [String](../types/String.md) | The role of the organization in the study | direct |
-| [type](../slots/type.md) | 0..1 <br/> [OrganizationType](../enums/OrganizationType.md) | The type of organization (e | direct |
-| [location](../slots/location.md) | 0..1 <br/> [String](../types/String.md) | The physical location of the organization | direct |
-| [address](../slots/address.md) | 0..1 <br/> [String](../types/String.md) | The address of the organization | direct |
-| [partOfOrganization](../slots/partOfOrganization.md) | 0..1 <br/> [Organization](../classes/Organization.md) | Reference to a parent organization if this organization is part of a larger e... | direct |
-| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context | [Identifiable](../classes/Identifiable.md) |
+| [role](../slots/role.md) | 0..1 <br/> [String](../types/String.md) | The role of the organization in the study. | direct |
+| [type](../slots/type.md) | 0..1 <br/> [OrganizationType](../enums/OrganizationType.md) | The type of organization (e.g., site, sponsor, vendor). | direct |
+| [location](../slots/location.md) | 0..1 <br/> [String](../types/String.md) | The physical location of the organization. | direct |
+| [address](../slots/address.md) | 0..1 <br/> [String](../types/String.md) | The address of the organization. | direct |
+| [partOfOrganization](../slots/partOfOrganization.md) | 0..1 <br/> [Organization](../classes/Organization.md) | Reference to a parent organization if this organization is part of a larger entity. | direct |
+| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
 | [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
 | [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
 | [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Detailed description, shown in tooltips | [Labelled](../classes/Labelled.md) |
@@ -83,12 +83,15 @@ Organization ||--}o Coding : "coding"
 | [ItemGroup](../classes/ItemGroup.md) | [authenticator](../slots/authenticator.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [ItemGroup](../classes/ItemGroup.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [CodeList](../classes/CodeList.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
+| [Comment](../classes/Comment.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [Dictionary](../classes/Dictionary.md) | [publishedBy](../slots/publishedBy.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [ReifiedConcept](../classes/ReifiedConcept.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [ConceptProperty](../classes/ConceptProperty.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
+| [WhereClause](../classes/WhereClause.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [Condition](../classes/Condition.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [Method](../classes/Method.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [source](../slots/source.md) | any_of[range] | [Organization](../classes/Organization.md) |
+| [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [User](../classes/User.md) | [organization](../slots/organization.md) | range | [Organization](../classes/Organization.md) |
 | [Organization](../classes/Organization.md) | [partOfOrganization](../slots/partOfOrganization.md) | range | [Organization](../classes/Organization.md) |
 | [NominalOccurrence](../classes/NominalOccurrence.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
@@ -105,6 +108,8 @@ Organization ||--}o Coding : "coding"
 | [DataProduct](../classes/DataProduct.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [DataProvider](../classes/DataProvider.md) | [partOfOrganization](../slots/partOfOrganization.md) | range | [Organization](../classes/Organization.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
+| [Analysis](../classes/Analysis.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
+| [Display](../classes/Display.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
 
 
 
@@ -190,6 +195,7 @@ attributes:
     rank: 1000
     domain_of:
     - Organization
+    - Display
     range: string
   address:
     name: address
@@ -262,6 +268,7 @@ attributes:
     owner: Organization
     domain_of:
     - Organization
+    - Display
     range: string
   address:
     name: address

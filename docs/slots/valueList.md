@@ -22,7 +22,7 @@ Alias: valueList
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ReturnValue](../classes/ReturnValue.md) | An output specification that defines the details of what a formal expression ... |  no  |
+| [ReturnValue](../classes/ReturnValue.md) | An output specification that defines the details of what a formal expression returns |  no  |
 
 
 

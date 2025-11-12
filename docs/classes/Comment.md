@@ -23,6 +23,27 @@ Comment {
     string description  
     string label  
     stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+SiteOrSponsorComment {
+    string text  
+    OriginSource sourceType  
+    string source  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
 }
 Coding {
     string code  
@@ -48,6 +69,11 @@ DocumentReference {
 
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
+Comment ||--}o Comment : "comments"
+Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+SiteOrSponsorComment ||--}o Coding : "coding"
+SiteOrSponsorComment ||--}o Comment : "comments"
+SiteOrSponsorComment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 DocumentReference ||--}o Coding : "coding"
 
 ```
@@ -56,7 +82,7 @@ DocumentReference ||--}o Coding : "coding"
 
 
 ## Inheritance
-* [IdentifiableElement](../classes/IdentifiableElement.md) [ [Identifiable](../classes/Identifiable.md) [Labelled](../classes/Labelled.md)]
+* [GovernedElement](../classes/GovernedElement.md) [ [Identifiable](../classes/Identifiable.md) [Labelled](../classes/Labelled.md) [Governed](../classes/Governed.md)]
     * **Comment**
 
 
@@ -65,15 +91,22 @@ DocumentReference ||--}o Coding : "coding"
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [text](../slots/text.md) | 1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | The comment text | direct |
+| [text](../slots/text.md) | 1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | The comment text. | direct |
 | [documents](../slots/documents.md) | * <br/> [DocumentReference](../classes/DocumentReference.md) | References to documents that contain or are referenced by this comment | direct |
-| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context | [Identifiable](../classes/Identifiable.md) |
+| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
 | [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
 | [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
 | [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Detailed description, shown in tooltips | [Labelled](../classes/Labelled.md) |
 | [coding](../slots/coding.md) | * <br/> [Coding](../classes/Coding.md) | Semantic tags for this element | [Labelled](../classes/Labelled.md) |
 | [label](../slots/label.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Human-readable label, shown in UIs | [Labelled](../classes/Labelled.md) |
 | [aliases](../slots/aliases.md) | * <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Alternative name or identifier | [Labelled](../classes/Labelled.md) |
+| [mandatory](../slots/mandatory.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Is this element required? | [Governed](../classes/Governed.md) |
+| [comments](../slots/comments.md) | * <br/> [Comment](../classes/Comment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
+| [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | * <br/> [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
+| [purpose](../slots/purpose.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Purpose or rationale for this data element | [Governed](../classes/Governed.md) |
+| [lastUpdated](../slots/lastUpdated.md) | 0..1 <br/> [Datetime](../types/Datetime.md) | When the resource was last updated | [Governed](../classes/Governed.md) |
+| [owner](../slots/owner.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Party responsible for this element | [Governed](../classes/Governed.md) |
+| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[MetaDataVersion](../classes/MetaDataVersion.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[ReifiedConcept](../classes/ReifiedConcept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[Condition](../classes/Condition.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[NominalOccurrence](../classes/NominalOccurrence.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
 
 
 
@@ -83,26 +116,30 @@ DocumentReference ||--}o Coding : "coding"
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
-| [GovernedElement](../classes/GovernedElement.md) | [comment](../slots/comment.md) | range | [Comment](../classes/Comment.md) |
-| [Governed](../classes/Governed.md) | [comment](../slots/comment.md) | range | [Comment](../classes/Comment.md) |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | [comment](../slots/comment.md) | range | [Comment](../classes/Comment.md) |
-| [Item](../classes/Item.md) | [comment](../slots/comment.md) | range | [Comment](../classes/Comment.md) |
-| [ItemGroup](../classes/ItemGroup.md) | [comment](../slots/comment.md) | range | [Comment](../classes/Comment.md) |
-| [CodeList](../classes/CodeList.md) | [comment](../slots/comment.md) | range | [Comment](../classes/Comment.md) |
-| [ReifiedConcept](../classes/ReifiedConcept.md) | [comment](../slots/comment.md) | range | [Comment](../classes/Comment.md) |
-| [ConceptProperty](../classes/ConceptProperty.md) | [comment](../slots/comment.md) | range | [Comment](../classes/Comment.md) |
-| [Condition](../classes/Condition.md) | [comment](../slots/comment.md) | range | [Comment](../classes/Comment.md) |
-| [Method](../classes/Method.md) | [comment](../slots/comment.md) | range | [Comment](../classes/Comment.md) |
-| [Standard](../classes/Standard.md) | [comment](../slots/comment.md) | range | [Comment](../classes/Comment.md) |
-| [NominalOccurrence](../classes/NominalOccurrence.md) | [comment](../slots/comment.md) | range | [Comment](../classes/Comment.md) |
-| [DataStructureDefinition](../classes/DataStructureDefinition.md) | [comment](../slots/comment.md) | range | [Comment](../classes/Comment.md) |
-| [Dataflow](../classes/Dataflow.md) | [comment](../slots/comment.md) | range | [Comment](../classes/Comment.md) |
-| [CubeComponent](../classes/CubeComponent.md) | [comment](../slots/comment.md) | range | [Comment](../classes/Comment.md) |
-| [Measure](../classes/Measure.md) | [comment](../slots/comment.md) | range | [Comment](../classes/Comment.md) |
-| [Dimension](../classes/Dimension.md) | [comment](../slots/comment.md) | range | [Comment](../classes/Comment.md) |
-| [DataAttribute](../classes/DataAttribute.md) | [comment](../slots/comment.md) | range | [Comment](../classes/Comment.md) |
-| [DataProduct](../classes/DataProduct.md) | [comment](../slots/comment.md) | range | [Comment](../classes/Comment.md) |
-| [ProvisionAgreement](../classes/ProvisionAgreement.md) | [comment](../slots/comment.md) | range | [Comment](../classes/Comment.md) |
+| [GovernedElement](../classes/GovernedElement.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
+| [Governed](../classes/Governed.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
+| [MetaDataVersion](../classes/MetaDataVersion.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
+| [Item](../classes/Item.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
+| [ItemGroup](../classes/ItemGroup.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
+| [CodeList](../classes/CodeList.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
+| [Comment](../classes/Comment.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
+| [ReifiedConcept](../classes/ReifiedConcept.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
+| [ConceptProperty](../classes/ConceptProperty.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
+| [WhereClause](../classes/WhereClause.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
+| [Condition](../classes/Condition.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
+| [Method](../classes/Method.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
+| [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
+| [NominalOccurrence](../classes/NominalOccurrence.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
+| [DataStructureDefinition](../classes/DataStructureDefinition.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
+| [Dataflow](../classes/Dataflow.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
+| [CubeComponent](../classes/CubeComponent.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
+| [Measure](../classes/Measure.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
+| [Dimension](../classes/Dimension.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
+| [DataAttribute](../classes/DataAttribute.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
+| [DataProduct](../classes/DataProduct.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
+| [ProvisionAgreement](../classes/ProvisionAgreement.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
+| [Analysis](../classes/Analysis.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
+| [Display](../classes/Display.md) | [comments](../slots/comments.md) | range | [Comment](../classes/Comment.md) |
 
 
 
@@ -156,7 +193,7 @@ exact_mappings:
 - usdm:CommentAnnotation
 - fhir:Annotation
 - sdmx:Annotation
-is_a: IdentifiableElement
+is_a: GovernedElement
 attributes:
   text:
     name: text
@@ -177,8 +214,12 @@ attributes:
     rank: 1000
     domain_of:
     - Comment
+    - Method
+    - Origin
     range: DocumentReference
     multivalued: true
+    inlined: true
+    inlined_as_list: true
 
 ```
 </details>
@@ -196,7 +237,7 @@ exact_mappings:
 - usdm:CommentAnnotation
 - fhir:Annotation
 - sdmx:Annotation
-is_a: IdentifiableElement
+is_a: GovernedElement
 attributes:
   text:
     name: text
@@ -221,8 +262,12 @@ attributes:
     owner: Comment
     domain_of:
     - Comment
+    - Method
+    - Origin
     range: DocumentReference
     multivalued: true
+    inlined: true
+    inlined_as_list: true
   OID:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
@@ -321,6 +366,109 @@ attributes:
     any_of:
     - range: string
     - range: TranslatedText
+  mandatory:
+    name: mandatory
+    description: Is this element required?
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    alias: mandatory
+    owner: Comment
+    domain_of:
+    - Governed
+    range: boolean
+  comments:
+    name: comments
+    description: Comment on the element, such as a rationale for its inclusion or
+      exclusion
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    alias: comments
+    owner: Comment
+    domain_of:
+    - Governed
+    range: Comment
+    multivalued: true
+    inlined: false
+  siteOrSponsorComments:
+    name: siteOrSponsorComments
+    description: Comment on the element, such as a rationale for its inclusion or
+      exclusion
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    alias: siteOrSponsorComments
+    owner: Comment
+    domain_of:
+    - Governed
+    range: SiteOrSponsorComment
+    multivalued: true
+    inlined: false
+  purpose:
+    name: purpose
+    description: Purpose or rationale for this data element
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    alias: purpose
+    owner: Comment
+    domain_of:
+    - Governed
+    range: string
+    any_of:
+    - range: string
+    - range: TranslatedText
+  lastUpdated:
+    name: lastUpdated
+    description: When the resource was last updated
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    alias: lastUpdated
+    owner: Comment
+    domain_of:
+    - Governed
+    range: datetime
+  owner:
+    name: owner
+    description: Party responsible for this element
+    from_schema: https://cdisc.org/define-json
+    narrow_mappings:
+    - prov:wasAttributedTo
+    - prov:wasAssociatedBy
+    rank: 1000
+    alias: owner
+    owner: Comment
+    domain_of:
+    - Governed
+    range: string
+    any_of:
+    - range: User
+    - range: Organization
+    - range: string
+  wasDerivedFrom:
+    name: wasDerivedFrom
+    description: Reference to another item that this item implements or extends, e.g.
+      a template Item definition.
+    from_schema: https://cdisc.org/define-json
+    exact_mappings:
+    - prov:wasDerivedFrom
+    rank: 1000
+    alias: wasDerivedFrom
+    owner: Comment
+    domain_of:
+    - Governed
+    range: string
+    any_of:
+    - range: Item
+    - range: ItemGroup
+    - range: MetaDataVersion
+    - range: CodeList
+    - range: ReifiedConcept
+    - range: ConceptProperty
+    - range: Condition
+    - range: Method
+    - range: NominalOccurrence
+    - range: Dataflow
+    - range: CubeComponent
+    - range: DataProduct
+    - range: ProvisionAgreement
 
 ```
 </details>

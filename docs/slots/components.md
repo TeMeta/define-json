@@ -22,7 +22,7 @@ Alias: components
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ComponentList](../classes/ComponentList.md) | An abstract definition that specifies a list of components within a data stru... |  no  |
+| [ComponentList](../classes/ComponentList.md) | An abstract definition that specifies a list of components within a data structure definition, including various descriptor types |  no  |
 
 
 

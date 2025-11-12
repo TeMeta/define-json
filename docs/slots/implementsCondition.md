@@ -22,7 +22,7 @@ Alias: implementsCondition
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Condition](../classes/Condition.md) | A reusable logical construct that combines multiple components using AND logi... |  no  |
+| [Condition](../classes/Condition.md) | A reusable, composable, and nestable logical construct allowing for complex expressions. Conditions are most useful when given a meaningful name and linked to Study Definitions. |  no  |
 
 
 

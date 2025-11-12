@@ -3,7 +3,9 @@
 # Class: Method 
 
 
-_A reusable computational procedure that describes how to derive values and can be referenced by Items_
+_A reusable computational procedure that describes how to derive values and can be referenced by Items._
+
+_Analysis and Derivation concepts can be implemented by a Method. Properties can be referenced by Parameters in its expressions._
 
 
 
@@ -29,6 +31,22 @@ Method {
     string owner  
     string wasDerivedFrom  
 }
+SiteOrSponsorComment {
+    string text  
+    OriginSource sourceType  
+    string source  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
 Comment {
     string text  
     string OID  
@@ -37,6 +55,11 @@ Comment {
     string description  
     string label  
     stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
 }
 Coding {
     string code  
@@ -44,6 +67,36 @@ Coding {
     string codeSystem  
     string codeSystemVersion  
     AliasPredicate aliasType  
+}
+ReifiedConcept {
+    string version  
+    string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+ConceptProperty {
+    integer minOccurs  
+    integer maxOccurs  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
 }
 DocumentReference {
     string title  
@@ -95,6 +148,9 @@ ReturnValue {
 Parameter {
     DataType dataType  
     string value  
+    string defaultValue  
+    stringList items  
+    boolean required  
     string OID  
     string uuid  
     string name  
@@ -103,12 +159,27 @@ Parameter {
     stringList aliases  
 }
 
-Method ||--}o FormalExpression : "formalExpressions"
-Method ||--|o DocumentReference : "document"
+Method ||--}o FormalExpression : "expressions"
+Method ||--}o DocumentReference : "documents"
+Method ||--|o ReifiedConcept : "implementsConcept"
 Method ||--}o Coding : "coding"
-Method ||--}o Comment : "comment"
+Method ||--}o Comment : "comments"
+Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+SiteOrSponsorComment ||--}o Coding : "coding"
+SiteOrSponsorComment ||--}o Comment : "comments"
+SiteOrSponsorComment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
+Comment ||--}o Comment : "comments"
+Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+ReifiedConcept ||--}o ConceptProperty : "properties"
+ReifiedConcept ||--}o Coding : "coding"
+ReifiedConcept ||--}o Comment : "comments"
+ReifiedConcept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+ConceptProperty ||--|o CodeList : "codeList"
+ConceptProperty ||--}o Coding : "coding"
+ConceptProperty ||--}o Comment : "comments"
+ConceptProperty ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 DocumentReference ||--}o Coding : "coding"
 FormalExpression ||--}o Parameter : "parameters"
 FormalExpression ||--|o ReturnValue : "returnValue"
@@ -118,8 +189,9 @@ Resource ||--}o FormalExpression : "selection"
 Resource ||--}o Coding : "coding"
 ReturnValue ||--}o Coding : "coding"
 Parameter ||--}o CodeList : "codeList"
-Parameter ||--}o Item : "items"
 Parameter ||--}o ConceptProperty : "conceptProperty"
+Parameter ||--}o WhereClause : "applicableWhen"
+Parameter ||--}o Condition : "conditions"
 Parameter ||--}o Coding : "coding"
 
 ```
@@ -130,6 +202,7 @@ Parameter ||--}o Coding : "coding"
 ## Inheritance
 * [GovernedElement](../classes/GovernedElement.md) [ [Identifiable](../classes/Identifiable.md) [Labelled](../classes/Labelled.md) [Governed](../classes/Governed.md)]
     * **Method**
+        * [Analysis](../classes/Analysis.md) [ [Versioned](../classes/Versioned.md)]
 
 
 
@@ -137,10 +210,11 @@ Parameter ||--}o Coding : "coding"
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [type](../slots/type.md) | 0..1 <br/> [MethodType](../enums/MethodType.md) | The type of method: Computation, Imputation, or Transformation | direct |
-| [formalExpressions](../slots/formalExpressions.md) | * <br/> [FormalExpression](../classes/FormalExpression.md) | Formal expressions used by this method | direct |
-| [document](../slots/document.md) | 0..1 <br/> [DocumentReference](../classes/DocumentReference.md) | Reference to a document that describes this method in detail | direct |
-| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context | [Identifiable](../classes/Identifiable.md) |
+| [type](../slots/type.md) | 0..1 <br/> [MethodType](../enums/MethodType.md) | The type of method e.g. Computation, Imputation, Transformation. | direct |
+| [expressions](../slots/expressions.md) | * <br/> [FormalExpression](../classes/FormalExpression.md) | Formal expressions used by this method | direct |
+| [documents](../slots/documents.md) | * <br/> [DocumentReference](../classes/DocumentReference.md) | Reference to a document that describes this method in detail. | direct |
+| [implementsConcept](../slots/implementsConcept.md) | 0..1 <br/> [ReifiedConcept](../classes/ReifiedConcept.md) | Reference to a specific concept that this Method implements. | direct |
+| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
 | [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
 | [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
 | [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Detailed description, shown in tooltips | [Labelled](../classes/Labelled.md) |
@@ -148,11 +222,12 @@ Parameter ||--}o Coding : "coding"
 | [label](../slots/label.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Human-readable label, shown in UIs | [Labelled](../classes/Labelled.md) |
 | [aliases](../slots/aliases.md) | * <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Alternative name or identifier | [Labelled](../classes/Labelled.md) |
 | [mandatory](../slots/mandatory.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Is this element required? | [Governed](../classes/Governed.md) |
-| [comment](../slots/comment.md) | * <br/> [Comment](../classes/Comment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
+| [comments](../slots/comments.md) | * <br/> [Comment](../classes/Comment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
+| [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | * <br/> [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
 | [purpose](../slots/purpose.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Purpose or rationale for this data element | [Governed](../classes/Governed.md) |
 | [lastUpdated](../slots/lastUpdated.md) | 0..1 <br/> [Datetime](../types/Datetime.md) | When the resource was last updated | [Governed](../classes/Governed.md) |
 | [owner](../slots/owner.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Party responsible for this element | [Governed](../classes/Governed.md) |
-| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[MetaDataVersion](../classes/MetaDataVersion.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[ReifiedConcept](../classes/ReifiedConcept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[Condition](../classes/Condition.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[NominalOccurrence](../classes/NominalOccurrence.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e | [Governed](../classes/Governed.md) |
+| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[MetaDataVersion](../classes/MetaDataVersion.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[ReifiedConcept](../classes/ReifiedConcept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[Condition](../classes/Condition.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[NominalOccurrence](../classes/NominalOccurrence.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
 
 
 
@@ -170,10 +245,13 @@ Parameter ||--}o Coding : "coding"
 | [Item](../classes/Item.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
 | [ItemGroup](../classes/ItemGroup.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
 | [CodeList](../classes/CodeList.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [Comment](../classes/Comment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
 | [ReifiedConcept](../classes/ReifiedConcept.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
 | [ConceptProperty](../classes/ConceptProperty.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [WhereClause](../classes/WhereClause.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
 | [Condition](../classes/Condition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
 | [Method](../classes/Method.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
 | [Timing](../classes/Timing.md) | [imputation](../slots/imputation.md) | range | [Method](../classes/Method.md) |
 | [NominalOccurrence](../classes/NominalOccurrence.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
@@ -192,6 +270,8 @@ Parameter ||--}o Coding : "coding"
 | [DataAttribute](../classes/DataAttribute.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
 | [DataProduct](../classes/DataProduct.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [Analysis](../classes/Analysis.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [Display](../classes/Display.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
 
 
 
@@ -238,8 +318,11 @@ Parameter ||--}o Coding : "coding"
 <details>
 ```yaml
 name: Method
-description: A reusable computational procedure that describes how to derive values
-  and can be referenced by Items
+description: 'A reusable computational procedure that describes how to derive values
+  and can be referenced by Items.
+
+  Analysis and Derivation concepts can be implemented by a Method. Properties can
+  be referenced by Parameters in its expressions.'
 from_schema: https://cdisc.org/define-json
 exact_mappings:
 - odm:MethodRef
@@ -251,7 +334,7 @@ is_a: GovernedElement
 attributes:
   type:
     name: type
-    description: 'The type of method: Computation, Imputation, or Transformation.'
+    description: The type of method e.g. Computation, Imputation, Transformation.
     from_schema: https://cdisc.org/define-json
     domain_of:
     - ItemGroup
@@ -261,26 +344,39 @@ attributes:
     - Standard
     - Timing
     range: MethodType
-  formalExpressions:
-    name: formalExpressions
+  expressions:
+    name: expressions
     description: Formal expressions used by this method
     from_schema: https://cdisc.org/define-json
-    rank: 1000
     domain_of:
+    - Condition
+    - RangeCheck
     - Method
     range: FormalExpression
     multivalued: true
     inlined: true
-  document:
-    name: document
+    inlined_as_list: true
+  documents:
+    name: documents
     description: Reference to a document that describes this method in detail.
     from_schema: https://cdisc.org/define-json
-    rank: 1000
     domain_of:
+    - Comment
     - Method
-    - SourceItem
     - Origin
     range: DocumentReference
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  implementsConcept:
+    name: implementsConcept
+    description: Reference to a specific concept that this Method implements.
+    from_schema: https://cdisc.org/define-json
+    domain_of:
+    - ItemGroup
+    - Method
+    range: ReifiedConcept
+    inlined: false
 
 ```
 </details>
@@ -290,8 +386,11 @@ attributes:
 <details>
 ```yaml
 name: Method
-description: A reusable computational procedure that describes how to derive values
-  and can be referenced by Items
+description: 'A reusable computational procedure that describes how to derive values
+  and can be referenced by Items.
+
+  Analysis and Derivation concepts can be implemented by a Method. Properties can
+  be referenced by Parameters in its expressions.'
 from_schema: https://cdisc.org/define-json
 exact_mappings:
 - odm:MethodRef
@@ -303,7 +402,7 @@ is_a: GovernedElement
 attributes:
   type:
     name: type
-    description: 'The type of method: Computation, Imputation, or Transformation.'
+    description: The type of method e.g. Computation, Imputation, Transformation.
     from_schema: https://cdisc.org/define-json
     alias: type
     owner: Method
@@ -315,30 +414,45 @@ attributes:
     - Standard
     - Timing
     range: MethodType
-  formalExpressions:
-    name: formalExpressions
+  expressions:
+    name: expressions
     description: Formal expressions used by this method
     from_schema: https://cdisc.org/define-json
-    rank: 1000
-    alias: formalExpressions
+    alias: expressions
     owner: Method
     domain_of:
+    - Condition
+    - RangeCheck
     - Method
     range: FormalExpression
     multivalued: true
     inlined: true
-  document:
-    name: document
+    inlined_as_list: true
+  documents:
+    name: documents
     description: Reference to a document that describes this method in detail.
     from_schema: https://cdisc.org/define-json
-    rank: 1000
-    alias: document
+    alias: documents
     owner: Method
     domain_of:
+    - Comment
     - Method
-    - SourceItem
     - Origin
     range: DocumentReference
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  implementsConcept:
+    name: implementsConcept
+    description: Reference to a specific concept that this Method implements.
+    from_schema: https://cdisc.org/define-json
+    alias: implementsConcept
+    owner: Method
+    domain_of:
+    - ItemGroup
+    - Method
+    range: ReifiedConcept
+    inlined: false
   OID:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
@@ -447,19 +561,32 @@ attributes:
     domain_of:
     - Governed
     range: boolean
-  comment:
-    name: comment
+  comments:
+    name: comments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
     from_schema: https://cdisc.org/define-json
     rank: 1000
-    alias: comment
+    alias: comments
     owner: Method
     domain_of:
     - Governed
-    - Standard
     range: Comment
     multivalued: true
+    inlined: false
+  siteOrSponsorComments:
+    name: siteOrSponsorComments
+    description: Comment on the element, such as a rationale for its inclusion or
+      exclusion
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    alias: siteOrSponsorComments
+    owner: Method
+    domain_of:
+    - Governed
+    range: SiteOrSponsorComment
+    multivalued: true
+    inlined: false
   purpose:
     name: purpose
     description: Purpose or rationale for this data element

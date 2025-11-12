@@ -32,6 +32,22 @@ DataAttribute {
     string owner  
     string wasDerivedFrom  
 }
+SiteOrSponsorComment {
+    string text  
+    OriginSource sourceType  
+    string source  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
 Comment {
     string text  
     string OID  
@@ -40,6 +56,11 @@ Comment {
     string description  
     string label  
     stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
 }
 Coding {
     string code  
@@ -101,6 +122,26 @@ Dataflow {
     string owner  
     string wasDerivedFrom  
 }
+Analysis {
+    string analysisReason  
+    string analysisPurpose  
+    string analysisMethod  
+    stringList inputData  
+    string version  
+    string href  
+    MethodType type  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
 Dimension {
     integer keySequence  
     string role  
@@ -122,7 +163,6 @@ DataStructureDefinition {
     string structure  
     boolean isReferenceData  
     ItemGroupType type  
-    stringList children  
     stringList profile  
     string authenticator  
     string OID  
@@ -146,43 +186,64 @@ DataAttribute ||--|| Item : "item"
 DataAttribute ||--|o Method : "missingHandling"
 DataAttribute ||--|o Method : "imputation"
 DataAttribute ||--}o Coding : "coding"
-DataAttribute ||--}o Comment : "comment"
+DataAttribute ||--}o Comment : "comments"
+DataAttribute ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+SiteOrSponsorComment ||--}o Coding : "coding"
+SiteOrSponsorComment ||--}o Comment : "comments"
+SiteOrSponsorComment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
-Method ||--}o FormalExpression : "formalExpressions"
-Method ||--|o DocumentReference : "document"
+Comment ||--}o Comment : "comments"
+Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Method ||--}o FormalExpression : "expressions"
+Method ||--}o DocumentReference : "documents"
+Method ||--|o ReifiedConcept : "implementsConcept"
 Method ||--}o Coding : "coding"
-Method ||--}o Comment : "comment"
+Method ||--}o Comment : "comments"
+Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--|o WhereClause : "whereClause"
+Item ||--}o WhereClause : "applicableWhen"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
 Item ||--|o CodeList : "roleCodeList"
 Item ||--|o Condition : "collectionExceptionCondition"
 Item ||--}o Coding : "coding"
-Item ||--}o Comment : "comment"
+Item ||--}o Comment : "comments"
+Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Dataflow ||--|| DataStructureDefinition : "structure"
 Dataflow ||--}o Dimension : "dimensionConstraint"
+Dataflow ||--|o Analysis : "analysisMethod"
 Dataflow ||--}o Coding : "coding"
-Dataflow ||--}o Comment : "comment"
+Dataflow ||--}o Comment : "comments"
+Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Analysis ||--}o WhereClause : "applicableWhen"
+Analysis ||--}o FormalExpression : "expressions"
+Analysis ||--}o DocumentReference : "documents"
+Analysis ||--|o ReifiedConcept : "implementsConcept"
+Analysis ||--}o Coding : "coding"
+Analysis ||--}o Comment : "comments"
+Analysis ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Dimension ||--|| Item : "item"
 Dimension ||--|o Method : "missingHandling"
 Dimension ||--|o Method : "imputation"
 Dimension ||--}o Coding : "coding"
-Dimension ||--}o Comment : "comment"
+Dimension ||--}o Comment : "comments"
+Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 DataStructureDefinition ||--}o Dimension : "dimensions"
 DataStructureDefinition ||--}o Measure : "measures"
 DataStructureDefinition ||--}o DataAttribute : "attributes"
 DataStructureDefinition ||--|o ComponentList : "grouping"
 DataStructureDefinition ||--}o Item : "items"
+DataStructureDefinition ||--}o ItemGroup : "children"
 DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
-DataStructureDefinition ||--|o WhereClause : "whereClause"
+DataStructureDefinition ||--}o WhereClause : "applicableWhen"
 DataStructureDefinition ||--}o Coding : "security"
 DataStructureDefinition ||--|o Timing : "validityPeriod"
 DataStructureDefinition ||--}o Coding : "coding"
-DataStructureDefinition ||--}o Comment : "comment"
+DataStructureDefinition ||--}o Comment : "comments"
+DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 ```
 

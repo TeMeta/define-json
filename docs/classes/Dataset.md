@@ -115,7 +115,6 @@ DataStructureDefinition {
     string structure  
     boolean isReferenceData  
     ItemGroupType type  
-    stringList children  
     stringList profile  
     string authenticator  
     string OID  
@@ -132,6 +131,22 @@ DataStructureDefinition {
     string version  
     string href  
 }
+SiteOrSponsorComment {
+    string text  
+    OriginSource sourceType  
+    string source  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
 Comment {
     string text  
     string OID  
@@ -140,6 +155,11 @@ Comment {
     string description  
     string label  
     stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
 }
 WhereClause {
     string OID  
@@ -148,6 +168,11 @@ WhereClause {
     string description  
     string label  
     stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
 }
 ReifiedConcept {
     string version  
@@ -163,6 +188,27 @@ ReifiedConcept {
     datetime lastUpdated  
     string owner  
     string wasDerivedFrom  
+}
+ItemGroup {
+    string domain  
+    string structure  
+    boolean isReferenceData  
+    ItemGroupType type  
+    stringList profile  
+    string authenticator  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+    string version  
+    string href  
 }
 Item {
     DataType dataType  
@@ -255,6 +301,26 @@ Dataflow {
     string owner  
     string wasDerivedFrom  
 }
+Analysis {
+    string analysisReason  
+    string analysisPurpose  
+    string analysisMethod  
+    stringList inputData  
+    string version  
+    string href  
+    MethodType type  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
 
 Dataset ||--|o Dataflow : "describedBy"
 Dataset ||--|o DataStructureDefinition : "structuredBy"
@@ -266,14 +332,17 @@ Timing ||--|o NominalOccurrence : "relativeTo"
 Timing ||--|o NominalOccurrence : "relativeFrom"
 Timing ||--|o Method : "imputation"
 Timing ||--}o Coding : "coding"
-Method ||--}o FormalExpression : "formalExpressions"
-Method ||--|o DocumentReference : "document"
+Method ||--}o FormalExpression : "expressions"
+Method ||--}o DocumentReference : "documents"
+Method ||--|o ReifiedConcept : "implementsConcept"
 Method ||--}o Coding : "coding"
-Method ||--}o Comment : "comment"
+Method ||--}o Comment : "comments"
+Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 NominalOccurrence ||--|| Timing : "timing"
 NominalOccurrence ||--}o Condition : "condition"
 NominalOccurrence ||--}o Coding : "coding"
-NominalOccurrence ||--}o Comment : "comment"
+NominalOccurrence ||--}o Comment : "comments"
+NominalOccurrence ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Distribution ||--|o DataService : "accessService"
 Distribution ||--|o Dataset : "isDistributionOf"
 DataService ||--|o Distribution : "isAccessServiceOf"
@@ -284,49 +353,81 @@ DataStructureDefinition ||--}o Measure : "measures"
 DataStructureDefinition ||--}o DataAttribute : "attributes"
 DataStructureDefinition ||--|o ComponentList : "grouping"
 DataStructureDefinition ||--}o Item : "items"
+DataStructureDefinition ||--}o ItemGroup : "children"
 DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
-DataStructureDefinition ||--|o WhereClause : "whereClause"
+DataStructureDefinition ||--}o WhereClause : "applicableWhen"
 DataStructureDefinition ||--}o Coding : "security"
 DataStructureDefinition ||--|o Timing : "validityPeriod"
 DataStructureDefinition ||--}o Coding : "coding"
-DataStructureDefinition ||--}o Comment : "comment"
+DataStructureDefinition ||--}o Comment : "comments"
+DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+SiteOrSponsorComment ||--}o Coding : "coding"
+SiteOrSponsorComment ||--}o Comment : "comments"
+SiteOrSponsorComment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
+Comment ||--}o Comment : "comments"
+Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 WhereClause ||--}o Condition : "conditions"
 WhereClause ||--}o Coding : "coding"
+WhereClause ||--}o Comment : "comments"
+WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ReifiedConcept ||--}o ConceptProperty : "properties"
 ReifiedConcept ||--}o Coding : "coding"
-ReifiedConcept ||--}o Comment : "comment"
+ReifiedConcept ||--}o Comment : "comments"
+ReifiedConcept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+ItemGroup ||--}o Item : "items"
+ItemGroup ||--}o ItemGroup : "children"
+ItemGroup ||--|o ReifiedConcept : "implementsConcept"
+ItemGroup ||--}o WhereClause : "applicableWhen"
+ItemGroup ||--}o Coding : "security"
+ItemGroup ||--|o Timing : "validityPeriod"
+ItemGroup ||--}o Coding : "coding"
+ItemGroup ||--}o Comment : "comments"
+ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--|o WhereClause : "whereClause"
+Item ||--}o WhereClause : "applicableWhen"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
 Item ||--|o CodeList : "roleCodeList"
 Item ||--|o Condition : "collectionExceptionCondition"
 Item ||--}o Coding : "coding"
-Item ||--}o Comment : "comment"
+Item ||--}o Comment : "comments"
+Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ComponentList ||--}o Coding : "coding"
 DataAttribute ||--|| Item : "item"
 DataAttribute ||--|o Method : "missingHandling"
 DataAttribute ||--|o Method : "imputation"
 DataAttribute ||--}o Coding : "coding"
-DataAttribute ||--}o Comment : "comment"
+DataAttribute ||--}o Comment : "comments"
+DataAttribute ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Measure ||--|| Item : "item"
 Measure ||--|o Method : "missingHandling"
 Measure ||--|o Method : "imputation"
 Measure ||--}o Coding : "coding"
-Measure ||--}o Comment : "comment"
+Measure ||--}o Comment : "comments"
+Measure ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Dimension ||--|| Item : "item"
 Dimension ||--|o Method : "missingHandling"
 Dimension ||--|o Method : "imputation"
 Dimension ||--}o Coding : "coding"
-Dimension ||--}o Comment : "comment"
+Dimension ||--}o Comment : "comments"
+Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Dataflow ||--|| DataStructureDefinition : "structure"
 Dataflow ||--}o Dimension : "dimensionConstraint"
+Dataflow ||--|o Analysis : "analysisMethod"
 Dataflow ||--}o Coding : "coding"
-Dataflow ||--}o Comment : "comment"
+Dataflow ||--}o Comment : "comments"
+Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Analysis ||--}o WhereClause : "applicableWhen"
+Analysis ||--}o FormalExpression : "expressions"
+Analysis ||--}o DocumentReference : "documents"
+Analysis ||--|o ReifiedConcept : "implementsConcept"
+Analysis ||--}o Coding : "coding"
+Analysis ||--}o Comment : "comments"
+Analysis ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 ```
 
@@ -343,30 +444,30 @@ Dataflow ||--}o Comment : "comment"
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [describedBy](../slots/describedBy.md) | 0..1 <br/> [Dataflow](../classes/Dataflow.md) | Associates a Dataflow and thereby a Data Structure Definition to the data set | direct |
-| [structuredBy](../slots/structuredBy.md) | 0..1 <br/> [DataStructureDefinition](../classes/DataStructureDefinition.md) | Associates the Data Structure Definition that defines the structure of the Da... | direct |
-| [publishedBy](../slots/publishedBy.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Associates the Data Provider that reports/publishes the data | direct |
-| [keys](../slots/keys.md) | 1..* <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[SeriesKey](../classes/SeriesKey.md)&nbsp;or&nbsp;<br />[GroupKey](../classes/GroupKey.md) | Series and Group keys in the data that are associated with dimensions in this... | direct |
+| [describedBy](../slots/describedBy.md) | 0..1 <br/> [Dataflow](../classes/Dataflow.md) | Associates a Dataflow and thereby a Data Structure Definition to the data set. | direct |
+| [structuredBy](../slots/structuredBy.md) | 0..1 <br/> [DataStructureDefinition](../classes/DataStructureDefinition.md) | Associates the Data Structure Definition that defines the structure of the Data Set. Note that the Data Structure Definition is the same as that associated (non-mandatory) to the Dataflow. | direct |
+| [publishedBy](../slots/publishedBy.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Associates the Data Provider that reports/publishes the data. | direct |
+| [keys](../slots/keys.md) | 1..* <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[SeriesKey](../classes/SeriesKey.md)&nbsp;or&nbsp;<br />[GroupKey](../classes/GroupKey.md) | Series and Group keys in the data that are associated with dimensions in this structure | direct |
 | [datasetType](../slots/datasetType.md) | 0..1 <br/> [String](../types/String.md) | Type or classification of the dataset | direct |
 | [distribution](../slots/distribution.md) | * <br/> [Distribution](../classes/Distribution.md) | Representations of this dataset in various formats or access methods | direct |
 | [conformsTo](../slots/conformsTo.md) | 0..1 <br/> [String](../types/String.md) | Specification or standard that this dataset conforms to | direct |
 | [hasPolicy](../slots/hasPolicy.md) | * <br/> [String](../types/String.md) | Access or usage policy applied to this dataset | direct |
 | [informationSensitivityClassification](../slots/informationSensitivityClassification.md) | 0..1 <br/> [String](../types/String.md) | Classification of the dataset's sensitivity or confidentiality | direct |
 | [version](../slots/version.md) | 0..1 <br/> [String](../types/String.md) | The version of the external resources | [Versioned](../classes/Versioned.md) |
-| [href](../slots/href.md) | 0..1 <br/> [String](../types/String.md) | Machine-readable instructions to obtain the resource e | [Versioned](../classes/Versioned.md) |
+| [href](../slots/href.md) | 0..1 <br/> [String](../types/String.md) | Machine-readable instructions to obtain the resource e.g. FHIR path, URL | [Versioned](../classes/Versioned.md) |
 | [profile](../slots/profile.md) | * <br/> [String](../types/String.md) | Profiles this resource claims to conform to | [IsProfile](../classes/IsProfile.md) |
 | [security](../slots/security.md) | * <br/> [Coding](../classes/Coding.md) | Security tags applied to this resource | [IsProfile](../classes/IsProfile.md) |
 | [authenticator](../slots/authenticator.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Who/what authenticated the resource | [IsProfile](../classes/IsProfile.md) |
 | [validityPeriod](../slots/validityPeriod.md) | 0..1 <br/> [Timing](../classes/Timing.md) | Time period during which the resouce is valid | [IsProfile](../classes/IsProfile.md) |
-| [action](../slots/action.md) | 0..1 <br/> [String](../types/String.md) | Defines the action to be taken by the recipient system (information, append, ... | [IsSdmxDataset](../classes/IsSdmxDataset.md) |
-| [reportingBegin](../slots/reportingBegin.md) | 0..1 <br/> [String](../types/String.md) | A specific time period in a known system of time periods that identifies the ... | [IsSdmxDataset](../classes/IsSdmxDataset.md) |
-| [reportingEnd](../slots/reportingEnd.md) | 0..1 <br/> [String](../types/String.md) | A specific time period in a known system of time periods that identifies the ... | [IsSdmxDataset](../classes/IsSdmxDataset.md) |
-| [dataExtractionDate](../slots/dataExtractionDate.md) | 0..1 <br/> [String](../types/String.md) | A specific time period that identifies the date and time that the data are ex... | [IsSdmxDataset](../classes/IsSdmxDataset.md) |
-| [validFrom](../slots/validFrom.md) | 0..1 <br/> [String](../types/String.md) | Indicates the inclusive start time indicating the validity of the information... | [IsSdmxDataset](../classes/IsSdmxDataset.md) |
-| [validTo](../slots/validTo.md) | 0..1 <br/> [String](../types/String.md) | Indicates the inclusive end time indicating the validity of the information i... | [IsSdmxDataset](../classes/IsSdmxDataset.md) |
-| [publicationYear](../slots/publicationYear.md) | 0..1 <br/> [String](../types/String.md) | Specifies the year of publication of the data or metadata in terms of whateve... | [IsSdmxDataset](../classes/IsSdmxDataset.md) |
-| [publicationPeriod](../slots/publicationPeriod.md) | 0..1 <br/> [String](../types/String.md) | Specifies the period of publication of the data or metadata in terms of whate... | [IsSdmxDataset](../classes/IsSdmxDataset.md) |
-| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context | [Identifiable](../classes/Identifiable.md) |
+| [action](../slots/action.md) | 0..1 <br/> [String](../types/String.md) | Defines the action to be taken by the recipient system (information, append, replace, delete) | [IsSdmxDataset](../classes/IsSdmxDataset.md) |
+| [reportingBegin](../slots/reportingBegin.md) | 0..1 <br/> [String](../types/String.md) | A specific time period in a known system of time periods that identifies the start period of a report. | [IsSdmxDataset](../classes/IsSdmxDataset.md) |
+| [reportingEnd](../slots/reportingEnd.md) | 0..1 <br/> [String](../types/String.md) | A specific time period in a known system of time periods that identifies the end period of a report. | [IsSdmxDataset](../classes/IsSdmxDataset.md) |
+| [dataExtractionDate](../slots/dataExtractionDate.md) | 0..1 <br/> [String](../types/String.md) | A specific time period that identifies the date and time that the data are extracted from a data source. | [IsSdmxDataset](../classes/IsSdmxDataset.md) |
+| [validFrom](../slots/validFrom.md) | 0..1 <br/> [String](../types/String.md) | Indicates the inclusive start time indicating the validity of the information in the data set. | [IsSdmxDataset](../classes/IsSdmxDataset.md) |
+| [validTo](../slots/validTo.md) | 0..1 <br/> [String](../types/String.md) | Indicates the inclusive end time indicating the validity of the information in the data set. | [IsSdmxDataset](../classes/IsSdmxDataset.md) |
+| [publicationYear](../slots/publicationYear.md) | 0..1 <br/> [String](../types/String.md) | Specifies the year of publication of the data or metadata in terms of whatever provisioning agreements might be in force. | [IsSdmxDataset](../classes/IsSdmxDataset.md) |
+| [publicationPeriod](../slots/publicationPeriod.md) | 0..1 <br/> [String](../types/String.md) | Specifies the period of publication of the data or metadata in terms of whatever provisioning agreements might be in force. | [IsSdmxDataset](../classes/IsSdmxDataset.md) |
+| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
 | [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
 | [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
 | [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Detailed description, shown in tooltips | [Labelled](../classes/Labelled.md) |
@@ -385,6 +486,7 @@ Dataflow ||--}o Comment : "comment"
 | [DataProduct](../classes/DataProduct.md) | [inputDataset](../slots/inputDataset.md) | range | [Dataset](../classes/Dataset.md) |
 | [DataProduct](../classes/DataProduct.md) | [outputDataset](../slots/outputDataset.md) | range | [Dataset](../classes/Dataset.md) |
 | [Distribution](../classes/Distribution.md) | [isDistributionOf](../slots/isDistributionOf.md) | range | [Dataset](../classes/Dataset.md) |
+| [Analysis](../classes/Analysis.md) | [inputData](../slots/inputData.md) | any_of[range] | [Dataset](../classes/Dataset.md) |
 
 
 

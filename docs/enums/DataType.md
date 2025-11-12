@@ -13,17 +13,17 @@ URI: [DataType](../enums/DataType.md)
 
 | Value | Meaning | Description |
 | --- | --- | --- |
-| text | None | Character text with no length restriction |
-| integer | None | Integer numbers |
-| float | None | Floating-point numbers (decimals) |
-| date | None | Calendar date |
-| time | None | Time of day |
-| datetime | None | Calendar date and time of day |
-| boolean | None | Logical values (true/false) |
-| double | None | Double-precision floating-point numbers |
-| hex | None | Hexadecimal number |
-| base64 | None | Base-64 encoded binary data |
-| hexBinary | None | Hexadecimal encoded binary data |
+| text | None | Character text with no length restriction. |
+| integer | None | Integer numbers. |
+| float | None | Floating-point numbers (decimals). |
+| date | None | Calendar date. |
+| time | None | Time of day. |
+| datetime | None | Calendar date and time of day. |
+| boolean | None | Logical values (true/false). |
+| double | None | Double-precision floating-point numbers. |
+| hex | None | Hexadecimal number. |
+| base64 | None | Base-64 encoded binary data. |
+| hexBinary | None | Hexadecimal encoded binary data. |
 
 
 
@@ -32,7 +32,7 @@ URI: [DataType](../enums/DataType.md)
 
 | Name | Description |
 | ---  | --- |
-| [dataType](../slots/dataType.md) | The data type of the item |
+| [dataType](../slots/dataType.md) | The data type of the item. |
 
 
 

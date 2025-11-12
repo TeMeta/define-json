@@ -22,7 +22,7 @@ Alias: comparator
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [RangeCheck](../classes/RangeCheck.md) | A validation element that performs a simple comparison check between a refere... |  no  |
+| [RangeCheck](../classes/RangeCheck.md) | A validation element that performs a simple comparison check between a referenced item's value and specified values, resolving to a boolean result |  no  |
 
 
 

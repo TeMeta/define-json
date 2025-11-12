@@ -247,8 +247,9 @@ def run_roundtrip_test(original_xml_path: Path, converted_json_path: Path) -> Di
         test_results['passed'] = False
     
     # MetaDataVersion OID is now flattened to root level with mixins
-    if mdv and json_data.get('OID') != mdv.get('OID'):
-        test_results['errors'].append(f"MetaDataVersion OID mismatch: XML={mdv.get('OID')}, JSON={json_data.get('OID')}")
+    json_mdv_oid = json_data.get('metaDataVersionOID')
+    if mdv and json_mdv_oid != mdv.get('OID'):
+        test_results['errors'].append(f"MetaDataVersion OID mismatch: XML={mdv.get('OID')}, JSON={json_mdv_oid}")
         test_results['passed'] = False
     
     # Test 4: ItemRef relationship validation

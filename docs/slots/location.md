@@ -3,11 +3,6 @@
 # Slot: location 
 
 
-_The physical location of the organization._
-
-
-
-
 
 URI: [odm:slot/location](https://cdisc.org/odm2/slot/location)
 Alias: location
@@ -22,8 +17,9 @@ Alias: location
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [DataProvider](../classes/DataProvider.md) | An organization element that provides data to a Data Consumer, which can be a... |  no  |
-| [Organization](../classes/Organization.md) | An entity that represents organizational information, such as a site or spons... |  no  |
+| [DataProvider](../classes/DataProvider.md) | An organization element that provides data to a Data Consumer, which can be a sponsor, site, or any other entity that supplies data |  no  |
+| [Display](../classes/Display.md) | A rendered output of an analysis result. |  no  |
+| [Organization](../classes/Organization.md) | An entity that represents organizational information, such as a site or sponsor |  no  |
 
 
 
@@ -33,7 +29,7 @@ Alias: location
 
 ## Properties
 
-* Range: [String](../types/String.md)
+* Range: NONE
 
 
 
@@ -44,13 +40,6 @@ Alias: location
 
 
 
-
-
-
-### Schema Source
-
-
-* from schema: https://cdisc.org/define-json
 
 
 
@@ -70,14 +59,10 @@ Alias: location
 <details>
 ```yaml
 name: location
-description: The physical location of the organization.
-from_schema: https://cdisc.org/define-json
-rank: 1000
 alias: location
-owner: Organization
 domain_of:
 - Organization
-range: string
+- Display
 
 ```
 </details>
