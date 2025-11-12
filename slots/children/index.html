@@ -95,7 +95,7 @@
 </div></div>
 <div class="col-md-9" role="main">
 <h1 id="slot-children">Slot: children</h1>
-<p><em>References to child ItemGroups (OIDs) within this item group. Use these OID references to look up the actual ItemGroup objects  from the top-level itemGroups collection.</em></p>
+<p><em>Child ItemGroups nested within this item group (e.g., ValueLists under parent domains). Can be either: - Full ItemGroup objects (preferred for hierarchical nesting) - OID string references (for cross-references to avoid duplication)</em></p>
 <p>URI: <a href="https://cdisc.org/odm2/slot/children">odm:slot/children</a>
 Alias: children</p>
 <!-- no inheritance hierarchy -->
@@ -124,7 +124,7 @@ Alias: children</p>
 <h2 id="properties">Properties</h2>
 <ul>
 <li>
-<p>Range: <a href="../../types/String/">String</a></p>
+<p>Range: <a href="../../classes/ItemGroup/">ItemGroup</a> or <br/><a href="../../classes/ItemGroup/">ItemGroup</a> or <br/><a href="../../types/String/">String</a></p>
 </li>
 <li>
 <p>Multivalued: True</p>
@@ -157,18 +157,22 @@ Alias: children</p>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">children</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">References to child ItemGroups (OIDs) within this item group. Use these</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">OID references to look up the actual ItemGroup objects  from the top-level itemGroups</span>
-<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">collection.</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Child</span><span class="nv"> </span><span class="s">ItemGroups</span><span class="nv"> </span><span class="s">nested</span><span class="nv"> </span><span class="s">within</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">group</span><span class="nv"> </span><span class="s">(e.g.,</span><span class="nv"> </span><span class="s">ValueLists</span><span class="nv"> </span><span class="s">under</span>
+<span class="w">  </span><span class="s">parent</span><span class="nv"> </span><span class="s">domains).</span><span class="nv"> </span><span class="s">Can</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">either:</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Full</span><span class="nv"> </span><span class="s">ItemGroup</span><span class="nv"> </span><span class="s">objects</span><span class="nv"> </span><span class="s">(preferred</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">hierarchical</span>
+<span class="w">  </span><span class="s">nesting)</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">OID</span><span class="nv"> </span><span class="s">string</span><span class="nv"> </span><span class="s">references</span><span class="nv"> </span><span class="s">(for</span><span class="nv"> </span><span class="s">cross-references</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">avoid</span><span class="nv"> </span><span class="s">duplication)'</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">children</span>
 <span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
 <span class="nt">domain_of</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
-<span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+<span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
 <span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">any_of</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 </code></pre></div>
 </details></div>
 </div>

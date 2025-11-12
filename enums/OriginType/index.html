@@ -100,29 +100,39 @@
 </thead>
 <tbody>
 <tr>
-<td>CRF</td>
-<td>None</td>
-<td>Case Report Form.</td>
+<td>Assigned</td>
+<td>ncit:C170547</td>
+<td>A value that is derived through designation, such as values from a look up table or a label on a CRF.</td>
+</tr>
+<tr>
+<td>Collected</td>
+<td>ncit:C170548</td>
+<td>A value that is actually observed and recorded by a person or obtained by an instrument.</td>
 </tr>
 <tr>
 <td>Derived</td>
-<td>None</td>
-<td>Derived from other items.</td>
+<td>ncit:C170549</td>
+<td>A value that is calculated by an algorithm or reproducible rule, and which is dependent upon other data values.</td>
 </tr>
 <tr>
-<td>Protocol</td>
-<td>None</td>
-<td>Protocol-defined data.</td>
+<td>Not Available</td>
+<td>ncit:C126101</td>
+<td>A value that is not discoverable or accessible.</td>
 </tr>
 <tr>
-<td>eDT</td>
+<td>Other</td>
 <td>None</td>
-<td>Electronic data transfer.</td>
+<td>Different than the one(s) previously specified or mentioned. (NCI)</td>
 </tr>
 <tr>
 <td>Predecessor</td>
-<td>None</td>
-<td>From a predecessor study.</td>
+<td>ncit:C170550</td>
+<td>A value that is copied from another variable.</td>
+</tr>
+<tr>
+<td>Protocol</td>
+<td>ncit:C170551</td>
+<td>A value that is included as part of the study protocol.</td>
 </tr>
 </tbody>
 </table>
@@ -138,21 +148,36 @@
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">permissible_values</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">CRF</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CRF</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Case Report Form.</span>
+<span class="w">  </span><span class="nt">Assigned</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Assigned</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A value that is derived through designation, such as values from</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">a look up table or a label on a CRF.</span>
+<span class="w">    </span><span class="nt">meaning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ncit:C170547</span>
+<span class="w">  </span><span class="nt">Collected</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Collected</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A value that is actually observed and recorded by a person or obtained</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">by an instrument.</span>
+<span class="w">    </span><span class="nt">meaning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ncit:C170548</span>
 <span class="w">  </span><span class="nt">Derived</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Derived</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Derived from other items.</span>
-<span class="w">  </span><span class="nt">Protocol</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Protocol</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Protocol-defined data.</span>
-<span class="w">  </span><span class="nt">eDT</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">eDT</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Electronic data transfer.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A value that is calculated by an algorithm or reproducible rule,</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">and which is dependent upon other data values.</span>
+<span class="w">    </span><span class="nt">meaning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ncit:C170549</span>
+<span class="w">  </span><span class="nt">Not Available</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Not Available</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A value that is not discoverable or accessible.</span>
+<span class="w">    </span><span class="nt">meaning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ncit:C126101</span>
+<span class="w">  </span><span class="nt">Other</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Other</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Different than the one(s) previously specified or mentioned. (NCI)</span>
 <span class="w">  </span><span class="nt">Predecessor</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Predecessor</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">From a predecessor study.</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A value that is copied from another variable.</span>
+<span class="w">    </span><span class="nt">meaning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ncit:C170550</span>
+<span class="w">  </span><span class="nt">Protocol</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Protocol</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A value that is included as part of the study protocol.</span>
+<span class="w">    </span><span class="nt">meaning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ncit:C170551</span>
 </code></pre></div>
 </details></div>
 </div>
