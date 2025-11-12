@@ -400,7 +400,7 @@
                 "WC.VS.VSORRES.TEMP"
               ],
               "origin": {
-                "type": "CRF",
+                "type": "Collected",
                 "source": "Investigator"
               }
             },
@@ -415,7 +415,7 @@
                 "WC.VS.VSORRES.WEIGHT"
               ],
               "origin": {
-                "type": "CRF",
+                "type": "Collected",
                 "source": "Investigator"
               }
             },
@@ -430,7 +430,7 @@
                 "WC.VS.VSORRES.HEIGHT"
               ],
               "origin": {
-                "type": "CRF",
+                "type": "Collected",
                 "source": "Investigator"
               }
             },
@@ -443,7 +443,7 @@
                 "WC.VS.VSORRES.SYSBP"
               ],
               "origin": {
-                "type": "CRF",
+                "type": "Collected",
                 "source": "Investigator"
               }
             },
@@ -456,7 +456,7 @@
                 "WC.VS.VSORRES.DIABP"
               ],
               "origin": {
-                "type": "CRF",
+                "type": "Collected",
                 "source": "Investigator"
               }
             },
@@ -469,7 +469,7 @@
                 "WC.VS.VSORRES.HR"
               ],
               "origin": {
-                "type": "CRF",
+                "type": "Collected",
                 "source": "Investigator"
               }
             }
@@ -748,7 +748,7 @@
                 "WC.LB.LBORRES.ALT"
               ],
               "origin": {
-                "type": "CRF",
+                "type": "Collected",
                 "source": "Vendor"
               }
             },
@@ -762,7 +762,7 @@
                 "WC.LB.LBORRES.ALB"
               ],
               "origin": {
-                "type": "CRF",
+                "type": "Collected",
                 "source": "Vendor"
               }
             },
@@ -777,7 +777,7 @@
                 "WC.LB.LBORRES.ALP"
               ],
               "origin": {
-                "type": "CRF",
+                "type": "Collected",
                 "source": "Vendor"
               }
             },
@@ -792,7 +792,7 @@
                 "WC.LB.LBORRES.AST"
               ],
               "origin": {
-                "type": "CRF",
+                "type": "Collected",
                 "source": "Vendor"
               }
             },
@@ -807,7 +807,7 @@
                 "WC.LB.LBORRES.CREAT"
               ],
               "origin": {
-                "type": "CRF",
+                "type": "Collected",
                 "source": "Vendor"
               }
             },
@@ -822,7 +822,7 @@
                 "WC.LB.LBORRES.K"
               ],
               "origin": {
-                "type": "CRF",
+                "type": "Collected",
                 "source": "Vendor"
               }
             },
@@ -837,7 +837,7 @@
                 "WC.LB.LBORRES.SODIUM"
               ],
               "origin": {
-                "type": "CRF",
+                "type": "Collected",
                 "source": "Vendor"
               }
             },
@@ -852,7 +852,7 @@
                 "WC.LB.LBORRES.HBA1C"
               ],
               "origin": {
-                "type": "CRF",
+                "type": "Collected",
                 "source": "Vendor"
               }
             }
@@ -3332,59 +3332,45 @@
           "valueListOID": "VL.LB.LBORRESU"
         },
         "IT.VS.VSORRES.TEMP": {
-          "originalOriginType": "Collected",
           "wasElement": true
         },
         "IT.VS.VSORRES.WEIGHT": {
-          "originalOriginType": "Collected",
           "wasElement": true
         },
         "IT.VS.VSORRES.HEIGHT": {
-          "originalOriginType": "Collected",
           "wasElement": true
         },
         "IT.VS.VSORRES.SYSBP": {
-          "originalOriginType": "Collected",
           "wasElement": true
         },
         "IT.VS.VSORRES.DIABP": {
-          "originalOriginType": "Collected",
           "wasElement": true
         },
         "IT.VS.VSORRES.HR": {
-          "originalOriginType": "Collected",
           "wasElement": true
         },
         "IT.LB.LBORRES.ALT": {
-          "originalOriginType": "Collected",
           "wasElement": true
         },
         "IT.LB.LBORRES.ALB": {
-          "originalOriginType": "Collected",
           "wasElement": true
         },
         "IT.LB.LBORRES.ALP": {
-          "originalOriginType": "Collected",
           "wasElement": true
         },
         "IT.LB.LBORRES.AST": {
-          "originalOriginType": "Collected",
           "wasElement": true
         },
         "IT.LB.LBORRES.CREAT": {
-          "originalOriginType": "Collected",
           "wasElement": true
         },
         "IT.LB.LBORRES.K": {
-          "originalOriginType": "Collected",
           "wasElement": true
         },
         "IT.LB.LBORRES.SODIUM": {
-          "originalOriginType": "Collected",
           "wasElement": true
         },
         "IT.LB.LBORRES.HBA1C": {
-          "originalOriginType": "Collected",
           "wasElement": true
         }
       }

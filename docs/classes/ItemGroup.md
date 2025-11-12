@@ -20,7 +20,6 @@ ItemGroup {
     string structure  
     boolean isReferenceData  
     ItemGroupType type  
-    stringList children  
     stringList profile  
     string authenticator  
     string OID  
@@ -229,6 +228,7 @@ RangeCheck {
 }
 
 ItemGroup ||--}o Item : "items"
+ItemGroup ||--}o ItemGroup : "children"
 ItemGroup ||--|o ReifiedConcept : "implementsConcept"
 ItemGroup ||--}o WhereClause : "applicableWhen"
 ItemGroup ||--}o Coding : "security"
@@ -317,7 +317,7 @@ RangeCheck ||--}o FormalExpression : "expressions"
 | [isReferenceData](../slots/isReferenceData.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Set to Yes if this is a reference item group. | direct |
 | [type](../slots/type.md) | 0..1 <br/> [ItemGroupType](../enums/ItemGroupType.md) | Type of item group | direct |
 | [items](../slots/items.md) | * <br/> [Item](../classes/Item.md) | Items in this group | direct |
-| [children](../slots/children.md) | * <br/> [String](../types/String.md) | References to child ItemGroups (OIDs) within this item group. Use these OID references to look up the actual ItemGroup objects  from the top-level itemGroups collection. | direct |
+| [children](../slots/children.md) | * <br/> [ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Child ItemGroups nested within this item group (e.g., ValueLists under parent domains). Can be either: - Full ItemGroup objects (preferred for hierarchical nesting) - OID string references (for cross-references to avoid duplication) | direct |
 | [implementsConcept](../slots/implementsConcept.md) | 0..1 <br/> [ReifiedConcept](../classes/ReifiedConcept.md) | Reference to a abstract concept topic that this item group is a specialization of | direct |
 | [applicableWhen](../slots/applicableWhen.md) | * <br/> [WhereClause](../classes/WhereClause.md) | References to different situations that define when this item applies.<br>Multiple whereClauses are combined with OR logic: the item applies if ANY referenced WhereClause matches.<br>Within each WhereClause, conditions are combined with AND logic: all conditions must be true.<br><br>Example: whereClause: ["WC.SYSBP", "WC.DIABP"] means the item applies when<br>(all conditions in WC.SYSBP are true) OR (all conditions in WC.DIABP are true). | direct |
 | [profile](../slots/profile.md) | * <br/> [String](../types/String.md) | Profiles this resource claims to conform to | [IsProfile](../classes/IsProfile.md) |
@@ -354,6 +354,8 @@ RangeCheck ||--}o FormalExpression : "expressions"
 | [MetaDataVersion](../classes/MetaDataVersion.md) | [itemGroups](../slots/itemGroups.md) | range | [ItemGroup](../classes/ItemGroup.md) |
 | [MetaDataVersion](../classes/MetaDataVersion.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [Item](../classes/Item.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
+| [ItemGroup](../classes/ItemGroup.md) | [children](../slots/children.md) | range | [ItemGroup](../classes/ItemGroup.md) |
+| [ItemGroup](../classes/ItemGroup.md) | [children](../slots/children.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [ItemGroup](../classes/ItemGroup.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [CodeList](../classes/CodeList.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [Comment](../classes/Comment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
@@ -364,6 +366,8 @@ RangeCheck ||--}o FormalExpression : "expressions"
 | [Method](../classes/Method.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [NominalOccurrence](../classes/NominalOccurrence.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
+| [DataStructureDefinition](../classes/DataStructureDefinition.md) | [children](../slots/children.md) | range | [ItemGroup](../classes/ItemGroup.md) |
+| [DataStructureDefinition](../classes/DataStructureDefinition.md) | [children](../slots/children.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [Dataflow](../classes/Dataflow.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [CubeComponent](../classes/CubeComponent.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
@@ -508,16 +512,21 @@ attributes:
     inlined_as_list: true
   children:
     name: children
-    description: References to child ItemGroups (OIDs) within this item group. Use
-      these OID references to look up the actual ItemGroup objects  from the top-level
-      itemGroups collection.
+    description: 'Child ItemGroups nested within this item group (e.g., ValueLists
+      under parent domains). Can be either: - Full ItemGroup objects (preferred for
+      hierarchical nesting) - OID string references (for cross-references to avoid
+      duplication)'
     from_schema: https://cdisc.org/define-json
     rank: 1000
     domain_of:
     - ItemGroup
-    range: string
+    range: ItemGroup
     multivalued: true
-    inlined: false
+    inlined: true
+    inlined_as_list: true
+    any_of:
+    - range: ItemGroup
+    - range: string
   implementsConcept:
     name: implementsConcept
     description: Reference to a abstract concept topic that this item group is a specialization
@@ -660,18 +669,23 @@ attributes:
     inlined_as_list: true
   children:
     name: children
-    description: References to child ItemGroups (OIDs) within this item group. Use
-      these OID references to look up the actual ItemGroup objects  from the top-level
-      itemGroups collection.
+    description: 'Child ItemGroups nested within this item group (e.g., ValueLists
+      under parent domains). Can be either: - Full ItemGroup objects (preferred for
+      hierarchical nesting) - OID string references (for cross-references to avoid
+      duplication)'
     from_schema: https://cdisc.org/define-json
     rank: 1000
     alias: children
     owner: ItemGroup
     domain_of:
     - ItemGroup
-    range: string
+    range: ItemGroup
     multivalued: true
-    inlined: false
+    inlined: true
+    inlined_as_list: true
+    any_of:
+    - range: ItemGroup
+    - range: string
   implementsConcept:
     name: implementsConcept
     description: Reference to a abstract concept topic that this item group is a specialization

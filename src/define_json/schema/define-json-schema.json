@@ -2313,9 +2313,17 @@
                     "description": "Who/what authenticated the resource"
                 },
                 "children": {
-                    "description": "References to child ItemGroups (OIDs) within this item group. Use these OID references to look up the actual ItemGroup objects  from the top-level itemGroups collection.",
+                    "description": "Child ItemGroups nested within this item group (e.g., ValueLists under parent domains). Can be either: - Full ItemGroup objects (preferred for hierarchical nesting) - OID string references (for cross-references to avoid duplication)",
                     "items": {
-                        "type": "string"
+                        "$ref": "#/$defs/ItemGroup",
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
                     },
                     "type": [
                         "array",
@@ -4512,9 +4520,17 @@
                     "description": "Who/what authenticated the resource"
                 },
                 "children": {
-                    "description": "References to child ItemGroups (OIDs) within this item group. Use these OID references to look up the actual ItemGroup objects  from the top-level itemGroups collection.",
+                    "description": "Child ItemGroups nested within this item group (e.g., ValueLists under parent domains). Can be either: - Full ItemGroup objects (preferred for hierarchical nesting) - OID string references (for cross-references to avoid duplication)",
                     "items": {
-                        "type": "string"
+                        "$ref": "#/$defs/ItemGroup",
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
                     },
                     "type": [
                         "array",
@@ -6237,7 +6253,7 @@
                 },
                 "type": {
                     "$ref": "#/$defs/OriginType",
-                    "description": "The type of origin: CRF, Derived, Protocol, eDT, Predecessor."
+                    "description": "The type of origin: Assigned, Collected, Derived, Protocol, Predecessor, Not Available, or Other."
                 }
             },
             "title": "Origin",
@@ -6255,13 +6271,15 @@
             "type": "string"
         },
         "OriginType": {
-            "description": "An enumeration that defines the types of origins for data items",
+            "description": "An enumeration that defines the types of origins for data items.",
             "enum": [
-                "CRF",
+                "Assigned",
+                "Collected",
                 "Derived",
-                "Protocol",
-                "eDT",
-                "Predecessor"
+                "Not Available",
+                "Other",
+                "Predecessor",
+                "Protocol"
             ],
             "title": "OriginType",
             "type": "string"

@@ -375,7 +375,27 @@ DataStructureDefinition {
     string structure  
     boolean isReferenceData  
     ItemGroupType type  
-    stringList children  
+    stringList profile  
+    string authenticator  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+    string version  
+    string href  
+}
+ItemGroup {
+    string domain  
+    string structure  
+    boolean isReferenceData  
+    ItemGroupType type  
     stringList profile  
     string authenticator  
     string OID  
@@ -531,28 +551,6 @@ IdentifiableElement {
     string label  
     stringList aliases  
 }
-ItemGroup {
-    string domain  
-    string structure  
-    boolean isReferenceData  
-    ItemGroupType type  
-    stringList children  
-    stringList profile  
-    string authenticator  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-    string version  
-    string href  
-}
 
 MetaDataVersion ||--}o ItemGroup : "itemGroups"
 MetaDataVersion ||--}o Item : "items"
@@ -667,6 +665,7 @@ DataStructureDefinition ||--}o Measure : "measures"
 DataStructureDefinition ||--}o DataAttribute : "attributes"
 DataStructureDefinition ||--|o ComponentList : "grouping"
 DataStructureDefinition ||--}o Item : "items"
+DataStructureDefinition ||--}o ItemGroup : "children"
 DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
 DataStructureDefinition ||--}o WhereClause : "applicableWhen"
 DataStructureDefinition ||--}o Coding : "security"
@@ -674,6 +673,15 @@ DataStructureDefinition ||--|o Timing : "validityPeriod"
 DataStructureDefinition ||--}o Coding : "coding"
 DataStructureDefinition ||--}o Comment : "comments"
 DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+ItemGroup ||--}o Item : "items"
+ItemGroup ||--}o ItemGroup : "children"
+ItemGroup ||--|o ReifiedConcept : "implementsConcept"
+ItemGroup ||--}o WhereClause : "applicableWhen"
+ItemGroup ||--}o Coding : "security"
+ItemGroup ||--|o Timing : "validityPeriod"
+ItemGroup ||--}o Coding : "coding"
+ItemGroup ||--}o Comment : "comments"
+ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
@@ -722,14 +730,6 @@ Relationship ||--|| IdentifiableElement : "subject"
 Relationship ||--|| IdentifiableElement : "object"
 Relationship ||--}o Coding : "coding"
 IdentifiableElement ||--}o Coding : "coding"
-ItemGroup ||--}o Item : "items"
-ItemGroup ||--|o ReifiedConcept : "implementsConcept"
-ItemGroup ||--}o WhereClause : "applicableWhen"
-ItemGroup ||--}o Coding : "security"
-ItemGroup ||--|o Timing : "validityPeriod"
-ItemGroup ||--}o Coding : "coding"
-ItemGroup ||--}o Comment : "comments"
-ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 ```
 
@@ -883,7 +883,7 @@ ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | [structure](slots/structure.md) | Data structure of the item group, indicating how the records are organized. If this is a FHIR Resource, is it nested or flattened? If this is a structured concept, is it a Biomedical/Derivation/Analysis concept? |
 | [isReferenceData](slots/isReferenceData.md) | Set to Yes if this is a reference item group. |
 | [type](slots/type.md) | Type of item group |
-| [children](slots/children.md) | References to child ItemGroups (OIDs) within this item group. Use these OID references to look up the actual ItemGroup objects  from the top-level itemGroups collection. |
+| [children](slots/children.md) | Child ItemGroups nested within this item group (e.g., ValueLists under parent domains). Can be either: - Full ItemGroup objects (preferred for hierarchical nesting) - OID string references (for cross-references to avoid duplication) |
 | [implementsConcept](slots/implementsConcept.md) | Reference to a abstract concept topic that this item group is a specialization of |
 | [subject](slots/subject.md) | The starting element of the relationship (e.g., an Item or ItemGroup). |
 | [object](slots/object.md) | The ending element of the relationship. |
@@ -1021,7 +1021,7 @@ ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | [SoftHard](enums/SoftHard.md) | An enumeration that indicates whether a validation check should be treated as an error or a warning |
 | [MethodType](enums/MethodType.md) | An enumeration that defines the types of computational methods available for data processing |
 | [DataType](enums/DataType.md) | An enumeration that defines the fundamental data types available for items |
-| [OriginType](enums/OriginType.md) | An enumeration that defines the types of origins for data items |
+| [OriginType](enums/OriginType.md) | An enumeration that defines the types of origins for data items. |
 | [OriginSource](enums/OriginSource.md) | An enumeration that defines the sources of data origin |
 | [ItemGroupType](enums/ItemGroupType.md) | An enumeration that defines the roles of an item group within a specific context |
 | [TimingType](enums/TimingType.md) | An enumeration that defines CDISC timing type values indicating the temporal relationship of an observation to a reference point |

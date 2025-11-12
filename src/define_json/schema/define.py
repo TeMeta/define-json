@@ -279,27 +279,35 @@ class DataType(str, Enum):
 
 class OriginType(str, Enum):
     """
-    An enumeration that defines the types of origins for data items
+    An enumeration that defines the types of origins for data items.
     """
-    CRF = "CRF"
+    Assigned = "Assigned"
     """
-    Case Report Form.
+    A value that is derived through designation, such as values from a look up table or a label on a CRF.
+    """
+    Collected = "Collected"
+    """
+    A value that is actually observed and recorded by a person or obtained by an instrument.
     """
     Derived = "Derived"
     """
-    Derived from other items.
+    A value that is calculated by an algorithm or reproducible rule, and which is dependent upon other data values.
     """
-    Protocol = "Protocol"
+    Not_Available = "Not Available"
     """
-    Protocol-defined data.
+    A value that is not discoverable or accessible.
     """
-    eDT = "eDT"
+    Other = "Other"
     """
-    Electronic data transfer.
+    Different than the one(s) previously specified or mentioned. (NCI)
     """
     Predecessor = "Predecessor"
     """
-    From a predecessor study.
+    A value that is copied from another variable.
+    """
+    Protocol = "Protocol"
+    """
+    A value that is included as part of the study protocol.
     """
 
 
@@ -1155,7 +1163,9 @@ class ItemGroup(IsProfile, GovernedElement):
          'close_mappings': ['fhir:StructureDefinition/snapshot',
                             'fhir:StructureDefinition/differential'],
          'domain_of': ['MetaDataVersion', 'ItemGroup', 'Parameter']} })
-    children: Optional[list[str]] = Field(default=None, description="""References to child ItemGroups (OIDs) within this item group. Use these OID references to look up the actual ItemGroup objects  from the top-level itemGroups collection.""", json_schema_extra = { "linkml_meta": {'alias': 'children', 'domain_of': ['ItemGroup']} })
+    children: Optional[list[Union[ItemGroup, str]]] = Field(default=None, description="""Child ItemGroups nested within this item group (e.g., ValueLists under parent domains). Can be either: - Full ItemGroup objects (preferred for hierarchical nesting) - OID string references (for cross-references to avoid duplication)""", json_schema_extra = { "linkml_meta": {'alias': 'children',
+         'any_of': [{'range': 'ItemGroup'}, {'range': 'string'}],
+         'domain_of': ['ItemGroup']} })
     implementsConcept: Optional[str] = Field(default=None, description="""Reference to a abstract concept topic that this item group is a specialization of""", json_schema_extra = { "linkml_meta": {'alias': 'implementsConcept', 'domain_of': ['ItemGroup', 'Method']} })
     applicableWhen: Optional[list[str]] = Field(default=None, description="""References to different situations that define when this item applies.
 Multiple whereClauses are combined with OR logic: the item applies if ANY referenced WhereClause matches.
@@ -2088,7 +2098,7 @@ class Origin(ConfiguredBaseModel):
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://cdisc.org/define-json'})
 
-    type: Optional[OriginType] = Field(default=None, description="""The type of origin: CRF, Derived, Protocol, eDT, Predecessor.""", json_schema_extra = { "linkml_meta": {'alias': 'type',
+    type: Optional[OriginType] = Field(default=None, description="""The type of origin: Assigned, Collected, Derived, Protocol, Predecessor, Not Available, or Other.""", json_schema_extra = { "linkml_meta": {'alias': 'type',
          'domain_of': ['ItemGroup',
                        'Method',
                        'Origin',
@@ -2577,7 +2587,9 @@ class DataStructureDefinition(ItemGroup):
          'close_mappings': ['fhir:StructureDefinition/snapshot',
                             'fhir:StructureDefinition/differential'],
          'domain_of': ['MetaDataVersion', 'ItemGroup', 'Parameter']} })
-    children: Optional[list[str]] = Field(default=None, description="""References to child ItemGroups (OIDs) within this item group. Use these OID references to look up the actual ItemGroup objects  from the top-level itemGroups collection.""", json_schema_extra = { "linkml_meta": {'alias': 'children', 'domain_of': ['ItemGroup']} })
+    children: Optional[list[Union[ItemGroup, str]]] = Field(default=None, description="""Child ItemGroups nested within this item group (e.g., ValueLists under parent domains). Can be either: - Full ItemGroup objects (preferred for hierarchical nesting) - OID string references (for cross-references to avoid duplication)""", json_schema_extra = { "linkml_meta": {'alias': 'children',
+         'any_of': [{'range': 'ItemGroup'}, {'range': 'string'}],
+         'domain_of': ['ItemGroup']} })
     implementsConcept: Optional[str] = Field(default=None, description="""Reference to a abstract concept topic that this item group is a specialization of""", json_schema_extra = { "linkml_meta": {'alias': 'implementsConcept', 'domain_of': ['ItemGroup', 'Method']} })
     applicableWhen: Optional[list[str]] = Field(default=None, description="""References to different situations that define when this item applies.
 Multiple whereClauses are combined with OR logic: the item applies if ANY referenced WhereClause matches.

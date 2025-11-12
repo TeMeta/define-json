@@ -115,7 +115,6 @@ DataStructureDefinition {
     string structure  
     boolean isReferenceData  
     ItemGroupType type  
-    stringList children  
     stringList profile  
     string authenticator  
     string OID  
@@ -189,6 +188,27 @@ ReifiedConcept {
     datetime lastUpdated  
     string owner  
     string wasDerivedFrom  
+}
+ItemGroup {
+    string domain  
+    string structure  
+    boolean isReferenceData  
+    ItemGroupType type  
+    stringList profile  
+    string authenticator  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+    string version  
+    string href  
 }
 Item {
     DataType dataType  
@@ -333,6 +353,7 @@ DataStructureDefinition ||--}o Measure : "measures"
 DataStructureDefinition ||--}o DataAttribute : "attributes"
 DataStructureDefinition ||--|o ComponentList : "grouping"
 DataStructureDefinition ||--}o Item : "items"
+DataStructureDefinition ||--}o ItemGroup : "children"
 DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
 DataStructureDefinition ||--}o WhereClause : "applicableWhen"
 DataStructureDefinition ||--}o Coding : "security"
@@ -355,6 +376,15 @@ ReifiedConcept ||--}o ConceptProperty : "properties"
 ReifiedConcept ||--}o Coding : "coding"
 ReifiedConcept ||--}o Comment : "comments"
 ReifiedConcept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+ItemGroup ||--}o Item : "items"
+ItemGroup ||--}o ItemGroup : "children"
+ItemGroup ||--|o ReifiedConcept : "implementsConcept"
+ItemGroup ||--}o WhereClause : "applicableWhen"
+ItemGroup ||--}o Coding : "security"
+ItemGroup ||--|o Timing : "validityPeriod"
+ItemGroup ||--}o Coding : "coding"
+ItemGroup ||--}o Comment : "comments"
+ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"

@@ -18,8 +18,8 @@ Alias: value
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
 | [Parameter](../classes/Parameter.md) | A variable element that describes an input used in a formal expression |  no  |
-| [Translation](../classes/Translation.md) | A text representation that provides content in a specific language, used for multilingual support |  no  |
 | [Timing](../classes/Timing.md) | A temporal element that describes the timing of an event or occurrence, which can be absolute, relative, or nominal |  no  |
+| [Translation](../classes/Translation.md) | A text representation that provides content in a specific language, used for multilingual support |  no  |
 
 
 

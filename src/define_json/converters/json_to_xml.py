@@ -1680,12 +1680,7 @@ class DefineJSONToXMLConverter:
                         # v2.x style: Create Origin child element
                         origin_elem = ET.SubElement(item_elem, f'{{{def_ns}}}Origin' if def_ns else 'Origin')
                         if origin.get('type'):
-                            # Check if there's an original non-standard OriginType in supplemental
-                            original_origin_type = origin_metadata.get('originalOriginType')
-                            if original_origin_type:
-                                origin_elem.set('Type', original_origin_type)
-                            else:
-                                origin_elem.set('Type', origin['type'])
+                            origin_elem.set('Type', origin['type'])
                         if origin.get('source'):
                             origin_elem.set('Source', origin['source'])
                         

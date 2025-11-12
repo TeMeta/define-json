@@ -1317,8 +1317,21 @@ class DefineXMLToJSONConverter:
         Extract origin information for Origin object.
         Note: Origin itself doesn't have a description field - descriptions go in Item.description
         
+        Legacy Terminology Upgrade (pre-Define 2.1):
+        - Old "CRF" → Upgraded to "Collected" (one-way conversion)
+        - Old "eDT" → Upgraded to "Collected" (one-way conversion)
+        
+        Current OriginType enum values:
+        - Assigned: Values from lookup tables/CRF labels
+        - Collected: Observed/recorded data (replaces CRF/eDT)
+        - Derived: Calculated values
+        - Not_Available: Not discoverable
+        - Other: Catch-all
+        - Predecessor: Copied from another variable
+        - Protocol: Protocol-defined values
+        
         Returns:
-            Dictionary with origin data for Pydantic Origin object
+            Tuple of (origin_dict, origin_metadata)
         """
         origin = {}
         has_origin_element = False  # Track if origin was an element vs attribute
@@ -1333,11 +1346,14 @@ class DefineXMLToJSONConverter:
                 try:
                     origin['type'] = OriginType(origin_type)
                 except ValueError:
-                    # Store original invalid value in metadata for perfect roundtrip
-                    logger.warning(f"Invalid OriginType '{origin_type}' for item {item_def.get('OID')}, storing in supplemental")
-                    origin_metadata['originalOriginType'] = origin_type
-                    # Use CRF as fallback for the model  
-                    origin['type'] = OriginType.CRF
+                    # Handle legacy terminology (CRF/eDT → Collected)
+                    if origin_type in ['CRF', 'eDT']:
+                        origin['type'] = OriginType.Collected
+                        logger.info(f"Upgraded legacy OriginType '{origin_type}' → 'Collected' for item {item_def.get('OID')}")
+                    else:
+                        # Invalid value → use Other as fallback
+                        logger.warning(f"Invalid OriginType '{origin_type}' for item {item_def.get('OID')}, using 'Other'")
+                        origin['type'] = OriginType.Other
             
             source = origin_elem.get('Source')
             if source:
@@ -1353,7 +1369,12 @@ class DefineXMLToJSONConverter:
             try:
                 origin['type'] = OriginType(origin_attr)
             except ValueError:
-                origin['type'] = origin_attr
+                # Handle legacy terminology in attributes (CRF/eDT → Collected)
+                if origin_attr in ['CRF', 'eDT']:
+                    origin['type'] = OriginType.Collected
+                    logger.info(f"Upgraded legacy Origin attribute '{origin_attr}' → 'Collected' for item {item_def.get('OID')}")
+                else:
+                    origin['type'] = origin_attr
         
         # ALWAYS capture Comment attribute (for both modes)
         comment_attr = item_def.get('Comment')

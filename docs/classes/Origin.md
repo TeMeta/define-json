@@ -97,7 +97,7 @@ Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [type](../slots/type.md) | 0..1 <br/> [OriginType](../enums/OriginType.md) | The type of origin: CRF, Derived, Protocol, eDT, Predecessor. | direct |
+| [type](../slots/type.md) | 0..1 <br/> [OriginType](../enums/OriginType.md) | The type of origin: Assigned, Collected, Derived, Protocol, Predecessor, Not Available, or Other. | direct |
 | [source](../slots/source.md) | 0..1 <br/> [OriginSource](../enums/OriginSource.md) | The source of the data, such as Investigator, Sponsor, Subject, or Vendor. | direct |
 | [sourceItems](../slots/sourceItems.md) | * <br/> [SourceItem](../classes/SourceItem.md) | Source items for this origin | direct |
 | [documents](../slots/documents.md) | * <br/> [DocumentReference](../classes/DocumentReference.md) | Reference to a document that describes this origin in detail. | direct |
@@ -160,7 +160,8 @@ from_schema: https://cdisc.org/define-json
 attributes:
   type:
     name: type
-    description: 'The type of origin: CRF, Derived, Protocol, eDT, Predecessor.'
+    description: 'The type of origin: Assigned, Collected, Derived, Protocol, Predecessor,
+      Not Available, or Other.'
     from_schema: https://cdisc.org/define-json
     domain_of:
     - ItemGroup
@@ -219,7 +220,8 @@ from_schema: https://cdisc.org/define-json
 attributes:
   type:
     name: type
-    description: 'The type of origin: CRF, Derived, Protocol, eDT, Predecessor.'
+    description: 'The type of origin: Assigned, Collected, Derived, Protocol, Predecessor,
+      Not Available, or Other.'
     from_schema: https://cdisc.org/define-json
     alias: type
     owner: Origin

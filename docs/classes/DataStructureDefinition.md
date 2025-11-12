@@ -21,7 +21,6 @@ DataStructureDefinition {
     string structure  
     boolean isReferenceData  
     ItemGroupType type  
-    stringList children  
     stringList profile  
     string authenticator  
     string OID  
@@ -176,6 +175,27 @@ ConceptProperty {
     string owner  
     string wasDerivedFrom  
 }
+ItemGroup {
+    string domain  
+    string structure  
+    boolean isReferenceData  
+    ItemGroupType type  
+    stringList profile  
+    string authenticator  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+    string version  
+    string href  
+}
 Item {
     DataType dataType  
     integer length  
@@ -199,34 +219,6 @@ Item {
     datetime lastUpdated  
     string owner  
     string wasDerivedFrom  
-}
-CodeList {
-    DataType dataType  
-    string formatName  
-    string version  
-    string href  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-Origin {
-    OriginType type  
-    OriginSource source  
-}
-RangeCheck {
-    Comparator comparator  
-    stringList checkValues  
-    string item  
-    SoftHard softHard  
-    LogicalOperator operator  
 }
 ComponentList {
     stringList components  
@@ -286,6 +278,7 @@ DataStructureDefinition ||--}o Measure : "measures"
 DataStructureDefinition ||--}o DataAttribute : "attributes"
 DataStructureDefinition ||--|o ComponentList : "grouping"
 DataStructureDefinition ||--}o Item : "items"
+DataStructureDefinition ||--}o ItemGroup : "children"
 DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
 DataStructureDefinition ||--}o WhereClause : "applicableWhen"
 DataStructureDefinition ||--}o Coding : "security"
@@ -333,6 +326,15 @@ ConceptProperty ||--|o CodeList : "codeList"
 ConceptProperty ||--}o Coding : "coding"
 ConceptProperty ||--}o Comment : "comments"
 ConceptProperty ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+ItemGroup ||--}o Item : "items"
+ItemGroup ||--}o ItemGroup : "children"
+ItemGroup ||--|o ReifiedConcept : "implementsConcept"
+ItemGroup ||--}o WhereClause : "applicableWhen"
+ItemGroup ||--}o Coding : "security"
+ItemGroup ||--|o Timing : "validityPeriod"
+ItemGroup ||--}o Coding : "coding"
+ItemGroup ||--}o Comment : "comments"
+ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
@@ -344,14 +346,6 @@ Item ||--|o Condition : "collectionExceptionCondition"
 Item ||--}o Coding : "coding"
 Item ||--}o Comment : "comments"
 Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-CodeList ||--}o CodeListItem : "codeListItems"
-CodeList ||--|o Resource : "externalCodeList"
-CodeList ||--}o Coding : "coding"
-CodeList ||--}o Comment : "comments"
-CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-Origin ||--}o SourceItem : "sourceItems"
-Origin ||--}o DocumentReference : "documents"
-RangeCheck ||--}o FormalExpression : "expressions"
 ComponentList ||--}o Coding : "coding"
 DataAttribute ||--|| Item : "item"
 DataAttribute ||--|o Method : "missingHandling"
@@ -398,7 +392,7 @@ Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | [isReferenceData](../slots/isReferenceData.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Set to Yes if this is a reference item group. | [ItemGroup](../classes/ItemGroup.md) |
 | [type](../slots/type.md) | 0..1 <br/> [ItemGroupType](../enums/ItemGroupType.md) | Type of item group | [ItemGroup](../classes/ItemGroup.md) |
 | [items](../slots/items.md) | * <br/> [Item](../classes/Item.md) | Items in this group | [ItemGroup](../classes/ItemGroup.md) |
-| [children](../slots/children.md) | * <br/> [String](../types/String.md) | References to child ItemGroups (OIDs) within this item group. Use these OID references to look up the actual ItemGroup objects  from the top-level itemGroups collection. | [ItemGroup](../classes/ItemGroup.md) |
+| [children](../slots/children.md) | * <br/> [ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Child ItemGroups nested within this item group (e.g., ValueLists under parent domains). Can be either: - Full ItemGroup objects (preferred for hierarchical nesting) - OID string references (for cross-references to avoid duplication) | [ItemGroup](../classes/ItemGroup.md) |
 | [implementsConcept](../slots/implementsConcept.md) | 0..1 <br/> [ReifiedConcept](../classes/ReifiedConcept.md) | Reference to a abstract concept topic that this item group is a specialization of | [ItemGroup](../classes/ItemGroup.md) |
 | [applicableWhen](../slots/applicableWhen.md) | * <br/> [WhereClause](../classes/WhereClause.md) | References to different situations that define when this item applies.<br>Multiple whereClauses are combined with OR logic: the item applies if ANY referenced WhereClause matches.<br>Within each WhereClause, conditions are combined with AND logic: all conditions must be true.<br><br>Example: whereClause: ["WC.SYSBP", "WC.DIABP"] means the item applies when<br>(all conditions in WC.SYSBP are true) OR (all conditions in WC.DIABP are true). | [ItemGroup](../classes/ItemGroup.md) |
 | [profile](../slots/profile.md) | * <br/> [String](../types/String.md) | Profiles this resource claims to conform to | [IsProfile](../classes/IsProfile.md) |
@@ -668,18 +662,23 @@ attributes:
     inlined_as_list: true
   children:
     name: children
-    description: References to child ItemGroups (OIDs) within this item group. Use
-      these OID references to look up the actual ItemGroup objects  from the top-level
-      itemGroups collection.
+    description: 'Child ItemGroups nested within this item group (e.g., ValueLists
+      under parent domains). Can be either: - Full ItemGroup objects (preferred for
+      hierarchical nesting) - OID string references (for cross-references to avoid
+      duplication)'
     from_schema: https://cdisc.org/define-json
     rank: 1000
     alias: children
     owner: DataStructureDefinition
     domain_of:
     - ItemGroup
-    range: string
+    range: ItemGroup
     multivalued: true
-    inlined: false
+    inlined: true
+    inlined_as_list: true
+    any_of:
+    - range: ItemGroup
+    - range: string
   implementsConcept:
     name: implementsConcept
     description: Reference to a abstract concept topic that this item group is a specialization

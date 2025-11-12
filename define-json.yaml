@@ -1210,7 +1210,7 @@ classes:
     attributes:
       type:
         description: >-
-          The type of origin: CRF, Derived, Protocol, eDT, Predecessor.
+          The type of origin: Assigned, Collected, Derived, Protocol, Predecessor, Not Available, or Other.
         range: OriginType
       source:
         description: >-
@@ -2209,27 +2209,41 @@ enums:
 
   OriginType:
     description: >-
-      An enumeration that defines the types of origins for data items
+      An enumeration that defines the types of origins for data items.
+    from_schema: ncit:C170449
     permissible_values:
-      CRF:
+      Assigned:
         description: >-
-          Case Report Form.
+          A value that is derived through designation, such as values from a look up table or a label on a CRF.
+        meaning: ncit:C170547
+      Collected:
+        description: >-
+          A value that is actually observed and recorded by a person or obtained by an instrument.
+        meaning: ncit:C170548
       Derived:
         description: >-
-          Derived from other items.
-      Protocol:
+          A value that is calculated by an algorithm or reproducible rule, and which is dependent upon other data values.
+        meaning: ncit:C170549
+      Not Available:
         description: >-
-          Protocol-defined data.
-      eDT:
+          A value that is not discoverable or accessible.
+        meaning: ncit:C126101
+      Other:
         description: >-
-          Electronic data transfer.
+          Different than the one(s) previously specified or mentioned. (NCI)
       Predecessor:
         description: >-
-          From a predecessor study.
+          A value that is copied from another variable.
+        meaning: ncit:C170550
+      Protocol:
+        description: >-
+          A value that is included as part of the study protocol.
+        meaning: ncit:C170551
 
   OriginSource:
     description: >-
       An enumeration that defines the sources of data origin
+    from_schema: ncit:C170450
     permissible_values:
       Investigator:
         text: Investigator
