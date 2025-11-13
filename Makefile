@@ -37,31 +37,31 @@ install:
 
 check-syntax:
 	@echo "Checking YAML syntax..."
-	poetry run python -c "import yaml; yaml.safe_load(open('define-json.yaml'))"
+	poetry run python -c "import yaml; yaml.safe_load(open('define.yaml'))"
 	@echo "YAML syntax is valid"
 
 validate:
 	@echo "Validating LinkML schema structure..."
-	poetry run python -c "from linkml_runtime import SchemaView; sv = SchemaView('define-json.yaml'); print('Schema loaded successfully')"
+	poetry run python -c "from linkml_runtime import SchemaView; sv = SchemaView('define.yaml'); print('Schema loaded successfully')"
 	@echo "LinkML schema validation passed"
 
 lint:
 	@echo "Linting YAML file..."
-	poetry run yamllint define-json.yaml || echo "YAML linting issues found (yamllint)"
+	poetry run yamllint define.yaml || echo "YAML linting issues found (yamllint)"
 
 linkml-lint:
 	@echo "Running LinkML schema linter..."
-	poetry run linkml-lint define-json.yaml || echo "LinkML linting issues found (non-blocking)"
+	poetry run linkml-lint define.yaml || echo "LinkML linting issues found (non-blocking)"
 	@echo "LinkML linting complete"
 
 generate-json-schema:
 	@echo "Generating JSON Schema from LinkML..."
-	poetry run linkml generate json-schema define-json.yaml > generated/define-json-schema.json
+	poetry run linkml generate json-schema define.yaml > generated/define-json-schema.json
 	@echo "JSON Schema generated: generated/define-json-schema.json"
 
 generate-pydantic:
 	@echo "Generating Pydantic models from LinkML..."
-	poetry run linkml generate pydantic --meta AUTO define-json.yaml > generated/define.py
+	poetry run linkml generate pydantic --meta AUTO define.yaml > generated/define.py
 	@echo "Pydantic models generated: generated/define.py"
 # Main functionality targets
 demo:
@@ -103,7 +103,7 @@ docs:
 	cp src/js/* docs/js/;
 	cp CONVERSION_README.md docs/CONVERSION_README.md;
 	cp QUICK_REFERENCE.md docs/QUICK_REFERENCE.md;
-	poetry run gen-doc define-json.yaml --directory docs/ --subfolder-type-separation --hierarchical-class-view --diagram-type er_diagram \
+	poetry run gen-doc define.yaml --directory docs/ --subfolder-type-separation --hierarchical-class-view --diagram-type er_diagram \
 	--sort-by rank --include-top-level-diagram --truncate-descriptions false
 
 docs-serve:

@@ -33,7 +33,7 @@ def to_schema_compliant(conversion_json: Dict[str, Any]) -> Dict[str, Any]:
     Example:
         >>> intermediate = converter.convert_file(xml_path, json_path)
         >>> schema_json = to_schema_compliant(intermediate)
-        >>> # schema_json can now be validated against define-json.yaml
+        >>> # schema_json can now be validated against define.yaml
     """
     def strip_underscores(obj):
         if isinstance(obj, dict):

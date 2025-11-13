@@ -96,9 +96,9 @@ linkml_meta = LinkMLMeta({'default_prefix': 'odm',
                            'prefix_reference': 'https://cdisc.org/cosmos/sdtm_v1.0#'},
                   'skos': {'prefix_prefix': 'skos',
                            'prefix_reference': 'http://www.w3.org/2004/02/skos/core#'},
-                  'usdm': {'prefix_prefix': 'usdm',
-                           'prefix_reference': 'https://cdisc.org/usdm/'}},
-     'source_file': 'define-json.yaml'} )
+                 'usdm': {'prefix_prefix': 'usdm',
+                          'prefix_reference': 'https://cdisc.org/usdm/'}},
+    'source_file': 'define.yaml'} )
 
 class AliasPredicate(str, Enum):
     """
