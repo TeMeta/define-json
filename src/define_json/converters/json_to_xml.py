@@ -1775,6 +1775,18 @@ class DefineJSONToXMLConverter:
                     logger.info(f"Creating ExternalCodeList for {cl_oid} from supplemental: {cl_supp['externalCodeList']}")
                     self._create_external_code_list(cl_elem, cl_supp['externalCodeList'])
             
+            # Add Alias elements for CodeList from coding array (terminology references)
+            codings = cl.get('coding', [])
+            for coding_obj in codings:
+                alias_elem = ET.SubElement(cl_elem, 'Alias')
+                if isinstance(coding_obj, dict):
+                    alias_elem.set('Context', coding_obj.get('codeSystem', ''))
+                    alias_elem.set('Name', coding_obj.get('code', ''))
+                else:
+                    # Pydantic Coding object
+                    alias_elem.set('Context', coding_obj.codeSystem)
+                    alias_elem.set('Name', coding_obj.code)
+            
             # Add Alias elements for CodeList (from string aliases)
             aliases = cl.get('aliases', [])
             for alias_str in aliases:

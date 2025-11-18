@@ -1010,16 +1010,21 @@ class DefineXMLToJSONConverter:
             if ig_elem.get('Name'):
                 ig_data['name'] = ig_elem.get('Name')
             
-            # Description (prefer def:Label)
-            label = ig_elem.get('{%s}Label' % self.active_namespaces['def'])
-            if label:
-                ig_data['label'] = label
+            # Label and Description
+            # In Define-XML, the <Description> element typically contains the label (short name)
+            # The def:Label attribute is used for actual labels when present
+            def_label = ig_elem.get('{%s}Label' % self.active_namespaces['def'])
+            description_text = self._get_description(ig_elem)
             
-            description = self._get_description(ig_elem)
-            if description:
-                ig_data['description'] = description
-            elif not label and ig_elem.get('Domain'):
-                ig_data['description'] = f"{ig_elem.get('Domain')} domain dataset"
+            if def_label:
+                # If def:Label attribute exists, use it as label
+                ig_data['label'] = def_label
+                # And use Description element as description if present
+                if description_text:
+                    ig_data['description'] = description_text
+            elif description_text:
+                # If no def:Label, the Description element is actually the label
+                ig_data['label'] = description_text
             
             # Domain - this IS a valid ItemGroup field!
             domain = ig_elem.get('Domain')
@@ -1161,15 +1166,21 @@ class DefineXMLToJSONConverter:
         if item_def.get('Name'):
             item_data['name'] = item_def.get('Name')
         
-        # Label (prefer def:Label)
-        label = item_def.get('{%s}Label' % self.active_namespaces['def'])
-        if label:
-            item_data['label'] = label
+        # Label and Description
+        # In Define-XML, the <Description> element typically contains the label (short name)
+        # The def:Label attribute is used for actual labels when present
+        def_label = item_def.get('{%s}Label' % self.active_namespaces['def'])
+        description_text = self._get_description(item_def)
         
-        # Description
-        description = self._get_description(item_def)
-        if description:
-            item_data['description'] = description
+        if def_label:
+            # If def:Label attribute exists, use it as label
+            item_data['label'] = def_label
+            # And use Description element as description if present
+            if description_text:
+                item_data['description'] = description_text
+        elif description_text:
+            # If no def:Label, the Description element is actually the label
+            item_data['label'] = description_text
         
         # DataType (required by schema, but may not be in XML)
         data_type = item_def.get('DataType')
@@ -1526,19 +1537,31 @@ class DefineXMLToJSONConverter:
             if description:
                 cl_data['description'] = description
             
-            # Process Alias elements on CodeList - store as simple string aliases
-            # Format: "context|||name" using ||| as delimiter to avoid conflicts with : in context
+            # Process Alias elements on CodeList
+            # Check if they are coding references (e.g., nci:ExtCodeID) or true aliases
             aliases = []
+            codings = []
             for alias_elem in cl_elem.findall('odm:Alias', self.active_namespaces):
                 context = alias_elem.get('Context')
                 name = alias_elem.get('Name')
-                if context and name:
+                
+                # If context suggests terminology/coding (e.g., nci:ExtCodeID), treat as coding
+                if context and name and ('ExtCodeID' in context or 'nci:' in context.lower() or 'cdisc:' in context.lower()):
+                    codings.append(Coding(
+                        codeSystem=context,
+                        code=name
+                    ))
+                # Otherwise, treat as a true alias
+                elif context and name:
                     # Use ||| as delimiter (unlikely to appear in real data)
                     aliases.append(f"{context}|||{name}")
                 elif name:
                     aliases.append(name)
+            
             if aliases:
                 cl_data['aliases'] = aliases
+            if codings:
+                cl_data['coding'] = codings
             
             # Check for ExternalCodeList - convert to Dictionary object
             external_cl = cl_elem.find('odm:ExternalCodeList', self.active_namespaces)
