@@ -109,63 +109,8 @@ Alias: version</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../../classes/Dictionary/">Dictionary</a></td>
-<td>A dictionary that defines a set of codes and their meanings</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/Dataflow/">Dataflow</a></td>
-<td>An abstract representation that defines data provision for different reference periods, where a Distribution and its Dataset are instances</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/Analysis/">Analysis</a></td>
-<td>Analysis extends Method to capture analysis-specific metadata including the reason for analysis, its purpose, and data traceability for the results used.<br/>Expressions and parameters from Method can be generic or implementation-specific.</td>
-<td>no</td>
-</tr>
-<tr>
 <td><a href="../../classes/CodeList/">CodeList</a></td>
 <td>A value set that defines a discrete collection of permissible values for an item, corresponding to the ODM CodeList construct</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/ReifiedConcept/">ReifiedConcept</a></td>
-<td>A canonical information layer that makes abstract concepts explicit and referenceable, showing how different data implementations represent the same underlying meanings through a star schema structure with multiple properties</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/DataService/">DataService</a></td>
-<td>A service element that provides an API or endpoint for serving or receiving data</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/DataStructureDefinition/">DataStructureDefinition</a></td>
-<td>A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/Versioned/">Versioned</a></td>
-<td>A mixin that provides version and connectivity information, including version numbers and resource references</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/Resource/">Resource</a></td>
-<td>An external reference that serves as the source for a Dataset, ItemGroup, or Item</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/IsProfile/">IsProfile</a></td>
-<td>A mixin that provides additional metadata for FHIR resources and Data Products, including profiles, security tags, and validity periods</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/DocumentReference/">DocumentReference</a></td>
-<td>A comprehensive reference element that points to an external document, combining elements from ODM and FHIR</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/ItemGroup/">ItemGroup</a></td>
-<td>A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections</td>
 <td>no</td>
 </tr>
 <tr>
@@ -179,8 +124,48 @@ Alias: version</p>
 <td>no</td>
 </tr>
 <tr>
+<td><a href="../../classes/Dataflow/">Dataflow</a></td>
+<td>An abstract representation that defines data provision for different reference periods, where a Distribution and its Dataset are instances</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/DataService/">DataService</a></td>
+<td>A service element that provides an API or endpoint for serving or receiving data</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/IsProfile/">IsProfile</a></td>
+<td>A mixin that provides additional metadata for FHIR resources and Data Products, including profiles, security tags, and validity periods</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/ItemGroup/">ItemGroup</a></td>
+<td>A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/DataProduct/">DataProduct</a></td>
+<td>A governed collection that represents a purpose-driven assembly of datasets and services with an owning team and lifecycle</td>
+<td>no</td>
+</tr>
+<tr>
 <td><a href="../../classes/Standard/">Standard</a></td>
 <td>A collection element that groups related standards within a specific context, used for defining CDISC implementation guides and controlled terminologies</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/ReifiedConcept/">ReifiedConcept</a></td>
+<td>A canonical information layer that makes abstract concepts explicit and referenceable, showing how different data implementations represent the same underlying meanings through a star schema structure with multiple properties</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/Versioned/">Versioned</a></td>
+<td>A mixin that provides version and connectivity information, including version numbers and resource references</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/DocumentReference/">DocumentReference</a></td>
+<td>A comprehensive reference element that points to an external document, combining elements from ODM and FHIR</td>
 <td>no</td>
 </tr>
 <tr>
@@ -189,8 +174,23 @@ Alias: version</p>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../../classes/DataProduct/">DataProduct</a></td>
-<td>A governed collection that represents a purpose-driven assembly of datasets and services with an owning team and lifecycle</td>
+<td><a href="../../classes/Resource/">Resource</a></td>
+<td>An external reference that serves as the source for a Dataset, ItemGroup, or Item</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/Analysis/">Analysis</a></td>
+<td>Analysis extends Method to capture analysis-specific metadata including the reason for analysis, its purpose, and data traceability for the results used.<br/>Expressions and parameters from Method can be generic or implementation-specific.</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/DataStructureDefinition/">DataStructureDefinition</a></td>
+<td>A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/Dictionary/">Dictionary</a></td>
+<td>A dictionary that defines a set of codes and their meanings</td>
 <td>no</td>
 </tr>
 </tbody>

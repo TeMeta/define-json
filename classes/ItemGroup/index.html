@@ -315,6 +315,7 @@ RangeCheck {
 }
 
 ItemGroup ||--}o Item : "items"
+ItemGroup ||--}o Item : "keySequence"
 ItemGroup ||--}o ItemGroup : "children"
 ItemGroup ||--|o ReifiedConcept : "implementsConcept"
 ItemGroup ||--}o WhereClause : "applicableWhen"
@@ -433,6 +434,12 @@ RangeCheck ||--}o FormalExpression : "expressions"
 <td><a href="../../slots/items/">items</a></td>
 <td>* <br/> <a href="../Item/">Item</a></td>
 <td>Items in this group</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../../slots/keySequence/">keySequence</a></td>
+<td>* <br/> <a href="../Item/">Item</a></td>
+<td>Ordered list of Items that define the dataset key structure for sorting and uniqueness. Each entry is an OID reference to an Item in the items array. Order determines sorting precedence, merge operations, and record uniqueness. These are allowed to be null, unlike stricter dataset dimensions or primary keys.</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -792,7 +799,7 @@ RangeCheck ||--}o FormalExpression : "expressions"
 </tr>
 <tr>
 <td>narrow</td>
-<td>fhir:StructureDefinition, fhir:ViewDefinition, fhir:Questionnaire/item, omop:Table, qb:DataStructureDefinition, sdmx:DataStructureDefinition, sdmx:MetaDataStructureDefinition</td>
+<td>fhir:StructureDefinition, fhir:ViewDefinition, fhir:Questionnaire, omop:Table, qb:DataStructureDefinition, sdmx:DataStructureDefinition, sdmx:MetaDataStructureDefinition</td>
 </tr>
 <tr>
 <td>related</td>
@@ -826,7 +833,7 @@ RangeCheck ||--}o FormalExpression : "expressions"
 <span class="nt">narrow_mappings</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fhir:StructureDefinition</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fhir:ViewDefinition</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fhir:Questionnaire/item</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fhir:Questionnaire</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">omop:Table</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qb:DataStructureDefinition</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sdmx:DataStructureDefinition</span>
@@ -889,6 +896,24 @@ RangeCheck ||--}o FormalExpression : "expressions"
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MetaDataVersion</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Parameter</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Item</span>
+<span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">keySequence</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">keySequence</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ordered list of Items that define the dataset key structure for sorting</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">and uniqueness. Each entry is an OID reference to an Item in the items array.</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">Order determines sorting precedence, merge operations, and record uniqueness.</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">These are allowed to be null, unlike stricter dataset dimensions or primary</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">keys.</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
+<span class="w">    </span><span class="nt">close_mappings</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">odm:ItemRef.KeySequence</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sdmx:DimensionDescriptor</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Item</span>
 <span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
@@ -969,7 +994,7 @@ RangeCheck ||--}o FormalExpression : "expressions"
 <span class="nt">narrow_mappings</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fhir:StructureDefinition</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fhir:ViewDefinition</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fhir:Questionnaire/item</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fhir:Questionnaire</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">omop:Table</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">qb:DataStructureDefinition</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sdmx:DataStructureDefinition</span>
@@ -1042,6 +1067,26 @@ RangeCheck ||--}o FormalExpression : "expressions"
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MetaDataVersion</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Parameter</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Item</span>
+<span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">    </span><span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="nt">keySequence</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">keySequence</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ordered list of Items that define the dataset key structure for sorting</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">and uniqueness. Each entry is an OID reference to an Item in the items array.</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">Order determines sorting precedence, merge operations, and record uniqueness.</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">These are allowed to be null, unlike stricter dataset dimensions or primary</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">keys.</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
+<span class="w">    </span><span class="nt">close_mappings</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">odm:ItemRef.KeySequence</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sdmx:DimensionDescriptor</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">keySequence</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Item</span>
 <span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>

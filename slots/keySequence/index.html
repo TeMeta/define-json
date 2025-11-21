@@ -95,6 +95,7 @@
 </div></div>
 <div class="col-md-9" role="main">
 <h1 id="slot-keysequence">Slot: keySequence</h1>
+<p><em>Ordered list of Items that define the dataset key structure for sorting and uniqueness. Each entry is an OID reference to an Item in the items array. Order determines sorting precedence, merge operations, and record uniqueness. These are allowed to be null, unlike stricter dataset dimensions or primary keys.</em></p>
 <p>URI: <a href="https://cdisc.org/odm2/slot/keySequence">odm:slot/keySequence</a>
 Alias: keySequence</p>
 <!-- no inheritance hierarchy -->
@@ -109,15 +110,25 @@ Alias: keySequence</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../../classes/Dimension/">Dimension</a></td>
-<td>A data cube property that describes a categorical or hierarchical dimension</td>
+<td><a href="../../classes/DataStructureDefinition/">DataStructureDefinition</a></td>
+<td>A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../../classes/ItemGroup/">ItemGroup</a></td>
+<td>A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections</td>
 <td>no</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>Range: <a href="../../types/Integer/">Integer</a></li>
+<li>
+<p>Range: <a href="../../classes/Item/">Item</a></p>
+</li>
+<li>
+<p>Multivalued: True</p>
+</li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -141,18 +152,32 @@ Alias: keySequence</p>
 <td>native</td>
 <td>odm:keySequence</td>
 </tr>
+<tr>
+<td>close</td>
+<td>odm:ItemRef.KeySequence, sdmx:DimensionDescriptor</td>
+</tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">keySequence</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Ordered list of Items that define the dataset key structure for sorting</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">and uniqueness. Each entry is an OID reference to an Item in the items array. Order</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">determines sorting precedence, merge operations, and record uniqueness. These are</span>
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">allowed to be null, unlike stricter dataset dimensions or primary keys.</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
+<span class="nt">close_mappings</span><span class="p">:</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">odm:ItemRef.KeySequence</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sdmx:DimensionDescriptor</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">keySequence</span>
-<span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Dimension</span>
+<span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
 <span class="nt">domain_of</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Dimension</span>
-<span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">integer</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
+<span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Item</span>
+<span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 </details></div>
 </div>
