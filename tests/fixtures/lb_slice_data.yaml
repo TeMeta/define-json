@@ -1,0 +1,50 @@
+# Mock data showing how attribute values vary across slices
+# This simulates what would be in actual data, showing attachment patterns
+
+slices:
+  - oid: WC.GLUCOSE.BASELINE
+    dimensions:
+      LBTEST: Glucose
+      VISITNUM: 1
+    attributes:
+      STUDYID: STUDY001        # Constant across all slices
+      LBCAT: CHEMISTRY         # Varies by LBTEST (Glucose/Sodium=CHEMISTRY, Platelet=HEMATOLOGY)
+      LBSTRESU: mg/dL          # Varies by LBTEST
+      VISIT: Baseline          # Varies by VISITNUM
+  
+  - oid: WC.GLUCOSE.WEEK4
+    dimensions:
+      LBTEST: Glucose
+      VISITNUM: 2
+    attributes:
+      STUDYID: STUDY001        # Same everywhere
+      LBCAT: CHEMISTRY         # Same as other Glucose (varies by LBTEST)
+      LBSTRESU: mg/dL          # Same as other Glucose (varies by LBTEST)
+      VISIT: Week 4            # Different from Baseline (varies by VISITNUM)
+  
+  - oid: WC.SODIUM.BASELINE
+    dimensions:
+      LBTEST: Sodium
+      VISITNUM: 1
+    attributes:
+      STUDYID: STUDY001        # Same everywhere
+      LBCAT: CHEMISTRY         # Same as Glucose (varies by LBTEST)
+      LBSTRESU: mmol/L         # Different from Glucose (varies by LBTEST)
+      VISIT: Baseline          # Same as other Baseline (varies by VISITNUM)
+  
+  - oid: WC.PLATELET.BASELINE
+    dimensions:
+      LBTEST: Platelet
+      VISITNUM: 1
+    attributes:
+      STUDYID: STUDY001        # Same everywhere
+      LBCAT: HEMATOLOGY        # Different from Chemistry tests (varies by LBTEST)
+      LBSTRESU: 10^9/L         # Different from other tests (varies by LBTEST)
+      VISIT: Baseline          # Same as other Baseline (varies by VISITNUM)
+
+# Expected inference results:
+# STUDYID: Dataset-level (constant everywhere)
+# LBCAT: Dimension-level, attached to LBTEST
+# LBSTRESU: Dimension-level, attached to LBTEST
+# VISIT: Dimension-level, attached to VISITNUM
+

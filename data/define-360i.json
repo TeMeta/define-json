@@ -1830,8 +1830,11 @@
     {
       "OID": "CL.NY",
       "name": "No Yes Response",
-      "aliases": [
-        "nci:ExtCodeID|||C66742"
+      "coding": [
+        {
+          "code": "C66742",
+          "codeSystem": "nci:ExtCodeID"
+        }
       ],
       "dataType": "text",
       "codeListItems": [
@@ -1872,8 +1875,11 @@
     {
       "OID": "CL.AGEU",
       "name": "Age Unit",
-      "aliases": [
-        "nci:ExtCodeID|||C66781"
+      "coding": [
+        {
+          "code": "C66781",
+          "codeSystem": "nci:ExtCodeID"
+        }
       ],
       "dataType": "text",
       "codeListItems": [
@@ -1917,8 +1923,11 @@
     {
       "OID": "CL.SEX",
       "name": "Sex",
-      "aliases": [
-        "nci:ExtCodeID|||C66731"
+      "coding": [
+        {
+          "code": "C66731",
+          "codeSystem": "nci:ExtCodeID"
+        }
       ],
       "dataType": "text",
       "codeListItems": [
@@ -1943,8 +1952,11 @@
     {
       "OID": "CL.RACE",
       "name": "Race",
-      "aliases": [
-        "nci:ExtCodeID|||C74457"
+      "coding": [
+        {
+          "code": "C74457",
+          "codeSystem": "nci:ExtCodeID"
+        }
       ],
       "dataType": "text",
       "codeListItems": [
@@ -2009,8 +2021,11 @@
     {
       "OID": "CL.ARMNULRS",
       "name": "Arm Null Reason",
-      "aliases": [
-        "nci:ExtCodeID|||C142179"
+      "coding": [
+        {
+          "code": "C142179",
+          "codeSystem": "nci:ExtCodeID"
+        }
       ],
       "dataType": "text",
       "codeListItems": [
@@ -2047,8 +2062,11 @@
     {
       "OID": "CL.VSTESTCD",
       "name": "Vital Signs Test Code",
-      "aliases": [
-        "nci:ExtCodeID|||C66741"
+      "coding": [
+        {
+          "code": "C66741",
+          "codeSystem": "nci:ExtCodeID"
+        }
       ],
       "dataType": "text",
       "codeListItems": [
@@ -2105,8 +2123,11 @@
     {
       "OID": "CL.VSTEST",
       "name": "Vital Signs Test Name",
-      "aliases": [
-        "nci:ExtCodeID|||C67153"
+      "coding": [
+        {
+          "code": "C67153",
+          "codeSystem": "nci:ExtCodeID"
+        }
       ],
       "dataType": "text",
       "codeListItems": [
@@ -2163,8 +2184,11 @@
     {
       "OID": "CL.POSITION",
       "name": "Position",
-      "aliases": [
-        "nci:ExtCodeID|||C71148"
+      "coding": [
+        {
+          "code": "C71148",
+          "codeSystem": "nci:ExtCodeID"
+        }
       ],
       "dataType": "text",
       "codeListItems": [
@@ -2213,8 +2237,11 @@
     {
       "OID": "CL.VSRESU",
       "name": "Units for Vital Signs Results",
-      "aliases": [
-        "nci:ExtCodeID|||C66770"
+      "coding": [
+        {
+          "code": "C66770",
+          "codeSystem": "nci:ExtCodeID"
+        }
       ],
       "dataType": "text",
       "codeListItems": [
@@ -2295,8 +2322,11 @@
     {
       "OID": "CL.LOC",
       "name": "Anatomical Location",
-      "aliases": [
-        "nci:ExtCodeID|||C74456"
+      "coding": [
+        {
+          "code": "C74456",
+          "codeSystem": "nci:ExtCodeID"
+        }
       ],
       "dataType": "text",
       "codeListItems": [
@@ -2401,8 +2431,11 @@
     {
       "OID": "CL.LAT",
       "name": "Laterality",
-      "aliases": [
-        "nci:ExtCodeID|||C99073"
+      "coding": [
+        {
+          "code": "C99073",
+          "codeSystem": "nci:ExtCodeID"
+        }
       ],
       "dataType": "text",
       "codeListItems": [
@@ -2425,8 +2458,11 @@
     {
       "OID": "CL.LBTESTCD",
       "name": "Laboratory Test Code",
-      "aliases": [
-        "nci:ExtCodeID|||C65047"
+      "coding": [
+        {
+          "code": "C65047",
+          "codeSystem": "nci:ExtCodeID"
+        }
       ],
       "dataType": "text",
       "codeListItems": [
@@ -2499,8 +2535,11 @@
     {
       "OID": "CL.LBTEST",
       "name": "Laboratory Test Name",
-      "aliases": [
-        "nci:ExtCodeID|||C67154"
+      "coding": [
+        {
+          "code": "C67154",
+          "codeSystem": "nci:ExtCodeID"
+        }
       ],
       "dataType": "text",
       "codeListItems": [
@@ -2573,8 +2612,11 @@
     {
       "OID": "CL.UNIT",
       "name": "Unit",
-      "aliases": [
-        "nci:ExtCodeID|||C71620"
+      "coding": [
+        {
+          "code": "C71620",
+          "codeSystem": "nci:ExtCodeID"
+        }
       ],
       "dataType": "text",
       "codeListItems": [
@@ -2663,8 +2705,11 @@
     {
       "OID": "CL.LBSTRESC",
       "name": "Laboratory Test Standard Character Result",
-      "aliases": [
-        "nci:ExtCodeID|||C102580"
+      "coding": [
+        {
+          "code": "C102580",
+          "codeSystem": "nci:ExtCodeID"
+        }
       ],
       "dataType": "text",
       "codeListItems": [
@@ -2771,8 +2816,11 @@
     {
       "OID": "CL.NRIND",
       "name": "Reference Range Indicator",
-      "aliases": [
-        "nci:ExtCodeID|||C78736"
+      "coding": [
+        {
+          "code": "C78736",
+          "codeSystem": "nci:ExtCodeID"
+        }
       ],
       "dataType": "text",
       "codeListItems": [
@@ -2809,8 +2857,11 @@
     {
       "OID": "CL.SPECTYPE",
       "name": "Specimen Type",
-      "aliases": [
-        "nci:ExtCodeID|||C78734"
+      "coding": [
+        {
+          "code": "C78734",
+          "codeSystem": "nci:ExtCodeID"
+        }
       ],
       "dataType": "text",
       "codeListItems": [
@@ -2843,8 +2894,11 @@
     {
       "OID": "CL.AESEV",
       "name": "Severity/Intensity Scale for Adverse Events",
-      "aliases": [
-        "nci:ExtCodeID|||C66769"
+      "coding": [
+        {
+          "code": "C66769",
+          "codeSystem": "nci:ExtCodeID"
+        }
       ],
       "dataType": "text",
       "codeListItems": [
@@ -2877,8 +2931,11 @@
     {
       "OID": "CL.ACN",
       "name": "Action Taken with Study Treatment",
-      "aliases": [
-        "nci:ExtCodeID|||C66767"
+      "coding": [
+        {
+          "code": "C66767",
+          "codeSystem": "nci:ExtCodeID"
+        }
       ],
       "dataType": "text",
       "codeListItems": [
@@ -2943,8 +3000,11 @@
     {
       "OID": "CL.OUT",
       "name": "Outcome of Event",
-      "aliases": [
-        "nci:ExtCodeID|||C66768"
+      "coding": [
+        {
+          "code": "C66768",
+          "codeSystem": "nci:ExtCodeID"
+        }
       ],
       "dataType": "text",
       "codeListItems": [
@@ -3001,8 +3061,11 @@
     {
       "OID": "CL.STENRF",
       "name": "Relation to Reference Period",
-      "aliases": [
-        "nci:ExtCodeID|||C66728"
+      "coding": [
+        {
+          "code": "C66728",
+          "codeSystem": "nci:ExtCodeID"
+        }
       ],
       "dataType": "text",
       "codeListItems": [
@@ -3264,6 +3327,12 @@
       "IT.AE.AEENRTPT",
       "IT.AE.AEENTPT"
     ],
+    "valueListDefOrder": [
+      "VL.VS.VSORRES",
+      "VL.VS.VSORRESU",
+      "VL.LB.LBORRES",
+      "VL.LB.LBORRESU"
+    ],
     "hasStandardsElement": true,
     "annotatedCRF": {
       "documentRefs": [
@@ -3319,59 +3388,428 @@
       "VL.LB.LBORRES": {},
       "VL.LB.LBORRESU": {},
       "_itemOriginMetadata": {
+        "IT.DM.STUDYID": {
+          "SASFieldName": "STUDYID"
+        },
+        "IT.DM.DOMAIN": {
+          "SASFieldName": "DOMAIN"
+        },
+        "IT.DM.USUBJID": {
+          "SASFieldName": "USUBJID"
+        },
+        "IT.DM.SUBJID": {
+          "SASFieldName": "SUBJID"
+        },
+        "IT.DM.RFSTDTC": {
+          "SASFieldName": "RFSTDTC"
+        },
+        "IT.DM.RFENDTC": {
+          "SASFieldName": "RFENDTC"
+        },
+        "IT.DM.RFXSTDTC": {
+          "SASFieldName": "RFXSTDTC"
+        },
+        "IT.DM.RFXENDTC": {
+          "SASFieldName": "RFXENDTC"
+        },
+        "IT.DM.RFICDTC": {
+          "SASFieldName": "RFICDTC"
+        },
+        "IT.DM.RFPENDTC": {
+          "SASFieldName": "RFPENDTC"
+        },
+        "IT.DM.DTHDTC": {
+          "SASFieldName": "DTHDTC"
+        },
+        "IT.DM.DTHFL": {
+          "SASFieldName": "DTHFL"
+        },
+        "IT.DM.SITEID": {
+          "SASFieldName": "SITEID"
+        },
+        "IT.DM.AGE": {
+          "SASFieldName": "AGE"
+        },
+        "IT.DM.AGEU": {
+          "SASFieldName": "AGEU"
+        },
+        "IT.DM.SEX": {
+          "SASFieldName": "SEX"
+        },
+        "IT.DM.RACE": {
+          "SASFieldName": "RACE"
+        },
+        "IT.DM.ARMCD": {
+          "SASFieldName": "ARMCD"
+        },
+        "IT.DM.ARM": {
+          "SASFieldName": "ARM"
+        },
+        "IT.DM.ACTARMCD": {
+          "SASFieldName": "ACTARMCD"
+        },
+        "IT.DM.ACTARM": {
+          "SASFieldName": "ACTARM"
+        },
+        "IT.DM.ARMNRS": {
+          "SASFieldName": "ARMNRS"
+        },
+        "IT.DM.ACTARMUD": {
+          "SASFieldName": "ACTARMUD"
+        },
+        "IT.DM.COUNTRY": {
+          "SASFieldName": "COUNTRY"
+        },
+        "IT.DM.DMDTC": {
+          "SASFieldName": "DMDTC"
+        },
+        "IT.VS.STUDYID": {
+          "SASFieldName": "STUDYID"
+        },
+        "IT.VS.DOMAIN": {
+          "SASFieldName": "DOMAIN"
+        },
+        "IT.VS.USUBJID": {
+          "SASFieldName": "USUBJID"
+        },
+        "IT.VS.VSSEQ": {
+          "SASFieldName": "VSSEQ"
+        },
+        "IT.VS.VSTESTCD": {
+          "SASFieldName": "VSTESTCD"
+        },
+        "IT.VS.VSTEST": {
+          "SASFieldName": "VSTEST"
+        },
+        "IT.VS.VSPOS": {
+          "SASFieldName": "VSPOS"
+        },
         "IT.VS.VSORRES": {
-          "valueListOID": "VL.VS.VSORRES"
+          "valueListOID": "VL.VS.VSORRES",
+          "SASFieldName": "VSORRES"
         },
         "IT.VS.VSORRESU": {
-          "valueListOID": "VL.VS.VSORRESU"
+          "valueListOID": "VL.VS.VSORRESU",
+          "SASFieldName": "VSORRESU"
+        },
+        "IT.VS.VSSTRESC": {
+          "SASFieldName": "VSSTRESC"
+        },
+        "IT.VS.VSSTRESN": {
+          "SASFieldName": "VSSTRESN"
+        },
+        "IT.VS.VSSTRESU": {
+          "SASFieldName": "VSSTRESU"
+        },
+        "IT.VS.VSLOC": {
+          "SASFieldName": "VSLOC"
+        },
+        "IT.VS.VSLAT": {
+          "SASFieldName": "VSLAT"
+        },
+        "IT.VS.VSLOBXFL": {
+          "SASFieldName": "VSLOBXFL"
+        },
+        "IT.VS.VISITNUM": {
+          "SASFieldName": "VISITNUM"
+        },
+        "IT.VS.VSDTC": {
+          "SASFieldName": "VSDTC"
+        },
+        "IT.LB.STUDYID": {
+          "SASFieldName": "STUDYID"
+        },
+        "IT.LB.DOMAIN": {
+          "SASFieldName": "DOMAIN"
+        },
+        "IT.LB.USUBJID": {
+          "SASFieldName": "USUBJID"
+        },
+        "IT.LB.LBSEQ": {
+          "SASFieldName": "LBSEQ"
+        },
+        "IT.LB.LBTESTCD": {
+          "SASFieldName": "LBTESTCD"
+        },
+        "IT.LB.LBTEST": {
+          "SASFieldName": "LBTEST"
+        },
+        "IT.LB.LBCAT": {
+          "SASFieldName": "LBCAT"
         },
         "IT.LB.LBORRES": {
-          "valueListOID": "VL.LB.LBORRES"
+          "valueListOID": "VL.LB.LBORRES",
+          "SASFieldName": "LBORRES"
         },
         "IT.LB.LBORRESU": {
-          "valueListOID": "VL.LB.LBORRESU"
+          "valueListOID": "VL.LB.LBORRESU",
+          "SASFieldName": "LBORRESU"
+        },
+        "IT.LB.LBORNRLO": {
+          "SASFieldName": "LBORNRLO"
+        },
+        "IT.LB.LBORNRHI": {
+          "SASFieldName": "LBORNRHI"
+        },
+        "IT.LB.LBSTRESC": {
+          "SASFieldName": "LBSTRESC"
+        },
+        "IT.LB.LBSTRESN": {
+          "SASFieldName": "LBSTRESN"
+        },
+        "IT.LB.LBSTRESU": {
+          "SASFieldName": "LBSTRESU"
+        },
+        "IT.LB.LBSTNRLO": {
+          "SASFieldName": "LBSTNRLO"
+        },
+        "IT.LB.LBSTNRHI": {
+          "SASFieldName": "LBSTNRHI"
+        },
+        "IT.LB.LBNRIND": {
+          "SASFieldName": "LBNRIND"
+        },
+        "IT.LB.LBSPEC": {
+          "SASFieldName": "LBSPEC"
+        },
+        "IT.LB.LBLOBXFL": {
+          "SASFieldName": "LBLOBXFL"
+        },
+        "IT.LB.LBFAST": {
+          "SASFieldName": "LBFAST"
+        },
+        "IT.LB.VISITNUM": {
+          "SASFieldName": "VISITNUM"
+        },
+        "IT.LB.LBDTC": {
+          "SASFieldName": "LBDTC"
+        },
+        "IT.AE.STUDYID": {
+          "SASFieldName": "STUDYID"
+        },
+        "IT.AE.DOMAIN": {
+          "SASFieldName": "DOMAIN"
+        },
+        "IT.AE.USUBJID": {
+          "SASFieldName": "USUBJID"
+        },
+        "IT.AE.AESEQ": {
+          "SASFieldName": "AESEQ"
+        },
+        "IT.AE.AETERM": {
+          "SASFieldName": "AETERM"
+        },
+        "IT.AE.AELLT": {
+          "SASFieldName": "AELLT"
+        },
+        "IT.AE.AELLTCD": {
+          "SASFieldName": "AELLTCD"
+        },
+        "IT.AE.AEDECOD": {
+          "SASFieldName": "AEDECOD"
+        },
+        "IT.AE.AEPTCD": {
+          "SASFieldName": "AEPTCD"
+        },
+        "IT.AE.AEHLT": {
+          "SASFieldName": "AEHLT"
+        },
+        "IT.AE.AEHLTCD": {
+          "SASFieldName": "AEHLTCD"
+        },
+        "IT.AE.AEHLGT": {
+          "SASFieldName": "AEHLGT"
+        },
+        "IT.AE.AEHLGTCD": {
+          "SASFieldName": "AEHLGTCD"
+        },
+        "IT.AE.AECAT": {
+          "SASFieldName": "AECAT"
+        },
+        "IT.AE.AESCAT": {
+          "SASFieldName": "AESCAT"
+        },
+        "IT.AE.AEPRESP": {
+          "SASFieldName": "AEPRESP"
+        },
+        "IT.AE.AEBODSYS": {
+          "SASFieldName": "AEBODSYS"
+        },
+        "IT.AE.AEBDSYCD": {
+          "SASFieldName": "AEBDSYCD"
+        },
+        "IT.AE.AESOC": {
+          "SASFieldName": "AESOC"
+        },
+        "IT.AE.AESOCCD": {
+          "SASFieldName": "AESOCCD"
+        },
+        "IT.AE.AELOC": {
+          "SASFieldName": "AELOC"
+        },
+        "IT.AE.AESEV": {
+          "SASFieldName": "AESEV"
+        },
+        "IT.AE.AESER": {
+          "SASFieldName": "AESER"
+        },
+        "IT.AE.AEACN": {
+          "SASFieldName": "AEACN"
+        },
+        "IT.AE.AEACNOTH": {
+          "SASFieldName": "AEACNOTH"
+        },
+        "IT.AE.AEREL": {
+          "SASFieldName": "AEREL"
+        },
+        "IT.AE.AERELNST": {
+          "SASFieldName": "AERELNST"
+        },
+        "IT.AE.AEPATT": {
+          "SASFieldName": "AEPATT"
+        },
+        "IT.AE.AEOUT": {
+          "SASFieldName": "AEOUT"
+        },
+        "IT.AE.AESCAN": {
+          "SASFieldName": "AESCAN"
+        },
+        "IT.AE.AESCONG": {
+          "SASFieldName": "AESCONG"
+        },
+        "IT.AE.AESDISAB": {
+          "SASFieldName": "AESDISAB"
+        },
+        "IT.AE.AESDTH": {
+          "SASFieldName": "AESDTH"
+        },
+        "IT.AE.AESHOSP": {
+          "SASFieldName": "AESHOSP"
+        },
+        "IT.AE.AESLIFE": {
+          "SASFieldName": "AESLIFE"
+        },
+        "IT.AE.AESOD": {
+          "SASFieldName": "AESOD"
+        },
+        "IT.AE.AESMIE": {
+          "SASFieldName": "AESMIE"
+        },
+        "IT.AE.AECONTRT": {
+          "SASFieldName": "AECONTRT"
+        },
+        "IT.AE.AETOXGR": {
+          "SASFieldName": "AETOXGR"
+        },
+        "IT.AE.AESTDTC": {
+          "SASFieldName": "AESTDTC"
+        },
+        "IT.AE.AEENDTC": {
+          "SASFieldName": "AEENDTC"
+        },
+        "IT.AE.AEENRF": {
+          "SASFieldName": "AEENRF"
+        },
+        "IT.AE.AEENRTPT": {
+          "SASFieldName": "AEENRTPT"
+        },
+        "IT.AE.AEENTPT": {
+          "SASFieldName": "AEENTPT"
         },
         "IT.VS.VSORRES.TEMP": {
-          "wasElement": true
+          "wasElement": true,
+          "SASFieldName": "VSORRES"
         },
         "IT.VS.VSORRES.WEIGHT": {
-          "wasElement": true
+          "wasElement": true,
+          "SASFieldName": "VSORRES"
         },
         "IT.VS.VSORRES.HEIGHT": {
-          "wasElement": true
+          "wasElement": true,
+          "SASFieldName": "VSORRES"
         },
         "IT.VS.VSORRES.SYSBP": {
-          "wasElement": true
+          "wasElement": true,
+          "SASFieldName": "VSORRES"
         },
         "IT.VS.VSORRES.DIABP": {
-          "wasElement": true
+          "wasElement": true,
+          "SASFieldName": "VSORRES"
         },
         "IT.VS.VSORRES.HR": {
-          "wasElement": true
+          "wasElement": true,
+          "SASFieldName": "VSORRES"
+        },
+        "IT.VS.VSORRESU.TEMP": {
+          "SASFieldName": "VSORRESU"
+        },
+        "IT.VS.VSORRESU.WEIGHT": {
+          "SASFieldName": "VSORRESU"
+        },
+        "IT.VS.VSORRESU.HEIGHT": {
+          "SASFieldName": "VSORRESU"
+        },
+        "IT.VS.VSORRESU.SYSBP": {
+          "SASFieldName": "VSORRESU"
+        },
+        "IT.VS.VSORRESU.DIABP": {
+          "SASFieldName": "VSORRESU"
+        },
+        "IT.VS.VSORRESU.HR": {
+          "SASFieldName": "VSORRESU"
         },
         "IT.LB.LBORRES.ALT": {
-          "wasElement": true
+          "wasElement": true,
+          "SASFieldName": "LBORRES"
         },
         "IT.LB.LBORRES.ALB": {
-          "wasElement": true
+          "wasElement": true,
+          "SASFieldName": "LBORRES"
         },
         "IT.LB.LBORRES.ALP": {
-          "wasElement": true
+          "wasElement": true,
+          "SASFieldName": "LBORRES"
         },
         "IT.LB.LBORRES.AST": {
-          "wasElement": true
+          "wasElement": true,
+          "SASFieldName": "LBORRES"
         },
         "IT.LB.LBORRES.CREAT": {
-          "wasElement": true
+          "wasElement": true,
+          "SASFieldName": "LBORRES"
         },
         "IT.LB.LBORRES.K": {
-          "wasElement": true
+          "wasElement": true,
+          "SASFieldName": "LBORRES"
         },
         "IT.LB.LBORRES.SODIUM": {
-          "wasElement": true
+          "wasElement": true,
+          "SASFieldName": "LBORRES"
         },
         "IT.LB.LBORRES.HBA1C": {
-          "wasElement": true
+          "wasElement": true,
+          "SASFieldName": "LBORRES"
+        },
+        "IT.LB.LBORRESU.ALT": {
+          "SASFieldName": "LBORRESU"
+        },
+        "IT.LB.LBORRESU.ALP": {
+          "SASFieldName": "LBORRESU"
+        },
+        "IT.LB.LBORRESU.AST": {
+          "SASFieldName": "LBORRESU"
+        },
+        "IT.LB.LBORRESU.CREAT": {
+          "SASFieldName": "LBORRESU"
+        },
+        "IT.LB.LBORRESU.K": {
+          "SASFieldName": "LBORRESU"
+        },
+        "IT.LB.LBORRESU.SODIUM": {
+          "SASFieldName": "LBORRESU"
+        },
+        "IT.LB.LBORRESU.HBA1C": {
+          "SASFieldName": "LBORRESU"
         }
       }
     },

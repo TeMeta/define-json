@@ -1,0 +1,78 @@
+{
+  "metaDataVersion": [{
+    "OID": "MDV.TEST.003",
+    "name": "Test with Un-normalised WhereClause",
+    "fileOID": "FILE.TEST.003",
+    "creationDateTime": "2025-01-01T00:00:00",
+    "odmVersion": "2.0",
+    "fileType": "Snapshot",
+    "studyOID": "STUDY.TEST.003",
+    "conditions": [
+      {
+        "OID": "COND.BASELINE.001",
+        "rangeChecks": [
+          {
+            "comparator": "IN",
+            "checkValues": ["BASELINE", "SCREENING", "DAY 1"],
+            "item": "IT.VS.VISITNUM"
+          }
+        ]
+      },
+      {
+        "OID": "COND.BASELINE.002",
+        "rangeChecks": [
+          {
+            "comparator": "IN",
+            "checkValues": ["DAY 1", "SCREENING", "BASELINE"],
+            "item": "IT.VS.VISITNUM"
+          }
+        ]
+      }
+    ],
+    "whereClauses": [
+      {
+        "OID": "WC.BASELINE.001",
+        "conditions": ["COND.BASELINE.001"]
+      },
+      {
+        "OID": "WC.BASELINE.002",
+        "conditions": ["COND.BASELINE.002"]
+      }
+    ],
+    "itemGroups": [
+      {
+        "OID": "IG.VS",
+        "name": "VS",
+        "domain": "VS",
+        "type": "Table",
+        "items": [
+          {
+            "OID": "IT.VS.VISITNUM",
+            "name": "VISITNUM",
+            "dataType": "float"
+          },
+          {
+            "OID": "IT.VS.VSTESTCD",
+            "name": "VSTESTCD",
+            "dataType": "text"
+          },
+          {
+            "OID": "IT.VS.VSORRES.BASELINE",
+            "name": "VSORRES",
+            "dataType": "float",
+            "applicableWhen": ["WC.BASELINE.001"]
+          },
+          {
+            "OID": "IT.VS.VSORRES.BASELINE.DUP",
+            "name": "VSORRES",
+            "dataType": "float",
+            "applicableWhen": ["WC.BASELINE.002"]
+          }
+        ]
+      }
+    ],
+    "items": [],
+    "codeLists": []
+  }]
+}
+

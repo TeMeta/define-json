@@ -16,7 +16,6 @@ URI: [odm:class/Dimension](https://cdisc.org/odm2/class/Dimension)
 ```mermaid
 erDiagram
 Dimension {
-    integer keySequence  
     string role  
     string OID  
     string uuid  
@@ -295,7 +294,6 @@ RangeCheck ||--}o FormalExpression : "expressions"
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [keySequence](../slots/keySequence.md) | 0..1 <br/> [Integer](../types/Integer.md) |  | direct |
 | [item](../slots/item.md) | 1 <br/> [Item](../classes/Item.md) | Reference to the Item that defines this component's data structure and properties | [CubeComponent](../classes/CubeComponent.md) |
 | [role](../slots/role.md) | 0..1 <br/> [String](../types/String.md) | The role this component plays in its Structure Definition | [CubeComponent](../classes/CubeComponent.md) |
 | [missingHandling](../slots/missingHandling.md) | 0..1 <br/> [Method](../classes/Method.md) | The method for handling missing values in the measure property | [CubeComponent](../classes/CubeComponent.md) |
@@ -390,14 +388,6 @@ narrow_mappings:
 broad_mappings:
 - sdmx:DataAttribute
 is_a: CubeComponent
-attributes:
-  keySequence:
-    name: keySequence
-    from_schema: https://cdisc.org/define-json
-    rank: 1000
-    domain_of:
-    - Dimension
-    range: integer
 
 ```
 </details>
@@ -419,15 +409,6 @@ broad_mappings:
 - sdmx:DataAttribute
 is_a: CubeComponent
 attributes:
-  keySequence:
-    name: keySequence
-    from_schema: https://cdisc.org/define-json
-    rank: 1000
-    alias: keySequence
-    owner: Dimension
-    domain_of:
-    - Dimension
-    range: integer
   item:
     name: item
     description: Reference to the Item that defines this component's data structure
@@ -486,7 +467,6 @@ attributes:
     - Identifiable
     range: string
     required: true
-    pattern: ^[A-Za-z][A-Za-z0-9._-]*$
   uuid:
     name: uuid
     description: Universal unique identifier

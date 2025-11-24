@@ -1,0 +1,20 @@
+# Simplified SDMX policy for WhereClause → GroupKey tests
+domain: LB
+
+dimensions:
+  - USUBJID
+  - LBTEST
+  - VISITNUM
+
+measures:
+  - LBSTRESN
+
+attributes:
+  dataset_level:
+    - STUDYID
+
+dimension_order:
+  - USUBJID
+  - LBTEST
+  - VISITNUM
+

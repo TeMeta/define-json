@@ -51,8 +51,6 @@ classes:
         identifier: true
         required: false
         range: string
-        pattern: "^[A-Za-z][A-Za-z0-9._-]*$"
-      # URI vs UUID?
       uuid:
         description: Universal unique identifier
         range: string
@@ -538,7 +536,7 @@ classes:
     narrow_mappings:
       - fhir:StructureDefinition
       - fhir:ViewDefinition
-      - fhir:Questionnaire/item
+      - fhir:Questionnaire
       - omop:Table
       - qb:DataStructureDefinition
       - sdmx:DataStructureDefinition
@@ -582,6 +580,19 @@ classes:
           - fhir:StructureDefinition/differential
         inlined: false
         inlined_as_list: true
+      keySequence:
+        description: >-
+          Ordered list of Items that define the dataset key structure for sorting and uniqueness.
+          Each entry is an OID reference to an Item in the items array.
+          Order determines sorting precedence, merge operations, and record uniqueness.
+          These are allowed to be null, unlike stricter dataset dimensions or primary keys.
+        range: Item
+        multivalued: true
+        inlined: false
+        inlined_as_list: true
+        close_mappings:
+          - odm:ItemRef.KeySequence
+          - sdmx:DimensionDescriptor
       children:
         description: >-
           Child ItemGroups nested within this item group (e.g., ValueLists under parent domains).
@@ -1455,6 +1466,7 @@ classes:
     narrow_mappings:
       - usdm:ScheduledInstance
       - usdm:Encounter
+      - usdm:InterCurrentEvent
       - fhir:PlanDefinition/action
       - fhir:ActivityDefinition
       - fhir:Encounter
@@ -1770,9 +1782,6 @@ classes:
       - sdmx:MeasureDimension
       - sdmx:TimeDimension
     is_a: CubeComponent
-    attributes:
-      keySequence:
-        range: integer
 
   DataAttribute:
     description: >-

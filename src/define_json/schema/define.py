@@ -98,7 +98,7 @@ linkml_meta = LinkMLMeta({'default_prefix': 'odm',
                            'prefix_reference': 'http://www.w3.org/2004/02/skos/core#'},
                   'usdm': {'prefix_prefix': 'usdm',
                            'prefix_reference': 'https://cdisc.org/usdm/'}},
-     'source_file': 'define-json.yaml'} )
+     'source_file': 'define.yaml'} )
 
 class AliasPredicate(str, Enum):
     """
@@ -635,19 +635,6 @@ class Identifiable(ConfiguredBaseModel):
     OID: str = Field(default=..., description="""Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.""", json_schema_extra = { "linkml_meta": {'alias': 'OID', 'domain_of': ['Identifiable']} })
     uuid: Optional[str] = Field(default=None, description="""Universal unique identifier""", json_schema_extra = { "linkml_meta": {'alias': 'uuid', 'domain_of': ['Identifiable']} })
 
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
-
 
 class Governed(ConfiguredBaseModel):
     """
@@ -728,19 +715,6 @@ class IdentifiableElement(Labelled, Identifiable):
          'domain_of': ['Labelled', 'CodeListItem'],
          'exact_mappings': ['skos:altLabel']} })
 
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
-
 
 class GovernedElement(Labelled, Governed, Identifiable):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'abstract': True,
@@ -789,19 +763,6 @@ class GovernedElement(Labelled, Governed, Identifiable):
                     {'range': 'ProvisionAgreement'}],
          'domain_of': ['Governed'],
          'exact_mappings': ['prov:wasDerivedFrom']} })
-
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
 
 
 class Formatted(ConfiguredBaseModel):
@@ -986,19 +947,6 @@ class MetaDataVersion(StudyMetadata, ODMFileMetadata, GovernedElement):
          'domain_of': ['Governed'],
          'exact_mappings': ['prov:wasDerivedFrom']} })
 
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
-
 
 class Item(IsODMItem, Formatted, GovernedElement):
     """
@@ -1111,19 +1059,6 @@ Example: whereClause: [\"WC.SYSBP\", \"WC.DIABP\"] means the item applies when
          'domain_of': ['Governed'],
          'exact_mappings': ['prov:wasDerivedFrom']} })
 
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
-
 
 class ItemGroup(IsProfile, GovernedElement):
     """
@@ -1136,7 +1071,7 @@ class ItemGroup(IsProfile, GovernedElement):
          'mixins': ['IsProfile'],
          'narrow_mappings': ['fhir:StructureDefinition',
                              'fhir:ViewDefinition',
-                             'fhir:Questionnaire/item',
+                             'fhir:Questionnaire',
                              'omop:Table',
                              'qb:DataStructureDefinition',
                              'sdmx:DataStructureDefinition',
@@ -1163,6 +1098,9 @@ class ItemGroup(IsProfile, GovernedElement):
          'close_mappings': ['fhir:StructureDefinition/snapshot',
                             'fhir:StructureDefinition/differential'],
          'domain_of': ['MetaDataVersion', 'ItemGroup', 'Parameter']} })
+    keySequence: Optional[list[str]] = Field(default=None, description="""Ordered list of Items that define the dataset key structure for sorting and uniqueness. Each entry is an OID reference to an Item in the items array. Order determines sorting precedence, merge operations, and record uniqueness. These are allowed to be null, unlike stricter dataset dimensions or primary keys.""", json_schema_extra = { "linkml_meta": {'alias': 'keySequence',
+         'close_mappings': ['odm:ItemRef.KeySequence', 'sdmx:DimensionDescriptor'],
+         'domain_of': ['ItemGroup']} })
     children: Optional[list[Union[ItemGroup, str]]] = Field(default=None, description="""Child ItemGroups nested within this item group (e.g., ValueLists under parent domains). Can be either: - Full ItemGroup objects (preferred for hierarchical nesting) - OID string references (for cross-references to avoid duplication)""", json_schema_extra = { "linkml_meta": {'alias': 'children',
          'any_of': [{'range': 'ItemGroup'}, {'range': 'string'}],
          'domain_of': ['ItemGroup']} })
@@ -1227,19 +1165,6 @@ Example: whereClause: [\"WC.SYSBP\", \"WC.DIABP\"] means the item applies when
     version: Optional[str] = Field(default=None, description="""The version of the external resources""", json_schema_extra = { "linkml_meta": {'alias': 'version', 'domain_of': ['Versioned', 'Standard']} })
     href: Optional[str] = Field(default=None, description="""Machine-readable instructions to obtain the resource e.g. FHIR path, URL""", json_schema_extra = { "linkml_meta": {'alias': 'href', 'domain_of': ['Versioned']} })
 
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
-
 
 class Relationship(IdentifiableElement):
     """
@@ -1267,19 +1192,6 @@ class Relationship(IdentifiableElement):
          'any_of': [{'range': 'string'}, {'range': 'TranslatedText'}],
          'domain_of': ['Labelled', 'CodeListItem'],
          'exact_mappings': ['skos:altLabel']} })
-
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
 
 
 class Translation(ConfiguredBaseModel):
@@ -1359,19 +1271,6 @@ class CodeList(Versioned, GovernedElement):
                     {'range': 'ProvisionAgreement'}],
          'domain_of': ['Governed'],
          'exact_mappings': ['prov:wasDerivedFrom']} })
-
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
 
 
 class CodeListItem(ConfiguredBaseModel):
@@ -1456,19 +1355,6 @@ class Comment(GovernedElement):
          'domain_of': ['Governed'],
          'exact_mappings': ['prov:wasDerivedFrom']} })
 
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
-
 
 class Coding(ConfiguredBaseModel):
     """
@@ -1520,19 +1406,6 @@ class Dictionary(Versioned, IdentifiableElement):
          'any_of': [{'range': 'string'}, {'range': 'TranslatedText'}],
          'domain_of': ['Labelled', 'CodeListItem'],
          'exact_mappings': ['skos:altLabel']} })
-
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
 
 
 class ReifiedConcept(Versioned, GovernedElement):
@@ -1596,19 +1469,6 @@ class ReifiedConcept(Versioned, GovernedElement):
                     {'range': 'ProvisionAgreement'}],
          'domain_of': ['Governed'],
          'exact_mappings': ['prov:wasDerivedFrom']} })
-
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
 
 
 class ConceptProperty(GovernedElement):
@@ -1674,19 +1534,6 @@ class ConceptProperty(GovernedElement):
          'domain_of': ['Governed'],
          'exact_mappings': ['prov:wasDerivedFrom']} })
 
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
-
 
 class WhereClause(GovernedElement):
     """
@@ -1744,19 +1591,6 @@ class WhereClause(GovernedElement):
                     {'range': 'ProvisionAgreement'}],
          'domain_of': ['Governed'],
          'exact_mappings': ['prov:wasDerivedFrom']} })
-
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
 
 
 class Condition(GovernedElement):
@@ -1820,19 +1654,6 @@ class Condition(GovernedElement):
          'domain_of': ['Governed'],
          'exact_mappings': ['prov:wasDerivedFrom']} })
 
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
-
 
 class RangeCheck(ConfiguredBaseModel):
     """
@@ -1889,19 +1710,6 @@ class FormalExpression(IdentifiableElement):
          'any_of': [{'range': 'string'}, {'range': 'TranslatedText'}],
          'domain_of': ['Labelled', 'CodeListItem'],
          'exact_mappings': ['skos:altLabel']} })
-
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
 
 
 class Method(GovernedElement):
@@ -1966,19 +1774,6 @@ class Method(GovernedElement):
          'domain_of': ['Governed'],
          'exact_mappings': ['prov:wasDerivedFrom']} })
 
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
-
 
 class SourceItem(ConfiguredBaseModel):
     """
@@ -2039,19 +1834,6 @@ Example: A parameter AGE might have conditions ensuring it's >= 0 and <= 120. or
          'domain_of': ['Labelled', 'CodeListItem'],
          'exact_mappings': ['skos:altLabel']} })
 
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
-
 
 class ReturnValue(IdentifiableElement):
     """
@@ -2077,19 +1859,6 @@ class ReturnValue(IdentifiableElement):
          'any_of': [{'range': 'string'}, {'range': 'TranslatedText'}],
          'domain_of': ['Labelled', 'CodeListItem'],
          'exact_mappings': ['skos:altLabel']} })
-
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
 
 
 class Origin(ConfiguredBaseModel):
@@ -2173,19 +1942,6 @@ class SiteOrSponsorComment(GovernedElement):
          'domain_of': ['Governed'],
          'exact_mappings': ['prov:wasDerivedFrom']} })
 
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
-
 
 class User(IdentifiableElement):
     """
@@ -2216,19 +1972,6 @@ class User(IdentifiableElement):
          'any_of': [{'range': 'string'}, {'range': 'TranslatedText'}],
          'domain_of': ['Labelled', 'CodeListItem'],
          'exact_mappings': ['skos:altLabel']} })
-
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
 
 
 class Organization(IdentifiableElement):
@@ -2268,19 +2011,6 @@ class Organization(IdentifiableElement):
          'domain_of': ['Labelled', 'CodeListItem'],
          'exact_mappings': ['skos:altLabel']} })
 
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
-
 
 class Standard(IdentifiableElement):
     """
@@ -2313,19 +2043,6 @@ class Standard(IdentifiableElement):
          'any_of': [{'range': 'string'}, {'range': 'TranslatedText'}],
          'domain_of': ['Labelled', 'CodeListItem'],
          'exact_mappings': ['skos:altLabel']} })
-
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
 
 
 class Resource(Versioned, IdentifiableElement):
@@ -2363,19 +2080,6 @@ class Resource(Versioned, IdentifiableElement):
          'domain_of': ['Labelled', 'CodeListItem'],
          'exact_mappings': ['skos:altLabel']} })
 
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
-
 
 class DocumentReference(Versioned, IdentifiableElement):
     """
@@ -2404,19 +2108,6 @@ class DocumentReference(Versioned, IdentifiableElement):
          'any_of': [{'range': 'string'}, {'range': 'TranslatedText'}],
          'domain_of': ['Labelled', 'CodeListItem'],
          'exact_mappings': ['skos:altLabel']} })
-
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
 
 
 class Timing(IdentifiableElement):
@@ -2466,19 +2157,6 @@ class Timing(IdentifiableElement):
          'domain_of': ['Labelled', 'CodeListItem'],
          'exact_mappings': ['skos:altLabel']} })
 
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
-
 
 class NominalOccurrence(GovernedElement):
     """
@@ -2487,6 +2165,7 @@ class NominalOccurrence(GovernedElement):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://cdisc.org/define-json',
          'narrow_mappings': ['usdm:ScheduledInstance',
                              'usdm:Encounter',
+                             'usdm:InterCurrentEvent',
                              'fhir:PlanDefinition/action',
                              'fhir:ActivityDefinition',
                              'fhir:Encounter',
@@ -2541,19 +2220,6 @@ class NominalOccurrence(GovernedElement):
          'domain_of': ['Governed'],
          'exact_mappings': ['prov:wasDerivedFrom']} })
 
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
-
 
 class DataStructureDefinition(ItemGroup):
     """
@@ -2587,6 +2253,9 @@ class DataStructureDefinition(ItemGroup):
          'close_mappings': ['fhir:StructureDefinition/snapshot',
                             'fhir:StructureDefinition/differential'],
          'domain_of': ['MetaDataVersion', 'ItemGroup', 'Parameter']} })
+    keySequence: Optional[list[str]] = Field(default=None, description="""Ordered list of Items that define the dataset key structure for sorting and uniqueness. Each entry is an OID reference to an Item in the items array. Order determines sorting precedence, merge operations, and record uniqueness. These are allowed to be null, unlike stricter dataset dimensions or primary keys.""", json_schema_extra = { "linkml_meta": {'alias': 'keySequence',
+         'close_mappings': ['odm:ItemRef.KeySequence', 'sdmx:DimensionDescriptor'],
+         'domain_of': ['ItemGroup']} })
     children: Optional[list[Union[ItemGroup, str]]] = Field(default=None, description="""Child ItemGroups nested within this item group (e.g., ValueLists under parent domains). Can be either: - Full ItemGroup objects (preferred for hierarchical nesting) - OID string references (for cross-references to avoid duplication)""", json_schema_extra = { "linkml_meta": {'alias': 'children',
          'any_of': [{'range': 'ItemGroup'}, {'range': 'string'}],
          'domain_of': ['ItemGroup']} })
@@ -2651,19 +2320,6 @@ Example: whereClause: [\"WC.SYSBP\", \"WC.DIABP\"] means the item applies when
     version: Optional[str] = Field(default=None, description="""The version of the external resources""", json_schema_extra = { "linkml_meta": {'alias': 'version', 'domain_of': ['Versioned', 'Standard']} })
     href: Optional[str] = Field(default=None, description="""Machine-readable instructions to obtain the resource e.g. FHIR path, URL""", json_schema_extra = { "linkml_meta": {'alias': 'href', 'domain_of': ['Versioned']} })
 
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
-
 
 class Dataflow(Versioned, GovernedElement):
     """
@@ -2724,19 +2380,6 @@ class Dataflow(Versioned, GovernedElement):
                     {'range': 'ProvisionAgreement'}],
          'domain_of': ['Governed'],
          'exact_mappings': ['prov:wasDerivedFrom']} })
-
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
 
 
 class IsSdmxDataset(ConfiguredBaseModel):
@@ -2817,19 +2460,6 @@ class Dataset(IsSdmxDataset, IsProfile, Versioned, IdentifiableElement):
          'any_of': [{'range': 'string'}, {'range': 'TranslatedText'}],
          'domain_of': ['Labelled', 'CodeListItem'],
          'exact_mappings': ['skos:altLabel']} })
-
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
 
 
 class DatasetKey(ConfiguredBaseModel):
@@ -2934,19 +2564,6 @@ class CubeComponent(GovernedElement):
          'domain_of': ['Governed'],
          'exact_mappings': ['prov:wasDerivedFrom']} })
 
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
-
 
 class Measure(CubeComponent):
     """
@@ -3006,19 +2623,6 @@ class Measure(CubeComponent):
          'domain_of': ['Governed'],
          'exact_mappings': ['prov:wasDerivedFrom']} })
 
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
-
 
 class Dimension(CubeComponent):
     """
@@ -3029,7 +2633,6 @@ class Dimension(CubeComponent):
          'from_schema': 'https://cdisc.org/define-json',
          'narrow_mappings': ['sdmx:MeasureDimension', 'sdmx:TimeDimension']})
 
-    keySequence: Optional[int] = Field(default=None, json_schema_extra = { "linkml_meta": {'alias': 'keySequence', 'domain_of': ['Dimension']} })
     item: str = Field(default=..., description="""Reference to the Item that defines this component's data structure and properties""", json_schema_extra = { "linkml_meta": {'alias': 'item',
          'domain_of': ['RangeCheck',
                        'SourceItem',
@@ -3080,19 +2683,6 @@ class Dimension(CubeComponent):
                     {'range': 'ProvisionAgreement'}],
          'domain_of': ['Governed'],
          'exact_mappings': ['prov:wasDerivedFrom']} })
-
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
 
 
 class DataAttribute(CubeComponent):
@@ -3153,19 +2743,6 @@ class DataAttribute(CubeComponent):
          'domain_of': ['Governed'],
          'exact_mappings': ['prov:wasDerivedFrom']} })
 
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
-
 
 class ComponentList(IdentifiableElement):
     """
@@ -3194,19 +2771,6 @@ class ComponentList(IdentifiableElement):
          'any_of': [{'range': 'string'}, {'range': 'TranslatedText'}],
          'domain_of': ['Labelled', 'CodeListItem'],
          'exact_mappings': ['skos:altLabel']} })
-
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
 
 
 class MeasureRelationship(ConfiguredBaseModel):
@@ -3371,19 +2935,6 @@ class DataProduct(Versioned, GovernedElement):
          'domain_of': ['Governed'],
          'exact_mappings': ['prov:wasDerivedFrom']} })
 
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
-
 
 class Distribution(ConfiguredBaseModel):
     """
@@ -3440,19 +2991,6 @@ class DataService(Resource):
          'domain_of': ['Labelled', 'CodeListItem'],
          'exact_mappings': ['skos:altLabel']} })
 
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
-
 
 class DataProvider(Organization):
     """
@@ -3494,19 +3032,6 @@ class DataProvider(Organization):
          'any_of': [{'range': 'string'}, {'range': 'TranslatedText'}],
          'domain_of': ['Labelled', 'CodeListItem'],
          'exact_mappings': ['skos:altLabel']} })
-
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
 
 
 class ProvisionAgreement(Versioned, GovernedElement):
@@ -3569,19 +3094,6 @@ class ProvisionAgreement(Versioned, GovernedElement):
                     {'range': 'ProvisionAgreement'}],
          'domain_of': ['Governed'],
          'exact_mappings': ['prov:wasDerivedFrom']} })
-
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
 
 
 class Analysis(Method, Versioned):
@@ -3656,19 +3168,6 @@ class Analysis(Method, Versioned):
          'domain_of': ['Governed'],
          'exact_mappings': ['prov:wasDerivedFrom']} })
 
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
-
 
 class Display(Versioned, GovernedElement):
     """
@@ -3723,19 +3222,6 @@ class Display(Versioned, GovernedElement):
                     {'range': 'ProvisionAgreement'}],
          'domain_of': ['Governed'],
          'exact_mappings': ['prov:wasDerivedFrom']} })
-
-    @field_validator('OID')
-    def pattern_OID(cls, v):
-        pattern=re.compile(r"^[A-Za-z][A-Za-z0-9._-]*$")
-        if isinstance(v, list):
-            for element in v:
-                if isinstance(element, str) and not pattern.match(element):
-                    err_msg = f"Invalid OID format: {element}"
-                    raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
-            err_msg = f"Invalid OID format: {v}"
-            raise ValueError(err_msg)
-        return v
 
 
 # Model rebuild

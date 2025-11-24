@@ -481,7 +481,6 @@ Measure {
     string wasDerivedFrom  
 }
 Dimension {
-    integer keySequence  
     string role  
     string OID  
     string uuid  
@@ -665,6 +664,7 @@ DataStructureDefinition ||--}o Measure : "measures"
 DataStructureDefinition ||--}o DataAttribute : "attributes"
 DataStructureDefinition ||--|o ComponentList : "grouping"
 DataStructureDefinition ||--}o Item : "items"
+DataStructureDefinition ||--}o Item : "keySequence"
 DataStructureDefinition ||--}o ItemGroup : "children"
 DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
 DataStructureDefinition ||--}o WhereClause : "applicableWhen"
@@ -674,6 +674,7 @@ DataStructureDefinition ||--}o Coding : "coding"
 DataStructureDefinition ||--}o Comment : "comments"
 DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ItemGroup ||--}o Item : "items"
+ItemGroup ||--}o Item : "keySequence"
 ItemGroup ||--}o ItemGroup : "children"
 ItemGroup ||--|o ReifiedConcept : "implementsConcept"
 ItemGroup ||--}o WhereClause : "applicableWhen"
@@ -883,6 +884,7 @@ IdentifiableElement ||--}o Coding : "coding"
 | [structure](slots/structure.md) | Data structure of the item group, indicating how the records are organized. If this is a FHIR Resource, is it nested or flattened? If this is a structured concept, is it a Biomedical/Derivation/Analysis concept? |
 | [isReferenceData](slots/isReferenceData.md) | Set to Yes if this is a reference item group. |
 | [type](slots/type.md) | Type of item group |
+| [keySequence](slots/keySequence.md) | Ordered list of Items that define the dataset key structure for sorting and uniqueness. Each entry is an OID reference to an Item in the items array. Order determines sorting precedence, merge operations, and record uniqueness. These are allowed to be null, unlike stricter dataset dimensions or primary keys. |
 | [children](slots/children.md) | Child ItemGroups nested within this item group (e.g., ValueLists under parent domains). Can be either: - Full ItemGroup objects (preferred for hierarchical nesting) - OID string references (for cross-references to avoid duplication) |
 | [implementsConcept](slots/implementsConcept.md) | Reference to a abstract concept topic that this item group is a specialization of |
 | [subject](slots/subject.md) | The starting element of the relationship (e.g., an Item or ItemGroup). |
@@ -983,7 +985,6 @@ IdentifiableElement ||--}o Coding : "coding"
 | [keyValues](slots/keyValues.md) | List of Key Values that comprise each key, separated by a dot e.g. SUBJ001.VISIT2.BMI |
 | [attributeValues](slots/attributeValues.md) | Association to the Attribute Values relating to Key |
 | [missingHandling](slots/missingHandling.md) | The method for handling missing values in the measure property |
-| [keySequence](slots/keySequence.md) |  |
 | [components](slots/components.md) | The components that make up this component list |
 | [measure](slots/measure.md) |  |
 | [dataFlow](slots/dataFlow.md) |  |

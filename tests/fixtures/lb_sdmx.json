@@ -1,0 +1,109 @@
+{
+  "metaDataVersion": [{
+    "OID": "MDV.STUDY001",
+    "fileOID": "FILE.001",
+    "creationDateTime": "2025-10-13T10:00:00",
+    "odmVersion": "2.1.0",
+    "fileType": "Snapshot",
+    "studyOID": "STUDY.001",
+    "name": "Laboratory DataCube Test",
+    "description": "Minimal fixture for testing SDMX DataStructureDefinition building",
+    
+    "itemGroups": [{
+      "OID": "IG.LB",
+      "name": "Laboratory Test Results",
+      "domain": "LB",
+      "type": "Table",
+      "purpose": "Tabulation",
+      "items": [
+        {
+          "OID": "IT.LB.STUDYID",
+          "name": "STUDYID",
+          "label": "Study Identifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.LB.DOMAIN",
+          "name": "DOMAIN",
+          "label": "Domain Abbreviation",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.LB.USUBJID",
+          "name": "USUBJID",
+          "label": "Unique Subject Identifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.LB.LBSEQ",
+          "name": "LBSEQ",
+          "label": "Sequence Number",
+          "dataType": "integer"
+        },
+        {
+          "OID": "IT.LB.LBTEST",
+          "name": "LBTEST",
+          "label": "Lab Test Name",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.LB.LBCAT",
+          "name": "LBCAT",
+          "label": "Category for Lab Test",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.LB.LBORRESU",
+          "name": "LBORRESU",
+          "label": "Original Units",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.LB.LBORRES",
+          "name": "LBORRES",
+          "label": "Result or Finding in Original Units",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.LB.LBSTRESC",
+          "name": "LBSTRESC",
+          "label": "Character Result/Finding in Std Format",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.LB.LBSTRESN",
+          "name": "LBSTRESN",
+          "label": "Numeric Result/Finding in Standard Units",
+          "dataType": "float"
+        },
+        {
+          "OID": "IT.LB.LBSTRESU",
+          "name": "LBSTRESU",
+          "label": "Standard Units",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.LB.VISITNUM",
+          "name": "VISITNUM",
+          "label": "Visit Number",
+          "dataType": "integer"
+        },
+        {
+          "OID": "IT.LB.VISIT",
+          "name": "VISIT",
+          "label": "Visit Name",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.LB.LBDTC",
+          "name": "LBDTC",
+          "label": "Date/Time of Specimen Collection",
+          "dataType": "datetime"
+        }
+      ]
+    }],
+    
+    "items": [],
+    "codeLists": []
+  }]
+}

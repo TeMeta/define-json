@@ -23,7 +23,7 @@ class TestDefineJSONSchema(unittest.TestCase):
     
     def setUp(self):
         """Set up test fixtures."""
-        self.schema_path = Path("define-json.yaml")
+        self.schema_path = Path("define.yaml")
         self.schema_data = None
         
         # Load schema
@@ -54,7 +54,7 @@ class TestDefineJSONSchema(unittest.TestCase):
     @unittest.skipUnless(LINKML_AVAILABLE, "LinkML not available")
     def test_linkml_schema_loading(self):
         """Test that the schema can be loaded by LinkML."""
-        schema_path = Path("define-json.yaml")
+        schema_path = Path("define.yaml")
         sv = SchemaView(str(schema_path))
         self.assertIsNotNone(sv)
 

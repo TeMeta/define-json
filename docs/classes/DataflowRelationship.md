@@ -143,7 +143,6 @@ Analysis {
     string wasDerivedFrom  
 }
 Dimension {
-    integer keySequence  
     string role  
     string OID  
     string uuid  
@@ -236,6 +235,7 @@ DataStructureDefinition ||--}o Measure : "measures"
 DataStructureDefinition ||--}o DataAttribute : "attributes"
 DataStructureDefinition ||--|o ComponentList : "grouping"
 DataStructureDefinition ||--}o Item : "items"
+DataStructureDefinition ||--}o Item : "keySequence"
 DataStructureDefinition ||--}o ItemGroup : "children"
 DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
 DataStructureDefinition ||--}o WhereClause : "applicableWhen"

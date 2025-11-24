@@ -258,7 +258,7 @@ Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | ---  | ---  |
 | self | odm:NominalOccurrence |
 | native | odm:NominalOccurrence |
-| narrow | usdm:ScheduledInstance, usdm:Encounter, fhir:PlanDefinition/action, fhir:ActivityDefinition, fhir:Encounter, fhir:AdverseEvent, omop:Visit_occurrence, omop:Condition_occurrence, omop:Procedure_occurrence |
+| narrow | usdm:ScheduledInstance, usdm:Encounter, usdm:InterCurrentEvent, fhir:PlanDefinition/action, fhir:ActivityDefinition, fhir:Encounter, fhir:AdverseEvent, omop:Visit_occurrence, omop:Condition_occurrence, omop:Procedure_occurrence |
 
 
 
@@ -281,6 +281,7 @@ from_schema: https://cdisc.org/define-json
 narrow_mappings:
 - usdm:ScheduledInstance
 - usdm:Encounter
+- usdm:InterCurrentEvent
 - fhir:PlanDefinition/action
 - fhir:ActivityDefinition
 - fhir:Encounter
@@ -332,6 +333,7 @@ from_schema: https://cdisc.org/define-json
 narrow_mappings:
 - usdm:ScheduledInstance
 - usdm:Encounter
+- usdm:InterCurrentEvent
 - fhir:PlanDefinition/action
 - fhir:ActivityDefinition
 - fhir:Encounter
@@ -387,7 +389,6 @@ attributes:
     - Identifiable
     range: string
     required: true
-    pattern: ^[A-Za-z][A-Za-z0-9._-]*$
   uuid:
     name: uuid
     description: Universal unique identifier

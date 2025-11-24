@@ -1,0 +1,165 @@
+{
+  "metaDataVersion": [{
+    "OID": "MDV.EXAMPLE.001",
+    "name": "Minimal Define-JSON Example",
+    "description": "A minimal example demonstrating Define-JSON structure with Conditions, WhereClauses, and ValueLists",
+    "fileOID": "FILE.EXAMPLE.001",
+    "creationDateTime": "2025-01-15T10:00:00",
+    "odmVersion": "1.3.2",
+    "fileType": "Snapshot",
+    "studyOID": "STUDY.EXAMPLE.001",
+    "studyName": "Example Study",
+    
+    "conditions": [
+      {
+        "OID": "COND.VS.SYSBP",
+        "name": "Systolic Blood Pressure Condition",
+        "rangeChecks": [
+          {
+            "item": "IT.VS.VSTESTCD",
+            "comparator": "EQ",
+            "checkValues": ["SYSBP"]
+          }
+        ]
+      },
+      {
+        "OID": "COND.VS.DIABP",
+        "name": "Diastolic Blood Pressure Condition",
+        "rangeChecks": [
+          {
+            "item": "IT.VS.VSTESTCD",
+            "comparator": "EQ",
+            "checkValues": ["DIABP"]
+          }
+        ]
+      }
+    ],
+    
+    "whereClauses": [
+      {
+        "OID": "WC.VS.SYSBP",
+        "name": "Systolic Blood Pressure Context",
+        "description": "Applies when VSTESTCD equals SYSBP",
+        "conditions": ["COND.VS.SYSBP"]
+      },
+      {
+        "OID": "WC.VS.DIABP",
+        "name": "Diastolic Blood Pressure Context",
+        "description": "Applies when VSTESTCD equals DIABP",
+        "conditions": ["COND.VS.DIABP"]
+      }
+    ],
+    
+    "itemGroups": [
+      {
+        "OID": "IG.VS",
+        "name": "VS",
+        "description": "Vital Signs",
+        "domain": "VS",
+        "type": "Table",
+        "items": [
+          {
+            "OID": "IT.VS.STUDYID",
+            "name": "STUDYID",
+            "description": "Study Identifier",
+            "dataType": "text",
+            "mandatory": true
+          },
+          {
+            "OID": "IT.VS.USUBJID",
+            "name": "USUBJID",
+            "description": "Unique Subject Identifier",
+            "dataType": "text",
+            "mandatory": true
+          },
+          {
+            "OID": "IT.VS.VSTESTCD",
+            "name": "VSTESTCD",
+            "description": "Vital Signs Test Code",
+            "dataType": "text",
+            "mandatory": true,
+            "codeList": "CL.VSTESTCD"
+          },
+          {
+            "OID": "IT.VS.VSORRES",
+            "name": "VSORRES",
+            "description": "Result or Finding in Original Units",
+            "dataType": "float",
+            "mandatory": false,
+            "applicableWhen": ["WC.VS.SYSBP", "WC.VS.DIABP"]
+          },
+          {
+            "OID": "IT.VS.VSORRESU",
+            "name": "VSORRESU",
+            "description": "Original Units",
+            "dataType": "text",
+            "mandatory": false,
+            "applicableWhen": ["WC.VS.SYSBP", "WC.VS.DIABP"]
+          }
+        ],
+        "children": [
+          {
+            "OID": "VL.VS.VSORRES",
+            "name": "VL_VS_VSORRES",
+            "description": "ValueList for VSORRES with context-specific items",
+            "type": "ValueList",
+            "domain": "VS",
+            "items": [
+              {
+                "OID": "IT.VS.VSORRES.SYSBP",
+                "name": "VSORRES",
+                "description": "Systolic Blood Pressure Result",
+                "dataType": "integer",
+                "displayFormat": "8.3",
+                "applicableWhen": ["WC.VS.SYSBP"],
+                "origin": {
+                  "type": "Collected",
+                  "source": "Investigator"
+                }
+              },
+              {
+                "OID": "IT.VS.VSORRES.DIABP",
+                "name": "VSORRES",
+                "description": "Diastolic Blood Pressure Result",
+                "dataType": "integer",
+                "displayFormat": "8.3",
+                "applicableWhen": ["WC.VS.DIABP"],
+                "origin": {
+                  "type": "Collected",
+                  "source": "Investigator"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    
+    "codeLists": [
+      {
+        "OID": "CL.VSTESTCD",
+        "name": "Vital Signs Test Code",
+        "description": "Standard codes for vital signs tests",
+        "dataType": "text",
+        "codeListItems": [
+          {
+            "codedValue": "SYSBP",
+            "decode": "Systolic Blood Pressure"
+          },
+          {
+            "codedValue": "DIABP",
+            "decode": "Diastolic Blood Pressure"
+          },
+          {
+            "codedValue": "PULSE",
+            "decode": "Pulse Rate"
+          }
+        ]
+      }
+    ],
+    
+    "items": [],
+    "methods": []
+  }]
+}
+

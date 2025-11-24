@@ -1,0 +1,74 @@
+{
+  "clinicalData": {
+    "studyOID": "STUDY001",
+    "metaDataVersionOID": "MDV.LB.001",
+    "itemGroupData": {
+      "IG.LB": {
+        "records": [
+          ["STUDY001", "SUBJ001", 1, "HGB", "Hemoglobin", 14.5, "g/dL", "HEMATOLOGY", "2024-01-15"],
+          ["STUDY001", "SUBJ001", 1, "WBC", "White Blood Cell Count", 7.2, "10^9/L", "HEMATOLOGY", "2024-01-15"],
+          ["STUDY001", "SUBJ001", 1, "PLAT", "Platelet Count", 250, "10^9/L", "HEMATOLOGY", "2024-01-15"],
+          ["STUDY001", "SUBJ001", 2, "HGB", "Hemoglobin", 14.8, "g/dL", "HEMATOLOGY", "2024-02-15"],
+          ["STUDY001", "SUBJ001", 2, "WBC", "White Blood Cell Count", 7.5, "10^9/L", "HEMATOLOGY", "2024-02-15"],
+          ["STUDY001", "SUBJ001", 2, "PLAT", "Platelet Count", 260, "10^9/L", "HEMATOLOGY", "2024-02-15"],
+          ["STUDY001", "SUBJ002", 1, "HGB", "Hemoglobin", 13.2, "g/dL", "HEMATOLOGY", "2024-01-16"],
+          ["STUDY001", "SUBJ002", 1, "WBC", "White Blood Cell Count", 6.8, "10^9/L", "HEMATOLOGY", "2024-01-16"],
+          ["STUDY001", "SUBJ002", 1, "PLAT", "Platelet Count", 240, "10^9/L", "HEMATOLOGY", "2024-01-16"],
+          ["STUDY001", "SUBJ002", 2, "HGB", "Hemoglobin", 13.5, "g/dL", "HEMATOLOGY", "2024-02-16"],
+          ["STUDY001", "SUBJ002", 2, "WBC", "White Blood Cell Count", 7.0, "10^9/L", "HEMATOLOGY", "2024-02-16"],
+          ["STUDY001", "SUBJ002", 2, "PLAT", "Platelet Count", 245, "10^9/L", "HEMATOLOGY", "2024-02-16"]
+        ],
+        "columns": [
+          {
+            "name": "STUDYID",
+            "label": "Study Identifier",
+            "dataType": "string"
+          },
+          {
+            "name": "USUBJID",
+            "label": "Unique Subject Identifier",
+            "dataType": "string"
+          },
+          {
+            "name": "VISITNUM",
+            "label": "Visit Number",
+            "dataType": "integer"
+          },
+          {
+            "name": "LBTESTCD",
+            "label": "Lab Test Code",
+            "dataType": "string"
+          },
+          {
+            "name": "LBTEST",
+            "label": "Lab Test Name",
+            "dataType": "string"
+          },
+          {
+            "name": "LBSTRESN",
+            "label": "Standardized Result (Numeric)",
+            "dataType": "float"
+          },
+          {
+            "name": "LBSTRESU",
+            "label": "Standard Units",
+            "dataType": "string"
+          },
+          {
+            "name": "LBCAT",
+            "label": "Lab Category",
+            "dataType": "string"
+          },
+          {
+            "name": "LBDTC",
+            "label": "Date/Time of Collection",
+            "dataType": "string"
+          }
+        ],
+        "name": "Laboratory Test Results",
+        "label": "LB"
+      }
+    }
+  }
+}
+

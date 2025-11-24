@@ -22,7 +22,7 @@ Complete bidirectional conversion system between Define-XML (CDISC ODM 1.2/1.3 +
 - **Reference-Based Structure**: Clean, non-redundant JSON with OID references
 - **Dataset Specialization**: ValueLists grouped by parameter (e.g., TEMP, WEIGHT)
 - **Hierarchical Relationships**: Domain ItemGroups reference ValueList children
-- **Schema Compliant**: Strict adherence to define-json.yaml schema with full Item objects
+- **Schema Compliant**: Strict adherence to define.yaml schema with full Item objects
 - **Comprehensive Validation**: Element counts, OID preservation, relationship fidelity
 - **Version Compatibility**: Supports Define-XML v1.0 and v2.1 with automatic namespace detection
 
@@ -248,6 +248,6 @@ print('Conversion complete!')
 
 - **Perfect Roundtrip**: XML → JSON → XML semantic equivalence
 - **Zero Data Loss**: All clinical metadata preserved
-- **Schema Compliance**: Strict adherence to define-json.yaml
+- **Schema Compliance**: Strict adherence to define.yaml
 - **Clinical Usability**: Dataset Specialization pattern implemented
 - **Reference Integrity**: All OID relationships maintained

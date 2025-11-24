@@ -21,7 +21,7 @@ except ImportError:
 console = Console()
 
 @click.command()
-@click.option('--schema', default='define-json.yaml', help='Path to schema file')
+@click.option('--schema', default='define.yaml', help='Path to schema file')
 @click.option('--verbose', '-v', is_flag=True, help='Verbose output')
 @click.option('--format', 'output_format', default='text', 
               type=click.Choice(['text', 'json', 'yaml']), help='Output format')

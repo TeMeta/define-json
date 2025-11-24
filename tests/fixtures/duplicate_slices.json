@@ -1,0 +1,80 @@
+{
+  "metaDataVersion": [{
+    "OID": "MDV.TEST.002",
+    "name": "Test with Duplicate Slices",
+    "fileOID": "FILE.TEST.002",
+    "creationDateTime": "2025-01-01T00:00:00",
+    "odmVersion": "2.0",
+    "fileType": "Snapshot",
+    "studyOID": "STUDY.TEST.002",
+    "conditions": [
+      {
+        "OID": "COND.VISIT1",
+        "rangeChecks": [
+          {
+            "comparator": "EQ",
+            "checkValues": ["VISIT 1"],
+            "item": "IT.LB.VISITNUM"
+          }
+        ]
+      }
+    ],
+    "whereClauses": [
+      {
+        "OID": "WC.TEMP.VISIT1",
+        "conditions": ["COND.VISIT1"]
+      }
+    ],
+    "itemGroups": [
+      {
+        "OID": "IG.LB",
+        "name": "LB",
+        "domain": "LB",
+        "type": "Table",
+        "items": [
+          {
+            "OID": "IT.LB.VISITNUM",
+            "name": "VISITNUM",
+            "dataType": "float"
+          },
+          {
+            "OID": "IT.LB.LBTESTCD",
+            "name": "LBTESTCD",
+            "dataType": "text"
+          }
+        ]
+      },
+      {
+        "OID": "IG.LB.SLICE1",
+        "name": "LB_VISIT1_A",
+        "domain": "LB",
+        "type": "DataSpecialization",
+        "applicableWhen": ["WC.TEMP.VISIT1"],
+        "items": [
+          {
+            "OID": "IT.LB.LBORRES.V1A",
+            "name": "LBORRES",
+            "dataType": "float"
+          }
+        ]
+      },
+      {
+        "OID": "IG.LB.SLICE2",
+        "name": "LB_VISIT1_B",
+        "domain": "LB",
+        "type": "DataSpecialization",
+        "applicableWhen": ["WC.TEMP.VISIT1"],
+        "items": [
+          {
+            "OID": "IT.LB.LBORRESU.V1B",
+            "name": "LBORRESU",
+            "dataType": "text"
+          }
+        ]
+      }
+    ],
+    "items": [],
+    "codeLists": []
+  }]
+}
+
