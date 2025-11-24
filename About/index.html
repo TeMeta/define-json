@@ -84,6 +84,10 @@
 <ul class="nav flex-column">
 </ul>
 </li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#reverse-engineering-data-metadata">🆕 Reverse Engineering: Data → Metadata</a>
+<ul class="nav flex-column">
+</ul>
+</li>
 <li class="nav-item" data-bs-level="2"><a class="nav-link" href="#context-is-everything">Context is everything</a>
 <ul class="nav flex-column">
 </ul>
@@ -167,9 +171,38 @@ poetry<span class="w"> </span>run<span class="w"> </span>python<span class="w"> 
 <span class="c1"># Use absolute URL (if you have XSL hosted online)</span>
 poetry<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>define_json<span class="w"> </span>json2xml<span class="w"> </span>input.json<span class="w"> </span>output.xml<span class="w"> </span>--stylesheet<span class="w"> </span><span class="s2">"https://example.com/define2-1.xsl"</span>
 </code></pre></div>
+<h2 id="reverse-engineering-data-metadata">🆕 Reverse Engineering: Data → Metadata</h2>
+<blockquote>
+<p>"Don't send data without its Define"</p>
+</blockquote>
+<p><strong>New capability</strong>: Automatically generate Define-JSON metadata from Dataset-JSON data files.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Run on sample datasets</span>
+make<span class="w"> </span>reverse-engineer-lb<span class="w">  </span><span class="c1"># Laboratory dataset</span>
+make<span class="w"> </span>reverse-engineer-vs<span class="w">  </span><span class="c1"># Vital Signs dataset</span>
+
+<span class="c1"># Or run directly</span>
+python<span class="w"> </span>scripts/reverse_engineer_define.py<span class="w"> </span>examples/sample_dataset_lb.json
+</code></pre></div>
+<p><strong>Outputs</strong> (4 files):
+1. <code>define_metadata.json</code> - Define-JSON ItemDef/ItemGroupDef structures
+2. <code>sdmx_policy_suggestion.yaml</code> - Auto-suggested SDMX Dimension/Measure/Attribute policy<br/>
+3. <code>analysis_summary.json</code> - Statistics and confidence scores
+4. <code>reverse_engineering_report.md</code> - Human-readable analysis report</p>
+<p><strong>What it does</strong>:
+- ✅ Detects dataset structure (vertical vs horizontal)
+- ✅ Classifies variables (IDENTIFIER, TIMING, TOPIC, RESULT, ATTRIBUTE)
+- ✅ Suggests SDMX roles (Dimension, Measure, Attribute)
+- ✅ Generates ItemGroups with WHERE clauses for topics
+- ✅ Provides confidence scores for all classifications</p>
+<p><strong>Use cases</strong>:
+- Bootstrap metadata for legacy datasets
+- Validate metadata-data consistency
+- Auto-generate SDMX policies
+- Quick prototyping of new analyses</p>
+<p>See <strong><a href="REVERSE_ENGINEERING_SUMMARY.md">REVERSE_ENGINEERING_SUMMARY.md</a></strong> for complete guide.</p>
 <h2 id="context-is-everything">Context is everything</h2>
 <blockquote>
-<p>“Don't provide values without units”</p>
+<p>"Don't provide values without units"</p>
 </blockquote>
 <p><code>define-json</code> element definitions are context-specific by design, only applicable to some defined local scope.</p>
 <p>By being so strict about scope (every <code>Item</code> must belong to an <code>ItemGroup</code>, which can in turn can act as nested slices), granular reusable definitions can be created and applied to a wide variety of contexts.</p>
