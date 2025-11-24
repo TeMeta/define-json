@@ -117,7 +117,6 @@ ComponentList {
     stringList aliases  
 }
 Dimension {
-    integer keySequence  
     string role  
     string OID  
     string uuid  

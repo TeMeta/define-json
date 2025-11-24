@@ -228,6 +228,7 @@ RangeCheck {
 }
 
 ItemGroup ||--}o Item : "items"
+ItemGroup ||--}o Item : "keySequence"
 ItemGroup ||--}o ItemGroup : "children"
 ItemGroup ||--|o ReifiedConcept : "implementsConcept"
 ItemGroup ||--}o WhereClause : "applicableWhen"
@@ -317,6 +318,7 @@ RangeCheck ||--}o FormalExpression : "expressions"
 | [isReferenceData](../slots/isReferenceData.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Set to Yes if this is a reference item group. | direct |
 | [type](../slots/type.md) | 0..1 <br/> [ItemGroupType](../enums/ItemGroupType.md) | Type of item group | direct |
 | [items](../slots/items.md) | * <br/> [Item](../classes/Item.md) | Items in this group | direct |
+| [keySequence](../slots/keySequence.md) | * <br/> [Item](../classes/Item.md) | Ordered list of Items that define the dataset key structure for sorting and uniqueness. Each entry is an OID reference to an Item in the items array. Order determines sorting precedence, merge operations, and record uniqueness. These are allowed to be null, unlike stricter dataset dimensions or primary keys. | direct |
 | [children](../slots/children.md) | * <br/> [ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Child ItemGroups nested within this item group (e.g., ValueLists under parent domains). Can be either: - Full ItemGroup objects (preferred for hierarchical nesting) - OID string references (for cross-references to avoid duplication) | direct |
 | [implementsConcept](../slots/implementsConcept.md) | 0..1 <br/> [ReifiedConcept](../classes/ReifiedConcept.md) | Reference to a abstract concept topic that this item group is a specialization of | direct |
 | [applicableWhen](../slots/applicableWhen.md) | * <br/> [WhereClause](../classes/WhereClause.md) | References to different situations that define when this item applies.<br>Multiple whereClauses are combined with OR logic: the item applies if ANY referenced WhereClause matches.<br>Within each WhereClause, conditions are combined with AND logic: all conditions must be true.<br><br>Example: whereClause: ["WC.SYSBP", "WC.DIABP"] means the item applies when<br>(all conditions in WC.SYSBP are true) OR (all conditions in WC.DIABP are true). | direct |
@@ -407,7 +409,7 @@ RangeCheck ||--}o FormalExpression : "expressions"
 | ---  | ---  |
 | self | odm:ItemGroup |
 | native | odm:ItemGroup |
-| narrow | fhir:StructureDefinition, fhir:ViewDefinition, fhir:Questionnaire/item, omop:Table, qb:DataStructureDefinition, sdmx:DataStructureDefinition, sdmx:MetaDataStructureDefinition |
+| narrow | fhir:StructureDefinition, fhir:ViewDefinition, fhir:Questionnaire, omop:Table, qb:DataStructureDefinition, sdmx:DataStructureDefinition, sdmx:MetaDataStructureDefinition |
 | related | qb:Dataset, qb:Observation, qb:ObservationGroup, qb:Slice, osb:Activity |
 | close | odm:ItemGroupDef, odm:ItemGroupRef, osb:ActivityInstance |
 
@@ -443,7 +445,7 @@ related_mappings:
 narrow_mappings:
 - fhir:StructureDefinition
 - fhir:ViewDefinition
-- fhir:Questionnaire/item
+- fhir:Questionnaire
 - omop:Table
 - qb:DataStructureDefinition
 - sdmx:DataStructureDefinition
@@ -506,6 +508,24 @@ attributes:
     - MetaDataVersion
     - ItemGroup
     - Parameter
+    range: Item
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  keySequence:
+    name: keySequence
+    description: Ordered list of Items that define the dataset key structure for sorting
+      and uniqueness. Each entry is an OID reference to an Item in the items array.
+      Order determines sorting precedence, merge operations, and record uniqueness.
+      These are allowed to be null, unlike stricter dataset dimensions or primary
+      keys.
+    from_schema: https://cdisc.org/define-json
+    close_mappings:
+    - odm:ItemRef.KeySequence
+    - sdmx:DimensionDescriptor
+    rank: 1000
+    domain_of:
+    - ItemGroup
     range: Item
     multivalued: true
     inlined: true
@@ -590,7 +610,7 @@ related_mappings:
 narrow_mappings:
 - fhir:StructureDefinition
 - fhir:ViewDefinition
-- fhir:Questionnaire/item
+- fhir:Questionnaire
 - omop:Table
 - qb:DataStructureDefinition
 - sdmx:DataStructureDefinition
@@ -663,6 +683,26 @@ attributes:
     - MetaDataVersion
     - ItemGroup
     - Parameter
+    range: Item
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  keySequence:
+    name: keySequence
+    description: Ordered list of Items that define the dataset key structure for sorting
+      and uniqueness. Each entry is an OID reference to an Item in the items array.
+      Order determines sorting precedence, merge operations, and record uniqueness.
+      These are allowed to be null, unlike stricter dataset dimensions or primary
+      keys.
+    from_schema: https://cdisc.org/define-json
+    close_mappings:
+    - odm:ItemRef.KeySequence
+    - sdmx:DimensionDescriptor
+    rank: 1000
+    alias: keySequence
+    owner: ItemGroup
+    domain_of:
+    - ItemGroup
     range: Item
     multivalued: true
     inlined: true
@@ -790,7 +830,6 @@ attributes:
     - Identifiable
     range: string
     required: true
-    pattern: ^[A-Za-z][A-Za-z0-9._-]*$
   uuid:
     name: uuid
     description: Universal unique identifier

@@ -1,0 +1,175 @@
+{
+  "metaDataVersion": [{
+    "OID": "MDV.CONCEPT.001",
+    "name": "Concept and Method Example",
+    "description": "Example demonstrating ReifiedConcepts, Methods with FormalExpressions, and derived Items",
+    "fileOID": "FILE.CONCEPT.001",
+    "creationDateTime": "2025-01-15T10:00:00",
+    "odmVersion": "1.3.2",
+    "fileType": "Snapshot",
+    "studyOID": "STUDY.CONCEPT.001",
+    "studyName": "Concept Example Study",
+    
+    "concepts": ["CONCEPT.BMI"],
+    
+    "methods": [{
+      "OID": "MTH.CALC.BMI",
+      "name": "CalculateBMI",
+      "label": "Body Mass Index Calculation",
+      "description": "Derives BMI from height and weight measurements",
+      "type": "Computation",
+      "implementsConcept": "CONCEPT.BMI",
+      "expressions": [{
+        "OID": "FEXPR.BMI.001",
+        "name": "BMI Python Expression",
+        "context": "Python",
+        "expression": "weight_kg / (height_m ** 2)",
+        "returnType": "float",
+        "parameters": [
+          {
+            "OID": "PARAM.BMI.HEIGHT",
+            "name": "height_m",
+            "description": "Height in meters",
+            "dataType": "float",
+            "conceptProperty": ["PROP.BMI.HEIGHT"],
+            "items": ["IT.VS.HEIGHT"],
+            "required": true
+          },
+          {
+            "OID": "PARAM.BMI.WEIGHT",
+            "name": "weight_kg",
+            "description": "Weight in kilograms",
+            "dataType": "float",
+            "conceptProperty": ["PROP.BMI.WEIGHT"],
+            "items": ["IT.VS.WEIGHT"],
+            "required": true
+          }
+        ],
+        "returnValue": "bmi (float, unit: kg/m², implementsProperty: PROP.BMI.FORMULA)"
+      }]
+    }],
+    
+    "items": [
+      {
+        "OID": "IT.VS.HEIGHT",
+        "name": "HEIGHT",
+        "label": "Height",
+        "description": "Height measurement in meters",
+        "dataType": "float",
+        "length": 8,
+        "significantDigits": 3,
+        "conceptProperty": "PROP.BMI.HEIGHT",
+        "coding": [{
+          "code": "C25347",
+          "decode": "Height",
+          "codeSystem": "NCI"
+        }],
+        "origin": {
+          "type": "Collected",
+          "source": "Investigator"
+        }
+      },
+      {
+        "OID": "IT.VS.WEIGHT",
+        "name": "WEIGHT",
+        "label": "Weight",
+        "description": "Weight measurement in kilograms",
+        "dataType": "float",
+        "length": 8,
+        "significantDigits": 3,
+        "conceptProperty": "PROP.BMI.WEIGHT",
+        "coding": [{
+          "code": "C25208",
+          "decode": "Weight",
+          "codeSystem": "NCI"
+        }],
+        "origin": {
+          "type": "Collected",
+          "source": "Investigator"
+        }
+      },
+      {
+        "OID": "IT.VS.BMI",
+        "name": "BMI",
+        "label": "Body Mass Index",
+        "description": "Derived BMI value calculated from height and weight",
+        "dataType": "float",
+        "length": 8,
+        "significantDigits": 2,
+        "displayFormat": "0.00",
+        "method": "MTH.CALC.BMI",
+        "conceptProperty": "PROP.BMI.FORMULA",
+        "coding": [{
+          "code": "C16358",
+          "decode": "Body Mass Index",
+          "codeSystem": "NCI",
+          "codeSystemVersion": "24.03d"
+        }],
+        "origin": {
+          "type": "Derived",
+          "sourceItems": [
+            {
+              "item": "IT.VS.HEIGHT"
+            },
+            {
+              "item": "IT.VS.WEIGHT"
+            }
+          ]
+        }
+      }
+    ],
+    
+    "itemGroups": [],
+    "conditions": [],
+    "whereClauses": [],
+    "codeLists": []
+  }],
+  
+  "_reifiedConcepts": [{
+    "OID": "CONCEPT.BMI",
+    "name": "BodyMassIndex",
+    "label": "Body Mass Index",
+    "description": "A measure of body fat based on height and weight",
+    "version": "1.0",
+    "coding": [{
+      "code": "C16358",
+      "decode": "Body Mass Index",
+      "codeSystem": "NCI",
+      "codeSystemVersion": "24.03d"
+    }],
+    "properties": [
+      {
+        "OID": "PROP.BMI.HEIGHT",
+        "name": "height",
+        "label": "Height Component",
+        "description": "Height measurement in meters",
+        "dataType": "float",
+        "coding": [{
+          "code": "C25347",
+          "decode": "Height",
+          "codeSystem": "NCI"
+        }]
+      },
+      {
+        "OID": "PROP.BMI.WEIGHT",
+        "name": "weight",
+        "label": "Weight Component",
+        "description": "Weight measurement in kilograms",
+        "dataType": "float",
+        "coding": [{
+          "code": "C25208",
+          "decode": "Weight",
+          "codeSystem": "NCI"
+        }]
+      },
+      {
+        "OID": "PROP.BMI.FORMULA",
+        "name": "formula",
+        "label": "Calculation Formula",
+        "description": "weight (kg) / height (m)²",
+        "dataType": "text"
+      }
+    ]
+  }]
+}
+

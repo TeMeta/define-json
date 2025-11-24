@@ -51,8 +51,6 @@ classes:
         identifier: true
         required: false
         range: string
-        pattern: "^[A-Za-z][A-Za-z0-9._-]*$"
-      # URI vs UUID?
       uuid:
         description: Universal unique identifier
         range: string

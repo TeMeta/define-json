@@ -141,7 +141,6 @@ WhereClause {
     string wasDerivedFrom  
 }
 Dimension {
-    integer keySequence  
     string role  
     string OID  
     string uuid  
@@ -350,6 +349,7 @@ DataStructureDefinition ||--}o Measure : "measures"
 DataStructureDefinition ||--}o DataAttribute : "attributes"
 DataStructureDefinition ||--|o ComponentList : "grouping"
 DataStructureDefinition ||--}o Item : "items"
+DataStructureDefinition ||--}o Item : "keySequence"
 DataStructureDefinition ||--}o ItemGroup : "children"
 DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
 DataStructureDefinition ||--}o WhereClause : "applicableWhen"
@@ -363,6 +363,7 @@ Timing ||--|o NominalOccurrence : "relativeFrom"
 Timing ||--|o Method : "imputation"
 Timing ||--}o Coding : "coding"
 ItemGroup ||--}o Item : "items"
+ItemGroup ||--}o Item : "keySequence"
 ItemGroup ||--}o ItemGroup : "children"
 ItemGroup ||--|o ReifiedConcept : "implementsConcept"
 ItemGroup ||--}o WhereClause : "applicableWhen"
@@ -639,7 +640,6 @@ attributes:
     - Identifiable
     range: string
     required: true
-    pattern: ^[A-Za-z][A-Za-z0-9._-]*$
   uuid:
     name: uuid
     description: Universal unique identifier

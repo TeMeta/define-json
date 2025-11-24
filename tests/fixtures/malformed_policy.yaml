@@ -1,0 +1,4 @@
+# Malformed policy - missing required 'domain' field
+dimensions: [VAR1, VAR2]
+measures: [VAR3]
+

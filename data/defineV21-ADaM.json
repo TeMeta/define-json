@@ -1,0 +1,5454 @@
+{
+  "OID": "MDV.CDISC01.ADaMIG.1.1.ADaM.2.1",
+  "name": "Study CDISC-Sample, Data Definitions",
+  "description": "Study CDISC-Sample, Data Definitions",
+  "fileOID": "www.cdisc.org/CDISC-Sample/ADaM/1/Define-XML_2.1.0",
+  "creationDateTime": "2024-11-21T16:24:00",
+  "odmVersion": "1.3.2",
+  "fileType": "Snapshot",
+  "originator": "CDISC Data Exchange Standards Team",
+  "context": "Submission",
+  "defineVersion": "2.1.9",
+  "studyOID": "STDY.www.cdisc.org/CDISC-Sample/ADaM",
+  "studyName": "CDISC-Sample",
+  "studyDescription": "CDISC-Sample Data Definition",
+  "protocolName": "CDISC-Sample",
+  "itemGroups": [
+    {
+      "OID": "IG.ADSL",
+      "purpose": "Analysis",
+      "name": "ADSL",
+      "description": "Subject-Level Analysis",
+      "structure": "one record per subject",
+      "isReferenceData": false,
+      "items": [
+        {
+          "OID": "IT.ADSL.STUDYID",
+          "mandatory": false,
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "length": 12,
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.USUBJID",
+          "mandatory": false,
+          "name": "USUBJID",
+          "description": "Unique Subject Identifier",
+          "dataType": "text",
+          "length": 11,
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.SUBJID",
+          "mandatory": false,
+          "name": "SUBJID",
+          "description": "Subject Identifier for the Study",
+          "dataType": "text",
+          "length": 4,
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.SITEID",
+          "mandatory": false,
+          "name": "SITEID",
+          "description": "Study Site Identifier",
+          "dataType": "text",
+          "length": 3,
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.SITEGR1",
+          "mandatory": false,
+          "name": "SITEGR1",
+          "description": "Pooled Site Group 1",
+          "dataType": "text",
+          "length": 3,
+          "method": "MT.ADSL.SITEGR1",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.ARM",
+          "mandatory": false,
+          "name": "ARM",
+          "description": "Description of Planned Arm",
+          "dataType": "text",
+          "length": 20,
+          "codeList": "CL.ARM",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.TRT01P",
+          "mandatory": false,
+          "name": "TRT01P",
+          "description": "Planned Treatment for Period 01",
+          "dataType": "text",
+          "length": 20,
+          "codeList": "CL.ARM",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.TRT01PN",
+          "mandatory": false,
+          "name": "TRT01PN",
+          "description": "Planned Treatment for Period 01 (N)",
+          "dataType": "integer",
+          "length": 2,
+          "codeList": "CL.ARMN",
+          "origin": {
+            "type": "Assigned",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.TRT01A",
+          "mandatory": false,
+          "name": "TRT01A",
+          "description": "Actual Treatment for Period 01",
+          "dataType": "text",
+          "length": 20,
+          "codeList": "CL.ARM",
+          "origin": {
+            "type": "Assigned",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.TRT01AN",
+          "mandatory": false,
+          "name": "TRT01AN",
+          "description": "Actual Treatment for Period 01 (N)",
+          "dataType": "integer",
+          "length": 2,
+          "codeList": "CL.ARMN",
+          "origin": {
+            "type": "Assigned",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.TRTSDT",
+          "mandatory": false,
+          "name": "TRTSDT",
+          "description": "Date of First Exposure to Treatment",
+          "displayFormat": "date9.",
+          "dataType": "integer",
+          "length": 5,
+          "method": "MT.ADSL.TRTSDT",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.TRTEDT",
+          "mandatory": false,
+          "name": "TRTEDT",
+          "description": "Date of Last Exposure to Treatment",
+          "displayFormat": "date9.",
+          "dataType": "integer",
+          "length": 5,
+          "method": "MT.ADSL.TRTEDT",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.TRTDURD",
+          "mandatory": false,
+          "name": "TRTDURD",
+          "description": "Total Treatment Duration (Days)",
+          "dataType": "integer",
+          "length": 3,
+          "method": "MT.ADSL.TRTDURD",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.AVGDD",
+          "mandatory": false,
+          "name": "AVGDD",
+          "description": "Avg Daily Dose (as planned)",
+          "displayFormat": "5.1",
+          "significantDigits": 1,
+          "dataType": "float",
+          "length": 4,
+          "method": "MT.ADSL.AVGDD",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.CUMDOSE",
+          "mandatory": false,
+          "name": "CUMDOSE",
+          "description": "Cumulative Dose (as planned)",
+          "displayFormat": "8.1",
+          "significantDigits": 1,
+          "dataType": "float",
+          "length": 7,
+          "method": "MT.ADSL.CUMDOSE",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.AGE",
+          "mandatory": false,
+          "name": "AGE",
+          "description": "Age",
+          "dataType": "integer",
+          "length": 2,
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.AGEGR1",
+          "mandatory": false,
+          "name": "AGEGR1",
+          "description": "Pooled Age Group 1",
+          "dataType": "text",
+          "length": 5,
+          "codeList": "CL.AGEGR1",
+          "method": "MT.ADSL.AGEGR1",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.AGEGR1N",
+          "mandatory": false,
+          "name": "AGEGR1N",
+          "description": "Pooled Age Group 1 (N)",
+          "dataType": "integer",
+          "length": 2,
+          "codeList": "CL.AGEGR1N",
+          "origin": {
+            "type": "Assigned",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.AGEU",
+          "mandatory": false,
+          "name": "AGEU",
+          "description": "Age Units",
+          "dataType": "text",
+          "length": 5,
+          "codeList": "CL.AGEU",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.RACE",
+          "mandatory": false,
+          "name": "RACE",
+          "description": "Race",
+          "dataType": "text",
+          "length": 32,
+          "codeList": "CL.RACE",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.RACEN",
+          "mandatory": false,
+          "name": "RACEN",
+          "description": "Race (N)",
+          "dataType": "integer",
+          "length": 1,
+          "codeList": "CL.RACEN",
+          "origin": {
+            "type": "Assigned",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.SEX",
+          "mandatory": false,
+          "name": "SEX",
+          "description": "Sex",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.SEX",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.ETHNIC",
+          "mandatory": false,
+          "name": "ETHNIC",
+          "description": "Ethnicity",
+          "dataType": "text",
+          "length": 22,
+          "codeList": "CL.ETHNIC",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.SAFFL",
+          "mandatory": false,
+          "name": "SAFFL",
+          "description": "Safety Population Flag",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.YN",
+          "method": "MT.ADSL.SAFFL",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.ITTFL",
+          "mandatory": false,
+          "name": "ITTFL",
+          "description": "Intent-To-Treat Population Flag",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.YN",
+          "method": "MT.ADSL.ITTFL",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.EFFFL",
+          "mandatory": false,
+          "name": "EFFFL",
+          "description": "Efficacy Population Flag",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.YN",
+          "method": "MT.ADSL.EFFFL",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.COMP8FL",
+          "mandatory": false,
+          "name": "COMP8FL",
+          "description": "Completers of Week 8 Population Flag",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.YN",
+          "method": "MT.ADSL.COMP8FL",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.COMP16FL",
+          "mandatory": false,
+          "name": "COMP16FL",
+          "description": "Completers of Week 16 Population Flag",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.YN",
+          "method": "MT.ADSL.COMP16FL",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.COMP24FL",
+          "mandatory": false,
+          "name": "COMP24FL",
+          "description": "Completers of Week 24 Population Flag",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.YN",
+          "method": "MT.ADSL.COMP24FL",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.DISCONFL",
+          "mandatory": false,
+          "name": "DISCONFL",
+          "description": "Subject Discontinued Study Flag",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.Y_BLANK",
+          "method": "MT.ADSL.DISCONFL",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.DSRAEFL",
+          "mandatory": false,
+          "name": "DSRAEFL",
+          "description": "Subject Discontinued due to AE Flag",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.Y_BLANK",
+          "method": "MT.ADSL.DSRAEFL",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.DTHFL",
+          "mandatory": false,
+          "name": "DTHFL",
+          "description": "Subject Death Flag",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.Y_BLANK",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.BMIBL",
+          "mandatory": false,
+          "name": "BMIBL",
+          "description": "Baseline BMI (kg/m^2)",
+          "displayFormat": "5.1",
+          "significantDigits": 1,
+          "dataType": "float",
+          "length": 4,
+          "method": "MT.ADSL.BMIBL",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.BMIBLGR1",
+          "mandatory": false,
+          "name": "BMIBLGR1",
+          "description": "Pooled Baseline BMI Group 1",
+          "dataType": "text",
+          "length": 6,
+          "codeList": "CL.BMICAT",
+          "method": "MT.ADSL.BMIBLGR1",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.HEIGHTBL",
+          "mandatory": false,
+          "name": "HEIGHTBL",
+          "description": "Baseline Height (cm)",
+          "displayFormat": "6.1",
+          "significantDigits": 1,
+          "dataType": "float",
+          "length": 5,
+          "method": "MT.ADSL.HEIGHTBL",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.WEIGHTBL",
+          "mandatory": false,
+          "name": "WEIGHTBL",
+          "description": "Baseline Weight (kg)",
+          "displayFormat": "6.1",
+          "significantDigits": 1,
+          "dataType": "float",
+          "length": 5,
+          "method": "MT.ADSL.WEIGHTBL",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.EDUCLVL",
+          "mandatory": false,
+          "name": "EDUCLVL",
+          "description": "Years of Education",
+          "dataType": "integer",
+          "length": 2,
+          "method": "MT.ADSL.EDUCLVL",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.DISONDT",
+          "mandatory": false,
+          "name": "DISONDT",
+          "description": "Date of Onset of Disease",
+          "displayFormat": "date9.",
+          "dataType": "integer",
+          "length": 5,
+          "method": "MT.ADSL.DISONDT",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.DURDIS",
+          "mandatory": false,
+          "name": "DURDIS",
+          "description": "Duration of Disease (Months)",
+          "displayFormat": "6.1",
+          "significantDigits": 1,
+          "dataType": "float",
+          "length": 5,
+          "method": "MT.ADSL.DURDIS",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.DURDSGR1",
+          "mandatory": false,
+          "name": "DURDSGR1",
+          "description": "Pooled Disease Duration Group 1",
+          "dataType": "text",
+          "length": 4,
+          "codeList": "CL.DURDISC",
+          "method": "MT.ADSL.DURDSGR1",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.VISIT1DT",
+          "mandatory": false,
+          "name": "VISIT1DT",
+          "description": "Date of Visit 1",
+          "displayFormat": "date9.",
+          "dataType": "integer",
+          "length": 5,
+          "method": "MT.ADSL.VISIT1DT",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.RFSTDTC",
+          "mandatory": false,
+          "name": "RFSTDTC",
+          "description": "Subject Reference Start Date/Time",
+          "dataType": "date",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.RFENDTC",
+          "mandatory": false,
+          "name": "RFENDTC",
+          "description": "Subject Reference End Date/Time",
+          "dataType": "date",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.VISNUMEN",
+          "mandatory": false,
+          "name": "VISNUMEN",
+          "description": "End of Trt Visit (Vis 12 or Early Term.)",
+          "dataType": "integer",
+          "length": 2,
+          "method": "MT.ADSL.VISNUMEN",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.RFENDT",
+          "mandatory": false,
+          "name": "RFENDT",
+          "description": "Date of Discontinuation/Completion",
+          "dataType": "integer",
+          "length": 5,
+          "method": "MT.ADSL.RFENDT",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.EOSSTT",
+          "mandatory": false,
+          "name": "EOSSTT",
+          "description": "End of Study Status",
+          "dataType": "text",
+          "length": 12,
+          "codeList": "CL.EOSSTT",
+          "method": "MT.ADSL.EOSSTT",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.DCSREAS",
+          "mandatory": false,
+          "name": "DCSREAS",
+          "description": "Reason for Discontinuation from Study",
+          "dataType": "text",
+          "length": 18,
+          "codeList": "CL.DISCREAS",
+          "method": "MT.ADSL.DCSREAS",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.EOSDISP",
+          "mandatory": false,
+          "name": "EOSDISP",
+          "description": "Standardized Disposition Term",
+          "dataType": "text",
+          "length": 27,
+          "codeList": "CL.DISCCD",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADSL.MMS1TSBL",
+          "mandatory": false,
+          "name": "MMS1TSBL",
+          "description": "MMS1-Total Score at Baseline",
+          "dataType": "integer",
+          "length": 2,
+          "method": "MT.ADSL.MMS1TSBL",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        }
+      ],
+      "keySequence": [
+        "IT.ADSL.STUDYID",
+        "IT.ADSL.USUBJID"
+      ]
+    },
+    {
+      "OID": "IG.ADQSADAS",
+      "purpose": "Analysis",
+      "name": "ADQSADAS",
+      "description": "ADAS-Cog Analysis",
+      "structure": "One record per subject per parameter per analysis visit per analysis date",
+      "isReferenceData": false,
+      "items": [
+        {
+          "OID": "IT.ADQSADAS.STUDYID",
+          "mandatory": false,
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "length": 12,
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.SITEID",
+          "mandatory": false,
+          "name": "SITEID",
+          "description": "Study Site Identifier",
+          "dataType": "text",
+          "length": 3,
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.SITEGR1",
+          "mandatory": false,
+          "name": "SITEGR1",
+          "description": "Pooled Site Group 1",
+          "dataType": "text",
+          "length": 3,
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.USUBJID",
+          "mandatory": false,
+          "name": "USUBJID",
+          "description": "Unique Subject Identifier",
+          "dataType": "text",
+          "length": 11,
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.TRTSDT",
+          "mandatory": false,
+          "name": "TRTSDT",
+          "description": "Date of First Exposure to Treatment",
+          "displayFormat": "date9.",
+          "dataType": "integer",
+          "length": 5,
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.TRTEDT",
+          "mandatory": false,
+          "name": "TRTEDT",
+          "description": "Date of Last Exposure to Treatment",
+          "displayFormat": "date9.",
+          "dataType": "integer",
+          "length": 5,
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.TRTP",
+          "mandatory": false,
+          "name": "TRTP",
+          "description": "Planned Treatment",
+          "dataType": "text",
+          "length": 20,
+          "codeList": "CL.ARM",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.TRTPN",
+          "mandatory": false,
+          "name": "TRTPN",
+          "description": "Planned Treatment (N)",
+          "dataType": "integer",
+          "length": 2,
+          "codeList": "CL.ARMN",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.AGE",
+          "mandatory": false,
+          "name": "AGE",
+          "description": "Age",
+          "dataType": "integer",
+          "length": 2,
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.AGEGR1",
+          "mandatory": false,
+          "name": "AGEGR1",
+          "description": "Pooled Age Group 1",
+          "dataType": "text",
+          "length": 5,
+          "codeList": "CL.AGEGR1",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.AGEGR1N",
+          "mandatory": false,
+          "name": "AGEGR1N",
+          "description": "Pooled Age Group 1 (N)",
+          "dataType": "integer",
+          "length": 1,
+          "codeList": "CL.AGEGR1N",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.RACE",
+          "mandatory": false,
+          "name": "RACE",
+          "description": "Race",
+          "dataType": "text",
+          "length": 32,
+          "codeList": "CL.RACE",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.RACEN",
+          "mandatory": false,
+          "name": "RACEN",
+          "description": "Race (N)",
+          "dataType": "integer",
+          "length": 1,
+          "codeList": "CL.RACEN",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.SEX",
+          "mandatory": false,
+          "name": "SEX",
+          "description": "Sex",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.SEX",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.ITTFL",
+          "mandatory": false,
+          "name": "ITTFL",
+          "description": "Intent-To-Treat Population Flag",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.YN",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.EFFFL",
+          "mandatory": false,
+          "name": "EFFFL",
+          "description": "Efficacy Population Flag",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.YN",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.COMP24FL",
+          "mandatory": false,
+          "name": "COMP24FL",
+          "description": "Completers of Week 24 Population Flag",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.YN",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.AVISIT",
+          "mandatory": false,
+          "name": "AVISIT",
+          "description": "Analysis Visit",
+          "dataType": "text",
+          "length": 16,
+          "codeList": "CL.AVISIT",
+          "method": "MT.ADQSADAS.AVISIT",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.AVISITN",
+          "mandatory": false,
+          "name": "AVISITN",
+          "description": "Analysis Visit (N)",
+          "dataType": "integer",
+          "length": 5,
+          "codeList": "CL.AVISITN",
+          "origin": {
+            "type": "Assigned",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.VISIT",
+          "mandatory": false,
+          "name": "VISIT",
+          "description": "Visit Name",
+          "dataType": "text",
+          "length": 19,
+          "codeList": "CL.VISIT",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.VISITNUM",
+          "mandatory": false,
+          "name": "VISITNUM",
+          "description": "Visit Number",
+          "displayFormat": "5.1",
+          "significantDigits": 1,
+          "dataType": "float",
+          "length": 4,
+          "codeList": "CL.VISITNUM",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.ADY",
+          "mandatory": false,
+          "name": "ADY",
+          "description": "Analysis Relative Day",
+          "dataType": "integer",
+          "length": 3,
+          "method": "MT.ADQSADAS.ADY",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.ADT",
+          "mandatory": false,
+          "name": "ADT",
+          "description": "Analysis Date",
+          "displayFormat": "date9.",
+          "dataType": "integer",
+          "length": 5,
+          "method": "MT.ADQSADAS.ADT",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.PARAM",
+          "mandatory": false,
+          "name": "PARAM",
+          "description": "Parameter",
+          "dataType": "text",
+          "length": 100,
+          "codeList": "CL.PARAM_ADQSADAS",
+          "origin": {
+            "type": "Assigned",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.PARAMCD",
+          "mandatory": false,
+          "name": "PARAMCD",
+          "description": "Parameter Code",
+          "dataType": "text",
+          "length": 8,
+          "codeList": "CL.PARAMCD_ADQSADAS",
+          "origin": {
+            "type": "Assigned",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.PARAMN",
+          "mandatory": false,
+          "name": "PARAMN",
+          "description": "Parameter (N)",
+          "dataType": "integer",
+          "length": 2,
+          "codeList": "CL.PARAMN_ADQSADAS",
+          "origin": {
+            "type": "Assigned",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.AVAL",
+          "mandatory": false,
+          "name": "AVAL",
+          "description": "Analysis Value",
+          "dataType": "integer",
+          "length": 3
+        },
+        {
+          "OID": "IT.ADQSADAS.BASE",
+          "mandatory": false,
+          "name": "BASE",
+          "description": "Baseline Value",
+          "dataType": "integer",
+          "length": 2,
+          "method": "MT.ADQSADAS.BASE",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.CHG",
+          "mandatory": false,
+          "name": "CHG",
+          "description": "Change from Baseline",
+          "dataType": "integer",
+          "length": 8,
+          "method": "MT.ADQSADAS.CHG",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.PCHG",
+          "mandatory": false,
+          "name": "PCHG",
+          "description": "Percent Change from Baseline",
+          "dataType": "integer",
+          "length": 8,
+          "method": "MT.ADQSADAS.PCHG",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.ABLFL",
+          "mandatory": false,
+          "name": "ABLFL",
+          "description": "Baseline Record Flag",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.Y_BLANK",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.ANL01FL",
+          "mandatory": false,
+          "name": "ANL01FL",
+          "description": "Analysis Flag 01",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.Y_BLANK",
+          "method": "MT.ADQSADAS.ANL01FL",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.DTYPE",
+          "mandatory": false,
+          "name": "DTYPE",
+          "description": "Derivation Type",
+          "dataType": "text",
+          "length": 7,
+          "codeList": "CL.DTYPE"
+        },
+        {
+          "OID": "IT.ADQSADAS.AWRANGE",
+          "mandatory": false,
+          "name": "AWRANGE",
+          "description": "Analysis Window Valid Relative Range",
+          "dataType": "text",
+          "length": 9,
+          "codeList": "CL.AWRANGE_ADQSADAS",
+          "origin": {
+            "type": "Assigned",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.AWTARGET",
+          "mandatory": false,
+          "name": "AWTARGET",
+          "description": "Analysis Window Target",
+          "dataType": "integer",
+          "length": 8,
+          "origin": {
+            "type": "Assigned",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.AWTDIFF",
+          "mandatory": false,
+          "name": "AWTDIFF",
+          "description": "Analysis Window Diff from Target",
+          "dataType": "integer",
+          "length": 8,
+          "method": "MT.ADQSADAS.AWTDIFF",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.AWLO",
+          "mandatory": false,
+          "name": "AWLO",
+          "description": "Analysis Window Beginning Timepoint",
+          "dataType": "integer",
+          "length": 8,
+          "origin": {
+            "type": "Assigned",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.AWHI",
+          "mandatory": false,
+          "name": "AWHI",
+          "description": "Analysis Window Ending Timepoint",
+          "dataType": "integer",
+          "length": 8,
+          "origin": {
+            "type": "Assigned",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.AWU",
+          "mandatory": false,
+          "name": "AWU",
+          "description": "Analysis Window Unit",
+          "dataType": "text",
+          "length": 4,
+          "codeList": "CL.AWU",
+          "origin": {
+            "type": "Assigned",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADQSADAS.QSSEQ",
+          "mandatory": false,
+          "name": "QSSEQ",
+          "description": "Sequence Number",
+          "dataType": "integer",
+          "length": 4
+        }
+      ],
+      "keySequence": [
+        "IT.ADQSADAS.STUDYID",
+        "IT.ADQSADAS.USUBJID",
+        "IT.ADQSADAS.PARAMCD",
+        "IT.ADQSADAS.AVISIT",
+        "IT.ADQSADAS.ADT"
+      ],
+      "children": [
+        {
+          "OID": "VL.ADQSADAS.AVAL",
+          "name": "VL_ADQSADAS_AVAL",
+          "type": "ValueList",
+          "items": [
+            {
+              "OID": "IT.ADQSADAS.AVAL.ACITM01-ACITM14",
+              "mandatory": false,
+              "name": "AVAL",
+              "description": "Analysis Value",
+              "dataType": "integer",
+              "length": 2,
+              "applicableWhen": [
+                "WC.ADQSADAS.AVAL.ACITM01-ACITM14"
+              ],
+              "origin": {
+                "type": "Predecessor"
+              }
+            },
+            {
+              "OID": "IT.ADQSADAS.AVAL.ACTOT",
+              "mandatory": false,
+              "name": "AVAL",
+              "description": "Analysis Value",
+              "dataType": "integer",
+              "length": 3,
+              "method": "MT.ADQSADAS.AVAL.ACTOT",
+              "applicableWhen": [
+                "WC.ADQSADAS.AVAL.ACTOT"
+              ],
+              "origin": {
+                "type": "Derived",
+                "source": "Sponsor"
+              }
+            }
+          ]
+        },
+        {
+          "OID": "VL.ADQSADAS.DTYPE",
+          "name": "VL_ADQSADAS_DTYPE",
+          "type": "ValueList",
+          "items": [
+            {
+              "OID": "IT.ADQSADAS.DTYPE.ACITM01-ACITM14",
+              "mandatory": false,
+              "name": "DTYPE",
+              "description": "Derivation Type",
+              "dataType": "text",
+              "length": 7,
+              "codeList": "CL.DTYPE",
+              "applicableWhen": [
+                "WC.ADQSADAS.DTYPE.ACITM01-ACITM14"
+              ],
+              "origin": {
+                "type": "Assigned",
+                "source": "Sponsor"
+              }
+            },
+            {
+              "OID": "IT.ADQSADAS.DTYPE.ACTOT",
+              "mandatory": false,
+              "name": "DTYPE",
+              "description": "Derivation Type",
+              "dataType": "text",
+              "length": 7,
+              "codeList": "CL.DTYPE",
+              "applicableWhen": [
+                "WC.ADQSADAS.DTYPE.ACTOT"
+              ],
+              "origin": {
+                "type": "Assigned",
+                "source": "Sponsor"
+              }
+            }
+          ]
+        },
+        {
+          "OID": "VL.ADQSADAS.QSSEQ",
+          "name": "VL_ADQSADAS_QSSEQ",
+          "type": "ValueList",
+          "items": [
+            {
+              "OID": "IT.ADQSADAS.QSSEQ.ACITM01-ACITM14",
+              "mandatory": false,
+              "name": "QSSEQ",
+              "description": "Sequence Number",
+              "dataType": "integer",
+              "length": 4,
+              "applicableWhen": [
+                "WC.ADQSADAS.QSSEQ.ACITM01-ACITM14"
+              ],
+              "origin": {
+                "type": "Predecessor"
+              }
+            },
+            {
+              "OID": "IT.ADQSADAS.QSSEQ.ACTOT",
+              "mandatory": false,
+              "name": "QSSEQ",
+              "description": "Sequence Number",
+              "dataType": "integer",
+              "length": 3,
+              "applicableWhen": [
+                "WC.ADQSADAS.QSSEQ.ACTOT"
+              ],
+              "origin": {
+                "type": "Assigned",
+                "source": "Sponsor"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "OID": "IG.ADAE",
+      "purpose": "Analysis",
+      "name": "ADAE",
+      "description": "Adverse Events Analysis Dataset",
+      "structure": "one record per subject per adverse event",
+      "isReferenceData": false,
+      "items": [
+        {
+          "OID": "IT.ADAE.STUDYID",
+          "mandatory": false,
+          "name": "STUDYID",
+          "description": "Study Identifier",
+          "dataType": "text",
+          "length": 12,
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.SITEID",
+          "mandatory": false,
+          "name": "SITEID",
+          "description": "Study Site Identifier",
+          "dataType": "text",
+          "length": 3,
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.USUBJID",
+          "mandatory": false,
+          "name": "USUBJID",
+          "description": "Unique Subject Identifier",
+          "dataType": "text",
+          "length": 11,
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.TRTA",
+          "mandatory": false,
+          "name": "TRTA",
+          "description": "Actual Treatment",
+          "dataType": "text",
+          "length": 20,
+          "codeList": "CL.ARM",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.TRTAN",
+          "mandatory": false,
+          "name": "TRTAN",
+          "description": "Actual Treatment (N)",
+          "dataType": "integer",
+          "length": 2,
+          "codeList": "CL.ARMN",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AGE",
+          "mandatory": false,
+          "name": "AGE",
+          "description": "Age",
+          "dataType": "integer",
+          "length": 2,
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AGEGR1",
+          "mandatory": false,
+          "name": "AGEGR1",
+          "description": "Pooled Age Group 1",
+          "dataType": "text",
+          "length": 5,
+          "codeList": "CL.AGEGR1",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AGEGR1N",
+          "mandatory": false,
+          "name": "AGEGR1N",
+          "description": "Pooled Age Group 1 (N)",
+          "dataType": "integer",
+          "length": 1,
+          "codeList": "CL.AGEGR1N",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.RACE",
+          "mandatory": false,
+          "name": "RACE",
+          "description": "Race",
+          "dataType": "text",
+          "length": 32,
+          "codeList": "CL.RACE",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.RACEN",
+          "mandatory": false,
+          "name": "RACEN",
+          "description": "Race (N)",
+          "dataType": "integer",
+          "length": 1,
+          "codeList": "CL.RACEN",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.SEX",
+          "mandatory": false,
+          "name": "SEX",
+          "description": "Sex",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.SEX",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.SAFFL",
+          "mandatory": false,
+          "name": "SAFFL",
+          "description": "Safety Population Flag",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.YN",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.TRTSDT",
+          "mandatory": false,
+          "name": "TRTSDT",
+          "description": "Date of First Exposure to Treatment",
+          "displayFormat": "date9.",
+          "dataType": "integer",
+          "length": 5,
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.TRTEDT",
+          "mandatory": false,
+          "name": "TRTEDT",
+          "description": "Date of Last Exposure to Treatment",
+          "displayFormat": "date9.",
+          "dataType": "integer",
+          "length": 5,
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.ASTDT",
+          "mandatory": false,
+          "name": "ASTDT",
+          "description": "Analysis Start Date",
+          "displayFormat": "date9.",
+          "dataType": "integer",
+          "length": 5,
+          "method": "MT.ADAE.ASTDT",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.ASTDTF",
+          "mandatory": false,
+          "name": "ASTDTF",
+          "description": "Analysis Start Date Imputation Flag",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.DATEFL",
+          "method": "MT.ADAE.ASTDTF",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.ASTDY",
+          "mandatory": false,
+          "name": "ASTDY",
+          "description": "Analysis Start Relative Day",
+          "dataType": "integer",
+          "length": 5,
+          "method": "MT.ADAE.ASTDY",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AENDT",
+          "mandatory": false,
+          "name": "AENDT",
+          "description": "Analysis End Date",
+          "displayFormat": "date9.",
+          "dataType": "integer",
+          "length": 5,
+          "method": "MT.ADAE.AENDT",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AENDY",
+          "mandatory": false,
+          "name": "AENDY",
+          "description": "Analysis End Relative Day",
+          "dataType": "integer",
+          "length": 4,
+          "method": "MT.ADAE.AENDY",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.ADURN",
+          "mandatory": false,
+          "name": "ADURN",
+          "description": "Analysis Duration (N)",
+          "dataType": "integer",
+          "length": 3,
+          "method": "MT.ADAE.ADURN",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.ADURU",
+          "mandatory": false,
+          "name": "ADURU",
+          "description": "Analysis Duration Units",
+          "dataType": "text",
+          "length": 3,
+          "method": "MT.ADAE.ADURU",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AETERM",
+          "mandatory": false,
+          "name": "AETERM",
+          "description": "Reported Term for the Adverse Event",
+          "dataType": "text",
+          "length": 46,
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AELLT",
+          "mandatory": false,
+          "name": "AELLT",
+          "description": "Lowest Level Term",
+          "dataType": "text",
+          "length": 46,
+          "codeList": "CL.AEDICT",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AELLTCD",
+          "mandatory": false,
+          "name": "AELLTCD",
+          "description": "Lowest Level Term Code",
+          "dataType": "integer",
+          "length": 8,
+          "codeList": "CL.AEDICTN",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AEDECOD",
+          "mandatory": false,
+          "name": "AEDECOD",
+          "description": "Dictionary-Derived Term",
+          "dataType": "text",
+          "length": 46,
+          "codeList": "CL.AEDICT",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AEPTCD",
+          "mandatory": false,
+          "name": "AEPTCD",
+          "description": "Preferred Term Code",
+          "dataType": "integer",
+          "length": 8,
+          "codeList": "CL.AEDICTN",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AEHLT",
+          "mandatory": false,
+          "name": "AEHLT",
+          "description": "High Level Term",
+          "dataType": "text",
+          "length": 8,
+          "codeList": "CL.AEDICT",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AEHLTCD",
+          "mandatory": false,
+          "name": "AEHLTCD",
+          "description": "High Level Term Code",
+          "dataType": "integer",
+          "length": 8,
+          "codeList": "CL.AEDICTN",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AEHLGT",
+          "mandatory": false,
+          "name": "AEHLGT",
+          "description": "High Level Group Term",
+          "dataType": "text",
+          "length": 9,
+          "codeList": "CL.AEDICT",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AEHLGTCD",
+          "mandatory": false,
+          "name": "AEHLGTCD",
+          "description": "High Level Group Term Code",
+          "dataType": "integer",
+          "length": 8,
+          "codeList": "CL.AEDICTN",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AEBODSYS",
+          "mandatory": false,
+          "name": "AEBODSYS",
+          "description": "Body System or Organ Class",
+          "dataType": "text",
+          "length": 67,
+          "codeList": "CL.AEDICT",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AESOC",
+          "mandatory": false,
+          "name": "AESOC",
+          "description": "Primary System Organ Class",
+          "dataType": "text",
+          "length": 67,
+          "codeList": "CL.AEDICT",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AESOCCD",
+          "mandatory": false,
+          "name": "AESOCCD",
+          "description": "Primary System Organ Class Code",
+          "dataType": "integer",
+          "length": 8,
+          "codeList": "CL.AEDICTN",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AESEV",
+          "mandatory": false,
+          "name": "AESEV",
+          "description": "Severity/Intensity",
+          "dataType": "text",
+          "length": 8,
+          "codeList": "CL.AESEV",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AESER",
+          "mandatory": false,
+          "name": "AESER",
+          "description": "Serious Event",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.YN",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AESCAN",
+          "mandatory": false,
+          "name": "AESCAN",
+          "description": "Involves Cancer",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.YN",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AESCONG",
+          "mandatory": false,
+          "name": "AESCONG",
+          "description": "Congenital Anomaly or Birth Defect",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.YN",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AESDISAB",
+          "mandatory": false,
+          "name": "AESDISAB",
+          "description": "Persist or Signif Disability/Incapacity",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.YN",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AESDTH",
+          "mandatory": false,
+          "name": "AESDTH",
+          "description": "Results in Death",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.YN",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AESHOSP",
+          "mandatory": false,
+          "name": "AESHOSP",
+          "description": "Requires or Prolongs Hospitalization",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.YN",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AESLIFE",
+          "mandatory": false,
+          "name": "AESLIFE",
+          "description": "Is Life Threatening",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.YN",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AESOD",
+          "mandatory": false,
+          "name": "AESOD",
+          "description": "Occurred with Overdose",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.YN",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AEREL",
+          "mandatory": false,
+          "name": "AEREL",
+          "description": "Causality",
+          "dataType": "text",
+          "length": 8,
+          "codeList": "CL.AECAUS",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AEACN",
+          "mandatory": false,
+          "name": "AEACN",
+          "description": "Action Taken with Study Treatment",
+          "dataType": "text",
+          "length": 1,
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AEOUT",
+          "mandatory": false,
+          "name": "AEOUT",
+          "description": "Outcome of Adverse Event",
+          "dataType": "text",
+          "length": 26,
+          "codeList": "CL.OUT",
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AESEQ",
+          "mandatory": false,
+          "name": "AESEQ",
+          "description": "Sequence Number",
+          "dataType": "integer",
+          "length": 8,
+          "origin": {
+            "type": "Predecessor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.TRTEMFL",
+          "mandatory": false,
+          "name": "TRTEMFL",
+          "description": "Treatment Emergent Analysis Flag",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.YN",
+          "method": "MT.ADAE.TRTEMFL",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AOCCFL",
+          "mandatory": false,
+          "name": "AOCCFL",
+          "description": "1st Occurrence within Subject Flag",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.Y_BLANK",
+          "method": "MT.ADAE.AOCCFL",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AOCCSFL",
+          "mandatory": false,
+          "name": "AOCCSFL",
+          "description": "1st Occurrence of SOC Flag",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.Y_BLANK",
+          "method": "MT.ADAE.AOCCSFL",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AOCCPFL",
+          "mandatory": false,
+          "name": "AOCCPFL",
+          "description": "1st Occurrence of Preferred Term Flag",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.Y_BLANK",
+          "method": "MT.ADAE.AOCCPFL",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AOCC02FL",
+          "mandatory": false,
+          "name": "AOCC02FL",
+          "description": "1st Occurrence of Serious 02 Flag",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.Y_BLANK",
+          "method": "MT.ADAE.AOCC02FL",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AOCC03FL",
+          "mandatory": false,
+          "name": "AOCC03FL",
+          "description": "1st Occurrence of Serious SOC 03 Flag",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.Y_BLANK",
+          "method": "MT.ADAE.AOCC03FL",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AOCC04FL",
+          "mandatory": false,
+          "name": "AOCC04FL",
+          "description": "1st Occurrence of Serious PT 04 Flag",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.Y_BLANK",
+          "method": "MT.ADAE.AOCC04FL",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.CQ01NAM",
+          "mandatory": false,
+          "name": "CQ01NAM",
+          "description": "Customized Query 01 Name",
+          "dataType": "text",
+          "length": 19,
+          "method": "MT.ADAE.CQ01NAM",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        },
+        {
+          "OID": "IT.ADAE.AOCC01FL",
+          "mandatory": false,
+          "name": "AOCC01FL",
+          "description": "1st Occurrence of CQ01 01 Flag",
+          "dataType": "text",
+          "length": 1,
+          "codeList": "CL.Y_BLANK",
+          "method": "MT.ADAE.AOCC01FL",
+          "origin": {
+            "type": "Derived",
+            "source": "Sponsor"
+          }
+        }
+      ],
+      "keySequence": [
+        "IT.ADAE.STUDYID",
+        "IT.ADAE.USUBJID",
+        "IT.ADAE.AETERM",
+        "IT.ADAE.ASTDT",
+        "IT.ADAE.AESEQ"
+      ]
+    }
+  ],
+  "conditions": [
+    {
+      "OID": "COND.ADQSADAS.AVAL.ACITM01-ACITM14",
+      "rangeChecks": [
+        {
+          "comparator": "IN",
+          "checkValues": [
+            "ACITM01",
+            "ACITM02",
+            "ACITM03",
+            "ACITM04",
+            "ACITM05",
+            "ACITM06",
+            "ACITM07",
+            "ACITM08",
+            "ACITM09",
+            "ACITM10",
+            "ACITM11",
+            "ACITM12",
+            "ACITM13",
+            "ACITM14"
+          ],
+          "item": "IT.ADQSADAS.PARAMCD",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.ADQSADAS.AVAL.ACTOT",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "ACTOT"
+          ],
+          "item": "IT.ADQSADAS.PARAMCD",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.ADQSADAS.DTYPE.ACITM01-ACITM14",
+      "rangeChecks": [
+        {
+          "comparator": "NE",
+          "checkValues": [
+            "ACTOT"
+          ],
+          "item": "IT.ADQSADAS.PARAMCD",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.ADQSADAS.DTYPE.ACTOT",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "ACTOT"
+          ],
+          "item": "IT.ADQSADAS.PARAMCD",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.ADQSADAS.QSSEQ.ACITM01-ACITM14",
+      "rangeChecks": [
+        {
+          "comparator": "NE",
+          "checkValues": [
+            "ACTOT"
+          ],
+          "item": "IT.ADQSADAS.PARAMCD",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.ADQSADAS.QSSEQ.ACTOT",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "ACTOT"
+          ],
+          "item": "IT.ADQSADAS.PARAMCD",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.Table_14-3.01.R.1.ADQSADAS",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "ACTOT"
+          ],
+          "item": "IT.ADQSADAS.PARAMCD",
+          "softHard": "Soft"
+        },
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "Week 24"
+          ],
+          "item": "IT.ADQSADAS.AVISIT",
+          "softHard": "Soft"
+        },
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "Y"
+          ],
+          "item": "IT.ADQSADAS.EFFFL",
+          "softHard": "Soft"
+        },
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "Y"
+          ],
+          "item": "IT.ADQSADAS.ANL01FL",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.Table_14-3.01.R.2.ADQSADAS",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "ACTOT"
+          ],
+          "item": "IT.ADQSADAS.PARAMCD",
+          "softHard": "Soft"
+        },
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "Week 24"
+          ],
+          "item": "IT.ADQSADAS.AVISIT",
+          "softHard": "Soft"
+        },
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "Y"
+          ],
+          "item": "IT.ADQSADAS.EFFFL",
+          "softHard": "Soft"
+        },
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "Y"
+          ],
+          "item": "IT.ADQSADAS.ANL01FL",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.Table_14-5.02.R.1.ADAE",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "Y"
+          ],
+          "item": "IT.ADAE.TRTEMFL",
+          "softHard": "Soft"
+        },
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "Y"
+          ],
+          "item": "IT.ADAE.AESER",
+          "softHard": "Soft"
+        }
+      ]
+    },
+    {
+      "OID": "COND.Table_14-5.02.R.1.ADSL",
+      "rangeChecks": [
+        {
+          "comparator": "EQ",
+          "checkValues": [
+            "Y"
+          ],
+          "item": "IT.ADSL.SAFFL",
+          "softHard": "Soft"
+        }
+      ]
+    }
+  ],
+  "whereClauses": [
+    {
+      "OID": "WC.ADQSADAS.AVAL.ACITM01-ACITM14",
+      "conditions": [
+        "COND.ADQSADAS.AVAL.ACITM01-ACITM14"
+      ]
+    },
+    {
+      "OID": "WC.ADQSADAS.AVAL.ACTOT",
+      "conditions": [
+        "COND.ADQSADAS.AVAL.ACTOT"
+      ]
+    },
+    {
+      "OID": "WC.ADQSADAS.DTYPE.ACITM01-ACITM14",
+      "conditions": [
+        "COND.ADQSADAS.DTYPE.ACITM01-ACITM14"
+      ]
+    },
+    {
+      "OID": "WC.ADQSADAS.DTYPE.ACTOT",
+      "conditions": [
+        "COND.ADQSADAS.DTYPE.ACTOT"
+      ]
+    },
+    {
+      "OID": "WC.ADQSADAS.QSSEQ.ACITM01-ACITM14",
+      "conditions": [
+        "COND.ADQSADAS.QSSEQ.ACITM01-ACITM14"
+      ]
+    },
+    {
+      "OID": "WC.ADQSADAS.QSSEQ.ACTOT",
+      "conditions": [
+        "COND.ADQSADAS.QSSEQ.ACTOT"
+      ]
+    },
+    {
+      "OID": "WC.Table_14-3.01.R.1.ADQSADAS",
+      "conditions": [
+        "COND.Table_14-3.01.R.1.ADQSADAS"
+      ]
+    },
+    {
+      "OID": "WC.Table_14-3.01.R.2.ADQSADAS",
+      "conditions": [
+        "COND.Table_14-3.01.R.2.ADQSADAS"
+      ]
+    },
+    {
+      "OID": "WC.Table_14-5.02.R.1.ADAE",
+      "conditions": [
+        "COND.Table_14-5.02.R.1.ADAE"
+      ]
+    },
+    {
+      "OID": "WC.Table_14-5.02.R.1.ADSL",
+      "conditions": [
+        "COND.Table_14-5.02.R.1.ADSL"
+      ]
+    }
+  ],
+  "methods": [
+    {
+      "OID": "MT.ADQSADAS.AVISIT",
+      "name": "MT.ADQSADAS.AVISIT",
+      "description": "Derived based on windowing algorithm described in SAP, Section 8.2",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADQSADAS.ADY",
+      "name": "MT.ADQSADAS.ADY",
+      "description": "ADY = ADT - TRTSDT + 1, if ADT>=TRTSDT. ADY = ADT - TRTSDT, if ADT<TRTSDT.",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADQSADAS.ADT",
+      "name": "MT.ADQSADAS.ADT",
+      "description": "SAS date from QS.QSDTC",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADQSADAS.BASE",
+      "name": "MT.ADQSADAS.BASE",
+      "description": "QS.QSSTRESN where QS.QSBLFL=Y (QS.VISITNUM=3)",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADQSADAS.CHG",
+      "name": "MT.ADQSADAS.CHG",
+      "description": "AVAL - BASE",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADQSADAS.PCHG",
+      "name": "MT.ADQSADAS.PCHG",
+      "description": "100* (CHG/BASE)",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADQSADAS.ANL01FL",
+      "name": "MT.ADQSADAS.ANL01FL",
+      "description": "If multiple visits fall into the same visit window, then the one closest to the target day is chosen for analysis. These are flagged with ANL01FL=\"Y\".",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADQSADAS.AWTDIFF",
+      "name": "MT.ADQSADAS.AWTDIFF",
+      "description": "Absolute difference between AWTARGET and ADY",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.SITEGR1",
+      "name": "MT.ADSL.SITEGR1",
+      "description": "refer to SAP, Section 7.1 - if not pooled then SITEGR1=SITEID. If pooled, SITEGR1 will be 900",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.TRTSDT",
+      "name": "MT.ADSL.TRTSDT",
+      "description": "SV.SVSTDTC where SV.VISITNUM=3, converted to SAS date",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.TRTEDT",
+      "name": "MT.ADSL.TRTEDT",
+      "description": "The date of final dose (from the CRF) is EX.EXENDTC on the subject's last EX record. If the date of final dose is missing for the subject and the subject discontinued after visit 3, use the date of discontinuation as the date of last dose. Convert the date to a SAS date.",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.TRTDURD",
+      "name": "MT.ADSL.TRTDURD",
+      "description": "TRTEDT-TRTSDT+1",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.AVGDD",
+      "name": "MT.ADSL.AVGDD",
+      "description": "CUMDOSE/TRTDURD",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.CUMDOSE",
+      "name": "MT.ADSL.CUMDOSE",
+      "description": "For TRT01PN=0 or 54: CUMDOSE=TRT01PN*TRTDURD. \nFor TRT01PN=81: CUMDOSE will be based on \n  54 mg per day for the # of days subject was in 1st dosing interval \n    (i.e., Date of visit 4 - TRTSTDT+1 if 1st interval completed, TRTEDT-TRTSTDT+1 if subject discontinued <= Visit 4 (Week 4) and > Visit 3 (Baseline)), \n  81 mg per day for the # of days subject was in 2nd dosing interval \n    (i.e., Date of Visit 12 - Date of Visit 4 if 2nd interval completed, TRTEDT- Date of Visit 4 if subject discontinued <= Visit 12 (Week 24) and > Visit 4), \n  and 54 mg per day for the # of days subject was in 3rd dosing interval \n    (i.e., TRTEDT - Date of Visit 12 if subject continued after Visit 12).",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.AGEGR1",
+      "name": "MT.ADSL.AGEGR1",
+      "description": "Grouping of AGE into <65, 65-80, and >80",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.SAFFL",
+      "name": "MT.ADSL.SAFFL",
+      "description": "Y if ITTFL='Y' and TRTSDT ne missing. N otherwise",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.ITTFL",
+      "name": "MT.ADSL.ITTFL",
+      "description": "Y if ARMCD ne ' '. N otherwise",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.EFFFL",
+      "name": "MT.ADSL.EFFFL",
+      "description": "Y if SAFFL='Y AND subject has at least one record in QS for ADAS-Cog with QS.VISITNUM>3 AND at least one record in QS for CIBIC+ with QS.VISITNUM>3, N otherwise",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.COMP8FL",
+      "name": "MT.ADSL.COMP8FL",
+      "description": "Y if subject has a SV.VISITNUM=8 and TRTEDT>= date of visit 8, N otherwise",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.COMP16FL",
+      "name": "MT.ADSL.COMP16FL",
+      "description": "Y if subject has a SV.VISITNUM=10 and TRTEDT>=date of visit 10, N otherwise",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.COMP24FL",
+      "name": "MT.ADSL.COMP24FL",
+      "description": "Y if subject has a SV.VISITNUM=12 and TRTEDT>= date of visit 12 , N otherwise",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.DISCONFL",
+      "name": "MT.ADSL.DISCONFL",
+      "description": "Y if EOSSTT='DISCONTINUED'. Null otherwise",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.DSRAEFL",
+      "name": "MT.ADSL.DSRAEFL",
+      "description": "Y if DCSREAS='Adverse Event'. Null otherwise",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.BMIBL",
+      "name": "MT.ADSL.BMIBL",
+      "description": "WEIGHTBL / ((HEIGHTBL*100)**2)",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.BMIBLGR1",
+      "name": "MT.ADSL.BMIBLGR1",
+      "description": "BMIBLGR1=Normal if . < BMIBL <25. BMIBLGR1=Overweight if 25 <=BMIBL <30. BMIBLGR1=Obese if BMIBL >=30",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.HEIGHTBL",
+      "name": "MT.ADSL.HEIGHTBL",
+      "description": "VS.VSSTRESN where VS.VSTESTCD='HEIGHT' and VS.VISITNUM=1",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.WEIGHTBL",
+      "name": "MT.ADSL.WEIGHTBL",
+      "description": "VS.VSSTRESN where VS.VSTESTCD='WEIGHT' and VS.VISITNUM=3",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.EDUCLVL",
+      "name": "MT.ADSL.EDUCLVL",
+      "description": "SC.SCSTRESN where SC.SCTESTCD=\"EDLEVEL\"",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.DISONDT",
+      "name": "MT.ADSL.DISONDT",
+      "description": "MH.MHSTDTC where MH.MHCAT='PRIMARY DIAGNOSIS' converted to SAS date",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.DURDIS",
+      "name": "MT.ADSL.DURDIS",
+      "description": "number of months between Date of VISIT 1 and DISONDT",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.DURDSGR1",
+      "name": "MT.ADSL.DURDSGR1",
+      "description": "grouping DURDIS values as <12 and >=12",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.VISIT1DT",
+      "name": "MT.ADSL.VISIT1DT",
+      "description": "SV.SVSTDTC where SV.VISITNUM=1, converted to SAS date",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.VISNUMEN",
+      "name": "MT.ADSL.VISNUMEN",
+      "description": "If DS.VISITNUM=13 where DS.DSTERM='PROTOCOL COMPLETED' then VISNUMEN=12, otherwise VISNUMEN=DS.VISITNUM where DS.DSTERM='PROTOCOL COMPLETED'",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.RFENDT",
+      "name": "MT.ADSL.RFENDT",
+      "description": "RFENDTC converted to SAS date",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.EOSSTT",
+      "name": "MT.ADSL.EOSSTT",
+      "description": "If DS.DSDECOD='COMPLETED' then EOSSTT='COMPLETED'. Otherwise EOSSTT='DISCONTINUED'.",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.DCSREAS",
+      "name": "MT.ADSL.DCSREAS",
+      "description": "If DS.DSCAT='DISPOSITION EVENT' and DS.DSTERM in('I/E NOT MET' 'SPONSOR DECISION' 'WITHDREW CONSENT') then DCSREAS=DS.DSTERM. Otherwise if DS.DSCAT='DISPOSITION EVENT' then DCSREAS=DS.DSDECOD. Convert to mixed case to match display format.",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADSL.MMS1TSBL",
+      "name": "MT.ADSL.MMS1TSBL",
+      "description": "Sum of FT.FTSTRESN values where FT.FTCAT=\"MMSE\" for the subject (FT.FTTESTCD= 'MMS101A'-'MMS111')",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADQSADAS.AVAL.ACTOT",
+      "name": "MT.ADQSADAS.AVAL.ACTOT",
+      "description": "Sum of ADAS scores for items 1, 2, 4, 5, 6, 7, 8, 11, 12, 13, and 14, see ADRG for details on adjusting for missing values.",
+      "type": "Computation",
+      "documents": [
+        {
+          "OID": "LF.ADRG",
+          "leafID": "LF.ADRG"
+        }
+      ]
+    },
+    {
+      "OID": "MT.ADAE.ASTDT",
+      "name": "MT.ADAE.ASTDT",
+      "description": "AE.AESTDTC, converted to a numeric SAS date. Some events with partial dates are imputed in a conservative manner. If the day component is missing, a value of '01' is used. If both the month and day are missing no imputation is performed as these dates clearly indicate a start prior to the beginning of treatment. There are no events with completely missing start dates.",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADAE.ASTDTF",
+      "name": "MT.ADAE.ASTDTF",
+      "description": "ASTDTF='D' if the day value within the character date is imputed. Note that only day values needed to be imputed for this study",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADAE.ASTDY",
+      "name": "MT.ADAE.ASTDY",
+      "description": "IF ASTDT>=TRTSDT>MISSING then ASTDY=ASTDT-TRTSDT+1 Else if TRTSDT>ASTDT>MISSING then ASTDY=ASTDT-TRTSDT",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADAE.AENDT",
+      "name": "MT.ADAE.AENDT",
+      "description": "AE.AEENDTC, converted to a numeric SAS date",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADAE.AENDY",
+      "name": "MT.ADAE.AENDY",
+      "description": "IF AENDT>=TRTSDT>MISSING then AENDY=AENDT-TRTSDT+1 Else if TRTSDT>AENDT>MISSING then AENDY=AENDT-TRTSDT",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADAE.ADURN",
+      "name": "MT.ADAE.ADURN",
+      "description": "ADURN=AENDT-ASTDT+1",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADAE.ADURU",
+      "name": "MT.ADAE.ADURU",
+      "description": "If ADURN is not missing then ADURU='DAY'",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADAE.TRTEMFL",
+      "name": "MT.ADAE.TRTEMFL",
+      "description": "If ASTDT >= TRTSDT > . then TRTEMFL='Y'. Otherwise TRTEMFL='N'",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADAE.AOCCFL",
+      "name": "MT.ADAE.AOCCFL",
+      "description": "Subset to TRTEMFL='Y' and sort by Subject (USUBJID), Start Date (ASTDT), and Sequence Number (AESEQ) and flag the first record (set AOCCFL=’Y’) within each Subject",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADAE.AOCCSFL",
+      "name": "MT.ADAE.AOCCSFL",
+      "description": "Subset to TRTEMFL='Y' and sort by Subject (USUBJID), System Organ Class (AEBODSYS), Start Date (ASTDT), and Sequence Number (AESEQ) and flag the first record (set AOCCSFL=’Y’) within each Subject and SOC",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADAE.AOCCPFL",
+      "name": "MT.ADAE.AOCCPFL",
+      "description": "Subset to TRTEMFL='Y' and sort by Subject (USUBJID), System Organ Class (AEBODSYS), Preferred Term (AEDECOD), Start Date (ASTDT), and Sequence Number (AESEQ) and flag the first record (set AOCCPFL=’Y’) within each Subject, SOC, and PT",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADAE.AOCC02FL",
+      "name": "MT.ADAE.AOCC02FL",
+      "description": "Subset to TRTEMFL='Y' and AESER='Y' and sort by Subject (USUBJID), Start Date (ASTDT), and Sequence Number (AESEQ) and flag the first record (set AOCC02FL=’Y’) within each Subject",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADAE.AOCC03FL",
+      "name": "MT.ADAE.AOCC03FL",
+      "description": "Subset to TRTEMFL='Y' and AESER='Y' and sort by Subject (USUBJID), System Organ Class (AEBODSYS), Start Date (ASTDT), and Sequence Number (AESEQ) and flag the first record (set AOCC03FL=’Y’) within each Subject and SOC",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADAE.AOCC04FL",
+      "name": "MT.ADAE.AOCC04FL",
+      "description": "Subset to TRTEMFL='Y' and AESER='Y' and sort by Subject (USUBJID), System Organ Class (AEBODSYS), Preferred Term (AEDECOD), Start Date (ASTDT), and Sequence Number (AESEQ) and flag the first record (set AOCC04FL=’Y’) within each Subject, SOC, and PT",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADAE.CQ01NAM",
+      "name": "MT.ADAE.CQ01NAM",
+      "description": "If AEDECOD contains any of the character strings of ('APPLICATION', 'DERMATITIS', 'ERYTHEMA', 'BLISTER') OR if AEBODSYS='SKIN AND SUBC UTANEOUS TISSUE DISORDERS' but AEDECOD is not in ('COLD SWEAT', 'HYPERHIDROSIS', 'ALOPECIA') then CQ01NAM='DERMATOLOGIC EVENTS' Otherwise CQ01NAM=NULL",
+      "type": "Computation"
+    },
+    {
+      "OID": "MT.ADAE.AOCC01FL",
+      "name": "MT.ADAE.AOCC01FL",
+      "description": "Subset to CQ01NAM='' and TRTEMFL='Y' and sort by Subject (USUBJID), Start Date (ASTDT), and Sequence Number (AESEQ) and flag the first record (set AOCC01FL=’Y’) within each Subject (Flag First Treatment Emergent Dermatological Event for Time to Event Analysis)",
+      "type": "Computation"
+    }
+  ],
+  "analyses": [
+    {
+      "OID": "AR.Table_14-3.01.R.1",
+      "description": "Linear model analysis of CHG for dose response; using randomized dose (0 for placebo; 54 for low dose; 81 for high dose) and site group in model. Used PROC GLM in SAS to produce p-value (from Type III SS for treatment dose).",
+      "type": "Computation",
+      "inputData": [
+        "IG.ADQSADAS"
+      ]
+    },
+    {
+      "OID": "AR.Table_14-3.01.R.2",
+      "description": "ANCOVA analysis of CHG performed to provide pairwise comparisons among treatment groups and adjusted means; using randomized treatment as class variable and site group as class variable in model and the baseline value as a covariate.",
+      "type": "Computation",
+      "inputData": [
+        "IG.ADQSADAS"
+      ]
+    },
+    {
+      "OID": "AR.Table_14-5.02.R.1",
+      "description": "Unique count of subjects that experienced an Adverse Event by Preferred Term, System Organ Class, and Treatment Group and percentages based on the number of subjects in the safety population within each treatment group. The total number of times an event occurred was recorded by Preferred Term, System Organ Class, and Treatment Group. Fisher's exact test was used for treatment comparison of event rates.",
+      "type": "Computation",
+      "inputData": [
+        "IG.ADAE",
+        "IG.ADSL"
+      ]
+    }
+  ],
+  "codeLists": [
+    {
+      "OID": "CL.AGEGR1",
+      "name": "Age Group",
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "<65",
+          "weight": "1"
+        },
+        {
+          "codedValue": "65-80",
+          "weight": "2"
+        },
+        {
+          "codedValue": ">80",
+          "weight": "3"
+        }
+      ]
+    },
+    {
+      "OID": "CL.AGEGR1N",
+      "name": "Age Group (N)",
+      "dataType": "integer",
+      "codeListItems": [
+        {
+          "codedValue": "1",
+          "decode": "<65"
+        },
+        {
+          "codedValue": "2",
+          "decode": "65-80"
+        },
+        {
+          "codedValue": "3",
+          "decode": ">80"
+        }
+      ]
+    },
+    {
+      "OID": "CL.AGEU",
+      "name": "Age Unit",
+      "coding": [
+        {
+          "code": "C66781",
+          "codeSystem": "nci:ExtCodeID"
+        }
+      ],
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "YEARS",
+          "coding": {
+            "code": "C29848",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        }
+      ]
+    },
+    {
+      "OID": "CL.ARM",
+      "name": "Actual Treatment",
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "Placebo"
+        },
+        {
+          "codedValue": "Xanomeline Low Dose"
+        },
+        {
+          "codedValue": "Xanomeline High Dose"
+        }
+      ]
+    },
+    {
+      "OID": "CL.ARMN",
+      "name": "Actual Treatment (N)",
+      "dataType": "integer",
+      "codeListItems": [
+        {
+          "codedValue": "0",
+          "decode": "Placebo"
+        },
+        {
+          "codedValue": "54",
+          "decode": "Xanomeline Low Dose"
+        },
+        {
+          "codedValue": "81",
+          "decode": "Xanomeline High Dose"
+        }
+      ]
+    },
+    {
+      "OID": "CL.AVISIT",
+      "name": "Analysis Visit",
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "Baseline"
+        },
+        {
+          "codedValue": "Week 8"
+        },
+        {
+          "codedValue": "Week 16"
+        },
+        {
+          "codedValue": "Week 24"
+        }
+      ]
+    },
+    {
+      "OID": "CL.AVISITN",
+      "name": "Analysis Visit (N)",
+      "dataType": "integer",
+      "codeListItems": [
+        {
+          "codedValue": "0",
+          "decode": "Baseline"
+        },
+        {
+          "codedValue": "8",
+          "decode": "Week 8"
+        },
+        {
+          "codedValue": "16",
+          "decode": "Week 16"
+        },
+        {
+          "codedValue": "24",
+          "decode": "Week 24"
+        }
+      ]
+    },
+    {
+      "OID": "CL.AWU",
+      "name": "Unit - AWU",
+      "coding": [
+        {
+          "code": "C71620",
+          "codeSystem": "nci:ExtCodeID"
+        }
+      ],
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "DAYS",
+          "coding": {
+            "code": "C25301",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        }
+      ]
+    },
+    {
+      "OID": "CL.BMICAT",
+      "name": "Body Mass Index Category",
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "<25",
+          "decode": "Normal",
+          "weight": "1"
+        },
+        {
+          "codedValue": "25-<30",
+          "decode": "Overweight",
+          "weight": "2"
+        },
+        {
+          "codedValue": ">30",
+          "decode": "Obese",
+          "weight": "3"
+        }
+      ]
+    },
+    {
+      "OID": "CL.DATEFL",
+      "name": "Date Imputation Flag",
+      "coding": [
+        {
+          "code": "C81223",
+          "codeSystem": "nci:ExtCodeID"
+        }
+      ],
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "D",
+          "decode": "Day Imputed: Day is imputed",
+          "coding": {
+            "code": "C81212",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "M",
+          "decode": "Month Imputed: Month and day are imputed",
+          "coding": {
+            "code": "C81211",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "Y",
+          "decode": "Year Imputed: Entire date (year, month and day) is imputed",
+          "coding": {
+            "code": "C81210",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        }
+      ]
+    },
+    {
+      "OID": "CL.DISCCD",
+      "name": "Completion/Reason for Non-Completion",
+      "coding": [
+        {
+          "code": "C66727",
+          "codeSystem": "nci:ExtCodeID"
+        }
+      ],
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "COMPLETED",
+          "coding": {
+            "code": "C25250",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "ADVERSE EVENT",
+          "coding": {
+            "code": "C41331",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "DEATH",
+          "coding": {
+            "code": "C28554",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "LACK OF EFFICACY",
+          "coding": {
+            "code": "C48226",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "LOST TO FOLLOW-UP",
+          "coding": {
+            "code": "C48227",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "PHYSICIAN DECISION",
+          "coding": {
+            "code": "C48250",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "PROTOCOL VIOLATION",
+          "coding": {
+            "code": "C142185",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "STUDY TERMINATED BY SPONSOR",
+          "coding": {
+            "code": "C49632",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "WITHDRAWAL BY SUBJECT",
+          "coding": {
+            "code": "C49634",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        }
+      ]
+    },
+    {
+      "OID": "CL.DISCREAS",
+      "name": "Reason for Discontinuation",
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "Completed"
+        },
+        {
+          "codedValue": "Adverse Event"
+        },
+        {
+          "codedValue": "Death"
+        },
+        {
+          "codedValue": "I/E Not Met"
+        },
+        {
+          "codedValue": "Lack of Efficacy"
+        },
+        {
+          "codedValue": "Lost to Follow-up"
+        },
+        {
+          "codedValue": "Physician Decision"
+        },
+        {
+          "codedValue": "Protocol Violation"
+        },
+        {
+          "codedValue": "Sponsor Decision"
+        },
+        {
+          "codedValue": "Withdrew Consent"
+        }
+      ]
+    },
+    {
+      "OID": "CL.DTYPE",
+      "name": "Derivation Type",
+      "coding": [
+        {
+          "code": "C81224",
+          "codeSystem": "nci:ExtCodeID"
+        }
+      ],
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "LOCF",
+          "decode": "Last Observation Carried Forward",
+          "coding": {
+            "code": "C81198",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        }
+      ]
+    },
+    {
+      "OID": "CL.DURDISC",
+      "name": "Disease Duration Group",
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "<12",
+          "weight": "1"
+        },
+        {
+          "codedValue": ">=12",
+          "weight": "2"
+        }
+      ]
+    },
+    {
+      "OID": "CL.EOSSTT",
+      "name": "Subject Trial Status",
+      "coding": [
+        {
+          "code": "C124296",
+          "codeSystem": "nci:ExtCodeID"
+        }
+      ],
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "COMPLETED",
+          "coding": {
+            "code": "C25250",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "DISCONTINUED",
+          "coding": {
+            "code": "C25484",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        }
+      ]
+    },
+    {
+      "OID": "CL.ETHNIC",
+      "name": "Ethnic Group",
+      "coding": [
+        {
+          "code": "C66790",
+          "codeSystem": "nci:ExtCodeID"
+        }
+      ],
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "HISPANIC OR LATINO",
+          "coding": {
+            "code": "C17459",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "NOT HISPANIC OR LATINO",
+          "coding": {
+            "code": "C41222",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        }
+      ]
+    },
+    {
+      "OID": "CL.PARAMCD_ADQSADAS",
+      "name": "ADAS-Cog Parameter Code",
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "ACITM01",
+          "decode": "Word Recall Task"
+        },
+        {
+          "codedValue": "ACITM02",
+          "decode": "Naming Objects And Fingers (Refer To 5 C"
+        },
+        {
+          "codedValue": "ACITM03",
+          "decode": "Delayed Word Recall"
+        },
+        {
+          "codedValue": "ACITM04",
+          "decode": "Commands"
+        },
+        {
+          "codedValue": "ACITM05",
+          "decode": "Constructional Praxis"
+        },
+        {
+          "codedValue": "ACITM06",
+          "decode": "Ideational Praxis"
+        },
+        {
+          "codedValue": "ACITM07",
+          "decode": "Orientation"
+        },
+        {
+          "codedValue": "ACITM08",
+          "decode": "Word Recognition"
+        },
+        {
+          "codedValue": "ACITM09",
+          "decode": "Attention/Visual Search Task"
+        },
+        {
+          "codedValue": "ACITM10",
+          "decode": "Maze Solution"
+        },
+        {
+          "codedValue": "ACITM11",
+          "decode": "Spoken Language Ability"
+        },
+        {
+          "codedValue": "ACITM12",
+          "decode": "Comprehension Of Spoken Language"
+        },
+        {
+          "codedValue": "ACITM13",
+          "decode": "Word Finding Difficulty In Spontaneous Speech"
+        },
+        {
+          "codedValue": "ACITM14",
+          "decode": "Recall Of Test Instructions"
+        },
+        {
+          "codedValue": "ACTOT",
+          "decode": "Adas-Cog(11) Subscore"
+        }
+      ]
+    },
+    {
+      "OID": "CL.PARAMN_ADQSADAS",
+      "name": "ADAS-Cog Parameter Code (N)",
+      "dataType": "integer",
+      "codeListItems": [
+        {
+          "codedValue": "1",
+          "decode": "Word Recall Task"
+        },
+        {
+          "codedValue": "2",
+          "decode": "Naming Objects And Fingers (Refer To 5 C"
+        },
+        {
+          "codedValue": "3",
+          "decode": "Delayed Word Recall"
+        },
+        {
+          "codedValue": "4",
+          "decode": "Commands"
+        },
+        {
+          "codedValue": "5",
+          "decode": "Constructional Praxis"
+        },
+        {
+          "codedValue": "6",
+          "decode": "Ideational Praxis"
+        },
+        {
+          "codedValue": "7",
+          "decode": "Orientation"
+        },
+        {
+          "codedValue": "8",
+          "decode": "Word Recognition"
+        },
+        {
+          "codedValue": "9",
+          "decode": "Attention/Visual Search Task"
+        },
+        {
+          "codedValue": "10",
+          "decode": "Maze Solution"
+        },
+        {
+          "codedValue": "11",
+          "decode": "Spoken Language Ability"
+        },
+        {
+          "codedValue": "12",
+          "decode": "Comprehension Of Spoken Language"
+        },
+        {
+          "codedValue": "13",
+          "decode": "Word Finding Difficulty In Spontaneous S"
+        },
+        {
+          "codedValue": "14",
+          "decode": "Recall Of Test Instructions"
+        },
+        {
+          "codedValue": "15",
+          "decode": "Adas-Cog(11) Subscore"
+        }
+      ]
+    },
+    {
+      "OID": "CL.PARAM_ADQSADAS",
+      "name": "ADAS-Cog Parameter",
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "Word Recall Task"
+        },
+        {
+          "codedValue": "Naming Objects And Fingers (Refer To 5 C"
+        },
+        {
+          "codedValue": "Delayed Word Recall"
+        },
+        {
+          "codedValue": "Commands"
+        },
+        {
+          "codedValue": "Constructional Praxis"
+        },
+        {
+          "codedValue": "Ideational Praxis"
+        },
+        {
+          "codedValue": "Orientation"
+        },
+        {
+          "codedValue": "Word Recognition"
+        },
+        {
+          "codedValue": "Attention/Visual Search Task"
+        },
+        {
+          "codedValue": "Maze Solution"
+        },
+        {
+          "codedValue": "Spoken Language Ability"
+        },
+        {
+          "codedValue": "Comprehension Of Spoken Language"
+        },
+        {
+          "codedValue": "Word Finding Difficulty In Spontaneous S"
+        },
+        {
+          "codedValue": "Recall Of Test Instructions"
+        },
+        {
+          "codedValue": "Adas-Cog(11) Subscore"
+        }
+      ]
+    },
+    {
+      "OID": "CL.AWRANGE_ADQSADAS",
+      "name": "Analysis Window Range",
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "<=1"
+        },
+        {
+          "codedValue": "2-84"
+        },
+        {
+          "codedValue": "85-140"
+        },
+        {
+          "codedValue": ">140"
+        }
+      ]
+    },
+    {
+      "OID": "CL.RACE",
+      "name": "Race",
+      "coding": [
+        {
+          "code": "C74457",
+          "codeSystem": "nci:ExtCodeID"
+        }
+      ],
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "WHITE",
+          "coding": {
+            "code": "C41261",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "BLACK OR AFRICAN AMERICAN",
+          "coding": {
+            "code": "C16352",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "ASIAN",
+          "coding": {
+            "code": "C41260",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "AMERICAN INDIAN OR ALASKA NATIVE",
+          "coding": {
+            "code": "C41259",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        }
+      ]
+    },
+    {
+      "OID": "CL.RACEN",
+      "name": "Race (N)",
+      "dataType": "integer",
+      "codeListItems": [
+        {
+          "codedValue": "1",
+          "decode": "WHITE"
+        },
+        {
+          "codedValue": "2",
+          "decode": "BLACK OR AFRICAN AMERICAN"
+        },
+        {
+          "codedValue": "6",
+          "decode": "AMERICAN INDIAN OR ALASKA NATIVE"
+        },
+        {
+          "codedValue": "7",
+          "decode": "ASIAN"
+        }
+      ]
+    },
+    {
+      "OID": "CL.SEX",
+      "name": "Sex",
+      "coding": [
+        {
+          "code": "C66731",
+          "codeSystem": "nci:ExtCodeID"
+        }
+      ],
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "F",
+          "decode": "Female",
+          "coding": {
+            "code": "C16576",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "M",
+          "decode": "Male",
+          "coding": {
+            "code": "C20197",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "U",
+          "decode": "Unknown",
+          "coding": {
+            "code": "C17998",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        }
+      ]
+    },
+    {
+      "OID": "CL.VISIT",
+      "name": "Visit",
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "SCREENING 1"
+        },
+        {
+          "codedValue": "UNSCHEDULED 1.1"
+        },
+        {
+          "codedValue": "UNSCHEDULED 1.2"
+        },
+        {
+          "codedValue": "UNSCHEDULED 1.3"
+        },
+        {
+          "codedValue": "SCREENING 2"
+        },
+        {
+          "codedValue": "BASELINE"
+        },
+        {
+          "codedValue": "UNSCHEDULED 3.1"
+        },
+        {
+          "codedValue": "AMBUL ECG PLACEMENT"
+        },
+        {
+          "codedValue": "WEEK 2"
+        },
+        {
+          "codedValue": "UNSCHEDULED 4.1"
+        },
+        {
+          "codedValue": "UNSCHEDULED 4.2"
+        },
+        {
+          "codedValue": "WEEK 4"
+        },
+        {
+          "codedValue": "UNSCHEDULED 5.1"
+        },
+        {
+          "codedValue": "AMBUL ECG REMOVAL"
+        },
+        {
+          "codedValue": "UNSCHEDULED 6.1"
+        },
+        {
+          "codedValue": "WEEK 6"
+        },
+        {
+          "codedValue": "UNSCHEDULED 7.1"
+        },
+        {
+          "codedValue": "WEEK 8"
+        },
+        {
+          "codedValue": "WEEK 10 (T)"
+        },
+        {
+          "codedValue": "UNSCHEDULED 8.2"
+        },
+        {
+          "codedValue": "WEEK 12"
+        },
+        {
+          "codedValue": "WEEK 14 (T)"
+        },
+        {
+          "codedValue": "UNSCHEDULED 9.2"
+        },
+        {
+          "codedValue": "UNSCHEDULED 9.3"
+        },
+        {
+          "codedValue": "WEEK 16"
+        },
+        {
+          "codedValue": "WEEK 18 (T)"
+        },
+        {
+          "codedValue": "UNSCHEDULED 10.2"
+        },
+        {
+          "codedValue": "WEEK 20"
+        },
+        {
+          "codedValue": "WEEK 22 (T)"
+        },
+        {
+          "codedValue": "UNSCHEDULED 11.2"
+        },
+        {
+          "codedValue": "WEEK 24"
+        },
+        {
+          "codedValue": "UNSCHEDULED 12.1"
+        },
+        {
+          "codedValue": "WEEK 26"
+        },
+        {
+          "codedValue": "UNSCHEDULED 13.1"
+        },
+        {
+          "codedValue": "AE FOLLOW-UP"
+        },
+        {
+          "codedValue": "RETRIEVAL"
+        },
+        {
+          "codedValue": "Rash followup"
+        }
+      ]
+    },
+    {
+      "OID": "CL.VISITNUM",
+      "name": "Visit Number",
+      "dataType": "float",
+      "codeListItems": [
+        {
+          "codedValue": "1",
+          "decode": "SCREENING 1"
+        },
+        {
+          "codedValue": "1.1",
+          "decode": "UNSCHEDULED 1.1"
+        },
+        {
+          "codedValue": "1.2",
+          "decode": "UNSCHEDULED 1.2"
+        },
+        {
+          "codedValue": "1.3",
+          "decode": "UNSCHEDULED 1.3"
+        },
+        {
+          "codedValue": "2",
+          "decode": "SCREENING 2"
+        },
+        {
+          "codedValue": "3",
+          "decode": "BASELINE"
+        },
+        {
+          "codedValue": "3.1",
+          "decode": "UNSCHEDULED 3.1"
+        },
+        {
+          "codedValue": "3.5",
+          "decode": "AMBUL ECG PLACEMENT"
+        },
+        {
+          "codedValue": "4",
+          "decode": "WEEK 2"
+        },
+        {
+          "codedValue": "4.1",
+          "decode": "UNSCHEDULED 4.1"
+        },
+        {
+          "codedValue": "4.2",
+          "decode": "UNSCHEDULED 4.2"
+        },
+        {
+          "codedValue": "5",
+          "decode": "WEEK 4"
+        },
+        {
+          "codedValue": "5.1",
+          "decode": "UNSCHEDULED 5.1"
+        },
+        {
+          "codedValue": "6",
+          "decode": "AMBUL ECG REMOVAL"
+        },
+        {
+          "codedValue": "6.1",
+          "decode": "UNSCHEDULED 6.1"
+        },
+        {
+          "codedValue": "7",
+          "decode": "WEEK 6"
+        },
+        {
+          "codedValue": "7.1",
+          "decode": "UNSCHEDULED 7.1"
+        },
+        {
+          "codedValue": "8",
+          "decode": "WEEK 8"
+        },
+        {
+          "codedValue": "8.1",
+          "decode": "WEEK 10 (T)"
+        },
+        {
+          "codedValue": "8.2",
+          "decode": "UNSCHEDULED 8.2"
+        },
+        {
+          "codedValue": "9",
+          "decode": "WEEK 12"
+        },
+        {
+          "codedValue": "9.1",
+          "decode": "WEEK 14 (T)"
+        },
+        {
+          "codedValue": "9.2",
+          "decode": "UNSCHEDULED 9.2"
+        },
+        {
+          "codedValue": "9.3",
+          "decode": "UNSCHEDULED 9.3"
+        },
+        {
+          "codedValue": "10",
+          "decode": "WEEK 16"
+        },
+        {
+          "codedValue": "10.1",
+          "decode": "WEEK 18 (T)"
+        },
+        {
+          "codedValue": "10.2",
+          "decode": "UNSCHEDULED 10.2"
+        },
+        {
+          "codedValue": "11",
+          "decode": "WEEK 20"
+        },
+        {
+          "codedValue": "11.1",
+          "decode": "WEEK 22 (T)"
+        },
+        {
+          "codedValue": "11.2",
+          "decode": "UNSCHEDULED 11.2"
+        },
+        {
+          "codedValue": "12",
+          "decode": "WEEK 24"
+        },
+        {
+          "codedValue": "12.1",
+          "decode": "UNSCHEDULED 12.1"
+        },
+        {
+          "codedValue": "13",
+          "decode": "WEEK 26"
+        },
+        {
+          "codedValue": "13.1",
+          "decode": "UNSCHEDULED 13.1"
+        },
+        {
+          "codedValue": "101",
+          "decode": "AE FOLLOW-UP"
+        },
+        {
+          "codedValue": "201",
+          "decode": "RETRIEVAL"
+        },
+        {
+          "codedValue": "501",
+          "decode": "Rash followup"
+        }
+      ]
+    },
+    {
+      "OID": "CL.YN",
+      "name": "No Yes Response",
+      "coding": [
+        {
+          "code": "C66742",
+          "codeSystem": "nci:ExtCodeID"
+        }
+      ],
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "N",
+          "decode": "No",
+          "coding": {
+            "code": "C49487",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "Y",
+          "decode": "Yes",
+          "coding": {
+            "code": "C49488",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        }
+      ]
+    },
+    {
+      "OID": "CL.Y_BLANK",
+      "name": "No Yes Response - Y subset",
+      "coding": [
+        {
+          "code": "C66742",
+          "codeSystem": "nci:ExtCodeID"
+        }
+      ],
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "Y",
+          "decode": "Yes",
+          "coding": {
+            "code": "C49488",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        }
+      ]
+    },
+    {
+      "OID": "CL.AESEV",
+      "name": "Severity/Intensity Scale for Adverse Events",
+      "coding": [
+        {
+          "code": "C66769",
+          "codeSystem": "nci:ExtCodeID"
+        }
+      ],
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "MILD",
+          "decode": "Grade 1",
+          "coding": {
+            "code": "C41338",
+            "codeSystem": "nci:ExtCodeID"
+          },
+          "weight": "1"
+        },
+        {
+          "codedValue": "MODERATE",
+          "decode": "Grade 2",
+          "coding": {
+            "code": "C41339",
+            "codeSystem": "nci:ExtCodeID"
+          },
+          "weight": "2"
+        },
+        {
+          "codedValue": "SEVERE",
+          "decode": "Grade 3",
+          "coding": {
+            "code": "C41340",
+            "codeSystem": "nci:ExtCodeID"
+          },
+          "weight": "3"
+        }
+      ]
+    },
+    {
+      "OID": "CL.AECAUS",
+      "name": "Causality",
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "NONE",
+          "weight": "1"
+        },
+        {
+          "codedValue": "POSSIBLE",
+          "weight": "2"
+        },
+        {
+          "codedValue": "PROBABLE",
+          "weight": "3"
+        },
+        {
+          "codedValue": "REMOTE",
+          "weight": "4"
+        }
+      ]
+    },
+    {
+      "OID": "CL.OUT",
+      "name": "Outcome of Adverse Event",
+      "coding": [
+        {
+          "code": "C66768",
+          "codeSystem": "nci:ExtCodeID"
+        }
+      ],
+      "dataType": "text",
+      "codeListItems": [
+        {
+          "codedValue": "RECOVERED/RESOLVED",
+          "coding": {
+            "code": "C49498",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "NOT RECOVERED/NOT RESOLVED",
+          "coding": {
+            "code": "C49494",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        },
+        {
+          "codedValue": "FATAL",
+          "coding": {
+            "code": "C48275",
+            "codeSystem": "nci:ExtCodeID"
+          }
+        }
+      ]
+    },
+    {
+      "OID": "CL.AEDICT",
+      "wasDerivedFrom": "DICT.MedDRA",
+      "name": "Adverse Event Dictionary",
+      "dataType": "text",
+      "codeListItems": []
+    },
+    {
+      "OID": "CL.AEDICTN",
+      "wasDerivedFrom": "DICT.MedDRA",
+      "name": "Adverse Event Dictionary (N)",
+      "dataType": "integer",
+      "codeListItems": []
+    }
+  ],
+  "dictionaries": [
+    {
+      "OID": "DICT.MedDRA",
+      "name": "MedDRA",
+      "version": "8.0",
+      "terms": []
+    }
+  ],
+  "standards": [
+    {
+      "OID": "STD.01",
+      "name": "ADaMIG",
+      "type": "IG",
+      "version": "1.1",
+      "status": "FINAL"
+    },
+    {
+      "OID": "STD.CT.01",
+      "name": "CDISC/NCI",
+      "type": "CT",
+      "publishingSet": "ADaM",
+      "version": "2017-09-29",
+      "status": "FINAL"
+    },
+    {
+      "OID": "STD.CT.02",
+      "name": "CDISC/NCI",
+      "type": "CT",
+      "publishingSet": "SDTM",
+      "version": "2018-06-29",
+      "status": "FINAL"
+    },
+    {
+      "OID": "STD.5",
+      "name": "CDISC/NCI",
+      "type": "CT",
+      "publishingSet": "DEFINE-XML",
+      "version": "2025-03-28",
+      "status": "FINAL"
+    }
+  ],
+  "resources": [
+    {
+      "OID": "RES.LF.ADSL",
+      "name": "adsl.xpt ",
+      "label": "adsl.xpt ",
+      "href": "adsl.xpt",
+      "resourceType": "ODM"
+    },
+    {
+      "OID": "RES.LF.ADQSADAS",
+      "name": "adqsadas.xpt ",
+      "label": "adqsadas.xpt ",
+      "href": "adqsadas.xpt",
+      "resourceType": "ODM"
+    },
+    {
+      "OID": "RES.LF.ADAE",
+      "name": "adae.xpt ",
+      "label": "adae.xpt ",
+      "href": "adae.xpt",
+      "resourceType": "ODM"
+    },
+    {
+      "OID": "DOC.SUPP.LF.ADRG",
+      "title": "Analysis Data Reviewer's Guide",
+      "leafID": "LF.ADRG"
+    },
+    {
+      "OID": "RES.LF.ADRG",
+      "name": "Analysis Data Reviewer's Guide",
+      "label": "Analysis Data Reviewer's Guide",
+      "href": "adrg.pdf",
+      "resourceType": "ODM"
+    },
+    {
+      "OID": "RES.LF.ADQSADAS.PGM",
+      "name": "adqsadas.sas",
+      "label": "adqsadas.sas",
+      "href": "../programs/adqsadas-sas.txt",
+      "resourceType": "ODM"
+    },
+    {
+      "OID": "RES.LF.CODE.001",
+      "name": "adae.sas",
+      "label": "adae.sas",
+      "href": "../programs/adae-sas.txt",
+      "resourceType": "ODM"
+    },
+    {
+      "OID": "RES.LF.ADSL.PGM",
+      "name": "adsl.sas",
+      "label": "adsl.sas",
+      "href": "../programs/adsl-sas.txt",
+      "resourceType": "ODM"
+    },
+    {
+      "OID": "RES.LF.CSR",
+      "name": "Clinical Study Report",
+      "label": "Clinical Study Report",
+      "href": "../dummy-csr/dummy-csr.pdf",
+      "resourceType": "ODM"
+    },
+    {
+      "OID": "RES.LF.at14-5-02.sas",
+      "name": "at14-5-02.sas",
+      "label": "at14-5-02.sas",
+      "href": "../programs/at14-5-02-sas.txt",
+      "resourceType": "ODM"
+    }
+  ],
+  "displays": [
+    {
+      "OID": "RD.Table_14-3.01",
+      "name": "Table 14-3.01",
+      "description": "Primary Endpoint Analysis: ADAS-Cog - Summary at Week 24 - LOCF (Efficacy Population)",
+      "label": "",
+      "analysis": "AR.Table_14-3.01.R.1",
+      "location": [
+        {
+          "OID": "LF.CSR",
+          "leafID": "LF.CSR"
+        }
+      ]
+    },
+    {
+      "OID": "RD.Table_14-5.02",
+      "name": "Table 14-5.02",
+      "description": "Incidence of Treatment Emergent Serious Adverse Events by Treatment Group",
+      "label": "",
+      "analysis": "AR.Table_14-5.02.R.1",
+      "location": [
+        {
+          "OID": "LF.CSR",
+          "leafID": "LF.CSR"
+        }
+      ]
+    }
+  ],
+  "_xmlMetadata": {
+    "namespaces": {
+      "odm": "http://www.cdisc.org/ns/odm/v1.3",
+      "def": "http://www.cdisc.org/ns/def/v2.1",
+      "xlink": "http://www.w3.org/1999/xlink",
+      "arm": "http://www.cdisc.org/ns/arm/v1.0"
+    },
+    "_odmMetadata": {
+      "Name": "Study CDISC-Sample, Data Definitions",
+      "DefineVersion": "2.1.9",
+      "StudyName": "CDISC-Sample",
+      "StudyDescription": "CDISC-Sample Data Definition",
+      "ProtocolName": "CDISC-Sample"
+    },
+    "itemDefOrder": [
+      "IT.ADQSADAS.STUDYID",
+      "IT.ADQSADAS.SITEID",
+      "IT.ADQSADAS.SITEGR1",
+      "IT.ADQSADAS.USUBJID",
+      "IT.ADQSADAS.TRTSDT",
+      "IT.ADQSADAS.TRTEDT",
+      "IT.ADQSADAS.TRTP",
+      "IT.ADQSADAS.TRTPN",
+      "IT.ADQSADAS.AGE",
+      "IT.ADQSADAS.AGEGR1",
+      "IT.ADQSADAS.AGEGR1N",
+      "IT.ADQSADAS.RACE",
+      "IT.ADQSADAS.RACEN",
+      "IT.ADQSADAS.SEX",
+      "IT.ADQSADAS.ITTFL",
+      "IT.ADQSADAS.EFFFL",
+      "IT.ADQSADAS.COMP24FL",
+      "IT.ADQSADAS.AVISIT",
+      "IT.ADQSADAS.AVISITN",
+      "IT.ADQSADAS.VISIT",
+      "IT.ADQSADAS.VISITNUM",
+      "IT.ADQSADAS.ADY",
+      "IT.ADQSADAS.ADT",
+      "IT.ADQSADAS.PARAM",
+      "IT.ADQSADAS.PARAMCD",
+      "IT.ADQSADAS.PARAMN",
+      "IT.ADQSADAS.AVAL",
+      "IT.ADQSADAS.BASE",
+      "IT.ADQSADAS.CHG",
+      "IT.ADQSADAS.PCHG",
+      "IT.ADQSADAS.ABLFL",
+      "IT.ADQSADAS.ANL01FL",
+      "IT.ADQSADAS.DTYPE",
+      "IT.ADQSADAS.AWRANGE",
+      "IT.ADQSADAS.AWTARGET",
+      "IT.ADQSADAS.AWTDIFF",
+      "IT.ADQSADAS.AWLO",
+      "IT.ADQSADAS.AWHI",
+      "IT.ADQSADAS.AWU",
+      "IT.ADQSADAS.QSSEQ",
+      "IT.ADSL.STUDYID",
+      "IT.ADSL.USUBJID",
+      "IT.ADSL.SUBJID",
+      "IT.ADSL.SITEID",
+      "IT.ADSL.SITEGR1",
+      "IT.ADSL.ARM",
+      "IT.ADSL.TRT01P",
+      "IT.ADSL.TRT01PN",
+      "IT.ADSL.TRT01A",
+      "IT.ADSL.TRT01AN",
+      "IT.ADSL.TRTSDT",
+      "IT.ADSL.TRTEDT",
+      "IT.ADSL.TRTDURD",
+      "IT.ADSL.AVGDD",
+      "IT.ADSL.CUMDOSE",
+      "IT.ADSL.AGE",
+      "IT.ADSL.AGEGR1",
+      "IT.ADSL.AGEGR1N",
+      "IT.ADSL.AGEU",
+      "IT.ADSL.RACE",
+      "IT.ADSL.RACEN",
+      "IT.ADSL.SEX",
+      "IT.ADSL.ETHNIC",
+      "IT.ADSL.SAFFL",
+      "IT.ADSL.ITTFL",
+      "IT.ADSL.EFFFL",
+      "IT.ADSL.COMP8FL",
+      "IT.ADSL.COMP16FL",
+      "IT.ADSL.COMP24FL",
+      "IT.ADSL.DISCONFL",
+      "IT.ADSL.DSRAEFL",
+      "IT.ADSL.DTHFL",
+      "IT.ADSL.BMIBL",
+      "IT.ADSL.BMIBLGR1",
+      "IT.ADSL.HEIGHTBL",
+      "IT.ADSL.WEIGHTBL",
+      "IT.ADSL.EDUCLVL",
+      "IT.ADSL.DISONDT",
+      "IT.ADSL.DURDIS",
+      "IT.ADSL.DURDSGR1",
+      "IT.ADSL.VISIT1DT",
+      "IT.ADSL.RFSTDTC",
+      "IT.ADSL.RFENDTC",
+      "IT.ADSL.VISNUMEN",
+      "IT.ADSL.RFENDT",
+      "IT.ADSL.EOSSTT",
+      "IT.ADSL.DCSREAS",
+      "IT.ADSL.EOSDISP",
+      "IT.ADSL.MMS1TSBL",
+      "IT.ADQSADAS.AVAL.ACITM01-ACITM14",
+      "IT.ADQSADAS.AVAL.ACTOT",
+      "IT.ADQSADAS.DTYPE.ACITM01-ACITM14",
+      "IT.ADQSADAS.DTYPE.ACTOT",
+      "IT.ADQSADAS.QSSEQ.ACITM01-ACITM14",
+      "IT.ADQSADAS.QSSEQ.ACTOT",
+      "IT.ADAE.STUDYID",
+      "IT.ADAE.SITEID",
+      "IT.ADAE.USUBJID",
+      "IT.ADAE.TRTA",
+      "IT.ADAE.TRTAN",
+      "IT.ADAE.AGE",
+      "IT.ADAE.AGEGR1",
+      "IT.ADAE.AGEGR1N",
+      "IT.ADAE.RACE",
+      "IT.ADAE.RACEN",
+      "IT.ADAE.SEX",
+      "IT.ADAE.SAFFL",
+      "IT.ADAE.TRTSDT",
+      "IT.ADAE.TRTEDT",
+      "IT.ADAE.ASTDT",
+      "IT.ADAE.ASTDTF",
+      "IT.ADAE.ASTDY",
+      "IT.ADAE.AENDT",
+      "IT.ADAE.AENDY",
+      "IT.ADAE.ADURN",
+      "IT.ADAE.ADURU",
+      "IT.ADAE.AETERM",
+      "IT.ADAE.AELLT",
+      "IT.ADAE.AELLTCD",
+      "IT.ADAE.AEDECOD",
+      "IT.ADAE.AEPTCD",
+      "IT.ADAE.AEHLT",
+      "IT.ADAE.AEHLTCD",
+      "IT.ADAE.AEHLGT",
+      "IT.ADAE.AEHLGTCD",
+      "IT.ADAE.AEBODSYS",
+      "IT.ADAE.AESOC",
+      "IT.ADAE.AESOCCD",
+      "IT.ADAE.AESEV",
+      "IT.ADAE.AESER",
+      "IT.ADAE.AESCAN",
+      "IT.ADAE.AESCONG",
+      "IT.ADAE.AESDISAB",
+      "IT.ADAE.AESDTH",
+      "IT.ADAE.AESHOSP",
+      "IT.ADAE.AESLIFE",
+      "IT.ADAE.AESOD",
+      "IT.ADAE.AEREL",
+      "IT.ADAE.AEACN",
+      "IT.ADAE.AEOUT",
+      "IT.ADAE.AESEQ",
+      "IT.ADAE.TRTEMFL",
+      "IT.ADAE.AOCCFL",
+      "IT.ADAE.AOCCSFL",
+      "IT.ADAE.AOCCPFL",
+      "IT.ADAE.AOCC02FL",
+      "IT.ADAE.AOCC03FL",
+      "IT.ADAE.AOCC04FL",
+      "IT.ADAE.CQ01NAM",
+      "IT.ADAE.AOCC01FL"
+    ],
+    "valueListDefOrder": [
+      "VL.ADQSADAS.AVAL",
+      "VL.ADQSADAS.DTYPE",
+      "VL.ADQSADAS.QSSEQ"
+    ],
+    "standardSupplemental": {
+      "STD.CT.01": {
+        "commentOID": "COM.STDCT.01"
+      },
+      "STD.CT.02": {
+        "commentOID": "COM.STDCT.02"
+      },
+      "STD.5": {
+        "commentOID": "COM.STD5"
+      }
+    },
+    "hasStandardsElement": true,
+    "hasSASFieldName": true,
+    "displaySupplemental": {
+      "multipleAnalyses": {
+        "RD.Table_14-3.01": [
+          "AR.Table_14-3.01.R.1",
+          "AR.Table_14-3.01.R.2"
+        ]
+      },
+      "RD.Table_14-3.01": {
+        "name": "Table 14-3.01",
+        "pdfPageRefs": {
+          "LF.CSR": [
+            {
+              "pageRefs": "2",
+              "type": "PhysicalRef",
+              "title": "Table 14-3.01"
+            }
+          ]
+        }
+      },
+      "RD.Table_14-5.02": {
+        "name": "Table 14-5.02",
+        "pdfPageRefs": {
+          "LF.CSR": [
+            {
+              "pageRefs": "3",
+              "type": "PhysicalRef",
+              "title": "Table 14-5.02"
+            }
+          ]
+        }
+      }
+    },
+    "analysisSupplemental": {
+      "resultSupplemental": {
+        "AR.Table_14-3.01.R.1": {
+          "analysisReason": "SPECIFIED IN SAP",
+          "parameterOID": "IT.ADQSADAS.PARAMCD",
+          "analysisPurpose": "PRIMARY OUTCOME MEASURE",
+          "description": "Dose response analysis for ADAS-Cog changes from baseline",
+          "documentation": {
+            "description": "Linear model analysis of CHG for dose response; using randomized dose (0 for placebo; 54 for low dose; 81 for high dose) and site group in model. Used PROC GLM in SAS to produce p-value (from Type III SS for treatment dose).",
+            "documents": [
+              {
+                "OID": "LF.CSR",
+                "leafID": "LF.CSR",
+                "pdfPageRefs": [
+                  {
+                    "pageRefs": "4",
+                    "type": "PhysicalRef",
+                    "title": "SAP Section 10.1.1"
+                  }
+                ]
+              }
+            ]
+          },
+          "programmingCode": {
+            "context": "SAS version 9.2",
+            "code": "\nproc glm data = ADQSADAS;\n  where EFFFL='Y' and ANL01FL='Y' and AVISIT='Week 24' and PARAMCD=\"ACTOT\";\n  class SITEGR1;\n  model CHG = TRTPN SITEGR1;\nrun;\n            "
+          }
+        },
+        "AR.Table_14-3.01.R.2": {
+          "analysisReason": "SPECIFIED IN SAP",
+          "parameterOID": "IT.ADQSADAS.PARAMCD",
+          "analysisPurpose": "PRIMARY OUTCOME MEASURE",
+          "description": "Pairwise comparisons to placebo for ADAS-Cog changes from baseline",
+          "documentation": {
+            "description": "ANCOVA analysis of CHG performed to provide pairwise comparisons among treatment groups and adjusted means; using randomized treatment as class variable and site group as class variable in model and the baseline value as a covariate.",
+            "documents": [
+              {
+                "OID": "LF.CSR",
+                "leafID": "LF.CSR",
+                "pdfPageRefs": [
+                  {
+                    "pageRefs": "4",
+                    "type": "PhysicalRef",
+                    "title": "SAP Section 10.1.1"
+                  }
+                ]
+              }
+            ]
+          },
+          "programmingCode": {
+            "context": "SAS version 9.2",
+            "code": "\nproc glm data = ADQSADAS;\n  where EFFFL='Y' and ANL01FL='Y' and AVISIT='Week 24' and PARAMCD=\"ACTOT\";\n  class TRTPN SITEGR1;\n  model CHG = TRTPN SITEGR1 BASE;\n  means TRTPN;\n  lsmeans TRTPN / OM STDERR PDIFF CL;\nrun;\n            "
+          }
+        },
+        "AR.Table_14-5.02.R.1": {
+          "analysisReason": "SPECIFIED IN SAP",
+          "analysisPurpose": "PRIMARY OUTCOME MEASURE",
+          "description": "Incidence of Treatment Emergent Serious Adverse Events by Treatment Group",
+          "documentation": {
+            "description": "Unique count of subjects that experienced an Adverse Event by Preferred Term, System Organ Class, and Treatment Group and percentages based on the number of subjects in the safety population within each treatment group. The total number of times an event occurred was recorded by Preferred Term, System Organ Class, and Treatment Group. Fisher's exact test was used for treatment comparison of event rates.",
+            "documents": [
+              {
+                "OID": "LF.CSR",
+                "leafID": "LF.CSR",
+                "pdfPageRefs": [
+                  {
+                    "pageRefs": "5",
+                    "type": "PhysicalRef",
+                    "title": "SAP Section 11.2"
+                  }
+                ]
+              }
+            ]
+          },
+          "programmingCode": {
+            "context": "SAS version 9.2",
+            "documents": [
+              {
+                "OID": "LF.at14-5-02.sas",
+                "leafID": "LF.at14-5-02.sas"
+              }
+            ]
+          }
+        }
+      },
+      "datasetSupplemental": {
+        "AR.Table_14-3.01.R.1": {
+          "IG.ADQSADAS": {
+            "whereClauseRefs": [
+              {
+                "whereClauseOID": "WC.Table_14-3.01.R.1.ADQSADAS"
+              }
+            ],
+            "analysisVariables": [
+              {
+                "itemOID": "IT.ADQSADAS.CHG"
+              }
+            ],
+            "_isDataset": true
+          }
+        },
+        "AR.Table_14-3.01.R.2": {
+          "IG.ADQSADAS": {
+            "whereClauseRefs": [
+              {
+                "whereClauseOID": "WC.Table_14-3.01.R.2.ADQSADAS"
+              }
+            ],
+            "analysisVariables": [
+              {
+                "itemOID": "IT.ADQSADAS.CHG"
+              }
+            ],
+            "_isDataset": true
+          }
+        },
+        "AR.Table_14-5.02.R.1": {
+          "IG.ADAE": {
+            "whereClauseRefs": [
+              {
+                "whereClauseOID": "WC.Table_14-5.02.R.1.ADAE"
+              }
+            ],
+            "analysisVariables": [
+              {
+                "itemOID": "IT.ADAE.AEBODSYS"
+              },
+              {
+                "itemOID": "IT.ADAE.AEDECOD"
+              }
+            ],
+            "_isDataset": true
+          },
+          "IG.ADSL": {
+            "whereClauseRefs": [
+              {
+                "whereClauseOID": "WC.Table_14-5.02.R.1.ADSL"
+              }
+            ],
+            "_isDataset": true
+          }
+        }
+      },
+      "datasetsSupplemental": {
+        "AR.Table_14-5.02.R.1": {
+          "commentOID": "COM.JOIN-ADSL-ADAE"
+        }
+      }
+    },
+    "commentSupplemental": {
+      "COM.ADSL": {
+        "OID": "COM.ADSL",
+        "text": "Screen Failures are excluded since they are not needed for this study analysis. See referenced dataset creation program and ADRG",
+        "documents": [
+          {
+            "OID": "LF.ADSL.PGM",
+            "leafID": "LF.ADSL.PGM"
+          },
+          {
+            "OID": "LF.ADRG",
+            "leafID": "LF.ADRG",
+            "pdfPageRefs": [
+              {
+                "type": "PhysicalRef",
+                "pageRefs": "6"
+              }
+            ]
+          }
+        ]
+      },
+      "COM.ADAE": {
+        "OID": "COM.ADAE",
+        "text": "See SAS program",
+        "documents": [
+          {
+            "OID": "LF.CODE.001",
+            "leafID": "LF.CODE.001"
+          }
+        ]
+      },
+      "COM.ADQSADAS": {
+        "OID": "COM.ADQSADAS",
+        "text": "See referenced dataset creation program and ADRG",
+        "documents": [
+          {
+            "OID": "LF.ADQSADAS.PGM",
+            "leafID": "LF.ADQSADAS.PGM"
+          },
+          {
+            "OID": "LF.ADRG",
+            "leafID": "LF.ADRG",
+            "pdfPageRefs": [
+              {
+                "type": "NamedDestination",
+                "pageRefs": "Section2.1"
+              }
+            ]
+          }
+        ]
+      },
+      "COM.JOIN-ADSL-ADAE": {
+        "OID": "COM.JOIN-ADSL-ADAE",
+        "text": "Get denominators for percentages from ADSL and counts and numerators from ADAE. Join ADAE with ADSL based on the unique subject identifier (USUBJID) keeping only records in ADAE for the numerator."
+      },
+      "COM.ADQSADAS.AVISITN": {
+        "OID": "COM.ADQSADAS.AVISITN",
+        "text": "Numeric code for AVISIT"
+      },
+      "COM.ADQSADAS.PARAMN": {
+        "OID": "COM.ADQSADAS.PARAMN",
+        "text": "Numeric code for PARAM"
+      },
+      "COM.ADQSADAS.AWRANGE": {
+        "OID": "COM.ADQSADAS.AWRANGE",
+        "text": "Window range, specified in the SAP."
+      },
+      "COM.ADQSADAS.AWTARGET": {
+        "OID": "COM.ADQSADAS.AWTARGET",
+        "text": "Target day within the window, specified in the SAP."
+      },
+      "COM.ADQSADAS.AWLO": {
+        "OID": "COM.ADQSADAS.AWLO",
+        "text": "Start day of the window, specified in the SAP."
+      },
+      "COM.ADQSADAS.AWHI": {
+        "OID": "COM.ADQSADAS.AWHI",
+        "text": "End day of the window, specified in the SAP."
+      },
+      "COM.ADQSADAS.AWU": {
+        "OID": "COM.ADQSADAS.AWU",
+        "text": "Assigned as \"DAYS\"."
+      },
+      "COM.ADSL.TRT01PN": {
+        "OID": "COM.ADSL.TRT01PN",
+        "text": "Numeric code for TRT01P"
+      },
+      "COM.ADSL.TRT01A": {
+        "OID": "COM.ADSL.TRT01A",
+        "text": "TRT01A=TRT01P, i.e., no difference between actual and randomized treatment in this study."
+      },
+      "COM.ADSL.TRT01AN": {
+        "OID": "COM.ADSL.TRT01AN",
+        "text": "Numeric code for TRT01A"
+      },
+      "COM.ADSL.AGEGR1N": {
+        "OID": "COM.ADSL.AGEGR1N",
+        "text": "Numeric code for AGEGR1"
+      },
+      "COM.ADSL.RACEN": {
+        "OID": "COM.ADSL.RACEN",
+        "text": "Numeric code for RACE"
+      },
+      "COM.ADQSADAS.DTYPE.ACITM01-ACITM14": {
+        "OID": "COM.ADQSADAS.DTYPE.ACITM01-ACITM14",
+        "text": "Value: null"
+      },
+      "COM.ADQSADAS.DTYPE.ACTOT": {
+        "OID": "COM.ADQSADAS.DTYPE.ACTOT",
+        "text": "Value: LOCF denotes that the LOCF imputation method was used to impute the value for the given parameter and analysis visit."
+      },
+      "COM.ADQSADAS.QSSEQ.ACTOT": {
+        "OID": "COM.ADQSADAS.QSSEQ.ACTOT",
+        "text": "Set QSSEQ to missing for post baseline records. Set to QS.QSSEQ where QS.VISIT=BASELINE and QS.QSTESTCD=ACTOT."
+      },
+      "COM.STDCT.01": {
+        "OID": "COM.STDCT.01",
+        "text": "ADaM specific CT is applicable for a few variables only."
+      },
+      "COM.STDCT.02": {
+        "OID": "COM.STDCT.02",
+        "text": "SDTM CT is applicable for variables copied from SDTM to ADaM."
+      },
+      "COM.STD5": {
+        "OID": "COM.STD5",
+        "text": "This is the CDISC CT Package 59 (2025-03-28) associated to the CDISC Define-XML Specification Version 2.1.9."
+      }
+    },
+    "itemGroupSupplemental": {
+      "IG.ADSL": {
+        "OID": "IG.ADSL",
+        "defClass": "SUBJECT LEVEL ANALYSIS DATASET",
+        "classIsAttribute": false,
+        "commentOID": "COM.ADSL",
+        "standardOID": "STD.01",
+        "repeating": "No",
+        "sasDatasetName": "ADSL",
+        "archiveLocationID": "LF.ADSL",
+        "sourceResourceOID": "RES.LF.ADSL",
+        "leafID": "LF.ADSL"
+      },
+      "IG.ADQSADAS": {
+        "OID": "IG.ADQSADAS",
+        "defClass": "BASIC DATA STRUCTURE",
+        "classIsAttribute": false,
+        "commentOID": "COM.ADQSADAS",
+        "standardOID": "STD.01",
+        "repeating": "Yes",
+        "sasDatasetName": "ADQSADAS",
+        "archiveLocationID": "LF.ADQSADAS",
+        "sourceResourceOID": "RES.LF.ADQSADAS",
+        "leafID": "LF.ADQSADAS"
+      },
+      "IG.ADAE": {
+        "OID": "IG.ADAE",
+        "defClass": "OCCURRENCE DATA STRUCTURE",
+        "classIsAttribute": false,
+        "subClasses": [
+          {
+            "name": "ADVERSE EVENT"
+          }
+        ],
+        "commentOID": "COM.ADAE",
+        "standardOID": "STD.01",
+        "repeating": "Yes",
+        "sasDatasetName": "ADAE",
+        "archiveLocationID": "LF.ADAE",
+        "sourceResourceOID": "RES.LF.ADAE",
+        "leafID": "LF.ADAE"
+      },
+      "VL.ADQSADAS.AVAL": {},
+      "VL.ADQSADAS.DTYPE": {},
+      "VL.ADQSADAS.QSSEQ": {},
+      "_itemOriginMetadata": {
+        "IT.ADSL.STUDYID": {
+          "originDescription": "DM.STUDYID",
+          "wasElement": true,
+          "SASFieldName": "STUDYID"
+        },
+        "IT.ADSL.USUBJID": {
+          "originDescription": "DM.USUBJID",
+          "wasElement": true,
+          "SASFieldName": "USUBJID"
+        },
+        "IT.ADSL.SUBJID": {
+          "originDescription": "DM.SUBJID",
+          "wasElement": true,
+          "SASFieldName": "SUBJID"
+        },
+        "IT.ADSL.SITEID": {
+          "originDescription": "DM.SITEID",
+          "wasElement": true,
+          "SASFieldName": "SITEID"
+        },
+        "IT.ADSL.SITEGR1": {
+          "wasElement": true,
+          "SASFieldName": "SITEGR1"
+        },
+        "IT.ADSL.ARM": {
+          "originDescription": "DM.ARM",
+          "wasElement": true,
+          "SASFieldName": "ARM"
+        },
+        "IT.ADSL.TRT01P": {
+          "originDescription": "DM.ARM",
+          "wasElement": true,
+          "SASFieldName": "TRT01P"
+        },
+        "IT.ADSL.TRT01PN": {
+          "wasElement": true,
+          "commentOID": "COM.ADSL.TRT01PN",
+          "SASFieldName": "TRT01PN"
+        },
+        "IT.ADSL.TRT01A": {
+          "wasElement": true,
+          "commentOID": "COM.ADSL.TRT01A",
+          "SASFieldName": "TRT01A"
+        },
+        "IT.ADSL.TRT01AN": {
+          "wasElement": true,
+          "commentOID": "COM.ADSL.TRT01AN",
+          "SASFieldName": "TRT01AN"
+        },
+        "IT.ADSL.TRTSDT": {
+          "wasElement": true,
+          "SASFieldName": "TRTSDT"
+        },
+        "IT.ADSL.TRTEDT": {
+          "wasElement": true,
+          "SASFieldName": "TRTEDT"
+        },
+        "IT.ADSL.TRTDURD": {
+          "wasElement": true,
+          "SASFieldName": "TRTDURD"
+        },
+        "IT.ADSL.AVGDD": {
+          "wasElement": true,
+          "SASFieldName": "AVGDD"
+        },
+        "IT.ADSL.CUMDOSE": {
+          "wasElement": true,
+          "SASFieldName": "CUMDOSE"
+        },
+        "IT.ADSL.AGE": {
+          "originDescription": "DM.AGE",
+          "wasElement": true,
+          "SASFieldName": "AGE"
+        },
+        "IT.ADSL.AGEGR1": {
+          "wasElement": true,
+          "SASFieldName": "AGEGR1"
+        },
+        "IT.ADSL.AGEGR1N": {
+          "wasElement": true,
+          "commentOID": "COM.ADSL.AGEGR1N",
+          "SASFieldName": "AGEGR1N"
+        },
+        "IT.ADSL.AGEU": {
+          "originDescription": "DM.AGEU",
+          "wasElement": true,
+          "SASFieldName": "AGEU"
+        },
+        "IT.ADSL.RACE": {
+          "originDescription": "DM.RACE",
+          "wasElement": true,
+          "SASFieldName": "RACE"
+        },
+        "IT.ADSL.RACEN": {
+          "wasElement": true,
+          "commentOID": "COM.ADSL.RACEN",
+          "SASFieldName": "RACEN"
+        },
+        "IT.ADSL.SEX": {
+          "originDescription": "DM.SEX",
+          "wasElement": true,
+          "SASFieldName": "SEX"
+        },
+        "IT.ADSL.ETHNIC": {
+          "originDescription": "DM.ETHNIC",
+          "wasElement": true,
+          "SASFieldName": "ETHNIC"
+        },
+        "IT.ADSL.SAFFL": {
+          "wasElement": true,
+          "SASFieldName": "SAFFL"
+        },
+        "IT.ADSL.ITTFL": {
+          "wasElement": true,
+          "SASFieldName": "ITTFL"
+        },
+        "IT.ADSL.EFFFL": {
+          "wasElement": true,
+          "SASFieldName": "EFFFL"
+        },
+        "IT.ADSL.COMP8FL": {
+          "wasElement": true,
+          "SASFieldName": "COMP8FL"
+        },
+        "IT.ADSL.COMP16FL": {
+          "wasElement": true,
+          "SASFieldName": "COMP16FL"
+        },
+        "IT.ADSL.COMP24FL": {
+          "wasElement": true,
+          "SASFieldName": "COMP24FL"
+        },
+        "IT.ADSL.DISCONFL": {
+          "wasElement": true,
+          "SASFieldName": "DISCONFL"
+        },
+        "IT.ADSL.DSRAEFL": {
+          "wasElement": true,
+          "SASFieldName": "DSRAEFL"
+        },
+        "IT.ADSL.DTHFL": {
+          "originDescription": "DM.DTHFL",
+          "wasElement": true,
+          "SASFieldName": "DTHFL"
+        },
+        "IT.ADSL.BMIBL": {
+          "wasElement": true,
+          "SASFieldName": "BMIBL"
+        },
+        "IT.ADSL.BMIBLGR1": {
+          "wasElement": true,
+          "SASFieldName": "BMIBLGR1"
+        },
+        "IT.ADSL.HEIGHTBL": {
+          "wasElement": true,
+          "SASFieldName": "HEIGHTBL"
+        },
+        "IT.ADSL.WEIGHTBL": {
+          "wasElement": true,
+          "SASFieldName": "WEIGHTBL"
+        },
+        "IT.ADSL.EDUCLVL": {
+          "wasElement": true,
+          "SASFieldName": "EDUCLVL"
+        },
+        "IT.ADSL.DISONDT": {
+          "wasElement": true,
+          "SASFieldName": "DISONDT"
+        },
+        "IT.ADSL.DURDIS": {
+          "wasElement": true,
+          "SASFieldName": "DURDIS"
+        },
+        "IT.ADSL.DURDSGR1": {
+          "wasElement": true,
+          "SASFieldName": "DURDSGR1"
+        },
+        "IT.ADSL.VISIT1DT": {
+          "wasElement": true,
+          "SASFieldName": "VISIT1DT"
+        },
+        "IT.ADSL.RFSTDTC": {
+          "originDescription": "DM.RFSTDTC",
+          "wasElement": true,
+          "SASFieldName": "RFSTDTC"
+        },
+        "IT.ADSL.RFENDTC": {
+          "originDescription": "DM.RFENDTC",
+          "wasElement": true,
+          "SASFieldName": "RFENDTC"
+        },
+        "IT.ADSL.VISNUMEN": {
+          "wasElement": true,
+          "SASFieldName": "VISNUMEN"
+        },
+        "IT.ADSL.RFENDT": {
+          "wasElement": true,
+          "SASFieldName": "RFENDT"
+        },
+        "IT.ADSL.EOSSTT": {
+          "wasElement": true,
+          "SASFieldName": "EOSSTT"
+        },
+        "IT.ADSL.DCSREAS": {
+          "wasElement": true,
+          "SASFieldName": "DCSREAS"
+        },
+        "IT.ADSL.EOSDISP": {
+          "originDescription": "DS.DSDECOD where DS.DSCAT='DISPOSITION EVENT'",
+          "wasElement": true,
+          "SASFieldName": "EOSDISP"
+        },
+        "IT.ADSL.MMS1TSBL": {
+          "wasElement": true,
+          "SASFieldName": "MMS1TSBL"
+        },
+        "IT.ADQSADAS.STUDYID": {
+          "originDescription": "ADSL.STUDYID",
+          "wasElement": true,
+          "SASFieldName": "STUDYID"
+        },
+        "IT.ADQSADAS.SITEID": {
+          "originDescription": "ADSL.SITEID",
+          "wasElement": true,
+          "SASFieldName": "SITEID"
+        },
+        "IT.ADQSADAS.SITEGR1": {
+          "originDescription": "ADSL.SITEGR1",
+          "wasElement": true,
+          "SASFieldName": "SITEGR1"
+        },
+        "IT.ADQSADAS.USUBJID": {
+          "originDescription": "ADSL.USUBJID",
+          "wasElement": true,
+          "SASFieldName": "USUBJID"
+        },
+        "IT.ADQSADAS.TRTSDT": {
+          "originDescription": "ADSL.TRTSDT",
+          "wasElement": true,
+          "SASFieldName": "TRTSDT"
+        },
+        "IT.ADQSADAS.TRTEDT": {
+          "originDescription": "ADSL.TRTEDT",
+          "wasElement": true,
+          "SASFieldName": "TRTEDT"
+        },
+        "IT.ADQSADAS.TRTP": {
+          "originDescription": "ADSL.TRT01P",
+          "wasElement": true,
+          "SASFieldName": "TRTP"
+        },
+        "IT.ADQSADAS.TRTPN": {
+          "originDescription": "ADSL.TRT01PN",
+          "wasElement": true,
+          "SASFieldName": "TRTPN"
+        },
+        "IT.ADQSADAS.AGE": {
+          "originDescription": "ADSL.AGE",
+          "wasElement": true,
+          "SASFieldName": "AGE"
+        },
+        "IT.ADQSADAS.AGEGR1": {
+          "originDescription": "ADSL.AGEGR1",
+          "wasElement": true,
+          "SASFieldName": "AGEGR1"
+        },
+        "IT.ADQSADAS.AGEGR1N": {
+          "originDescription": "ADSL.AGEGR1N",
+          "wasElement": true,
+          "SASFieldName": "AGEGR1N"
+        },
+        "IT.ADQSADAS.RACE": {
+          "originDescription": "ADSL.RACE",
+          "wasElement": true,
+          "SASFieldName": "RACE"
+        },
+        "IT.ADQSADAS.RACEN": {
+          "originDescription": "ADSL.RACEN",
+          "wasElement": true,
+          "SASFieldName": "RACEN"
+        },
+        "IT.ADQSADAS.SEX": {
+          "originDescription": "ADSL.SEX",
+          "wasElement": true,
+          "SASFieldName": "SEX"
+        },
+        "IT.ADQSADAS.ITTFL": {
+          "originDescription": "ADSL.ITTFL",
+          "wasElement": true,
+          "SASFieldName": "ITTFL"
+        },
+        "IT.ADQSADAS.EFFFL": {
+          "originDescription": "ADSL.FASFL",
+          "wasElement": true,
+          "SASFieldName": "EFFFL"
+        },
+        "IT.ADQSADAS.COMP24FL": {
+          "originDescription": "ADSL.COMP24FL",
+          "wasElement": true,
+          "SASFieldName": "COMP24FL"
+        },
+        "IT.ADQSADAS.AVISIT": {
+          "wasElement": true,
+          "SASFieldName": "AVISIT"
+        },
+        "IT.ADQSADAS.AVISITN": {
+          "wasElement": true,
+          "commentOID": "COM.ADQSADAS.AVISITN",
+          "SASFieldName": "AVISITN"
+        },
+        "IT.ADQSADAS.VISIT": {
+          "originDescription": "QS.VISIT",
+          "wasElement": true,
+          "SASFieldName": "VISIT"
+        },
+        "IT.ADQSADAS.VISITNUM": {
+          "originDescription": "QS.VISITNUM",
+          "wasElement": true,
+          "SASFieldName": "VISITNUM"
+        },
+        "IT.ADQSADAS.ADY": {
+          "wasElement": true,
+          "SASFieldName": "ADY"
+        },
+        "IT.ADQSADAS.ADT": {
+          "wasElement": true,
+          "SASFieldName": "ADT"
+        },
+        "IT.ADQSADAS.PARAM": {
+          "wasElement": true,
+          "SASFieldName": "PARAM"
+        },
+        "IT.ADQSADAS.PARAMCD": {
+          "wasElement": true,
+          "SASFieldName": "PARAMCD"
+        },
+        "IT.ADQSADAS.PARAMN": {
+          "wasElement": true,
+          "commentOID": "COM.ADQSADAS.PARAMN",
+          "SASFieldName": "PARAMN"
+        },
+        "IT.ADQSADAS.AVAL": {
+          "valueListOID": "VL.ADQSADAS.AVAL",
+          "SASFieldName": "AVAL"
+        },
+        "IT.ADQSADAS.BASE": {
+          "wasElement": true,
+          "SASFieldName": "BASE"
+        },
+        "IT.ADQSADAS.CHG": {
+          "wasElement": true,
+          "SASFieldName": "CHG"
+        },
+        "IT.ADQSADAS.PCHG": {
+          "wasElement": true,
+          "SASFieldName": "PCHG"
+        },
+        "IT.ADQSADAS.ABLFL": {
+          "originDescription": "QS.QSBLFL",
+          "wasElement": true,
+          "SASFieldName": "ABLFL"
+        },
+        "IT.ADQSADAS.ANL01FL": {
+          "wasElement": true,
+          "SASFieldName": "ANL01FL"
+        },
+        "IT.ADQSADAS.DTYPE": {
+          "valueListOID": "VL.ADQSADAS.DTYPE",
+          "SASFieldName": "DTYPE"
+        },
+        "IT.ADQSADAS.AWRANGE": {
+          "wasElement": true,
+          "commentOID": "COM.ADQSADAS.AWRANGE",
+          "SASFieldName": "AWRANGE"
+        },
+        "IT.ADQSADAS.AWTARGET": {
+          "wasElement": true,
+          "commentOID": "COM.ADQSADAS.AWTARGET",
+          "SASFieldName": "AWTARGET"
+        },
+        "IT.ADQSADAS.AWTDIFF": {
+          "wasElement": true,
+          "SASFieldName": "AWTDIFF"
+        },
+        "IT.ADQSADAS.AWLO": {
+          "wasElement": true,
+          "commentOID": "COM.ADQSADAS.AWLO",
+          "SASFieldName": "AWLO"
+        },
+        "IT.ADQSADAS.AWHI": {
+          "wasElement": true,
+          "commentOID": "COM.ADQSADAS.AWHI",
+          "SASFieldName": "AWHI"
+        },
+        "IT.ADQSADAS.AWU": {
+          "wasElement": true,
+          "commentOID": "COM.ADQSADAS.AWU",
+          "SASFieldName": "AWU"
+        },
+        "IT.ADQSADAS.QSSEQ": {
+          "valueListOID": "VL.ADQSADAS.QSSEQ",
+          "SASFieldName": "QSSEQ"
+        },
+        "IT.ADAE.STUDYID": {
+          "originDescription": "ADSL.STUDYID",
+          "wasElement": true,
+          "SASFieldName": "STUDYID"
+        },
+        "IT.ADAE.SITEID": {
+          "originDescription": "ADSL.SITEID",
+          "wasElement": true,
+          "SASFieldName": "SITEID"
+        },
+        "IT.ADAE.USUBJID": {
+          "originDescription": "ADSL.USUBJID",
+          "wasElement": true,
+          "SASFieldName": "USUBJID"
+        },
+        "IT.ADAE.TRTA": {
+          "originDescription": "ADSL.TRT01A",
+          "wasElement": true,
+          "SASFieldName": "TRTA"
+        },
+        "IT.ADAE.TRTAN": {
+          "originDescription": "ADSL.TRT01AN",
+          "wasElement": true,
+          "SASFieldName": "TRTAN"
+        },
+        "IT.ADAE.AGE": {
+          "originDescription": "ADSL.AGE",
+          "wasElement": true,
+          "SASFieldName": "AGE"
+        },
+        "IT.ADAE.AGEGR1": {
+          "originDescription": "ADSL.AGEGR1",
+          "wasElement": true,
+          "SASFieldName": "AGEGR1"
+        },
+        "IT.ADAE.AGEGR1N": {
+          "originDescription": "ADSL.AGEGR1N",
+          "wasElement": true,
+          "SASFieldName": "AGEGR1N"
+        },
+        "IT.ADAE.RACE": {
+          "originDescription": "ADSL.RACE",
+          "wasElement": true,
+          "SASFieldName": "RACE"
+        },
+        "IT.ADAE.RACEN": {
+          "originDescription": "ADSL.RACEN",
+          "wasElement": true,
+          "SASFieldName": "RACEN"
+        },
+        "IT.ADAE.SEX": {
+          "originDescription": "ADSL.SEX",
+          "wasElement": true,
+          "SASFieldName": "SEX"
+        },
+        "IT.ADAE.SAFFL": {
+          "originDescription": "ADSL.SAFFL",
+          "wasElement": true,
+          "SASFieldName": "SAFFL"
+        },
+        "IT.ADAE.TRTSDT": {
+          "originDescription": "ADSL.TRTSDT",
+          "wasElement": true,
+          "SASFieldName": "TRTSDT"
+        },
+        "IT.ADAE.TRTEDT": {
+          "originDescription": "ADSL.TRTEDT",
+          "wasElement": true,
+          "SASFieldName": "TRTEDT"
+        },
+        "IT.ADAE.ASTDT": {
+          "wasElement": true,
+          "SASFieldName": "ASTDT"
+        },
+        "IT.ADAE.ASTDTF": {
+          "wasElement": true,
+          "SASFieldName": "ASTDTF"
+        },
+        "IT.ADAE.ASTDY": {
+          "wasElement": true,
+          "SASFieldName": "ASTDY"
+        },
+        "IT.ADAE.AENDT": {
+          "wasElement": true,
+          "SASFieldName": "AENDT"
+        },
+        "IT.ADAE.AENDY": {
+          "wasElement": true,
+          "SASFieldName": "AENDY"
+        },
+        "IT.ADAE.ADURN": {
+          "wasElement": true,
+          "SASFieldName": "ADURN"
+        },
+        "IT.ADAE.ADURU": {
+          "wasElement": true,
+          "SASFieldName": "ADURU"
+        },
+        "IT.ADAE.AETERM": {
+          "originDescription": "AE.AETERM",
+          "wasElement": true,
+          "SASFieldName": "AETERM"
+        },
+        "IT.ADAE.AELLT": {
+          "originDescription": "AE.AELLT",
+          "wasElement": true,
+          "SASFieldName": "AELLT"
+        },
+        "IT.ADAE.AELLTCD": {
+          "originDescription": "AE.AELLTCD",
+          "wasElement": true,
+          "SASFieldName": "AELLTCD"
+        },
+        "IT.ADAE.AEDECOD": {
+          "originDescription": "AE.AEDECOD",
+          "wasElement": true,
+          "SASFieldName": "AEDECOD"
+        },
+        "IT.ADAE.AEPTCD": {
+          "originDescription": "AE.AEPTCD",
+          "wasElement": true,
+          "SASFieldName": "AEPTCD"
+        },
+        "IT.ADAE.AEHLT": {
+          "originDescription": "AE.AEHLT",
+          "wasElement": true,
+          "SASFieldName": "AEHLT"
+        },
+        "IT.ADAE.AEHLTCD": {
+          "originDescription": "AE.AEHLTCD",
+          "wasElement": true,
+          "SASFieldName": "AEHLTCD"
+        },
+        "IT.ADAE.AEHLGT": {
+          "originDescription": "AE.AEHLGT",
+          "wasElement": true,
+          "SASFieldName": "AEHLGT"
+        },
+        "IT.ADAE.AEHLGTCD": {
+          "originDescription": "AE.AEHLGTCD",
+          "wasElement": true,
+          "SASFieldName": "AEHLGTCD"
+        },
+        "IT.ADAE.AEBODSYS": {
+          "originDescription": "AE.AEBODSYS",
+          "wasElement": true,
+          "SASFieldName": "AEBODSYS"
+        },
+        "IT.ADAE.AESOC": {
+          "originDescription": "AE.AESOC",
+          "wasElement": true,
+          "SASFieldName": "AESOC"
+        },
+        "IT.ADAE.AESOCCD": {
+          "originDescription": "AE.AESOCCD",
+          "wasElement": true,
+          "SASFieldName": "AESOCCD"
+        },
+        "IT.ADAE.AESEV": {
+          "originDescription": "AE.AESEV",
+          "wasElement": true,
+          "SASFieldName": "AESEV"
+        },
+        "IT.ADAE.AESER": {
+          "originDescription": "AE.AESER",
+          "wasElement": true,
+          "SASFieldName": "AESER"
+        },
+        "IT.ADAE.AESCAN": {
+          "originDescription": "AE.AESCAN",
+          "wasElement": true,
+          "SASFieldName": "AESCAN"
+        },
+        "IT.ADAE.AESCONG": {
+          "originDescription": "AE.AESCONG",
+          "wasElement": true,
+          "SASFieldName": "AESCONG"
+        },
+        "IT.ADAE.AESDISAB": {
+          "originDescription": "AE.AESDISAB",
+          "wasElement": true,
+          "SASFieldName": "AESDISAB"
+        },
+        "IT.ADAE.AESDTH": {
+          "originDescription": "AE.AESDTH",
+          "wasElement": true,
+          "SASFieldName": "AESDTH"
+        },
+        "IT.ADAE.AESHOSP": {
+          "originDescription": "AE.AESHOSP",
+          "wasElement": true,
+          "SASFieldName": "AESHOSP"
+        },
+        "IT.ADAE.AESLIFE": {
+          "originDescription": "AE.AESLIFE",
+          "wasElement": true,
+          "SASFieldName": "AESLIFE"
+        },
+        "IT.ADAE.AESOD": {
+          "originDescription": "AE.AESOD",
+          "wasElement": true,
+          "SASFieldName": "AESOD"
+        },
+        "IT.ADAE.AEREL": {
+          "originDescription": "AE.AEREL",
+          "wasElement": true,
+          "SASFieldName": "AEREL"
+        },
+        "IT.ADAE.AEACN": {
+          "originDescription": "AE.AEACN",
+          "wasElement": true,
+          "SASFieldName": "AEACN"
+        },
+        "IT.ADAE.AEOUT": {
+          "originDescription": "AE.AEOUT",
+          "wasElement": true,
+          "SASFieldName": "AEOUT"
+        },
+        "IT.ADAE.AESEQ": {
+          "originDescription": "AE.AESEQ",
+          "wasElement": true,
+          "SASFieldName": "AESEQ"
+        },
+        "IT.ADAE.TRTEMFL": {
+          "wasElement": true,
+          "SASFieldName": "TRTEMFL"
+        },
+        "IT.ADAE.AOCCFL": {
+          "wasElement": true,
+          "SASFieldName": "AOCCFL"
+        },
+        "IT.ADAE.AOCCSFL": {
+          "wasElement": true,
+          "SASFieldName": "AOCCSFL"
+        },
+        "IT.ADAE.AOCCPFL": {
+          "wasElement": true,
+          "SASFieldName": "AOCCPFL"
+        },
+        "IT.ADAE.AOCC02FL": {
+          "wasElement": true,
+          "SASFieldName": "AOCC02FL"
+        },
+        "IT.ADAE.AOCC03FL": {
+          "wasElement": true,
+          "SASFieldName": "AOCC03FL"
+        },
+        "IT.ADAE.AOCC04FL": {
+          "wasElement": true,
+          "SASFieldName": "AOCC04FL"
+        },
+        "IT.ADAE.CQ01NAM": {
+          "wasElement": true,
+          "SASFieldName": "CQ01NAM"
+        },
+        "IT.ADAE.AOCC01FL": {
+          "wasElement": true,
+          "SASFieldName": "AOCC01FL"
+        },
+        "IT.ADQSADAS.AVAL.ACITM01-ACITM14": {
+          "originDescription": "QS.QSSTRESN where QS.QSTESTCD=ADQSADAS.PARAMCD",
+          "wasElement": true
+        },
+        "IT.ADQSADAS.AVAL.ACTOT": {
+          "wasElement": true
+        },
+        "IT.ADQSADAS.DTYPE.ACITM01-ACITM14": {
+          "wasElement": true,
+          "commentOID": "COM.ADQSADAS.DTYPE.ACITM01-ACITM14"
+        },
+        "IT.ADQSADAS.DTYPE.ACTOT": {
+          "wasElement": true,
+          "commentOID": "COM.ADQSADAS.DTYPE.ACTOT"
+        },
+        "IT.ADQSADAS.QSSEQ.ACITM01-ACITM14": {
+          "originDescription": "QS.QSSEQ",
+          "wasElement": true
+        },
+        "IT.ADQSADAS.QSSEQ.ACTOT": {
+          "wasElement": true,
+          "commentOID": "COM.ADQSADAS.QSSEQ.ACTOT"
+        }
+      }
+    },
+    "codeListSupplemental": {
+      "CL.AGEGR1": {
+        "OID": "CL.AGEGR1",
+        "isNonStandard": "Yes",
+        "isEnumeratedList": true
+      },
+      "CL.AGEGR1N": {
+        "OID": "CL.AGEGR1N",
+        "isNonStandard": "Yes"
+      },
+      "CL.AGEU": {
+        "OID": "CL.AGEU",
+        "standardOID": "STD.CT.02",
+        "isEnumeratedList": true
+      },
+      "CL.ARM": {
+        "OID": "CL.ARM",
+        "isNonStandard": "Yes",
+        "isEnumeratedList": true
+      },
+      "CL.ARMN": {
+        "OID": "CL.ARMN",
+        "isNonStandard": "Yes"
+      },
+      "CL.AVISIT": {
+        "OID": "CL.AVISIT",
+        "isNonStandard": "Yes",
+        "isEnumeratedList": true
+      },
+      "CL.AVISITN": {
+        "OID": "CL.AVISITN",
+        "isNonStandard": "Yes"
+      },
+      "CL.AWU": {
+        "OID": "CL.AWU",
+        "standardOID": "STD.CT.02",
+        "isEnumeratedList": true
+      },
+      "CL.BMICAT": {
+        "OID": "CL.BMICAT",
+        "isNonStandard": "Yes"
+      },
+      "CL.DATEFL": {
+        "OID": "CL.DATEFL",
+        "standardOID": "STD.CT.01"
+      },
+      "CL.DISCCD": {
+        "OID": "CL.DISCCD",
+        "standardOID": "STD.CT.02",
+        "isEnumeratedList": true
+      },
+      "CL.DISCREAS": {
+        "OID": "CL.DISCREAS",
+        "isNonStandard": "Yes",
+        "isEnumeratedList": true
+      },
+      "CL.DTYPE": {
+        "OID": "CL.DTYPE",
+        "standardOID": "STD.CT.01"
+      },
+      "CL.DURDISC": {
+        "OID": "CL.DURDISC",
+        "isNonStandard": "Yes",
+        "isEnumeratedList": true
+      },
+      "CL.EOSSTT": {
+        "OID": "CL.EOSSTT",
+        "standardOID": "STD.CT.01",
+        "isEnumeratedList": true
+      },
+      "CL.ETHNIC": {
+        "OID": "CL.ETHNIC",
+        "standardOID": "STD.CT.02",
+        "isEnumeratedList": true
+      },
+      "CL.PARAMCD_ADQSADAS": {
+        "OID": "CL.PARAMCD_ADQSADAS",
+        "isNonStandard": "Yes"
+      },
+      "CL.PARAMN_ADQSADAS": {
+        "OID": "CL.PARAMN_ADQSADAS",
+        "isNonStandard": "Yes"
+      },
+      "CL.PARAM_ADQSADAS": {
+        "OID": "CL.PARAM_ADQSADAS",
+        "isNonStandard": "Yes",
+        "isEnumeratedList": true
+      },
+      "CL.AWRANGE_ADQSADAS": {
+        "OID": "CL.AWRANGE_ADQSADAS",
+        "isNonStandard": "Yes",
+        "isEnumeratedList": true
+      },
+      "CL.RACE": {
+        "OID": "CL.RACE",
+        "standardOID": "STD.CT.02",
+        "isEnumeratedList": true
+      },
+      "CL.RACEN": {
+        "OID": "CL.RACEN",
+        "isNonStandard": "Yes"
+      },
+      "CL.SEX": {
+        "OID": "CL.SEX",
+        "standardOID": "STD.CT.02"
+      },
+      "CL.VISIT": {
+        "OID": "CL.VISIT",
+        "isNonStandard": "Yes",
+        "isEnumeratedList": true
+      },
+      "CL.VISITNUM": {
+        "OID": "CL.VISITNUM",
+        "isNonStandard": "Yes"
+      },
+      "CL.YN": {
+        "OID": "CL.YN",
+        "standardOID": "STD.CT.02"
+      },
+      "CL.Y_BLANK": {
+        "OID": "CL.Y_BLANK",
+        "standardOID": "STD.CT.02"
+      },
+      "CL.AESEV": {
+        "OID": "CL.AESEV",
+        "standardOID": "STD.CT.02"
+      },
+      "CL.AECAUS": {
+        "OID": "CL.AECAUS",
+        "isNonStandard": "Yes",
+        "isEnumeratedList": true
+      },
+      "CL.OUT": {
+        "OID": "CL.OUT",
+        "standardOID": "STD.CT.02",
+        "isEnumeratedList": true
+      },
+      "CL.AEDICT": {
+        "OID": "CL.AEDICT",
+        "isNonStandard": "Yes",
+        "externalCodeListLinks": {
+          "href": "http://www.meddra.org/"
+        }
+      },
+      "CL.AEDICTN": {
+        "OID": "CL.AEDICTN",
+        "isNonStandard": "Yes",
+        "externalCodeListLinks": {
+          "href": "http://www.meddra.org/"
+        }
+      }
+    },
+    "methodSupplemental": {
+      "MT.ADQSADAS.AVISIT": {
+        "_isFromXML": true
+      },
+      "MT.ADQSADAS.ADY": {
+        "_isFromXML": true
+      },
+      "MT.ADQSADAS.ADT": {
+        "_isFromXML": true
+      },
+      "MT.ADQSADAS.BASE": {
+        "_isFromXML": true
+      },
+      "MT.ADQSADAS.CHG": {
+        "_isFromXML": true
+      },
+      "MT.ADQSADAS.PCHG": {
+        "_isFromXML": true
+      },
+      "MT.ADQSADAS.ANL01FL": {
+        "_isFromXML": true
+      },
+      "MT.ADQSADAS.AWTDIFF": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.SITEGR1": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.TRTSDT": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.TRTEDT": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.TRTDURD": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.AVGDD": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.CUMDOSE": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.AGEGR1": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.SAFFL": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.ITTFL": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.EFFFL": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.COMP8FL": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.COMP16FL": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.COMP24FL": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.DISCONFL": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.DSRAEFL": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.BMIBL": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.BMIBLGR1": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.HEIGHTBL": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.WEIGHTBL": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.EDUCLVL": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.DISONDT": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.DURDIS": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.DURDSGR1": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.VISIT1DT": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.VISNUMEN": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.RFENDT": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.EOSSTT": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.DCSREAS": {
+        "_isFromXML": true
+      },
+      "MT.ADSL.MMS1TSBL": {
+        "_isFromXML": true
+      },
+      "MT.ADQSADAS.AVAL.ACTOT": {
+        "pdfPageRefs_LF.ADRG": [
+          {
+            "type": "PhysicalRef",
+            "pageRefs": "3"
+          }
+        ],
+        "_isFromXML": true
+      },
+      "MT.ADAE.ASTDT": {
+        "_isFromXML": true
+      },
+      "MT.ADAE.ASTDTF": {
+        "_isFromXML": true
+      },
+      "MT.ADAE.ASTDY": {
+        "_isFromXML": true
+      },
+      "MT.ADAE.AENDT": {
+        "_isFromXML": true
+      },
+      "MT.ADAE.AENDY": {
+        "_isFromXML": true
+      },
+      "MT.ADAE.ADURN": {
+        "_isFromXML": true
+      },
+      "MT.ADAE.ADURU": {
+        "_isFromXML": true
+      },
+      "MT.ADAE.TRTEMFL": {
+        "_isFromXML": true
+      },
+      "MT.ADAE.AOCCFL": {
+        "_isFromXML": true
+      },
+      "MT.ADAE.AOCCSFL": {
+        "_isFromXML": true
+      },
+      "MT.ADAE.AOCCPFL": {
+        "_isFromXML": true
+      },
+      "MT.ADAE.AOCC02FL": {
+        "_isFromXML": true
+      },
+      "MT.ADAE.AOCC03FL": {
+        "_isFromXML": true
+      },
+      "MT.ADAE.AOCC04FL": {
+        "_isFromXML": true
+      },
+      "MT.ADAE.CQ01NAM": {
+        "_isFromXML": true
+      },
+      "MT.ADAE.AOCC01FL": {
+        "_isFromXML": true
+      }
+    }
+  }
+}

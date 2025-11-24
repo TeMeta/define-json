@@ -1,0 +1,62 @@
+# SDMX Data Cube Policy for Laboratory (LB) Domain
+# Classifies variables into Dimension/Measure/Attribute roles
+
+domain: LB
+description: "Laboratory test results data cube structure"
+
+# Dimensions: Variables that define coordinates in the cube
+# These form the composite key for identifying observations
+dimensions:
+  - USUBJID      # Subject dimension
+  - LBTEST       # Test parameter dimension
+  - VISITNUM     # Time/visit dimension (ordered)
+  - LBSEQ        # Sequence within subject-test-visit
+
+# Measures: The actual observations/values being measured
+# These are the numeric or categorical values at each coordinate
+measures:
+  - LBSTRESN     # Primary numeric measure (standardised result)
+  - LBSTRESC     # Character measure (standardised result)
+  - LBORRES      # Original result
+
+# Attributes: Descriptive metadata that may vary by dimension
+# These provide context but aren't part of the key or observation value
+attributes:
+  # Dataset-level attributes (constant across all observations)
+  dataset_level:
+    - STUDYID
+    - DOMAIN
+  
+  # Dimension-level attributes (vary by specific dimensions)
+  dimension_level:
+    # Attached to LBTEST dimension
+    - variable: LBCAT
+      attached_to: [LBTEST]
+    
+    # Attached to VISITNUM dimension
+    - variable: VISIT
+      attached_to: [VISITNUM]
+    - variable: LBDTC
+      attached_to: [VISITNUM]
+  
+  # Measure-level attributes
+  measure_level:
+    - variable: LBSTRESU
+      attached_to: [LBSTRESN, LBSTRESC]
+    - variable: LBORRESU
+      attached_to: [LBORRES]
+
+# Order of dimensions for keyValues serialisation
+dimension_order:
+  - USUBJID
+  - LBTEST
+  - VISITNUM
+  - LBSEQ
+
+# Notes:
+# - This is a POLICY file: explicit classification, no inference
+# - Dimensions form the composite key (GroupKey/SeriesKey)
+# - Measures are the values being observed
+# - Attributes provide context and metadata
+# - Attribute attachment defines at what level they vary
+

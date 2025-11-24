@@ -83,9 +83,45 @@ poetry run python -m define_json json2xml input.json output.xml --stylesheet "./
 poetry run python -m define_json json2xml input.json output.xml --stylesheet "https://example.com/define2-1.xsl"
 ```
 
+## 🆕 Reverse Engineering: Data → Metadata
+
+> "Don't send data without its Define"
+
+**New capability**: Automatically generate Define-JSON metadata from Dataset-JSON data files.
+
+```bash
+# Run on sample datasets
+make reverse-engineer-lb  # Laboratory dataset
+make reverse-engineer-vs  # Vital Signs dataset
+
+# Or run directly
+python scripts/reverse_engineer_define.py examples/sample_dataset_lb.json
+```
+
+**Outputs** (4 files):
+1. `define_metadata.json` - Define-JSON ItemDef/ItemGroupDef structures
+2. `sdmx_policy_suggestion.yaml` - Auto-suggested SDMX Dimension/Measure/Attribute policy  
+3. `analysis_summary.json` - Statistics and confidence scores
+4. `reverse_engineering_report.md` - Human-readable analysis report
+
+**What it does**:
+- ✅ Detects dataset structure (vertical vs horizontal)
+- ✅ Classifies variables (IDENTIFIER, TIMING, TOPIC, RESULT, ATTRIBUTE)
+- ✅ Suggests SDMX roles (Dimension, Measure, Attribute)
+- ✅ Generates ItemGroups with WHERE clauses for topics
+- ✅ Provides confidence scores for all classifications
+
+**Use cases**:
+- Bootstrap metadata for legacy datasets
+- Validate metadata-data consistency
+- Auto-generate SDMX policies
+- Quick prototyping of new analyses
+
+See **[REVERSE_ENGINEERING_SUMMARY.md](REVERSE_ENGINEERING_SUMMARY.md)** for complete guide.
+
 ## Context is everything
 
-> “Don't provide values without units”
+> "Don't provide values without units"
 
 `define-json` element definitions are context-specific by design, only applicable to some defined local scope.
 

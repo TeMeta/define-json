@@ -350,6 +350,7 @@ ReifiedConcept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | [MetaDataVersion](../classes/MetaDataVersion.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Item](../classes/Item.md) |
 | [Item](../classes/Item.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Item](../classes/Item.md) |
 | [ItemGroup](../classes/ItemGroup.md) | [items](../slots/items.md) | range | [Item](../classes/Item.md) |
+| [ItemGroup](../classes/ItemGroup.md) | [keySequence](../slots/keySequence.md) | range | [Item](../classes/Item.md) |
 | [ItemGroup](../classes/ItemGroup.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Item](../classes/Item.md) |
 | [CodeList](../classes/CodeList.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Item](../classes/Item.md) |
 | [Comment](../classes/Comment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Item](../classes/Item.md) |
@@ -364,6 +365,7 @@ ReifiedConcept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Item](../classes/Item.md) |
 | [NominalOccurrence](../classes/NominalOccurrence.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Item](../classes/Item.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [items](../slots/items.md) | range | [Item](../classes/Item.md) |
+| [DataStructureDefinition](../classes/DataStructureDefinition.md) | [keySequence](../slots/keySequence.md) | range | [Item](../classes/Item.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Item](../classes/Item.md) |
 | [Dataflow](../classes/Dataflow.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Item](../classes/Item.md) |
 | [CubeComponent](../classes/CubeComponent.md) | [item](../slots/item.md) | range | [Item](../classes/Item.md) |
@@ -860,7 +862,6 @@ attributes:
     - Identifiable
     range: string
     required: true
-    pattern: ^[A-Za-z][A-Za-z0-9._-]*$
   uuid:
     name: uuid
     description: Universal unique identifier

@@ -1,0 +1,204 @@
+# Laboratory Data Cube Configuration
+# This defines the structure for analyzing laboratory data
+
+name: "Laboratory Analysis Cube"
+description: "Data cube for analyzing laboratory test results by demographic and visit factors"
+
+# Data source configuration
+data_source:
+  type: "sdtm"
+  domains:
+    - "DM"  # Demographics
+    - "LB"  # Laboratory
+
+# Items: All possible variables/concepts
+items:
+  IT001:
+    id: "IT001"
+    name: "Subject ID"
+    label: "Subject Identifier"
+    dataType: "string"
+    length: 20
+    description: "Unique subject identifier"
+    
+  IT002:
+    id: "IT002"
+    name: "Age"
+    label: "Age"
+    dataType: "integer"
+    units: "years"
+    description: "Subject age at screening"
+    
+  IT003:
+    id: "IT003"
+    name: "Sex"
+    label: "Sex"
+    dataType: "string"
+    length: 1
+    description: "Subject sex"
+    
+  IT004:
+    id: "IT004"
+    name: "Race"
+    label: "Race"
+    dataType: "string"
+    length: 20
+    description: "Subject race"
+    
+  IT005:
+    id: "IT005"
+    name: "Treatment Arm"
+    label: "Treatment Arm"
+    dataType: "string"
+    length: 50
+    description: "Assigned treatment arm"
+    
+  IT006:
+    id: "IT006"
+    name: "Hemoglobin"
+    label: "Hemoglobin"
+    dataType: "float"
+    units: "g/dL"
+    description: "Hemoglobin measurement"
+    
+  IT007:
+    id: "IT007"
+    name: "White Blood Cell Count"
+    label: "WBC Count"
+    dataType: "float"
+    units: "10^9/L"
+    description: "White blood cell count"
+    
+  IT008:
+    id: "IT008"
+    name: "Platelet Count"
+    label: "Platelet Count"
+    dataType: "float"
+    units: "10^9/L"
+    description: "Platelet count"
+    
+  IT009:
+    id: "IT009"
+    name: "Visit"
+    label: "Visit"
+    dataType: "string"
+    length: 20
+    description: "Study visit identifier"
+    
+  IT010:
+    id: "IT010"
+    name: "Test Category"
+    label: "Test Category"
+    dataType: "string"
+    length: 50
+    description: "Laboratory test category"
+
+# Components: Structural roles that reference Items
+components:
+  DIM001:
+    id: "DIM001"
+    name: "Subject Dimension"
+    item: "IT001"
+    role: "dimension"
+    description: "Subject identifier as dimension"
+    
+  DIM002:
+    id: "DIM002"
+    name: "Age Dimension"
+    item: "IT002"
+    role: "dimension"
+    description: "Age as dimension"
+    
+  DIM003:
+    id: "DIM003"
+    name: "Sex Dimension"
+    item: "IT003"
+    role: "dimension"
+    description: "Sex as dimension"
+    
+  DIM004:
+    id: "DIM004"
+    name: "Visit Dimension"
+    item: "IT009"
+    role: "dimension"
+    description: "Visit as dimension"
+    
+  DIM005:
+    id: "DIM005"
+    name: "Test Category Dimension"
+    item: "IT010"
+    role: "dimension"
+    description: "Test category as dimension"
+    
+  MEAS001:
+    id: "MEAS001"
+    name: "Hemoglobin Measure"
+    item: "IT006"
+    role: "measure"
+    description: "Hemoglobin as measure"
+    
+  MEAS002:
+    id: "MEAS002"
+    name: "WBC Count Measure"
+    item: "IT007"
+    role: "measure"
+    description: "White blood cell count as measure"
+    
+  MEAS003:
+    id: "MEAS003"
+    name: "Platelet Count Measure"
+    item: "IT008"
+    role: "measure"
+    description: "Platelet count as measure"
+    
+  ATTR001:
+    id: "ATTR001"
+    name: "Race Attribute"
+    item: "IT004"
+    role: "attribute"
+    description: "Race as attribute"
+    
+  ATTR002:
+    id: "ATTR002"
+    name: "Treatment Arm Attribute"
+    item: "IT005"
+    role: "attribute"
+    description: "Treatment arm as attribute"
+
+# Data Structure Definition: How to organize the cube
+data_structure_definition:
+  id: "DSD002"
+  name: "Laboratory Analysis Structure"
+  description: "Structure for analyzing laboratory results by demographic and visit factors"
+  dimensions: ["DIM001", "DIM002", "DIM003", "DIM004", "DIM005"]
+  measures: ["MEAS001", "MEAS002", "MEAS003"]
+  attributes: ["ATTR001", "ATTR002"]
+
+# Data mapping: How to map from source data to items
+data_mapping:
+  DM:
+    USUBJID: "IT001"  # Subject ID
+    AGE: "IT002"      # Age
+    SEX: "IT003"      # Sex
+    RACE: "IT004"     # Race
+    ARM: "IT005"      # Treatment Arm
+    
+  LB:
+    USUBJID: "IT001"  # Subject ID
+    LBTESTCD:         # Test code mapping
+      HGB: "IT006"    # Hemoglobin
+      WBC: "IT007"    # White Blood Cell Count
+      PLAT: "IT008"   # Platelet Count
+    LBORRES:          # Result value
+      HGB: "IT006"    # Maps to Hemoglobin
+      WBC: "IT007"    # Maps to WBC Count
+      PLAT: "IT008"   # Maps to Platelet Count
+    VISIT: "IT009"    # Visit
+    LBCAT: "IT010"    # Test Category
+
+# Visualization preferences
+visualization:
+  default_3d_dims: ["DIM002", "DIM003"]  # Age, Sex for 3D plots
+  color_by: "DIM005"  # Color by Test Category
+  size_by: "MEAS001"  # Size by Hemoglobin
+  dashboard_layout: "2x3"  # 2x3 grid for dashboard (more measures) 

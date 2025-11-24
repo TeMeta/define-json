@@ -268,8 +268,9 @@ class DefineJSONToXMLConverter:
         # Fields that should have def: namespace in CDISC standards
         # These apply to ItemGroupDef elements
         def_namespaced_fields = {
-            'structure', 'class', 'label', 'archiveLocationID', 
-            'standardOID', 'commentOID'
+            'structure', 'class', 'label', 'archiveLocationID'
+            # Note: standardOID and commentOID are handled explicitly in _create_item_groups and _create_code_lists
+            # to ensure correct casing (StandardOID, CommentOID with capital letters)
         }
         
         # Skip metadata keys and nested structures
@@ -283,12 +284,15 @@ class DefineJSONToXMLConverter:
             'codeList',  # codeList is handled as CodeListRef child element
             'mandatory',  # mandatory is handled explicitly in ItemRef creation, skip in ItemDef
             'role',  # role is ItemRef attribute, not ItemDef - handled explicitly in ItemRef creation
+            'method',  # method is handled as MethodOID on ItemRef, not ItemDef attribute
             'wasDerivedFrom',  # wasDerivedFrom is provenance, handled as ExternalCodeList, not XML attribute
-            # Skip def: namespaced fields that are handled explicitly
+            # Skip def: namespaced fields that are handled explicitly with correct casing
             'defClass', 'defDomainKeys', 'comment',
+            'standardOID', 'commentOID', 'isNonStandard', 'hasNoData',  # Handled explicitly to ensure correct namespace (def:StandardOID, def:CommentOID, def:IsNonStandard, def:HasNoData)
             'leaf', 'externalCodeList', 'sourceResourceOID', 'leafID',
             'displayFormat',  # displayFormat (def:DisplayFormat) is handled explicitly for ItemDefs
             'classIsAttribute',  # classIsAttribute is metadata to track attribute vs element form
+            'sasFieldName',  # sasFieldName is handled explicitly based on hasSASFieldName flag
         }
         
         # Context-specific field exclusions
@@ -544,11 +548,83 @@ class DefineJSONToXMLConverter:
         # Process ItemGroups/ValueLists and get flattened list (includes nested children)
         flattened_item_groups = self._process_item_groups_and_value_lists(mdv, all_item_groups, json_data)
         
+        # Store flattened list for method reference collection
+        self._flattened_item_groups = flattened_item_groups
+        
         # Process ItemDefs using flattened list (includes items from nested ValueLists)
         self._process_item_defs(mdv, json_data, flattened_item_groups)
         
         # Process CodeLists
         self._create_code_lists(mdv, json_data.get('codeLists', []))
+        
+        # Process Comments (def:CommentDef elements)
+        # First, collect all CommentOID references from supplemental metadata
+        xml_metadata = getattr(self, '_current_xml_metadata', {})
+        referenced_comment_oids = set()
+        
+        # Collect from itemGroupSupplemental
+        item_group_supp = xml_metadata.get('itemGroupSupplemental', {})
+        item_origin_metadata = item_group_supp.get('_itemOriginMetadata', {})
+        for item_metadata in item_origin_metadata.values():
+            comment_oid = item_metadata.get('commentOID')
+            if comment_oid:
+                referenced_comment_oids.add(comment_oid)
+        
+        # Collect from conditionSupplemental
+        condition_supplemental = xml_metadata.get('conditionSupplemental', {})
+        for wc_supp in condition_supplemental.values():
+            comment_oid = wc_supp.get('commentOID')
+            if comment_oid:
+                referenced_comment_oids.add(comment_oid)
+        
+        # Collect from codeListSupplemental
+        code_list_supplemental = xml_metadata.get('codeListSupplemental', {})
+        for cl_supp in code_list_supplemental.values():
+            comment_oid = cl_supp.get('commentOID')
+            if comment_oid:
+                referenced_comment_oids.add(comment_oid)
+        
+        # Collect from standardSupplemental
+        standard_supplemental = xml_metadata.get('standardSupplemental', {})
+        for std_supp in standard_supplemental.values():
+            comment_oid = std_supp.get('commentOID')
+            if comment_oid:
+                referenced_comment_oids.add(comment_oid)
+        
+        # Collect from itemGroupSupplemental (ItemGroupDef level)
+        for ig_supp in item_group_supp.values():
+            if isinstance(ig_supp, dict):
+                comment_oid = ig_supp.get('commentOID')
+                if comment_oid:
+                    referenced_comment_oids.add(comment_oid)
+        
+        # Get explicit CommentDef data from supplemental
+        comment_supplemental = xml_metadata.get('commentSupplemental', {})
+        
+        # Create CommentDef elements for all referenced CommentOIDs
+        comments_to_create = {}
+        
+        # First, add explicit CommentDef data
+        for comment_oid, comment_data in comment_supplemental.items():
+            if isinstance(comment_data, dict) and 'OID' in comment_data:
+                comments_to_create[comment_oid] = comment_data
+        
+        # Then, infer CommentDef for any referenced CommentOIDs that don't have explicit data
+        for comment_oid in referenced_comment_oids:
+            if comment_oid not in comments_to_create:
+                # Create minimal CommentDef from the reference
+                comments_to_create[comment_oid] = {
+                    'OID': comment_oid,
+                    'text': f'Comment referenced by CommentOID={comment_oid}'
+                }
+        
+        if comments_to_create:
+            self._create_comments(mdv, list(comments_to_create.values()))
+        
+        # Write MetaDataVersion Comment attribute if present
+        mdv_comments = json_data.get('comments', [])
+        if mdv_comments and len(mdv_comments) > 0:
+            mdv.set('Comment', str(mdv_comments[0]))
         
         # Process Methods
         self._create_methods(mdv, json_data.get('methods', []))
@@ -664,6 +740,15 @@ class DefineJSONToXMLConverter:
             # Actually Type values like "IG", "CT" should remain as-is
             
             self._apply_mapped_attributes(standard_elem, standard_copy)
+            
+            # Add def:CommentOID from supplemental
+            std_oid = standard.get('OID')
+            if std_oid and def_ns:
+                xml_metadata = getattr(self, '_current_xml_metadata', {})
+                std_supp = xml_metadata.get('standardSupplemental', {}).get(std_oid, {})
+                comment_oid = std_supp.get('commentOID')
+                if comment_oid:
+                    standard_elem.set(f'{{{def_ns}}}CommentOID', comment_oid)
     
     def _create_annotated_crf(self, parent: ET.Element, annotated_crf: List[Dict[str, Any]]) -> None:
         """Create def:AnnotatedCRF section."""
@@ -787,6 +872,15 @@ class DefineJSONToXMLConverter:
         wc_elem = ET.SubElement(parent, f'{{{def_ns}}}WhereClauseDef' if def_ns else 'WhereClauseDef')
         wc_elem.set('OID', wc.get('OID', ''))
         
+        # Add def:CommentOID from supplemental if present
+        wc_oid = wc.get('OID')
+        if wc_oid and def_ns:
+            xml_metadata = getattr(self, '_current_xml_metadata', {})
+            cond_supp = xml_metadata.get('conditionSupplemental', {}).get(wc_oid, {})
+            comment_oid = cond_supp.get('commentOID')
+            if comment_oid:
+                wc_elem.set(f'{{{def_ns}}}CommentOID', comment_oid)
+        
         # Add description if present
         if wc.get('description'):
             desc = ET.SubElement(wc_elem, 'Description')
@@ -820,12 +914,12 @@ class DefineJSONToXMLConverter:
             # Comparator attribute
             range_check.set('Comparator', range_check_data.get('comparator', 'EQ'))
             
-            # Add CheckValue child element (Define-JSON stores as checkValues list)
+            # Add CheckValue child elements (Define-JSON stores as checkValues list)
+            # Multiple CheckValue elements can exist per RangeCheck
             check_values = range_check_data.get('checkValues', [])
-            if check_values:
-                # Use first value (typically only one per RangeCheck)
+            for check_value in check_values:
                 check_value_elem = ET.SubElement(range_check, 'CheckValue')
-                check_value_elem.text = str(check_values[0])
+                check_value_elem.text = str(check_value)
             
     def _create_supplemental_doc(self, parent: ET.Element, json_data: Dict[str, Any]) -> None:
         """
@@ -896,23 +990,88 @@ class DefineJSONToXMLConverter:
             logger.warning("No ARM namespace found, skipping AnalysisResultDisplays")
             return
         
-        # Create one AnalysisResultDisplays container per Display (ARM standard)
+        # Check if we need separate containers (LZZT format) or one container (defineV21 format)
+        # Check first display's supplemental data to determine format
+        use_separate_containers = False
+        if displays:
+            first_display_oid = displays[0].get('OID')
+            first_display_supp = display_supplemental.get(first_display_oid, {})
+            use_separate_containers = first_display_supp.get('_separateContainer', False)
+        
+        # Create container(s) based on format
+        if use_separate_containers:
+            # LZZT format: one AnalysisResultDisplays container per Display
+            ard_container = None  # Will be created per display
+        else:
+            # defineV21 format: one AnalysisResultDisplays container for all Displays
+            if displays:
+                ard_container = ET.SubElement(parent, f'{{{arm_ns}}}AnalysisResultDisplays')
+        
         for display in displays:
-            # Create AnalysisResultDisplays container
-            ard_container = ET.SubElement(parent, f'{{{arm_ns}}}AnalysisResultDisplays')
+            # Create separate container if needed (LZZT format)
+            if use_separate_containers:
+                ard_container = ET.SubElement(parent, f'{{{arm_ns}}}AnalysisResultDisplays')
             
             # Create ResultDisplay element
             rd_elem = ET.SubElement(ard_container, f'{{{arm_ns}}}ResultDisplay')
             rd_elem.set('OID', display.get('OID', ''))
-            if display.get('name'):
-                rd_elem.set('DisplayIdentifier', display.get('name'))
-            if display.get('label'):
-                rd_elem.set('DisplayLabel', display.get('label'))
             
-            # Handle location (leafID)
+            # Get display supplemental data for attributes and documents
+            display_oid = display.get('OID')
+            display_supp = display_supplemental.get(display_oid, {})
+            
+            # Set attributes based on format
+            if display_supp.get('displayIdentifier'):
+                # LZZT format: DisplayIdentifier and DisplayLabel
+                rd_elem.set('DisplayIdentifier', display_supp['displayIdentifier'])
+                if display_supp.get('displayLabel'):
+                    rd_elem.set('DisplayLabel', display_supp['displayLabel'])
+            else:
+                # defineV21 format: Name attribute
+                name_attr = display_supp.get('name') or display.get('name')
+                if name_attr:
+                    rd_elem.set('Name', name_attr)
+            
+            # Add Description child if present
+            if display.get('description'):
+                desc_elem = ET.SubElement(rd_elem, 'Description')
+                self._create_translated_text(desc_elem, display['description'])
+            
+            # Add DocumentRef children if Display.location exists (presence indicates original had DocumentRef children)
             locations = display.get('location', [])
             if locations:
-                leaf_id = locations[0].get('leafID') if isinstance(locations[0], dict) else None
+                def_ns = self._get_namespace_uri('def')
+                for loc_ref in locations:
+                    # Handle both dict (from JSON) and DocumentReference object
+                    if isinstance(loc_ref, dict):
+                        leaf_id = loc_ref.get('leafID')
+                    else:
+                        leaf_id = loc_ref.leafID if hasattr(loc_ref, 'leafID') else None
+                    
+                    if leaf_id:
+                        # DocumentRef is in def namespace, not arm namespace
+                        if def_ns:
+                            doc_ref = ET.SubElement(rd_elem, f'{{{def_ns}}}DocumentRef')
+                        else:
+                            doc_ref = ET.SubElement(rd_elem, f'{{{arm_ns}}}DocumentRef')
+                        doc_ref.set('leafID', leaf_id)
+                        # Add PDFPageRef children if present in supplemental
+                        pdf_page_refs_dict = display_supp.get('pdfPageRefs', {})
+                        pdf_page_refs = pdf_page_refs_dict.get(leaf_id, [])
+                        for pdf_page_ref_data in pdf_page_refs:
+                            pdf_ref_elem = ET.SubElement(doc_ref, f'{{{def_ns}}}PDFPageRef')
+                            if pdf_page_ref_data.get('pageRefs'):
+                                pdf_ref_elem.set('PageRefs', pdf_page_ref_data['pageRefs'])
+                            if pdf_page_ref_data.get('type'):
+                                pdf_ref_elem.set('Type', pdf_page_ref_data['type'])
+                            if pdf_page_ref_data.get('title'):
+                                pdf_ref_elem.set('Title', pdf_page_ref_data['title'])
+            
+            # Set leafID attribute on ResultDisplay (only if original had it as an attribute, not from DocumentRef children)
+            # If Display.location exists, DocumentRef children were present, so don't set leafID attribute
+            # If Display.location doesn't exist but leafID is in supplemental, set it as attribute
+            if not locations:
+                leaf_id = display_supp.get('leafID')
                 if leaf_id:
                     rd_elem.set('leafID', leaf_id)
             
@@ -935,14 +1094,45 @@ class DefineJSONToXMLConverter:
                     logger.warning(f"Analysis {analysis_oid} not found for Display {display.get('OID')}")
                     continue
                 
-                # Create AnalysisResults element
-                ar_elem = ET.SubElement(rd_elem, f'{{{arm_ns}}}AnalysisResults')
+                # Create AnalysisResult element (default to singular, correct format)
+                # Permissively handle AnalysisResults (plural) if explicitly detected, but default to singular
+                uses_plural = display_supp.get('_usesAnalysisResults', False)
+                if uses_plural:
+                    # Only use plural if explicitly detected in original XML (permissive handling)
+                    ar_elem = ET.SubElement(rd_elem, f'{{{arm_ns}}}AnalysisResults')
+                else:
+                    # Default to singular (correct format per Define-XML standard)
+                    ar_elem = ET.SubElement(rd_elem, f'{{{arm_ns}}}AnalysisResult')
                 ar_elem.set('OID', analysis.get('OID', ''))
                 
+                # Get AnalysisResult supplemental data
+                analysis_oid = analysis.get('OID')
+                result_supplemental = analysis_supplemental.get('resultSupplemental', {})
+                ar_supp = result_supplemental.get(analysis_oid, {})
+                
+                # Set attributes
                 if analysis.get('analysisReason'):
                     ar_elem.set('Reason', analysis.get('analysisReason'))
+                if ar_supp.get('analysisReason'):
+                    ar_elem.set('AnalysisReason', ar_supp['analysisReason'])
                 if analysis.get('name'):
                     ar_elem.set('ResultIdentifier', analysis.get('name'))
+                if ar_supp.get('parameterOID'):
+                    ar_elem.set('ParameterOID', ar_supp['parameterOID'])
+                if ar_supp.get('analysisPurpose'):
+                    ar_elem.set('AnalysisPurpose', ar_supp['analysisPurpose'])
+                
+                # Add Description child if present in supplemental
+                # Description is in ODM namespace, not ARM namespace
+                if ar_supp.get('description'):
+                    odm_ns = self._get_namespace_uri('odm')
+                    if odm_ns:
+                        desc_elem = ET.SubElement(ar_elem, f'{{{odm_ns}}}Description')
+                    else:
+                        desc_elem = ET.SubElement(ar_elem, f'{{{arm_ns}}}Description')
+                    trans_text = ET.SubElement(desc_elem, 'TranslatedText')
+                    trans_text.set('{http://www.w3.org/XML/1998/namespace}lang', 'en')
+                    trans_text.text = ar_supp['description']
                 
                 # Add ParameterList if parameters exist (extract from expressions)
                 parameters = []
@@ -973,26 +1163,147 @@ class DefineJSONToXMLConverter:
                             param_elem.set('ParamCD', param_cd)
                             param_elem.set('Param', param.get('name', param_cd))
                 
-                # Add AnalysisVariable elements (from inputData)
-                input_data = analysis.get('inputData', [])
-                for item_oid in input_data:
-                    # Check if it's an Item OID (contains dot) - these become AnalysisVariable
-                    if '.' in item_oid:
-                        av_elem = ET.SubElement(ar_elem, f'{{{arm_ns}}}AnalysisVariable')
-                        av_elem.set('ItemOID', item_oid)
-                
-                # Add AnalysisDataset elements
-                # ItemGroup OIDs from inputData become AnalysisDataset/ItemGroupRef
                 # Get dataset→criteria mapping for THIS analysis from supplemental
                 analysis_oid = analysis.get('OID')
                 dataset_criteria_map = analysis_dataset_criteria.get(analysis_oid, {})
                 
-                for item_oid in input_data:
-                    if '.' not in item_oid:  # It's an ItemGroup OID (dataset)
+                input_data = analysis.get('inputData', [])
+                
+                # Handle both formats permissively, but default to correct format (singular with AnalysisDatasets container)
+                # If plural format detected, use LZZT-style structure (direct children, ItemGroupRef)
+                # Otherwise, use correct defineV21 format (AnalysisDatasets container, ItemGroupOID attribute)
+                if uses_plural:
+                    # LZZT format: AnalysisVariable and AnalysisDataset as direct children
+                    # AnalysisVariable: all Item OIDs (not just those starting with 'IT.')
+                    # AnalysisDataset: ItemGroup OIDs with ItemGroupRef child (not ItemGroupOID attribute)
+                    
+                    # Get dataset supplemental data to identify which OIDs are datasets
+                    dataset_supplemental = analysis_supplemental.get('datasetSupplemental', {})
+                    analysis_dataset_supp = dataset_supplemental.get(analysis_oid, {})
+                    
+                    # Collect ItemGroup OIDs (datasets) - check supplemental data first, then 'IG.' prefix
+                    dataset_oids = []
+                    item_oids = []
+                    for item_oid in input_data:
+                        # Check if this OID is marked as a dataset in supplemental data
+                        is_dataset = False
+                        for ds_oid, ds_supp in analysis_dataset_supp.items():
+                            if ds_oid == item_oid and ds_supp.get('_isDataset', False):
+                                is_dataset = True
+                                break
+                        if is_dataset or item_oid.startswith('IG.'):
+                            dataset_oids.append(item_oid)
+                        else:
+                            # Assume non-dataset OIDs are Item OIDs
+                            item_oids.append(item_oid)
+                    
+                    # Create AnalysisVariable elements (all Item OIDs)
+                    for item_oid in item_oids:
+                        av_elem = ET.SubElement(ar_elem, f'{{{arm_ns}}}AnalysisVariable')
+                        av_elem.set('ItemOID', item_oid)
+                    
+                    # Create AnalysisDataset elements directly (no AnalysisDatasets container)
+                    dataset_supplemental = analysis_supplemental.get('datasetSupplemental', {})
+                    analysis_dataset_supp = dataset_supplemental.get(analysis_oid, {})
+                    
+                    for item_oid in dataset_oids:
                         ad_elem = ET.SubElement(ar_elem, f'{{{arm_ns}}}AnalysisDataset')
-                        igr_elem = ET.SubElement(ad_elem, 'ItemGroupRef')
-                        igr_elem.set('ItemGroupOID', item_oid)
-                        igr_elem.set('Mandatory', 'No')
+                        # LZZT format: ItemGroupRef child (not ItemGroupOID attribute)
+                        # ItemGroupRef is in ODM namespace, not ARM namespace
+                        ad_supp = analysis_dataset_supp.get(item_oid, {})
+                        odm_ns_uri = ad_supp.get('_itemGroupRefNamespace') or self._get_namespace_uri('odm') or 'http://www.cdisc.org/ns/odm/v1.3'
+                        ig_ref_elem = ET.SubElement(ad_elem, f'{{{odm_ns_uri}}}ItemGroupRef')
+                        ig_ref_elem.set('ItemGroupOID', item_oid)
+                        # Add Mandatory attribute if present
+                        if ad_supp.get('mandatory'):
+                            ig_ref_elem.set('Mandatory', ad_supp['mandatory'])
+                        
+                        # Add WhereClauseRef children if present in supplemental (in def namespace, not arm)
+                        ad_supp = analysis_dataset_supp.get(item_oid, {})
+                        def_ns = self._get_namespace_uri('def')
+                        for wc_ref_data in ad_supp.get('whereClauseRefs', []):
+                            wc_oid = wc_ref_data.get('whereClauseOID')
+                            if wc_oid:
+                                if def_ns:
+                                    wc_ref_elem = ET.SubElement(ad_elem, f'{{{def_ns}}}WhereClauseRef')
+                                else:
+                                    wc_ref_elem = ET.SubElement(ad_elem, f'{{{arm_ns}}}WhereClauseRef')
+                                wc_ref_elem.set('WhereClauseOID', wc_oid)
+                        
+                        # Add AnalysisVariable children if present in supplemental
+                        for av_data in ad_supp.get('analysisVariables', []):
+                            av_item_oid = av_data.get('itemOID')
+                            if av_item_oid:
+                                av_elem = ET.SubElement(ad_elem, f'{{{arm_ns}}}AnalysisVariable')
+                                av_elem.set('ItemOID', av_item_oid)
+                        
+                        # Add SelectionCriteria if present in supplemental
+                        sc_data = ad_supp.get('selectionCriteria', {})
+                        if sc_data.get('computationMethods'):
+                            sc_elem = ET.SubElement(ad_elem, f'{{{arm_ns}}}SelectionCriteria')
+                            def_ns = self._get_namespace_uri('def')
+                            for cm_data in sc_data['computationMethods']:
+                                if def_ns:
+                                    cm_elem = ET.SubElement(sc_elem, f'{{{def_ns}}}ComputationMethod')
+                                else:
+                                    cm_elem = ET.SubElement(sc_elem, f'{{{arm_ns}}}ComputationMethod')
+                                if cm_data.get('OID'):
+                                    cm_elem.set('OID', cm_data['OID'])
+                                if cm_data.get('Name'):
+                                    cm_elem.set('Name', cm_data['Name'])
+                                if cm_data.get('text'):
+                                    cm_elem.text = cm_data['text']
+                else:
+                    # defineV21 format: AnalysisDatasets container with AnalysisDataset children
+                    # Add AnalysisVariable elements (from inputData)
+                    for item_oid in input_data:
+                        # Check if it's an Item OID (starts with 'IT.') - these become AnalysisVariable
+                        if item_oid.startswith('IT.'):
+                            av_elem = ET.SubElement(ar_elem, f'{{{arm_ns}}}AnalysisVariable')
+                            av_elem.set('ItemOID', item_oid)
+                    
+                    # Collect ItemGroup OIDs (datasets)
+                    # ItemGroup OIDs start with 'IG.', Item OIDs start with 'IT.'
+                    dataset_oids = [item_oid for item_oid in input_data if item_oid.startswith('IG.')]
+                    
+                    if dataset_oids:
+                        # Create AnalysisDatasets container
+                        ads_container = ET.SubElement(ar_elem, f'{{{arm_ns}}}AnalysisDatasets')
+                        
+                        # Add AnalysisDatasets attributes (e.g., CommentOID) from supplemental
+                        datasets_supplemental = analysis_supplemental.get('datasetsSupplemental', {})
+                        ads_container_supp = datasets_supplemental.get(analysis_oid, {})
+                        def_ns = self._get_namespace_uri('def')
+                        if def_ns and ads_container_supp.get('commentOID'):
+                            ads_container.set(f'{{{def_ns}}}CommentOID', ads_container_supp['commentOID'])
+                        
+                        # Get AnalysisDataset supplemental data
+                        dataset_supplemental = analysis_supplemental.get('datasetSupplemental', {})
+                        analysis_dataset_supp = dataset_supplemental.get(analysis_oid, {})
+                        
+                        for item_oid in dataset_oids:
+                            ad_elem = ET.SubElement(ads_container, f'{{{arm_ns}}}AnalysisDataset')
+                            # Set ItemGroupOID as attribute on AnalysisDataset (not ItemGroupRef child)
+                            ad_elem.set('ItemGroupOID', item_oid)
+                            
+                            # Add WhereClauseRef children if present in supplemental (in def namespace, not arm)
+                            ad_supp = analysis_dataset_supp.get(item_oid, {})
+                            def_ns = self._get_namespace_uri('def')
+                            for wc_ref_data in ad_supp.get('whereClauseRefs', []):
+                                wc_oid = wc_ref_data.get('whereClauseOID')
+                                if wc_oid:
+                                    if def_ns:
+                                        wc_ref_elem = ET.SubElement(ad_elem, f'{{{def_ns}}}WhereClauseRef')
+                                    else:
+                                        wc_ref_elem = ET.SubElement(ad_elem, f'{{{arm_ns}}}WhereClauseRef')
+                                    wc_ref_elem.set('WhereClauseOID', wc_oid)
+                            
+                            # Add AnalysisVariable children if present in supplemental
+                            for av_data in ad_supp.get('analysisVariables', []):
+                                item_oid_av = av_data.get('itemOID')
+                                if item_oid_av:
+                                    av_elem = ET.SubElement(ad_elem, f'{{{arm_ns}}}AnalysisVariable')
+                                    av_elem.set('ItemOID', item_oid_av)
                         
                         # Add SelectionCriteria ONLY for THIS dataset (from supplemental mapping)
                         dataset_criteria = dataset_criteria_map.get(item_oid, [])
@@ -1018,34 +1329,130 @@ class DefineJSONToXMLConverter:
                                     if method and method.get('description'):
                                         cm_elem.text = method['description']
                 
-                # Add Documentation if description exists
+                # Add Documentation if present in supplemental or description exists
+                doc_data = ar_supp.get('documentation')
                 description = analysis.get('description', '')
-                if description:
+                if doc_data or description:
                     doc_elem = ET.SubElement(ar_elem, f'{{{arm_ns}}}Documentation')
-                    # Check if description is a leafID-only marker
-                    if description.startswith('[leafID: ') and description.endswith(']'):
-                        # Extract leafID and set as attribute (empty Documentation)
-                        leaf_id = description[9:-1]  # Remove '[leafID: ' and ']'
-                        doc_elem.set('leafID', leaf_id)
-                    else:
-                        # Regular description with TranslatedText
-                        # Check if leafID exists in supplemental (Documentation with BOTH leafID and text)
-                        analysis_oid = analysis.get('OID')
-                        doc_leaf_id = analysis_doc_leafids.get(analysis_oid)
-                        if doc_leaf_id:
-                            doc_elem.set('leafID', doc_leaf_id)
+                    
+                    # Add leafID attribute if present in supplemental data
+                    if doc_data and doc_data.get('leafID'):
+                        doc_elem.set('leafID', doc_data['leafID'])
+                    
+                    # Use supplemental data if available
+                    if doc_data:
+                        if doc_data.get('description'):
+                            # Check if TranslatedText should be directly under Documentation (LZZT format) or under Description (defineV21 format)
+                            if doc_data.get('_translatedTextDirect', False):
+                                # LZZT format: TranslatedText directly under Documentation
+                                odm_ns = self._get_namespace_uri('odm')
+                                if odm_ns:
+                                    trans_text = ET.SubElement(doc_elem, f'{{{odm_ns}}}TranslatedText')
+                                else:
+                                    trans_text = ET.SubElement(doc_elem, 'TranslatedText')
+                                trans_text.set('{http://www.w3.org/XML/1998/namespace}lang', 'en')
+                                trans_text.text = doc_data['description']
+                            else:
+                                # defineV21 format: TranslatedText under Description
+                                odm_ns = self._get_namespace_uri('odm')
+                                if odm_ns:
+                                    doc_desc_elem = ET.SubElement(doc_elem, f'{{{odm_ns}}}Description')
+                                else:
+                                    doc_desc_elem = ET.SubElement(doc_elem, f'{{{arm_ns}}}Description')
+                                trans_text = ET.SubElement(doc_desc_elem, 'TranslatedText')
+                                trans_text.set('{http://www.w3.org/XML/1998/namespace}lang', 'en')
+                                trans_text.text = doc_data['description']
                         
-                        # Add TranslatedText child
-                        trans_text = ET.SubElement(doc_elem, 'TranslatedText')
-                        trans_text.set('{http://www.w3.org/XML/1998/namespace}lang', 'en')
-                        trans_text.text = description
+                        for doc_ref_data in doc_data.get('documents', []):
+                            leaf_id = doc_ref_data.get('leafID')
+                            if leaf_id:
+                                # DocumentRef is in def namespace, not arm namespace
+                                def_ns = self._get_namespace_uri('def')
+                                if def_ns:
+                                    doc_ref = ET.SubElement(doc_elem, f'{{{def_ns}}}DocumentRef')
+                                else:
+                                    doc_ref = ET.SubElement(doc_elem, f'{{{arm_ns}}}DocumentRef')
+                                doc_ref.set('leafID', leaf_id)
+                                # Add PDFPageRef children if present
+                                for pdf_page_ref_data in doc_ref_data.get('pdfPageRefs', []):
+                                    pdf_ref_elem = ET.SubElement(doc_ref, f'{{{def_ns}}}PDFPageRef')
+                                    if pdf_page_ref_data.get('pageRefs'):
+                                        pdf_ref_elem.set('PageRefs', pdf_page_ref_data['pageRefs'])
+                                    if pdf_page_ref_data.get('type'):
+                                        pdf_ref_elem.set('Type', pdf_page_ref_data['type'])
+                                    if pdf_page_ref_data.get('title'):
+                                        pdf_ref_elem.set('Title', pdf_page_ref_data['title'])
+                    elif description:
+                        # Fallback to old logic
+                        # Check if description is a leafID-only marker
+                        if description.startswith('[leafID: ') and description.endswith(']'):
+                            # Extract leafID and set as attribute (empty Documentation)
+                            leaf_id = description[9:-1]  # Remove '[leafID: ' and ']'
+                            doc_elem.set('leafID', leaf_id)
+                        else:
+                            # Regular description with TranslatedText
+                            # Check if leafID exists in supplemental (Documentation with BOTH leafID and text)
+                            doc_leaf_id = analysis_doc_leafids.get(analysis_oid)
+                            if doc_leaf_id:
+                                doc_elem.set('leafID', doc_leaf_id)
+                            
+                            # Create Description/TranslatedText structure (not TranslatedText directly)
+                            # Description is in ODM namespace, not ARM namespace
+                            odm_ns = self._get_namespace_uri('odm')
+                            if odm_ns:
+                                doc_desc_elem = ET.SubElement(doc_elem, f'{{{odm_ns}}}Description')
+                            else:
+                                doc_desc_elem = ET.SubElement(doc_elem, f'{{{arm_ns}}}Description')
+                            trans_text = ET.SubElement(doc_desc_elem, 'TranslatedText')
+                            trans_text.set('{http://www.w3.org/XML/1998/namespace}lang', 'en')
+                            trans_text.text = description
                 
-                # Add ProgrammingCode (link to analysisMethod OR empty with leafID)
+                # Add ProgrammingCode (from supplemental or link to analysisMethod OR empty with leafID)
+                prog_code_data = ar_supp.get('programmingCode')
                 analysis_method_oid = analysis.get('analysisMethod')
-                analysis_oid = analysis.get('OID')
                 progcode_leaf_id = analysis_progcode_leafids.get(analysis_oid)
                 
-                if analysis_method_oid:
+                if prog_code_data is not None:
+                    # Use supplemental data (always create if present, even if empty)
+                    pc_elem = ET.SubElement(ar_elem, f'{{{arm_ns}}}ProgrammingCode')
+                    if prog_code_data.get('leafID'):
+                        pc_elem.set('leafID', prog_code_data['leafID'])
+                    if prog_code_data.get('context'):
+                        pc_elem.set('Context', prog_code_data['context'])
+                    if prog_code_data.get('methodOID'):
+                        def_ns = self._get_namespace_uri('def')
+                        if def_ns:
+                            cm_elem = ET.SubElement(pc_elem, f'{{{def_ns}}}ComputationMethod')
+                            cm_elem.set('OID', prog_code_data['methodOID'])
+                            # Add Name attribute if present
+                            if prog_code_data.get('computationMethodName'):
+                                cm_elem.set('Name', prog_code_data['computationMethodName'])
+                            # Add text content if present
+                            if prog_code_data.get('computationMethodText'):
+                                cm_elem.text = prog_code_data['computationMethodText']
+                    if prog_code_data.get('code'):
+                        code_elem = ET.SubElement(pc_elem, f'{{{arm_ns}}}Code')
+                        code_elem.text = prog_code_data['code']
+                    # Add DocumentRef children if present (in def namespace)
+                    def_ns = self._get_namespace_uri('def')
+                    for doc_ref_data in prog_code_data.get('documents', []):
+                        leaf_id = doc_ref_data.get('leafID')
+                        if leaf_id:
+                            if def_ns:
+                                doc_ref = ET.SubElement(pc_elem, f'{{{def_ns}}}DocumentRef')
+                            else:
+                                doc_ref = ET.SubElement(pc_elem, f'{{{arm_ns}}}DocumentRef')
+                            doc_ref.set('leafID', leaf_id)
+                            # Add PDFPageRef children if present
+                            for pdf_page_ref_data in doc_ref_data.get('pdfPageRefs', []):
+                                pdf_ref_elem = ET.SubElement(doc_ref, f'{{{def_ns}}}PDFPageRef')
+                                if pdf_page_ref_data.get('pageRefs'):
+                                    pdf_ref_elem.set('PageRefs', pdf_page_ref_data['pageRefs'])
+                                if pdf_page_ref_data.get('type'):
+                                    pdf_ref_elem.set('Type', pdf_page_ref_data['type'])
+                                if pdf_page_ref_data.get('title'):
+                                    pdf_ref_elem.set('Title', pdf_page_ref_data['title'])
+                elif analysis_method_oid:
                     # ProgrammingCode with ComputationMethod
                     # Look up the method to get its code text
                     method = None
@@ -1325,8 +1732,18 @@ class DefineJSONToXMLConverter:
         parent: ET.Element,
         value_lists: List[Dict[str, Any]]
     ) -> None:
-        """Create ValueListDef elements directly from stored structure."""
+        """Create ValueListDef elements directly from stored structure, preserving original order."""
         def_ns = self._get_namespace_uri('def')
+        
+        # Sort value_lists by original order if available in metadata
+        xml_metadata = getattr(self, '_current_xml_metadata', {})
+        value_list_def_order = xml_metadata.get('valueListDefOrder', [])
+        
+        if value_list_def_order:
+            # Create OID to order index map
+            order_map = {oid: idx for idx, oid in enumerate(value_list_def_order)}
+            # Sort by original order, keeping unordered items at end
+            value_lists = sorted(value_lists, key=lambda vl: order_map.get(vl.get('OID'), 999999))
         
         for vl in value_lists:
             vl_elem = ET.SubElement(parent, f'{{{def_ns}}}ValueListDef' if def_ns else 'ValueListDef')
@@ -1353,6 +1770,19 @@ class DefineJSONToXMLConverter:
                 
                 if item.get('role'):
                     item_ref.set('Role', item['role'])
+                
+                # MethodOID
+                if item.get('method'):
+                    item_ref.set('MethodOID', item['method'])
+                
+                # def:HasNoData - from item metadata
+                xml_metadata = getattr(self, '_current_xml_metadata', {})
+                item_group_supp = xml_metadata.get('itemGroupSupplemental', {})
+                item_origin_metadata = item_group_supp.get('_itemOriginMetadata', {})
+                item_metadata = item_origin_metadata.get(item_oid, {})
+                has_no_data = item_metadata.get('hasNoData')
+                if has_no_data and def_ns:
+                    item_ref.set(f'{{{def_ns}}}HasNoData', has_no_data)
                 
                 # WhereClauseRef (from whereClauseOID or applicableWhen)
                 where_clause_oid = item.get('whereClauseOID')
@@ -1396,6 +1826,18 @@ class DefineJSONToXMLConverter:
                     ig_elem.set(f'{{{def_ns}}}Structure', str(merged_ds['structure']))
                 if merged_ds.get('archiveLocationID'):
                     ig_elem.set(f'{{{def_ns}}}ArchiveLocationID', merged_ds['archiveLocationID'])
+                # def:CommentOID - from supplemental
+                if merged_ds.get('commentOID'):
+                    ig_elem.set(f'{{{def_ns}}}CommentOID', merged_ds['commentOID'])
+                # def:StandardOID - from supplemental
+                if merged_ds.get('standardOID'):
+                    ig_elem.set(f'{{{def_ns}}}StandardOID', merged_ds['standardOID'])
+                # def:IsNonStandard - from supplemental
+                if merged_ds.get('isNonStandard'):
+                    ig_elem.set(f'{{{def_ns}}}IsNonStandard', merged_ds['isNonStandard'])
+                # def:HasNoData - from supplemental
+                if merged_ds.get('hasNoData'):
+                    ig_elem.set(f'{{{def_ns}}}HasNoData', merged_ds['hasNoData'])
             
             # Write Comment attribute - prefer native comments array, fall back to supplemental
             if merged_ds.get('comments') and len(merged_ds['comments']) > 0:
@@ -1413,10 +1855,25 @@ class DefineJSONToXMLConverter:
                 desc = ET.SubElement(ig_elem, 'Description')
                 self._create_translated_text(desc, merged_ds['description'])
             
+            # Add Alias elements from coding field
+            # Coding objects map to Alias (codeSystem → Context, code → Name)
+            coding_list = merged_ds.get('coding', [])
+            for coding in coding_list:
+                if isinstance(coding, dict):
+                    code_system = coding.get('codeSystem')
+                    code = coding.get('code')
+                    if code_system and code:
+                        alias_elem = ET.SubElement(ig_elem, 'Alias')
+                        alias_elem.set('Context', code_system)
+                        alias_elem.set('Name', code)
+            
             # Add ItemRefs - order is preserved by array ordering
             items = merged_ds.get('items', [])
+            # Set current ItemGroup context for KeySequence resolution
+            self._current_itemgroup = merged_ds
             for idx, item in enumerate(items, start=1):
                 self._create_item_ref(ig_elem, item, def_ns, order_number=idx)
+            self._current_itemgroup = None  # Clear context
             
             # Add def:leaf element - check for Resource reference or legacy leaf data
             if merged_ds.get('sourceResourceOID'):
@@ -1439,6 +1896,12 @@ class DefineJSONToXMLConverter:
             if def_ns and merged_ds.get('defClass') and not merged_ds.get('classIsAttribute'):
                 class_elem = ET.SubElement(ig_elem, f'{{{def_ns}}}Class')
                 class_elem.set('Name', merged_ds['defClass'])
+                
+                # Add SubClass children if present
+                sub_classes = merged_ds.get('subClasses', [])
+                for sub_class_data in sub_classes:
+                    sub_class_elem = ET.SubElement(class_elem, f'{{{def_ns}}}SubClass')
+                    sub_class_elem.set('Name', sub_class_data.get('name', ''))
     
     def _create_item_ref(self, parent: ET.Element, item: Dict[str, Any], def_ns: str, order_number: int = None) -> None:
         """Create an ItemRef element. Order is inferred from array position."""
@@ -1460,6 +1923,32 @@ class DefineJSONToXMLConverter:
         if item.get('role'):
             item_ref.set('Role', item['role'])
         
+        # KeySequence - derived from parent ItemGroup's native keySequence array
+        key_seq = None
+        current_ig = getattr(self, '_current_itemgroup', None)
+        if current_ig and current_ig.get('keySequence'):
+            key_sequence_list = current_ig['keySequence']
+            if item_oid in key_sequence_list:
+                # KeySequence is 1-based position in the list
+                key_seq = key_sequence_list.index(item_oid) + 1
+        
+        if key_seq:
+            item_ref.set('KeySequence', str(key_seq))
+        
+        # MethodOID - attribute on ItemRef in Define-XML 2.1
+        method_oid = item.get('methodOID') or item.get('method')
+        if method_oid:
+            item_ref.set('MethodOID', method_oid)
+        
+        # def:HasNoData - from item metadata
+        xml_metadata = getattr(self, '_current_xml_metadata', {})
+        item_group_supp = xml_metadata.get('itemGroupSupplemental', {})
+        item_origin_metadata = item_group_supp.get('_itemOriginMetadata', {})
+        item_metadata = item_origin_metadata.get(item_oid, {})
+        has_no_data = item_metadata.get('hasNoData')
+        if has_no_data and def_ns:
+            item_ref.set(f'{{{def_ns}}}HasNoData', has_no_data)
+        
         # WhereClauseRef (from whereClauseOID or applicableWhen)
         where_clause_oid = item.get('whereClauseOID')
         if not where_clause_oid and item.get('applicableWhen'):
@@ -1471,11 +1960,6 @@ class DefineJSONToXMLConverter:
         if where_clause_oid:
             wc_ref = ET.SubElement(item_ref, f'{{{def_ns}}}WhereClauseRef' if def_ns else 'WhereClauseRef')
             wc_ref.set('WhereClauseOID', where_clause_oid)
-        
-        # MethodRef
-        if item.get('methodOID'):
-            method_ref = ET.SubElement(item_ref, 'MethodRef')
-            method_ref.set('MethodOID', item['methodOID'])
     
     def _create_leaf_element(self, parent: ET.Element, leaf_data: Dict[str, Any], def_ns: str) -> None:
         """Create a def:leaf element for dataset location."""
@@ -1591,12 +2075,23 @@ class DefineJSONToXMLConverter:
             # Apply basic attributes
             self._apply_mapped_attributes(item_elem, var)
             
-            # SASFieldName is redundant with Name - add it only if original file had them
+            # SASFieldName - write if explicitly present in supplemental
+            # Note: We only store SASFieldName in supplemental if it differs from Name
+            # If hasSASFieldName flag is set but no explicit value in supplemental, 
+            # the original XML didn't have SASFieldName for this specific item
             xml_metadata = getattr(self, '_current_xml_metadata', {})
             has_sas_field_name = xml_metadata.get('hasSASFieldName', False)
-            name_value = var.get('name')
-            if has_sas_field_name and name_value and not item_elem.get('SASFieldName'):
-                item_elem.set('SASFieldName', name_value)
+            
+            if has_sas_field_name and not item_elem.get('SASFieldName'):
+                # Get item supplemental metadata
+                var_oid = var.get('OID', '')
+                item_origin_metadata = xml_metadata.get('itemGroupSupplemental', {}).get('_itemOriginMetadata', {})
+                item_metadata = item_origin_metadata.get(var_oid, {})
+                
+                # Only write if explicitly stored in supplemental (means original had it and it differed from Name)
+                sas_field_name = item_metadata.get('SASFieldName')
+                if sas_field_name:
+                    item_elem.set('SASFieldName', sas_field_name)
             
             # Handle DataType - required field
             if not var.get('dataType'):
@@ -1641,6 +2136,11 @@ class DefineJSONToXMLConverter:
                 if value_list_oid:
                     vl_ref_elem = ET.SubElement(item_elem, f'{{{def_ns}}}ValueListRef')
                     vl_ref_elem.set('ValueListOID', value_list_oid)
+                
+                # Add def:CommentOID attribute if present in supplemental data
+                comment_oid = item_metadata.get('commentOID')
+                if comment_oid:
+                    item_elem.set(f'{{{def_ns}}}CommentOID', comment_oid)
             
             # Add Origin if present
             origin = var.get('origin', {})
@@ -1684,10 +2184,32 @@ class DefineJSONToXMLConverter:
                         if origin.get('source'):
                             origin_elem.set('Source', origin['source'])
                         
-                        # Add Description within Origin if present
-                        if origin.get('description'):
+                        # Add Description within Origin if present (stored in metadata)
+                        origin_desc_text = origin_metadata.get('originDescription')
+                        if origin_desc_text:
                             origin_desc = ET.SubElement(origin_elem, 'Description')
-                            self._create_translated_text(origin_desc, origin['description'])
+                            self._create_translated_text(origin_desc, origin_desc_text)
+                        
+                        # Add DocumentRef elements if present
+                        documents = origin.get('documents', [])
+                        for doc in documents:
+                            leaf_id = doc.get('leafID')
+                            if leaf_id and def_ns:
+                                doc_ref = ET.SubElement(origin_elem, f'{{{def_ns}}}DocumentRef')
+                                doc_ref.set('leafID', leaf_id)
+                                
+                                # Add PDFPageRef elements if present in metadata
+                                pdf_page_refs = origin_metadata.get(f'pdfPageRefs_{leaf_id}', [])
+                                for pdf_data in pdf_page_refs:
+                                    pdf_ref = ET.SubElement(doc_ref, f'{{{def_ns}}}PDFPageRef')
+                                    if pdf_data.get('type'):
+                                        pdf_ref.set('Type', pdf_data['type'])
+                                    if pdf_data.get('pageRefs'):
+                                        pdf_ref.set('PageRefs', pdf_data['pageRefs'])
+                                    if pdf_data.get('firstPage'):
+                                        pdf_ref.set('FirstPage', str(pdf_data['firstPage']))
+                                    if pdf_data.get('lastPage'):
+                                        pdf_ref.set('LastPage', str(pdf_data['lastPage']))
                     else:
                         # v1.x style: Use Origin as attribute
                         if origin.get('type'):
@@ -1716,6 +2238,28 @@ class DefineJSONToXMLConverter:
                 oid = cl.get('OID') or cl.get('oid', '')
                 if oid:
                     cl_elem.set('OID', oid)
+            
+            # Get supplemental data for this CodeList
+            xml_metadata = getattr(self, '_current_xml_metadata', {})
+            cl_supplemental = xml_metadata.get('codeListSupplemental', {})
+            cl_oid = cl.get('OID') or cl.get('oid', '')
+            cl_supp = cl_supplemental.get(cl_oid, {})
+            
+            # Add def: namespaced attributes from supplemental
+            if def_ns:
+                # def:StandardOID
+                if cl_supp.get('standardOID'):
+                    cl_elem.set(f'{{{def_ns}}}StandardOID', cl_supp['standardOID'])
+                # def:CommentOID
+                if cl_supp.get('commentOID'):
+                    cl_elem.set(f'{{{def_ns}}}CommentOID', cl_supp['commentOID'])
+                # def:IsNonStandard
+                if cl_supp.get('isNonStandard'):
+                    cl_elem.set(f'{{{def_ns}}}IsNonStandard', cl_supp['isNonStandard'])
+            
+            # SASFormatName attribute
+            if cl_supp.get('sasFormatName'):
+                cl_elem.set('SASFormatName', cl_supp['sasFormatName'])
             
             # Default DataType if missing and fallbacks enabled
             if not cl.get('dataType') and self.enable_fallbacks:
@@ -1824,13 +2368,23 @@ class DefineJSONToXMLConverter:
                 cli_elem = ET.SubElement(cl_elem, element_type)
                 cli_elem.set('CodedValue', item.get('codedValue', ''))
                 
-                # Add def:Rank from weight field
+                # Add Rank from weight field
+                # Rank is always non-namespaced in Define-XML (even in 2.1)
                 weight = item.get('weight') or item.get('rank')
                 if weight is not None:
-                    if def_ns:
-                        cli_elem.set(f'{{{def_ns}}}Rank', str(weight))
-                    else:
-                        cli_elem.set('Rank', str(weight))
+                    cli_elem.set('Rank', str(weight))
+                
+                # Add def:ExtendedValue (from supplemental - can be on both CodeListItem and EnumeratedItem)
+                if def_ns:
+                    if element_type == 'EnumeratedItem':
+                        enumerated_supp = cl_supp.get('enumeratedItemSupplemental', {})
+                        item_supp = enumerated_supp.get(coded_value, {})
+                    else:  # CodeListItem
+                        codelist_item_supp = cl_supp.get('codeListItemSupplemental', {})
+                        item_supp = codelist_item_supp.get(coded_value, {})
+                    
+                    if item_supp and item_supp.get('extendedValue'):
+                        cli_elem.set(f'{{{def_ns}}}ExtendedValue', item_supp['extendedValue'])
                 
                 # Add Decode element (only for CodeListItem, not EnumeratedItem)
                 if item.get('decode') and element_type == 'CodeListItem':
@@ -1902,25 +2456,77 @@ class DefineJSONToXMLConverter:
         
         # Check top-level items
         for item in json_data.get('items', []):
-            method_oid = item.get('methodOID')
+            # Check both methodOID (Define-XML attribute) and method (inferred field)
+            method_oid = item.get('methodOID') or item.get('method')
             if method_oid:
                 referenced.add(method_oid)
         
-        # Check items within ItemGroups (including nested ValueLists)
-        def collect_from_itemgroup(ig):
+        # Use flattened ItemGroups if available (after _process_item_groups_and_value_lists)
+        # This ensures we check ValueLists that were nested in JSON
+        item_groups_to_check = getattr(self, '_flattened_item_groups', json_data.get('itemGroups', []))
+        
+        # Check items within ItemGroups (now using flattened list which includes ValueLists)
+        for ig in item_groups_to_check:
             for item in ig.get('items', []):
-                method_oid = item.get('methodOID')
+                # Check both methodOID (Define-XML attribute) and method (inferred field)
+                method_oid = item.get('methodOID') or item.get('method')
                 if method_oid:
                     referenced.add(method_oid)
-            # Recursively check children
-            for child in ig.get('children', []):
-                if isinstance(child, dict):
-                    collect_from_itemgroup(child)
         
-        for ig in json_data.get('itemGroups', []):
-            collect_from_itemgroup(ig)
+        logger.info(f"Collected {len(referenced)} referenced method OIDs from {len(item_groups_to_check)} ItemGroups")
         
         return referenced
+    
+    def _create_comments(self, parent: ET.Element, comments: List[Dict[str, Any]]) -> None:
+        """
+        Create def:CommentDef elements.
+        
+        Args:
+            parent: Parent MetaDataVersion element
+            comments: List of Comment dictionaries
+        """
+        if not comments:
+            return
+        
+        def_ns = self._get_namespace_uri('def')
+        if not def_ns:
+            logger.warning("def namespace not found, skipping CommentDef elements")
+            return
+        
+        for comment in comments:
+            comment_elem = ET.SubElement(parent, f'{{{def_ns}}}CommentDef')
+            
+            # Add OID attribute
+            comment_oid = comment.get('OID')
+            if comment_oid:
+                comment_elem.set('OID', comment_oid)
+            
+            # Add Description (from 'text' field)
+            text = comment.get('text')
+            if text:
+                desc = ET.SubElement(comment_elem, 'Description')
+                self._create_translated_text(desc, text)
+            
+            # Add DocumentRef elements
+            documents = comment.get('documents', [])
+            for doc in documents:
+                leaf_id = doc.get('leafID')
+                if leaf_id:
+                    doc_ref = ET.SubElement(comment_elem, f'{{{def_ns}}}DocumentRef')
+                    doc_ref.set('leafID', leaf_id)
+                    
+                    # Add PDFPageRef elements if present (stored directly in documents)
+                    pdf_page_refs = doc.get('pdfPageRefs', [])
+                    for pdf_data in pdf_page_refs:
+                        pdf_ref = ET.SubElement(doc_ref, f'{{{def_ns}}}PDFPageRef')
+                        if pdf_data.get('type'):
+                            pdf_ref.set('Type', pdf_data['type'])
+                        if pdf_data.get('pageRefs'):
+                            pdf_ref.set('PageRefs', pdf_data['pageRefs'])
+                        if pdf_data.get('firstPage'):
+                            pdf_ref.set('FirstPage', str(pdf_data['firstPage']))
+                        if pdf_data.get('lastPage'):
+                            pdf_ref.set('LastPage', str(pdf_data['lastPage']))
     
     def _create_methods(self, parent: ET.Element, methods: List[Dict[str, Any]]) -> None:
         """Create MethodDef elements, skipping synthetic methods and ComputationMethods."""
@@ -1945,9 +2551,12 @@ class DefineJSONToXMLConverter:
                 continue
             
             # INFER: Skip ComputationMethod elements (ARM-specific, not referenced by ItemDefs)
-            # If method has no ItemDef references, it's a ComputationMethod (part of ARM Analysis Results)
+            # BUT: If method is from original XML (_isFromXML), include it even if not referenced
+            # This preserves methods that exist in original but aren't referenced by ItemDefs
             if method_oid not in referenced_method_oids:
-                continue
+                # Only skip if it's NOT from original XML
+                if not method_supp.get('_isFromXML', False):
+                    continue
             
             # Skip auto-generated method OIDs
             if method_oid.startswith('MT.DERIVATION.') or method_oid.startswith('MT.SYNTHETIC.'):
@@ -1968,6 +2577,38 @@ class DefineJSONToXMLConverter:
             if method.get('description'):
                 desc = ET.SubElement(method_elem, 'Description')
                 self._create_translated_text(desc, method['description'])
+            
+            # Add DocumentRef elements
+            documents = method.get('documents', [])
+            for doc in documents:
+                leaf_id = doc.get('leafID')
+                if leaf_id and def_ns:
+                    doc_ref = ET.SubElement(method_elem, f'{{{def_ns}}}DocumentRef')
+                    doc_ref.set('leafID', leaf_id)
+                    
+                    # Add PDFPageRef elements if present in supplemental metadata
+                    pdf_page_refs = method_supp.get(f'pdfPageRefs_{leaf_id}', [])
+                    for pdf_data in pdf_page_refs:
+                        pdf_ref = ET.SubElement(doc_ref, f'{{{def_ns}}}PDFPageRef')
+                        if pdf_data.get('type'):
+                            pdf_ref.set('Type', pdf_data['type'])
+                        if pdf_data.get('pageRefs'):
+                            pdf_ref.set('PageRefs', pdf_data['pageRefs'])
+                        if pdf_data.get('firstPage'):
+                            pdf_ref.set('FirstPage', str(pdf_data['firstPage']))
+                        if pdf_data.get('lastPage'):
+                            pdf_ref.set('LastPage', str(pdf_data['lastPage']))
+            
+            # Add FormalExpression if present in expressions (odm namespace, not def)
+            expressions = method.get('expressions', [])
+            odm_ns = self._get_namespace_uri('odm')
+            for expr in expressions:
+                if isinstance(expr, dict):
+                    formal_expr = ET.SubElement(method_elem, f'{{{odm_ns}}}FormalExpression' if odm_ns else 'FormalExpression')
+                    if expr.get('context'):
+                        formal_expr.set('Context', expr['context'])
+                    if expr.get('expression'):
+                        formal_expr.text = expr['expression']
     
     def _write_xml(self, root: ET.Element, output_path: Path) -> None:
         """

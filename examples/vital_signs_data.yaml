@@ -1,0 +1,63 @@
+# Vital Signs Example Data (SDTM DM and VS domains only)
+sdtm_dm:
+  - USUBJID: "001"
+    AGE: 45
+    SEX: "M"
+    RACE: "WHITE"
+    ETHNIC: "NOT HISPANIC OR LATINO"
+    ARM: "TREATMENT A"
+  - USUBJID: "002"
+    AGE: 32
+    SEX: "F"
+    RACE: "ASIAN"
+    ETHNIC: "NOT HISPANIC OR LATINO"
+    ARM: "TREATMENT B"
+  - USUBJID: "003"
+    AGE: 58
+    SEX: "M"
+    RACE: "WHITE"
+    ETHNIC: "HISPANIC OR LATINO"
+    ARM: "TREATMENT A"
+sdtm_vs:
+  - USUBJID: "001"
+    VSTESTCD: "SYSBP"
+    VSTEST: "Systolic Blood Pressure"
+    VSORRES: 120
+    VSORRESU: "mmHg"
+    VISIT: "SCREENING"
+    VSDTC: "2024-01-15"
+  - USUBJID: "001"
+    VSTESTCD: "DIABP"
+    VSTEST: "Diastolic Blood Pressure"
+    VSORRES: 80
+    VSORRESU: "mmHg"
+    VISIT: "SCREENING"
+    VSDTC: "2024-01-15"
+  - USUBJID: "002"
+    VSTESTCD: "SYSBP"
+    VSTEST: "Systolic Blood Pressure"
+    VSORRES: 118
+    VSORRESU: "mmHg"
+    VISIT: "SCREENING"
+    VSDTC: "2024-01-16"
+  - USUBJID: "002"
+    VSTESTCD: "DIABP"
+    VSTEST: "Diastolic Blood Pressure"
+    VSORRES: 75
+    VSORRESU: "mmHg"
+    VISIT: "SCREENING"
+    VSDTC: "2024-01-16"
+  - USUBJID: "003"
+    VSTESTCD: "SYSBP"
+    VSTEST: "Systolic Blood Pressure"
+    VSORRES: 135
+    VSORRESU: "mmHg"
+    VISIT: "SCREENING"
+    VSDTC: "2024-01-17"
+  - USUBJID: "003"
+    VSTESTCD: "DIABP"
+    VSTEST: "Diastolic Blood Pressure"
+    VSORRES: 85
+    VSORRESU: "mmHg"
+    VISIT: "SCREENING"
+    VSDTC: "2024-01-17" 

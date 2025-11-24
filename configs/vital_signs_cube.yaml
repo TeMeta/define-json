@@ -1,0 +1,173 @@
+# Vital Signs Data Cube Configuration
+# This defines the structure for analyzing vital signs data
+
+# Note how much this looks like Biomedical Concepts / VLM Items!
+
+name: "Vital Signs Analysis Cube"
+description: "Data cube for analyzing blood pressure and other vital signs by demographic factors"
+
+# Data source configuration
+data_source:
+  type: "sdtm"
+  domains:
+    - "DM"  # Demographics
+    - "VS"  # Vital Signs
+
+# Items: All possible variables/concepts
+items:
+  IT001:
+    id: "IT001"
+    name: "Subject ID"
+    label: "Subject Identifier"
+    dataType: "string"
+    length: 20
+    description: "Unique subject identifier"
+    
+  IT002:
+    id: "IT002"
+    name: "Age"
+    label: "Age"
+    dataType: "integer"
+    units: "years"
+    description: "Subject age at screening"
+    
+  IT003:
+    id: "IT003"
+    name: "Sex"
+    label: "Sex"
+    dataType: "string"
+    length: 1
+    description: "Subject sex"
+    
+  IT004:
+    id: "IT004"
+    name: "Race"
+    label: "Race"
+    dataType: "string"
+    length: 20
+    description: "Subject race"
+    
+  IT005:
+    id: "IT005"
+    name: "Treatment Arm"
+    label: "Treatment Arm"
+    dataType: "string"
+    length: 50
+    description: "Assigned treatment arm"
+    
+  IT006:
+    id: "IT006"
+    name: "Systolic BP"
+    label: "Systolic Blood Pressure"
+    dataType: "float"
+    units: "mmHg"
+    description: "Systolic blood pressure measurement"
+    
+  IT007:
+    id: "IT007"
+    name: "Diastolic BP"
+    label: "Diastolic Blood Pressure"
+    dataType: "float"
+    units: "mmHg"
+    description: "Diastolic blood pressure measurement"
+    
+  IT008:
+    id: "IT008"
+    name: "Visit"
+    label: "Visit"
+    dataType: "string"
+    length: 20
+    description: "Study visit identifier"
+
+# Components: Structural roles that reference Items
+components:
+  DIM001:
+    id: "DIM001"
+    name: "Subject Dimension"
+    item: "IT001"
+    role: "dimension"
+    description: "Subject identifier as dimension"
+    
+  DIM002:
+    id: "DIM002"
+    name: "Age Dimension"
+    item: "IT002"
+    role: "dimension"
+    description: "Age as dimension"
+    
+  DIM003:
+    id: "DIM003"
+    name: "Sex Dimension"
+    item: "IT003"
+    role: "dimension"
+    description: "Sex as dimension"
+    
+  DIM004:
+    id: "DIM004"
+    name: "Visit Dimension"
+    item: "IT008"
+    role: "dimension"
+    description: "Visit as dimension"
+    
+  MEAS001:
+    id: "MEAS001"
+    name: "Systolic BP Measure"
+    item: "IT006"
+    role: "measure"
+    description: "Systolic blood pressure as measure"
+    
+  MEAS002:
+    id: "MEAS002"
+    name: "Diastolic BP Measure"
+    item: "IT007"
+    role: "measure"
+    description: "Diastolic blood pressure as measure"
+    
+  ATTR001:
+    id: "ATTR001"
+    name: "Race Attribute"
+    item: "IT004"
+    role: "attribute"
+    description: "Race as attribute"
+    
+  ATTR002:
+    id: "ATTR002"
+    name: "Treatment Arm Attribute"
+    item: "IT005"
+    role: "attribute"
+    description: "Treatment arm as attribute"
+
+# Data Structure Definition: How to organize the cube
+data_structure_definition:
+  id: "DSD001"
+  name: "Vital Signs Analysis Structure"
+  description: "Structure for analyzing vital signs by demographic factors"
+  dimensions: ["DIM001", "DIM002", "DIM003", "DIM004"]
+  measures: ["MEAS001", "MEAS002"]
+  attributes: ["ATTR001", "ATTR002"]
+
+# Data mapping: How to map from source data to items
+data_mapping:
+  DM:
+    USUBJID: "IT001"  # Subject ID
+    AGE: "IT002"      # Age
+    SEX: "IT003"      # Sex
+    RACE: "IT004"     # Race
+    ARM: "IT005"      # Treatment Arm
+    
+  VS:
+    USUBJID: "IT001"  # Subject ID
+    VSTESTCD:         # Test code mapping
+      SYSBP: "IT006"  # Systolic BP
+      DIABP: "IT007"  # Diastolic BP
+    VSORRES:          # Result value
+      SYSBP: "IT006"  # Maps to Systolic BP
+      DIABP: "IT007"  # Maps to Diastolic BP
+    VISIT: "IT008"    # Visit
+
+# Visualization preferences
+visualization:
+  default_3d_dims: ["DIM002", "DIM003"]  # Age, Sex for 3D plots
+  color_by: "DIM003"  # Color by Sex
+  size_by: "MEAS001"  # Size by Systolic BP
+  dashboard_layout: "2x2"  # 2x2 grid for dashboard 

@@ -1,0 +1,153 @@
+# Sample SDTM data demonstrating the transformation to data cubes
+# This shows how SDTM domains can be transformed using the refactored Component-Item schema
+
+# SDTM DM (Demographics) Domain
+sdtm_dm:
+  - USUBJID: "001"
+    AGE: 45
+    SEX: "M"
+    RACE: "WHITE"
+    ETHNIC: "NOT HISPANIC OR LATINO"
+    ARM: "TREATMENT A"
+    
+  - USUBJID: "002"
+    AGE: 32
+    SEX: "F"
+    RACE: "ASIAN"
+    ETHNIC: "NOT HISPANIC OR LATINO"
+    ARM: "TREATMENT B"
+    
+  - USUBJID: "003"
+    AGE: 58
+    SEX: "M"
+    RACE: "WHITE"
+    ETHNIC: "HISPANIC OR LATINO"
+    ARM: "TREATMENT A"
+
+# SDTM VS (Vital Signs) Domain
+sdtm_vs:
+  - USUBJID: "001"
+    VSTESTCD: "SYSBP"
+    VSTEST: "Systolic Blood Pressure"
+    VSORRES: 120
+    VSORRESU: "mmHg"
+    VISIT: "SCREENING"
+    VSDTC: "2024-01-15"
+    
+  - USUBJID: "001"
+    VSTESTCD: "DIABP"
+    VSTEST: "Diastolic Blood Pressure"
+    VSORRES: 80
+    VSORRESU: "mmHg"
+    VISIT: "SCREENING"
+    VSDTC: "2024-01-15"
+    
+  - USUBJID: "002"
+    VSTESTCD: "SYSBP"
+    VSTEST: "Systolic Blood Pressure"
+    VSORRES: 118
+    VSORRESU: "mmHg"
+    VISIT: "SCREENING"
+    VSDTC: "2024-01-16"
+    
+  - USUBJID: "002"
+    VSTESTCD: "DIABP"
+    VSTEST: "Diastolic Blood Pressure"
+    VSORRES: 75
+    VSORRESU: "mmHg"
+    VISIT: "SCREENING"
+    VSDTC: "2024-01-16"
+    
+  - USUBJID: "003"
+    VSTESTCD: "SYSBP"
+    VSTEST: "Systolic Blood Pressure"
+    VSORRES: 135
+    VSORRESU: "mmHg"
+    VISIT: "SCREENING"
+    VSDTC: "2024-01-17"
+    
+  - USUBJID: "003"
+    VSTESTCD: "DIABP"
+    VSTEST: "Diastolic Blood Pressure"
+    VSORRES: 85
+    VSORRESU: "mmHg"
+    VISIT: "SCREENING"
+    VSDTC: "2024-01-17"
+
+# SDTM LB (Laboratory) Domain (for additional complexity)
+sdtm_lb:
+  - USUBJID: "001"
+    LBTESTCD: "GLUC"
+    LBTEST: "Glucose"
+    LBORRES: 95
+    LBORRESU: "mg/dL"
+    VISIT: "SCREENING"
+    LBDTC: "2024-01-15"
+    
+  - USUBJID: "002"
+    LBTESTCD: "GLUC"
+    LBTEST: "Glucose"
+    LBORRES: 88
+    LBORRESU: "mg/dL"
+    VISIT: "SCREENING"
+    LBDTC: "2024-01-16"
+    
+  - USUBJID: "003"
+    LBTESTCD: "GLUC"
+    LBTEST: "Glucose"
+    LBORRES: 102
+    LBORRESU: "mg/dL"
+    VISIT: "SCREENING"
+    LBDTC: "2024-01-17"
+
+# Expected Data Cube Output Structure
+expected_datacube_structure:
+  dimensions:
+    - subject: "Subject identifier"
+    - age: "Subject age in years"
+    - sex: "Subject sex"
+    - visit: "Study visit"
+    - test: "Laboratory or vital signs test"
+    
+  measures:
+    - result: "Test result value"
+    - unit: "Unit of measurement"
+    
+  attributes:
+    - date: "Test date"
+    - arm: "Treatment arm"
+
+# Example of how the same Items can be reused in different contexts
+item_reuse_examples:
+  subject_id_item:
+    id: "IT001"
+    name: "Subject ID"
+    description: "Unique subject identifier"
+    dataType: "string"
+    length: 20
+    
+  subject_as_dimension:
+    id: "DIM001"
+    name: "Subject Dimension"
+    item: "IT001"
+    role: "dimension"
+    keySequence: 1
+    
+  subject_as_attribute:
+    id: "ATTR001"
+    name: "Subject Identifier Attribute"
+    item: "IT001"  # Same Item!
+    role: "attribute"
+    
+  age_as_dimension:
+    id: "DIM002"
+    name: "Age Dimension"
+    item: "IT002"
+    role: "dimension"
+    keySequence: 2
+    
+  age_as_measure:
+    id: "MEAS003"
+    name: "Age Measure"
+    item: "IT002"  # Same Item!
+    role: "measure" 

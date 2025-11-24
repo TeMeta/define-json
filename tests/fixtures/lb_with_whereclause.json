@@ -1,0 +1,150 @@
+{
+  "metaDataVersion": [{
+    "OID": "MDV.STUDY001.WC",
+    "fileOID": "FILE.001",
+    "creationDateTime": "2025-10-13T10:00:00",
+    "odmVersion": "2.1.0",
+    "fileType": "Snapshot",
+    "studyOID": "STUDY.001",
+    "name": "Laboratory DataCube with WhereClauses",
+    "description": "Test fixture for WhereClause → GroupKey derivation",
+    
+    "conditions": [
+      {
+        "OID": "COND.GLUCOSE.BASELINE",
+        "rangeChecks": [
+          {
+            "item": "IT.LB.LBTEST",
+            "comparator": "EQ",
+            "checkValues": ["Glucose"]
+          },
+          {
+            "item": "IT.LB.VISITNUM",
+            "comparator": "EQ",
+            "checkValues": ["1"]
+          }
+        ]
+      },
+      {
+        "OID": "COND.COMPLEX",
+        "rangeChecks": [
+          {
+            "item": "IT.LB.LBSTRESN",
+            "comparator": "GT",
+            "checkValues": ["10"]
+          }
+        ]
+      },
+      {
+        "OID": "COND.NESTED.1",
+        "rangeChecks": [
+          {
+            "item": "IT.LB.LBTEST",
+            "comparator": "EQ",
+            "checkValues": ["Glucose"]
+          }
+        ]
+      },
+      {
+        "OID": "COND.NESTED.2",
+        "rangeChecks": [
+          {
+            "item": "IT.LB.LBTEST",
+            "comparator": "EQ",
+            "checkValues": ["Sodium"]
+          }
+        ]
+      }
+    ],
+    "whereClauses": [
+      {
+        "OID": "WC.LB.GLUCOSE.BASELINE",
+        "name": "Glucose at Baseline",
+        "conditions": ["COND.GLUCOSE.BASELINE"]
+      },
+      {
+        "OID": "WC.LB.COMPLEX",
+        "name": "Complex WhereClause (not derivable)",
+        "conditions": ["COND.COMPLEX"]
+      },
+      {
+        "OID": "WC.LB.NESTED",
+        "name": "Nested conditions (not derivable)",
+        "conditions": ["COND.NESTED.1", "COND.NESTED.2"]
+      }
+    ],
+    
+    "itemGroups": [{
+      "OID": "IG.LB",
+      "name": "Laboratory Test Results",
+      "domain": "LB",
+      "type": "Table",
+      "purpose": "Tabulation",
+      "items": [
+        {
+          "OID": "IT.LB.STUDYID",
+          "name": "STUDYID",
+          "label": "Study Identifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.LB.USUBJID",
+          "name": "USUBJID",
+          "label": "Unique Subject Identifier",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.LB.LBTEST",
+          "name": "LBTEST",
+          "label": "Lab Test Name",
+          "dataType": "text"
+        },
+        {
+          "OID": "IT.LB.LBSTRESN",
+          "name": "LBSTRESN",
+          "label": "Numeric Result",
+          "dataType": "float"
+        },
+        {
+          "OID": "IT.LB.VISITNUM",
+          "name": "VISITNUM",
+          "label": "Visit Number",
+          "dataType": "integer"
+        }
+      ]
+    }],
+    
+    "items": [
+      {
+        "OID": "IT.LB.STUDYID",
+        "name": "STUDYID",
+        "label": "Study Identifier",
+        "dataType": "text"
+      },
+      {
+        "OID": "IT.LB.USUBJID",
+        "name": "USUBJID",
+        "label": "Unique Subject Identifier",
+        "dataType": "text"
+      },
+      {
+        "OID": "IT.LB.LBTEST",
+        "name": "LBTEST",
+        "label": "Lab Test Name",
+        "dataType": "text"
+      },
+      {
+        "OID": "IT.LB.LBSTRESN",
+        "name": "LBSTRESN",
+        "label": "Numeric Result",
+        "dataType": "float"
+      },
+      {
+        "OID": "IT.LB.VISITNUM",
+        "name": "VISITNUM",
+        "label": "Visit Number",
+        "dataType": "integer"
+      }
+    ]
+  }]
+}

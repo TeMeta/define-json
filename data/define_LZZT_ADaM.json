@@ -20800,169 +20800,85 @@
       "OID": "Table_14-1.01",
       "name": "Table_14-1.01",
       "label": "Summary of Populations",
-      "analysis": "Table_14-1.01.R.1",
-      "location": [
-        {
-          "OID": "DOC.DISPLAY.Table_14-1.01",
-          "leafID": "Table_14-1.01"
-        }
-      ]
+      "analysis": "Table_14-1.01.R.1"
     },
     {
       "OID": "Table_14-1.02",
       "name": "Table_14-1.02",
       "label": "Summary of End of Study Data (ITT population)",
-      "analysis": "Table_14-1.02.R.1",
-      "location": [
-        {
-          "OID": "DOC.DISPLAY.Table_14-1.02",
-          "leafID": "Table_14-1.02"
-        }
-      ]
+      "analysis": "Table_14-1.02.R.1"
     },
     {
       "OID": "Table_14-2.01",
       "name": "Table_14-2.01",
       "label": "Summary of Demographic and Baseline Characteristics (ITT population)",
-      "analysis": "Table_14-2.01.R.1",
-      "location": [
-        {
-          "OID": "DOC.DISPLAY.Table_14-2.01",
-          "leafID": "Table_14-2.01"
-        }
-      ]
+      "analysis": "Table_14-2.01.R.1"
     },
     {
       "OID": "Table_14-3.01",
       "name": "Table_14-3.01",
       "label": "Primary Endpoint Analysis: ADAS-Cog - Summary at Week 24 - LOCF (Efficacy Population)",
-      "analysis": "Table_14-3.01.R.1",
-      "location": [
-        {
-          "OID": "DOC.DISPLAY.Table_14-3.01",
-          "leafID": "Table_14-3.01"
-        }
-      ]
+      "analysis": "Table_14-3.01.R.1"
     },
     {
       "OID": "Table_14-3.02",
       "name": "Table_14-3.02",
       "label": "Primary Endpoint Analysis: CIBIC+ - Summary at Week 24 - LOCF (Efficacy Population)",
-      "analysis": "Table_14-3.02.R.1",
-      "location": [
-        {
-          "OID": "DOC.DISPLAY.Table_14-3.02",
-          "leafID": "Table_14-3.02"
-        }
-      ]
+      "analysis": "Table_14-3.02.R.1"
     },
     {
       "OID": "Table_14-3.12",
       "name": "Table_14-3.12",
       "label": "Mean NPI-X total score from Weeks 4 through Week 24 - Windowed (Efficacy Population)",
-      "analysis": "Table_14-3.12.R.1",
-      "location": [
-        {
-          "OID": "DOC.DISPLAY.Table_14-3.12",
-          "leafID": "Table_14-3.12"
-        }
-      ]
+      "analysis": "Table_14-3.12.R.1"
     },
     {
       "OID": "Table_14-5.02",
       "name": "Table_14-5.02",
       "label": "Incidence of Treatment Emergent Serious Adverse Events by Treatment Group",
-      "analysis": "Table_14-5.02.R.1",
-      "location": [
-        {
-          "OID": "DOC.DISPLAY.Table_14-5.02",
-          "leafID": "Table_14-5.02"
-        }
-      ]
+      "analysis": "Table_14-5.02.R.1"
     },
     {
       "OID": "Table_14-6.01",
       "name": "Table_14-6.01",
       "label": "Summary Statistics for Continuous Laboratory Values (Safety Population)",
-      "analysis": "Table_14-6.01.R.1",
-      "location": [
-        {
-          "OID": "DOC.DISPLAY.Table_14-6.01",
-          "leafID": "Table_14-6.01"
-        }
-      ]
+      "analysis": "Table_14-6.01.R.1"
     },
     {
       "OID": "Table_14-6.02",
       "name": "Table_14-6.02",
       "label": "Frequency of Normal and Abnormal (Beyond Normal Range) Laboratory Values During Treatment (Safety Population)",
-      "analysis": "Table_14-6.02.R.1",
-      "location": [
-        {
-          "OID": "DOC.DISPLAY.Table_14-6.02",
-          "leafID": "Table_14-6.02"
-        }
-      ]
+      "analysis": "Table_14-6.02.R.1"
     },
     {
       "OID": "Table_14-6.03",
       "name": "Table_14-6.03",
       "label": "Frequency of Normal and Abnormal (Clinically Significant Change from Previous Observation) Laboratory Values During Treatment (Safety Population)",
-      "analysis": "Table_14-6.03.R.1",
-      "location": [
-        {
-          "OID": "DOC.DISPLAY.Table_14-6.03",
-          "leafID": "Table_14-6.03"
-        }
-      ]
+      "analysis": "Table_14-6.03.R.1"
     },
     {
       "OID": "Table_14-6.04",
       "name": "Table_14-6.04",
       "label": "Shifts of Laboratory Values During Treatment, Categorized Based on Threshold Ranges, by Visit (Safety Population)",
-      "analysis": "Table_14-6.04.R.1",
-      "location": [
-        {
-          "OID": "DOC.DISPLAY.Table_14-6.04",
-          "leafID": "Table_14-6.04"
-        }
-      ]
+      "analysis": "Table_14-6.04.R.1"
     },
     {
       "OID": "Table_14-6.05",
       "name": "Table_14-6.05",
       "label": "Shifts of Laboratory Values During Treatment, Categorized Based on Threshold Ranges (Safety Population)",
-      "analysis": "Table_14-6.05.R.1",
-      "location": [
-        {
-          "OID": "DOC.DISPLAY.Table_14-6.05",
-          "leafID": "Table_14-6.05"
-        }
-      ]
+      "analysis": "Table_14-6.05.R.1"
     },
     {
       "OID": "Table_14-6.06",
       "name": "Table_14-6.06",
       "label": "Shifts of Hy's Law Values During Treatment (Safety Population)",
-      "analysis": "Table_14-6.06.R.1",
-      "location": [
-        {
-          "OID": "DOC.DISPLAY.Table_14-6.06",
-          "leafID": "Table_14-6.06"
-        }
-      ]
+      "analysis": "Table_14-6.06.R.1"
     },
     {
       "OID": "Figure_14-1",
       "name": "Figure_14-1",
       "label": "Time to Dermatologic Event by Treatment Group",
-      "analysis": "Figure_14-1.R.1",
-      "location": [
-        {
-          "OID": "DOC.DISPLAY.Figure_14-1",
-          "leafID": "Figure_14-1"
-        }
-      ]
+      "analysis": "Figure_14-1.R.1"
     }
   ],
   "_xmlMetadata": {
@@ -22301,6 +22217,55 @@
       "ADVS.CHG.TEMP",
       "ADVS.CHG.WEIGHT"
     ],
+    "valueListDefOrder": [
+      "ValueList.ADLBC.A1HI",
+      "ValueList.ADLBC.A1LO",
+      "ValueList.ADLBC.ABLFL",
+      "ValueList.ADLBC.ANL01FL",
+      "ValueList.ADLBC.ANRIND",
+      "ValueList.ADLBC.AVAL",
+      "ValueList.ADLBC.BASE",
+      "ValueList.ADLBC.BNRIND",
+      "ValueList.ADLBC.CHG",
+      "ValueList.ADLBH.A1HI",
+      "ValueList.ADLBH.A1LO",
+      "ValueList.ADLBH.ABLFL",
+      "ValueList.ADLBH.ANL01FL",
+      "ValueList.ADLBH.ANRIND",
+      "ValueList.ADLBH.AVAL",
+      "ValueList.ADLBH.BASE",
+      "ValueList.ADLBH.BNRIND",
+      "ValueList.ADLBH.CHG",
+      "ValueList.ADLBHY.A1HI",
+      "ValueList.ADLBHY.A1LO",
+      "ValueList.ADLBHY.AVAL",
+      "ValueList.ADLBHY.BASE",
+      "ValueList.ADLBHY.BR2A1HI",
+      "ValueList.ADLBHY.BR2A1LO",
+      "ValueList.ADLBHY.CRIT1",
+      "ValueList.ADLBHY.CRIT1FL",
+      "ValueList.ADLBHY.PARAMTYP",
+      "ValueList.ADLBHY.PARCAT1",
+      "ValueList.ADLBHY.R2A1HI",
+      "ValueList.ADLBHY.R2A1LO",
+      "ValueList.ADLBHY.SHIFT1",
+      "ValueList.ADLBHY.SHIFT1N",
+      "ValueList.ADQSADAS.AVAL",
+      "ValueList.ADQSADAS.DTYPE",
+      "ValueList.ADQSADAS.QSSEQ",
+      "ValueList.ADQSNPIX.ABLFL",
+      "ValueList.ADQSNPIX.ANL01FL",
+      "ValueList.ADQSNPIX.AVAL",
+      "ValueList.ADQSNPIX.BASE",
+      "ValueList.ADQSNPIX.CHG",
+      "ValueList.ADQSNPIX.DTYPE",
+      "ValueList.ADQSNPIX.PARAMTYP",
+      "ValueList.ADQSNPIX.PCHG",
+      "ValueList.ADQSNPIX.QSSEQ",
+      "ValueList.ADVS.AVAL",
+      "ValueList.ADVS.BASE",
+      "ValueList.ADVS.CHG"
+    ],
     "hasStandardsElement": false,
     "displaySupplemental": {
       "multipleAnalyses": {
@@ -22320,6 +22285,104 @@
           "Table_14-3.12.R.1",
           "Table_14-3.12.R.2"
         ]
+      },
+      "Table_14-1.01": {
+        "displayIdentifier": "Table_14-1.01",
+        "displayLabel": "Summary of Populations",
+        "_separateContainer": true,
+        "leafID": "Table_14-1.01",
+        "_usesAnalysisResults": true
+      },
+      "Table_14-1.02": {
+        "displayIdentifier": "Table_14-1.02",
+        "displayLabel": "Summary of End of Study Data (ITT population)",
+        "_separateContainer": true,
+        "leafID": "Table_14-1.02",
+        "_usesAnalysisResults": true
+      },
+      "Table_14-2.01": {
+        "displayIdentifier": "Table_14-2.01",
+        "displayLabel": "Summary of Demographic and Baseline Characteristics (ITT population)",
+        "_separateContainer": true,
+        "leafID": "Table_14-2.01",
+        "_usesAnalysisResults": true
+      },
+      "Table_14-3.01": {
+        "displayIdentifier": "Table_14-3.01",
+        "displayLabel": "Primary Endpoint Analysis: ADAS-Cog - Summary at Week 24 - LOCF (Efficacy Population)",
+        "_separateContainer": true,
+        "leafID": "Table_14-3.01",
+        "_usesAnalysisResults": true
+      },
+      "Table_14-3.02": {
+        "displayIdentifier": "Table_14-3.02",
+        "displayLabel": "Primary Endpoint Analysis: CIBIC+ - Summary at Week 24 - LOCF (Efficacy Population)",
+        "_separateContainer": true,
+        "leafID": "Table_14-3.02",
+        "_usesAnalysisResults": true
+      },
+      "Table_14-3.12": {
+        "displayIdentifier": "Table_14-3.12",
+        "displayLabel": "Mean NPI-X total score from Weeks 4 through Week 24 - Windowed (Efficacy Population)",
+        "_separateContainer": true,
+        "leafID": "Table_14-3.12",
+        "_usesAnalysisResults": true
+      },
+      "Table_14-5.02": {
+        "displayIdentifier": "Table_14-5.02",
+        "displayLabel": "Incidence of Treatment Emergent Serious Adverse Events by Treatment Group",
+        "_separateContainer": true,
+        "leafID": "Table_14-5.02",
+        "_usesAnalysisResults": true
+      },
+      "Table_14-6.01": {
+        "displayIdentifier": "Table_14-6.01",
+        "displayLabel": "Summary Statistics for Continuous Laboratory Values (Safety Population)",
+        "_separateContainer": true,
+        "leafID": "Table_14-6.01",
+        "_usesAnalysisResults": true
+      },
+      "Table_14-6.02": {
+        "displayIdentifier": "Table_14-6.02",
+        "displayLabel": "Frequency of Normal and Abnormal (Beyond Normal Range) Laboratory Values During Treatment (Safety Population)",
+        "_separateContainer": true,
+        "leafID": "Table_14-6.02",
+        "_usesAnalysisResults": true
+      },
+      "Table_14-6.03": {
+        "displayIdentifier": "Table_14-6.03",
+        "displayLabel": "Frequency of Normal and Abnormal (Clinically Significant Change from Previous Observation) Laboratory Values During Treatment (Safety Population)",
+        "_separateContainer": true,
+        "leafID": "Table_14-6.03",
+        "_usesAnalysisResults": true
+      },
+      "Table_14-6.04": {
+        "displayIdentifier": "Table_14-6.04",
+        "displayLabel": "Shifts of Laboratory Values During Treatment, Categorized Based on Threshold Ranges, by Visit (Safety Population)",
+        "_separateContainer": true,
+        "leafID": "Table_14-6.04",
+        "_usesAnalysisResults": true
+      },
+      "Table_14-6.05": {
+        "displayIdentifier": "Table_14-6.05",
+        "displayLabel": "Shifts of Laboratory Values During Treatment, Categorized Based on Threshold Ranges (Safety Population)",
+        "_separateContainer": true,
+        "leafID": "Table_14-6.05",
+        "_usesAnalysisResults": true
+      },
+      "Table_14-6.06": {
+        "displayIdentifier": "Table_14-6.06",
+        "displayLabel": "Shifts of Hy's Law Values During Treatment (Safety Population)",
+        "_separateContainer": true,
+        "leafID": "Table_14-6.06",
+        "_usesAnalysisResults": true
+      },
+      "Figure_14-1": {
+        "displayIdentifier": "Figure_14-1",
+        "displayLabel": "Time to Dermatologic Event by Treatment Group",
+        "_separateContainer": true,
+        "leafID": "Figure_14-1",
+        "_usesAnalysisResults": true
       }
     },
     "analysisSupplemental": {
@@ -23222,6 +23285,620 @@
       },
       "progcodeLeafIDs": {
         "Table_14-5.02.R.1": "at14-5-02.sas"
+      },
+      "resultSupplemental": {
+        "Table_14-1.01.R.1": {
+          "documentation": {
+            "leafID": "SAP_SEC_9.1"
+          },
+          "programmingCode": {
+            "methodOID": "Table_14-1.01.R.1",
+            "computationMethodText": "proc freq data = pilot.adsl;\n  tables (ittfl saffl efffl comp24fl disconfl)*trt01pn / missing;\nrun;"
+          }
+        },
+        "Table_14-1.02.R.1": {
+          "documentation": {
+            "leafID": "SAP_SEC_9.1",
+            "description": "Reasons for discontinuation are summarized for subjects discontinuing before Week 24 (visit 12) (i.e. COMP24FL ne =\"Y\" and VISNUMEN less than 12)",
+            "_translatedTextDirect": true
+          },
+          "programmingCode": {
+            "methodOID": "Table_14-1.02.R.1",
+            "computationMethodText": "proc freq data=adsl;\n  table COMP24FL*TRT01P/chisq fisher exact;\nrun;\n\nproc freq data=adsl;\n  where COMP24FL=\"N\";\n  table DCREASCD* TRT01P/ chisq fisher exact;\nrun;"
+          }
+        },
+        "Table_14-2.01.R.1": {
+          "documentation": {
+            "description": "ANOVA treatment group comparison",
+            "_translatedTextDirect": true
+          }
+        },
+        "Table_14-2.01.R.2": {
+          "documentation": {
+            "description": "Pearson s chisquare test",
+            "_translatedTextDirect": true
+          }
+        },
+        "Table_14-3.01.R.1": {
+          "documentation": {
+            "leafID": "SAP_SEC_10.1.1",
+            "description": "Linear model analysis of CHG for dose response; using randomized dose (0 for placebo; 54 for low dose; 81 for high dose) and site group in model. Used PROC GLM in SAS to produce p-value (from Type III SS for treatment dose).",
+            "_translatedTextDirect": true
+          },
+          "programmingCode": {
+            "methodOID": "Table_14-3.01.R.1",
+            "computationMethodText": "proc glm data = ADQSADAS;\n  where EFFFL='Y' and ANL01FL='Y' and AVISIT='Week 24' and PARAMCD=\"ATOT\";\n  class sitegr1;\n  model CHG = trtpn sitegr1;\nrun;"
+          }
+        },
+        "Table_14-3.01.R.2": {
+          "documentation": {
+            "leafID": "SAP_SEC_10.1.1",
+            "description": "ANCOVA analysis of CHG performed to provide pairwise comparisons among treatment groups and adjusted means; using randomized treatment as class variable and site group as class variable in model and the baseline value as a covariate.",
+            "_translatedTextDirect": true
+          },
+          "programmingCode": {
+            "methodOID": "Table_14-3.01.R.2",
+            "computationMethodText": "proc glm data = ADQSADAS;\n  where EFFFL='Y' and ANL01FL='Y' and AVISIT='Week 24' and PARAMCD=\"ATOT\";\n  class trtpn sitegr1;\n  model CHG = trtpn sitegr1 base;\n  means trtpn;\n  lsmeans trtpn / OM STDERR PDIFF CL;\nrun;"
+          }
+        },
+        "Table_14-3.02.R.1": {
+          "documentation": {
+            "leafID": "SAP_SEC_10.1.2",
+            "description": "Summary statistics of AVAL at Week 24. Linear model analysis of AVAL for dose response; using randomized dose (0 for placebo; 54 for low dose; 81 for high dose) and site group in model. Used PROC GLM in SAS to produce p-value (from Type III SS for treatment dose);",
+            "_translatedTextDirect": true
+          },
+          "programmingCode": {
+            "methodOID": "Table_14-3.02.R.1",
+            "computationMethodText": "proc glm data = ADQSCIBC;\n  where EFFFL='Y' and ANL01FL='Y' and AVISIT='Week 24' and PARAMCD=\"CIBICVAL\";\n  class sitegr1;\n  model AVAL = trtpn sitegr1;\nrun;"
+          }
+        },
+        "Table_14-3.02.R.2": {
+          "documentation": {
+            "leafID": "SAP_SEC_10.1.2",
+            "description": "ANCOVA analysis of AVAL performed to provide pairwise comparisons among treatment groups and adjusted means; using randomized treatment as class variable and site group as class variable in model and the baseline value as a covariate.",
+            "_translatedTextDirect": true
+          },
+          "programmingCode": {
+            "methodOID": "Table_14-3.02.R.2",
+            "computationMethodText": "proc glm data = ADQSCIBC;\n   where EFFFL='Y' and ANL01FL='Y' and AVISIT='Week 24' and PARAMCD=\"CIBICVAL\";\n   class trtpn sitegr1; \n   model AVAL = trtpn sitegr1;\n   means trtpn;\n   lsmeans trtpn / OM STDERR PDIFF CL;\nrun;"
+          }
+        },
+        "Table_14-3.12.R.1": {
+          "documentation": {
+            "leafID": "SAP_SEC_10.2"
+          },
+          "programmingCode": {
+            "methodOID": "Table_14-3.12.R.1",
+            "computationMethodText": "PROC UNIVARIATE data= ADQSNPIX (where =(EFFFL = 'Y' and PARAMCD = 'NPTOTMN' and AVISIT='Weeks 4-24' and ANL01FL= 'Y')); \n Var BASE AVAL;\n By TRTPN;\nRun;"
+          }
+        },
+        "Table_14-3.12.R.2": {
+          "documentation": {
+            "leafID": "SAP_SEC_10.2"
+          },
+          "programmingCode": {
+            "methodOID": "Table_14-3.12.R.2",
+            "computationMethodText": "PROC MIXED data= ADQSNPIX (where =(EFFFL = 'Y' and PARAMCD = 'NPTOTMN' and AVISIT = 'Weeks 4-24' and ANL01FL= 'Y'));\n  class sitegr1 trtpn;\n  model aval = trtpn sitegr1 base;\n  lsmeans trtpn / diff pdiff cl;\nRun;"
+          }
+        },
+        "Table_14-5.02.R.1": {
+          "documentation": {
+            "leafID": "SAP_SEC_11.2",
+            "description": "Unique count of subjects that experienced an Adverse Event by Preferred Term, System Organ Class, and Treatment Group and percentages based on the number of subjects in the safety population within each treatment group. The total number of times an event occurred was recorded by Preferred Term, System Organ Class, and Treatment Group. Fishers exact test was used for treatment comparison.",
+            "_translatedTextDirect": true
+          },
+          "programmingCode": {
+            "leafID": "at14-5-02.sas"
+          }
+        },
+        "Table_14-6.01.R.1": {
+          "documentation": {
+            "leafID": "SAP_SEC_11.5"
+          }
+        },
+        "Table_14-6.02.R.1": {
+          "documentation": {
+            "leafID": "SAP_SEC_11.5"
+          },
+          "programmingCode": {
+            "methodOID": "Table_14-6.02.R.1",
+            "computationMethodText": "PROC FREQ (WHERE=(SAFFL=\"Y\" and ANL01FL =\"Y\" and index(PARAMCD,\"_\")=0));\n  BY PARCAT1 PARAMCD;\n  TABLES TRTPN*LBNRIND/ALL FISHER;\nrun;"
+          }
+        },
+        "Table_14-6.03.R.1": {
+          "documentation": {
+            "leafID": "SAP_SEC_11.5"
+          },
+          "programmingCode": {
+            "methodOID": "Table_14-6.03.R.1",
+            "computationMethodText": "PROC  FREQ(WHERE=(SAFFL=\"Y\" and ANL01FL =\"Y\" and index(PARAMCD,\"_\")));\n  BY PARCAT1 PARAMCD;\n  TABLES TRTPN*ANRIND/ALL FISHER;\nRUN;"
+          }
+        },
+        "Table_14-6.04.R.1": {
+          "documentation": {
+            "leafID": "SAP_SEC_11.5"
+          },
+          "programmingCode": {
+            "methodOID": "Table_14-6.04.R.1",
+            "computationMethodText": "PROC FREQ (WHERE=(SAFFL=\"Y\" and index(PARAMCD,\"_\")=0));\n  TABLES PARCAT1*PARAMCD*AVISITN*TRTPN*BNRIND*ANRIND;\nRUN;"
+          }
+        },
+        "Table_14-6.05.R.1": {
+          "documentation": {
+            "leafID": "SAP_SEC_11.5"
+          },
+          "programmingCode": {
+            "methodOID": "Table_14-6.05.R.1",
+            "computationMethodText": "PROC  FREQ(WHERE=(SAFFL=\"Y\" and ANL01FL=\"Y\" and index(PARAMCD,\"_\")=0)) t;\n  BY PARCAT1 PARAMCD;\n TABLES BNRIND*TRTPN*ANRIND / cmh ;\nRUN;"
+          }
+        },
+        "Table_14-6.06.R.1": {
+          "documentation": {
+            "leafID": "SAP_SEC_11.5",
+            "description": "Take the maximum AVAL per patient when patients were on treatment (AVISITN in (2,4,6,8,12,16,20,24,26)) for the Hy's Law parameters then perform a frequency count by treatment with Fisher's Exact test.",
+            "_translatedTextDirect": true
+          }
+        },
+        "Figure_14-1.R.1": {
+          "documentation": {
+            "leafID": "SAP_SEC_11.2",
+            "description": "Kaplan-Meier estimates and log-rank analysis of time to first dermatological adverse event, safety population",
+            "_translatedTextDirect": true
+          },
+          "programmingCode": {
+            "methodOID": "Figure_14-1.R.1",
+            "computationMethodText": "proc lifetest data = adtte (where=(saffl=\"Y\"))  plots=s;\n id usubjid;\n strata trtan;\n time aval*cnsr(1);\n test trtan;\nrun;"
+          }
+        }
+      },
+      "datasetSupplemental": {
+        "Table_14-1.01.R.1": {
+          "ADSL": {
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          }
+        },
+        "Table_14-1.02.R.1": {
+          "ADSL": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Table_14-1.02.R.1.SC1",
+                  "Name": "Selection Criteria 1",
+                  "text": "[ ITTFL=\"Y\" ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          }
+        },
+        "Table_14-2.01.R.1": {
+          "ADSL": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Table_14-2.01.R.1.SC1",
+                  "Name": "Selection Criteria 1",
+                  "text": "[ ITTFL=\"Y\" ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          }
+        },
+        "Table_14-2.01.R.2": {
+          "ADSL": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Table_14-2.01.R.2.SC1",
+                  "Name": "Selection Criteria 1",
+                  "text": "[ ITTFL=\"Y\" ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          }
+        },
+        "Table_14-3.01.R.1": {
+          "ADQSADAS": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Table_14-3.01.R.1.SC1",
+                  "Name": "Selection Criteria",
+                  "text": "[ EFFFL=\"Y\" and ANL01FL=\"Y\" and AVISIT=\"Week 24\" and PARAMCD=\"ATOT\" ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          }
+        },
+        "Table_14-3.01.R.2": {
+          "ADQSADAS": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Table_14-3.01.R.2.SC1",
+                  "Name": "Selection Criteria",
+                  "text": "[ EFFFL=\"Y\" and ANL01FL=\"Y\" and AVISIT=\"Week 24\" and PARAMCD=\"ATOT\" ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          }
+        },
+        "Table_14-3.02.R.1": {
+          "ADQSCIBC": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Table_14-3.02.R.1.SC1",
+                  "Name": "Selection Criteria",
+                  "text": "[ EFFFL=\"Y\" and ANL01FL=\"Y\" and AVISIT=\"Week 24\" and PARAMCD=\"CIBICVAL\" ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          }
+        },
+        "Table_14-3.02.R.2": {
+          "ADQSCIBC": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Table_14-3.02.R.2.SC1",
+                  "Name": "Selection Criteria",
+                  "text": "[ EFFFL=\"Y\" and ANL01FL=\"Y\" and AVISIT=\"Week 24\" and PARAMCD=\"CIBICVAL\" ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          }
+        },
+        "Table_14-3.12.R.1": {
+          "ADQSNPIX": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Table_14-3.12.R.1.SC1",
+                  "Name": "Selection Criteria",
+                  "text": "[ EFFFL=\"Y\" and PARAMCD=\"NPTOTMN\" and AVISIT=\"Weeks 4-24\" and ANL01FL=\"Y\" ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          }
+        },
+        "Table_14-3.12.R.2": {
+          "ADQSNPIX": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Table_14-3.12.R.2.SC1",
+                  "Name": "Selection Criteria",
+                  "text": "[ EFFFL=\"Y\" and PARAMCD=\"NPTOTMN\" and AVISIT=\"Weeks 4-24\" and ANL01FL=\"Y\" ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          }
+        },
+        "Table_14-5.02.R.1": {
+          "ADAE": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Table_14-5.02.R.1.SC1",
+                  "Name": "Selection Criteria 3",
+                  "text": "[ TRTEMFL=\"Y\" and AESER=\"Y\" ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          },
+          "ADSL": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Table_14-5.02.R.1.SC2",
+                  "Name": "Selection Criteria 4",
+                  "text": "[ SAFFL=\"Y\" ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          }
+        },
+        "Table_14-6.01.R.1": {
+          "ADLBC": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Table_14-6.01.R.1.SC1",
+                  "Name": "Selection Criteria",
+                  "text": "[ PARAMCD not contains \"_\" ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          },
+          "ADLBH": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Table_14-6.01.R.1.SC2",
+                  "Name": "Selection Criteria",
+                  "text": "[ PARAMCD not contains \"_\" ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          },
+          "ADSL": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Table_14-6.01.R.1.SC3",
+                  "Name": "Selection Criteria",
+                  "text": "[ SAFFL=\"Y\" ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          }
+        },
+        "Table_14-6.02.R.1": {
+          "ADLBC": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Table_14-6.02.R.1.SC1",
+                  "Name": "Selection Criteria",
+                  "text": "[ ANL01FL=\"Y\" and PARAMCD not contains \"_\" ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          },
+          "ADLBH": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Table_14-6.02.R.1.SC2",
+                  "Name": "Selection Criteria",
+                  "text": "[ ANL01FL=\"Y\" and PARAMCD not contains \"_\" ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          },
+          "ADSL": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Table_14-6.02.R.1.SC3",
+                  "Name": "Selection Criteria",
+                  "text": "[ SAFFL=\"Y\" ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          }
+        },
+        "Table_14-6.03.R.1": {
+          "ADLBC": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Table_14-6.03.R.1.SC1",
+                  "Name": "Selection Criteria",
+                  "text": "[ ANL01FL=\"Y\" and PARAMCD contains \"_\" ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          },
+          "ADLBH": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Table_14-6.03.R.1.SC2",
+                  "Name": "Selection Criteria",
+                  "text": "[ ANL01FL=\"Y\" and PARAMCD contains \"_\" ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          },
+          "ADSL": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Table_14-6.03.R.1.SC3",
+                  "Name": "Selection Criteria",
+                  "text": "[ SAFFL=\"Y\" ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          }
+        },
+        "Table_14-6.04.R.1": {
+          "ADLBC": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Table_14-6.04.R.1.SC1",
+                  "Name": "Selection Criteria",
+                  "text": "[ PARAMCD not contains \"_\" ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          },
+          "ADLBH": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Table_14-6.04.R.1.SC2",
+                  "Name": "Selection Criteria",
+                  "text": "[ PARAMCD not contains \"_\" ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          },
+          "ADSL": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Table_14-6.04.R.1.SC3",
+                  "Name": "Selection Criteria",
+                  "text": "[ SAFFL=\"Y\" ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          }
+        },
+        "Table_14-6.05.R.1": {
+          "ADLBC": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Table_14-6.05.R.1.SC1",
+                  "Name": "Selection Criteria",
+                  "text": "[ ANL01FL=\"Y\" and PARAMCD not contains \"_\" ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          },
+          "ADLBH": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Table_14-6.05.R.1.SC2",
+                  "Name": "Selection Criteria",
+                  "text": "[ ANL01FL=\"Y\" and PARAMCD not contains \"_\" ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          },
+          "ADSL": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Table_14-6.05.R.1.SC3",
+                  "Name": "Selection Criteria",
+                  "text": "[ SAFFL=\"Y\" ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          }
+        },
+        "Table_14-6.06.R.1": {
+          "ADLBHY": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Table_14-6.06.R.1.SC1",
+                  "Name": "Selection Criteria",
+                  "text": "[ PARAMCD in(\"TRANSHY\",\"HYLAW\") ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          },
+          "ADSL": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Table_14-6.06.R.1.SC2",
+                  "Name": "Selection Criteria",
+                  "text": "[ SAFFL=\"Y\" ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          }
+        },
+        "Figure_14-1.R.1": {
+          "ADTTE": {
+            "selectionCriteria": {
+              "computationMethods": [
+                {
+                  "OID": "Figure_14-1.R.1.SC1",
+                  "Name": "Selection Criteria",
+                  "text": "[ SAFFL=\"Y\" ]"
+                }
+              ]
+            },
+            "_isDataset": true,
+            "mandatory": "No",
+            "_itemGroupRefNamespace": "http://www.cdisc.org/ns/odm/v1.2"
+          }
+        }
       }
     },
     "itemGroupSupplemental": {

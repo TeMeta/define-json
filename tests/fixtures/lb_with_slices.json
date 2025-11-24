@@ -1,0 +1,143 @@
+{
+  "metaDataVersion": [{
+    "OID": "MDV.STUDY001.SLICES",
+    "fileOID": "FILE.001",
+    "creationDateTime": "2025-10-13T10:00:00",
+    "odmVersion": "2.1.0",
+    "fileType": "Snapshot",
+    "studyOID": "STUDY.001",
+    "name": "Laboratory with Slices for Attribute Inference",
+    "description": "Test fixture for attribute relationship inference - shows which attributes vary by which dimensions",
+    
+    "conditions": [
+      {
+        "OID": "COND.GLUCOSE.BASELINE",
+        "rangeChecks": [
+          {"item": "IT.LB.LBTEST", "comparator": "EQ", "checkValues": ["Glucose"]},
+          {"item": "IT.LB.VISITNUM", "comparator": "EQ", "checkValues": ["1"]}
+        ]
+      },
+      {
+        "OID": "COND.GLUCOSE.WEEK4",
+        "rangeChecks": [
+          {"item": "IT.LB.LBTEST", "comparator": "EQ", "checkValues": ["Glucose"]},
+          {"item": "IT.LB.VISITNUM", "comparator": "EQ", "checkValues": ["2"]}
+        ]
+      },
+      {
+        "OID": "COND.SODIUM.BASELINE",
+        "rangeChecks": [
+          {"item": "IT.LB.LBTEST", "comparator": "EQ", "checkValues": ["Sodium"]},
+          {"item": "IT.LB.VISITNUM", "comparator": "EQ", "checkValues": ["1"]}
+        ]
+      },
+      {
+        "OID": "COND.PLATELET.BASELINE",
+        "rangeChecks": [
+          {"item": "IT.LB.LBTEST", "comparator": "EQ", "checkValues": ["Platelet"]},
+          {"item": "IT.LB.VISITNUM", "comparator": "EQ", "checkValues": ["1"]}
+        ]
+      }
+    ],
+    "whereClauses": [
+      {
+        "OID": "WC.GLUCOSE.BASELINE",
+        "name": "Glucose at Baseline",
+        "conditions": ["COND.GLUCOSE.BASELINE"]
+      },
+      {
+        "OID": "WC.GLUCOSE.WEEK4",
+        "name": "Glucose at Week 4",
+        "conditions": ["COND.GLUCOSE.WEEK4"]
+      },
+      {
+        "OID": "WC.SODIUM.BASELINE",
+        "name": "Sodium at Baseline",
+        "conditions": ["COND.SODIUM.BASELINE"]
+      },
+      {
+        "OID": "WC.PLATELET.BASELINE",
+        "name": "Platelet at Baseline",
+        "conditions": ["COND.PLATELET.BASELINE"]
+      }
+    ],
+    
+    "itemGroups": [
+      {
+        "OID": "IG.LB.SLICE.GLUCOSE.BASELINE",
+        "name": "Glucose at Baseline",
+        "domain": "LB",
+        "type": "DataSpecialization",
+        "applicableWhen": ["WC.GLUCOSE.BASELINE"],
+        "items": [
+          {"OID": "IT.LB.STUDYID", "name": "STUDYID", "dataType": "text"},
+          {"OID": "IT.LB.LBTEST", "name": "LBTEST", "dataType": "text"},
+          {"OID": "IT.LB.LBCAT", "name": "LBCAT", "dataType": "text"},
+          {"OID": "IT.LB.LBSTRESU", "name": "LBSTRESU", "dataType": "text"},
+          {"OID": "IT.LB.VISITNUM", "name": "VISITNUM", "dataType": "integer"},
+          {"OID": "IT.LB.VISIT", "name": "VISIT", "dataType": "text"},
+          {"OID": "IT.LB.LBSTRESN", "name": "LBSTRESN", "dataType": "float"}
+        ]
+      },
+      {
+        "OID": "IG.LB.SLICE.GLUCOSE.WEEK4",
+        "name": "Glucose at Week 4",
+        "domain": "LB",
+        "type": "DataSpecialization",
+        "applicableWhen": ["WC.GLUCOSE.WEEK4"],
+        "items": [
+          {"OID": "IT.LB.STUDYID", "name": "STUDYID", "dataType": "text"},
+          {"OID": "IT.LB.LBTEST", "name": "LBTEST", "dataType": "text"},
+          {"OID": "IT.LB.LBCAT", "name": "LBCAT", "dataType": "text"},
+          {"OID": "IT.LB.LBSTRESU", "name": "LBSTRESU", "dataType": "text"},
+          {"OID": "IT.LB.VISITNUM", "name": "VISITNUM", "dataType": "integer"},
+          {"OID": "IT.LB.VISIT", "name": "VISIT", "dataType": "text"},
+          {"OID": "IT.LB.LBSTRESN", "name": "LBSTRESN", "dataType": "float"}
+        ]
+      },
+      {
+        "OID": "IG.LB.SLICE.SODIUM.BASELINE",
+        "name": "Sodium at Baseline",
+        "domain": "LB",
+        "type": "DataSpecialization",
+        "applicableWhen": ["WC.SODIUM.BASELINE"],
+        "items": [
+          {"OID": "IT.LB.STUDYID", "name": "STUDYID", "dataType": "text"},
+          {"OID": "IT.LB.LBTEST", "name": "LBTEST", "dataType": "text"},
+          {"OID": "IT.LB.LBCAT", "name": "LBCAT", "dataType": "text"},
+          {"OID": "IT.LB.LBSTRESU", "name": "LBSTRESU", "dataType": "text"},
+          {"OID": "IT.LB.VISITNUM", "name": "VISITNUM", "dataType": "integer"},
+          {"OID": "IT.LB.VISIT", "name": "VISIT", "dataType": "text"},
+          {"OID": "IT.LB.LBSTRESN", "name": "LBSTRESN", "dataType": "float"}
+        ]
+      },
+      {
+        "OID": "IG.LB.SLICE.PLATELET.BASELINE",
+        "name": "Platelet at Baseline",
+        "domain": "LB",
+        "type": "DataSpecialization",
+        "applicableWhen": ["WC.PLATELET.BASELINE"],
+        "items": [
+          {"OID": "IT.LB.STUDYID", "name": "STUDYID", "dataType": "text"},
+          {"OID": "IT.LB.LBTEST", "name": "LBTEST", "dataType": "text"},
+          {"OID": "IT.LB.LBCAT", "name": "LBCAT", "dataType": "text"},
+          {"OID": "IT.LB.LBSTRESU", "name": "LBSTRESU", "dataType": "text"},
+          {"OID": "IT.LB.VISITNUM", "name": "VISITNUM", "dataType": "integer"},
+          {"OID": "IT.LB.VISIT", "name": "VISIT", "dataType": "text"},
+          {"OID": "IT.LB.LBSTRESN", "name": "LBSTRESN", "dataType": "float"}
+        ]
+      }
+    ],
+    
+    "items": [
+      {"OID": "IT.LB.STUDYID", "name": "STUDYID", "label": "Study Identifier", "dataType": "text"},
+      {"OID": "IT.LB.LBTEST", "name": "LBTEST", "label": "Lab Test Name", "dataType": "text"},
+      {"OID": "IT.LB.LBCAT", "name": "LBCAT", "label": "Lab Test Category", "dataType": "text"},
+      {"OID": "IT.LB.LBSTRESU", "name": "LBSTRESU", "label": "Standard Units", "dataType": "text"},
+      {"OID": "IT.LB.VISITNUM", "name": "VISITNUM", "label": "Visit Number", "dataType": "integer"},
+      {"OID": "IT.LB.VISIT", "name": "VISIT", "label": "Visit Name", "dataType": "text"},
+      {"OID": "IT.LB.LBSTRESN", "name": "LBSTRESN", "label": "Numeric Result", "dataType": "float"}
+    ]
+  }]
+}
+

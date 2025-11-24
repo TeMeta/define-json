@@ -1,0 +1,69 @@
+{
+  "clinicalData": {
+    "studyOID": "STUDY001",
+    "metaDataVersionOID": "MDV.VS.001",
+    "itemGroupData": {
+      "IG.VS": {
+        "records": [
+          ["STUDY001", "SUBJ001", 1, "SYSBP", "Systolic Blood Pressure", 120, "mmHg", "2024-01-15"],
+          ["STUDY001", "SUBJ001", 1, "DIABP", "Diastolic Blood Pressure", 80, "mmHg", "2024-01-15"],
+          ["STUDY001", "SUBJ001", 1, "PULSE", "Pulse Rate", 72, "beats/min", "2024-01-15"],
+          ["STUDY001", "SUBJ001", 2, "SYSBP", "Systolic Blood Pressure", 122, "mmHg", "2024-02-15"],
+          ["STUDY001", "SUBJ001", 2, "DIABP", "Diastolic Blood Pressure", 82, "mmHg", "2024-02-15"],
+          ["STUDY001", "SUBJ001", 2, "PULSE", "Pulse Rate", 74, "beats/min", "2024-02-15"],
+          ["STUDY001", "SUBJ002", 1, "SYSBP", "Systolic Blood Pressure", 118, "mmHg", "2024-01-16"],
+          ["STUDY001", "SUBJ002", 1, "DIABP", "Diastolic Blood Pressure", 78, "mmHg", "2024-01-16"],
+          ["STUDY001", "SUBJ002", 1, "PULSE", "Pulse Rate", 70, "beats/min", "2024-01-16"],
+          ["STUDY001", "SUBJ002", 2, "SYSBP", "Systolic Blood Pressure", 120, "mmHg", "2024-02-16"],
+          ["STUDY001", "SUBJ002", 2, "DIABP", "Diastolic Blood Pressure", 80, "mmHg", "2024-02-16"],
+          ["STUDY001", "SUBJ002", 2, "PULSE", "Pulse Rate", 72, "beats/min", "2024-02-16"]
+        ],
+        "columns": [
+          {
+            "name": "STUDYID",
+            "label": "Study Identifier",
+            "dataType": "string"
+          },
+          {
+            "name": "USUBJID",
+            "label": "Unique Subject Identifier",
+            "dataType": "string"
+          },
+          {
+            "name": "VISITNUM",
+            "label": "Visit Number",
+            "dataType": "integer"
+          },
+          {
+            "name": "VSTESTCD",
+            "label": "Vital Signs Test Code",
+            "dataType": "string"
+          },
+          {
+            "name": "VSTEST",
+            "label": "Vital Signs Test Name",
+            "dataType": "string"
+          },
+          {
+            "name": "VSORRES",
+            "label": "Result in Original Units",
+            "dataType": "float"
+          },
+          {
+            "name": "VSORRESU",
+            "label": "Original Units",
+            "dataType": "string"
+          },
+          {
+            "name": "VSDTC",
+            "label": "Date/Time of Collection",
+            "dataType": "string"
+          }
+        ],
+        "name": "Vital Signs",
+        "label": "VS"
+      }
+    }
+  }
+}
+

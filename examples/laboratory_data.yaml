@@ -1,0 +1,42 @@
+# Laboratory Example Data (SDTM DM and LB domains only)
+sdtm_dm:
+  - USUBJID: "001"
+    AGE: 45
+    SEX: "M"
+    RACE: "WHITE"
+    ETHNIC: "NOT HISPANIC OR LATINO"
+    ARM: "TREATMENT A"
+  - USUBJID: "002"
+    AGE: 32
+    SEX: "F"
+    RACE: "ASIAN"
+    ETHNIC: "NOT HISPANIC OR LATINO"
+    ARM: "TREATMENT B"
+  - USUBJID: "003"
+    AGE: 58
+    SEX: "M"
+    RACE: "WHITE"
+    ETHNIC: "HISPANIC OR LATINO"
+    ARM: "TREATMENT A"
+sdtm_lb:
+  - USUBJID: "001"
+    LBTESTCD: "GLUC"
+    LBTEST: "Glucose"
+    LBORRES: 95
+    LBORRESU: "mg/dL"
+    VISIT: "SCREENING"
+    LBDTC: "2024-01-15"
+  - USUBJID: "002"
+    LBTESTCD: "GLUC"
+    LBTEST: "Glucose"
+    LBORRES: 88
+    LBORRESU: "mg/dL"
+    VISIT: "SCREENING"
+    LBDTC: "2024-01-16"
+  - USUBJID: "003"
+    LBTESTCD: "GLUC"
+    LBTEST: "Glucose"
+    LBORRES: 102
+    LBORRESU: "mg/dL"
+    VISIT: "SCREENING"
+    LBDTC: "2024-01-17" 

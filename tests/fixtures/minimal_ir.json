@@ -1,0 +1,59 @@
+{
+  "metaDataVersion": [{
+    "OID": "MDV.TEST.001",
+    "name": "Test Metadata Version",
+    "fileOID": "FILE.TEST.001",
+    "creationDateTime": "2025-01-01T00:00:00",
+    "odmVersion": "2.0",
+    "fileType": "Snapshot",
+    "studyOID": "STUDY.TEST.001",
+    "conditions": [
+      {
+        "OID": "COND.TEMP.001",
+        "rangeChecks": [
+          {
+            "comparator": "EQ",
+            "checkValues": ["SCREENING"],
+            "item": "IT.AE.VISITNUM"
+          }
+        ]
+      }
+    ],
+    "whereClauses": [
+      {
+        "OID": "WC.TEMP.001",
+        "conditions": ["COND.TEMP.001"]
+      }
+    ],
+    "itemGroups": [
+      {
+        "OID": "IG.AE",
+        "name": "AE",
+        "domain": "AE",
+        "type": "Table",
+        "items": [
+          {
+            "OID": "IT.AE.VISITNUM",
+            "name": "VISITNUM",
+            "dataType": "float"
+          },
+          {
+            "OID": "IT.AE.AETERM",
+            "name": "AETERM",
+            "dataType": "text",
+            "applicableWhen": []
+          },
+          {
+            "OID": "IT.AE.AESEV",
+            "name": "AESEV",
+            "dataType": "text",
+            "applicableWhen": ["WC.TEMP.001"]
+          }
+        ]
+      }
+    ],
+    "items": [],
+    "codeLists": []
+  }]
+}
+

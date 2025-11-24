@@ -17,7 +17,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -296,7 +295,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -659,7 +657,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -894,7 +891,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -999,7 +995,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -1218,7 +1213,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -1453,7 +1447,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -1673,7 +1666,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -1969,7 +1961,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "address": {
@@ -2116,7 +2107,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -2256,7 +2246,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -2416,6 +2405,16 @@
                 },
                 "items": {
                     "description": "Items in this group",
+                    "items": {
+                        "$ref": "#/$defs/Item"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "keySequence": {
+                    "description": "Ordered list of Items that define the dataset key structure for sorting and uniqueness. Each entry is an OID reference to an Item in the items array. Order determines sorting precedence, merge operations, and record uniqueness. These are allowed to be null, unlike stricter dataset dimensions or primary keys.",
                     "items": {
                         "$ref": "#/$defs/Item"
                     },
@@ -2647,7 +2646,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -2901,7 +2899,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "action": {
@@ -3138,7 +3135,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -3261,7 +3257,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -3325,12 +3320,6 @@
                 "item": {
                     "description": "Reference to the Item that defines this component's data structure and properties",
                     "type": "string"
-                },
-                "keySequence": {
-                    "type": [
-                        "integer",
-                        "null"
-                    ]
                 },
                 "label": {
                     "anyOf": [
@@ -3517,7 +3506,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -3788,7 +3776,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -3918,7 +3905,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -4098,7 +4084,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -4472,7 +4457,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -4601,6 +4585,16 @@
                 },
                 "items": {
                     "description": "Items in this group",
+                    "items": {
+                        "$ref": "#/$defs/Item"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "keySequence": {
+                    "description": "Ordered list of Items that define the dataset key structure for sorting and uniqueness. Each entry is an OID reference to an Item in the items array. Order determines sorting precedence, merge operations, and record uniqueness. These are allowed to be null, unlike stricter dataset dimensions or primary keys.",
                     "items": {
                         "$ref": "#/$defs/Item"
                     },
@@ -4922,7 +4916,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -5162,7 +5155,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -5617,7 +5609,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -5858,7 +5849,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -6099,7 +6089,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "address": {
@@ -6290,7 +6279,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -6501,7 +6489,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -6806,7 +6793,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -7028,7 +7014,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -7133,7 +7118,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -7256,7 +7240,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -7383,7 +7366,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -7675,7 +7657,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -7811,7 +7792,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -8011,7 +7991,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -8137,7 +8116,6 @@
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-                    "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
                     "type": "string"
                 },
                 "aliases": {
@@ -8348,7 +8326,6 @@
     "properties": {
         "OID": {
             "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
-            "pattern": "^[A-Za-z][A-Za-z0-9._-]*$",
             "type": "string"
         },
         "aliases": {
