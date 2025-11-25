@@ -21,6 +21,7 @@ try:
         RangeCheck,
         CodeList,
         CodeListItem,
+        ItemGroupType,
     )
 except Exception as exc:  # pragma: no cover
     raise ImportError("define_json.schema.define not available") from exc
@@ -72,11 +73,53 @@ def _ref_to_string(ref: Any) -> str:
     return f"OBJ:{ref.__class__.__name__}:{id(ref)}"
 
 
+def _canonical_condition_payload(cond: Condition, mdv: Optional[MetaDataVersion] = None) -> Dict[str, Any]:
+    """
+    Build canonical payload for Condition.
+    
+    Handles rangeChecks and nested condition references.
+    """
+    payload: Dict[str, Any] = {}
+    
+    # Process rangeChecks
+    checks = cond.rangeChecks or []
+    canon_checks: List[Dict[str, Any]] = []
+    for rc in checks:
+        comparator = getattr(rc, "comparator", None)
+        values = [_normalise_check_value(v) for v in (rc.checkValues or [])]
+        try:
+            values = sorted(values)
+        except TypeError:
+            values = sorted(map(lambda x: json.dumps(x, sort_keys=True), values))
+        canon_checks.append({
+            "item": _ref_to_string(getattr(rc, "item", None)),
+            "comparator": comparator,
+            "values": values,
+        })
+    canon_checks.sort(key=lambda d: (d["item"], str(d["comparator"]), json.dumps(d["values"])))
+    if canon_checks:
+        payload["rangeChecks"] = canon_checks
+    
+    # Process nested conditions (OID references)
+    nested_conditions = cond.conditions or []
+    if nested_conditions:
+        # Sort condition OIDs for determinism
+        payload["conditions"] = sorted(nested_conditions)
+    
+    # Include operator if present
+    operator = getattr(cond, "operator", None)
+    if operator:
+        payload["operator"] = operator
+    
+    return payload
+
+
 def _canonical_where_payload(where: WhereClause, mdv: Optional[MetaDataVersion] = None) -> Dict[str, Any]:
     """
     Build canonical payload for WhereClause.
     
     Handles both string OID references and Condition objects.
+    Note: This function now uses consolidated Condition OIDs if available.
     """
     conditions = where.conditions or []
     canon_conditions: List[Dict[str, Any]] = []
@@ -96,61 +139,205 @@ def _canonical_where_payload(where: WhereClause, mdv: Optional[MetaDataVersion] 
             # Already a Condition object
             cond = cond_ref
         
-        checks = cond.rangeChecks or []
-        canon_checks: List[Dict[str, Any]] = []
-        for rc in checks:
-            comparator = getattr(rc, "comparator", None)
-            values = [ _normalise_check_value(v) for v in (rc.checkValues or []) ]
-            try:
-                values = sorted(values)
-            except TypeError:
-                values = sorted(map(lambda x: json.dumps(x, sort_keys=True), values))
-            canon_checks.append({
-                "item": _ref_to_string(getattr(rc, "item", None)),
-                "comparator": comparator,
-                "values": values,
-            })
-        canon_checks.sort(key=lambda d: (d["item"], str(d["comparator"]), json.dumps(d["values"])))
-        canon_conditions.append({"checks": canon_checks})
+        # Use canonical condition payload
+        canon_cond = _canonical_condition_payload(cond, mdv)
+        canon_conditions.append(canon_cond)
+    
     canon_conditions.sort(key=lambda d: json.dumps(d, sort_keys=True))
     return {"conditions": canon_conditions}
 
 
+def _extract_meaningful_oid(where: WhereClause, mdv: Optional[MetaDataVersion] = None) -> Optional[str]:
+    """
+    Extract meaningful OID from WhereClause structure if possible.
+    
+    Attempts to create human-readable OID like WC.{domain}.{test_code} from the
+    WhereClause structure. Falls back to None if structure is too complex.
+    
+    Args:
+        where: WhereClause to extract OID from
+        mdv: Optional MetaDataVersion to resolve Condition OID references
+        
+    Returns:
+        Meaningful OID string (e.g., "WC.VS.TEMP") or None if structure too complex
+    """
+    payload = _canonical_where_payload(where, mdv)
+    conditions = payload.get('conditions', [])
+    
+    if not conditions:
+        return None
+    
+    # Extract domain and test codes from conditions
+    # Note: conditions now use _canonical_condition_payload which returns rangeChecks
+    domains = set()
+    all_checks = []
+    
+    for cond in conditions:
+        # Check for rangeChecks (from _canonical_condition_payload)
+        range_checks = cond.get('rangeChecks', [])
+        for rc in range_checks:
+            item = rc.get('item', '')
+            values = rc.get('values', [])
+            
+            # Parse domain from item OID (e.g., IT.VS.VSTESTCD -> VS)
+            if item.startswith('IT.'):
+                parts = item.split('.')
+                if len(parts) >= 2:
+                    domains.add(parts[1])
+            
+            # Collect checks with their item and values
+            for val in values:
+                if isinstance(val, str):
+                    all_checks.append((item, val))
+    
+    # Must have exactly one domain
+    if len(domains) != 1:
+        return None
+    
+    domain = list(domains)[0]
+    
+    # Extract test codes (checkValues) - sort for determinism
+    test_codes = sorted([val for _, val in all_checks])
+    
+    if not test_codes:
+        return None
+    
+    # Build OID: WC.{domain}.{test_code} or WC.{domain}.{test_code1}_{test_code2}...
+    if len(test_codes) == 1:
+        test_code = test_codes[0]
+        return f"WC.{domain}.{test_code}"
+    else:
+        # Multiple test codes - join with underscore, already sorted
+        test_code = '_'.join(test_codes)
+        return f"WC.{domain}.{test_code}"
+
+
 def canonicalise_whereclause(where: WhereClause, mdv: Optional[MetaDataVersion] = None) -> str:
     """
-    Create canonical hash ID for WhereClause.
+    Create canonical ID for WhereClause.
+    
+    Attempts to extract meaningful OID (e.g., WC.VS.TEMP) from structure.
+    Falls back to hash-based OID if structure is too complex.
     
     Args:
         where: WhereClause to canonicalise
         mdv: Optional MetaDataVersion to resolve Condition OID references
+        
+    Returns:
+        Canonical OID string (meaningful if possible, otherwise hash-based)
     """
+    # Try to extract meaningful OID first
+    meaningful_oid = _extract_meaningful_oid(where, mdv)
+    if meaningful_oid:
+        return meaningful_oid
+    
+    # Fallback to hash-based OID for complex structures
     payload = _canonical_where_payload(where, mdv)
     data = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
     return f"WC.{hashlib.sha256(data).hexdigest()[:16]}"
 
 
+def _canonical_condition_oid(cond: Condition, mdv: Optional[MetaDataVersion] = None) -> str:
+    """
+    Create canonical OID for Condition based on its structure.
+    
+    Attempts to extract meaningful OID (e.g., COND.VS.TEMP) from structure,
+    falls back to hash-based OID for complex structures.
+    """
+    payload = _canonical_condition_payload(cond, mdv)
+    
+    # Try to extract meaningful OID from rangeChecks
+    range_checks = payload.get("rangeChecks", [])
+    if range_checks and len(range_checks) == 1:
+        rc = range_checks[0]
+        item = rc.get("item", "")
+        values = rc.get("values", [])
+        
+        # Parse domain from item OID (e.g., IT.VS.VSTESTCD -> VS)
+        if item.startswith("IT."):
+            parts = item.split(".")
+            if len(parts) >= 2:
+                domain = parts[1]
+                # Extract test code from values
+                if values and len(values) == 1:
+                    test_code = values[0] if isinstance(values[0], str) else None
+                    if test_code:
+                        return f"COND.{domain}.{test_code}"
+    
+    # Fallback to hash-based OID
+    data = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return f"COND.{hashlib.sha256(data).hexdigest()[:16]}"
+
+
+def build_condition_registry(mdv: MetaDataVersion) -> Dict[str, Condition]:
+    """
+    Build canonical Condition registry and remap all references to canonical OIDs.
+    
+    This should be called BEFORE build_where_registry since WhereClauses reference Conditions.
+    """
+    registry: Dict[str, Condition] = {}
+    old_to_canonical: Dict[str, str] = {}
+    
+    # Canonicalise all Conditions and build mapping from old OID -> canonical OID
+    for cond in (mdv.conditions or []):
+        old_oid = cond.OID
+        canonical_oid = _canonical_condition_oid(cond, mdv)
+        
+        if canonical_oid not in registry:
+            # First Condition with this canonical OID - keep it
+            cond.OID = canonical_oid
+            registry[canonical_oid] = cond
+        
+        # Map old OID to canonical OID (for remapping references)
+        if old_oid:
+            old_to_canonical[old_oid] = canonical_oid
+    
+    # Remap all Condition references in WhereClauses
+    for wc in (mdv.whereClauses or []):
+        if wc.conditions:
+            wc.conditions = [
+                old_to_canonical.get(oid, oid) for oid in wc.conditions
+            ]
+    
+    # Remap nested Condition references in other Conditions
+    for cond in (mdv.conditions or []):
+        if cond.conditions:
+            cond.conditions = [
+                old_to_canonical.get(oid, oid) for oid in cond.conditions
+            ]
+    
+    # Remove duplicate Conditions from the list
+    mdv.conditions = list(registry.values())
+    
+    return registry
+
+
 def build_where_registry(mdv: MetaDataVersion) -> Dict[str, WhereClause]:
-    """Build canonical WhereClause registry and remap all references to canonical hashes."""
+    """
+    Build canonical WhereClause registry and remap all references to canonical OIDs.
+    
+    Note: Conditions should be consolidated first via build_condition_registry().
+    """
     registry: Dict[str, WhereClause] = {}
     old_to_canonical: Dict[str, str] = {}
     
-    # Canonicalise all WhereClauses and build mapping from old OID -> canonical hash
+    # Canonicalise all WhereClauses and build mapping from old OID -> canonical OID
     for wc in (mdv.whereClauses or []):
         old_oid = wc.OID
         canonical_wid = canonicalise_whereclause(wc, mdv)
         
         if canonical_wid not in registry:
-            # First WhereClause with this canonical hash - keep it
+            # First WhereClause with this canonical OID - keep it
             wc.OID = canonical_wid
             registry[canonical_wid] = wc
         
-        # Map old OID to canonical hash (for remapping applicableWhen)
+        # Map old OID to canonical OID (for remapping applicableWhen)
         if old_oid:
             old_to_canonical[old_oid] = canonical_wid
     
-    # Remap all applicableWhen to use canonical hashes
+    # Remap all applicableWhen to use canonical OIDs
     def _remap_oids(obj: Any) -> None:
-        """Remap applicableWhen OIDs to canonical hashes."""
+        """Remap applicableWhen OIDs to canonical OIDs."""
         if hasattr(obj, "applicableWhen") and obj.applicableWhen:
             obj.applicableWhen = [
                 old_to_canonical.get(oid, oid) for oid in obj.applicableWhen
@@ -179,6 +366,222 @@ def _is_slice(ig: ItemGroup) -> bool:
 
 def _domain_name_of_ig(ig: ItemGroup) -> str:
     return getattr(ig, "domain", None) or getattr(ig, "name", None) or ""
+
+
+def _is_value_list(ig: ItemGroup) -> bool:
+    """Check if ItemGroup is a ValueList (type="ValueList" or ItemGroupType.ValueList)."""
+    ig_type = getattr(ig, "type", None)
+    if ig_type == ItemGroupType.ValueList:
+        return True
+    return str(ig_type) == "ValueList"
+
+
+def transform_value_lists_to_specialisation(mdv: MetaDataVersion) -> None:
+    """
+    Transform ValueList-based structure to Dataset Specialisation shape.
+    
+    Converts ItemGroups with type="ValueList" (containing items grouped by variable name)
+    into canonical ItemGroups with type="DataSpecialization" (slices) where each shared
+    WhereClause gets its own ItemGroup containing ALL items that apply when that WhereClause is true.
+    
+    This transformation creates canonical slices:
+    1. Consolidates unique WhereClauses based on their structure (conditions/RangeChecks)
+    2. Identifies all ValueList ItemGroups (type="ValueList")
+    3. Extracts items from each ValueList, preserving all item properties
+    4. Groups items by their applicableWhen WhereClause OID(s) - canonical: one slice per WhereClause
+    5. Creates new DataSpecialization ItemGroups for each unique WhereClause (not per domain+WhereClause)
+    6. Removes the original ValueList ItemGroups
+    7. Updates domain ItemGroup children to reference canonical slice OIDs (removes ValueList references)
+    
+    Capabilities:
+    - Consolidates unique WhereClauses: deduplicates WhereClauses with identical structure (conditions)
+    - Canonical grouping: one slice per shared WhereClause (all items with same WhereClause in one slice)
+    - Handles items with single or multiple applicableWhen WhereClauses
+    - Preserves domain information from items (slice domain set from items' domains)
+    - Maintains all item properties (dataType, origin, codeList, etc.)
+    - Creates canonical slice OIDs following pattern: IG.{WhereClauseOID}
+    - Merges items from multiple ValueLists/domains that share the same WhereClause into one slice
+    - Updates domain ItemGroup children to reference slice OIDs (not ValueLists)
+    
+    This is the inverse transformation of _create_value_lists_from_slices in
+    json_to_xml.py, which projects DataSpecialization slices back to ValueLists.
+    
+    Args:
+        mdv: MetaDataVersion to transform in-place
+        
+    Modifies:
+        mdv.whereClauses - Duplicate WhereClauses consolidated, references updated
+        mdv.itemGroups - ValueLists are removed, replaced with canonical DataSpecialization slices
+        Domain ItemGroup children - ValueList references removed, slice OID references added
+    
+    Example:
+        Before: ValueList VL.VS.VSORRES contains items for TEMP, WEIGHT, HEIGHT, etc.
+                each with applicableWhen=["WC.VS.VSORRES.TEMP"], etc.
+                IG.VS has children=[VL.VS.VSORRES, VL.VS.VSORRESU]
+                WhereClauses: WC.VS.VSORRES.TEMP, WC.VS.VSORRESU.TEMP (duplicate structures)
+        
+        After:  ItemGroup IG.WC.VS.VSORRES.TEMP (type="DataSpecialization", canonical OID)
+                with applicableWhen=["WC.{canonical_hash}"] (consolidated WhereClause)
+                containing ALL items with this WhereClause (e.g., IT.VS.VSORRES.TEMP, IT.VS.VSORRESU.TEMP)
+                IG.VS has children=["IG.WC.{canonical_hash}", ...]
+                WhereClauses: Consolidated to unique structures only
+    
+    Note:
+        Items without applicableWhen are not included in the transformation.
+        Domain ItemGroups (non-ValueList, non-slice) are preserved unchanged.
+        If items from multiple domains share the same WhereClause, they all go into one slice.
+    """
+    if not mdv.itemGroups:
+        return
+    
+    # First, consolidate unique Conditions based on their structure
+    # This deduplicates Conditions with identical rangeChecks/conditions
+    build_condition_registry(mdv)
+    
+    # Then, consolidate unique WhereClauses based on their structure
+    # This deduplicates WhereClauses with identical conditions (now using consolidated Condition OIDs)
+    build_where_registry(mdv)
+    
+    # Track slices by WhereClause OID only (canonical: one slice per shared WhereClause)
+    wc_oid_to_slice: Dict[str, ItemGroup] = {}
+    value_list_oids_to_remove: Set[str] = set()
+    # Track which domain ItemGroups need their children updated
+    domain_to_slice_oids: Dict[str, List[str]] = {}
+    # Track domains for each WhereClause (for slice domain assignment)
+    wc_oid_to_domains: Dict[str, Set[str]] = {}
+    
+    # Process all ValueLists
+    for vl_ig in list(mdv.itemGroups or []):
+        if not _is_value_list(vl_ig):
+            continue
+        
+        domain = _domain_name_of_ig(vl_ig)
+        if not domain:
+            # Try to infer domain from OID pattern (e.g., VL.VS.VSORRES -> VS)
+            oid_parts = vl_ig.OID.split('.')
+            if len(oid_parts) >= 2 and oid_parts[0] == 'VL':
+                domain = oid_parts[1]
+        
+        if not domain:
+            # Skip ValueLists without domain information
+            continue
+        
+        # Extract items from ValueList
+        items = vl_ig.items or []
+        if not items:
+            # Mark empty ValueList for removal
+            value_list_oids_to_remove.add(vl_ig.OID)
+            continue
+        
+        # Group items by their applicableWhen WhereClause OIDs
+        for item in items:
+            applicable_whens = item.applicableWhen or []
+            if not applicable_whens:
+                # Skip items without applicableWhen
+                continue
+            
+            # Create or update slices for each applicableWhen WhereClause
+            for wc_oid in applicable_whens:
+                if not isinstance(wc_oid, str):
+                    wc_oid = str(wc_oid)
+                
+                # Track domain for this WhereClause
+                if wc_oid not in wc_oid_to_domains:
+                    wc_oid_to_domains[wc_oid] = set()
+                wc_oid_to_domains[wc_oid].add(domain)
+                
+                # Create or get slice for this WhereClause (canonical: one per WhereClause)
+                if wc_oid not in wc_oid_to_slice:
+                    # Determine slice domain: use first domain, or None if multiple domains share this WhereClause
+                    slice_domain = domain if len(wc_oid_to_domains[wc_oid]) == 1 else None
+                    
+                    # Create canonical DataSpecialization slice
+                    # OID pattern: IG.{WhereClauseOID} (canonical, based purely on WhereClause)
+                    slice_oid = f"IG.{wc_oid}"
+                    slice_name = wc_oid.replace('.', '_')
+                    
+                    new_slice = ItemGroup.model_construct(
+                        OID=slice_oid,
+                        name=slice_name,
+                        domain=slice_domain,
+                        type=ItemGroupType.DataSpecialization
+                    )
+                    new_slice.applicableWhen = [wc_oid]
+                    new_slice.items = []
+                    new_slice.children = None  # Slices are leaf nodes, no children
+                    wc_oid_to_slice[wc_oid] = new_slice
+                    mdv.itemGroups.append(new_slice)
+                    
+                    # Track slice OID for domain's children (all domains that use this WhereClause)
+                    for wc_domain in wc_oid_to_domains[wc_oid]:
+                        if wc_domain not in domain_to_slice_oids:
+                            domain_to_slice_oids[wc_domain] = []
+                        domain_to_slice_oids[wc_domain].append(slice_oid)
+                
+                # Add item to slice if not already present
+                # Items with multiple applicableWhen values will appear in multiple slices,
+                # which is correct - each slice represents one WhereClause context
+                if wc_oid_to_slice[wc_oid].items is None:
+                    wc_oid_to_slice[wc_oid].items = []
+                if item not in wc_oid_to_slice[wc_oid].items:
+                    wc_oid_to_slice[wc_oid].items.append(item)
+        
+        # Mark ValueList for removal after processing
+        value_list_oids_to_remove.add(vl_ig.OID)
+    
+    # Remove processed ValueLists
+    if value_list_oids_to_remove:
+        mdv.itemGroups = [
+            ig for ig in mdv.itemGroups 
+            if ig.OID not in value_list_oids_to_remove
+        ]
+    
+    # Ensure slices don't have children (they are leaf nodes)
+    for slice_ig in mdv.itemGroups or []:
+        if _is_slice(slice_ig):
+            slice_ig.children = None
+    
+    # Update domain ItemGroups: remove ValueList children, add slice children
+    for domain_ig in mdv.itemGroups or []:
+        # Skip slices and ValueLists
+        if _is_slice(domain_ig) or _is_value_list(domain_ig):
+            continue
+        
+        domain = _domain_name_of_ig(domain_ig)
+        if not domain or domain not in domain_to_slice_oids:
+            continue
+        
+        # Update children: remove ValueList references, add slice OID references
+        children = domain_ig.children or []
+        
+        # Remove ValueList references (both OID strings and full objects)
+        filtered_children = []
+        for child in children:
+            if isinstance(child, str):
+                # OID string reference - keep if not a ValueList
+                if not child.startswith('VL.'):
+                    filtered_children.append(child)
+            elif isinstance(child, ItemGroup):
+                # Full ItemGroup object - keep if not a ValueList
+                if not _is_value_list(child):
+                    filtered_children.append(child)
+            else:
+                # Unknown type, keep as-is
+                filtered_children.append(child)
+        
+        # Add slice OID references for this domain
+        slice_oids = domain_to_slice_oids[domain]
+        for slice_oid in sorted(slice_oids):
+            if slice_oid not in filtered_children:
+                filtered_children.append(slice_oid)
+        
+        domain_ig.children = filtered_children if filtered_children else None
+    
+    # Final pass: ensure slices don't have children (they are leaf nodes)
+    # This must be done AFTER updating domain ItemGroups to avoid any reverse references
+    for slice_ig in mdv.itemGroups or []:
+        if _is_slice(slice_ig):
+            slice_ig.children = None
 
 
 def build_canonical_slices(mdv: MetaDataVersion) -> None:

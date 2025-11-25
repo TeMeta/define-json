@@ -1670,7 +1670,9 @@ class DefineJSONToXMLConverter:
         
         for slice_ig in slices:
             domain = slice_ig.get('domain', '')
-            where_clause = slice_ig.get('whereClause', '')
+            # Get WhereClause from slice's applicableWhen (canonical slices have one WhereClause)
+            applicable_when = slice_ig.get('applicableWhen', [])
+            where_clause = applicable_when[0] if applicable_when else ''
             items = slice_ig.get('items', [])
             
             for item in items:
@@ -1683,9 +1685,12 @@ class DefineJSONToXMLConverter:
                     var_to_contexts[key] = []
                 
                 # Store item with its context
+                # Use slice's applicableWhen, or fall back to item's applicableWhen
+                item_applicable_when = item.get('applicableWhen', [])
+                item_where_clause = item_applicable_when[0] if item_applicable_when else where_clause
                 var_to_contexts[key].append({
                     'item': item,
-                    'whereClause': where_clause or item.get('whereClause', '')
+                    'whereClause': item_where_clause or where_clause
                 })
         
         # Create ValueListDefs for variables with multiple contexts

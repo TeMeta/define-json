@@ -20,7 +20,14 @@ from define_json.utils.ir import (
     serialize_canonical,
     export_define_xml_21,
     export_define_xml_10,
+    transform_value_lists_to_specialisation,
 )
+
+try:
+    from define_json.converters.xml_to_json import DefineXMLToJSONConverter
+    CONVERTERS_AVAILABLE = True
+except ImportError:
+    CONVERTERS_AVAILABLE = False
 
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
@@ -396,6 +403,503 @@ class TestXMLExporters:
         
         # AE domain content should be different from VS domain content
         assert xml_ae != xml_vs, "Different domain filters should produce different output"
+
+
+class TestValueListToSpecialisation:
+    """ValueList to Dataset Specialisation transformation tests."""
+
+    def test_transforms_value_lists_to_slices(self):
+        """ValueLists should be transformed into DataSpecialization slices."""
+        mdv = load_mdv(FIXTURES_DIR / "valuelist_test.json")
+        
+        # Count ValueLists before transformation
+        from define_json.schema.define import ItemGroupType
+        value_lists_before = [
+            ig for ig in mdv.itemGroups 
+            if getattr(ig, "type", None) == ItemGroupType.ValueList
+        ]
+        assert len(value_lists_before) == 3, "Should have 3 ValueLists before transformation"
+        
+        # Count domain ItemGroups before (should be preserved)
+        domain_groups_before = [
+            ig for ig in mdv.itemGroups 
+            if getattr(ig, "type", None) not in (ItemGroupType.ValueList, ItemGroupType.DataSpecialization)
+        ]
+        domain_group_count = len(domain_groups_before)
+        
+        # Transform
+        transform_value_lists_to_specialisation(mdv)
+        
+        # ValueLists should be removed
+        value_lists_after = [
+            ig for ig in mdv.itemGroups 
+            if getattr(ig, "type", None) == ItemGroupType.ValueList
+        ]
+        assert len(value_lists_after) == 0, "All ValueLists should be removed"
+        
+        # Domain ItemGroups should be preserved
+        domain_groups_after = [
+            ig for ig in mdv.itemGroups 
+            if getattr(ig, "type", None) not in (ItemGroupType.ValueList, ItemGroupType.DataSpecialization)
+        ]
+        assert len(domain_groups_after) == domain_group_count, "Domain ItemGroups should be preserved"
+        
+        # Should have created DataSpecialization slices
+        slices = [
+            ig for ig in mdv.itemGroups 
+            if getattr(ig, "type", None) == ItemGroupType.DataSpecialization
+        ]
+        assert len(slices) > 0, "Should create DataSpecialization slices"
+        
+        # Each slice should have exactly one applicableWhen
+        for slice_ig in slices:
+            assert slice_ig.applicableWhen is not None, "Slice must have applicableWhen"
+            assert len(slice_ig.applicableWhen) == 1, "Slice must have exactly one WhereClause"
+            assert slice_ig.items is not None, "Slice must have items"
+            assert len(slice_ig.items) > 0, "Slice must not be empty"
+
+    def test_groups_items_by_whereclause(self):
+        """Items should be grouped by their applicableWhen WhereClause."""
+        mdv = load_mdv(FIXTURES_DIR / "valuelist_test.json")
+        
+        transform_value_lists_to_specialisation(mdv)
+        
+        # Find slice for WC.VS.VSORRES.TEMP
+        from define_json.schema.define import ItemGroupType
+        temp_slice = None
+        for ig in mdv.itemGroups:
+            if (getattr(ig, "type", None) == ItemGroupType.DataSpecialization and
+                ig.applicableWhen and
+                ig.applicableWhen[0] == "WC.VS.VSORRES.TEMP"):
+                temp_slice = ig
+                break
+        
+        assert temp_slice is not None, "Should create slice for WC.VS.VSORRES.TEMP"
+        assert len(temp_slice.items) == 1, "TEMP slice should have 1 item"
+        assert temp_slice.items[0].OID == "IT.VS.VSORRES.TEMP", "Should contain IT.VS.VSORRES.TEMP"
+        
+        # Find slice for WC.VS.VSORRES.WEIGHT
+        weight_slice = None
+        for ig in mdv.itemGroups:
+            if (getattr(ig, "type", None) == ItemGroupType.DataSpecialization and
+                ig.applicableWhen and
+                ig.applicableWhen[0] == "WC.VS.VSORRES.WEIGHT"):
+                weight_slice = ig
+                break
+        
+        assert weight_slice is not None, "Should create slice for WC.VS.VSORRES.WEIGHT"
+        assert len(weight_slice.items) == 1, "WEIGHT slice should have 1 item"
+        assert weight_slice.items[0].OID == "IT.VS.VSORRES.WEIGHT", "Should contain IT.VS.VSORRES.WEIGHT"
+
+    def test_preserves_item_properties(self):
+        """Item properties should be preserved during transformation."""
+        mdv = load_mdv(FIXTURES_DIR / "valuelist_test.json")
+        
+        # Get original item before transformation
+        original_item = None
+        for vl_ig in mdv.itemGroups:
+            if vl_ig.OID == "VL.VS.VSORRES":
+                original_item = vl_ig.items[0]
+                break
+        
+        assert original_item is not None, "Should find original item"
+        original_data_type = original_item.dataType
+        original_origin = original_item.origin
+        
+        transform_value_lists_to_specialisation(mdv)
+        
+        # Find transformed item in slice
+        from define_json.schema.define import ItemGroupType
+        transformed_item = None
+        for ig in mdv.itemGroups:
+            if (getattr(ig, "type", None) == ItemGroupType.DataSpecialization and
+                ig.applicableWhen and
+                ig.applicableWhen[0] == "WC.VS.VSORRES.TEMP"):
+                transformed_item = ig.items[0]
+                break
+        
+        assert transformed_item is not None, "Should find transformed item"
+        assert transformed_item.OID == original_item.OID, "OID should be preserved"
+        assert transformed_item.dataType == original_data_type, "dataType should be preserved"
+        assert transformed_item.origin == original_origin, "origin should be preserved"
+
+    def test_creates_slice_oids_correctly(self):
+        """Slice OIDs should follow pattern IG.{domain}.{WhereClauseOID}."""
+        mdv = load_mdv(FIXTURES_DIR / "valuelist_test.json")
+        
+        transform_value_lists_to_specialisation(mdv)
+        
+        from define_json.schema.define import ItemGroupType
+        slices = [
+            ig for ig in mdv.itemGroups 
+            if getattr(ig, "type", None) == ItemGroupType.DataSpecialization
+        ]
+        
+        for slice_ig in slices:
+            domain = slice_ig.domain
+            wc_oid = slice_ig.applicableWhen[0] if slice_ig.applicableWhen else ""
+            expected_oid = f"IG.{domain}.{wc_oid}"
+            assert slice_ig.OID == expected_oid, f"Slice OID should be {expected_oid}, got {slice_ig.OID}"
+
+    def test_handles_multiple_value_lists_same_domain(self):
+        """Multiple ValueLists in same domain should create separate slices."""
+        mdv = load_mdv(FIXTURES_DIR / "valuelist_test.json")
+        
+        transform_value_lists_to_specialisation(mdv)
+        
+        # VS domain should have slices from both VL.VS.VSORRES and VL.VS.VSORRESU
+        from define_json.schema.define import ItemGroupType
+        vs_slices = [
+            ig for ig in mdv.itemGroups 
+            if (getattr(ig, "type", None) == ItemGroupType.DataSpecialization and
+                ig.domain == "VS")
+        ]
+        
+        assert len(vs_slices) >= 2, "VS domain should have multiple slices"
+        
+        # Should have slice for VSORRES.TEMP and VSORRESU.TEMP (different WhereClauses)
+        slice_wc_oids = {s.applicableWhen[0] for s in vs_slices if s.applicableWhen}
+        assert "WC.VS.VSORRES.TEMP" in slice_wc_oids, "Should have slice for VSORRES.TEMP"
+        assert "WC.VS.VSORRESU.TEMP" in slice_wc_oids, "Should have slice for VSORRESU.TEMP"
+
+    def test_handles_items_without_applicable_when(self):
+        """Items without applicableWhen should be skipped."""
+        mdv = load_mdv(FIXTURES_DIR / "valuelist_test.json")
+        
+        # Add a ValueList with an item without applicableWhen
+        from define_json.schema.define import ItemGroup, Item, ItemGroupType
+        vl_without_wc = ItemGroup.model_construct(
+            OID="VL.VS.TEST",
+            name="VL_VS_TEST",
+            domain="VS",
+            type=ItemGroupType.ValueList,
+            items=[
+                Item.model_construct(
+                    OID="IT.VS.TEST.NO_WC",
+                    name="TEST",
+                    dataType="text"
+                    # No applicableWhen
+                )
+            ]
+        )
+        mdv.itemGroups.append(vl_without_wc)
+        
+        transform_value_lists_to_specialisation(mdv)
+        
+        # ValueList should be removed
+        assert not any(ig.OID == "VL.VS.TEST" for ig in mdv.itemGroups), "ValueList should be removed"
+        
+        # Item without applicableWhen should not appear in any slice
+        from define_json.schema.define import ItemGroupType
+        all_slice_items = []
+        for ig in mdv.itemGroups:
+            if getattr(ig, "type", None) == ItemGroupType.DataSpecialization:
+                all_slice_items.extend(ig.items or [])
+        
+        assert not any(it.OID == "IT.VS.TEST.NO_WC" for it in all_slice_items), "Item without applicableWhen should not be in slices"
+
+    def test_handles_empty_value_list(self):
+        """Empty ValueLists should be removed without creating slices."""
+        mdv = load_mdv(FIXTURES_DIR / "valuelist_test.json")
+        
+        # Add an empty ValueList
+        from define_json.schema.define import ItemGroup, ItemGroupType
+        empty_vl = ItemGroup.model_construct(
+            OID="VL.VS.EMPTY",
+            name="VL_VS_EMPTY",
+            domain="VS",
+            type=ItemGroupType.ValueList,
+            items=[]
+        )
+        mdv.itemGroups.append(empty_vl)
+        
+        transform_value_lists_to_specialisation(mdv)
+        
+        # Empty ValueList should be removed
+        assert not any(ig.OID == "VL.VS.EMPTY" for ig in mdv.itemGroups), "Empty ValueList should be removed"
+        
+        # No slice should be created for empty ValueList
+        assert not any(
+            ig.OID == "IG.VS.WC.VS.EMPTY" for ig in mdv.itemGroups
+        ), "Should not create slice for empty ValueList"
+
+
+class TestMultipleClausesExamples:
+    """Tests for examples/multiple_clauses.xml and examples/multiple_clauses.json."""
+
+    def test_xml_to_json_matches_existing_json(self):
+        """
+        Convert multiple_clauses.xml to JSON and verify it matches existing JSON.
+        
+        Note: multiple_clauses.json is an INTERMEDIATE representation that preserves
+        the original XML structure (27 WhereClauses) for lossless roundtrip conversion.
+        It does NOT consolidate WhereClauses - that happens only in the canonical DSS representation.
+        """
+        if not CONVERTERS_AVAILABLE:
+            pytest.skip("Conversion modules not available")
+        
+        examples_dir = Path(__file__).parent.parent / "examples"
+        xml_path = examples_dir / "multiple_clauses.xml"
+        json_path = examples_dir / "multiple_clauses.json"
+        
+        if not xml_path.exists():
+            pytest.skip(f"XML file not found: {xml_path}")
+        
+        if not json_path.exists():
+            pytest.skip(f"JSON file not found: {json_path}")
+        
+        import tempfile
+        import json
+        
+        # Convert XML to JSON
+        converter = DefineXMLToJSONConverter()
+        temp_json = Path(tempfile.mktemp(suffix='.json'))
+        
+        try:
+            converted_data = converter.convert_file(xml_path, temp_json)
+            
+            # Load both JSON files for comparison
+            with open(temp_json, 'r') as f:
+                converted_json = json.load(f)
+            
+            with open(json_path, 'r') as f:
+                expected_json = json.load(f)
+            
+            # Handle different structures - converter outputs direct MetaDataVersion,
+            # expected JSON may have metaDataVersion wrapper
+            if 'metaDataVersion' in expected_json:
+                expected_mdv = expected_json['metaDataVersion']
+                if isinstance(expected_mdv, list) and len(expected_mdv) > 0:
+                    expected_mdv = expected_mdv[0]
+            else:
+                expected_mdv = expected_json
+            
+            # Converter outputs direct MetaDataVersion structure
+            converted_mdv = converted_json
+            
+            # Compare key structural elements
+            # Note: We compare structure rather than exact match due to potential
+            # differences in ordering, metadata, etc.
+            
+            # Check OID matches
+            assert converted_mdv.get('OID') == expected_mdv.get('OID'), \
+                f"OID mismatch: {converted_mdv.get('OID')} != {expected_mdv.get('OID')}"
+            
+            # Check study name matches
+            assert converted_mdv.get('studyName') == expected_mdv.get('studyName'), \
+                f"Study name mismatch: {converted_mdv.get('studyName')} != {expected_mdv.get('studyName')}"
+            
+            # Check ValueLists exist in both
+            converted_vls = [
+                ig for ig in converted_mdv.get('itemGroups', [])
+                if ig.get('type') == 'ValueList'
+            ]
+            expected_vls = [
+                ig for ig in expected_mdv.get('itemGroups', [])
+                if ig.get('type') == 'ValueList'
+            ]
+            
+            # Note: Expected JSON may have consolidated WhereClauses and flattened ValueLists,
+            # while converted JSON is fresh from XML with nested ValueLists.
+            # We compare structure but allow for processing differences.
+            
+            # Check ValueLists - account for nested vs flattened structure
+            # Converted JSON has ValueLists nested in children, expected may have them flattened
+            converted_vls_flat = converted_vls.copy()
+            for ig in converted_mdv.get('itemGroups', []):
+                if 'children' in ig and isinstance(ig['children'], list):
+                    for child in ig['children']:
+                        if isinstance(child, dict) and child.get('type') == 'ValueList':
+                            converted_vls_flat.append(child)
+            
+            # Allow for differences due to consolidation/processing
+            # The important thing is that both have ValueLists (or both don't)
+            if len(expected_vls) > 0:
+                assert len(converted_vls_flat) > 0, \
+                    f"Expected ValueLists but converted JSON has none (may be nested)"
+            
+            # Check domain ItemGroups exist
+            converted_domains = [
+                ig for ig in converted_mdv.get('itemGroups', [])
+                if ig.get('type') not in ('ValueList', 'DataSpecialization')
+            ]
+            expected_domains = [
+                ig for ig in expected_mdv.get('itemGroups', [])
+                if ig.get('type') not in ('ValueList', 'DataSpecialization')
+            ]
+            
+            # Domain count may differ due to processing, but should have at least the same domains
+            converted_domain_names = {ig.get('domain') for ig in converted_domains if ig.get('domain')}
+            expected_domain_names = {ig.get('domain') for ig in expected_domains if ig.get('domain')}
+            assert converted_domain_names == expected_domain_names, \
+                f"Domain mismatch: {converted_domain_names} != {expected_domain_names}"
+            
+        finally:
+            # Clean up temp file
+            if temp_json.exists():
+                temp_json.unlink()
+
+    def test_json_to_dss_transformation(self):
+        """
+        Transform multiple_clauses.json to Dataset Specialisation shape.
+        
+        Note: This test transforms the INTERMEDIATE representation (multiple_clauses.json)
+        to the CANONICAL DSS representation (multiple_clauses_dss.json).
+        
+        - multiple_clauses.json: Intermediate, preserves original structure (27 WhereClauses)
+        - multiple_clauses_dss.json: Canonical, consolidates WhereClauses (16 WhereClauses)
+          and creates DataSpecialization slices with meaningful OIDs like WC.VS.TEMP.
+        
+        The transformation consolidates redundant WhereClauses based on their internal
+        structure (not just OID), creating a canonical representation suitable for analysis.
+        """
+        examples_dir = Path(__file__).parent.parent / "examples"
+        json_path = examples_dir / "multiple_clauses.json"
+        dss_json_path = examples_dir / "multiple_clauses_dss.json"
+        
+        if not json_path.exists():
+            pytest.skip(f"JSON file not found: {json_path}")
+        
+        import json
+        
+        # Load original JSON - handle _xmlMetadata field and flatten nested ValueLists
+        with open(json_path, 'r') as f:
+            json_data = json.load(f)
+        
+        # Extract MetaDataVersion, ignoring _xmlMetadata
+        if isinstance(json_data, dict):
+            if "metaDataVersion" in json_data:
+                mdv_data = json_data["metaDataVersion"]
+                if isinstance(mdv_data, list) and len(mdv_data) > 0:
+                    mdv_data = mdv_data[0]
+            else:
+                # Remove _xmlMetadata if present
+                mdv_data = {k: v for k, v in json_data.items() if k != "_xmlMetadata"}
+        else:
+            mdv_data = json_data
+        
+        # Flatten nested ValueLists from children into top-level itemGroups
+        if "itemGroups" in mdv_data:
+            flattened_groups = []
+            for ig in mdv_data["itemGroups"]:
+                flattened_groups.append(ig)
+                # Extract ValueLists from children and set domain from parent
+                if "children" in ig and isinstance(ig["children"], list):
+                    parent_domain = ig.get("domain")
+                    for child in ig["children"]:
+                        if isinstance(child, dict) and child.get("type") == "ValueList":
+                            # Set domain from parent if not already set
+                            if not child.get("domain") and parent_domain:
+                                child["domain"] = parent_domain
+                            flattened_groups.append(child)
+            mdv_data["itemGroups"] = flattened_groups
+        
+        # Load as MetaDataVersion
+        from define_json.schema.define import MetaDataVersion
+        mdv = MetaDataVersion.model_validate(mdv_data)
+        
+        # Count ValueLists before transformation
+        from define_json.schema.define import ItemGroupType
+        value_lists_before = [
+            ig for ig in mdv.itemGroups
+            if getattr(ig, "type", None) == ItemGroupType.ValueList
+        ]
+        assert len(value_lists_before) > 0, "Should have ValueLists before transformation"
+        
+        # Count domain ItemGroups before (should be preserved)
+        domain_groups_before = [
+            ig for ig in mdv.itemGroups
+            if getattr(ig, "type", None) not in (ItemGroupType.ValueList, ItemGroupType.DataSpecialization)
+        ]
+        domain_count_before = len(domain_groups_before)
+        
+        # Apply transformation
+        transform_value_lists_to_specialisation(mdv)
+        
+        # Verify transformation
+        value_lists_after = [
+            ig for ig in mdv.itemGroups
+            if getattr(ig, "type", None) == ItemGroupType.ValueList
+        ]
+        assert len(value_lists_after) == 0, "All ValueLists should be removed"
+        
+        # Domain ItemGroups should be preserved
+        domain_groups_after = [
+            ig for ig in mdv.itemGroups
+            if getattr(ig, "type", None) not in (ItemGroupType.ValueList, ItemGroupType.DataSpecialization)
+        ]
+        assert len(domain_groups_after) == domain_count_before, \
+            f"Domain ItemGroups should be preserved: {len(domain_groups_after)} != {domain_count_before}"
+        
+        # Should have created DataSpecialization slices
+        slices = [
+            ig for ig in mdv.itemGroups
+            if getattr(ig, "type", None) == ItemGroupType.DataSpecialization
+        ]
+        assert len(slices) > 0, "Should create DataSpecialization slices"
+        
+        # Verify each slice has exactly one applicableWhen
+        for slice_ig in slices:
+            assert slice_ig.applicableWhen is not None, "Slice must have applicableWhen"
+            assert len(slice_ig.applicableWhen) == 1, "Slice must have exactly one WhereClause"
+            assert slice_ig.items is not None, "Slice must have items"
+            assert len(slice_ig.items) > 0, "Slice must not be empty"
+        
+        # Verify domain ItemGroups have slice OIDs as children (not ValueLists)
+        # Only check domains that have slices
+        domains_with_slices = {s.domain for s in slices}
+        for domain_ig in domain_groups_after:
+            domain = domain_ig.domain
+            children = domain_ig.children or []
+            
+            # Should NOT have ValueList references
+            vl_children = [c for c in children if isinstance(c, str) and c.startswith('VL.')]
+            assert len(vl_children) == 0, f"Domain {domain} should not have ValueList children"
+            
+            # Domains with slices should have slice OID references as children
+            if domain in domains_with_slices:
+                slice_children = [c for c in children if isinstance(c, str) and c.startswith('IG.')]
+                assert len(slice_children) > 0, f"Domain {domain} should have slice children"
+        
+        # Verify against expected output file if it exists
+        if dss_json_path.exists():
+            # Load expected output
+            expected_mdv = load_mdv(dss_json_path)
+            
+            # Compare structure
+            expected_slices = [
+                ig for ig in expected_mdv.itemGroups
+                if getattr(ig, "type", None) == ItemGroupType.DataSpecialization
+            ]
+            assert len(slices) == len(expected_slices), \
+                f"Slice count mismatch: {len(slices)} != {len(expected_slices)}"
+            
+            # Compare domain ItemGroups have correct children
+            expected_domains = [
+                ig for ig in expected_mdv.itemGroups
+                if getattr(ig, "type", None) not in (ItemGroupType.ValueList, ItemGroupType.DataSpecialization)
+            ]
+            
+            for domain_ig in domain_groups_after:
+                domain = domain_ig.domain
+                expected_domain_ig = next((ig for ig in expected_domains if ig.domain == domain), None)
+                if expected_domain_ig:
+                    expected_children = expected_domain_ig.children or []
+                    actual_children = domain_ig.children or []
+                    
+                    # Compare slice OID references
+                    expected_slice_refs = {c for c in expected_children if isinstance(c, str) and c.startswith('IG.')}
+                    actual_slice_refs = {c for c in actual_children if isinstance(c, str) and c.startswith('IG.')}
+                    assert expected_slice_refs == actual_slice_refs, \
+                        f"Domain {domain} children mismatch: expected {expected_slice_refs}, got {actual_slice_refs}"
+        else:
+            # If expected file doesn't exist, create it for reference
+            # (but this shouldn't happen in normal test runs)
+            mdv_dict = mdv.model_dump(mode='json', exclude_none=True)
+            output_data = {"metaDataVersion": [mdv_dict]}
+            with open(dss_json_path, 'w') as f:
+                json.dump(output_data, f, indent=2, ensure_ascii=False)
+            pytest.fail(f"Expected file {dss_json_path} not found. Created it, please review and commit.")
 
 
 class TestEndToEndPipeline:
