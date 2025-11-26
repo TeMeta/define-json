@@ -48,7 +48,7 @@ from datetime import datetime
 import logging
 import warnings
 
-# Suppress Pydantic serialization warnings for Union[ItemGroup, str] in children field
+# Suppress Pydantic serialization warnings for Union[ItemGroup, str] in slices field
 # (nested ItemGroups serialize correctly, warning is cosmetic due to self-referential model)
 warnings.filterwarnings('ignore', category=UserWarning, message='.*Pydantic serializer warnings.*')
 
@@ -92,8 +92,8 @@ class DefineXMLToJSONConverter:
     
     Features:
     - Items nested within ItemGroups (structured hierarchy)
-    - ValueLists processed as ItemGroups with type="DataSpecialization"
-    - Hierarchical structure with children references
+    - ValueLists processed as ItemGroups with type="DatasetSpecialization"
+    - Hierarchical structure with slices references
     - Optional method linking based on derivation descriptions
     - Origin information properly structured with comments
     - Full Pydantic validation throughout
@@ -952,10 +952,10 @@ class DefineXMLToJSONConverter:
             first_parent_oid = parent_oids[0]
             for domain_ig in domain_igs:
                 if domain_ig.OID == first_parent_oid:
-                    if domain_ig.children is None:
-                        domain_ig.children = []
+                    if domain_ig.slices is None:
+                        domain_ig.slices = []
                     # Nest the ACTUAL ValueList object, not just OID
-                    domain_ig.children.append(vl_ig)
+                    domain_ig.slices.append(vl_ig)
                     nested_valuelist_oids.add(vl_ig.OID)
                     children_added += 1
                     logger.info(f"    - Nested {vl_ig.OID} under parent {first_parent_oid}")
@@ -965,11 +965,11 @@ class DefineXMLToJSONConverter:
             for parent_oid in parent_oids[1:]:
                 for domain_ig in domain_igs:
                     if domain_ig.OID == parent_oid:
-                        if domain_ig.children is None:
-                            domain_ig.children = []
+                        if domain_ig.slices is None:
+                            domain_ig.slices = []
                         # Additional parents get OID reference (avoid duplication)
-                        if vl_ig.OID not in domain_ig.children:
-                            domain_ig.children.append(vl_ig.OID)
+                        if vl_ig.OID not in domain_ig.slices:
+                            domain_ig.slices.append(vl_ig.OID)
                             logger.info(f"    - Added OID reference {vl_ig.OID} to additional parent {parent_oid}")
                         break
         
@@ -980,7 +980,7 @@ class DefineXMLToJSONConverter:
             inferred_links = self._infer_valuelist_domain_links(value_list_igs, domain_igs, valuelist_to_parent)
             logger.info(f"  - Inferred {inferred_links} additional ValueList links via OID matching")
         
-        # Return only domain ItemGroups at top level (ValueLists are now nested in children)
+        # Return only domain ItemGroups at top level (ValueLists are now nested in slices)
         # Keep orphaned ValueLists (no parent) at top level
         orphaned_valuelists = [vl for vl in value_list_igs if vl.OID not in nested_valuelist_oids]
         top_level_item_groups = domain_igs + orphaned_valuelists
@@ -1069,11 +1069,11 @@ class DefineXMLToJSONConverter:
                 
                 if match_found:
                     # Add as child if not already there
-                    if domain_ig.children is None:
-                        domain_ig.children = []
+                    if domain_ig.slices is None:
+                        domain_ig.slices = []
                     
-                    if vl_ig.OID not in domain_ig.children:
-                        domain_ig.children.append(vl_ig.OID)
+                    if vl_ig.OID not in domain_ig.slices:
+                        domain_ig.slices.append(vl_ig.OID)
                         inferred_count += 1
                         
                         # Log the inference
@@ -2831,7 +2831,7 @@ class DefineXMLToJSONConverter:
                             if ig_oid:
                                 input_refs.append(ig_oid)
                                 
-                                # Store AnalysisDataset supplemental data (children: WhereClauseRef, AnalysisVariable)
+                                # Store AnalysisDataset supplemental data (slices: WhereClauseRef, AnalysisVariable)
                                 if not hasattr(self, '_analysis_dataset_supplemental'):
                                     self._analysis_dataset_supplemental = {}
                                 if analysis_oid not in self._analysis_dataset_supplemental:

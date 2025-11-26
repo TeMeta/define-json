@@ -48,7 +48,7 @@
         "OID": "IG.LB.SLICE1",
         "name": "LB_VISIT1_A",
         "domain": "LB",
-        "type": "DataSpecialization",
+        "type": "DatasetSpecialization",
         "applicableWhen": ["WC.TEMP.VISIT1"],
         "items": [
           {
@@ -62,7 +62,7 @@
         "OID": "IG.LB.SLICE2",
         "name": "LB_VISIT1_B",
         "domain": "LB",
-        "type": "DataSpecialization",
+        "type": "DatasetSpecialization",
         "applicableWhen": ["WC.TEMP.VISIT1"],
         "items": [
           {

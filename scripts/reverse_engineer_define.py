@@ -239,7 +239,7 @@ class DefineJSONGenerator:
                 topic_ig = {
                     "OID": topic_breakdown.item_group_oid,
                     "name": topic_breakdown.topic_info.topic_name,
-                    "type": "DataSpecialization",
+                    "type": "DatasetSpecialization",
                     "applicableWhen": [topic_breakdown.where_clause] if topic_breakdown.where_clause else [],
                     "items": [f"IT.{domain}.{col.name}" for col in topic_breakdown.measure_columns],
                     "description": f"Specialization for {topic_breakdown.topic_info.topic_name}"

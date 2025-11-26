@@ -172,7 +172,7 @@ class SpecialisationBuilder:
             "name": f"Main_{breakdown.structure.structure_type.value}",
             "description": f"Main ItemGroup for {breakdown.structure.structure_type.value} dataset",
             "items": main_items,
-            "children": [tb.item_group_oid for tb in breakdown.topic_breakdowns]
+            "slices": [tb.item_group_oid for tb in breakdown.topic_breakdowns]
         }
         item_groups.append(main_ig)
         

@@ -1169,7 +1169,7 @@
         "IT.ADQSADAS.AVISIT",
         "IT.ADQSADAS.ADT"
       ],
-      "children": [
+      "slices": [
         {
           "OID": "VL.ADQSADAS.AVAL",
           "name": "VL_ADQSADAS_AVAL",

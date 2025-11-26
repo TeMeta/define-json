@@ -1,6 +1,6 @@
 
 
-# Slot: children 
+# Slot: slices 
 
 
 _Child ItemGroups nested within this item group (e.g., ValueLists under parent domains). Can be either: - Full ItemGroup objects (preferred for hierarchical nesting) - OID string references (for cross-references to avoid duplication)_
@@ -9,8 +9,8 @@ _Child ItemGroups nested within this item group (e.g., ValueLists under parent d
 
 
 
-URI: [odm:slot/children](https://cdisc.org/odm2/slot/children)
-Alias: children
+URI: [odm:slot/slices](https://cdisc.org/odm2/slot/slices)
+Alias: slices
 
 <!-- no inheritance hierarchy -->
 
@@ -22,8 +22,8 @@ Alias: children
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [DataStructureDefinition](../classes/DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures |  no  |
 | [ItemGroup](../classes/ItemGroup.md) | A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections |  no  |
+| [DataStructureDefinition](../classes/DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures |  no  |
 
 
 
@@ -61,8 +61,8 @@ Alias: children
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:children |
-| native | odm:children |
+| self | odm:slices |
+| native | odm:slices |
 
 
 
@@ -71,13 +71,13 @@ Alias: children
 
 <details>
 ```yaml
-name: children
+name: slices
 description: 'Child ItemGroups nested within this item group (e.g., ValueLists under
   parent domains). Can be either: - Full ItemGroup objects (preferred for hierarchical
   nesting) - OID string references (for cross-references to avoid duplication)'
 from_schema: https://cdisc.org/define-json
 rank: 1000
-alias: children
+alias: slices
 owner: ItemGroup
 domain_of:
 - ItemGroup

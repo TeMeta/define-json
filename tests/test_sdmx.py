@@ -284,10 +284,10 @@ class TestAttributeRelationshipInference:
             "WC.PLATELET.BASELINE": {"STUDYID": "STUDY001", "LBCAT": "HEMATOLOGY"},
         }
         
-        # Get slices (ItemGroups with type=DataSpecialization)
+        # Get slices (ItemGroups with type=DatasetSpecialization)
         slices = [ig for ig in mdv.itemGroups if ig.type and 
-                  (ig.type == "DataSpecialization" or 
-                   (hasattr(ig.type, 'value') and ig.type.value == "DataSpecialization"))]
+                  (ig.type == "DatasetSpecialization" or 
+                   (hasattr(ig.type, 'value') and ig.type.value == "DatasetSpecialization"))]
         
         # Analyze STUDYID variance
         variance = analyze_attribute_variance("STUDYID", slices, slice_data, dsd, mdv)
@@ -311,8 +311,8 @@ class TestAttributeRelationshipInference:
         }
         
         slices = [ig for ig in mdv.itemGroups if ig.type and 
-                  (ig.type == "DataSpecialization" or 
-                   (hasattr(ig.type, 'value') and ig.type.value == "DataSpecialization"))]
+                  (ig.type == "DatasetSpecialization" or 
+                   (hasattr(ig.type, 'value') and ig.type.value == "DatasetSpecialization"))]
         
         # Analyze LBCAT variance
         variance = analyze_attribute_variance("LBCAT", slices, slice_data, dsd, mdv)
@@ -327,8 +327,8 @@ class TestAttributeRelationshipInference:
         
         dsd = build_dsd_for_domain(mdv, "LB", policy)
         slices = [ig for ig in mdv.itemGroups if ig.type and 
-                  (ig.type == "DataSpecialization" or 
-                   (hasattr(ig.type, 'value') and ig.type.value == "DataSpecialization"))]
+                  (ig.type == "DatasetSpecialization" or 
+                   (hasattr(ig.type, 'value') and ig.type.value == "DatasetSpecialization"))]
         
         # Provide slice data for inference
         slice_data = {

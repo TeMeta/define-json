@@ -491,9 +491,9 @@ def build_where_registry(mdv: MetaDataVersion) -> Dict[str, WhereClause]:
 
 
 def _is_slice(ig: ItemGroup) -> bool:
-    """Check if ItemGroup is a DataSpecialization slice."""
+    """Check if ItemGroup is a DatasetSpecialization slice."""
     ig_type = getattr(ig, "type", None)
-    return ig_type == ItemGroupType.DataSpecialization
+    return ig_type == ItemGroupType.DatasetSpecialization
 
 
 def _domain_name_of_ig(ig: ItemGroup) -> str:
@@ -513,7 +513,7 @@ def transform_value_lists_to_specialisation(mdv: MetaDataVersion) -> None:
     Transform ValueList-based structure to Dataset Specialisation shape.
     
     Converts ItemGroups with type="ValueList" (containing items grouped by variable name)
-    into canonical ItemGroups with type="DataSpecialization" (slices) where each shared
+    into canonical ItemGroups with type="DatasetSpecialization" (slices) where each shared
     WhereClause gets its own ItemGroup containing ALL items that apply when that WhereClause is true.
     
     This transformation creates canonical slices:
@@ -521,9 +521,9 @@ def transform_value_lists_to_specialisation(mdv: MetaDataVersion) -> None:
     2. Identifies all ValueList ItemGroups (type="ValueList")
     3. Extracts items from each ValueList, preserving all item properties
     4. Groups items by their applicableWhen WhereClause OID(s) - canonical: one slice per WhereClause
-    5. Creates new DataSpecialization ItemGroups for each unique WhereClause (not per domain+WhereClause)
+    5. Creates new DatasetSpecialization ItemGroups for each unique WhereClause (not per domain+WhereClause)
     6. Removes the original ValueList ItemGroups
-    7. Updates domain ItemGroup children to reference canonical slice OIDs (removes ValueList references)
+    7. Updates domain ItemGroup slices to reference canonical slice OIDs (removes ValueList references)
     
     Capabilities:
     - Consolidates unique WhereClauses: deduplicates WhereClauses with identical structure (conditions)
@@ -533,29 +533,29 @@ def transform_value_lists_to_specialisation(mdv: MetaDataVersion) -> None:
     - Maintains all item properties (dataType, origin, codeList, etc.)
     - Creates canonical slice OIDs following pattern: IG.{WhereClauseOID}
     - Merges items from multiple ValueLists/domains that share the same WhereClause into one slice
-    - Updates domain ItemGroup children to reference slice OIDs (not ValueLists)
+    - Updates domain ItemGroup slices to reference slice OIDs (not ValueLists)
     
     This is the inverse transformation of _create_value_lists_from_slices in
-    json_to_xml.py, which projects DataSpecialization slices back to ValueLists.
+    json_to_xml.py, which projects DatasetSpecialization slices back to ValueLists.
     
     Args:
         mdv: MetaDataVersion to transform in-place
         
     Modifies:
         mdv.whereClauses - Duplicate WhereClauses consolidated, references updated
-        mdv.itemGroups - ValueLists are removed, replaced with canonical DataSpecialization slices
-        Domain ItemGroup children - ValueList references removed, slice OID references added
+        mdv.itemGroups - ValueLists are removed, replaced with canonical DatasetSpecialization slices
+        Domain ItemGroup slices - ValueList references removed, slice OID references added
     
     Example:
         Before: ValueList VL.VS.VSORRES contains items for TEMP, WEIGHT, HEIGHT, etc.
                 each with applicableWhen=["WC.VS.VSORRES.TEMP"], etc.
-                IG.VS has children=[VL.VS.VSORRES, VL.VS.VSORRESU]
+                IG.VS has slices=[VL.VS.VSORRES, VL.VS.VSORRESU]
                 WhereClauses: WC.VS.VSORRES.TEMP, WC.VS.VSORRESU.TEMP (duplicate structures)
         
-        After:  ItemGroup IG.WC.VS.VSORRES.TEMP (type="DataSpecialization", canonical OID)
+        After:  ItemGroup IG.WC.VS.VSORRES.TEMP (type="DatasetSpecialization", canonical OID)
                 with applicableWhen=["WC.{canonical_hash}"] (consolidated WhereClause)
                 containing ALL items with this WhereClause (e.g., IT.VS.VSORRES.TEMP, IT.VS.VSORRESU.TEMP)
-                IG.VS has children=["IG.WC.{canonical_hash}", ...]
+                IG.VS has slices=["IG.WC.{canonical_hash}", ...]
                 WhereClauses: Consolidated to unique structures only
     
     Note:
@@ -577,7 +577,7 @@ def transform_value_lists_to_specialisation(mdv: MetaDataVersion) -> None:
     # Track slices by WhereClause OID only (canonical: one slice per shared WhereClause)
     wc_oid_to_slice: Dict[str, ItemGroup] = {}
     value_list_oids_to_remove: Set[str] = set()
-    # Track which domain ItemGroups need their children updated
+    # Track which domain ItemGroups need their slices updated
     domain_to_slice_oids: Dict[str, List[str]] = {}
     # Track domains for each WhereClause (for slice domain assignment)
     wc_oid_to_domains: Dict[str, Set[str]] = {}
@@ -627,7 +627,7 @@ def transform_value_lists_to_specialisation(mdv: MetaDataVersion) -> None:
                     # Determine slice domain: use first domain, or None if multiple domains share this WhereClause
                     slice_domain = domain if len(wc_oid_to_domains[wc_oid]) == 1 else None
                     
-                    # Create canonical DataSpecialization slice
+                    # Create canonical DatasetSpecialization slice
                     # OID pattern: IG.{WhereClauseOID} (canonical, based purely on WhereClause)
                     slice_oid = f"IG.{wc_oid}"
                     slice_name = wc_oid.replace('.', '_')
@@ -636,15 +636,15 @@ def transform_value_lists_to_specialisation(mdv: MetaDataVersion) -> None:
                         OID=slice_oid,
                         name=slice_name,
                         domain=slice_domain,
-                        type=ItemGroupType.DataSpecialization
+                        type=ItemGroupType.DatasetSpecialization
                     )
                     new_slice.applicableWhen = [wc_oid]
                     new_slice.items = []
-                    new_slice.children = None  # Slices are leaf nodes, no children
+                    new_slice.slices = None  # Slices are leaf nodes, no slices
                     wc_oid_to_slice[wc_oid] = new_slice
                     mdv.itemGroups.append(new_slice)
                     
-                    # Track slice OID for domain's children (all domains that use this WhereClause)
+                    # Track slice OID for domain's slices (all domains that use this WhereClause)
                     for wc_domain in wc_oid_to_domains[wc_oid]:
                         if wc_domain not in domain_to_slice_oids:
                             domain_to_slice_oids[wc_domain] = []
@@ -668,7 +668,7 @@ def transform_value_lists_to_specialisation(mdv: MetaDataVersion) -> None:
             if ig.OID not in value_list_oids_to_remove
         ]
     
-    # Update domain ItemGroups: replace ValueList children with slice OID references
+    # Update domain ItemGroups: replace ValueList slices with slice OID references
     # Slices are top-level ItemGroups, so we reference them as string OIDs (not inline objects)
     for domain_ig in mdv.itemGroups or []:
         if _is_slice(domain_ig) or _is_value_list(domain_ig):
@@ -676,11 +676,11 @@ def transform_value_lists_to_specialisation(mdv: MetaDataVersion) -> None:
         
         domain = _domain_name_of_ig(domain_ig)
         if domain in domain_to_slice_oids:
-            # Replace children with slice OID string references
-            domain_ig.children = sorted(domain_to_slice_oids[domain]) or None
+            # Replace slices with slice OID string references
+            domain_ig.slices = sorted(domain_to_slice_oids[domain]) or None
         else:
             # No slices for this domain - clear any ValueList references
-            domain_ig.children = None
+            domain_ig.slices = None
 
 
 def build_canonical_slices(mdv: MetaDataVersion) -> None:
@@ -726,7 +726,7 @@ def build_canonical_slices(mdv: MetaDataVersion) -> None:
                         OID=f"IG.{dom}.{wid}",
                         name=f"{dom}_{wid}",
                         domain=dom,
-                        type="DataSpecialization"
+                        type="DatasetSpecialization"
                     )
                     new_ig.applicableWhen = [wid]
                     new_ig.items = []

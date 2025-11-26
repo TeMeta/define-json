@@ -4799,7 +4799,7 @@
                 "DataCube",
                 "Table",
                 "Object",
-                "DataSpecialization",
+                "DatasetSpecialization",
                 "ValueList",
                 "Section",
                 "Form"

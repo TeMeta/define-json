@@ -21,7 +21,7 @@ Complete bidirectional conversion system between Define-XML (CDISC ODM 1.2/1.3 +
 - **Perfect Roundtrip**: XML → JSON → XML maintains all clinical data
 - **Reference-Based Structure**: Clean, non-redundant JSON with OID references
 - **Dataset Specialization**: ValueLists grouped by parameter (e.g., TEMP, WEIGHT)
-- **Hierarchical Relationships**: Domain ItemGroups reference ValueList children
+- **Hierarchical Relationships**: Domain ItemGroups reference ValueList slices
 - **Schema Compliant**: Strict adherence to define.yaml schema with full Item objects
 - **Comprehensive Validation**: Element counts, OID preservation, relationship fidelity
 - **Version Compatibility**: Supports Define-XML v1.0 and v2.1 with automatic namespace detection
@@ -79,13 +79,13 @@ All ItemGroups exist at the top level with hierarchical relationships via OID re
       "name": "VS",
       "description": "Vital Signs domain dataset containing clinical data",
       "domain": "VS",
-      "children": ["VL.VS.DIABP", "VL.VS.HEIGHT", "VL.VS.TEMP", "VL.VS.WEIGHT"]
+      "slices": ["VL.VS.DIABP", "VL.VS.HEIGHT", "VL.VS.TEMP", "VL.VS.WEIGHT"]
     },
     {
       "OID": "VL.VS.DIABP",
       "name": "VL.VS.DIABP", 
       "description": "Dataset specialization for VS DIABP parameter containing both result values and units",
-      "type": "DataSpecialization",
+      "type": "DatasetSpecialization",
       "domain": "VS",
       "items": [...],
       "whereClause": [...]
@@ -209,8 +209,8 @@ print('Conversion complete!')
 ## Advanced Features
 
 ### Hierarchical Structure
-- Domain ItemGroups contain references to ValueList children
-- ValueLists are DataSpecialization ItemGroups with parameter-specific data
+- Domain ItemGroups contain references to ValueList slices
+- ValueLists are DatasetSpecialization ItemGroups with parameter-specific data
 - All relationships preserved through OID references
 
 ### Clinical Context

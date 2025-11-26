@@ -545,7 +545,7 @@ class DefineJSONToXMLConverter:
         
         # Process ItemGroups and ValueLists
         all_item_groups = json_data.get('itemGroups', [])
-        # Process ItemGroups/ValueLists and get flattened list (includes nested children)
+        # Process ItemGroups/ValueLists and get flattened list (includes nested slices)
         flattened_item_groups = self._process_item_groups_and_value_lists(mdv, all_item_groups, json_data)
         
         # Store flattened list for method reference collection
@@ -1541,13 +1541,13 @@ class DefineJSONToXMLConverter:
     
     def _flatten_nested_itemgroups(self, item_groups: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """
-        Extract nested ItemGroups from children and flatten to top level.
+        Extract nested ItemGroups from slices and flatten to top level.
         
-        Recursively traverses children arrays to find nested ValueLists and other ItemGroups.
-        Modifies parent children arrays to contain only OID references (for roundtrip).
+        Recursively traverses slices arrays to find nested ValueLists and other ItemGroups.
+        Modifies parent slices arrays to contain only OID references (for roundtrip).
         
         Args:
-            item_groups: List of top-level ItemGroups (may contain nested children)
+            item_groups: List of top-level ItemGroups (may contain nested slices)
             
         Returns:
             Flat list of all ItemGroups (domains + nested ValueLists)
@@ -1558,28 +1558,28 @@ class DefineJSONToXMLConverter:
             # Add this ItemGroup to flat list
             flattened.append(ig)
             
-            # Check for nested children (could be ItemGroup objects or OID strings)
-            children = ig.get('children', [])
-            if not children:
+            # Check for nested slices (could be ItemGroup objects or OID strings)
+            slices = ig.get('slices', [])
+            if not slices:
                 continue
             
             # Separate nested ItemGroups from OID references
             nested_igs = []
             oid_refs = []
             
-            for child in children:
-                if isinstance(child, dict):
+            for slice_item in slices:
+                if isinstance(slice_item, dict):
                     # It's a nested ItemGroup object - extract it
-                    nested_igs.append(child)
-                    # Replace with OID reference for parent's children array
-                    oid_refs.append(child.get('OID', ''))
-                elif isinstance(child, str):
+                    nested_igs.append(slice_item)
+                    # Replace with OID reference for parent's slices array
+                    oid_refs.append(slice_item.get('OID', ''))
+                elif isinstance(slice_item, str):
                     # It's already an OID reference - keep it
-                    oid_refs.append(child)
+                    oid_refs.append(slice_item)
             
-            # Update parent's children to only contain OID references (for XML writing)
+            # Update parent's slices to only contain OID references (for XML writing)
             if nested_igs:
-                ig['children'] = oid_refs
+                ig['slices'] = oid_refs
                 logger.info(f"    - Extracted {len(nested_igs)} nested ItemGroups from {ig.get('OID')}")
             
             # Recursively flatten any nested ItemGroups
@@ -1599,11 +1599,11 @@ class DefineJSONToXMLConverter:
         Process ItemGroups and ValueLists with intelligent handling.
         
         Strategy:
-        1. Flatten nested ValueLists from children to top level
-        2. Separate by type field ('ValueList', 'DataSpecialization', or regular)
+        1. Flatten nested ValueLists from slices to top level
+        2. Separate by type field ('ValueList', 'DatasetSpecialization', or regular)
         3. Create ValueListDef elements for type='ValueList'
         4. Create ItemGroupDef elements for regular ItemGroups
-        5. Handle DataSpecialization slices if inference enabled
+        5. Handle DatasetSpecialization slices if inference enabled
         
         Returns:
             Flattened list of all ItemGroups (for ItemDef processing)
@@ -1615,9 +1615,9 @@ class DefineJSONToXMLConverter:
         
         # Separate ItemGroups by type field
         value_list_groups = [ig for ig in flattened_item_groups if ig.get('type') == 'ValueList']
-        slice_item_groups = [ig for ig in flattened_item_groups if ig.get('type') == 'DataSpecialization']
+        slice_item_groups = [ig for ig in flattened_item_groups if ig.get('type') == 'DatasetSpecialization']
         domain_item_groups = [ig for ig in flattened_item_groups 
-                              if ig.get('type') not in ('ValueList', 'DataSpecialization')]
+                              if ig.get('type') not in ('ValueList', 'DatasetSpecialization')]
         
         # Build map of ValueList OIDs for reference in ItemDef creation
         # This allows us to add <def:ValueListRef> elements to ItemDefs
@@ -1635,13 +1635,13 @@ class DefineJSONToXMLConverter:
             self._create_value_lists_direct(parent, value_list_groups)
             logger.info(f"Created {len(value_list_groups)} ValueListDef elements")
         
-        # Handle DataSpecialization slices
+        # Handle DatasetSpecialization slices
         if self.enable_inference and slice_item_groups:
             # Project slices to ValueLists
             self._create_value_lists_from_slices(parent, slice_item_groups, domain_item_groups)
         elif slice_item_groups:
             # Fallback: treat slices as regular ItemGroups if inference disabled
-            logger.warning("DataSpecialization slices found but inference disabled - treating as ItemGroups")
+            logger.warning("DatasetSpecialization slices found but inference disabled - treating as ItemGroups")
             domain_item_groups.extend(slice_item_groups)
         
         # Create domain ItemGroups
@@ -1991,13 +1991,13 @@ class DefineJSONToXMLConverter:
     
     def _extract_items_recursively(self, item_group: Dict[str, Any]) -> List[Dict[str, Any]]:
         """
-        Recursively extract items from an ItemGroup and its nested children.
+        Recursively extract items from an ItemGroup and its nested slices.
         
         Args:
-            item_group: ItemGroup dictionary (may contain nested children)
+            item_group: ItemGroup dictionary (may contain nested slices)
             
         Returns:
-            List of all items from this ItemGroup and its nested children
+            List of all items from this ItemGroup and its nested slices
         """
         items = []
         
@@ -2009,12 +2009,12 @@ class DefineJSONToXMLConverter:
                 item['OID'] = item['itemOID']
             items.append(item)
         
-        # Recursively extract from nested children
-        children = item_group.get('children', [])
-        for child in children:
-            if isinstance(child, dict):
+        # Recursively extract from nested slices
+        slices = item_group.get('slices', [])
+        for slice_item in slices:
+            if isinstance(slice_item, dict):
                 # It's a nested ItemGroup - recurse into it
-                items.extend(self._extract_items_recursively(child))
+                items.extend(self._extract_items_recursively(slice_item))
             # Skip OID string references - they've already been processed
         
         return items
@@ -2030,13 +2030,13 @@ class DefineJSONToXMLConverter:
         
         Combines top-level items with items nested in ItemGroups,
         removing duplicates by OID. Recursively extracts items from
-        nested children (e.g., ValueLists nested under parent domains).
+        nested slices (e.g., ValueLists nested under parent domains).
         """
         # Get top-level items
         items = json_data.get('items', [])
         
         # ALWAYS extract nested items to create ItemDef elements (required by Define-XML spec)
-        # Recursively extract from all ItemGroups including nested children
+        # Recursively extract from all ItemGroups including nested slices
         nested_items = []
         for ig in all_item_groups:
             nested_items.extend(self._extract_items_recursively(ig))

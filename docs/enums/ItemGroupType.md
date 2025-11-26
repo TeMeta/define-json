@@ -16,7 +16,7 @@ URI: [ItemGroupType](../enums/ItemGroupType.md)
 | DataCube | None | A Data Structure Definition for an Analysis Data Cube of dimensions, measures, and attributes. |
 | Table | None | A simple table or data frame. |
 | Object | None | An object or profile of a FHIR resource. |
-| DataSpecialization | None | A data specialization of a concept. |
+| DatasetSpecialization | None | A data specialization of a concept. |
 | ValueList | None | A list of topic-specific items for a specific column (from Define-XML). |
 | Section | None | A section of a form. |
 | Form | None | A data collection form. |
@@ -73,8 +73,8 @@ permissible_values:
   Object:
     text: Object
     description: An object or profile of a FHIR resource.
-  DataSpecialization:
-    text: DataSpecialization
+  DatasetSpecialization:
+    text: DatasetSpecialization
     description: A data specialization of a concept.
   ValueList:
     text: ValueList

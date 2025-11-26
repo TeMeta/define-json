@@ -385,7 +385,7 @@
               "dataType": "text"
             }
           ],
-          "children": [
+          "slices": [
             "IG.WC.VS.DIABP",
             "IG.WC.VS.DIABP_SITTING",
             "IG.WC.VS.HEIGHT",
@@ -589,7 +589,7 @@
               "dataType": "text"
             }
           ],
-          "children": [
+          "slices": [
             "IG.WC.LB.ALB",
             "IG.WC.LB.ALP",
             "IG.WC.LB.ALT",
@@ -982,7 +982,7 @@
           "OID": "IG.WC.VS.TEMP",
           "name": "WC_VS_TEMP",
           "domain": "VS",
-          "type": "DataSpecialization",
+          "type": "DatasetSpecialization",
           "items": [
             {
               "OID": "IT.VS.VSORRES.TEMP",
@@ -1017,7 +1017,7 @@
           "OID": "IG.WC.VS.WEIGHT",
           "name": "WC_VS_WEIGHT",
           "domain": "VS",
-          "type": "DataSpecialization",
+          "type": "DatasetSpecialization",
           "items": [
             {
               "OID": "IT.VS.VSORRES.WEIGHT",
@@ -1052,7 +1052,7 @@
           "OID": "IG.WC.VS.HEIGHT",
           "name": "WC_VS_HEIGHT",
           "domain": "VS",
-          "type": "DataSpecialization",
+          "type": "DatasetSpecialization",
           "items": [
             {
               "OID": "IT.VS.VSORRES.HEIGHT",
@@ -1087,7 +1087,7 @@
           "OID": "IG.WC.VS.SITTING_SYSBP",
           "name": "WC_VS_SITTING_SYSBP",
           "domain": "VS",
-          "type": "DataSpecialization",
+          "type": "DatasetSpecialization",
           "items": [
             {
               "OID": "IT.VS.VSORRES.SYSBP",
@@ -1111,7 +1111,7 @@
           "OID": "IG.WC.VS.DIABP_SITTING",
           "name": "WC_VS_DIABP_SITTING",
           "domain": "VS",
-          "type": "DataSpecialization",
+          "type": "DatasetSpecialization",
           "items": [
             {
               "OID": "IT.VS.VSORRES.DIABP",
@@ -1135,7 +1135,7 @@
           "OID": "IG.WC.VS.HR",
           "name": "WC_VS_HR",
           "domain": "VS",
-          "type": "DataSpecialization",
+          "type": "DatasetSpecialization",
           "items": [
             {
               "OID": "IT.VS.VSORRES.HR",
@@ -1168,7 +1168,7 @@
           "OID": "IG.WC.VS.SYSBP",
           "name": "WC_VS_SYSBP",
           "domain": "VS",
-          "type": "DataSpecialization",
+          "type": "DatasetSpecialization",
           "items": [
             {
               "OID": "IT.VS.VSORRESU.SYSBP",
@@ -1188,7 +1188,7 @@
           "OID": "IG.WC.VS.DIABP",
           "name": "WC_VS_DIABP",
           "domain": "VS",
-          "type": "DataSpecialization",
+          "type": "DatasetSpecialization",
           "items": [
             {
               "OID": "IT.VS.VSORRESU.DIABP",
@@ -1208,7 +1208,7 @@
           "OID": "IG.WC.LB.ALT",
           "name": "WC_LB_ALT",
           "domain": "LB",
-          "type": "DataSpecialization",
+          "type": "DatasetSpecialization",
           "items": [
             {
               "OID": "IT.LB.LBORRES.ALT",
@@ -1243,7 +1243,7 @@
           "OID": "IG.WC.LB.ALB",
           "name": "WC_LB_ALB",
           "domain": "LB",
-          "type": "DataSpecialization",
+          "type": "DatasetSpecialization",
           "items": [
             {
               "OID": "IT.LB.LBORRES.ALB",
@@ -1268,7 +1268,7 @@
           "OID": "IG.WC.LB.ALP",
           "name": "WC_LB_ALP",
           "domain": "LB",
-          "type": "DataSpecialization",
+          "type": "DatasetSpecialization",
           "items": [
             {
               "OID": "IT.LB.LBORRES.ALP",
@@ -1303,7 +1303,7 @@
           "OID": "IG.WC.LB.AST",
           "name": "WC_LB_AST",
           "domain": "LB",
-          "type": "DataSpecialization",
+          "type": "DatasetSpecialization",
           "items": [
             {
               "OID": "IT.LB.LBORRES.AST",
@@ -1338,7 +1338,7 @@
           "OID": "IG.WC.LB.CREAT",
           "name": "WC_LB_CREAT",
           "domain": "LB",
-          "type": "DataSpecialization",
+          "type": "DatasetSpecialization",
           "items": [
             {
               "OID": "IT.LB.LBORRES.CREAT",
@@ -1373,7 +1373,7 @@
           "OID": "IG.WC.LB.K",
           "name": "WC_LB_K",
           "domain": "LB",
-          "type": "DataSpecialization",
+          "type": "DatasetSpecialization",
           "items": [
             {
               "OID": "IT.LB.LBORRES.K",
@@ -1408,7 +1408,7 @@
           "OID": "IG.WC.LB.SODIUM",
           "name": "WC_LB_SODIUM",
           "domain": "LB",
-          "type": "DataSpecialization",
+          "type": "DatasetSpecialization",
           "items": [
             {
               "OID": "IT.LB.LBORRES.SODIUM",
@@ -1443,7 +1443,7 @@
           "OID": "IG.WC.LB.HBA1C",
           "name": "WC_LB_HBA1C",
           "domain": "LB",
-          "type": "DataSpecialization",
+          "type": "DatasetSpecialization",
           "items": [
             {
               "OID": "IT.LB.LBORRES.HBA1C",

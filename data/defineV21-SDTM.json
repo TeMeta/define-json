@@ -107,7 +107,7 @@
         "IT.TS.TSPARMCD",
         "IT.TS.TSSEQ"
       ],
-      "children": [
+      "slices": [
         {
           "OID": "VL.TS.TSVAL",
           "name": "VL_TS_TSVAL",
@@ -1326,7 +1326,7 @@
         "IT.LB.VISITNUM",
         "IT.LB.LBNAM"
       ],
-      "children": [
+      "slices": [
         {
           "OID": "VL.LB.LBORRES",
           "name": "VL_LB_LBORRES",
@@ -1745,7 +1745,7 @@
         "IT.VS.VISITNUM",
         "IT.VS.VSPOS"
       ],
-      "children": [
+      "slices": [
         {
           "OID": "VL.VS.VSORRES",
           "name": "VL_VS_VSORRES",
@@ -2789,7 +2789,7 @@
         "IT.SUPPDM.IDVARVAL",
         "IT.SUPPDM.QNAM"
       ],
-      "children": [
+      "slices": [
         {
           "OID": "VL.SUPPDM.QVAL",
           "name": "VL_SUPPDM_QVAL",
@@ -3076,7 +3076,7 @@
         "IT.SUPPVS.IDVARVAL",
         "IT.SUPPVS.QNAM"
       ],
-      "children": [
+      "slices": [
         {
           "OID": "VL.SUPPVS.QVAL",
           "name": "VL_SUPPVS_QVAL",
