@@ -116,13 +116,16 @@ def _canonical_condition_payload(cond: Condition, mdv: Optional[MetaDataVersion]
 
 def _canonical_where_payload(where: WhereClause, mdv: Optional[MetaDataVersion] = None) -> Dict[str, Any]:
     """
-    Build canonical payload for WhereClause.
+    Build canonical payload for WhereClause based on actual RangeCheck content.
+    
+    This function extracts all RangeChecks from all Conditions in the WhereClause
+    and creates a canonical representation based on the actual content, not Condition OIDs.
+    This ensures that WhereClauses with identical RangeCheck content are properly consolidated.
     
     Handles both string OID references and Condition objects.
-    Note: This function now uses consolidated Condition OIDs if available.
     """
     conditions = where.conditions or []
-    canon_conditions: List[Dict[str, Any]] = []
+    all_range_checks: List[Dict[str, Any]] = []
     
     for cond_ref in conditions:
         # Resolve condition if it's a string OID
@@ -139,12 +142,32 @@ def _canonical_where_payload(where: WhereClause, mdv: Optional[MetaDataVersion] 
             # Already a Condition object
             cond = cond_ref
         
-        # Use canonical condition payload
-        canon_cond = _canonical_condition_payload(cond, mdv)
-        canon_conditions.append(canon_cond)
+        # Extract RangeChecks from this Condition
+        checks = cond.rangeChecks or []
+        for rc in checks:
+            comparator = getattr(rc, "comparator", None)
+            values = [_normalise_check_value(v) for v in (rc.checkValues or [])]
+            try:
+                values = sorted(values)
+            except TypeError:
+                values = sorted(map(lambda x: json.dumps(x, sort_keys=True), values))
+            all_range_checks.append({
+                "item": _ref_to_string(getattr(rc, "item", None)),
+                "comparator": comparator,
+                "values": values,
+                "softHard": getattr(rc, "softHard", None),
+            })
     
-    canon_conditions.sort(key=lambda d: json.dumps(d, sort_keys=True))
-    return {"conditions": canon_conditions}
+    # Sort range checks for determinism
+    all_range_checks.sort(key=lambda d: (
+        d.get("item", ""),
+        str(d.get("comparator", "")),
+        json.dumps(d.get("values", []), sort_keys=True)
+    ))
+    
+    # Return canonical payload based on actual RangeCheck content
+    # This ensures WhereClauses with identical RangeChecks are considered equal
+    return {"rangeChecks": all_range_checks}
 
 
 def _extract_meaningful_oid(where: WhereClause, mdv: Optional[MetaDataVersion] = None) -> Optional[str]:
@@ -162,33 +185,29 @@ def _extract_meaningful_oid(where: WhereClause, mdv: Optional[MetaDataVersion] =
         Meaningful OID string (e.g., "WC.VS.TEMP") or None if structure too complex
     """
     payload = _canonical_where_payload(where, mdv)
-    conditions = payload.get('conditions', [])
+    range_checks = payload.get('rangeChecks', [])
     
-    if not conditions:
+    if not range_checks:
         return None
     
-    # Extract domain and test codes from conditions
-    # Note: conditions now use _canonical_condition_payload which returns rangeChecks
+    # Extract domain and test codes from rangeChecks
     domains = set()
     all_checks = []
     
-    for cond in conditions:
-        # Check for rangeChecks (from _canonical_condition_payload)
-        range_checks = cond.get('rangeChecks', [])
-        for rc in range_checks:
-            item = rc.get('item', '')
-            values = rc.get('values', [])
-            
-            # Parse domain from item OID (e.g., IT.VS.VSTESTCD -> VS)
-            if item.startswith('IT.'):
-                parts = item.split('.')
-                if len(parts) >= 2:
-                    domains.add(parts[1])
-            
-            # Collect checks with their item and values
-            for val in values:
-                if isinstance(val, str):
-                    all_checks.append((item, val))
+    for rc in range_checks:
+        item = rc.get('item', '')
+        values = rc.get('values', [])
+        
+        # Parse domain from item OID (e.g., IT.VS.VSTESTCD -> VS)
+        if item.startswith('IT.'):
+            parts = item.split('.')
+            if len(parts) >= 2:
+                domains.add(parts[1])
+        
+        # Collect checks with their item and values
+        for val in values:
+            if isinstance(val, str):
+                all_checks.append((item, val))
     
     # Must have exactly one domain
     if len(domains) != 1:
@@ -245,11 +264,27 @@ def _canonical_condition_oid(cond: Condition, mdv: Optional[MetaDataVersion] = N
     falls back to hash-based OID for complex structures.
     """
     payload = _canonical_condition_payload(cond, mdv)
+    return _canonical_condition_oid_from_payload(payload)
+
+
+def _canonical_condition_oid_from_payload(payload: Dict[str, Any]) -> str:
+    """
+    Create canonical OID for Condition from its payload.
     
-    # Try to extract meaningful OID from rangeChecks
+    Attempts to extract meaningful OID (e.g., COND.VS.TEMP, COND.VS.DIABP_SITTING) 
+    from structure, falls back to hash-based OID for complex structures.
+    """
     range_checks = payload.get("rangeChecks", [])
-    if range_checks and len(range_checks) == 1:
-        rc = range_checks[0]
+    if not range_checks:
+        # Fallback to hash-based OID
+        data = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
+        return f"COND.{hashlib.sha256(data).hexdigest()[:16]}"
+    
+    # Extract domain and values from all RangeChecks
+    domains = set()
+    all_values = []
+    
+    for rc in range_checks:
         item = rc.get("item", "")
         values = rc.get("values", [])
         
@@ -257,16 +292,59 @@ def _canonical_condition_oid(cond: Condition, mdv: Optional[MetaDataVersion] = N
         if item.startswith("IT."):
             parts = item.split(".")
             if len(parts) >= 2:
-                domain = parts[1]
-                # Extract test code from values
-                if values and len(values) == 1:
-                    test_code = values[0] if isinstance(values[0], str) else None
-                    if test_code:
-                        return f"COND.{domain}.{test_code}"
+                domains.add(parts[1])
+        
+        # Collect all string values
+        for val in values:
+            if isinstance(val, str):
+                all_values.append(val)
     
-    # Fallback to hash-based OID
-    data = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
-    return f"COND.{hashlib.sha256(data).hexdigest()[:16]}"
+    # Must have exactly one domain
+    if len(domains) != 1:
+        # Fallback to hash-based OID
+        data = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
+        return f"COND.{hashlib.sha256(data).hexdigest()[:16]}"
+    
+    domain = list(domains)[0]
+    
+    # Sort values for determinism
+    sorted_values = sorted(set(all_values))
+    
+    if not sorted_values:
+        # Fallback to hash-based OID
+        data = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
+        return f"COND.{hashlib.sha256(data).hexdigest()[:16]}"
+    
+    # Build meaningful OID: COND.{domain}.{value1} or COND.{domain}.{value1}_{value2}...
+    if len(sorted_values) == 1:
+        return f"COND.{domain}.{sorted_values[0]}"
+    else:
+        # Multiple values - join with underscore
+        value_str = '_'.join(sorted_values)
+        return f"COND.{domain}.{value_str}"
+
+
+def _canonical_condition_oid_from_range_checks(range_checks: List[Dict[str, Any]], mdv: Optional[MetaDataVersion] = None) -> str:
+    """
+    Create canonical OID for Condition from a list of RangeCheck dictionaries.
+    
+    Attempts to extract meaningful OID (e.g., COND.VS.TEMP) from structure,
+    falls back to hash-based OID for complex structures.
+    """
+    # Build payload from range checks
+    payload: Dict[str, Any] = {}
+    canon_checks: List[Dict[str, Any]] = []
+    for rc_data in range_checks:
+        canon_checks.append({
+            "item": rc_data.get("item", ""),
+            "comparator": rc_data.get("comparator"),
+            "values": rc_data.get("values", []),
+        })
+    canon_checks.sort(key=lambda d: (d["item"], str(d["comparator"]), json.dumps(d["values"])))
+    if canon_checks:
+        payload["rangeChecks"] = canon_checks
+    
+    return _canonical_condition_oid_from_payload(payload)
 
 
 def build_condition_registry(mdv: MetaDataVersion) -> Dict[str, Condition]:
@@ -316,22 +394,74 @@ def build_where_registry(mdv: MetaDataVersion) -> Dict[str, WhereClause]:
     """
     Build canonical WhereClause registry and remap all references to canonical OIDs.
     
+    Consolidates WhereClauses based on their actual RangeCheck content (not Condition OIDs).
+    Each consolidated WhereClause will have exactly one Condition containing all RangeChecks.
+    
     Note: Conditions should be consolidated first via build_condition_registry().
     """
+    # First, collect all RangeChecks from each WhereClause to identify unique content
+    whereclause_payloads: Dict[str, Dict[str, Any]] = {}
+    old_to_payload: Dict[str, Dict[str, Any]] = {}
+    
+    for wc in (mdv.whereClauses or []):
+        payload = _canonical_where_payload(wc, mdv)
+        payload_key = json.dumps(payload, sort_keys=True)
+        old_to_payload[wc.OID] = payload
+        whereclause_payloads[payload_key] = payload
+    
+    # Build registry: one WhereClause per unique payload
     registry: Dict[str, WhereClause] = {}
+    payload_to_canonical_oid: Dict[str, str] = {}
     old_to_canonical: Dict[str, str] = {}
     
-    # Canonicalise all WhereClauses and build mapping from old OID -> canonical OID
+    # Create consolidated WhereClauses and Conditions
     for wc in (mdv.whereClauses or []):
         old_oid = wc.OID
-        canonical_wid = canonicalise_whereclause(wc, mdv)
+        payload = old_to_payload[old_oid]
+        payload_key = json.dumps(payload, sort_keys=True)
         
-        if canonical_wid not in registry:
-            # First WhereClause with this canonical OID - keep it
-            wc.OID = canonical_wid
-            registry[canonical_wid] = wc
+        # Get or create canonical OID for this payload
+        if payload_key not in payload_to_canonical_oid:
+            canonical_wid = canonicalise_whereclause(wc, mdv)
+            payload_to_canonical_oid[payload_key] = canonical_wid
+            
+            # Create a single Condition containing all RangeChecks from this WhereClause
+            range_checks = payload.get("rangeChecks", [])
+            if range_checks:
+                # Create Condition with all RangeChecks
+                condition_oid = _canonical_condition_oid_from_range_checks(range_checks, mdv)
+                
+                # Check if Condition already exists, if not create it
+                existing_cond = next((c for c in (mdv.conditions or []) if c.OID == condition_oid), None)
+                if not existing_cond:
+                    # Create new Condition with all RangeChecks
+                    new_range_checks = []
+                    for rc_data in range_checks:
+                        rc = RangeCheck.model_construct(
+                            item=rc_data.get("item"),
+                            comparator=rc_data.get("comparator"),
+                            checkValues=rc_data.get("values", []),
+                            softHard=rc_data.get("softHard"),
+                        )
+                        new_range_checks.append(rc)
+                    
+                    new_cond = Condition.model_construct(
+                        OID=condition_oid,
+                        rangeChecks=new_range_checks,
+                    )
+                    if mdv.conditions is None:
+                        mdv.conditions = []
+                    mdv.conditions.append(new_cond)
+                
+                # Create consolidated WhereClause with single Condition reference
+                consolidated_wc = WhereClause.model_construct(
+                    OID=canonical_wid,
+                    conditions=[condition_oid],
+                )
+                registry[canonical_wid] = consolidated_wc
         
         # Map old OID to canonical OID (for remapping applicableWhen)
+        canonical_wid = payload_to_canonical_oid[payload_key]
         if old_oid:
             old_to_canonical[old_oid] = canonical_wid
     
@@ -354,14 +484,16 @@ def build_where_registry(mdv: MetaDataVersion) -> Dict[str, WhereClause]:
     for it in (mdv.items or []):
         _remap_oids(it)
     
-    # Remove duplicate WhereClauses from the list
+    # Replace WhereClauses with consolidated ones
     mdv.whereClauses = list(registry.values())
     
     return registry
 
 
 def _is_slice(ig: ItemGroup) -> bool:
-    return str(getattr(ig, "type", "")) == "DataSpecialization"
+    """Check if ItemGroup is a DataSpecialization slice."""
+    ig_type = getattr(ig, "type", None)
+    return ig_type == ItemGroupType.DataSpecialization
 
 
 def _domain_name_of_ig(ig: ItemGroup) -> str:
@@ -536,52 +668,19 @@ def transform_value_lists_to_specialisation(mdv: MetaDataVersion) -> None:
             if ig.OID not in value_list_oids_to_remove
         ]
     
-    # Ensure slices don't have children (they are leaf nodes)
-    for slice_ig in mdv.itemGroups or []:
-        if _is_slice(slice_ig):
-            slice_ig.children = None
-    
-    # Update domain ItemGroups: remove ValueList children, add slice children
+    # Update domain ItemGroups: replace ValueList children with slice OID references
+    # Slices are top-level ItemGroups, so we reference them as string OIDs (not inline objects)
     for domain_ig in mdv.itemGroups or []:
-        # Skip slices and ValueLists
         if _is_slice(domain_ig) or _is_value_list(domain_ig):
-            continue
+            continue  # Skip slices (leaf nodes) and ValueLists (already removed)
         
         domain = _domain_name_of_ig(domain_ig)
-        if not domain or domain not in domain_to_slice_oids:
-            continue
-        
-        # Update children: remove ValueList references, add slice OID references
-        children = domain_ig.children or []
-        
-        # Remove ValueList references (both OID strings and full objects)
-        filtered_children = []
-        for child in children:
-            if isinstance(child, str):
-                # OID string reference - keep if not a ValueList
-                if not child.startswith('VL.'):
-                    filtered_children.append(child)
-            elif isinstance(child, ItemGroup):
-                # Full ItemGroup object - keep if not a ValueList
-                if not _is_value_list(child):
-                    filtered_children.append(child)
-            else:
-                # Unknown type, keep as-is
-                filtered_children.append(child)
-        
-        # Add slice OID references for this domain
-        slice_oids = domain_to_slice_oids[domain]
-        for slice_oid in sorted(slice_oids):
-            if slice_oid not in filtered_children:
-                filtered_children.append(slice_oid)
-        
-        domain_ig.children = filtered_children if filtered_children else None
-    
-    # Final pass: ensure slices don't have children (they are leaf nodes)
-    # This must be done AFTER updating domain ItemGroups to avoid any reverse references
-    for slice_ig in mdv.itemGroups or []:
-        if _is_slice(slice_ig):
-            slice_ig.children = None
+        if domain in domain_to_slice_oids:
+            # Replace children with slice OID string references
+            domain_ig.children = sorted(domain_to_slice_oids[domain]) or None
+        else:
+            # No slices for this domain - clear any ValueList references
+            domain_ig.children = None
 
 
 def build_canonical_slices(mdv: MetaDataVersion) -> None:

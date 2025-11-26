@@ -1516,7 +1516,7 @@
           ]
         },
         {
-          "OID": "COND.707417420a3a9086",
+          "OID": "COND.VS.SITTING_SYSBP",
           "rangeChecks": [
             {
               "comparator": "EQ",
@@ -1537,7 +1537,7 @@
           ]
         },
         {
-          "OID": "COND.fc98796be1e14c99",
+          "OID": "COND.VS.DIABP_SITTING",
           "rangeChecks": [
             {
               "comparator": "EQ",
@@ -1723,13 +1723,13 @@
         {
           "OID": "WC.VS.SITTING_SYSBP",
           "conditions": [
-            "COND.707417420a3a9086"
+            "COND.VS.SITTING_SYSBP"
           ]
         },
         {
           "OID": "WC.VS.DIABP_SITTING",
           "conditions": [
-            "COND.fc98796be1e14c99"
+            "COND.VS.DIABP_SITTING"
           ]
         },
         {
