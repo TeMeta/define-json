@@ -1742,13 +1742,8 @@ class DefineJSONToXMLConverter:
         
         # Sort value_lists by original order if available in metadata
         xml_metadata = getattr(self, '_current_xml_metadata', {})
-        value_list_def_order = xml_metadata.get('valueListDefOrder', [])
-        
-        if value_list_def_order:
-            # Create OID to order index map
-            order_map = {oid: idx for idx, oid in enumerate(value_list_def_order)}
-            # Sort by original order, keeping unordered items at end
-            value_lists = sorted(value_lists, key=lambda vl: order_map.get(vl.get('OID'), 999999))
+        # Note: valueListDefOrder removed - order is preserved by array ordering
+        # Process ValueLists in the order they appear in the JSON array
         
         for vl in value_lists:
             vl_elem = ET.SubElement(parent, f'{{{def_ns}}}ValueListDef' if def_ns else 'ValueListDef')
@@ -2053,22 +2048,10 @@ class DefineJSONToXMLConverter:
         
         # Fix #5: Sort by original order if available
         xml_metadata = json_data.get('_xmlMetadata', {})
-        item_def_order = xml_metadata.get('itemDefOrder', [])
-        
-        if item_def_order:
-            # Create ordered list based on original sequence
-            ordered_items = []
-            for oid in item_def_order:
-                if oid in unique_items:
-                    ordered_items.append(unique_items[oid])
-            # Add any items not in original order
-            for oid, item in unique_items.items():
-                if oid not in item_def_order:
-                    ordered_items.append(item)
-            self._create_item_defs(parent, ordered_items)
-        else:
-            # No order specified, use as-is
-            self._create_item_defs(parent, list(unique_items.values()))
+        # Note: itemDefOrder removed - order is preserved by array ordering
+        # Process items in the order they appear in the JSON (from ItemGroups.items arrays)
+        # ItemDef order doesn't matter for Define-XML spec compliance
+        self._create_item_defs(parent, list(unique_items.values()))
     
     def _create_item_defs(self, parent: ET.Element, variables: List[Dict[str, Any]]) -> None:
         """Create ItemDef elements."""

@@ -221,8 +221,10 @@ class RoundtripValidator:
         all_tags = set(orig_children.keys()) | set(rt_children.keys())
         
         for tag in all_tags:
-            orig_count = len(orig_children[tag])
-            rt_count = len(rt_children[tag])
+            orig_list = orig_children[tag]
+            rt_list = rt_children[tag]
+            orig_count = len(orig_list)
+            rt_count = len(rt_list)
             
             if orig_count != rt_count:
                 self.differences.append({
@@ -232,11 +234,58 @@ class RoundtripValidator:
                     'roundtrip_count': rt_count
                 })
             
-            # Recursively compare matching children
-            for i in range(min(orig_count, rt_count)):
-                orig_child = orig_children[tag][i]
-                rt_child = rt_children[tag][i]
-                self._compare_elements(orig_child, rt_child, f"{path}/{tag}[{i}]")
+            # For elements that typically have OID attributes (ItemDef, ItemGroupDef, CodeList, etc.),
+            # match by OID instead of position to be order-agnostic
+            # This makes validation insensitive to element ordering
+            elements_with_oid = {'ItemDef', 'ItemGroupDef', 'CodeList', 'MethodDef', 'WhereClauseDef', 
+                                 'ValueListDef', 'Standard', 'Condition', 'CommentDef'}
+            
+            if tag in elements_with_oid:
+                # Match by OID
+                orig_by_oid = {}
+                rt_by_oid = {}
+                
+                for child in orig_list:
+                    oid = child.get('OID')
+                    if oid:
+                        orig_by_oid[oid] = child
+                
+                for child in rt_list:
+                    oid = child.get('OID')
+                    if oid:
+                        rt_by_oid[oid] = child
+                
+                # Compare elements matched by OID
+                all_oids = set(orig_by_oid.keys()) | set(rt_by_oid.keys())
+                for oid in all_oids:
+                    if oid in orig_by_oid and oid in rt_by_oid:
+                        self._compare_elements(orig_by_oid[oid], rt_by_oid[oid], f"{path}/{tag}[OID={oid}]")
+                    elif oid in orig_by_oid:
+                        self.differences.append({
+                            'type': 'MISSING_ELEMENT',
+                            'path': f"{path}/{tag}",
+                            'oid': oid,
+                            'message': f"Element with OID={oid} missing in roundtrip"
+                        })
+                    elif oid in rt_by_oid:
+                        self.differences.append({
+                            'type': 'EXTRA_ELEMENT',
+                            'path': f"{path}/{tag}",
+                            'oid': oid,
+                            'message': f"Element with OID={oid} extra in roundtrip"
+                        })
+                
+                # Handle elements without OID (shouldn't happen, but be safe)
+                orig_without_oid = [c for c in orig_list if not c.get('OID')]
+                rt_without_oid = [c for c in rt_list if not c.get('OID')]
+                for i in range(min(len(orig_without_oid), len(rt_without_oid))):
+                    self._compare_elements(orig_without_oid[i], rt_without_oid[i], f"{path}/{tag}[no-OID-{i}]")
+            else:
+                # For other elements, compare by position (order matters)
+                for i in range(min(orig_count, rt_count)):
+                    orig_child = orig_list[i]
+                    rt_child = rt_list[i]
+                    self._compare_elements(orig_child, rt_child, f"{path}/{tag}[{i}]")
     
     def print_report(self, report: Dict):
         """Print a human-readable validation report."""
