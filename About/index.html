@@ -76,35 +76,44 @@
 </div>
 <div class="navbar-collapse collapse card bg-body-tertiary" id="toc-collapse">
 <ul class="nav flex-column">
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#data-implementation-definition-fixing-clinical-data-contracts-at-the-root">Data Implementation Definition: Fixing Clinical Data Contracts at the Root</a>
+<li class="nav-item" data-bs-level="1"><a class="nav-link" href="#define-json-data-implementation-definition">Define-JSON: Data Implementation Definition</a>
 <ul class="nav flex-column">
-</ul>
-</li>
 <li class="nav-item" data-bs-level="2"><a class="nav-link" href="#quick-start-xml-json-conversion">🔄 Quick Start: XML ↔ JSON Conversion</a>
 <ul class="nav flex-column">
 </ul>
 </li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#reverse-engineering-data-metadata">🆕 Reverse Engineering: Data → Metadata</a>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#reverse-engineering-data-metadata">Reverse Engineering: Data → Metadata</a>
 <ul class="nav flex-column">
 </ul>
 </li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#context-is-everything">Context is everything</a>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#interactive-data-cube-pipeline">Interactive Data Cube Pipeline</a>
 <ul class="nav flex-column">
 </ul>
 </li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#usages">Usages</a>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#context-specific-definitions">Context-Specific Definitions</a>
 <ul class="nav flex-column">
 </ul>
 </li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#define-bridges-implementation-and-meaning">Define bridges implementation and meaning</a>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#the-problem">The Problem</a>
 <ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#use-cases">Use Cases</a>
+<ul class="nav flex-column">
+</ul>
+</li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#semantic-bridging">Semantic Bridging</a>
+<ul class="nav flex-column">
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </div>
 </div></div>
 <div class="col-md-9" role="main">
-<h2 id="data-implementation-definition-fixing-clinical-data-contracts-at-the-root">Data Implementation Definition: Fixing Clinical Data Contracts at the Root</h2>
+<h1 id="define-json-data-implementation-definition">Define-JSON: Data Implementation Definition</h1>
+<p>Fixing Clinical Data Contracts at the Root</p>
 <blockquote>
 <p>“send us the Define too so we know what's going on”</p>
 </blockquote>
@@ -116,164 +125,91 @@
 <p>It is being designed in a Clinical Trial context to supplement the CDISC Unified Study Definitions (<a href="https://github.com/cdisc-org/DDF-RA">USDM</a>) and <a href="https://github.com/cdisc-org/DataExchange-DatasetJson">Dataset-JSON</a>, providing a way to describe datasets and how they link causally to their context</p>
 <p><a href="https://temeta.github.io/define-json">Documentation Site</a></p>
 <h2 id="quick-start-xml-json-conversion">🔄 Quick Start: XML ↔ JSON Conversion</h2>
-<h3 id="ir-pipeline-slices-valuelist-xml-exports">IR Pipeline (slices + ValueList + XML exports)</h3>
-<p>Run the canonical IR pipeline using only the generated <code>define.py</code> classes:</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Install deps</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># Install dependencies</span>
 poetry<span class="w"> </span>install
 
-<span class="c1"># Run on a Define-JSON file</span>
-poetry<span class="w"> </span>run<span class="w"> </span>define-ir<span class="w"> </span>path/to/input.json<span class="w"> </span>--domains<span class="w"> </span>CE<span class="w"> </span>AE
-
-<span class="c1"># Outputs (alongside input unless --out is provided):</span>
-<span class="c1"># - input.canonical.json          (canonical ordering, registry applied)</span>
-<span class="c1"># - input.valuelist_projection.json (diagnostic per-domain variable-first contexts)</span>
-<span class="c1"># - input.define21.xml            (minimal Define-XML 2.1)</span>
-<span class="c1"># - input.define10.xml            (flattened Define-XML 1.0)</span>
-</code></pre></div>
-<p>For complete bidirectional conversion between Define-XML and Define-JSON, see:
-- <strong><a href="../CONVERSION_README/">CONVERSION_README.md</a></strong> - Complete guide
-- <strong><a href="../QUICK_REFERENCE/">QUICK_REFERENCE.md</a></strong> - Command cheat sheet</p>
-<h3 id="basic-usage">Basic Usage</h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Recommended: Use Poetry (handles virtual environment automatically)</span>
+<span class="c1"># Convert Define-XML to Define-JSON</span>
 poetry<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>define_json<span class="w"> </span>xml2json<span class="w"> </span>data/define.xml<span class="w"> </span>data/output.json
+
+<span class="c1"># Convert Define-JSON to Define-XML</span>
 poetry<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>define_json<span class="w"> </span>json2xml<span class="w"> </span>data/input.json<span class="w"> </span>data/output.xml
 
-<span class="c1"># Alternative: Set PYTHONPATH manually</span>
-<span class="nv">PYTHONPATH</span><span class="o">=</span>src<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>define_json<span class="w"> </span>xml2json<span class="w"> </span>data/define.xml<span class="w"> </span>data/output.json
-<span class="nv">PYTHONPATH</span><span class="o">=</span>src<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>define_json<span class="w"> </span>json2xml<span class="w"> </span>data/input.json<span class="w"> </span>data/output.xml
-
-<span class="c1"># From any other directory</span>
-<span class="nv">PYTHONPATH</span><span class="o">=</span>/path/to/define-json/src<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>define_json<span class="w"> </span>xml2json<span class="w"> </span>data/define.xml<span class="w"> </span>data/output.json
-</code></pre></div>
-<h3 id="viewing-xml-files-with-stylesheets">Viewing XML Files with Stylesheets</h3>
-<p>Generated XML files include an XSL stylesheet reference for proper rendering. Due to browser security policies, you may encounter CORS errors when opening XML files directly. Here are the solutions:</p>
-<h4 id="option-1-use-a-local-web-server-recommended">Option 1: Use a Local Web Server (Recommended)</h4>
-<div class="highlight"><pre><span></span><code><span class="c1"># Navigate to your XML file directory</span>
-<span class="nb">cd</span><span class="w"> </span>/path/to/your/xml/files
-python<span class="w"> </span>-m<span class="w"> </span>http.server<span class="w"> </span><span class="m">8000</span>
-
-<span class="c1"># Then open: http://localhost:8000/your-file.xml</span>
-</code></pre></div>
-<h4 id="option-2-generate-html-directly-recommended">Option 2: Generate HTML Directly (Recommended)</h4>
-<div class="highlight"><pre><span></span><code><span class="c1"># Convert JSON directly to HTML (no CORS issues!)</span>
+<span class="c1"># Convert to HTML (no CORS issues)</span>
 poetry<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>define_json<span class="w"> </span>json2html<span class="w"> </span>input.json<span class="w"> </span>output.html
-
-<span class="c1"># Convert existing XML to HTML</span>
-poetry<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>define_json<span class="w"> </span>xml2html<span class="w"> </span>input.xml<span class="w"> </span>output.html
-
-<span class="c1"># Use custom XSL stylesheet</span>
-poetry<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>define_json<span class="w"> </span>json2html<span class="w"> </span>input.json<span class="w"> </span>output.html<span class="w"> </span>--xsl<span class="w"> </span>./custom-style.xsl
 </code></pre></div>
-<h4 id="option-3-configure-stylesheet-path">Option 3: Configure Stylesheet Path</h4>
-<div class="highlight"><pre><span></span><code><span class="c1"># Use relative path (works when XSL is in same directory)</span>
-poetry<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>define_json<span class="w"> </span>json2xml<span class="w"> </span>input.json<span class="w"> </span>output.xml<span class="w"> </span>--stylesheet<span class="w"> </span><span class="s2">"./define2-1.xsl"</span>
-
-<span class="c1"># Use absolute URL (if you have XSL hosted online)</span>
-poetry<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>define_json<span class="w"> </span>json2xml<span class="w"> </span>input.json<span class="w"> </span>output.xml<span class="w"> </span>--stylesheet<span class="w"> </span><span class="s2">"https://example.com/define2-1.xsl"</span>
+<p>For complete documentation, see:</p>
+<ul>
+<li><strong><a href="../CONVERSION_README/">CONVERSION_README.md</a></strong> - Complete conversion guide</li>
+<li><strong><a href="../QUICK_REFERENCE/">QUICK_REFERENCE.md</a></strong> - Command reference</li>
+</ul>
+<p><strong>Example files</strong>:</p>
+<ul>
+<li><code>examples/minimal_define.json</code> - Minimal example with Conditions, WhereClauses, and ValueLists</li>
+<li><code>examples/sample_dataset_*.json</code> - Dataset-JSON files for reverse engineering</li>
+<li><code>data/defineV21-*.json</code> - Full real-world Define-JSON examples</li>
+</ul>
+<h2 id="reverse-engineering-data-metadata">Reverse Engineering: Data → Metadata</h2>
+<p>Generate Define-JSON metadata from Dataset-JSON data files:</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>scripts/reverse_engineer_define.py<span class="w"> </span>examples/sample_dataset_lb.json
 </code></pre></div>
-<h2 id="reverse-engineering-data-metadata">🆕 Reverse Engineering: Data → Metadata</h2>
-<blockquote>
-<p>"Don't send data without its Define"</p>
-</blockquote>
-<p><strong>New capability</strong>: Automatically generate Define-JSON metadata from Dataset-JSON data files.</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Run on sample datasets</span>
-make<span class="w"> </span>reverse-engineer-lb<span class="w">  </span><span class="c1"># Laboratory dataset</span>
-make<span class="w"> </span>reverse-engineer-vs<span class="w">  </span><span class="c1"># Vital Signs dataset</span>
-
-<span class="c1"># Or run directly</span>
-python<span class="w"> </span>scripts/reverse_engineer_define.py<span class="w"> </span>examples/sample_dataset_lb.json
+<p><strong>Outputs</strong>:</p>
+<ul>
+<li><code>define_metadata.json</code> - Define-JSON structures</li>
+<li><code>sdmx_policy_suggestion.yaml</code> - SDMX policy suggestions</li>
+<li><code>analysis_summary.json</code> - Statistics and confidence scores</li>
+<li><code>reverse_engineering_report.md</code> - Analysis report</li>
+</ul>
+<h2 id="interactive-data-cube-pipeline">Interactive Data Cube Pipeline</h2>
+<p>End-to-end demonstration notebook:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>notebooks
+jupyter<span class="w"> </span>lab<span class="w"> </span>datacube_end_to_end.ipynb
 </code></pre></div>
-<p><strong>Outputs</strong> (4 files):
-1. <code>define_metadata.json</code> - Define-JSON ItemDef/ItemGroupDef structures
-2. <code>sdmx_policy_suggestion.yaml</code> - Auto-suggested SDMX Dimension/Measure/Attribute policy<br/>
-3. <code>analysis_summary.json</code> - Statistics and confidence scores
-4. <code>reverse_engineering_report.md</code> - Human-readable analysis report</p>
-<p><strong>What it does</strong>:
-- ✅ Detects dataset structure (vertical vs horizontal)
-- ✅ Classifies variables (IDENTIFIER, TIMING, TOPIC, RESULT, ATTRIBUTE)
-- ✅ Suggests SDMX roles (Dimension, Measure, Attribute)
-- ✅ Generates ItemGroups with WHERE clauses for topics
-- ✅ Provides confidence scores for all classifications</p>
-<p><strong>Use cases</strong>:
-- Bootstrap metadata for legacy datasets
-- Validate metadata-data consistency
-- Auto-generate SDMX policies
-- Quick prototyping of new analyses</p>
-<p>See <strong><a href="REVERSE_ENGINEERING_SUMMARY.md">REVERSE_ENGINEERING_SUMMARY.md</a></strong> for complete guide.</p>
-<h2 id="context-is-everything">Context is everything</h2>
+<p>Demonstrates reverse engineering, schema validation, data cube construction, and interactive visualization.</p>
+<h2 id="context-specific-definitions">Context-Specific Definitions</h2>
 <blockquote>
 <p>"Don't provide values without units"</p>
 </blockquote>
-<p><code>define-json</code> element definitions are context-specific by design, only applicable to some defined local scope.</p>
-<p>By being so strict about scope (every <code>Item</code> must belong to an <code>ItemGroup</code>, which can in turn can act as nested slices), granular reusable definitions can be created and applied to a wide variety of contexts.</p>
-<blockquote>
-<p>“Don't quote someone without knowing what else they were saying and why</p>
-</blockquote>
-<p>The context that Define is implementing, i.e. <em>your</em> context, is up to you - make sure to record the surrounding context on your end so that the definitions within can be used and reused accurately:</p>
+<p><code>define-json</code> element definitions are context-specific by design. Every <code>Item</code> belongs to an <code>ItemGroup</code>, which can act as nested slices, enabling granular reusable definitions across contexts:</p>
 <ul>
-<li>CDISC Dataset Specification (actual data)</li>
-<li>CDISC Dataset Specialisation (template in the context of Biomedical Concept)</li>
-<li>OpenStudyBuilder Activity</li>
-<li>FHIR Profile or IG</li>
-<li>Clinical Recording Model</li>
-<li>Structured Data Collection forms / apps</li>
-<li>Clinical eSource Data Spec (a.k.a. Data Transfer Agreement, Data Contract)</li>
+<li>CDISC Dataset Specification</li>
+<li>CDISC Dataset Specialisation (Biomedical Concept-specific slice templates)</li>
+<li>FHIR Profiles</li>
+<li>Clinical eSource Data Specs (Data Transfer Agreements)</li>
 <li>OMOP-CDM mappings</li>
-<li>Dataset Transformation Metaprogramming</li>
-<li>Define-JSON / Define-XML for regulatory submission</li>
-<li>AI model feature spec</li>
+<li>Regulatory submissions (Define-XML)</li>
+<li>Dataset transformation specifications</li>
 </ul>
+<p>Define-JSON links to <code>Coding</code>, <code>ReifiedConcept</code> and <code>ConceptProperty</code> for structured semantic connections, enabling each data element to be mapped unambiguously to standard dictionaries/ontologies and abstract concepts.</p>
 <blockquote>
-<p>“Don't send data without its Define”</p>
+<p>"Don't define derivation/origin for a field without knowing what the Biomedical Concept is being implemented"</p>
 </blockquote>
-<p><img alt="The status quo of silos, files and documents" src="https://github.com/TeMeta/define-json/blob/gh-pages/images/throwing_vase_over_wall.png?raw=true" width="350"/></p>
-<p>Clinical trial data exchange needs fixing.  We need to be able to simultaneously speak in nuanced concepts and understand in specific self-explanatory structure. <em>The first step is agreeing on that structure</em>.</p>
-<p>Being able to iterate rapidly is important to the early stages of development of this standard. <em>Fix what's broken. Improve what works. Repeat.</em></p>
+<h2 id="the-problem">The Problem</h2>
 <blockquote>
-<p>“Don't define derivation/origin for a field without knowing what the Biomedical Concept is being implemented”</p>
+<p>"Don't send data without its Definition"</p>
 </blockquote>
-<p>Define-JSON details implementation, but also links to <code>Coding</code>, <code>ReifiedConcept</code> and <code>ConceptProperty</code> for structured semantic connections, i.e. enabling each data element to be mapped unambiguously to standard dictionaries/ontologies, abstract concepts, and their properties.</p>
-<p>The definition of [something] combines its abstract / template form with a context, then fleshes out that combined context.</p>
+<p><img alt="The status quo of silos, files and documents" src="images/throwing_vase_over_wall.png" width="350"/></p>
+<p>Clinical trial data exchange needs fixing. We need to be able to simultaneously speak in nuanced concepts and understand in specific self-explanatory structure. <em>The first step is agreeing on that structure</em>.</p>
+<h2 id="use-cases">Use Cases</h2>
+<p>This project started as part of CDISC 360i project, extending the current structure such that data specs to be drivers rather than simply descriptors of data transformations and transfer in clinical trials.</p>
+<p>Any gaps that emerged during the project (e.g. linking abstract analysis concepts to data, granularity) could quickly be addressed by adapting this model.</p>
+<p><strong>Dataset Transformation</strong>: Represent source and target datasets in the same framework, with explicit transformation mappings.</p>
+<p><strong>Regulatory Submissions</strong>: Metadata manifest accompanying Dataset-JSON, specifying what was provided, its origins, and derivations.</p>
+<p><strong>Data Transfer Agreements</strong>: Bilateral agreements between research organizations and suppliers, specifying data structure, timing, and content.</p>
+<p><strong>Demand Data Contracts</strong>: Analysis requests specifying how target datasets are derived from sources and expected structure.</p>
+<p><strong>Data Product Catalog</strong>: Enhanced metadata for data products including lineage, semantics, and derivations.</p>
+<p><strong>Provenance Tracking</strong>:</p>
 <ul>
-<li>FHIR Profile is a implementation of a FHIR Resource template in the context of some healthcare or research authority</li>
-<li>A granular definition for some Biomedical Concept (BC) is an implementation of a property of that BC in context of the standard being implemented</li>
-<li>A Biomedical Concept Property is an implementation of some abstract Data Element Concept in context of a BC</li>
-<li>A dataset is an implementation of a specified demand data contract in the context of a specific transfer/timepoint</li>
-<li>Transformation code is the implementation of described transformation in the context of a specific environment</li>
+<li><code>SourceItem</code> - Direct links to source documents, CRF forms, or datasets</li>
+<li><code>wasDerivedFrom</code> - Template reuse (PROV-O based), independent instances</li>
 </ul>
-<h2 id="usages">Usages</h2>
-<h3 id="dataset-transformation-program">Dataset Transformation Program</h3>
-<p>Both source and target datasets represented in the same framework, with target referencing back to how the source is used explicitly</p>
-<p>From this a full dataset transformation expression and/or executable program script can be generated.</p>
-<h3 id="regulatory-clinical-trial-submission-supply-data-contract">Regulatory Clinical Trial Submission (Supply Data Contract)</h3>
-<p>Metadata to accompany Dataset-JSON, a manifest of specifying precisely what has been provided as well as its origins and how it was derived</p>
-<h3 id="dta-bilateral-agreement-supply-demand-data-contract">DTA (bilateral agreement - Supply &amp; Demand Data Contract)</h3>
-<p>Data Transfer Agreements are based on the demands specified by the research organisation, against which the supplier agrees to deliver specific data at specific times using a specific structure.</p>
-<p>If the Supply has an opinionated structure it can promise to deliver that, or if they have no opinionated structure they can provide the precise structure demanded</p>
-<h3 id="demand-data-contracts">Demand Data Contracts</h3>
-<p>A search, analysis or data access request is entered</p>
+<h2 id="semantic-bridging">Semantic Bridging</h2>
+<p>Define-JSON bridges implementation and meaning through:</p>
 <ul>
-<li>specifying how target (including intermediate datasets) are derived from source</li>
-<li>specifying the expected content and structure</li>
+<li><strong><code>Coding</code></strong> - Semantic tags against known ontologies</li>
+<li><strong><code>ReifiedConcept</code></strong> - Links to abstract concepts (e.g., CDISC Biomedical Concepts)</li>
+<li><strong><code>ConceptProperty</code></strong> - Properties of concepts in context</li>
 </ul>
-<p>This allows us to specify e.g. a FHIR Data Contract, a promise to provide a particular Resource structure, and understand how it will be interpreted by analysis in tabular form</p>
-<h3 id="manifest">Manifest</h3>
-<p>Contextual / semantic / derivation / dependency / traceability / structural metadata to supplement a data transfer</p>
-<h3 id="data-product-catalog">Data Product Catalog</h3>
-<p>A given set of data products can be described using define-json to provide enhanced metadata around lineage, semantics and derivations.</p>
-<p>In the context of a Clinical Data Fabric/Mesh/Lake, MDR, or Operational Data Store: define-json can be used as a means of recording granular value-level lineage within dataset, allowing tooling to show dependencies and impact analysis.</p>
-<p>Define can even be used a psuedo 'MDR' with the way it tracks dependencies, provenance and impact analysis.</p>
-<ul>
-<li><code>SourceItem</code> structure has detailed information about where the value came from, whether it's a document or CRF form or source dataset with its own referencable <code>Item</code>.</li>
-<li><code>wasDerivedFrom</code> relationship is borrows from PROV-O (Provenance Ontology) exclusively to denote template reuse i.e. "I am reusing this definition from somewhere else and making it my own".</li>
-<li><code>SourceItem</code> denotes a direct link. Changes to the source will impact the target. Conversely <code>wasDerivedFrom</code> relationship only provides provenance and lets you identify reuse without coupling the instances - you can modify each instance independently.</li>
-</ul>
-<h2 id="define-bridges-implementation-and-meaning">Define bridges implementation and meaning</h2>
-<p>Because Define is implementation-agnostic, it can be used to compare across different implementations e.g. establishing changes between study-specific implementation and a standard template.</p>
-<p>What relates both disparate implementations is explicit link to an independent meaning.</p>
-<p>The <code>Coding</code> class semantically-tags all identifiable definitions against known ontologies.</p>
-<p>We can also reference to compound 'concept' structures such as the CDISC Biomedical Concept, which <a href="https://dictionary.cambridge.org/dictionary/english/reify">reifies</a> a clinical Observation topic and specifies a set of data properties in context of that topic, so that we can use them to define abstract constraints common to all implementations while staying granular to the topic.</p>
-<p>These explicit links can be used to bridge the implementation to the meaningful thing that it is implementing</p></div>
+<p>This enables comparison across implementations and links disparate structures to shared meaning.</p></div>
 </div>
 </div>
 <footer class="col-md-12">

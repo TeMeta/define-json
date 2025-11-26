@@ -316,7 +316,7 @@ RangeCheck {
 
 ItemGroup ||--}o Item : "items"
 ItemGroup ||--}o Item : "keySequence"
-ItemGroup ||--}o ItemGroup : "children"
+ItemGroup ||--}o ItemGroup : "slices"
 ItemGroup ||--|o ReifiedConcept : "implementsConcept"
 ItemGroup ||--}o WhereClause : "applicableWhen"
 ItemGroup ||--}o Coding : "security"
@@ -443,7 +443,7 @@ RangeCheck ||--}o FormalExpression : "expressions"
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../../slots/children/">children</a></td>
+<td><a href="../../slots/slices/">slices</a></td>
 <td>* <br/> <a href="./">ItemGroup</a> or <br/><a href="./">ItemGroup</a> or <br/><a href="../../types/String/">String</a></td>
 <td>Child ItemGroups nested within this item group (e.g., ValueLists under parent domains). Can be either: - Full ItemGroup objects (preferred for hierarchical nesting) - OID string references (for cross-references to avoid duplication)</td>
 <td>direct</td>
@@ -625,13 +625,13 @@ RangeCheck ||--}o FormalExpression : "expressions"
 </tr>
 <tr>
 <td><a href="./">ItemGroup</a></td>
-<td><a href="../../slots/children/">children</a></td>
+<td><a href="../../slots/slices/">slices</a></td>
 <td>range</td>
 <td><a href="./">ItemGroup</a></td>
 </tr>
 <tr>
 <td><a href="./">ItemGroup</a></td>
-<td><a href="../../slots/children/">children</a></td>
+<td><a href="../../slots/slices/">slices</a></td>
 <td>any_of[range]</td>
 <td><a href="./">ItemGroup</a></td>
 </tr>
@@ -697,13 +697,13 @@ RangeCheck ||--}o FormalExpression : "expressions"
 </tr>
 <tr>
 <td><a href="../DataStructureDefinition/">DataStructureDefinition</a></td>
-<td><a href="../../slots/children/">children</a></td>
+<td><a href="../../slots/slices/">slices</a></td>
 <td>range</td>
 <td><a href="./">ItemGroup</a></td>
 </tr>
 <tr>
 <td><a href="../DataStructureDefinition/">DataStructureDefinition</a></td>
-<td><a href="../../slots/children/">children</a></td>
+<td><a href="../../slots/slices/">slices</a></td>
 <td>any_of[range]</td>
 <td><a href="./">ItemGroup</a></td>
 </tr>
@@ -918,8 +918,8 @@ RangeCheck ||--}o FormalExpression : "expressions"
 <span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">children</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">children</span>
+<span class="w">  </span><span class="nt">slices</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">slices</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Child</span><span class="nv"> </span><span class="s">ItemGroups</span><span class="nv"> </span><span class="s">nested</span><span class="nv"> </span><span class="s">within</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">group</span><span class="nv"> </span><span class="s">(e.g.,</span><span class="nv"> </span><span class="s">ValueLists</span>
 <span class="w">      </span><span class="s">under</span><span class="nv"> </span><span class="s">parent</span><span class="nv"> </span><span class="s">domains).</span><span class="nv"> </span><span class="s">Can</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">either:</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Full</span><span class="nv"> </span><span class="s">ItemGroup</span><span class="nv"> </span><span class="s">objects</span><span class="nv"> </span><span class="s">(preferred</span><span class="nv"> </span><span class="s">for</span>
 <span class="w">      </span><span class="s">hierarchical</span><span class="nv"> </span><span class="s">nesting)</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">OID</span><span class="nv"> </span><span class="s">string</span><span class="nv"> </span><span class="s">references</span><span class="nv"> </span><span class="s">(for</span><span class="nv"> </span><span class="s">cross-references</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">avoid</span>
@@ -1091,15 +1091,15 @@ RangeCheck ||--}o FormalExpression : "expressions"
 <span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">  </span><span class="nt">children</span><span class="p">:</span>
-<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">children</span>
+<span class="w">  </span><span class="nt">slices</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">slices</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Child</span><span class="nv"> </span><span class="s">ItemGroups</span><span class="nv"> </span><span class="s">nested</span><span class="nv"> </span><span class="s">within</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">group</span><span class="nv"> </span><span class="s">(e.g.,</span><span class="nv"> </span><span class="s">ValueLists</span>
 <span class="w">      </span><span class="s">under</span><span class="nv"> </span><span class="s">parent</span><span class="nv"> </span><span class="s">domains).</span><span class="nv"> </span><span class="s">Can</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">either:</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Full</span><span class="nv"> </span><span class="s">ItemGroup</span><span class="nv"> </span><span class="s">objects</span><span class="nv"> </span><span class="s">(preferred</span><span class="nv"> </span><span class="s">for</span>
 <span class="w">      </span><span class="s">hierarchical</span><span class="nv"> </span><span class="s">nesting)</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">OID</span><span class="nv"> </span><span class="s">string</span><span class="nv"> </span><span class="s">references</span><span class="nv"> </span><span class="s">(for</span><span class="nv"> </span><span class="s">cross-references</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">avoid</span>
 <span class="w">      </span><span class="s">duplication)'</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">children</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">slices</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
