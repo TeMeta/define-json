@@ -1,0 +1,161 @@
+{
+  "metaDataVersion": [{
+    "OID": "MDV.VALUELIST.TEST",
+    "name": "ValueList Transformation Test",
+    "fileOID": "FILE.VALUELIST.TEST",
+    "creationDateTime": "2025-01-01T00:00:00",
+    "odmVersion": "2.0",
+    "fileType": "Snapshot",
+    "studyOID": "STUDY.VALUELIST.TEST",
+    "conditions": [
+      {
+        "OID": "COND.VS.TEMP",
+        "rangeChecks": [
+          {
+            "comparator": "EQ",
+            "checkValues": ["TEMP"],
+            "item": "IT.VS.VSTESTCD"
+          }
+        ]
+      },
+      {
+        "OID": "COND.VS.WEIGHT",
+        "rangeChecks": [
+          {
+            "comparator": "EQ",
+            "checkValues": ["WEIGHT"],
+            "item": "IT.VS.VSTESTCD"
+          }
+        ]
+      },
+      {
+        "OID": "COND.LB.ALT",
+        "rangeChecks": [
+          {
+            "comparator": "EQ",
+            "checkValues": ["ALT"],
+            "item": "IT.LB.LBTESTCD"
+          }
+        ]
+      }
+    ],
+    "whereClauses": [
+      {
+        "OID": "WC.VS.VSORRES.TEMP",
+        "conditions": ["COND.VS.TEMP"]
+      },
+      {
+        "OID": "WC.VS.VSORRES.WEIGHT",
+        "conditions": ["COND.VS.WEIGHT"]
+      },
+      {
+        "OID": "WC.VS.VSORRESU.TEMP",
+        "conditions": ["COND.VS.TEMP"]
+      },
+      {
+        "OID": "WC.LB.LBORRES.ALT",
+        "conditions": ["COND.LB.ALT"]
+      }
+    ],
+    "itemGroups": [
+      {
+        "OID": "IG.VS",
+        "name": "VS",
+        "domain": "VS",
+        "type": "Table",
+        "items": [
+          {
+            "OID": "IT.VS.VSTESTCD",
+            "name": "VSTESTCD",
+            "dataType": "text"
+          },
+          {
+            "OID": "IT.VS.VSORRES",
+            "name": "VSORRES",
+            "dataType": "text"
+          },
+          {
+            "OID": "IT.VS.VSORRESU",
+            "name": "VSORRESU",
+            "dataType": "text"
+          }
+        ]
+      },
+      {
+        "OID": "IG.LB",
+        "name": "LB",
+        "domain": "LB",
+        "type": "Table",
+        "items": [
+          {
+            "OID": "IT.LB.LBTESTCD",
+            "name": "LBTESTCD",
+            "dataType": "text"
+          },
+          {
+            "OID": "IT.LB.LBORRES",
+            "name": "LBORRES",
+            "dataType": "text"
+          }
+        ]
+      },
+      {
+        "OID": "VL.VS.VSORRES",
+        "name": "VL_VS_VSORRES",
+        "domain": "VS",
+        "type": "ValueList",
+        "items": [
+          {
+            "OID": "IT.VS.VSORRES.TEMP",
+            "name": "VSORRES",
+            "dataType": "float",
+            "applicableWhen": ["WC.VS.VSORRES.TEMP"],
+            "origin": {
+              "type": "Collected",
+              "source": "Investigator"
+            }
+          },
+          {
+            "OID": "IT.VS.VSORRES.WEIGHT",
+            "name": "VSORRES",
+            "dataType": "float",
+            "applicableWhen": ["WC.VS.VSORRES.WEIGHT"],
+            "origin": {
+              "type": "Collected",
+              "source": "Investigator"
+            }
+          }
+        ]
+      },
+      {
+        "OID": "VL.VS.VSORRESU",
+        "name": "VL_VS_VSORRESU",
+        "domain": "VS",
+        "type": "ValueList",
+        "items": [
+          {
+            "OID": "IT.VS.VSORRESU.TEMP",
+            "name": "VSORRESU",
+            "dataType": "text",
+            "applicableWhen": ["WC.VS.VSORRESU.TEMP"]
+          }
+        ]
+      },
+      {
+        "OID": "VL.LB.LBORRES",
+        "name": "VL_LB_LBORRES",
+        "domain": "LB",
+        "type": "ValueList",
+        "items": [
+          {
+            "OID": "IT.LB.LBORRES.ALT",
+            "name": "LBORRES",
+            "dataType": "float",
+            "applicableWhen": ["WC.LB.LBORRES.ALT"]
+          }
+        ]
+      }
+    ]
+  }]
+}
+

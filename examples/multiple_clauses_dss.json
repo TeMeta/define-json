@@ -1,0 +1,3153 @@
+{
+  "metaDataVersion": [
+    {
+      "OID": "MDV.LZZT",
+      "name": "MDV LZZT",
+      "description": "Data Definitions for LZZT",
+      "fileOID": "ODM.DEFINE21.360i.001",
+      "asOfDateTime": "2025-08-25T14:27:13.299792",
+      "creationDateTime": "2025-08-25T14:27:13.299812",
+      "odmVersion": "1.3.2",
+      "fileType": "Snapshot",
+      "originator": "360i Define-XML Team",
+      "sourceSystem": "odmlib",
+      "sourceSystemVersion": "0.2",
+      "context": "Other",
+      "defineVersion": "2.1.0",
+      "studyOID": "ODM.LZZT",
+      "studyName": "LZZT",
+      "studyDescription": "Safety and Efficacy of the Xanomeline Transdermal Therapeutic System (TTS) in Patients\n                with Mild to Moderate Alzheimer's Disease\n            ",
+      "protocolName": "LZZT",
+      "itemGroups": [
+        {
+          "OID": "IG.DM",
+          "name": "DM",
+          "description": "Demographics",
+          "domain": "DM",
+          "structure": "One record per subject",
+          "items": [
+            {
+              "OID": "IT.DM.STUDYID",
+              "mandatory": false,
+              "name": "STUDYID",
+              "description": "Study Identifier",
+              "role": "Identifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.DM.DOMAIN",
+              "mandatory": false,
+              "name": "DOMAIN",
+              "description": "Domain Abbreviation",
+              "role": "Identifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.DM.USUBJID",
+              "mandatory": false,
+              "name": "USUBJID",
+              "description": "Unique Subject Identifier",
+              "role": "Identifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.DM.SUBJID",
+              "mandatory": false,
+              "name": "SUBJID",
+              "description": "Subject Identifier for the Study",
+              "role": "Topic",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.DM.RFSTDTC",
+              "mandatory": false,
+              "name": "RFSTDTC",
+              "description": "Subject Reference Start Date/Time",
+              "role": "Record Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.DM.RFENDTC",
+              "mandatory": false,
+              "name": "RFENDTC",
+              "description": "Subject Reference End Date/Time",
+              "role": "Record Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.DM.RFXSTDTC",
+              "mandatory": false,
+              "name": "RFXSTDTC",
+              "description": "Date/Time of First Study Treatment",
+              "role": "Record Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.DM.RFXENDTC",
+              "mandatory": false,
+              "name": "RFXENDTC",
+              "description": "Date/Time of Last Study Treatment",
+              "role": "Record Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.DM.RFICDTC",
+              "mandatory": false,
+              "name": "RFICDTC",
+              "description": "Date/Time of Informed Consent",
+              "role": "Record Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.DM.RFPENDTC",
+              "mandatory": false,
+              "name": "RFPENDTC",
+              "description": "Date/Time of End of Participation",
+              "role": "Record Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.DM.DTHDTC",
+              "mandatory": false,
+              "name": "DTHDTC",
+              "description": "Date/Time of Death",
+              "role": "Record Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.DM.DTHFL",
+              "mandatory": false,
+              "name": "DTHFL",
+              "description": "Subject Death Flag",
+              "role": "Record Qualifier",
+              "dataType": "text",
+              "codeList": "CL.NY"
+            },
+            {
+              "OID": "IT.DM.SITEID",
+              "mandatory": false,
+              "name": "SITEID",
+              "description": "Study Site Identifier",
+              "role": "Record Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.DM.AGE",
+              "mandatory": false,
+              "name": "AGE",
+              "description": "Age",
+              "role": "Record Qualifier",
+              "dataType": "float"
+            },
+            {
+              "OID": "IT.DM.AGEU",
+              "mandatory": false,
+              "name": "AGEU",
+              "description": "Age Units",
+              "role": "Variable Qualifier",
+              "dataType": "text",
+              "codeList": "CL.AGEU"
+            },
+            {
+              "OID": "IT.DM.SEX",
+              "mandatory": false,
+              "name": "SEX",
+              "description": "Sex",
+              "role": "Record Qualifier",
+              "dataType": "text",
+              "codeList": "CL.SEX"
+            },
+            {
+              "OID": "IT.DM.RACE",
+              "mandatory": false,
+              "name": "RACE",
+              "description": "Race",
+              "role": "Record Qualifier",
+              "dataType": "text",
+              "codeList": "CL.RACE"
+            },
+            {
+              "OID": "IT.DM.ARMCD",
+              "mandatory": false,
+              "name": "ARMCD",
+              "description": "Planned Arm Code",
+              "role": "Record Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.DM.ARM",
+              "mandatory": false,
+              "name": "ARM",
+              "description": "Description of Planned Arm",
+              "role": "Synonym Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.DM.ACTARMCD",
+              "mandatory": false,
+              "name": "ACTARMCD",
+              "description": "Actual Arm Code",
+              "role": "Record Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.DM.ACTARM",
+              "mandatory": false,
+              "name": "ACTARM",
+              "description": "Description of Actual Arm",
+              "role": "Synonym Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.DM.ARMNRS",
+              "mandatory": false,
+              "name": "ARMNRS",
+              "description": "Reason Arm and/or Actual Arm is Null",
+              "role": "Record Qualifier",
+              "dataType": "text",
+              "codeList": "CL.ARMNULRS"
+            },
+            {
+              "OID": "IT.DM.ACTARMUD",
+              "mandatory": false,
+              "name": "ACTARMUD",
+              "description": "Description of Unplanned Actual Arm",
+              "role": "Record Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.DM.COUNTRY",
+              "mandatory": false,
+              "name": "COUNTRY",
+              "description": "Country",
+              "role": "Record Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.DM.DMDTC",
+              "mandatory": false,
+              "name": "DMDTC",
+              "description": "Date/Time of Collection",
+              "role": "Timing",
+              "dataType": "text"
+            }
+          ]
+        },
+        {
+          "OID": "IG.VS",
+          "name": "VS",
+          "description": "Vital Signs",
+          "domain": "VS",
+          "structure": "One record per vital sign measurement per time point per visit per subject",
+          "items": [
+            {
+              "OID": "IT.VS.STUDYID",
+              "mandatory": false,
+              "name": "STUDYID",
+              "description": "Study Identifier",
+              "role": "Identifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.VS.DOMAIN",
+              "mandatory": false,
+              "name": "DOMAIN",
+              "description": "Domain Abbreviation",
+              "role": "Identifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.VS.USUBJID",
+              "mandatory": false,
+              "name": "USUBJID",
+              "description": "Unique Subject Identifier",
+              "role": "Identifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.VS.VSSEQ",
+              "mandatory": false,
+              "name": "VSSEQ",
+              "description": "Sequence Number",
+              "role": "Identifier",
+              "dataType": "float"
+            },
+            {
+              "OID": "IT.VS.VSTESTCD",
+              "mandatory": false,
+              "name": "VSTESTCD",
+              "description": "Vital Signs Test Short Name",
+              "role": "Topic",
+              "dataType": "text",
+              "codeList": "CL.VSTESTCD"
+            },
+            {
+              "OID": "IT.VS.VSTEST",
+              "mandatory": false,
+              "name": "VSTEST",
+              "description": "Vital Signs Test Name",
+              "role": "Synonym Qualifier",
+              "dataType": "text",
+              "codeList": "CL.VSTEST"
+            },
+            {
+              "OID": "IT.VS.VSPOS",
+              "mandatory": false,
+              "name": "VSPOS",
+              "description": "Vital Signs Position of Subject",
+              "role": "Record Qualifier",
+              "dataType": "text",
+              "codeList": "CL.POSITION"
+            },
+            {
+              "OID": "IT.VS.VSORRES",
+              "mandatory": false,
+              "name": "VSORRES",
+              "description": "Result or Finding in Original Units",
+              "role": "Result Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.VS.VSORRESU",
+              "mandatory": false,
+              "name": "VSORRESU",
+              "description": "Original Units",
+              "role": "Variable Qualifier",
+              "dataType": "text",
+              "codeList": "CL.VSRESU"
+            },
+            {
+              "OID": "IT.VS.VSSTRESC",
+              "mandatory": false,
+              "name": "VSSTRESC",
+              "description": "Character Result/Finding in Std Format",
+              "role": "Result Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.VS.VSSTRESN",
+              "mandatory": false,
+              "name": "VSSTRESN",
+              "description": "Numeric Result/Finding in Standard Units",
+              "role": "Result Qualifier",
+              "dataType": "float"
+            },
+            {
+              "OID": "IT.VS.VSSTRESU",
+              "mandatory": false,
+              "name": "VSSTRESU",
+              "description": "Standard Units",
+              "role": "Variable Qualifier",
+              "dataType": "text",
+              "codeList": "CL.VSRESU"
+            },
+            {
+              "OID": "IT.VS.VSLOC",
+              "mandatory": false,
+              "name": "VSLOC",
+              "description": "Location of Vital Signs Measurement",
+              "role": "Record Qualifier",
+              "dataType": "text",
+              "codeList": "CL.LOC"
+            },
+            {
+              "OID": "IT.VS.VSLAT",
+              "mandatory": false,
+              "name": "VSLAT",
+              "description": "Laterality",
+              "role": "Result Qualifier",
+              "dataType": "text",
+              "codeList": "CL.LAT"
+            },
+            {
+              "OID": "IT.VS.VSLOBXFL",
+              "mandatory": false,
+              "name": "VSLOBXFL",
+              "description": "Last Observation Before Exposure Flag",
+              "role": "Record Qualifier",
+              "dataType": "text",
+              "codeList": "CL.NY"
+            },
+            {
+              "OID": "IT.VS.VISITNUM",
+              "mandatory": false,
+              "name": "VISITNUM",
+              "description": "Visit Number",
+              "role": "Timing",
+              "dataType": "float"
+            },
+            {
+              "OID": "IT.VS.VSDTC",
+              "mandatory": false,
+              "name": "VSDTC",
+              "description": "Date/Time of Measurements",
+              "role": "Timing",
+              "dataType": "text"
+            }
+          ],
+          "children": [
+            "IG.WC.VS.DIABP",
+            "IG.WC.VS.DIABP_SITTING",
+            "IG.WC.VS.HEIGHT",
+            "IG.WC.VS.HR",
+            "IG.WC.VS.SITTING_SYSBP",
+            "IG.WC.VS.SYSBP",
+            "IG.WC.VS.TEMP",
+            "IG.WC.VS.WEIGHT"
+          ]
+        },
+        {
+          "OID": "IG.LB",
+          "name": "LB",
+          "description": "Laboratory Test Results",
+          "domain": "LB",
+          "structure": "One record per lab test per time point per visit per subject",
+          "items": [
+            {
+              "OID": "IT.LB.STUDYID",
+              "mandatory": false,
+              "name": "STUDYID",
+              "description": "Study Identifier",
+              "role": "Identifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.LB.DOMAIN",
+              "mandatory": false,
+              "name": "DOMAIN",
+              "description": "Domain Abbreviation",
+              "role": "Identifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.LB.USUBJID",
+              "mandatory": false,
+              "name": "USUBJID",
+              "description": "Unique Subject Identifier",
+              "role": "Identifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.LB.LBSEQ",
+              "mandatory": false,
+              "name": "LBSEQ",
+              "description": "Sequence Number",
+              "role": "Identifier",
+              "dataType": "float"
+            },
+            {
+              "OID": "IT.LB.LBTESTCD",
+              "mandatory": false,
+              "name": "LBTESTCD",
+              "description": "Lab Test or Examination Short Name",
+              "role": "Topic",
+              "dataType": "text",
+              "codeList": "CL.LBTESTCD"
+            },
+            {
+              "OID": "IT.LB.LBTEST",
+              "mandatory": false,
+              "name": "LBTEST",
+              "description": "Lab Test or Examination Name",
+              "role": "Synonym Qualifier",
+              "dataType": "text",
+              "codeList": "CL.LBTEST"
+            },
+            {
+              "OID": "IT.LB.LBCAT",
+              "mandatory": false,
+              "name": "LBCAT",
+              "description": "Category for Lab Test",
+              "role": "Grouping Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.LB.LBORRES",
+              "mandatory": false,
+              "name": "LBORRES",
+              "description": "Result or Finding in Original Units",
+              "role": "Result Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.LB.LBORRESU",
+              "mandatory": false,
+              "name": "LBORRESU",
+              "description": "Original Units",
+              "role": "Variable Qualifier",
+              "dataType": "text",
+              "codeList": "CL.UNIT"
+            },
+            {
+              "OID": "IT.LB.LBORNRLO",
+              "mandatory": false,
+              "name": "LBORNRLO",
+              "description": "Reference Range Lower Limit in Orig Unit",
+              "role": "Variable Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.LB.LBORNRHI",
+              "mandatory": false,
+              "name": "LBORNRHI",
+              "description": "Reference Range Upper Limit in Orig Unit",
+              "role": "Variable Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.LB.LBSTRESC",
+              "mandatory": false,
+              "name": "LBSTRESC",
+              "description": "Character Result/Finding in Std Format",
+              "role": "Result Qualifier",
+              "dataType": "text",
+              "codeList": "CL.LBSTRESC"
+            },
+            {
+              "OID": "IT.LB.LBSTRESN",
+              "mandatory": false,
+              "name": "LBSTRESN",
+              "description": "Numeric Result/Finding in Standard Units",
+              "role": "Result Qualifier",
+              "dataType": "float"
+            },
+            {
+              "OID": "IT.LB.LBSTRESU",
+              "mandatory": false,
+              "name": "LBSTRESU",
+              "description": "Standard Units",
+              "role": "Variable Qualifier",
+              "dataType": "text",
+              "codeList": "CL.UNIT"
+            },
+            {
+              "OID": "IT.LB.LBSTNRLO",
+              "mandatory": false,
+              "name": "LBSTNRLO",
+              "description": "Reference Range Lower Limit-Std Units",
+              "role": "Variable Qualifier",
+              "dataType": "float"
+            },
+            {
+              "OID": "IT.LB.LBSTNRHI",
+              "mandatory": false,
+              "name": "LBSTNRHI",
+              "description": "Reference Range Upper Limit-Std Units",
+              "role": "Variable Qualifier",
+              "dataType": "float"
+            },
+            {
+              "OID": "IT.LB.LBNRIND",
+              "mandatory": false,
+              "name": "LBNRIND",
+              "description": "Reference Range Indicator",
+              "role": "Variable Qualifier",
+              "dataType": "text",
+              "codeList": "CL.NRIND"
+            },
+            {
+              "OID": "IT.LB.LBSPEC",
+              "mandatory": false,
+              "name": "LBSPEC",
+              "description": "Specimen Type",
+              "role": "Record Qualifier",
+              "dataType": "text",
+              "codeList": "CL.SPECTYPE"
+            },
+            {
+              "OID": "IT.LB.LBLOBXFL",
+              "mandatory": false,
+              "name": "LBLOBXFL",
+              "description": "Last Observation Before Exposure Flag",
+              "role": "Record Qualifier",
+              "dataType": "text",
+              "codeList": "CL.NY"
+            },
+            {
+              "OID": "IT.LB.LBFAST",
+              "mandatory": false,
+              "name": "LBFAST",
+              "description": "Fasting Status",
+              "role": "Record Qualifier",
+              "dataType": "text",
+              "codeList": "CL.NY"
+            },
+            {
+              "OID": "IT.LB.VISITNUM",
+              "mandatory": false,
+              "name": "VISITNUM",
+              "description": "Visit Number",
+              "role": "Timing",
+              "dataType": "float"
+            },
+            {
+              "OID": "IT.LB.LBDTC",
+              "mandatory": false,
+              "name": "LBDTC",
+              "description": "Date/Time of Specimen Collection",
+              "role": "Timing",
+              "dataType": "text"
+            }
+          ],
+          "children": [
+            "IG.WC.LB.ALB",
+            "IG.WC.LB.ALP",
+            "IG.WC.LB.ALT",
+            "IG.WC.LB.AST",
+            "IG.WC.LB.CREAT",
+            "IG.WC.LB.HBA1C",
+            "IG.WC.LB.K",
+            "IG.WC.LB.SODIUM"
+          ]
+        },
+        {
+          "OID": "IG.AE",
+          "name": "AE",
+          "description": "Adverse Events",
+          "domain": "AE",
+          "structure": "One record per adverse event per subject",
+          "items": [
+            {
+              "OID": "IT.AE.STUDYID",
+              "mandatory": false,
+              "name": "STUDYID",
+              "description": "Study Identifier",
+              "role": "Identifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.AE.DOMAIN",
+              "mandatory": false,
+              "name": "DOMAIN",
+              "description": "Domain Abbreviation",
+              "role": "Identifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.AE.USUBJID",
+              "mandatory": false,
+              "name": "USUBJID",
+              "description": "Unique Subject Identifier",
+              "role": "Identifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.AE.AESEQ",
+              "mandatory": false,
+              "name": "AESEQ",
+              "description": "Sequence Number",
+              "role": "Identifier",
+              "dataType": "float"
+            },
+            {
+              "OID": "IT.AE.AETERM",
+              "mandatory": false,
+              "name": "AETERM",
+              "description": "Reported Term for the Adverse Event",
+              "role": "Topic",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.AE.AELLT",
+              "mandatory": false,
+              "name": "AELLT",
+              "description": "Lowest Level Term",
+              "role": "Variable Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.AE.AELLTCD",
+              "mandatory": false,
+              "name": "AELLTCD",
+              "description": "Lowest Level Term Code",
+              "role": "Variable Qualifier",
+              "dataType": "float"
+            },
+            {
+              "OID": "IT.AE.AEDECOD",
+              "mandatory": false,
+              "name": "AEDECOD",
+              "description": "Dictionary-Derived Term",
+              "role": "Synonym Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.AE.AEPTCD",
+              "mandatory": false,
+              "name": "AEPTCD",
+              "description": "Preferred Term Code",
+              "role": "Variable Qualifier",
+              "dataType": "float"
+            },
+            {
+              "OID": "IT.AE.AEHLT",
+              "mandatory": false,
+              "name": "AEHLT",
+              "description": "High Level Term",
+              "role": "Variable Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.AE.AEHLTCD",
+              "mandatory": false,
+              "name": "AEHLTCD",
+              "description": "High Level Term Code",
+              "role": "Variable Qualifier",
+              "dataType": "float"
+            },
+            {
+              "OID": "IT.AE.AEHLGT",
+              "mandatory": false,
+              "name": "AEHLGT",
+              "description": "High Level Group Term",
+              "role": "Variable Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.AE.AEHLGTCD",
+              "mandatory": false,
+              "name": "AEHLGTCD",
+              "description": "High Level Group Term Code",
+              "role": "Variable Qualifier",
+              "dataType": "float"
+            },
+            {
+              "OID": "IT.AE.AECAT",
+              "mandatory": false,
+              "name": "AECAT",
+              "description": "Category for Adverse Event",
+              "role": "Grouping Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.AE.AESCAT",
+              "mandatory": false,
+              "name": "AESCAT",
+              "description": "Subcategory for Adverse Event",
+              "role": "Grouping Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.AE.AEPRESP",
+              "mandatory": false,
+              "name": "AEPRESP",
+              "description": "Pre-Specified Adverse Event",
+              "role": "Variable Qualifier",
+              "dataType": "text",
+              "codeList": "CL.NY"
+            },
+            {
+              "OID": "IT.AE.AEBODSYS",
+              "mandatory": false,
+              "name": "AEBODSYS",
+              "description": "Body System or Organ Class",
+              "role": "Record Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.AE.AEBDSYCD",
+              "mandatory": false,
+              "name": "AEBDSYCD",
+              "description": "Body System or Organ Class Code",
+              "role": "Variable Qualifier",
+              "dataType": "float"
+            },
+            {
+              "OID": "IT.AE.AESOC",
+              "mandatory": false,
+              "name": "AESOC",
+              "description": "Primary System Organ Class",
+              "role": "Variable Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.AE.AESOCCD",
+              "mandatory": false,
+              "name": "AESOCCD",
+              "description": "Primary System Organ Class Code",
+              "role": "Variable Qualifier",
+              "dataType": "float"
+            },
+            {
+              "OID": "IT.AE.AELOC",
+              "mandatory": false,
+              "name": "AELOC",
+              "description": "Location of Event",
+              "role": "Record Qualifier",
+              "dataType": "text",
+              "codeList": "CL.LOC"
+            },
+            {
+              "OID": "IT.AE.AESEV",
+              "mandatory": false,
+              "name": "AESEV",
+              "description": "Severity/Intensity",
+              "role": "Record Qualifier",
+              "dataType": "text",
+              "codeList": "CL.AESEV"
+            },
+            {
+              "OID": "IT.AE.AESER",
+              "mandatory": false,
+              "name": "AESER",
+              "description": "Serious Event",
+              "role": "Record Qualifier",
+              "dataType": "text",
+              "codeList": "CL.NY"
+            },
+            {
+              "OID": "IT.AE.AEACN",
+              "mandatory": false,
+              "name": "AEACN",
+              "description": "Action Taken with Study Treatment",
+              "role": "Record Qualifier",
+              "dataType": "text",
+              "codeList": "CL.ACN"
+            },
+            {
+              "OID": "IT.AE.AEACNOTH",
+              "mandatory": false,
+              "name": "AEACNOTH",
+              "description": "Other Action Taken",
+              "role": "Record Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.AE.AEREL",
+              "mandatory": false,
+              "name": "AEREL",
+              "description": "Causality",
+              "role": "Record Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.AE.AERELNST",
+              "mandatory": false,
+              "name": "AERELNST",
+              "description": "Relationship to Non-Study Treatment",
+              "role": "Record Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.AE.AEPATT",
+              "mandatory": false,
+              "name": "AEPATT",
+              "description": "Pattern of Adverse Event",
+              "role": "Record Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.AE.AEOUT",
+              "mandatory": false,
+              "name": "AEOUT",
+              "description": "Outcome of Adverse Event",
+              "role": "Record Qualifier",
+              "dataType": "text",
+              "codeList": "CL.OUT"
+            },
+            {
+              "OID": "IT.AE.AESCAN",
+              "mandatory": false,
+              "name": "AESCAN",
+              "description": "Involves Cancer",
+              "role": "Record Qualifier",
+              "dataType": "text",
+              "codeList": "CL.NY"
+            },
+            {
+              "OID": "IT.AE.AESCONG",
+              "mandatory": false,
+              "name": "AESCONG",
+              "description": "Congenital Anomaly or Birth Defect",
+              "role": "Record Qualifier",
+              "dataType": "text",
+              "codeList": "CL.NY"
+            },
+            {
+              "OID": "IT.AE.AESDISAB",
+              "mandatory": false,
+              "name": "AESDISAB",
+              "description": "Persist or Signif Disability/Incapacity",
+              "role": "Record Qualifier",
+              "dataType": "text",
+              "codeList": "CL.NY"
+            },
+            {
+              "OID": "IT.AE.AESDTH",
+              "mandatory": false,
+              "name": "AESDTH",
+              "description": "Results in Death",
+              "role": "Record Qualifier",
+              "dataType": "text",
+              "codeList": "CL.NY"
+            },
+            {
+              "OID": "IT.AE.AESHOSP",
+              "mandatory": false,
+              "name": "AESHOSP",
+              "description": "Requires or Prolongs Hospitalization",
+              "role": "Record Qualifier",
+              "dataType": "text",
+              "codeList": "CL.NY"
+            },
+            {
+              "OID": "IT.AE.AESLIFE",
+              "mandatory": false,
+              "name": "AESLIFE",
+              "description": "Is Life Threatening",
+              "role": "Record Qualifier",
+              "dataType": "text",
+              "codeList": "CL.NY"
+            },
+            {
+              "OID": "IT.AE.AESOD",
+              "mandatory": false,
+              "name": "AESOD",
+              "description": "Occurred with Overdose",
+              "role": "Record Qualifier",
+              "dataType": "text",
+              "codeList": "CL.NY"
+            },
+            {
+              "OID": "IT.AE.AESMIE",
+              "mandatory": false,
+              "name": "AESMIE",
+              "description": "Other Medically Important Serious Event",
+              "role": "Record Qualifier",
+              "dataType": "text",
+              "codeList": "CL.NY"
+            },
+            {
+              "OID": "IT.AE.AECONTRT",
+              "mandatory": false,
+              "name": "AECONTRT",
+              "description": "Concomitant or Additional Trtmnt Given",
+              "role": "Record Qualifier",
+              "dataType": "text",
+              "codeList": "CL.NY"
+            },
+            {
+              "OID": "IT.AE.AETOXGR",
+              "mandatory": false,
+              "name": "AETOXGR",
+              "description": "Standard Toxicity Grade",
+              "role": "Record Qualifier",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.AE.AESTDTC",
+              "mandatory": false,
+              "name": "AESTDTC",
+              "description": "Start Date/Time of Adverse Event",
+              "role": "Timing",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.AE.AEENDTC",
+              "mandatory": false,
+              "name": "AEENDTC",
+              "description": "End Date/Time of Adverse Event",
+              "role": "Timing",
+              "dataType": "text"
+            },
+            {
+              "OID": "IT.AE.AEENRF",
+              "mandatory": false,
+              "name": "AEENRF",
+              "description": "End Relative to Reference Period",
+              "role": "Timing",
+              "dataType": "text",
+              "codeList": "CL.STENRF"
+            },
+            {
+              "OID": "IT.AE.AEENRTPT",
+              "mandatory": false,
+              "name": "AEENRTPT",
+              "description": "End Relative to Reference Time Point",
+              "role": "Timing",
+              "dataType": "text",
+              "codeList": "CL.STENRF"
+            },
+            {
+              "OID": "IT.AE.AEENTPT",
+              "mandatory": false,
+              "name": "AEENTPT",
+              "description": "End Reference Time Point",
+              "role": "Timing",
+              "dataType": "text"
+            }
+          ]
+        },
+        {
+          "OID": "IG.WC.VS.TEMP",
+          "name": "WC_VS_TEMP",
+          "domain": "VS",
+          "type": "DataSpecialization",
+          "items": [
+            {
+              "OID": "IT.VS.VSORRES.TEMP",
+              "mandatory": false,
+              "name": "VSORRES",
+              "displayFormat": "8.3",
+              "significantDigits": 3,
+              "dataType": "float",
+              "applicableWhen": [
+                "WC.VS.TEMP"
+              ],
+              "origin": {
+                "type": "Collected",
+                "source": "Investigator"
+              }
+            },
+            {
+              "OID": "IT.VS.VSORRESU.TEMP",
+              "mandatory": false,
+              "name": "VSORRESU",
+              "dataType": "text",
+              "applicableWhen": [
+                "WC.VS.TEMP"
+              ]
+            }
+          ],
+          "applicableWhen": [
+            "WC.VS.TEMP"
+          ]
+        },
+        {
+          "OID": "IG.WC.VS.WEIGHT",
+          "name": "WC_VS_WEIGHT",
+          "domain": "VS",
+          "type": "DataSpecialization",
+          "items": [
+            {
+              "OID": "IT.VS.VSORRES.WEIGHT",
+              "mandatory": false,
+              "name": "VSORRES",
+              "displayFormat": "8.3",
+              "significantDigits": 3,
+              "dataType": "float",
+              "applicableWhen": [
+                "WC.VS.WEIGHT"
+              ],
+              "origin": {
+                "type": "Collected",
+                "source": "Investigator"
+              }
+            },
+            {
+              "OID": "IT.VS.VSORRESU.WEIGHT",
+              "mandatory": false,
+              "name": "VSORRESU",
+              "dataType": "text",
+              "applicableWhen": [
+                "WC.VS.WEIGHT"
+              ]
+            }
+          ],
+          "applicableWhen": [
+            "WC.VS.WEIGHT"
+          ]
+        },
+        {
+          "OID": "IG.WC.VS.HEIGHT",
+          "name": "WC_VS_HEIGHT",
+          "domain": "VS",
+          "type": "DataSpecialization",
+          "items": [
+            {
+              "OID": "IT.VS.VSORRES.HEIGHT",
+              "mandatory": false,
+              "name": "VSORRES",
+              "displayFormat": "8.3",
+              "significantDigits": 3,
+              "dataType": "float",
+              "applicableWhen": [
+                "WC.VS.HEIGHT"
+              ],
+              "origin": {
+                "type": "Collected",
+                "source": "Investigator"
+              }
+            },
+            {
+              "OID": "IT.VS.VSORRESU.HEIGHT",
+              "mandatory": false,
+              "name": "VSORRESU",
+              "dataType": "text",
+              "applicableWhen": [
+                "WC.VS.HEIGHT"
+              ]
+            }
+          ],
+          "applicableWhen": [
+            "WC.VS.HEIGHT"
+          ]
+        },
+        {
+          "OID": "IG.WC.VS.SITTING_SYSBP",
+          "name": "WC_VS_SITTING_SYSBP",
+          "domain": "VS",
+          "type": "DataSpecialization",
+          "items": [
+            {
+              "OID": "IT.VS.VSORRES.SYSBP",
+              "mandatory": false,
+              "name": "VSORRES",
+              "dataType": "integer",
+              "applicableWhen": [
+                "WC.VS.SITTING_SYSBP"
+              ],
+              "origin": {
+                "type": "Collected",
+                "source": "Investigator"
+              }
+            }
+          ],
+          "applicableWhen": [
+            "WC.VS.SITTING_SYSBP"
+          ]
+        },
+        {
+          "OID": "IG.WC.VS.DIABP_SITTING",
+          "name": "WC_VS_DIABP_SITTING",
+          "domain": "VS",
+          "type": "DataSpecialization",
+          "items": [
+            {
+              "OID": "IT.VS.VSORRES.DIABP",
+              "mandatory": false,
+              "name": "VSORRES",
+              "dataType": "integer",
+              "applicableWhen": [
+                "WC.VS.DIABP_SITTING"
+              ],
+              "origin": {
+                "type": "Collected",
+                "source": "Investigator"
+              }
+            }
+          ],
+          "applicableWhen": [
+            "WC.VS.DIABP_SITTING"
+          ]
+        },
+        {
+          "OID": "IG.WC.VS.HR",
+          "name": "WC_VS_HR",
+          "domain": "VS",
+          "type": "DataSpecialization",
+          "items": [
+            {
+              "OID": "IT.VS.VSORRES.HR",
+              "mandatory": false,
+              "name": "VSORRES",
+              "dataType": "integer",
+              "applicableWhen": [
+                "WC.VS.HR"
+              ],
+              "origin": {
+                "type": "Collected",
+                "source": "Investigator"
+              }
+            },
+            {
+              "OID": "IT.VS.VSORRESU.HR",
+              "mandatory": false,
+              "name": "VSORRESU",
+              "dataType": "text",
+              "applicableWhen": [
+                "WC.VS.HR"
+              ]
+            }
+          ],
+          "applicableWhen": [
+            "WC.VS.HR"
+          ]
+        },
+        {
+          "OID": "IG.WC.VS.SYSBP",
+          "name": "WC_VS_SYSBP",
+          "domain": "VS",
+          "type": "DataSpecialization",
+          "items": [
+            {
+              "OID": "IT.VS.VSORRESU.SYSBP",
+              "mandatory": false,
+              "name": "VSORRESU",
+              "dataType": "text",
+              "applicableWhen": [
+                "WC.VS.SYSBP"
+              ]
+            }
+          ],
+          "applicableWhen": [
+            "WC.VS.SYSBP"
+          ]
+        },
+        {
+          "OID": "IG.WC.VS.DIABP",
+          "name": "WC_VS_DIABP",
+          "domain": "VS",
+          "type": "DataSpecialization",
+          "items": [
+            {
+              "OID": "IT.VS.VSORRESU.DIABP",
+              "mandatory": false,
+              "name": "VSORRESU",
+              "dataType": "text",
+              "applicableWhen": [
+                "WC.VS.DIABP"
+              ]
+            }
+          ],
+          "applicableWhen": [
+            "WC.VS.DIABP"
+          ]
+        },
+        {
+          "OID": "IG.WC.LB.ALT",
+          "name": "WC_LB_ALT",
+          "domain": "LB",
+          "type": "DataSpecialization",
+          "items": [
+            {
+              "OID": "IT.LB.LBORRES.ALT",
+              "mandatory": false,
+              "name": "LBORRES",
+              "displayFormat": "12.4",
+              "significantDigits": 4,
+              "dataType": "float",
+              "applicableWhen": [
+                "WC.LB.ALT"
+              ],
+              "origin": {
+                "type": "Collected",
+                "source": "Vendor"
+              }
+            },
+            {
+              "OID": "IT.LB.LBORRESU.ALT",
+              "mandatory": false,
+              "name": "LBORRESU",
+              "dataType": "text",
+              "applicableWhen": [
+                "WC.LB.ALT"
+              ]
+            }
+          ],
+          "applicableWhen": [
+            "WC.LB.ALT"
+          ]
+        },
+        {
+          "OID": "IG.WC.LB.ALB",
+          "name": "WC_LB_ALB",
+          "domain": "LB",
+          "type": "DataSpecialization",
+          "items": [
+            {
+              "OID": "IT.LB.LBORRES.ALB",
+              "mandatory": false,
+              "name": "LBORRES",
+              "significantDigits": 4,
+              "dataType": "text",
+              "applicableWhen": [
+                "WC.LB.ALB"
+              ],
+              "origin": {
+                "type": "Collected",
+                "source": "Vendor"
+              }
+            }
+          ],
+          "applicableWhen": [
+            "WC.LB.ALB"
+          ]
+        },
+        {
+          "OID": "IG.WC.LB.ALP",
+          "name": "WC_LB_ALP",
+          "domain": "LB",
+          "type": "DataSpecialization",
+          "items": [
+            {
+              "OID": "IT.LB.LBORRES.ALP",
+              "mandatory": false,
+              "name": "LBORRES",
+              "displayFormat": "12.4",
+              "significantDigits": 4,
+              "dataType": "float",
+              "applicableWhen": [
+                "WC.LB.ALP"
+              ],
+              "origin": {
+                "type": "Collected",
+                "source": "Vendor"
+              }
+            },
+            {
+              "OID": "IT.LB.LBORRESU.ALP",
+              "mandatory": false,
+              "name": "LBORRESU",
+              "dataType": "text",
+              "applicableWhen": [
+                "WC.LB.ALP"
+              ]
+            }
+          ],
+          "applicableWhen": [
+            "WC.LB.ALP"
+          ]
+        },
+        {
+          "OID": "IG.WC.LB.AST",
+          "name": "WC_LB_AST",
+          "domain": "LB",
+          "type": "DataSpecialization",
+          "items": [
+            {
+              "OID": "IT.LB.LBORRES.AST",
+              "mandatory": false,
+              "name": "LBORRES",
+              "displayFormat": "12.4",
+              "significantDigits": 4,
+              "dataType": "float",
+              "applicableWhen": [
+                "WC.LB.AST"
+              ],
+              "origin": {
+                "type": "Collected",
+                "source": "Vendor"
+              }
+            },
+            {
+              "OID": "IT.LB.LBORRESU.AST",
+              "mandatory": false,
+              "name": "LBORRESU",
+              "dataType": "text",
+              "applicableWhen": [
+                "WC.LB.AST"
+              ]
+            }
+          ],
+          "applicableWhen": [
+            "WC.LB.AST"
+          ]
+        },
+        {
+          "OID": "IG.WC.LB.CREAT",
+          "name": "WC_LB_CREAT",
+          "domain": "LB",
+          "type": "DataSpecialization",
+          "items": [
+            {
+              "OID": "IT.LB.LBORRES.CREAT",
+              "mandatory": false,
+              "name": "LBORRES",
+              "displayFormat": "12.4",
+              "significantDigits": 4,
+              "dataType": "float",
+              "applicableWhen": [
+                "WC.LB.CREAT"
+              ],
+              "origin": {
+                "type": "Collected",
+                "source": "Vendor"
+              }
+            },
+            {
+              "OID": "IT.LB.LBORRESU.CREAT",
+              "mandatory": false,
+              "name": "LBORRESU",
+              "dataType": "text",
+              "applicableWhen": [
+                "WC.LB.CREAT"
+              ]
+            }
+          ],
+          "applicableWhen": [
+            "WC.LB.CREAT"
+          ]
+        },
+        {
+          "OID": "IG.WC.LB.K",
+          "name": "WC_LB_K",
+          "domain": "LB",
+          "type": "DataSpecialization",
+          "items": [
+            {
+              "OID": "IT.LB.LBORRES.K",
+              "mandatory": false,
+              "name": "LBORRES",
+              "displayFormat": "12.4",
+              "significantDigits": 4,
+              "dataType": "float",
+              "applicableWhen": [
+                "WC.LB.K"
+              ],
+              "origin": {
+                "type": "Collected",
+                "source": "Vendor"
+              }
+            },
+            {
+              "OID": "IT.LB.LBORRESU.K",
+              "mandatory": false,
+              "name": "LBORRESU",
+              "dataType": "text",
+              "applicableWhen": [
+                "WC.LB.K"
+              ]
+            }
+          ],
+          "applicableWhen": [
+            "WC.LB.K"
+          ]
+        },
+        {
+          "OID": "IG.WC.LB.SODIUM",
+          "name": "WC_LB_SODIUM",
+          "domain": "LB",
+          "type": "DataSpecialization",
+          "items": [
+            {
+              "OID": "IT.LB.LBORRES.SODIUM",
+              "mandatory": false,
+              "name": "LBORRES",
+              "displayFormat": "12.4",
+              "significantDigits": 4,
+              "dataType": "float",
+              "applicableWhen": [
+                "WC.LB.SODIUM"
+              ],
+              "origin": {
+                "type": "Collected",
+                "source": "Vendor"
+              }
+            },
+            {
+              "OID": "IT.LB.LBORRESU.SODIUM",
+              "mandatory": false,
+              "name": "LBORRESU",
+              "dataType": "text",
+              "applicableWhen": [
+                "WC.LB.SODIUM"
+              ]
+            }
+          ],
+          "applicableWhen": [
+            "WC.LB.SODIUM"
+          ]
+        },
+        {
+          "OID": "IG.WC.LB.HBA1C",
+          "name": "WC_LB_HBA1C",
+          "domain": "LB",
+          "type": "DataSpecialization",
+          "items": [
+            {
+              "OID": "IT.LB.LBORRES.HBA1C",
+              "mandatory": false,
+              "name": "LBORRES",
+              "displayFormat": "12.4",
+              "significantDigits": 4,
+              "dataType": "float",
+              "applicableWhen": [
+                "WC.LB.HBA1C"
+              ],
+              "origin": {
+                "type": "Collected",
+                "source": "Vendor"
+              }
+            },
+            {
+              "OID": "IT.LB.LBORRESU.HBA1C",
+              "mandatory": false,
+              "name": "LBORRESU",
+              "dataType": "text",
+              "applicableWhen": [
+                "WC.LB.HBA1C"
+              ]
+            }
+          ],
+          "applicableWhen": [
+            "WC.LB.HBA1C"
+          ]
+        }
+      ],
+      "conditions": [
+        {
+          "OID": "COND.VS.TEMP",
+          "rangeChecks": [
+            {
+              "comparator": "EQ",
+              "checkValues": [
+                "TEMP"
+              ],
+              "item": "IT.VS.VSTESTCD",
+              "softHard": "Soft"
+            }
+          ]
+        },
+        {
+          "OID": "COND.VS.WEIGHT",
+          "rangeChecks": [
+            {
+              "comparator": "EQ",
+              "checkValues": [
+                "WEIGHT"
+              ],
+              "item": "IT.VS.VSTESTCD",
+              "softHard": "Soft"
+            }
+          ]
+        },
+        {
+          "OID": "COND.VS.HEIGHT",
+          "rangeChecks": [
+            {
+              "comparator": "EQ",
+              "checkValues": [
+                "HEIGHT"
+              ],
+              "item": "IT.VS.VSTESTCD",
+              "softHard": "Soft"
+            }
+          ]
+        },
+        {
+          "OID": "COND.VS.SITTING_SYSBP",
+          "rangeChecks": [
+            {
+              "comparator": "EQ",
+              "checkValues": [
+                "SYSBP"
+              ],
+              "item": "IT.VS.VSTESTCD",
+              "softHard": "Soft"
+            },
+            {
+              "comparator": "EQ",
+              "checkValues": [
+                "SITTING"
+              ],
+              "item": "IT.VS.VSPOS",
+              "softHard": "Soft"
+            }
+          ]
+        },
+        {
+          "OID": "COND.VS.DIABP_SITTING",
+          "rangeChecks": [
+            {
+              "comparator": "EQ",
+              "checkValues": [
+                "DIABP"
+              ],
+              "item": "IT.VS.VSTESTCD",
+              "softHard": "Soft"
+            },
+            {
+              "comparator": "EQ",
+              "checkValues": [
+                "SITTING"
+              ],
+              "item": "IT.VS.VSPOS",
+              "softHard": "Soft"
+            }
+          ]
+        },
+        {
+          "OID": "COND.VS.HR",
+          "rangeChecks": [
+            {
+              "comparator": "EQ",
+              "checkValues": [
+                "HR"
+              ],
+              "item": "IT.VS.VSTESTCD",
+              "softHard": "Soft"
+            }
+          ]
+        },
+        {
+          "OID": "COND.VS.SYSBP",
+          "rangeChecks": [
+            {
+              "comparator": "EQ",
+              "checkValues": [
+                "SYSBP"
+              ],
+              "item": "IT.VS.VSTESTCD",
+              "softHard": "Soft"
+            }
+          ]
+        },
+        {
+          "OID": "COND.VS.DIABP",
+          "rangeChecks": [
+            {
+              "comparator": "EQ",
+              "checkValues": [
+                "DIABP"
+              ],
+              "item": "IT.VS.VSTESTCD",
+              "softHard": "Soft"
+            }
+          ]
+        },
+        {
+          "OID": "COND.LB.ALT",
+          "rangeChecks": [
+            {
+              "comparator": "EQ",
+              "checkValues": [
+                "ALT"
+              ],
+              "item": "IT.LB.LBTESTCD",
+              "softHard": "Soft"
+            }
+          ]
+        },
+        {
+          "OID": "COND.LB.ALB",
+          "rangeChecks": [
+            {
+              "comparator": "EQ",
+              "checkValues": [
+                "ALB"
+              ],
+              "item": "IT.LB.LBTESTCD",
+              "softHard": "Soft"
+            }
+          ]
+        },
+        {
+          "OID": "COND.LB.ALP",
+          "rangeChecks": [
+            {
+              "comparator": "EQ",
+              "checkValues": [
+                "ALP"
+              ],
+              "item": "IT.LB.LBTESTCD",
+              "softHard": "Soft"
+            }
+          ]
+        },
+        {
+          "OID": "COND.LB.AST",
+          "rangeChecks": [
+            {
+              "comparator": "EQ",
+              "checkValues": [
+                "AST"
+              ],
+              "item": "IT.LB.LBTESTCD",
+              "softHard": "Soft"
+            }
+          ]
+        },
+        {
+          "OID": "COND.LB.CREAT",
+          "rangeChecks": [
+            {
+              "comparator": "EQ",
+              "checkValues": [
+                "CREAT"
+              ],
+              "item": "IT.LB.LBTESTCD",
+              "softHard": "Soft"
+            }
+          ]
+        },
+        {
+          "OID": "COND.LB.K",
+          "rangeChecks": [
+            {
+              "comparator": "EQ",
+              "checkValues": [
+                "K"
+              ],
+              "item": "IT.LB.LBTESTCD",
+              "softHard": "Soft"
+            }
+          ]
+        },
+        {
+          "OID": "COND.LB.SODIUM",
+          "rangeChecks": [
+            {
+              "comparator": "EQ",
+              "checkValues": [
+                "SODIUM"
+              ],
+              "item": "IT.LB.LBTESTCD",
+              "softHard": "Soft"
+            }
+          ]
+        },
+        {
+          "OID": "COND.LB.HBA1C",
+          "rangeChecks": [
+            {
+              "comparator": "EQ",
+              "checkValues": [
+                "HBA1C"
+              ],
+              "item": "IT.LB.LBTESTCD",
+              "softHard": "Soft"
+            }
+          ]
+        }
+      ],
+      "whereClauses": [
+        {
+          "OID": "WC.VS.TEMP",
+          "conditions": [
+            "COND.VS.TEMP"
+          ]
+        },
+        {
+          "OID": "WC.VS.WEIGHT",
+          "conditions": [
+            "COND.VS.WEIGHT"
+          ]
+        },
+        {
+          "OID": "WC.VS.HEIGHT",
+          "conditions": [
+            "COND.VS.HEIGHT"
+          ]
+        },
+        {
+          "OID": "WC.VS.SITTING_SYSBP",
+          "conditions": [
+            "COND.VS.SITTING_SYSBP"
+          ]
+        },
+        {
+          "OID": "WC.VS.DIABP_SITTING",
+          "conditions": [
+            "COND.VS.DIABP_SITTING"
+          ]
+        },
+        {
+          "OID": "WC.VS.HR",
+          "conditions": [
+            "COND.VS.HR"
+          ]
+        },
+        {
+          "OID": "WC.VS.SYSBP",
+          "conditions": [
+            "COND.VS.SYSBP"
+          ]
+        },
+        {
+          "OID": "WC.VS.DIABP",
+          "conditions": [
+            "COND.VS.DIABP"
+          ]
+        },
+        {
+          "OID": "WC.LB.ALT",
+          "conditions": [
+            "COND.LB.ALT"
+          ]
+        },
+        {
+          "OID": "WC.LB.ALB",
+          "conditions": [
+            "COND.LB.ALB"
+          ]
+        },
+        {
+          "OID": "WC.LB.ALP",
+          "conditions": [
+            "COND.LB.ALP"
+          ]
+        },
+        {
+          "OID": "WC.LB.AST",
+          "conditions": [
+            "COND.LB.AST"
+          ]
+        },
+        {
+          "OID": "WC.LB.CREAT",
+          "conditions": [
+            "COND.LB.CREAT"
+          ]
+        },
+        {
+          "OID": "WC.LB.K",
+          "conditions": [
+            "COND.LB.K"
+          ]
+        },
+        {
+          "OID": "WC.LB.SODIUM",
+          "conditions": [
+            "COND.LB.SODIUM"
+          ]
+        },
+        {
+          "OID": "WC.LB.HBA1C",
+          "conditions": [
+            "COND.LB.HBA1C"
+          ]
+        }
+      ],
+      "codeLists": [
+        {
+          "OID": "CL.NY",
+          "name": "No Yes Response",
+          "coding": [
+            {
+              "code": "C66742",
+              "codeSystem": "nci:ExtCodeID"
+            }
+          ],
+          "dataType": "text",
+          "codeListItems": [
+            {
+              "codedValue": "N",
+              "decode": "No",
+              "coding": {
+                "code": "C49487",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "NA",
+              "decode": "NA",
+              "coding": {
+                "code": "C48660",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "U",
+              "decode": "U",
+              "coding": {
+                "code": "C17998",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "Y",
+              "decode": "Yes",
+              "coding": {
+                "code": "C49488",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            }
+          ]
+        },
+        {
+          "OID": "CL.AGEU",
+          "name": "Age Unit",
+          "coding": [
+            {
+              "code": "C66781",
+              "codeSystem": "nci:ExtCodeID"
+            }
+          ],
+          "dataType": "text",
+          "codeListItems": [
+            {
+              "codedValue": "DAYS",
+              "coding": {
+                "code": "C25301",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "HOURS",
+              "coding": {
+                "code": "C25529",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "MONTHS",
+              "coding": {
+                "code": "C29846",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "WEEKS",
+              "coding": {
+                "code": "C29844",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "YEARS",
+              "coding": {
+                "code": "C29848",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            }
+          ]
+        },
+        {
+          "OID": "CL.SEX",
+          "name": "Sex",
+          "coding": [
+            {
+              "code": "C66731",
+              "codeSystem": "nci:ExtCodeID"
+            }
+          ],
+          "dataType": "text",
+          "codeListItems": [
+            {
+              "codedValue": "F",
+              "decode": "Female",
+              "coding": {
+                "code": "C16576",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "M",
+              "decode": "Male",
+              "coding": {
+                "code": "C20197",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            }
+          ]
+        },
+        {
+          "OID": "CL.RACE",
+          "name": "Race",
+          "coding": [
+            {
+              "code": "C74457",
+              "codeSystem": "nci:ExtCodeID"
+            }
+          ],
+          "dataType": "text",
+          "codeListItems": [
+            {
+              "codedValue": "AMERICAN INDIAN OR ALASKA NATIVE",
+              "coding": {
+                "code": "C41259",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "ASIAN",
+              "coding": {
+                "code": "C41260",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "BLACK OR AFRICAN AMERICAN",
+              "coding": {
+                "code": "C16352",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER",
+              "coding": {
+                "code": "C41219",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "NOT REPORTED",
+              "coding": {
+                "code": "C43234",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "OTHER",
+              "coding": {
+                "code": "C17649",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "UNKNOWN",
+              "coding": {
+                "code": "C17998",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "WHITE",
+              "coding": {
+                "code": "C41261",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            }
+          ]
+        },
+        {
+          "OID": "CL.ARMNULRS",
+          "name": "Arm Null Reason",
+          "coding": [
+            {
+              "code": "C142179",
+              "codeSystem": "nci:ExtCodeID"
+            }
+          ],
+          "dataType": "text",
+          "codeListItems": [
+            {
+              "codedValue": "ASSIGNED, NOT TREATED",
+              "coding": {
+                "code": "C142238",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "NOT ASSIGNED",
+              "coding": {
+                "code": "C142239",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "SCREEN FAILURE",
+              "coding": {
+                "code": "C49628",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "UNPLANNED TREATMENT",
+              "coding": {
+                "code": "C142240",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            }
+          ]
+        },
+        {
+          "OID": "CL.VSTESTCD",
+          "name": "Vital Signs Test Code",
+          "coding": [
+            {
+              "code": "C66741",
+              "codeSystem": "nci:ExtCodeID"
+            }
+          ],
+          "dataType": "text",
+          "codeListItems": [
+            {
+              "codedValue": "DIABP",
+              "decode": "Diastolic Blood Pressure",
+              "coding": {
+                "code": "C25299",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "HEIGHT",
+              "decode": "Height",
+              "coding": {
+                "code": "C25347",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "HR",
+              "decode": "Heart Rate",
+              "coding": {
+                "code": "C49677",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "SYSBP",
+              "decode": "Systolic Blood Pressure",
+              "coding": {
+                "code": "C25298",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "TEMP",
+              "decode": "Body Temperature",
+              "coding": {
+                "code": "C174446",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "WEIGHT",
+              "decode": "Weight",
+              "coding": {
+                "code": "C25208",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            }
+          ]
+        },
+        {
+          "OID": "CL.VSTEST",
+          "name": "Vital Signs Test Name",
+          "coding": [
+            {
+              "code": "C67153",
+              "codeSystem": "nci:ExtCodeID"
+            }
+          ],
+          "dataType": "text",
+          "codeListItems": [
+            {
+              "codedValue": "Diastolic Blood Pressure",
+              "decode": "Diastolic Blood Pressure",
+              "coding": {
+                "code": "C25299",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "Heart Rate",
+              "decode": "Heart Rate",
+              "coding": {
+                "code": "C49677",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "Height",
+              "decode": "Height",
+              "coding": {
+                "code": "C25347",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "Systolic Blood Pressure",
+              "decode": "Systolic Blood Pressure",
+              "coding": {
+                "code": "C25298",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "Temperature",
+              "decode": "Body Temperature",
+              "coding": {
+                "code": "C174446",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "Weight",
+              "decode": "Weight",
+              "coding": {
+                "code": "C25208",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            }
+          ]
+        },
+        {
+          "OID": "CL.POSITION",
+          "name": "Position",
+          "coding": [
+            {
+              "code": "C71148",
+              "codeSystem": "nci:ExtCodeID"
+            }
+          ],
+          "dataType": "text",
+          "codeListItems": [
+            {
+              "codedValue": "PRONE",
+              "decode": "Prone",
+              "coding": {
+                "code": "C62165",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "SEMI-RECUMBENT",
+              "decode": "Semi-Supine",
+              "coding": {
+                "code": "C111310",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "SITTING",
+              "decode": "Sitting",
+              "coding": {
+                "code": "C62122",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "STANDING",
+              "decode": "Orthostatic",
+              "coding": {
+                "code": "C62166",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "SUPINE",
+              "decode": "Supine",
+              "coding": {
+                "code": "C62167",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            }
+          ]
+        },
+        {
+          "OID": "CL.VSRESU",
+          "name": "Units for Vital Signs Results",
+          "coding": [
+            {
+              "code": "C66770",
+              "codeSystem": "nci:ExtCodeID"
+            }
+          ],
+          "dataType": "text",
+          "codeListItems": [
+            {
+              "codedValue": "C",
+              "decode": "Degree Celsius",
+              "coding": {
+                "code": "C42559",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "cm",
+              "decode": "Centimeter",
+              "coding": {
+                "code": "C49668",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "F",
+              "decode": "Degree Fahrenheit",
+              "coding": {
+                "code": "C44277",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "g",
+              "decode": "Gram",
+              "coding": {
+                "code": "C48155",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "in",
+              "decode": "Inch",
+              "coding": {
+                "code": "C48500",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "K",
+              "decode": "Kelvin",
+              "coding": {
+                "code": "C42537",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "kg",
+              "decode": "Kilogram",
+              "coding": {
+                "code": "C28252",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "LB",
+              "decode": "lb",
+              "coding": {
+                "code": "C48531",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "m",
+              "decode": "Meter",
+              "coding": {
+                "code": "C41139",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            }
+          ]
+        },
+        {
+          "OID": "CL.LOC",
+          "name": "Anatomical Location",
+          "coding": [
+            {
+              "code": "C74456",
+              "codeSystem": "nci:ExtCodeID"
+            }
+          ],
+          "dataType": "text",
+          "codeListItems": [
+            {
+              "codedValue": "AXILLA",
+              "decode": "Armpit",
+              "coding": {
+                "code": "C12674",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "BRACHIAL ARTERY",
+              "decode": "BRACHIAL ARTERY",
+              "coding": {
+                "code": "C12681",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "CAROTID ARTERY",
+              "decode": "Common Carotid Artery",
+              "coding": {
+                "code": "C12687",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "CEREBRAL ARTERY",
+              "decode": "CEREBRAL ARTERY",
+              "coding": {
+                "code": "C12691",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "DORSALIS PEDIS ARTERY",
+              "decode": "Dorsal Pedal Artery",
+              "coding": {
+                "code": "C32478",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "EAR",
+              "decode": "EAR",
+              "coding": {
+                "code": "C12394",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "FEMORAL ARTERY",
+              "decode": "FEMORAL ARTERY",
+              "coding": {
+                "code": "C12715",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "FINGER",
+              "decode": "Finger",
+              "coding": {
+                "code": "C32608",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "FOREHEAD",
+              "decode": "Forehead",
+              "coding": {
+                "code": "C89803",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "ORAL CAVITY",
+              "decode": "Buccal cavity",
+              "coding": {
+                "code": "C12421",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "RADIAL ARTERY",
+              "decode": "Radial Artery",
+              "coding": {
+                "code": "C12838",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "RECTUM",
+              "decode": "RECTUM",
+              "coding": {
+                "code": "C12390",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            }
+          ]
+        },
+        {
+          "OID": "CL.LAT",
+          "name": "Laterality",
+          "coding": [
+            {
+              "code": "C99073",
+              "codeSystem": "nci:ExtCodeID"
+            }
+          ],
+          "dataType": "text",
+          "codeListItems": [
+            {
+              "codedValue": "LEFT",
+              "coding": {
+                "code": "C25229",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "RIGHT",
+              "coding": {
+                "code": "C25228",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            }
+          ]
+        },
+        {
+          "OID": "CL.LBTESTCD",
+          "name": "Laboratory Test Code",
+          "coding": [
+            {
+              "code": "C65047",
+              "codeSystem": "nci:ExtCodeID"
+            }
+          ],
+          "dataType": "text",
+          "codeListItems": [
+            {
+              "codedValue": "ALB",
+              "decode": "Albumin",
+              "coding": {
+                "code": "C64431",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "ALP",
+              "decode": "Alkaline Phosphatase",
+              "coding": {
+                "code": "C64432",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "ALT",
+              "decode": "Alanine Aminotransferase",
+              "coding": {
+                "code": "C64433",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "AST",
+              "decode": "Aspartate Aminotransferase",
+              "coding": {
+                "code": "C64467",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "CREAT",
+              "decode": "Creatinine",
+              "coding": {
+                "code": "C64547",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "HBA1C",
+              "decode": "HbA1c",
+              "coding": {
+                "code": "C64849",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "K",
+              "decode": "Potassium",
+              "coding": {
+                "code": "C64853",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "SODIUM",
+              "decode": "Sodium",
+              "coding": {
+                "code": "C64809",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            }
+          ]
+        },
+        {
+          "OID": "CL.LBTEST",
+          "name": "Laboratory Test Name",
+          "coding": [
+            {
+              "code": "C67154",
+              "codeSystem": "nci:ExtCodeID"
+            }
+          ],
+          "dataType": "text",
+          "codeListItems": [
+            {
+              "codedValue": "Alanine Aminotransferase",
+              "decode": "Alanine Aminotransferase",
+              "coding": {
+                "code": "C64433",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "Albumin",
+              "decode": "Albumin",
+              "coding": {
+                "code": "C64431",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "Alkaline Phosphatase",
+              "decode": "Alkaline Phosphatase",
+              "coding": {
+                "code": "C64432",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "Aspartate Aminotransferase",
+              "decode": "Aspartate Aminotransferase",
+              "coding": {
+                "code": "C64467",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "Creatinine",
+              "decode": "Creatinine",
+              "coding": {
+                "code": "C64547",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "Hemoglobin A1C",
+              "decode": "HbA1c",
+              "coding": {
+                "code": "C64849",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "Potassium",
+              "decode": "Potassium",
+              "coding": {
+                "code": "C64853",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "Sodium",
+              "decode": "Sodium",
+              "coding": {
+                "code": "C64809",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            }
+          ]
+        },
+        {
+          "OID": "CL.UNIT",
+          "name": "Unit",
+          "coding": [
+            {
+              "code": "C71620",
+              "codeSystem": "nci:ExtCodeID"
+            }
+          ],
+          "dataType": "text",
+          "codeListItems": [
+            {
+              "codedValue": "IU/L",
+              "decode": "IE/L",
+              "coding": {
+                "code": "C67376",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "mEq/dL",
+              "decode": "Milliequivalent per Deciliter",
+              "coding": {
+                "code": "C67473",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "mEq/L",
+              "decode": "Milliequivalent Per Liter",
+              "coding": {
+                "code": "C67474",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "mg/dL",
+              "decode": "mg%",
+              "coding": {
+                "code": "C67015",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "mg/L",
+              "decode": "g/m3",
+              "coding": {
+                "code": "C64572",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "mmol/L",
+              "decode": "mcmol/mL",
+              "coding": {
+                "code": "C64387",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "nkat/L",
+              "decode": "Nanokatal per Liter",
+              "coding": {
+                "code": "C70510",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "U/L",
+              "decode": "mU/mL",
+              "coding": {
+                "code": "C67456",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "ukat/L",
+              "decode": "mckat/L",
+              "coding": {
+                "code": "C67397",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "umol/L",
+              "decode": "nmol/mL",
+              "coding": {
+                "code": "C48508",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            }
+          ]
+        },
+        {
+          "OID": "CL.LBSTRESC",
+          "name": "Laboratory Test Standard Character Result",
+          "coding": [
+            {
+              "code": "C102580",
+              "codeSystem": "nci:ExtCodeID"
+            }
+          ],
+          "dataType": "text",
+          "codeListItems": [
+            {
+              "codedValue": "ABNORMAL",
+              "coding": {
+                "code": "C25401",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "ABSENT",
+              "coding": {
+                "code": "C48190",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "BORDERLINE",
+              "coding": {
+                "code": "C14157",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "DETECTED",
+              "coding": {
+                "code": "C191719",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "INDETERMINATE",
+              "coding": {
+                "code": "C48658",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "NEGATIVE",
+              "coding": {
+                "code": "C38757",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "NORMAL",
+              "coding": {
+                "code": "C14165",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "NOT DETECTED",
+              "coding": {
+                "code": "C191300",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "POSITIVE",
+              "coding": {
+                "code": "C38758",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "PRESENT",
+              "coding": {
+                "code": "C25626",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "STRONGLY POSITIVE",
+              "coding": {
+                "code": "C191301",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "TOO NUMEROUS TO COUNT",
+              "coding": {
+                "code": "C191303",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "TRACE",
+              "coding": {
+                "code": "C80218",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "WEAKLY POSITIVE",
+              "coding": {
+                "code": "C191302",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            }
+          ]
+        },
+        {
+          "OID": "CL.NRIND",
+          "name": "Reference Range Indicator",
+          "coding": [
+            {
+              "code": "C78736",
+              "codeSystem": "nci:ExtCodeID"
+            }
+          ],
+          "dataType": "text",
+          "codeListItems": [
+            {
+              "codedValue": "ABNORMAL",
+              "coding": {
+                "code": "C78802",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "HIGH",
+              "coding": {
+                "code": "C78800",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "LOW",
+              "coding": {
+                "code": "C78801",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "NORMAL",
+              "coding": {
+                "code": "C78727",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            }
+          ]
+        },
+        {
+          "OID": "CL.SPECTYPE",
+          "name": "Specimen Type",
+          "coding": [
+            {
+              "code": "C78734",
+              "codeSystem": "nci:ExtCodeID"
+            }
+          ],
+          "dataType": "text",
+          "codeListItems": [
+            {
+              "codedValue": "BLOOD",
+              "decode": "Peripheral Blood",
+              "coding": {
+                "code": "C12434",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "SERUM OR PLASMA",
+              "decode": "Ser/Plas",
+              "coding": {
+                "code": "C105706",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "URINE",
+              "decode": "URINE",
+              "coding": {
+                "code": "C13283",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            }
+          ]
+        },
+        {
+          "OID": "CL.AESEV",
+          "name": "Severity/Intensity Scale for Adverse Events",
+          "coding": [
+            {
+              "code": "C66769",
+              "codeSystem": "nci:ExtCodeID"
+            }
+          ],
+          "dataType": "text",
+          "codeListItems": [
+            {
+              "codedValue": "MILD",
+              "decode": "1",
+              "coding": {
+                "code": "C41338",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "MODERATE",
+              "decode": "2",
+              "coding": {
+                "code": "C41339",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "SEVERE",
+              "decode": "3",
+              "coding": {
+                "code": "C41340",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            }
+          ]
+        },
+        {
+          "OID": "CL.ACN",
+          "name": "Action Taken with Study Treatment",
+          "coding": [
+            {
+              "code": "C66767",
+              "codeSystem": "nci:ExtCodeID"
+            }
+          ],
+          "dataType": "text",
+          "codeListItems": [
+            {
+              "codedValue": "DOSE INCREASED",
+              "coding": {
+                "code": "C49503",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "DOSE NOT CHANGED",
+              "coding": {
+                "code": "C49504",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "DOSE RATE REDUCED",
+              "coding": {
+                "code": "C150826",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "DOSE REDUCED",
+              "coding": {
+                "code": "C49505",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "DRUG INTERRUPTED",
+              "coding": {
+                "code": "C49501",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "DRUG WITHDRAWN",
+              "coding": {
+                "code": "C49502",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "NOT APPLICABLE",
+              "coding": {
+                "code": "C48660",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "UNKNOWN",
+              "coding": {
+                "code": "C17998",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            }
+          ]
+        },
+        {
+          "OID": "CL.OUT",
+          "name": "Outcome of Event",
+          "coding": [
+            {
+              "code": "C66768",
+              "codeSystem": "nci:ExtCodeID"
+            }
+          ],
+          "dataType": "text",
+          "codeListItems": [
+            {
+              "codedValue": "FATAL",
+              "decode": "5",
+              "coding": {
+                "code": "C48275",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "NOT RECOVERED/NOT RESOLVED",
+              "decode": "NOT RECOVERED/NOT RESOLVED",
+              "coding": {
+                "code": "C49494",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "RECOVERED/RESOLVED WITH SEQUELAE",
+              "decode": "RECOVERED/RESOLVED WITH SEQUELAE",
+              "coding": {
+                "code": "C49495",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "RECOVERED/RESOLVED",
+              "decode": "RECOVERED/RESOLVED",
+              "coding": {
+                "code": "C49498",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "RECOVERING/RESOLVING",
+              "decode": "RECOVERING/RESOLVING",
+              "coding": {
+                "code": "C49496",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "UNKNOWN",
+              "decode": "U",
+              "coding": {
+                "code": "C17998",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            }
+          ]
+        },
+        {
+          "OID": "CL.STENRF",
+          "name": "Relation to Reference Period",
+          "coding": [
+            {
+              "code": "C66728",
+              "codeSystem": "nci:ExtCodeID"
+            }
+          ],
+          "dataType": "text",
+          "codeListItems": [
+            {
+              "codedValue": "AFTER",
+              "coding": {
+                "code": "C38008",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "BEFORE",
+              "coding": {
+                "code": "C25629",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "BEFORE/DURING",
+              "coding": {
+                "code": "C184710",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "COINCIDENT",
+              "coding": {
+                "code": "C25456",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "DURING",
+              "coding": {
+                "code": "C25490",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "DURING/AFTER",
+              "coding": {
+                "code": "C49640",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "ONGOING",
+              "coding": {
+                "code": "C53279",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            },
+            {
+              "codedValue": "UNKNOWN",
+              "coding": {
+                "code": "C17998",
+                "codeSystem": "nci:ExtCodeID"
+              }
+            }
+          ]
+        }
+      ],
+      "standards": [
+        {
+          "OID": "ST.1",
+          "name": "SDTMIG",
+          "type": "IG",
+          "version": "3.4",
+          "status": "FINAL"
+        },
+        {
+          "OID": "ST.2",
+          "name": "CDISC/NCI",
+          "type": "CT",
+          "publishingSet": "SDTM",
+          "version": "2025-03-28",
+          "status": "FINAL"
+        }
+      ],
+      "resources": [
+        {
+          "OID": "RES.LF.DM",
+          "name": "dm.xpt",
+          "label": "dm.xpt",
+          "href": "dm.xpt",
+          "resourceType": "ODM"
+        },
+        {
+          "OID": "RES.LF.VS",
+          "name": "vs.xpt",
+          "label": "vs.xpt",
+          "href": "vs.xpt",
+          "resourceType": "ODM"
+        },
+        {
+          "OID": "RES.LF.LB",
+          "name": "lb.xpt",
+          "label": "lb.xpt",
+          "href": "lb.xpt",
+          "resourceType": "ODM"
+        },
+        {
+          "OID": "RES.LF.AE",
+          "name": "ae.xpt",
+          "label": "ae.xpt",
+          "href": "ae.xpt",
+          "resourceType": "ODM"
+        }
+      ]
+    }
+  ]
+}

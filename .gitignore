@@ -201,6 +201,9 @@ site/
 *.swo
 *~
 
+# Test outputs and artifacts
+test_outputs/
+
 # Logs
 *.log
 logs/
