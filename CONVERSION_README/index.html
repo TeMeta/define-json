@@ -147,7 +147,7 @@
 <li><strong>Perfect Roundtrip</strong>: XML → JSON → XML maintains all clinical data</li>
 <li><strong>Reference-Based Structure</strong>: Clean, non-redundant JSON with OID references</li>
 <li><strong>Dataset Specialization</strong>: ValueLists grouped by parameter (e.g., TEMP, WEIGHT)</li>
-<li><strong>Hierarchical Relationships</strong>: Domain ItemGroups reference ValueList children</li>
+<li><strong>Hierarchical Relationships</strong>: Domain ItemGroups reference ValueList slices</li>
 <li><strong>Schema Compliant</strong>: Strict adherence to define.yaml schema with full Item objects</li>
 <li><strong>Comprehensive Validation</strong>: Element counts, OID preservation, relationship fidelity</li>
 <li><strong>Version Compatibility</strong>: Supports Define-XML v1.0 and v2.1 with automatic namespace detection</li>
@@ -195,7 +195,7 @@
 <span class="w">      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VS"</span><span class="p">,</span>
 <span class="w">      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Vital Signs domain dataset containing clinical data"</span><span class="p">,</span>
 <span class="w">      </span><span class="nt">"domain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VS"</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">"children"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"VL.VS.DIABP"</span><span class="p">,</span><span class="w"> </span><span class="s2">"VL.VS.HEIGHT"</span><span class="p">,</span><span class="w"> </span><span class="s2">"VL.VS.TEMP"</span><span class="p">,</span><span class="w"> </span><span class="s2">"VL.VS.WEIGHT"</span><span class="p">]</span>
+<span class="w">      </span><span class="nt">"slices"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"VL.VS.DIABP"</span><span class="p">,</span><span class="w"> </span><span class="s2">"VL.VS.HEIGHT"</span><span class="p">,</span><span class="w"> </span><span class="s2">"VL.VS.TEMP"</span><span class="p">,</span><span class="w"> </span><span class="s2">"VL.VS.WEIGHT"</span><span class="p">]</span>
 <span class="w">    </span><span class="p">},</span>
 <span class="w">    </span><span class="p">{</span>
 <span class="w">      </span><span class="nt">"OID"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VL.VS.DIABP"</span><span class="p">,</span>
@@ -311,7 +311,7 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span
 <h2 id="advanced-features">Advanced Features</h2>
 <h3 id="hierarchical-structure">Hierarchical Structure</h3>
 <ul>
-<li>Domain ItemGroups contain references to ValueList children</li>
+<li>Domain ItemGroups contain references to ValueList slices</li>
 <li>ValueLists are DataSpecialization ItemGroups with parameter-specific data</li>
 <li>All relationships preserved through OID references</li>
 </ul>
