@@ -84,6 +84,10 @@
 <ul class="nav flex-column">
 </ul>
 </li>
+<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#updating-the-model-refreshing-schemas">Updating the model, refreshing schemas</a>
+<ul class="nav flex-column">
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -146,7 +150,14 @@ make<span class="w"> </span>setup
 make<span class="w"> </span>test-roundtrip
 make<span class="w"> </span>convert
 make<span class="w"> </span>roundtrip
-</code></pre></div></div>
+</code></pre></div>
+<h2 id="updating-the-model-refreshing-schemas">Updating the model, refreshing schemas</h2>
+<ol>
+<li>make your updates and run <code>make generate-all</code> to update everything</li>
+<li>new schemas are created in <code>/generated</code> folder for review</li>
+<li>to avoid accidental overwrites, copy schemas manually once approved to <code>src/define_json/schema</code></li>
+<li>update the conversion tooling to handle any breaking changes</li>
+</ol></div>
 </div>
 </div>
 <footer class="col-md-12">
