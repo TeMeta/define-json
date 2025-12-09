@@ -30,7 +30,6 @@ Alias: validFrom
 
 
 
-
 ## Properties
 
 * Range: NONE
@@ -38,9 +37,7 @@ Alias: validFrom
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

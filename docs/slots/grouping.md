@@ -29,7 +29,6 @@ Alias: grouping
 
 
 
-
 ## Properties
 
 * Range: [ComponentList](../classes/ComponentList.md)
@@ -37,9 +36,7 @@ Alias: grouping
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

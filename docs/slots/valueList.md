@@ -29,7 +29,6 @@ Alias: valueList
 
 
 
-
 ## Properties
 
 * Range: [String](../types/String.md)
@@ -39,9 +38,7 @@ Alias: valueList
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

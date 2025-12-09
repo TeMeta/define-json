@@ -29,7 +29,6 @@ Alias: displayType
 
 
 
-
 ## Properties
 
 * Range: NONE
@@ -37,9 +36,7 @@ Alias: displayType
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

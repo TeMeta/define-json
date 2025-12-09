@@ -12,7 +12,6 @@ _An external reference that serves as the source for a Dataset, ItemGroup, or It
 URI: [odm:class/Resource](https://cdisc.org/odm2/class/Resource)
 
 
-
 ```mermaid
 erDiagram
 Resource {
@@ -131,8 +130,8 @@ Parameter ||--}o Coding : "coding"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -154,7 +153,6 @@ Parameter ||--}o Coding : "coding"
 | self | odm:Resource |
 | native | odm:Resource |
 | close | odm:Resource |
-
 
 
 

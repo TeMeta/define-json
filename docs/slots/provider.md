@@ -29,7 +29,6 @@ Alias: provider
 
 
 
-
 ## Properties
 
 * Range: [DataProvider](../classes/DataProvider.md)
@@ -37,9 +36,7 @@ Alias: provider
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

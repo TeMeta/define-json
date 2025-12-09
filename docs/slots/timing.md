@@ -29,7 +29,6 @@ Alias: timing
 
 
 
-
 ## Properties
 
 * Range: [Timing](../classes/Timing.md)
@@ -39,9 +38,7 @@ Alias: timing
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

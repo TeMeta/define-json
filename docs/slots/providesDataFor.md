@@ -29,7 +29,6 @@ Alias: providesDataFor
 
 
 
-
 ## Properties
 
 * Range: [Dataflow](../classes/Dataflow.md)
@@ -39,9 +38,7 @@ Alias: providesDataFor
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

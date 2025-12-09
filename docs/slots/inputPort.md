@@ -29,7 +29,6 @@ Alias: inputPort
 
 
 
-
 ## Properties
 
 * Range: [DataService](../classes/DataService.md)
@@ -39,9 +38,7 @@ Alias: inputPort
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

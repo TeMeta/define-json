@@ -12,7 +12,6 @@ _A feedback element that contains comments from a site or sponsor, distinct from
 URI: [odm:class/SiteOrSponsorComment](https://cdisc.org/odm2/class/SiteOrSponsorComment)
 
 
-
 ```mermaid
 erDiagram
 SiteOrSponsorComment {
@@ -147,8 +146,8 @@ DocumentReference ||--}o Coding : "coding"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -169,7 +168,6 @@ DocumentReference ||--}o Coding : "coding"
 | ---  | ---  |
 | self | odm:SiteOrSponsorComment |
 | native | odm:SiteOrSponsorComment |
-
 
 
 

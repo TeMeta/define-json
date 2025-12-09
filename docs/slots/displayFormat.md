@@ -30,7 +30,6 @@ Alias: displayFormat
 
 
 
-
 ## Properties
 
 * Range: [String](../types/String.md)
@@ -38,9 +37,7 @@ Alias: displayFormat
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

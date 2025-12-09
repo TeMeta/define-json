@@ -3,7 +3,7 @@
 # Slot: slices 
 
 
-_Child ItemGroups nested within this item group (e.g., ValueLists under parent domains). Can be either: - Full ItemGroup objects (preferred for hierarchical nesting) - OID string references (for cross-references to avoid duplication)_
+_Slices are specific subset ItemGroups that belong to, or are used by this ItemGroup_
 
 
 
@@ -22,9 +22,8 @@ Alias: slices
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ItemGroup](../classes/ItemGroup.md) | A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections |  no  |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures |  no  |
-
+| [ItemGroup](../classes/ItemGroup.md) | A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections |  no  |
 
 
 
@@ -33,16 +32,14 @@ Alias: slices
 
 ## Properties
 
-* Range: [ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[String](../types/String.md)
+* Range: [ItemGroup](../classes/ItemGroup.md)
 
 * Multivalued: True
 
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 
@@ -72,9 +69,8 @@ Alias: slices
 <details>
 ```yaml
 name: slices
-description: 'Child ItemGroups nested within this item group (e.g., ValueLists under
-  parent domains). Can be either: - Full ItemGroup objects (preferred for hierarchical
-  nesting) - OID string references (for cross-references to avoid duplication)'
+description: Slices are specific subset ItemGroups that belong to, or are used by
+  this ItemGroup
 from_schema: https://cdisc.org/define-json
 rank: 1000
 alias: slices
@@ -85,9 +81,6 @@ range: ItemGroup
 multivalued: true
 inlined: true
 inlined_as_list: true
-any_of:
-- range: ItemGroup
-- range: string
 
 ```
 </details>

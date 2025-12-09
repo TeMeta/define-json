@@ -12,7 +12,6 @@ _A canonical information layer that makes abstract concepts explicit and referen
 URI: [odm:class/ReifiedConcept](https://cdisc.org/odm2/class/ReifiedConcept)
 
 
-
 ```mermaid
 erDiagram
 ReifiedConcept {
@@ -197,8 +196,8 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -222,7 +221,6 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | narrow | usdm:BiomedicalConcept, usdm:AnalysisConcept, usdm:DerivationConcept |
 | related | osb:ActivityInstance, osb:assm_group, osb:assm_subgroup |
 | close | sdmx:MetaDataStructureDefinition, sdmx:Concept, osb:Activity |
-
 
 
 

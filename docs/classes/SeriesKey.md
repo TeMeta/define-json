@@ -12,7 +12,6 @@ _A unique identifier that comprises the cross-product of dimension values includ
 URI: [odm:class/SeriesKey](https://cdisc.org/odm2/class/SeriesKey)
 
 
-
 ```mermaid
 erDiagram
 SeriesKey {
@@ -57,8 +56,8 @@ SeriesKey {
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -80,7 +79,6 @@ SeriesKey {
 | self | odm:SeriesKey |
 | native | odm:SeriesKey |
 | exact | sdmx:SeriesKey |
-
 
 
 

@@ -12,7 +12,6 @@ _A mixin that provides additional metadata for FHIR resources and Data Products,
 URI: [odm:class/IsProfile](https://cdisc.org/odm2/class/IsProfile)
 
 
-
 ```mermaid
 erDiagram
 IsProfile {
@@ -127,8 +126,8 @@ NominalOccurrence ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -149,7 +148,6 @@ NominalOccurrence ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | ---  | ---  |
 | self | odm:IsProfile |
 | native | odm:IsProfile |
-
 
 
 

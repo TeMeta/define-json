@@ -29,7 +29,6 @@ Alias: inputData
 
 
 
-
 ## Properties
 
 * Range: NONE&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[Dataset](../classes/Dataset.md)
@@ -39,9 +38,7 @@ Alias: inputData
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

@@ -29,7 +29,6 @@ Alias: codedValue
 
 
 
-
 ## Properties
 
 * Range: [String](../types/String.md)
@@ -39,9 +38,7 @@ Alias: codedValue
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

@@ -29,7 +29,6 @@ Alias: informationSensitivityClassification
 
 
 
-
 ## Properties
 
 * Range: NONE
@@ -37,9 +36,7 @@ Alias: informationSensitivityClassification
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

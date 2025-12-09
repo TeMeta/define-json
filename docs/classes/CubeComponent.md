@@ -14,7 +14,6 @@ _An abstract data field that represents a component in a data structure definiti
 URI: [odm:class/CubeComponent](https://cdisc.org/odm2/class/CubeComponent)
 
 
-
 ```mermaid
 erDiagram
 CubeComponent {
@@ -355,8 +354,8 @@ RangeCheck ||--}o FormalExpression : "expressions"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -378,7 +377,6 @@ RangeCheck ||--}o FormalExpression : "expressions"
 | self | odm:CubeComponent |
 | native | odm:CubeComponent |
 | exact | sdmx:Component |
-
 
 
 

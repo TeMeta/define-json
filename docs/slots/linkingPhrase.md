@@ -29,7 +29,6 @@ Alias: linkingPhrase
 
 
 
-
 ## Properties
 
 * Range: [LinkingPhraseEnum](../enums/LinkingPhraseEnum.md)
@@ -39,9 +38,7 @@ Alias: linkingPhrase
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

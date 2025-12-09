@@ -7,7 +7,7 @@ _An enumeration that defines permissible values for publishing sets_
 
 
 
-URI: [PublishingSet](../enums/PublishingSet.md)
+URI: [odm:enum/PublishingSet](https://cdisc.org/odm2/enum/PublishingSet)
 
 ## Permissible Values
 
@@ -32,9 +32,7 @@ URI: [PublishingSet](../enums/PublishingSet.md)
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

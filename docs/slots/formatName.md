@@ -29,7 +29,6 @@ Alias: formatName
 
 
 
-
 ## Properties
 
 * Range: [String](../types/String.md)
@@ -37,9 +36,7 @@ Alias: formatName
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

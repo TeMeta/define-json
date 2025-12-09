@@ -12,7 +12,6 @@ _A dimension subset that represents collections of dimensions that are subsets o
 URI: [odm:class/GroupKey](https://cdisc.org/odm2/class/GroupKey)
 
 
-
 ```mermaid
 erDiagram
 GroupKey {
@@ -57,8 +56,8 @@ GroupKey {
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -80,7 +79,6 @@ GroupKey {
 | self | odm:GroupKey |
 | native | odm:GroupKey |
 | exact | sdmx:GroupKey |
-
 
 
 

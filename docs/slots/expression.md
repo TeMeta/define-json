@@ -29,7 +29,6 @@ Alias: expression
 
 
 
-
 ## Properties
 
 * Range: [String](../types/String.md)
@@ -44,9 +43,7 @@ Alias: expression
 * code
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

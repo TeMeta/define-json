@@ -29,7 +29,6 @@ Alias: dataProductOwner
 
 
 
-
 ## Properties
 
 * Range: NONE&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md)
@@ -37,9 +36,7 @@ Alias: dataProductOwner
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

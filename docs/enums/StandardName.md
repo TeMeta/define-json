@@ -7,7 +7,7 @@ _An enumeration that defines permissible values for standard names_
 
 
 
-URI: [StandardName](../enums/StandardName.md)
+URI: [odm:enum/StandardName](https://cdisc.org/odm2/enum/StandardName)
 
 ## Permissible Values
 
@@ -31,9 +31,7 @@ URI: [StandardName](../enums/StandardName.md)
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

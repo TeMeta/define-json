@@ -29,7 +29,6 @@ Alias: leafID
 
 
 
-
 ## Properties
 
 * Range: [String](../types/String.md)
@@ -37,9 +36,7 @@ Alias: leafID
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

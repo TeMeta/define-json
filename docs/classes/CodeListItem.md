@@ -12,7 +12,6 @@ _A structured member of a CodeList that extends the Coding class with additional
 URI: [odm:class/CodeListItem](https://cdisc.org/odm2/class/CodeListItem)
 
 
-
 ```mermaid
 erDiagram
 CodeListItem {
@@ -67,8 +66,8 @@ CodeListItem ||--|o Coding : "coding"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -92,7 +91,6 @@ CodeListItem ||--|o Coding : "coding"
 | exact | odm:CodeListItem |
 | narrow | sdmx:Code, sdmx:ValueItem |
 | close | usdm:AliasCode, usdm:ResponseCode, fhir:CodeableConcept, omop:Concept |
-
 
 
 

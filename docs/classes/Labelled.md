@@ -12,7 +12,6 @@ _A mixin that provides slots for detailing meanings and multilingual description
 URI: [odm:class/Labelled](https://cdisc.org/odm2/class/Labelled)
 
 
-
 ```mermaid
 erDiagram
 Labelled {
@@ -64,8 +63,8 @@ Labelled ||--}o Coding : "coding"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -86,7 +85,6 @@ Labelled ||--}o Coding : "coding"
 | ---  | ---  |
 | self | odm:Labelled |
 | native | odm:Labelled |
-
 
 
 

@@ -29,7 +29,6 @@ Alias: resource
 
 
 
-
 ## Properties
 
 * Range: NONE&nbsp;or&nbsp;<br />[Resource](../classes/Resource.md)&nbsp;or&nbsp;<br />[String](../types/String.md)
@@ -39,9 +38,7 @@ Alias: resource
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

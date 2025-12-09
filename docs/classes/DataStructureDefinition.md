@@ -12,7 +12,6 @@ _A structural element that defines the organization of a data cube for analysis,
 URI: [odm:class/DataStructureDefinition](https://cdisc.org/odm2/class/DataStructureDefinition)
 
 
-
 ```mermaid
 erDiagram
 DataStructureDefinition {
@@ -394,7 +393,7 @@ Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | [type](../slots/type.md) | 0..1 <br/> [ItemGroupType](../enums/ItemGroupType.md) | Type of item group | [ItemGroup](../classes/ItemGroup.md) |
 | [items](../slots/items.md) | * <br/> [Item](../classes/Item.md) | Items in this group | [ItemGroup](../classes/ItemGroup.md) |
 | [keySequence](../slots/keySequence.md) | * <br/> [Item](../classes/Item.md) | Ordered list of Items that define the dataset key structure for sorting and uniqueness. Each entry is an OID reference to an Item in the items array. Order determines sorting precedence, merge operations, and record uniqueness. These are allowed to be null, unlike stricter dataset dimensions or primary keys. | [ItemGroup](../classes/ItemGroup.md) |
-| [slices](../slots/slices.md) | * <br/> [ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Child ItemGroups nested within this item group (e.g., ValueLists under parent domains). Can be either: - Full ItemGroup objects (preferred for hierarchical nesting) - OID string references (for cross-references to avoid duplication) | [ItemGroup](../classes/ItemGroup.md) |
+| [slices](../slots/slices.md) | * <br/> [ItemGroup](../classes/ItemGroup.md) | Slices are specific subset ItemGroups that belong to, or are used by this ItemGroup | [ItemGroup](../classes/ItemGroup.md) |
 | [implementsConcept](../slots/implementsConcept.md) | 0..1 <br/> [ReifiedConcept](../classes/ReifiedConcept.md) | Reference to a abstract concept topic that this item group is a specialization of | [ItemGroup](../classes/ItemGroup.md) |
 | [applicableWhen](../slots/applicableWhen.md) | * <br/> [WhereClause](../classes/WhereClause.md) | References to different situations that define when this item applies.<br>Multiple whereClauses are combined with OR logic: the item applies if ANY referenced WhereClause matches.<br>Within each WhereClause, conditions are combined with AND logic: all conditions must be true.<br><br>Example: whereClause: ["WC.SYSBP", "WC.DIABP"] means the item applies when<br>(all conditions in WC.SYSBP are true) OR (all conditions in WC.DIABP are true). | [ItemGroup](../classes/ItemGroup.md) |
 | [profile](../slots/profile.md) | * <br/> [String](../types/String.md) | Profiles this resource claims to conform to | [IsProfile](../classes/IsProfile.md) |
@@ -435,8 +434,8 @@ Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -458,7 +457,6 @@ Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | self | odm:DataStructureDefinition |
 | native | odm:DataStructureDefinition |
 | close | sdmx:DataStructureDefinition, qb:DataStructureDefinition |
-
 
 
 
@@ -684,10 +682,8 @@ attributes:
     inlined_as_list: true
   slices:
     name: slices
-    description: 'Child ItemGroups nested within this item group (e.g., ValueLists
-      under parent domains). Can be either: - Full ItemGroup objects (preferred for
-      hierarchical nesting) - OID string references (for cross-references to avoid
-      duplication)'
+    description: Slices are specific subset ItemGroups that belong to, or are used
+      by this ItemGroup
     from_schema: https://cdisc.org/define-json
     rank: 1000
     alias: slices
@@ -698,9 +694,6 @@ attributes:
     multivalued: true
     inlined: true
     inlined_as_list: true
-    any_of:
-    - range: ItemGroup
-    - range: string
   implementsConcept:
     name: implementsConcept
     description: Reference to a abstract concept topic that this item group is a specialization

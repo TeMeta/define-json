@@ -7,7 +7,7 @@ _An enumeration that defines permissible values for standard types_
 
 
 
-URI: [StandardType](../enums/StandardType.md)
+URI: [odm:enum/StandardType](https://cdisc.org/odm2/enum/StandardType)
 
 ## Permissible Values
 
@@ -23,9 +23,7 @@ URI: [StandardType](../enums/StandardType.md)
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

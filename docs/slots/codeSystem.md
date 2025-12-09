@@ -29,7 +29,6 @@ Alias: codeSystem
 
 
 
-
 ## Properties
 
 * Range: [String](../types/String.md)
@@ -39,9 +38,7 @@ Alias: codeSystem
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

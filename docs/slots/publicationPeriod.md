@@ -30,7 +30,6 @@ Alias: publicationPeriod
 
 
 
-
 ## Properties
 
 * Range: NONE
@@ -38,9 +37,7 @@ Alias: publicationPeriod
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

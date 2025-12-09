@@ -29,7 +29,6 @@ Alias: isNominal
 
 
 
-
 ## Properties
 
 * Range: [Boolean](../types/Boolean.md)
@@ -37,9 +36,7 @@ Alias: isNominal
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

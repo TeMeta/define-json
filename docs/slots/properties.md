@@ -29,7 +29,6 @@ Alias: properties
 
 
 
-
 ## Properties
 
 * Range: [ConceptProperty](../classes/ConceptProperty.md)
@@ -39,9 +38,7 @@ Alias: properties
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

@@ -29,7 +29,6 @@ Alias: returnType
 
 
 
-
 ## Properties
 
 * Range: [String](../types/String.md)
@@ -37,9 +36,7 @@ Alias: returnType
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

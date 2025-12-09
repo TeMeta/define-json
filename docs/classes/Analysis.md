@@ -14,7 +14,6 @@ _Expressions and parameters from Method can be generic or implementation-specifi
 URI: [odm:class/Analysis](https://cdisc.org/odm2/class/Analysis)
 
 
-
 ```mermaid
 erDiagram
 Analysis {
@@ -298,8 +297,8 @@ Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -320,7 +319,6 @@ Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | ---  | ---  |
 | self | odm:Analysis |
 | native | odm:Analysis |
-
 
 
 

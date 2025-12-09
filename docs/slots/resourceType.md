@@ -30,7 +30,6 @@ Alias: resourceType
 
 
 
-
 ## Properties
 
 * Range: [String](../types/String.md)
@@ -38,9 +37,7 @@ Alias: resourceType
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

@@ -29,7 +29,6 @@ Alias: annotatedCRFs
 
 
 
-
 ## Properties
 
 * Range: [DocumentReference](../classes/DocumentReference.md)
@@ -39,9 +38,7 @@ Alias: annotatedCRFs
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

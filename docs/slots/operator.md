@@ -25,7 +25,6 @@ Alias: operator
 
 
 
-
 ## Properties
 
 * Range: NONE
@@ -33,9 +32,7 @@ Alias: operator
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

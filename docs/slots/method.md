@@ -29,7 +29,6 @@ Alias: method
 
 
 
-
 ## Properties
 
 * Range: [Method](../classes/Method.md)
@@ -37,9 +36,7 @@ Alias: method
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

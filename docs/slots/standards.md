@@ -29,7 +29,6 @@ Alias: standards
 
 
 
-
 ## Properties
 
 * Range: [Standard](../classes/Standard.md)
@@ -39,9 +38,7 @@ Alias: standards
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

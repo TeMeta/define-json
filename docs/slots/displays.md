@@ -29,7 +29,6 @@ Alias: displays
 
 
 
-
 ## Properties
 
 * Range: [Display](../classes/Display.md)
@@ -39,9 +38,7 @@ Alias: displays
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

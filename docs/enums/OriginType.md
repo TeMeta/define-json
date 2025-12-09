@@ -7,7 +7,7 @@ _An enumeration that defines the types of origins for data items._
 
 
 
-URI: [OriginType](../enums/OriginType.md)
+URI: [odm:enum/OriginType](https://cdisc.org/odm2/enum/OriginType)
 
 ## Permissible Values
 
@@ -28,9 +28,7 @@ URI: [OriginType](../enums/OriginType.md)
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

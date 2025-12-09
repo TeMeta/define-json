@@ -29,7 +29,6 @@ Alias: relativeTo
 
 
 
-
 ## Properties
 
 * Range: [NominalOccurrence](../classes/NominalOccurrence.md)
@@ -37,9 +36,7 @@ Alias: relativeTo
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

@@ -22,9 +22,8 @@ Alias: protocolName
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [StudyMetadata](../classes/StudyMetadata.md) | A mixin that provides study-level metadata attributes including study identification and protocol information |  no  |
 | [MetaDataVersion](../classes/MetaDataVersion.md) | A container element that represents a given version of a specification, linking to a particular usage context such as a study, dataset, or data collection instrument. |  no  |
-
+| [StudyMetadata](../classes/StudyMetadata.md) | A mixin that provides study-level metadata attributes including study identification and protocol information |  no  |
 
 
 
@@ -38,9 +37,7 @@ Alias: protocolName
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

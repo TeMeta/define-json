@@ -12,7 +12,6 @@ _A reusable, composable, and nestable logical construct allowing for complex exp
 URI: [odm:class/Condition](https://cdisc.org/odm2/class/Condition)
 
 
-
 ```mermaid
 erDiagram
 Condition {
@@ -228,8 +227,8 @@ RangeCheck ||--}o FormalExpression : "expressions"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -252,7 +251,6 @@ RangeCheck ||--}o FormalExpression : "expressions"
 | native | odm:Condition |
 | related | fhir:Expression, qb:SliceKey, sdmx:DataConstraint, sdmx:MetaDataConstraint, sdmx:DataKeySet |
 | close | odm:ConditionDef, usdm:Condition |
-
 
 
 

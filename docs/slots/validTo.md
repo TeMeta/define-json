@@ -30,7 +30,6 @@ Alias: validTo
 
 
 
-
 ## Properties
 
 * Range: NONE
@@ -38,9 +37,7 @@ Alias: validTo
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

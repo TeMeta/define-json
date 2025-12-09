@@ -29,7 +29,6 @@ Alias: document
 
 
 
-
 ## Properties
 
 * Range: [DocumentReference](../classes/DocumentReference.md)
@@ -39,9 +38,7 @@ Alias: document
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

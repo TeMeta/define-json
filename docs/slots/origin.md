@@ -29,7 +29,6 @@ Alias: origin
 
 
 
-
 ## Properties
 
 * Range: [Origin](../classes/Origin.md)
@@ -37,9 +36,7 @@ Alias: origin
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

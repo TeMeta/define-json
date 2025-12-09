@@ -29,7 +29,6 @@ Alias: isDistributionOf
 
 
 
-
 ## Properties
 
 * Range: [Dataset](../classes/Dataset.md)
@@ -37,9 +36,7 @@ Alias: isDistributionOf
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

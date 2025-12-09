@@ -29,7 +29,6 @@ Alias: dimensionConstraint
 
 
 
-
 ## Properties
 
 * Range: [Dimension](../classes/Dimension.md)
@@ -39,9 +38,7 @@ Alias: dimensionConstraint
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

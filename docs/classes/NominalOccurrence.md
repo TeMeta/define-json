@@ -12,7 +12,6 @@ _An event element that represents occurrences such as planned or unplanned encou
 URI: [odm:class/NominalOccurrence](https://cdisc.org/odm2/class/NominalOccurrence)
 
 
-
 ```mermaid
 erDiagram
 NominalOccurrence {
@@ -236,8 +235,8 @@ Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -259,7 +258,6 @@ Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | self | odm:NominalOccurrence |
 | native | odm:NominalOccurrence |
 | narrow | usdm:ScheduledInstance, usdm:Encounter, usdm:InterCurrentEvent, fhir:PlanDefinition/action, fhir:ActivityDefinition, fhir:Encounter, fhir:AdverseEvent, omop:Visit_occurrence, omop:Condition_occurrence, omop:Procedure_occurrence |
-
 
 
 

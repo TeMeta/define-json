@@ -12,7 +12,6 @@ _A governed collection that represents a purpose-driven assembly of datasets and
 URI: [odm:class/DataProduct](https://cdisc.org/odm2/class/DataProduct)
 
 
-
 ```mermaid
 erDiagram
 DataProduct {
@@ -312,8 +311,8 @@ FormalExpression ||--}o Coding : "coding"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -335,7 +334,6 @@ FormalExpression ||--}o Coding : "coding"
 | self | odm:DataProduct |
 | native | odm:DataProduct |
 | exact | dprod:DataProduct, dcat:DataService |
-
 
 
 

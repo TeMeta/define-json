@@ -30,7 +30,6 @@ Alias: selection
 
 
 
-
 ## Properties
 
 * Range: [FormalExpression](../classes/FormalExpression.md)
@@ -40,9 +39,7 @@ Alias: selection
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

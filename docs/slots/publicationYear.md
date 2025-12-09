@@ -30,7 +30,6 @@ Alias: publicationYear
 
 
 
-
 ## Properties
 
 * Range: NONE
@@ -38,9 +37,7 @@ Alias: publicationYear
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

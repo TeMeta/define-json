@@ -26,7 +26,6 @@ Alias: codeList
 
 
 
-
 ## Properties
 
 * Range: NONE
@@ -34,9 +33,7 @@ Alias: codeList
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

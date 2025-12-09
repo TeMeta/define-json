@@ -27,7 +27,6 @@ Alias: items
 
 
 
-
 ## Properties
 
 * Range: NONE
@@ -35,9 +34,7 @@ Alias: items
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

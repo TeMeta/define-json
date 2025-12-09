@@ -12,7 +12,6 @@ _A dictionary that defines a set of codes and their meanings_
 URI: [odm:class/Dictionary](https://cdisc.org/odm2/class/Dictionary)
 
 
-
 ```mermaid
 erDiagram
 Dictionary {
@@ -79,8 +78,8 @@ Dictionary ||--}o Coding : "coding"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -101,7 +100,6 @@ Dictionary ||--}o Coding : "coding"
 | ---  | ---  |
 | self | odm:Dictionary |
 | native | odm:Dictionary |
-
 
 
 

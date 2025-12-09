@@ -12,7 +12,6 @@ _An organization element that provides data to a Data Consumer, which can be a s
 URI: [odm:class/DataProvider](https://cdisc.org/odm2/class/DataProvider)
 
 
-
 ```mermaid
 erDiagram
 DataProvider {
@@ -210,8 +209,8 @@ Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -233,7 +232,6 @@ Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | self | odm:DataProvider |
 | native | odm:DataProvider |
 | close | sdmx:DataProvider |
-
 
 
 

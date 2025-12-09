@@ -30,7 +30,6 @@ Alias: action
 
 
 
-
 ## Properties
 
 * Range: NONE
@@ -38,9 +37,7 @@ Alias: action
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

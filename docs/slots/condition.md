@@ -29,7 +29,6 @@ Alias: condition
 
 
 
-
 ## Properties
 
 * Range: [Condition](../classes/Condition.md)
@@ -39,9 +38,7 @@ Alias: condition
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

@@ -29,7 +29,6 @@ Alias: components
 
 
 
-
 ## Properties
 
 * Range: NONE&nbsp;or&nbsp;<br />[Measure](../classes/Measure.md)&nbsp;or&nbsp;<br />[Dimension](../classes/Dimension.md)&nbsp;or&nbsp;<br />[DataAttribute](../classes/DataAttribute.md)
@@ -39,9 +38,7 @@ Alias: components
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

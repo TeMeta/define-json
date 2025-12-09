@@ -12,7 +12,6 @@ _A technical representation that provides a specific format or access method for
 URI: [odm:class/Distribution](https://cdisc.org/odm2/class/Distribution)
 
 
-
 ```mermaid
 erDiagram
 Distribution {
@@ -202,8 +201,8 @@ FormalExpression ||--}o Coding : "coding"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -226,7 +225,6 @@ FormalExpression ||--}o Coding : "coding"
 | native | odm:Distribution |
 | exact | dprod:Distribution, dcat:Distribution |
 | narrow | sdmx:JsonDataset, sdmx:CsvDataset, sdmx:StructureSpecificDataset |
-
 
 
 

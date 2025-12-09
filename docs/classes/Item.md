@@ -12,7 +12,6 @@ _A data element that represents a specific piece of information within a defined
 URI: [odm:class/Item](https://cdisc.org/odm2/class/Item)
 
 
-
 ```mermaid
 erDiagram
 Item {
@@ -387,8 +386,8 @@ ReifiedConcept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -412,7 +411,6 @@ ReifiedConcept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | narrow | fhir:StructureDefinition/variable, fhir:Questionnaire/item, qb:ComponentProperty, omop:Field, omop:DerivedColumn |
 | related | usdm:BiomedicalConceptProperty, usdm:DerivationConceptProperty, usdm:AnalysisConceptProperty, fhir:ElementDefinition, qb:Measure, qb:Attribute, sdmx:Concept, sdmx:Component, sdmx:Representation, osb:sdtm_variable, osb:specimen, osb:unit_dimension, osb:std_unit |
 | close | odm:ItemRef, odm:ItemDef, qb:ComponentSpecification, sdmx:DataAttribute, sdmx:MetadataAttribute |
-
 
 
 

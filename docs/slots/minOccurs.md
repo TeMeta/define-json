@@ -29,7 +29,6 @@ Alias: minOccurs
 
 
 
-
 ## Properties
 
 * Range: [Integer](../types/Integer.md)
@@ -37,9 +36,7 @@ Alias: minOccurs
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

@@ -17,9 +17,8 @@ Alias: dataFlow
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [DataflowRelationship](../classes/DataflowRelationship.md) | A relationship element that associates a DataAttribute with a Dataflow, reported at the Dataset level |  no  |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | An agreement element that describes the contractual relationship between a Data Provider and a Data Consumer regarding data provision |  no  |
-
+| [DataflowRelationship](../classes/DataflowRelationship.md) | A relationship element that associates a DataAttribute with a Dataflow, reported at the Dataset level |  no  |
 
 
 
@@ -33,9 +32,7 @@ Alias: dataFlow
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

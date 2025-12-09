@@ -24,7 +24,6 @@ Alias: evolvingStructure
 
 
 
-
 ## Properties
 
 * Range: [Boolean](../types/Boolean.md)
@@ -32,9 +31,7 @@ Alias: evolvingStructure
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

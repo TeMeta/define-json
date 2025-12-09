@@ -12,7 +12,6 @@ _An abstract representation that defines data provision for different reference 
 URI: [odm:class/Dataflow](https://cdisc.org/odm2/class/Dataflow)
 
 
-
 ```mermaid
 erDiagram
 Dataflow {
@@ -463,8 +462,8 @@ Measure ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -487,7 +486,6 @@ Measure ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | native | odm:Dataflow |
 | related | dprod:Distribution, dcat:Distribution, dprod:DataService, dcat:DataService |
 | close | sdmx:Dataflow |
-
 
 
 

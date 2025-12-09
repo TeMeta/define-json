@@ -12,7 +12,6 @@ _A reified property concept that exists within the context of its containing top
 URI: [odm:class/ConceptProperty](https://cdisc.org/odm2/class/ConceptProperty)
 
 
-
 ```mermaid
 erDiagram
 ConceptProperty {
@@ -199,8 +198,8 @@ CodeListItem ||--|o Coding : "coding"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -224,7 +223,6 @@ CodeListItem ||--|o Coding : "coding"
 | narrow | usdm:BiomedicalConceptProperty, usdm:DerivationConceptProperty, usdm:AnalysisConceptProperty |
 | related | osb:sdtm_variable, osb:specimen, osb:unit_dimension, osb:std_unit, osb:laterality, osb:location, osb:position |
 | close | sdmx:MetaDataAttribute, sdmx:Concept |
-
 
 
 

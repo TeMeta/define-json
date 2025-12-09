@@ -25,7 +25,6 @@ Alias: text
 
 
 
-
 ## Properties
 
 * Range: NONE
@@ -33,9 +32,7 @@ Alias: text
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

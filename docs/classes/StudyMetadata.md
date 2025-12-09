@@ -12,7 +12,6 @@ _A mixin that provides study-level metadata attributes including study identific
 URI: [odm:class/StudyMetadata](https://cdisc.org/odm2/class/StudyMetadata)
 
 
-
 ```mermaid
 erDiagram
 StudyMetadata {
@@ -55,8 +54,8 @@ StudyMetadata {
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -77,7 +76,6 @@ StudyMetadata {
 | ---  | ---  |
 | self | odm:StudyMetadata |
 | native | odm:StudyMetadata |
-
 
 
 

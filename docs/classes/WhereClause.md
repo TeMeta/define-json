@@ -12,7 +12,6 @@ _A conditional element that describes the circumstances under which a containing
 URI: [odm:class/WhereClause](https://cdisc.org/odm2/class/WhereClause)
 
 
-
 ```mermaid
 erDiagram
 WhereClause {
@@ -173,8 +172,8 @@ RangeCheck ||--}o FormalExpression : "expressions"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -197,7 +196,6 @@ RangeCheck ||--}o FormalExpression : "expressions"
 | native | odm:WhereClause |
 | related | fhir:StructureDefinition/context, qb:ObservationGroup, qb:Slice, sdmx:CubeRegion, sdmx:MetadataTargetRegion |
 | close | sdmx:AttachmentConstraint |
-
 
 
 

@@ -7,7 +7,7 @@ _Logical operators for combining conditions in Boolean expressions. For complex 
 
 
 
-URI: [LogicalOperator](../enums/LogicalOperator.md)
+URI: [odm:enum/LogicalOperator](https://cdisc.org/odm2/enum/LogicalOperator)
 
 ## Permissible Values
 
@@ -31,9 +31,7 @@ URI: [LogicalOperator](../enums/LogicalOperator.md)
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

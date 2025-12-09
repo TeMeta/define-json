@@ -30,7 +30,6 @@ Alias: significantDigits
 
 
 
-
 ## Properties
 
 * Range: [Integer](../types/Integer.md)
@@ -38,9 +37,7 @@ Alias: significantDigits
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

@@ -12,7 +12,6 @@ _A value set that defines a discrete collection of permissible values for an ite
 URI: [odm:class/CodeList](https://cdisc.org/odm2/class/CodeList)
 
 
-
 ```mermaid
 erDiagram
 CodeList {
@@ -201,8 +200,8 @@ CodeListItem ||--|o Coding : "coding"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -227,7 +226,6 @@ CodeListItem ||--|o Coding : "coding"
 | narrow | sdmx:Codelist, sdmx:ValueList, sdmx:ConceptScheme |
 | related | usdm:BiomedicalConceptProperty/responseCodes |
 | close | skos:Collection, sdmx:ItemScheme, qb:codeList |
-
 
 
 

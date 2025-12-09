@@ -12,7 +12,6 @@ _A relationship element that associates a DataAttribute with a Measure_
 URI: [odm:class/MeasureRelationship](https://cdisc.org/odm2/class/MeasureRelationship)
 
 
-
 ```mermaid
 erDiagram
 MeasureRelationship {
@@ -183,8 +182,8 @@ Measure ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -206,7 +205,6 @@ Measure ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | self | odm:MeasureRelationship |
 | native | odm:MeasureRelationship |
 | exact | sdmx:MeasureRelationship |
-
 
 
 

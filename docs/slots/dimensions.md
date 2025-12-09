@@ -25,7 +25,6 @@ Alias: dimensions
 
 
 
-
 ## Properties
 
 * Range: NONE
@@ -33,9 +32,7 @@ Alias: dimensions
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

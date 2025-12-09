@@ -29,7 +29,6 @@ Alias: userType
 
 
 
-
 ## Properties
 
 * Range: [UserType](../enums/UserType.md)
@@ -37,9 +36,7 @@ Alias: userType
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

@@ -29,7 +29,6 @@ Alias: windowUpper
 
 
 
-
 ## Properties
 
 * Range: [Datetime](../types/Datetime.md)
@@ -37,9 +36,7 @@ Alias: windowUpper
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

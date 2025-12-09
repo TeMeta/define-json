@@ -7,7 +7,6 @@
 URI: [odm:class/TranslatedText](https://cdisc.org/odm2/class/TranslatedText)
 
 
-
 ```mermaid
 erDiagram
 TranslatedText {
@@ -208,8 +207,8 @@ TranslatedText ||--}o Translation : "translations"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -230,7 +229,6 @@ TranslatedText ||--}o Translation : "translations"
 | ---  | ---  |
 | self | odm:TranslatedText |
 | native | odm:TranslatedText |
-
 
 
 

@@ -12,7 +12,6 @@ _A relationship element that associates a DataAttribute with a specific Dimensio
 URI: [odm:class/DimensionRelationship](https://cdisc.org/odm2/class/DimensionRelationship)
 
 
-
 ```mermaid
 erDiagram
 DimensionRelationship {
@@ -195,8 +194,8 @@ Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -218,7 +217,6 @@ Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | self | odm:DimensionRelationship |
 | native | odm:DimensionRelationship |
 | exact | sdmx:DimensionRelationship |
-
 
 
 

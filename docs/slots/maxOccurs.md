@@ -29,7 +29,6 @@ Alias: maxOccurs
 
 
 
-
 ## Properties
 
 * Range: [Integer](../types/Integer.md)
@@ -37,9 +36,7 @@ Alias: maxOccurs
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

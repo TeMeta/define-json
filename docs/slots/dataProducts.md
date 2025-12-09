@@ -29,7 +29,6 @@ Alias: dataProducts
 
 
 
-
 ## Properties
 
 * Range: [DataProduct](../classes/DataProduct.md)
@@ -39,9 +38,7 @@ Alias: dataProducts
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

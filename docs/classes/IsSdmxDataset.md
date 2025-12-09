@@ -12,7 +12,6 @@ _A mixin that provides additional metadata specific to SDMX Datasets_
 URI: [odm:class/IsSdmxDataset](https://cdisc.org/odm2/class/IsSdmxDataset)
 
 
-
 ```mermaid
 erDiagram
 IsSdmxDataset {
@@ -63,8 +62,8 @@ IsSdmxDataset {
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -85,7 +84,6 @@ IsSdmxDataset {
 | ---  | ---  |
 | self | odm:IsSdmxDataset |
 | native | odm:IsSdmxDataset |
-
 
 
 

@@ -29,7 +29,6 @@ Alias: structuredBy
 
 
 
-
 ## Properties
 
 * Range: [DataStructureDefinition](../classes/DataStructureDefinition.md)
@@ -37,9 +36,7 @@ Alias: structuredBy
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

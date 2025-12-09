@@ -12,7 +12,6 @@ _A collection element that groups observations sharing the same dimensionality, 
 URI: [odm:class/Dataset](https://cdisc.org/odm2/class/Dataset)
 
 
-
 ```mermaid
 erDiagram
 Dataset {
@@ -494,8 +493,8 @@ Analysis ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -518,7 +517,6 @@ Analysis ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | native | odm:Dataset |
 | narrow | sdmx:JsonDataset, sdmx:CsvDataset, sdmx:StructureSpecificDataset |
 | close | qb:Dataset, sdmx:Dataset, dprod:Dataset, dcat:Dataset |
-
 
 
 

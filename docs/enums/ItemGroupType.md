@@ -7,7 +7,7 @@ _An enumeration that defines the roles of an item group within a specific contex
 
 
 
-URI: [ItemGroupType](../enums/ItemGroupType.md)
+URI: [odm:enum/ItemGroupType](https://cdisc.org/odm2/enum/ItemGroupType)
 
 ## Permissible Values
 
@@ -34,9 +34,7 @@ URI: [ItemGroupType](../enums/ItemGroupType.md)
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

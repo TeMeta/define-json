@@ -29,7 +29,6 @@ Alias: lifecycleStatus
 
 
 
-
 ## Properties
 
 * Range: [DataProductLifecycleStatus](../enums/DataProductLifecycleStatus.md)
@@ -37,9 +36,7 @@ Alias: lifecycleStatus
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

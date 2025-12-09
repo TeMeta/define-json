@@ -30,7 +30,6 @@ Alias: decimalDigits
 
 
 
-
 ## Properties
 
 * Range: [Integer](../types/Integer.md)
@@ -38,9 +37,7 @@ Alias: decimalDigits
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

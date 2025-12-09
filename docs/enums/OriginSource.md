@@ -7,7 +7,7 @@ _An enumeration that defines the sources of data origin_
 
 
 
-URI: [OriginSource](../enums/OriginSource.md)
+URI: [odm:enum/OriginSource](https://cdisc.org/odm2/enum/OriginSource)
 
 ## Permissible Values
 
@@ -32,9 +32,7 @@ URI: [OriginSource](../enums/OriginSource.md)
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

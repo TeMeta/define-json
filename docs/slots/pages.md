@@ -29,7 +29,6 @@ Alias: pages
 
 
 
-
 ## Properties
 
 * Range: [Integer](../types/Integer.md)
@@ -39,9 +38,7 @@ Alias: pages
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

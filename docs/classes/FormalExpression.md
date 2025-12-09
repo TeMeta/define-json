@@ -12,7 +12,6 @@ _A computational element that defines the execution of a data derivation within 
 URI: [odm:class/FormalExpression](https://cdisc.org/odm2/class/FormalExpression)
 
 
-
 ```mermaid
 erDiagram
 FormalExpression {
@@ -210,8 +209,8 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -233,7 +232,6 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | self | odm:FormalExpression |
 | native | odm:FormalExpression |
 | exact | odm:FormalExpression, odm:FormalExpressionRef, fhir:Expression |
-
 
 
 

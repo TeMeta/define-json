@@ -29,7 +29,6 @@ Alias: defaultValue
 
 
 
-
 ## Properties
 
 * Range: [String](../types/String.md)
@@ -37,9 +36,7 @@ Alias: defaultValue
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

@@ -12,7 +12,6 @@ _A mixin that provides slots for audit trail and standards governance, including
 URI: [odm:class/Governed](https://cdisc.org/odm2/class/Governed)
 
 
-
 ```mermaid
 erDiagram
 Governed {
@@ -104,8 +103,8 @@ Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -126,7 +125,6 @@ Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | ---  | ---  |
 | self | odm:Governed |
 | native | odm:Governed |
-
 
 
 

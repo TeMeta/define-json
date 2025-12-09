@@ -12,7 +12,6 @@ _A relationship element that associates a DataAttribute with a set of Dimensions
 URI: [odm:class/GroupRelationship](https://cdisc.org/odm2/class/GroupRelationship)
 
 
-
 ```mermaid
 erDiagram
 GroupRelationship {
@@ -173,8 +172,8 @@ ComponentList ||--}o Coding : "coding"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -196,7 +195,6 @@ ComponentList ||--}o Coding : "coding"
 | self | odm:GroupRelationship |
 | native | odm:GroupRelationship |
 | exact | sdmx:GroupRelationship |
-
 
 
 

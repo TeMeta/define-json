@@ -25,7 +25,6 @@ Alias: decode
 
 
 
-
 ## Properties
 
 * Range: NONE
@@ -33,9 +32,7 @@ Alias: decode
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

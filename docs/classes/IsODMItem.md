@@ -12,7 +12,6 @@ _A mixin that provides additional attributes for CDISC Operational Data Model it
 URI: [odm:class/IsODMItem](https://cdisc.org/odm2/class/IsODMItem)
 
 
-
 ```mermaid
 erDiagram
 IsODMItem {
@@ -195,8 +194,8 @@ CodeListItem ||--|o Coding : "coding"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -217,7 +216,6 @@ CodeListItem ||--|o Coding : "coding"
 | ---  | ---  |
 | self | odm:IsODMItem |
 | native | odm:IsODMItem |
-
 
 
 

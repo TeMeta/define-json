@@ -12,7 +12,6 @@ _A text representation that provides content in a specific language, used for mu
 URI: [odm:class/Translation](https://cdisc.org/odm2/class/Translation)
 
 
-
 ```mermaid
 erDiagram
 Translation {
@@ -51,8 +50,8 @@ Translation {
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -74,7 +73,6 @@ Translation {
 | self | odm:Translation |
 | native | odm:Translation |
 | exact | odm:TranslatedText, sdmx:InternationalString |
-
 
 
 

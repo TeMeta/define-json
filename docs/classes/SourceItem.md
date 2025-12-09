@@ -12,7 +12,6 @@ _A data source that provides the origin of information for an item_
 URI: [odm:class/SourceItem](https://cdisc.org/odm2/class/SourceItem)
 
 
-
 ```mermaid
 erDiagram
 SourceItem {
@@ -261,8 +260,8 @@ Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -283,7 +282,6 @@ Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | ---  | ---  |
 | self | odm:SourceItem |
 | native | odm:SourceItem |
-
 
 
 

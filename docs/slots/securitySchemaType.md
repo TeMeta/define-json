@@ -29,7 +29,6 @@ Alias: securitySchemaType
 
 
 
-
 ## Properties
 
 * Range: NONE
@@ -37,9 +36,7 @@ Alias: securitySchemaType
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

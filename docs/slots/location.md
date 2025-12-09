@@ -17,10 +17,9 @@ Alias: location
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Display](../classes/Display.md) | A rendered output of an analysis result. |  no  |
-| [DataProvider](../classes/DataProvider.md) | An organization element that provides data to a Data Consumer, which can be a sponsor, site, or any other entity that supplies data |  no  |
 | [Organization](../classes/Organization.md) | An entity that represents organizational information, such as a site or sponsor |  no  |
-
+| [DataProvider](../classes/DataProvider.md) | An organization element that provides data to a Data Consumer, which can be a sponsor, site, or any other entity that supplies data |  no  |
+| [Display](../classes/Display.md) | A rendered output of an analysis result. |  no  |
 
 
 
@@ -34,9 +33,7 @@ Alias: location
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

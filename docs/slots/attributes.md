@@ -24,7 +24,6 @@ Alias: attributes
 
 
 
-
 ## Properties
 
 * Range: [DataAttribute](../classes/DataAttribute.md)
@@ -34,9 +33,7 @@ Alias: attributes
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

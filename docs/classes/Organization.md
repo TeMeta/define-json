@@ -12,7 +12,6 @@ _An entity that represents organizational information, such as a site or sponsor
 URI: [odm:class/Organization](https://cdisc.org/odm2/class/Organization)
 
 
-
 ```mermaid
 erDiagram
 Organization {
@@ -116,8 +115,8 @@ Organization ||--}o Coding : "coding"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -140,7 +139,6 @@ Organization ||--}o Coding : "coding"
 | native | odm:Organization |
 | exact | odm:Organization, usdm:Organization, sdmx:Organisation |
 | broad | prov:Agent |
-
 
 
 

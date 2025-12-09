@@ -29,7 +29,6 @@ Alias: relationship
 
 
 
-
 ## Properties
 
 * Range: [String](../types/String.md)
@@ -37,9 +36,7 @@ Alias: relationship
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

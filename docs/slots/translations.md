@@ -24,7 +24,6 @@ Alias: translations
 
 
 
-
 ## Properties
 
 * Range: [Translation](../classes/Translation.md)
@@ -34,9 +33,7 @@ Alias: translations
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

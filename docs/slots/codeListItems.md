@@ -29,7 +29,6 @@ Alias: codeListItems
 
 
 
-
 ## Properties
 
 * Range: [CodeListItem](../classes/CodeListItem.md)
@@ -39,9 +38,7 @@ Alias: codeListItems
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

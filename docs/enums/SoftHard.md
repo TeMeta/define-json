@@ -7,7 +7,7 @@ _An enumeration that indicates whether a validation check should be treated as a
 
 
 
-URI: [SoftHard](../enums/SoftHard.md)
+URI: [odm:enum/SoftHard](https://cdisc.org/odm2/enum/SoftHard)
 
 ## Permissible Values
 
@@ -29,9 +29,7 @@ URI: [SoftHard](../enums/SoftHard.md)
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 
