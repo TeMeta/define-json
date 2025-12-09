@@ -544,8 +544,8 @@ Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 </tr>
 <tr>
 <td><a href="../../slots/slices/">slices</a></td>
-<td>* <br/> <a href="../ItemGroup/">ItemGroup</a> or <br/><a href="../ItemGroup/">ItemGroup</a> or <br/><a href="../../types/String/">String</a></td>
-<td>Child ItemGroups nested within this item group (e.g., ValueLists under parent domains). Can be either: - Full ItemGroup objects (preferred for hierarchical nesting) - OID string references (for cross-references to avoid duplication)</td>
+<td>* <br/> <a href="../ItemGroup/">ItemGroup</a></td>
+<td>Slices are specific subset ItemGroups that belong to, or are used by this ItemGroup</td>
 <td><a href="../ItemGroup/">ItemGroup</a></td>
 </tr>
 <tr>
@@ -952,10 +952,8 @@ Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <span class="w">    </span><span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">  </span><span class="nt">slices</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">slices</span>
-<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'Child</span><span class="nv"> </span><span class="s">ItemGroups</span><span class="nv"> </span><span class="s">nested</span><span class="nv"> </span><span class="s">within</span><span class="nv"> </span><span class="s">this</span><span class="nv"> </span><span class="s">item</span><span class="nv"> </span><span class="s">group</span><span class="nv"> </span><span class="s">(e.g.,</span><span class="nv"> </span><span class="s">ValueLists</span>
-<span class="w">      </span><span class="s">under</span><span class="nv"> </span><span class="s">parent</span><span class="nv"> </span><span class="s">domains).</span><span class="nv"> </span><span class="s">Can</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">either:</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">Full</span><span class="nv"> </span><span class="s">ItemGroup</span><span class="nv"> </span><span class="s">objects</span><span class="nv"> </span><span class="s">(preferred</span><span class="nv"> </span><span class="s">for</span>
-<span class="w">      </span><span class="s">hierarchical</span><span class="nv"> </span><span class="s">nesting)</span><span class="nv"> </span><span class="s">-</span><span class="nv"> </span><span class="s">OID</span><span class="nv"> </span><span class="s">string</span><span class="nv"> </span><span class="s">references</span><span class="nv"> </span><span class="s">(for</span><span class="nv"> </span><span class="s">cross-references</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">avoid</span>
-<span class="w">      </span><span class="s">duplication)'</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Slices are specific subset ItemGroups that belong to, or are used</span>
+<span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">by this ItemGroup</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">slices</span>
@@ -966,9 +964,6 @@ Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">    </span><span class="nt">any_of</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 <span class="w">  </span><span class="nt">implementsConcept</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">implementsConcept</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reference to a abstract concept topic that this item group is a specialization</span>
