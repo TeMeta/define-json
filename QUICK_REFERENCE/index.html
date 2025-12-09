@@ -92,14 +92,23 @@
 <div class="col-md-9" role="main">
 <h1 id="define-json-quick-reference">🚀 Define-JSON Quick Reference</h1>
 <h2 id="installation">Installation</h2>
-<p>This project uses <code>poetry</code> as a python environment manager</p>
+<p>This project uses <strong>Poetry</strong> for Python dependency and environment management.</p>
 <p>To install poetry:
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-sSL<span class="w"> </span>https://install.python-poetry.org<span class="w"> </span><span class="p">|</span><span class="w"> </span>python3<span class="w"> </span>-
+<div class="highlight"><pre><span></span><code><span class="c1"># Recommended official installer (works on Linux, macOS, and WSL)</span>
+curl<span class="w"> </span>-sSL<span class="w"> </span>https://install.python-poetry.org<span class="w"> </span><span class="p">|</span><span class="w"> </span>python3<span class="w"> </span>-
+
+<span class="c1"># On Windows (PowerShell):</span>
+<span class="o">(</span>Invoke-WebRequest<span class="w"> </span>-Uri<span class="w"> </span>https://install.python-poetry.org<span class="w"> </span>-UseBasicParsing<span class="o">)</span>.Content<span class="w"> </span><span class="p">|</span><span class="w"> </span>py<span class="w"> </span>-3<span class="w"> </span>-
 </code></pre></div></p>
-<p>Clone this project and navigate to it, adding poetry to the path via</p>
-<p><code>export PATH="$HOME/.local/bin:$PATH"</code></p>
-<p>then install all the dependencies for this project with</p>
-<p><code>poetry install</code></p>
+<p>After installation, restart your shell or run</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.local/bin:</span><span class="nv">$PATH</span><span class="s2">"</span><span class="w">    </span><span class="c1"># Linux/macOS/WSL</span>
+<span class="c1"># or add it permanently to ~/.bashrc, ~/.zshrc, etc.</span>
+</code></pre></div>
+<p>verify it worked (<code>poetry --version</code>) then clone this repo and install everything</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/TeMeta/define-json.git
+<span class="nb">cd</span><span class="w"> </span>define-json
+make<span class="w"> </span>setup
+</code></pre></div>
 <h2 id="convert-from-any-directory">🔄 Convert from Any Directory</h2>
 <h3 id="json-xml">JSON → XML</h3>
 <div class="highlight"><pre><span></span><code><span class="nv">PYTHONPATH</span><span class="o">=</span>/Users/jeremyteoh/Projects/define-json<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span>
