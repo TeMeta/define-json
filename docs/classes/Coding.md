@@ -12,7 +12,6 @@ _A semantic reference that provides standardized codes and their meanings from c
 URI: [odm:class/Coding](https://cdisc.org/odm2/class/Coding)
 
 
-
 ```mermaid
 erDiagram
 Coding {
@@ -104,8 +103,8 @@ Coding {
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -128,7 +127,6 @@ Coding {
 | native | odm:Coding |
 | exact | odm:Coding, usdm:Code, fhir:Coding |
 | close | omop:Concept, skos:Concept, skos:Label, sdmx:Code, sdmx:Concept, sdmx:ISOConceptReference |
-
 
 
 

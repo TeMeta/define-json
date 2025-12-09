@@ -12,7 +12,6 @@ _An abstract definition that specifies a list of components within a data struct
 URI: [odm:class/ComponentList](https://cdisc.org/odm2/class/ComponentList)
 
 
-
 ```mermaid
 erDiagram
 ComponentList {
@@ -78,8 +77,8 @@ ComponentList ||--}o Coding : "coding"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -101,7 +100,6 @@ ComponentList ||--}o Coding : "coding"
 | self | odm:ComponentList |
 | native | odm:ComponentList |
 | exact | sdmx:ComponentList |
-
 
 
 

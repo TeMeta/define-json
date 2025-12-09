@@ -29,7 +29,6 @@ Alias: weight
 
 
 
-
 ## Properties
 
 * Range: [Decimal](../types/Decimal.md)
@@ -37,9 +36,7 @@ Alias: weight
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

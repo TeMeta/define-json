@@ -29,7 +29,6 @@ Alias: fullName
 
 
 
-
 ## Properties
 
 * Range: [String](../types/String.md)
@@ -37,9 +36,7 @@ Alias: fullName
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

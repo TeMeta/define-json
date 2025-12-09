@@ -12,7 +12,6 @@ _An output specification that defines the details of what a formal expression re
 URI: [odm:class/ReturnValue](https://cdisc.org/odm2/class/ReturnValue)
 
 
-
 ```mermaid
 erDiagram
 ReturnValue {
@@ -75,8 +74,8 @@ ReturnValue ||--}o Coding : "coding"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -97,7 +96,6 @@ ReturnValue ||--}o Coding : "coding"
 | ---  | ---  |
 | self | odm:ReturnValue |
 | native | odm:ReturnValue |
-
 
 
 

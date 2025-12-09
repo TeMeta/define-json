@@ -29,7 +29,6 @@ Alias: returnValue
 
 
 
-
 ## Properties
 
 * Range: [ReturnValue](../classes/ReturnValue.md)
@@ -37,9 +36,7 @@ Alias: returnValue
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

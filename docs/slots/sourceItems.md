@@ -29,7 +29,6 @@ Alias: sourceItems
 
 
 
-
 ## Properties
 
 * Range: [SourceItem](../classes/SourceItem.md)
@@ -39,9 +38,7 @@ Alias: sourceItems
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

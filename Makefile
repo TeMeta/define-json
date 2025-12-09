@@ -73,7 +73,7 @@ generate-json-schema:
 
 generate-pydantic:
 	@echo "Generating Pydantic models from LinkML..."
-	poetry run linkml generate pydantic --meta AUTO define.yaml > generated/define.py
+	poetry run linkml generate pydantic --meta auto define.yaml > generated/define.py
 	@echo "Pydantic models generated: generated/define.py"
 # Main functionality targets
 demo:
@@ -164,7 +164,7 @@ format:
 
 setup: install
 	@echo "Setting up development environment..."
-	mkdir -p data generated docs
+	@mkdir -p data generated
 	@echo "Development environment ready"
 
 # Reverse Engineering targets

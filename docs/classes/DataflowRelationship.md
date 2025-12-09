@@ -12,7 +12,6 @@ _A relationship element that associates a DataAttribute with a Dataflow, reporte
 URI: [odm:class/DataflowRelationship](https://cdisc.org/odm2/class/DataflowRelationship)
 
 
-
 ```mermaid
 erDiagram
 DataflowRelationship {
@@ -236,7 +235,7 @@ DataStructureDefinition ||--}o DataAttribute : "attributes"
 DataStructureDefinition ||--|o ComponentList : "grouping"
 DataStructureDefinition ||--}o Item : "items"
 DataStructureDefinition ||--}o Item : "keySequence"
-DataStructureDefinition ||--}o ItemGroup : "children"
+DataStructureDefinition ||--}o ItemGroup : "slices"
 DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
 DataStructureDefinition ||--}o WhereClause : "applicableWhen"
 DataStructureDefinition ||--}o Coding : "security"
@@ -267,8 +266,8 @@ DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -290,7 +289,6 @@ DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | self | odm:DataflowRelationship |
 | native | odm:DataflowRelationship |
 | exact | sdmx:DataflowRelationship |
-
 
 
 

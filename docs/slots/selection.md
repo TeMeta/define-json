@@ -22,9 +22,8 @@ Alias: selection
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Resource](../classes/Resource.md) | An external reference that serves as the source for a Dataset, ItemGroup, or Item |  no  |
 | [DataService](../classes/DataService.md) | A service element that provides an API or endpoint for serving or receiving data |  no  |
-
+| [Resource](../classes/Resource.md) | An external reference that serves as the source for a Dataset, ItemGroup, or Item |  no  |
 
 
 
@@ -40,9 +39,7 @@ Alias: selection
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

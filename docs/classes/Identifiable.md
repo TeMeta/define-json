@@ -12,7 +12,6 @@ _A mixin that provides slots for making an entity addressable within a study or 
 URI: [odm:class/Identifiable](https://cdisc.org/odm2/class/Identifiable)
 
 
-
 ```mermaid
 erDiagram
 Identifiable {
@@ -52,8 +51,8 @@ Identifiable {
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -74,7 +73,6 @@ Identifiable {
 | ---  | ---  |
 | self | odm:Identifiable |
 | native | odm:Identifiable |
-
 
 
 

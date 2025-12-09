@@ -12,7 +12,6 @@ _A service element that provides an API or endpoint for serving or receiving dat
 URI: [odm:class/DataService](https://cdisc.org/odm2/class/DataService)
 
 
-
 ```mermaid
 erDiagram
 DataService {
@@ -186,8 +185,8 @@ Dataset ||--}o Coding : "coding"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -209,7 +208,6 @@ Dataset ||--}o Coding : "coding"
 | self | odm:DataService |
 | native | odm:DataService |
 | exact | dprod:DataService, dcat:DataService |
-
 
 
 

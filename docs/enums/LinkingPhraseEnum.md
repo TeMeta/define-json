@@ -7,7 +7,7 @@ _An enumeration that defines variable relationship descriptive linking phrases f
 
 
 
-URI: [LinkingPhraseEnum](../enums/LinkingPhraseEnum.md)
+URI: [odm:enum/LinkingPhraseEnum](https://cdisc.org/odm2/enum/LinkingPhraseEnum)
 
 ## Permissible Values
 
@@ -112,9 +112,7 @@ URI: [LinkingPhraseEnum](../enums/LinkingPhraseEnum.md)
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

@@ -12,7 +12,6 @@ _A mixin that provides slots for reporting, exchange, or storage formatting_
 URI: [odm:class/Formatted](https://cdisc.org/odm2/class/Formatted)
 
 
-
 ```mermaid
 erDiagram
 Formatted {
@@ -53,8 +52,8 @@ Formatted {
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -76,7 +75,6 @@ Formatted {
 | self | odm:Formatted |
 | native | odm:Formatted |
 | related | sdmx:Facet, sdmx:Representation |
-
 
 
 

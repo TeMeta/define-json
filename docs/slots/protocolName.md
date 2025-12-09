@@ -30,7 +30,6 @@ Alias: protocolName
 
 
 
-
 ## Properties
 
 * Range: [String](../types/String.md)
@@ -38,9 +37,7 @@ Alias: protocolName
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

@@ -12,7 +12,6 @@ _A relationship element that associates a DataAttribute with an Observation, all
 URI: [odm:class/ObservationRelationship](https://cdisc.org/odm2/class/ObservationRelationship)
 
 
-
 ```mermaid
 erDiagram
 ObservationRelationship {
@@ -163,8 +162,8 @@ Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -186,7 +185,6 @@ Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | self | odm:ObservationRelationship |
 | native | odm:ObservationRelationship |
 | exact | sdmx:ObservationRelationship |
-
 
 
 

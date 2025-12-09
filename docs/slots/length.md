@@ -29,7 +29,6 @@ Alias: length
 
 
 
-
 ## Properties
 
 * Range: [Integer](../types/Integer.md)
@@ -37,9 +36,7 @@ Alias: length
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

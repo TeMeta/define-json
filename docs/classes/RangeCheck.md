@@ -12,7 +12,6 @@ _A validation element that performs a simple comparison check between a referenc
 URI: [odm:class/RangeCheck](https://cdisc.org/odm2/class/RangeCheck)
 
 
-
 ```mermaid
 erDiagram
 RangeCheck {
@@ -124,8 +123,8 @@ Parameter ||--}o Coding : "coding"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -147,7 +146,6 @@ Parameter ||--}o Coding : "coding"
 | self | odm:RangeCheck |
 | native | odm:RangeCheck |
 | related | qb:SliceKey, sdmx:DataKey |
-
 
 
 

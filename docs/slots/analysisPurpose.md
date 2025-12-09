@@ -29,7 +29,6 @@ Alias: analysisPurpose
 
 
 
-
 ## Properties
 
 * Range: NONE
@@ -37,9 +36,7 @@ Alias: analysisPurpose
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

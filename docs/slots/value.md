@@ -26,7 +26,6 @@ Alias: value
 
 
 
-
 ## Properties
 
 * Range: NONE
@@ -34,9 +33,7 @@ Alias: value
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

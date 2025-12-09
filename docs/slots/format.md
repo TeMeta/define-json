@@ -29,7 +29,6 @@ Alias: format
 
 
 
-
 ## Properties
 
 * Range: NONE
@@ -37,9 +36,7 @@ Alias: format
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

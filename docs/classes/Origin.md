@@ -12,7 +12,6 @@ _A provenance element that describes the source of data for an item_
 URI: [odm:class/Origin](https://cdisc.org/odm2/class/Origin)
 
 
-
 ```mermaid
 erDiagram
 Origin {
@@ -117,8 +116,8 @@ Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -139,7 +138,6 @@ Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | ---  | ---  |
 | self | odm:Origin |
 | native | odm:Origin |
-
 
 
 

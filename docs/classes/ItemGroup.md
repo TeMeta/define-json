@@ -12,7 +12,6 @@ _A collection element that groups related items or subgroups within a specific c
 URI: [odm:class/ItemGroup](https://cdisc.org/odm2/class/ItemGroup)
 
 
-
 ```mermaid
 erDiagram
 ItemGroup {
@@ -229,7 +228,7 @@ RangeCheck {
 
 ItemGroup ||--}o Item : "items"
 ItemGroup ||--}o Item : "keySequence"
-ItemGroup ||--}o ItemGroup : "children"
+ItemGroup ||--}o ItemGroup : "slices"
 ItemGroup ||--|o ReifiedConcept : "implementsConcept"
 ItemGroup ||--}o WhereClause : "applicableWhen"
 ItemGroup ||--}o Coding : "security"
@@ -319,7 +318,7 @@ RangeCheck ||--}o FormalExpression : "expressions"
 | [type](../slots/type.md) | 0..1 <br/> [ItemGroupType](../enums/ItemGroupType.md) | Type of item group | direct |
 | [items](../slots/items.md) | * <br/> [Item](../classes/Item.md) | Items in this group | direct |
 | [keySequence](../slots/keySequence.md) | * <br/> [Item](../classes/Item.md) | Ordered list of Items that define the dataset key structure for sorting and uniqueness. Each entry is an OID reference to an Item in the items array. Order determines sorting precedence, merge operations, and record uniqueness. These are allowed to be null, unlike stricter dataset dimensions or primary keys. | direct |
-| [children](../slots/children.md) | * <br/> [ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Child ItemGroups nested within this item group (e.g., ValueLists under parent domains). Can be either: - Full ItemGroup objects (preferred for hierarchical nesting) - OID string references (for cross-references to avoid duplication) | direct |
+| [slices](../slots/slices.md) | * <br/> [ItemGroup](../classes/ItemGroup.md) | Slices are specific subset ItemGroups that belong to, or are used by this ItemGroup | direct |
 | [implementsConcept](../slots/implementsConcept.md) | 0..1 <br/> [ReifiedConcept](../classes/ReifiedConcept.md) | Reference to a abstract concept topic that this item group is a specialization of | direct |
 | [applicableWhen](../slots/applicableWhen.md) | * <br/> [WhereClause](../classes/WhereClause.md) | References to different situations that define when this item applies.<br>Multiple whereClauses are combined with OR logic: the item applies if ANY referenced WhereClause matches.<br>Within each WhereClause, conditions are combined with AND logic: all conditions must be true.<br><br>Example: whereClause: ["WC.SYSBP", "WC.DIABP"] means the item applies when<br>(all conditions in WC.SYSBP are true) OR (all conditions in WC.DIABP are true). | direct |
 | [profile](../slots/profile.md) | * <br/> [String](../types/String.md) | Profiles this resource claims to conform to | [IsProfile](../classes/IsProfile.md) |
@@ -356,8 +355,7 @@ RangeCheck ||--}o FormalExpression : "expressions"
 | [MetaDataVersion](../classes/MetaDataVersion.md) | [itemGroups](../slots/itemGroups.md) | range | [ItemGroup](../classes/ItemGroup.md) |
 | [MetaDataVersion](../classes/MetaDataVersion.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [Item](../classes/Item.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
-| [ItemGroup](../classes/ItemGroup.md) | [children](../slots/children.md) | range | [ItemGroup](../classes/ItemGroup.md) |
-| [ItemGroup](../classes/ItemGroup.md) | [children](../slots/children.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
+| [ItemGroup](../classes/ItemGroup.md) | [slices](../slots/slices.md) | range | [ItemGroup](../classes/ItemGroup.md) |
 | [ItemGroup](../classes/ItemGroup.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [CodeList](../classes/CodeList.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [Comment](../classes/Comment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
@@ -368,8 +366,7 @@ RangeCheck ||--}o FormalExpression : "expressions"
 | [Method](../classes/Method.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [NominalOccurrence](../classes/NominalOccurrence.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
-| [DataStructureDefinition](../classes/DataStructureDefinition.md) | [children](../slots/children.md) | range | [ItemGroup](../classes/ItemGroup.md) |
-| [DataStructureDefinition](../classes/DataStructureDefinition.md) | [children](../slots/children.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
+| [DataStructureDefinition](../classes/DataStructureDefinition.md) | [slices](../slots/slices.md) | range | [ItemGroup](../classes/ItemGroup.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [Dataflow](../classes/Dataflow.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [CubeComponent](../classes/CubeComponent.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
@@ -387,8 +384,8 @@ RangeCheck ||--}o FormalExpression : "expressions"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -412,7 +409,6 @@ RangeCheck ||--}o FormalExpression : "expressions"
 | narrow | fhir:StructureDefinition, fhir:ViewDefinition, fhir:Questionnaire, omop:Table, qb:DataStructureDefinition, sdmx:DataStructureDefinition, sdmx:MetaDataStructureDefinition |
 | related | qb:Dataset, qb:Observation, qb:ObservationGroup, qb:Slice, osb:Activity |
 | close | odm:ItemGroupDef, odm:ItemGroupRef, osb:ActivityInstance |
-
 
 
 
@@ -530,12 +526,10 @@ attributes:
     multivalued: true
     inlined: true
     inlined_as_list: true
-  children:
-    name: children
-    description: 'Child ItemGroups nested within this item group (e.g., ValueLists
-      under parent domains). Can be either: - Full ItemGroup objects (preferred for
-      hierarchical nesting) - OID string references (for cross-references to avoid
-      duplication)'
+  slices:
+    name: slices
+    description: Slices are specific subset ItemGroups that belong to, or are used
+      by this ItemGroup
     from_schema: https://cdisc.org/define-json
     rank: 1000
     domain_of:
@@ -544,9 +538,6 @@ attributes:
     multivalued: true
     inlined: true
     inlined_as_list: true
-    any_of:
-    - range: ItemGroup
-    - range: string
   implementsConcept:
     name: implementsConcept
     description: Reference to a abstract concept topic that this item group is a specialization
@@ -707,15 +698,13 @@ attributes:
     multivalued: true
     inlined: true
     inlined_as_list: true
-  children:
-    name: children
-    description: 'Child ItemGroups nested within this item group (e.g., ValueLists
-      under parent domains). Can be either: - Full ItemGroup objects (preferred for
-      hierarchical nesting) - OID string references (for cross-references to avoid
-      duplication)'
+  slices:
+    name: slices
+    description: Slices are specific subset ItemGroups that belong to, or are used
+      by this ItemGroup
     from_schema: https://cdisc.org/define-json
     rank: 1000
-    alias: children
+    alias: slices
     owner: ItemGroup
     domain_of:
     - ItemGroup
@@ -723,9 +712,6 @@ attributes:
     multivalued: true
     inlined: true
     inlined_as_list: true
-    any_of:
-    - range: ItemGroup
-    - range: string
   implementsConcept:
     name: implementsConcept
     description: Reference to a abstract concept topic that this item group is a specialization

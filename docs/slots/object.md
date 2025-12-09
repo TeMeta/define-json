@@ -29,7 +29,6 @@ Alias: object
 
 
 
-
 ## Properties
 
 * Range: [IdentifiableElement](../classes/IdentifiableElement.md)
@@ -39,9 +38,7 @@ Alias: object
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

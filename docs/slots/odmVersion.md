@@ -30,7 +30,6 @@ Alias: odmVersion
 
 
 
-
 ## Properties
 
 * Range: [String](../types/String.md)
@@ -40,9 +39,7 @@ Alias: odmVersion
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

@@ -12,7 +12,6 @@ _A rendered output of an analysis result._
 URI: [odm:class/Display](https://cdisc.org/odm2/class/Display)
 
 
-
 ```mermaid
 erDiagram
 Display {
@@ -225,8 +224,8 @@ WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -247,7 +246,6 @@ WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | ---  | ---  |
 | self | odm:Display |
 | native | odm:Display |
-
 
 
 

@@ -7,7 +7,7 @@ _An enumeration that defines permissible values for the relationship between an 
 
 
 
-URI: [AliasPredicate](../enums/AliasPredicate.md)
+URI: [odm:enum/AliasPredicate](https://cdisc.org/odm2/enum/AliasPredicate)
 
 ## Permissible Values
 
@@ -31,9 +31,7 @@ URI: [AliasPredicate](../enums/AliasPredicate.md)
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

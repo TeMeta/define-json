@@ -29,7 +29,6 @@ Alias: resources
 
 
 
-
 ## Properties
 
 * Range: NONE&nbsp;or&nbsp;<br />[DocumentReference](../classes/DocumentReference.md)&nbsp;or&nbsp;<br />[Resource](../classes/Resource.md)
@@ -39,9 +38,7 @@ Alias: resources
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

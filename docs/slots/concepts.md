@@ -29,7 +29,6 @@ Alias: concepts
 
 
 
-
 ## Properties
 
 * Range: [ReifiedConcept](../classes/ReifiedConcept.md)
@@ -39,9 +38,7 @@ Alias: concepts
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

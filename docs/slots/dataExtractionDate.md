@@ -30,7 +30,6 @@ Alias: dataExtractionDate
 
 
 
-
 ## Properties
 
 * Range: NONE
@@ -38,9 +37,7 @@ Alias: dataExtractionDate
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

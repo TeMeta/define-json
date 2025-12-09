@@ -29,7 +29,6 @@ Alias: userName
 
 
 
-
 ## Properties
 
 * Range: [String](../types/String.md)
@@ -37,9 +36,7 @@ Alias: userName
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

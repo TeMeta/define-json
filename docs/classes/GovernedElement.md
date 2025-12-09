@@ -9,7 +9,6 @@
 URI: [odm:class/GovernedElement](https://cdisc.org/odm2/class/GovernedElement)
 
 
-
 ```mermaid
 erDiagram
 GovernedElement {
@@ -128,8 +127,8 @@ Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -150,7 +149,6 @@ Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | ---  | ---  |
 | self | odm:GovernedElement |
 | native | odm:GovernedElement |
-
 
 
 

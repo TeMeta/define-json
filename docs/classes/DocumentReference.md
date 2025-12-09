@@ -12,7 +12,6 @@ _A comprehensive reference element that points to an external document, combinin
 URI: [odm:class/DocumentReference](https://cdisc.org/odm2/class/DocumentReference)
 
 
-
 ```mermaid
 erDiagram
 DocumentReference {
@@ -90,8 +89,8 @@ DocumentReference ||--}o Coding : "coding"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -112,7 +111,6 @@ DocumentReference ||--}o Coding : "coding"
 | ---  | ---  |
 | self | odm:DocumentReference |
 | native | odm:DocumentReference |
-
 
 
 

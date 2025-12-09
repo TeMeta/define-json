@@ -7,7 +7,7 @@ _An enumeration that defines CDISC timing type values indicating the temporal re
 
 
 
-URI: [TimingType](../enums/TimingType.md)
+URI: [odm:enum/TimingType](https://cdisc.org/odm2/enum/TimingType)
 
 ## Permissible Values
 
@@ -24,9 +24,7 @@ URI: [TimingType](../enums/TimingType.md)
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

@@ -29,7 +29,6 @@ Alias: implementsCondition
 
 
 
-
 ## Properties
 
 * Range: NONE
@@ -37,9 +36,7 @@ Alias: implementsCondition
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

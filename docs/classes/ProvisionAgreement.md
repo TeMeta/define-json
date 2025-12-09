@@ -12,7 +12,6 @@ _An agreement element that describes the contractual relationship between a Data
 URI: [odm:class/ProvisionAgreement](https://cdisc.org/odm2/class/ProvisionAgreement)
 
 
-
 ```mermaid
 erDiagram
 ProvisionAgreement {
@@ -230,7 +229,7 @@ DataStructureDefinition ||--}o DataAttribute : "attributes"
 DataStructureDefinition ||--|o ComponentList : "grouping"
 DataStructureDefinition ||--}o Item : "items"
 DataStructureDefinition ||--}o Item : "keySequence"
-DataStructureDefinition ||--}o ItemGroup : "children"
+DataStructureDefinition ||--}o ItemGroup : "slices"
 DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
 DataStructureDefinition ||--}o WhereClause : "applicableWhen"
 DataStructureDefinition ||--}o Coding : "security"
@@ -320,8 +319,8 @@ Organization ||--}o Coding : "coding"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -343,7 +342,6 @@ Organization ||--}o Coding : "coding"
 | self | odm:ProvisionAgreement |
 | native | odm:ProvisionAgreement |
 | close | sdmx:ProvisionAgreement |
-
 
 
 

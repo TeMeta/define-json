@@ -29,7 +29,6 @@ Alias: predicateTerm
 
 
 
-
 ## Properties
 
 * Range: [PredicateTermEnum](../enums/PredicateTermEnum.md)
@@ -39,9 +38,7 @@ Alias: predicateTerm
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

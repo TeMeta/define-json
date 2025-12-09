@@ -30,7 +30,6 @@ Alias: fileType
 
 
 
-
 ## Properties
 
 * Range: [String](../types/String.md)
@@ -40,9 +39,7 @@ Alias: fileType
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

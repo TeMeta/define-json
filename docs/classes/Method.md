@@ -14,7 +14,6 @@ _Analysis and Derivation concepts can be implemented by a Method. Properties can
 URI: [odm:class/Method](https://cdisc.org/odm2/class/Method)
 
 
-
 ```mermaid
 erDiagram
 Method {
@@ -278,8 +277,8 @@ Parameter ||--}o Coding : "coding"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -302,7 +301,6 @@ Parameter ||--}o Coding : "coding"
 | native | odm:Method |
 | exact | odm:MethodRef, odm:MethodDef |
 | close | fhir:Expression, omop:Transformation |
-
 
 
 

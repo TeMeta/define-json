@@ -12,7 +12,6 @@ _A mixin that provides version and connectivity information, including version n
 URI: [odm:class/Versioned](https://cdisc.org/odm2/class/Versioned)
 
 
-
 ```mermaid
 erDiagram
 Versioned {
@@ -62,8 +61,8 @@ Versioned {
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -84,7 +83,6 @@ Versioned {
 | ---  | ---  |
 | self | odm:Versioned |
 | native | odm:Versioned |
-
 
 
 

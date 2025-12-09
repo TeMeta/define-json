@@ -29,7 +29,6 @@ Alias: softHard
 
 
 
-
 ## Properties
 
 * Range: [SoftHard](../enums/SoftHard.md)
@@ -37,9 +36,7 @@ Alias: softHard
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

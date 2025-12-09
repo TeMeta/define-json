@@ -29,7 +29,6 @@ Alias: windowLower
 
 
 
-
 ## Properties
 
 * Range: [Datetime](../types/Datetime.md)
@@ -37,9 +36,7 @@ Alias: windowLower
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

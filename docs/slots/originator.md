@@ -30,7 +30,6 @@ Alias: originator
 
 
 
-
 ## Properties
 
 * Range: [String](../types/String.md)
@@ -38,9 +37,7 @@ Alias: originator
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

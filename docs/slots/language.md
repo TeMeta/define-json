@@ -29,7 +29,6 @@ Alias: language
 
 
 
-
 ## Properties
 
 * Range: [String](../types/String.md)
@@ -39,9 +38,7 @@ Alias: language
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

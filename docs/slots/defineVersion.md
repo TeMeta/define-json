@@ -30,7 +30,6 @@ Alias: defineVersion
 
 
 
-
 ## Properties
 
 * Range: [String](../types/String.md)
@@ -38,9 +37,7 @@ Alias: defineVersion
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

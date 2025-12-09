@@ -29,7 +29,6 @@ Alias: externalCodeList
 
 
 
-
 ## Properties
 
 * Range: [Resource](../classes/Resource.md)
@@ -37,9 +36,7 @@ Alias: externalCodeList
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

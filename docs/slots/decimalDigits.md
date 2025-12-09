@@ -22,9 +22,8 @@ Alias: decimalDigits
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Formatted](../classes/Formatted.md) | A mixin that provides slots for reporting, exchange, or storage formatting |  no  |
 | [Item](../classes/Item.md) | A data element that represents a specific piece of information within a defined context, with data type, constraints, and derivation methods |  no  |
-
+| [Formatted](../classes/Formatted.md) | A mixin that provides slots for reporting, exchange, or storage formatting |  no  |
 
 
 
@@ -38,9 +37,7 @@ Alias: decimalDigits
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

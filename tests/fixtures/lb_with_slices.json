@@ -67,7 +67,7 @@
         "OID": "IG.LB.SLICE.GLUCOSE.BASELINE",
         "name": "Glucose at Baseline",
         "domain": "LB",
-        "type": "DataSpecialization",
+        "type": "DatasetSpecialization",
         "applicableWhen": ["WC.GLUCOSE.BASELINE"],
         "items": [
           {"OID": "IT.LB.STUDYID", "name": "STUDYID", "dataType": "text"},
@@ -83,7 +83,7 @@
         "OID": "IG.LB.SLICE.GLUCOSE.WEEK4",
         "name": "Glucose at Week 4",
         "domain": "LB",
-        "type": "DataSpecialization",
+        "type": "DatasetSpecialization",
         "applicableWhen": ["WC.GLUCOSE.WEEK4"],
         "items": [
           {"OID": "IT.LB.STUDYID", "name": "STUDYID", "dataType": "text"},
@@ -99,7 +99,7 @@
         "OID": "IG.LB.SLICE.SODIUM.BASELINE",
         "name": "Sodium at Baseline",
         "domain": "LB",
-        "type": "DataSpecialization",
+        "type": "DatasetSpecialization",
         "applicableWhen": ["WC.SODIUM.BASELINE"],
         "items": [
           {"OID": "IT.LB.STUDYID", "name": "STUDYID", "dataType": "text"},
@@ -115,7 +115,7 @@
         "OID": "IG.LB.SLICE.PLATELET.BASELINE",
         "name": "Platelet at Baseline",
         "domain": "LB",
-        "type": "DataSpecialization",
+        "type": "DatasetSpecialization",
         "applicableWhen": ["WC.PLATELET.BASELINE"],
         "items": [
           {"OID": "IT.LB.STUDYID", "name": "STUDYID", "dataType": "text"},

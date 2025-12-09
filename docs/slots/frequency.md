@@ -29,7 +29,6 @@ Alias: frequency
 
 
 
-
 ## Properties
 
 * Range: [String](../types/String.md)
@@ -37,9 +36,7 @@ Alias: frequency
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

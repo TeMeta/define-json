@@ -12,7 +12,6 @@ _A descriptive element that contains explanatory text provided by a data or meta
 URI: [odm:class/Comment](https://cdisc.org/odm2/class/Comment)
 
 
-
 ```mermaid
 erDiagram
 Comment {
@@ -146,8 +145,8 @@ DocumentReference ||--}o Coding : "coding"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -169,7 +168,6 @@ DocumentReference ||--}o Coding : "coding"
 | self | odm:Comment |
 | native | odm:Comment |
 | exact | odm:CommentDef, usdm:CommentAnnotation, fhir:Annotation, sdmx:Annotation |
-
 
 
 

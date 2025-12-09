@@ -30,7 +30,6 @@ Alias: reportingEnd
 
 
 
-
 ## Properties
 
 * Range: NONE
@@ -38,9 +37,7 @@ Alias: reportingEnd
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

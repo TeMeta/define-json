@@ -30,7 +30,6 @@ Alias: sourceSystem
 
 
 
-
 ## Properties
 
 * Range: [String](../types/String.md)
@@ -38,9 +37,7 @@ Alias: sourceSystem
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

@@ -593,19 +593,13 @@ classes:
         close_mappings:
           - odm:ItemRef.KeySequence
           - sdmx:DimensionDescriptor
-      children:
+      slices:
         description: >-
-          Child ItemGroups nested within this item group (e.g., ValueLists under parent domains).
-          Can be either:
-          - Full ItemGroup objects (preferred for hierarchical nesting)
-          - OID string references (for cross-references to avoid duplication)
+          Slices are specific subset ItemGroups that belong to, or are used by this ItemGroup
         range: ItemGroup
         multivalued: true
-        inlined: true
+        inlined: false
         inlined_as_list: true
-        any_of:
-          - range: ItemGroup
-          - range: string
       implementsConcept:
         description: >-
           Reference to a abstract concept topic that this item group is a specialization of
@@ -2280,7 +2274,7 @@ enums:
       Object:
         description: >-
           An object or profile of a FHIR resource.
-      DataSpecialization:
+      DatasetSpecialization:
         description: >-
           A data specialization of a concept.
       ValueList:

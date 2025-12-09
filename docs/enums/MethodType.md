@@ -7,7 +7,7 @@ _An enumeration that defines the types of computational methods available for da
 
 
 
-URI: [MethodType](../enums/MethodType.md)
+URI: [odm:enum/MethodType](https://cdisc.org/odm2/enum/MethodType)
 
 ## Permissible Values
 
@@ -26,9 +26,7 @@ URI: [MethodType](../enums/MethodType.md)
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

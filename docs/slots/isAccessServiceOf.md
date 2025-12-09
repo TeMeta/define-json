@@ -29,7 +29,6 @@ Alias: isAccessServiceOf
 
 
 
-
 ## Properties
 
 * Range: [Distribution](../classes/Distribution.md)
@@ -37,9 +36,7 @@ Alias: isAccessServiceOf
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

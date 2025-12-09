@@ -29,7 +29,6 @@ Alias: title
 
 
 
-
 ## Properties
 
 * Range: [String](../types/String.md)
@@ -37,9 +36,7 @@ Alias: title
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

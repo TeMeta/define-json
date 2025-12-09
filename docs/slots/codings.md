@@ -29,7 +29,6 @@ Alias: codings
 
 
 
-
 ## Properties
 
 * Range: [Coding](../classes/Coding.md)
@@ -39,9 +38,7 @@ Alias: codings
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

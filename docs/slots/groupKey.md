@@ -25,7 +25,6 @@ Alias: groupKey
 
 
 
-
 ## Properties
 
 * Range: NONE
@@ -33,9 +32,7 @@ Alias: groupKey
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

@@ -665,7 +665,7 @@ DataStructureDefinition ||--}o DataAttribute : "attributes"
 DataStructureDefinition ||--|o ComponentList : "grouping"
 DataStructureDefinition ||--}o Item : "items"
 DataStructureDefinition ||--}o Item : "keySequence"
-DataStructureDefinition ||--}o ItemGroup : "children"
+DataStructureDefinition ||--}o ItemGroup : "slices"
 DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
 DataStructureDefinition ||--}o WhereClause : "applicableWhen"
 DataStructureDefinition ||--}o Coding : "security"
@@ -675,7 +675,7 @@ DataStructureDefinition ||--}o Comment : "comments"
 DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ItemGroup ||--}o Item : "items"
 ItemGroup ||--}o Item : "keySequence"
-ItemGroup ||--}o ItemGroup : "children"
+ItemGroup ||--}o ItemGroup : "slices"
 ItemGroup ||--|o ReifiedConcept : "implementsConcept"
 ItemGroup ||--}o WhereClause : "applicableWhen"
 ItemGroup ||--}o Coding : "security"
@@ -885,7 +885,7 @@ IdentifiableElement ||--}o Coding : "coding"
 | [isReferenceData](slots/isReferenceData.md) | Set to Yes if this is a reference item group. |
 | [type](slots/type.md) | Type of item group |
 | [keySequence](slots/keySequence.md) | Ordered list of Items that define the dataset key structure for sorting and uniqueness. Each entry is an OID reference to an Item in the items array. Order determines sorting precedence, merge operations, and record uniqueness. These are allowed to be null, unlike stricter dataset dimensions or primary keys. |
-| [children](slots/children.md) | Child ItemGroups nested within this item group (e.g., ValueLists under parent domains). Can be either: - Full ItemGroup objects (preferred for hierarchical nesting) - OID string references (for cross-references to avoid duplication) |
+| [slices](slots/slices.md) | Slices are specific subset ItemGroups that belong to, or are used by this ItemGroup |
 | [implementsConcept](slots/implementsConcept.md) | Reference to a abstract concept topic that this item group is a specialization of |
 | [subject](slots/subject.md) | The starting element of the relationship (e.g., an Item or ItemGroup). |
 | [object](slots/object.md) | The ending element of the relationship. |

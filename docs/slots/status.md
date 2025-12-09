@@ -29,7 +29,6 @@ Alias: status
 
 
 
-
 ## Properties
 
 * Range: [StandardStatus](../enums/StandardStatus.md)
@@ -37,9 +36,7 @@ Alias: status
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

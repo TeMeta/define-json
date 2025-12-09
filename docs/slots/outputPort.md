@@ -29,7 +29,6 @@ Alias: outputPort
 
 
 
-
 ## Properties
 
 * Range: [DataService](../classes/DataService.md)
@@ -39,9 +38,7 @@ Alias: outputPort
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

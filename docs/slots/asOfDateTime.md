@@ -30,7 +30,6 @@ Alias: asOfDateTime
 
 
 
-
 ## Properties
 
 * Range: [Datetime](../types/Datetime.md)
@@ -38,9 +37,7 @@ Alias: asOfDateTime
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

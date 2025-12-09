@@ -7,7 +7,7 @@ _An enumeration that defines the types of users in a clinical data collection or
 
 
 
-URI: [UserType](../enums/UserType.md)
+URI: [odm:enum/UserType](https://cdisc.org/odm2/enum/UserType)
 
 ## Permissible Values
 
@@ -36,9 +36,7 @@ URI: [UserType](../enums/UserType.md)
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

@@ -337,7 +337,7 @@ class ItemGroupType(str, Enum):
     """
     An object or profile of a FHIR resource.
     """
-    DataSpecialization = "DataSpecialization"
+    DatasetSpecialization = "DatasetSpecialization"
     """
     A data specialization of a concept.
     """
@@ -1098,12 +1098,10 @@ class ItemGroup(IsProfile, GovernedElement):
          'close_mappings': ['fhir:StructureDefinition/snapshot',
                             'fhir:StructureDefinition/differential'],
          'domain_of': ['MetaDataVersion', 'ItemGroup', 'Parameter']} })
-    keySequence: Optional[list[str]] = Field(default=None, description="""Ordered list of Items that define the dataset key structure for sorting and uniqueness. Each entry is an OID reference to an Item in the items array. Order determines sorting precedence, merge operations, and record uniqueness. These are allowed to be null, unlike stricter dataset dimensions or primary keys.""", json_schema_extra = { "linkml_meta": {'alias': 'keySequence',
+    keySequence: Optional[list[Item]] = Field(default=None, description="""Ordered list of Items that define the dataset key structure for sorting and uniqueness. Each entry is an OID reference to an Item in the items array. Order determines sorting precedence, merge operations, and record uniqueness. These are allowed to be null, unlike stricter dataset dimensions or primary keys.""", json_schema_extra = { "linkml_meta": {'alias': 'keySequence',
          'close_mappings': ['odm:ItemRef.KeySequence', 'sdmx:DimensionDescriptor'],
          'domain_of': ['ItemGroup']} })
-    children: Optional[list[Union[ItemGroup, str]]] = Field(default=None, description="""Child ItemGroups nested within this item group (e.g., ValueLists under parent domains). Can be either: - Full ItemGroup objects (preferred for hierarchical nesting) - OID string references (for cross-references to avoid duplication)""", json_schema_extra = { "linkml_meta": {'alias': 'children',
-         'any_of': [{'range': 'ItemGroup'}, {'range': 'string'}],
-         'domain_of': ['ItemGroup']} })
+    slices: Optional[list[ItemGroup]] = Field(default=None, description="""Slices are specific subset ItemGroups that belong to, or are used by this ItemGroup""", json_schema_extra = { "linkml_meta": {'alias': 'slices', 'domain_of': ['ItemGroup']} })
     implementsConcept: Optional[str] = Field(default=None, description="""Reference to a abstract concept topic that this item group is a specialization of""", json_schema_extra = { "linkml_meta": {'alias': 'implementsConcept', 'domain_of': ['ItemGroup', 'Method']} })
     applicableWhen: Optional[list[str]] = Field(default=None, description="""References to different situations that define when this item applies.
 Multiple whereClauses are combined with OR logic: the item applies if ANY referenced WhereClause matches.
@@ -2253,12 +2251,10 @@ class DataStructureDefinition(ItemGroup):
          'close_mappings': ['fhir:StructureDefinition/snapshot',
                             'fhir:StructureDefinition/differential'],
          'domain_of': ['MetaDataVersion', 'ItemGroup', 'Parameter']} })
-    keySequence: Optional[list[str]] = Field(default=None, description="""Ordered list of Items that define the dataset key structure for sorting and uniqueness. Each entry is an OID reference to an Item in the items array. Order determines sorting precedence, merge operations, and record uniqueness. These are allowed to be null, unlike stricter dataset dimensions or primary keys.""", json_schema_extra = { "linkml_meta": {'alias': 'keySequence',
+    keySequence: Optional[list[Item]] = Field(default=None, description="""Ordered list of Items that define the dataset key structure for sorting and uniqueness. Each entry is an OID reference to an Item in the items array. Order determines sorting precedence, merge operations, and record uniqueness. These are allowed to be null, unlike stricter dataset dimensions or primary keys.""", json_schema_extra = { "linkml_meta": {'alias': 'keySequence',
          'close_mappings': ['odm:ItemRef.KeySequence', 'sdmx:DimensionDescriptor'],
          'domain_of': ['ItemGroup']} })
-    children: Optional[list[Union[ItemGroup, str]]] = Field(default=None, description="""Child ItemGroups nested within this item group (e.g., ValueLists under parent domains). Can be either: - Full ItemGroup objects (preferred for hierarchical nesting) - OID string references (for cross-references to avoid duplication)""", json_schema_extra = { "linkml_meta": {'alias': 'children',
-         'any_of': [{'range': 'ItemGroup'}, {'range': 'string'}],
-         'domain_of': ['ItemGroup']} })
+    slices: Optional[list[ItemGroup]] = Field(default=None, description="""Slices are specific subset ItemGroups that belong to, or are used by this ItemGroup""", json_schema_extra = { "linkml_meta": {'alias': 'slices', 'domain_of': ['ItemGroup']} })
     implementsConcept: Optional[str] = Field(default=None, description="""Reference to a abstract concept topic that this item group is a specialization of""", json_schema_extra = { "linkml_meta": {'alias': 'implementsConcept', 'domain_of': ['ItemGroup', 'Method']} })
     applicableWhen: Optional[list[str]] = Field(default=None, description="""References to different situations that define when this item applies.
 Multiple whereClauses are combined with OR logic: the item applies if ANY referenced WhereClause matches.

@@ -25,7 +25,6 @@ Alias: conceptProperty
 
 
 
-
 ## Properties
 
 * Range: NONE
@@ -33,9 +32,7 @@ Alias: conceptProperty
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

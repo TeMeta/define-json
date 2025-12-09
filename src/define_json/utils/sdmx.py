@@ -549,7 +549,7 @@ def analyze_attribute_variance(
     
     Args:
         attribute_name: Name of the attribute to analyze (e.g., "LBCAT")
-        slices: List of ItemGroup slices (type=DataSpecialization)
+        slices: List of ItemGroup slices (type=DatasetSpecialization)
         slice_data: Dict mapping WhereClause OID to attribute/dimension values
         dsd: DataStructureDefinition containing dimensions
         mdv: MetaDataVersion for lookups
@@ -675,7 +675,7 @@ def infer_attribute_relationships(
     
     Args:
         dsd: DataStructureDefinition ItemGroup
-        slices: List of ItemGroup slices (type=DataSpecialization)
+        slices: List of ItemGroup slices (type=DatasetSpecialization)
         slice_data: Dict mapping WhereClause OID to attribute/dimension values
         mdv: MetaDataVersion for lookups
         

@@ -29,7 +29,6 @@ Alias: aliasType
 
 
 
-
 ## Properties
 
 * Range: [AliasPredicate](../enums/AliasPredicate.md)
@@ -37,9 +36,7 @@ Alias: aliasType
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

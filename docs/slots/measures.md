@@ -24,7 +24,6 @@ Alias: measures
 
 
 
-
 ## Properties
 
 * Range: [Measure](../classes/Measure.md)
@@ -34,9 +33,7 @@ Alias: measures
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

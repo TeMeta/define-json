@@ -30,7 +30,6 @@ Alias: isReferenceData
 
 
 
-
 ## Properties
 
 * Range: [Boolean](../types/Boolean.md)
@@ -38,9 +37,7 @@ Alias: isReferenceData
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

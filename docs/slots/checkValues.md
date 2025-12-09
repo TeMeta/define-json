@@ -29,7 +29,6 @@ Alias: checkValues
 
 
 
-
 ## Properties
 
 * Range: [String](../types/String.md)
@@ -39,9 +38,7 @@ Alias: checkValues
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

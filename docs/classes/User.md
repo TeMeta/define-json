@@ -12,7 +12,6 @@ _An entity that represents information about a specific user of a clinical data 
 URI: [odm:class/User](https://cdisc.org/odm2/class/User)
 
 
-
 ```mermaid
 erDiagram
 User {
@@ -122,8 +121,8 @@ Organization ||--}o Coding : "coding"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -146,7 +145,6 @@ Organization ||--}o Coding : "coding"
 | native | odm:User |
 | exact | odm:User |
 | broad | prov:Agent |
-
 
 
 

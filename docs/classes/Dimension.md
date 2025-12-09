@@ -12,7 +12,6 @@ _A data cube property that describes a categorical or hierarchical dimension_
 URI: [odm:class/Dimension](https://cdisc.org/odm2/class/Dimension)
 
 
-
 ```mermaid
 erDiagram
 Dimension {
@@ -336,8 +335,8 @@ RangeCheck ||--}o FormalExpression : "expressions"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -361,7 +360,6 @@ RangeCheck ||--}o FormalExpression : "expressions"
 | exact | qb:DimensionProperty, sdmx:Dimension |
 | narrow | sdmx:MeasureDimension, sdmx:TimeDimension |
 | broad | sdmx:DataAttribute |
-
 
 
 

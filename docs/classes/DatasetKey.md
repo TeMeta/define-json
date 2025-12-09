@@ -14,7 +14,6 @@ _An abstract identifier that comprises the cross-product of dimension values to 
 URI: [odm:class/DatasetKey](https://cdisc.org/odm2/class/DatasetKey)
 
 
-
 ```mermaid
 erDiagram
 DatasetKey {
@@ -53,8 +52,8 @@ DatasetKey {
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -76,7 +75,6 @@ DatasetKey {
 | self | odm:DatasetKey |
 | native | odm:DatasetKey |
 | exact | sdmx:Key |
-
 
 
 

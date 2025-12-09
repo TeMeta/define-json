@@ -9,7 +9,6 @@
 URI: [odm:class/IdentifiableElement](https://cdisc.org/odm2/class/IdentifiableElement)
 
 
-
 ```mermaid
 erDiagram
 IdentifiableElement {
@@ -81,8 +80,8 @@ IdentifiableElement ||--}o Coding : "coding"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -103,7 +102,6 @@ IdentifiableElement ||--}o Coding : "coding"
 | ---  | ---  |
 | self | odm:IdentifiableElement |
 | native | odm:IdentifiableElement |
-
 
 
 

@@ -7,7 +7,7 @@ _An enumeration that defines permissible values for standard status_
 
 
 
-URI: [StandardStatus](../enums/StandardStatus.md)
+URI: [odm:enum/StandardStatus](https://cdisc.org/odm2/enum/StandardStatus)
 
 ## Permissible Values
 
@@ -29,9 +29,7 @@ URI: [StandardStatus](../enums/StandardStatus.md)
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

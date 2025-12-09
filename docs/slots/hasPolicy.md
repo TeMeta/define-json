@@ -25,7 +25,6 @@ Alias: hasPolicy
 
 
 
-
 ## Properties
 
 * Range: NONE
@@ -33,9 +32,7 @@ Alias: hasPolicy
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

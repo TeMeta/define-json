@@ -1798,7 +1798,7 @@
           }
         }
       ],
-      "children": [
+      "slices": [
         {
           "OID": "ValueList.ADLBC.A1HI",
           "name": "ADLBC_A1HI",
@@ -6218,7 +6218,7 @@
           }
         }
       ],
-      "children": [
+      "slices": [
         {
           "OID": "ValueList.ADLBH.A1HI",
           "name": "ADLBH_A1HI",
@@ -10389,7 +10389,7 @@
           }
         }
       ],
-      "children": [
+      "slices": [
         {
           "OID": "ValueList.ADLBHY.A1HI",
           "name": "ADLBHY_A1HI",
@@ -11972,7 +11972,7 @@
           }
         }
       ],
-      "children": [
+      "slices": [
         {
           "OID": "ValueList.ADQSADAS.AVAL",
           "name": "ADQSADAS_AVAL",
@@ -13423,7 +13423,7 @@
           }
         }
       ],
-      "children": [
+      "slices": [
         {
           "OID": "ValueList.ADQSNPIX.ABLFL",
           "name": "ADQSNPIX_ABLFL",
@@ -15654,7 +15654,7 @@
           }
         }
       ],
-      "children": [
+      "slices": [
         {
           "OID": "ValueList.ADVS.AVAL",
           "name": "ADVS_AVAL",

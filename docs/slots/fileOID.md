@@ -30,7 +30,6 @@ Alias: fileOID
 
 
 
-
 ## Properties
 
 * Range: [String](../types/String.md)
@@ -40,9 +39,7 @@ Alias: fileOID
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

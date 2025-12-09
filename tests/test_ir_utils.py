@@ -142,7 +142,7 @@ class TestCanonicalSlices:
         # Count slices for LB domain
         lb_slices = [
             ig for ig in mdv.itemGroups 
-            if ig.domain == "LB" and ig.type == "DataSpecialization"
+            if ig.domain == "LB" and ig.type == "DatasetSpecialization"
         ]
         
         # Should be exactly one slice (merged from two)
@@ -171,7 +171,7 @@ class TestCanonicalSlices:
         # After slicing
         ae_slices = [
             ig for ig in mdv.itemGroups 
-            if ig.domain == "AE" and ig.type == "DataSpecialization"
+            if ig.domain == "AE" and ig.type == "DatasetSpecialization"
         ]
         
         assert len(ae_slices) == 1, "Should create exactly one slice for AE"
@@ -187,7 +187,7 @@ class TestCanonicalSlices:
         
         ae_slices = [
             ig for ig in mdv.itemGroups 
-            if ig.domain == "AE" and ig.type == "DataSpecialization"
+            if ig.domain == "AE" and ig.type == "DatasetSpecialization"
         ]
         
         slice_wc_oid = ae_slices[0].applicableWhen[0]
@@ -214,7 +214,7 @@ class TestSliceInvariants:
         from define_json.schema.define import ItemGroup
         empty_slice = ItemGroup.model_construct(
             OID="IG.TEST.EMPTY",
-            type="DataSpecialization",
+            type="DatasetSpecialization",
             domain="TEST"
         )
         # applicableWhen should be list of string OIDs
@@ -233,7 +233,7 @@ class TestSliceInvariants:
         
         ae_slices = [
             ig for ig in mdv.itemGroups 
-            if ig.domain == "AE" and ig.type == "DataSpecialization"
+            if ig.domain == "AE" and ig.type == "DatasetSpecialization"
         ]
         
         # Manually add second WhereClause OID
@@ -409,7 +409,7 @@ class TestValueListToSpecialisation:
     """ValueList to Dataset Specialisation transformation tests."""
 
     def test_transforms_value_lists_to_slices(self):
-        """ValueLists should be transformed into DataSpecialization slices."""
+        """ValueLists should be transformed into DatasetSpecialization slices."""
         mdv = load_mdv(FIXTURES_DIR / "valuelist_test.json")
         
         # Count ValueLists before transformation
@@ -423,7 +423,7 @@ class TestValueListToSpecialisation:
         # Count domain ItemGroups before (should be preserved)
         domain_groups_before = [
             ig for ig in mdv.itemGroups 
-            if getattr(ig, "type", None) not in (ItemGroupType.ValueList, ItemGroupType.DataSpecialization)
+            if getattr(ig, "type", None) not in (ItemGroupType.ValueList, ItemGroupType.DatasetSpecialization)
         ]
         domain_group_count = len(domain_groups_before)
         
@@ -440,16 +440,16 @@ class TestValueListToSpecialisation:
         # Domain ItemGroups should be preserved
         domain_groups_after = [
             ig for ig in mdv.itemGroups 
-            if getattr(ig, "type", None) not in (ItemGroupType.ValueList, ItemGroupType.DataSpecialization)
+            if getattr(ig, "type", None) not in (ItemGroupType.ValueList, ItemGroupType.DatasetSpecialization)
         ]
         assert len(domain_groups_after) == domain_group_count, "Domain ItemGroups should be preserved"
         
-        # Should have created DataSpecialization slices
+        # Should have created DatasetSpecialization slices
         slices = [
             ig for ig in mdv.itemGroups 
-            if getattr(ig, "type", None) == ItemGroupType.DataSpecialization
+            if getattr(ig, "type", None) == ItemGroupType.DatasetSpecialization
         ]
-        assert len(slices) > 0, "Should create DataSpecialization slices"
+        assert len(slices) > 0, "Should create DatasetSpecialization slices"
         
         # Each slice should have exactly one applicableWhen
         for slice_ig in slices:
@@ -468,7 +468,7 @@ class TestValueListToSpecialisation:
         from define_json.schema.define import ItemGroupType
         temp_slice = None
         for ig in mdv.itemGroups:
-            if (getattr(ig, "type", None) == ItemGroupType.DataSpecialization and
+            if (getattr(ig, "type", None) == ItemGroupType.DatasetSpecialization and
                 ig.applicableWhen and
                 ig.applicableWhen[0] == "WC.VS.VSORRES.TEMP"):
                 temp_slice = ig
@@ -481,7 +481,7 @@ class TestValueListToSpecialisation:
         # Find slice for WC.VS.VSORRES.WEIGHT
         weight_slice = None
         for ig in mdv.itemGroups:
-            if (getattr(ig, "type", None) == ItemGroupType.DataSpecialization and
+            if (getattr(ig, "type", None) == ItemGroupType.DatasetSpecialization and
                 ig.applicableWhen and
                 ig.applicableWhen[0] == "WC.VS.VSORRES.WEIGHT"):
                 weight_slice = ig
@@ -512,7 +512,7 @@ class TestValueListToSpecialisation:
         from define_json.schema.define import ItemGroupType
         transformed_item = None
         for ig in mdv.itemGroups:
-            if (getattr(ig, "type", None) == ItemGroupType.DataSpecialization and
+            if (getattr(ig, "type", None) == ItemGroupType.DatasetSpecialization and
                 ig.applicableWhen and
                 ig.applicableWhen[0] == "WC.VS.VSORRES.TEMP"):
                 transformed_item = ig.items[0]
@@ -532,7 +532,7 @@ class TestValueListToSpecialisation:
         from define_json.schema.define import ItemGroupType
         slices = [
             ig for ig in mdv.itemGroups 
-            if getattr(ig, "type", None) == ItemGroupType.DataSpecialization
+            if getattr(ig, "type", None) == ItemGroupType.DatasetSpecialization
         ]
         
         for slice_ig in slices:
@@ -551,7 +551,7 @@ class TestValueListToSpecialisation:
         from define_json.schema.define import ItemGroupType
         vs_slices = [
             ig for ig in mdv.itemGroups 
-            if (getattr(ig, "type", None) == ItemGroupType.DataSpecialization and
+            if (getattr(ig, "type", None) == ItemGroupType.DatasetSpecialization and
                 ig.domain == "VS")
         ]
         
@@ -593,7 +593,7 @@ class TestValueListToSpecialisation:
         from define_json.schema.define import ItemGroupType
         all_slice_items = []
         for ig in mdv.itemGroups:
-            if getattr(ig, "type", None) == ItemGroupType.DataSpecialization:
+            if getattr(ig, "type", None) == ItemGroupType.DatasetSpecialization:
                 all_slice_items.extend(ig.items or [])
         
         assert not any(it.OID == "IT.VS.TEST.NO_WC" for it in all_slice_items), "Item without applicableWhen should not be in slices"
@@ -704,11 +704,11 @@ class TestMultipleClausesExamples:
             # We compare structure but allow for processing differences.
             
             # Check ValueLists - account for nested vs flattened structure
-            # Converted JSON has ValueLists nested in children, expected may have them flattened
+            # Converted JSON has ValueLists nested in slices, expected may have them flattened
             converted_vls_flat = converted_vls.copy()
             for ig in converted_mdv.get('itemGroups', []):
-                if 'children' in ig and isinstance(ig['children'], list):
-                    for child in ig['children']:
+                if 'slices' in ig and isinstance(ig['slices'], list):
+                    for child in ig['slices']:
                         if isinstance(child, dict) and child.get('type') == 'ValueList':
                             converted_vls_flat.append(child)
             
@@ -721,11 +721,11 @@ class TestMultipleClausesExamples:
             # Check domain ItemGroups exist
             converted_domains = [
                 ig for ig in converted_mdv.get('itemGroups', [])
-                if ig.get('type') not in ('ValueList', 'DataSpecialization')
+                if ig.get('type') not in ('ValueList', 'DatasetSpecialization')
             ]
             expected_domains = [
                 ig for ig in expected_mdv.get('itemGroups', [])
-                if ig.get('type') not in ('ValueList', 'DataSpecialization')
+                if ig.get('type') not in ('ValueList', 'DatasetSpecialization')
             ]
             
             # Domain count may differ due to processing, but should have at least the same domains
@@ -748,7 +748,7 @@ class TestMultipleClausesExamples:
         
         - multiple_clauses.json: Intermediate, preserves original structure (27 WhereClauses)
         - multiple_clauses_dss.json: Canonical, consolidates WhereClauses (16 WhereClauses)
-          and creates DataSpecialization slices with meaningful OIDs like WC.VS.TEMP.
+          and creates DatasetSpecialization slices with meaningful OIDs like WC.VS.TEMP.
         
         The transformation consolidates redundant WhereClauses based on their internal
         structure (not just OID), creating a canonical representation suitable for analysis.
@@ -778,15 +778,15 @@ class TestMultipleClausesExamples:
         else:
             mdv_data = json_data
         
-        # Flatten nested ValueLists from children into top-level itemGroups
+        # Flatten nested ValueLists from slices into top-level itemGroups
         if "itemGroups" in mdv_data:
             flattened_groups = []
             for ig in mdv_data["itemGroups"]:
                 flattened_groups.append(ig)
-                # Extract ValueLists from children and set domain from parent
-                if "children" in ig and isinstance(ig["children"], list):
+                # Extract ValueLists from slices and set domain from parent
+                if "slices" in ig and isinstance(ig["slices"], list):
                     parent_domain = ig.get("domain")
-                    for child in ig["children"]:
+                    for child in ig["slices"]:
                         if isinstance(child, dict) and child.get("type") == "ValueList":
                             # Set domain from parent if not already set
                             if not child.get("domain") and parent_domain:
@@ -809,7 +809,7 @@ class TestMultipleClausesExamples:
         # Count domain ItemGroups before (should be preserved)
         domain_groups_before = [
             ig for ig in mdv.itemGroups
-            if getattr(ig, "type", None) not in (ItemGroupType.ValueList, ItemGroupType.DataSpecialization)
+            if getattr(ig, "type", None) not in (ItemGroupType.ValueList, ItemGroupType.DatasetSpecialization)
         ]
         domain_count_before = len(domain_groups_before)
         
@@ -826,17 +826,17 @@ class TestMultipleClausesExamples:
         # Domain ItemGroups should be preserved
         domain_groups_after = [
             ig for ig in mdv.itemGroups
-            if getattr(ig, "type", None) not in (ItemGroupType.ValueList, ItemGroupType.DataSpecialization)
+            if getattr(ig, "type", None) not in (ItemGroupType.ValueList, ItemGroupType.DatasetSpecialization)
         ]
         assert len(domain_groups_after) == domain_count_before, \
             f"Domain ItemGroups should be preserved: {len(domain_groups_after)} != {domain_count_before}"
         
-        # Should have created DataSpecialization slices
+        # Should have created DatasetSpecialization slices
         slices = [
             ig for ig in mdv.itemGroups
-            if getattr(ig, "type", None) == ItemGroupType.DataSpecialization
+            if getattr(ig, "type", None) == ItemGroupType.DatasetSpecialization
         ]
-        assert len(slices) > 0, "Should create DataSpecialization slices"
+        assert len(slices) > 0, "Should create DatasetSpecialization slices"
         
         # Verify each slice has exactly one applicableWhen
         for slice_ig in slices:
@@ -845,21 +845,21 @@ class TestMultipleClausesExamples:
             assert slice_ig.items is not None, "Slice must have items"
             assert len(slice_ig.items) > 0, "Slice must not be empty"
         
-        # Verify domain ItemGroups have slice OIDs as children (not ValueLists)
+        # Verify domain ItemGroups have slice OIDs as slices (not ValueLists)
         # Only check domains that have slices
         domains_with_slices = {s.domain for s in slices}
         for domain_ig in domain_groups_after:
             domain = domain_ig.domain
-            children = domain_ig.children or []
+            slices_list = domain_ig.slices or []
             
             # Should NOT have ValueList references
-            vl_children = [c for c in children if isinstance(c, str) and c.startswith('VL.')]
-            assert len(vl_children) == 0, f"Domain {domain} should not have ValueList children"
+            vl_slices = [c for c in slices_list if isinstance(c, str) and c.startswith('VL.')]
+            assert len(vl_slices) == 0, f"Domain {domain} should not have ValueList slices"
             
-            # Domains with slices should have slice OID references as children
+            # Domains with slices should have slice OID references as slices
             if domain in domains_with_slices:
-                slice_children = [c for c in children if isinstance(c, str) and c.startswith('IG.')]
-                assert len(slice_children) > 0, f"Domain {domain} should have slice children"
+                slice_refs = [c for c in slices_list if isinstance(c, str) and c.startswith('IG.')]
+                assert len(slice_refs) > 0, f"Domain {domain} should have slice references"
         
         # Verify against expected output file if it exists
         if dss_json_path.exists():
@@ -869,29 +869,29 @@ class TestMultipleClausesExamples:
             # Compare structure
             expected_slices = [
                 ig for ig in expected_mdv.itemGroups
-                if getattr(ig, "type", None) == ItemGroupType.DataSpecialization
+                if getattr(ig, "type", None) == ItemGroupType.DatasetSpecialization
             ]
             assert len(slices) == len(expected_slices), \
                 f"Slice count mismatch: {len(slices)} != {len(expected_slices)}"
             
-            # Compare domain ItemGroups have correct children
+            # Compare domain ItemGroups have correct slices
             expected_domains = [
                 ig for ig in expected_mdv.itemGroups
-                if getattr(ig, "type", None) not in (ItemGroupType.ValueList, ItemGroupType.DataSpecialization)
+                if getattr(ig, "type", None) not in (ItemGroupType.ValueList, ItemGroupType.DatasetSpecialization)
             ]
             
             for domain_ig in domain_groups_after:
                 domain = domain_ig.domain
                 expected_domain_ig = next((ig for ig in expected_domains if ig.domain == domain), None)
                 if expected_domain_ig:
-                    expected_children = expected_domain_ig.children or []
-                    actual_children = domain_ig.children or []
+                    expected_slices = expected_domain_ig.slices or []
+                    actual_slices = domain_ig.slices or []
                     
                     # Compare slice OID references
-                    expected_slice_refs = {c for c in expected_children if isinstance(c, str) and c.startswith('IG.')}
-                    actual_slice_refs = {c for c in actual_children if isinstance(c, str) and c.startswith('IG.')}
+                    expected_slice_refs = {c for c in expected_slices if isinstance(c, str) and c.startswith('IG.')}
+                    actual_slice_refs = {c for c in actual_slices if isinstance(c, str) and c.startswith('IG.')}
                     assert expected_slice_refs == actual_slice_refs, \
-                        f"Domain {domain} children mismatch: expected {expected_slice_refs}, got {actual_slice_refs}"
+                        f"Domain {domain} slices mismatch: expected {expected_slice_refs}, got {actual_slice_refs}"
         else:
             # If expected file doesn't exist, create it for reference
             # (but this shouldn't happen in normal test runs)
@@ -947,7 +947,7 @@ class TestEndToEndPipeline:
         # Verify merge happened
         lb_slices = [
             ig for ig in mdv.itemGroups 
-            if ig.domain == "LB" and ig.type == "DataSpecialization"
+            if ig.domain == "LB" and ig.type == "DatasetSpecialization"
         ]
         assert len(lb_slices) == 1, "Duplicate slices must be merged"
 
@@ -961,7 +961,7 @@ class TestEndToEndPipeline:
         # The two "BASELINE" items should create only one slice
         vs_slices = [
             ig for ig in mdv.itemGroups 
-            if ig.domain == "VS" and ig.type == "DataSpecialization"
+            if ig.domain == "VS" and ig.type == "DatasetSpecialization"
         ]
         
         # Should be exactly one slice (because WhereClauses are identical after normalisation)

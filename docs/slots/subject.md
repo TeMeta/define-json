@@ -29,7 +29,6 @@ Alias: subject
 
 
 
-
 ## Properties
 
 * Range: [IdentifiableElement](../classes/IdentifiableElement.md)
@@ -39,9 +38,7 @@ Alias: subject
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

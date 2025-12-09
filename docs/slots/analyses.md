@@ -29,7 +29,6 @@ Alias: analyses
 
 
 
-
 ## Properties
 
 * Range: [Analysis](../classes/Analysis.md)
@@ -39,9 +38,7 @@ Alias: analyses
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

@@ -12,7 +12,6 @@ _A data cube property that describes additional characteristics or metadata abou
 URI: [odm:class/DataAttribute](https://cdisc.org/odm2/class/DataAttribute)
 
 
-
 ```mermaid
 erDiagram
 DataAttribute {
@@ -336,8 +335,8 @@ RangeCheck ||--}o FormalExpression : "expressions"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -359,7 +358,6 @@ RangeCheck ||--}o FormalExpression : "expressions"
 | self | odm:DataAttribute |
 | native | odm:DataAttribute |
 | exact | qb:AttributeProperty, sdmx:DataAttribute |
-
 
 
 

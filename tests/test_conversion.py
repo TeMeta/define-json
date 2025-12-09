@@ -65,17 +65,17 @@ class TestDefineConversion(unittest.TestCase):
         self.assertGreater(len(item_groups), 0, "Should have ItemGroups")
         
         # Check for domain ItemGroups
-        domain_groups = [ig for ig in item_groups if ig.get('type') not in ['DataSpecialization', 'ValueList']]
+        domain_groups = [ig for ig in item_groups if ig.get('type') not in ['DatasetSpecialization', 'ValueList']]
         
         self.assertGreater(len(domain_groups), 0, "Should have domain ItemGroups")
         
-        # ValueLists are nested as full objects in children arrays, not as top-level ItemGroups
+        # ValueLists are nested as full objects in slices arrays, not as top-level ItemGroups
         # They may also be string references in some cases
-        # Verify children structure (can be string OIDs or full ItemGroup objects)
+        # Verify slices structure (can be string OIDs or full ItemGroup objects)
         for ig in domain_groups:
-            children = ig.get('children', [])
-            if children:
-                for child in children:
+            slices = ig.get('slices', [])
+            if slices:
+                for child in slices:
                     if isinstance(child, str):
                         # String OID reference is valid
                         pass
@@ -193,8 +193,8 @@ class TestDefineConversion(unittest.TestCase):
                 'ItemRef mismatch',  # Expected due to ValueList → ItemGroup restructuring
                 'MetaDataVersion OID mismatch',  # OID might be None in some cases
                 'ItemDef count mismatch',  # Expected due to ValueList restructuring - contextual items moved to slices
-                'ValueList ItemRef count mismatch',  # Expected - ValueLists are nested in children, not referenced
-                'ItemRef_ValueList count mismatch'  # Expected - ValueLists are nested in children, not referenced
+                'ValueList ItemRef count mismatch',  # Expected - ValueLists are nested in slices, not referenced
+                'ItemRef_ValueList count mismatch'  # Expected - ValueLists are nested in slices, not referenced
             ]
             real_errors = [
                 error for error in errors 
@@ -240,34 +240,34 @@ class TestDefineConversion(unittest.TestCase):
         unique_oids = set(all_oids)
         self.assertEqual(len(all_oids), len(unique_oids), "All ItemGroup OIDs should be unique (no redundancy)")
         
-        # Check that children are string references or full objects
+        # Check that slices are string references or full objects
         for ig in item_groups:
-            children = ig.get('children', [])
-            for child in children:
+            slices = ig.get('slices', [])
+            for child in slices:
                 if isinstance(child, str):
                     # String OID reference - should exist in top-level ItemGroups
-                    self.assertIn(child, all_oids, f"Child OID {child} should exist in ItemGroups")
+                    self.assertIn(child, all_oids, f"Slice OID {child} should exist in ItemGroups")
                 elif isinstance(child, dict):
                     # Full ItemGroup object (e.g., nested ValueList)
                     child_oid = child.get('OID')
-                    self.assertIsNotNone(child_oid, "Child ItemGroup should have OID")
-                    # Nested ValueLists don't need to be in top-level list - they're nested in children
+                    self.assertIsNotNone(child_oid, "Slice ItemGroup should have OID")
+                    # Nested ValueLists don't need to be in top-level list - they're nested in slices
                     # Only verify structure, not presence in top-level list
                     child_type = child.get('type')
                     if child_type == 'ValueList':
-                        # ValueLists nested in children are valid - don't require them in top-level
+                        # ValueLists nested in slices are valid - don't require them in top-level
                         pass
                     else:
                         # Other nested ItemGroups should exist in top-level
-                        self.assertIn(child_oid, all_oids, f"Child OID {child_oid} should exist in ItemGroups")
+                        self.assertIn(child_oid, all_oids, f"Slice OID {child_oid} should exist in ItemGroups")
         
         # Check for ValueList ItemGroups - they may be:
         # 1. Top-level ItemGroups with type='ValueList'
-        # 2. Nested in children arrays as full objects
+        # 2. Nested in slices arrays as full objects
         top_level_value_lists = [ig for ig in item_groups if ig.get('type') == 'ValueList']
         nested_value_lists = []
         for ig in item_groups:
-            for child in ig.get('children', []):
+            for child in ig.get('slices', []):
                 if isinstance(child, dict) and child.get('type') == 'ValueList':
                     nested_value_lists.append(child)
         
@@ -277,8 +277,8 @@ class TestDefineConversion(unittest.TestCase):
             self.assertGreater(len(all_value_lists), 0, "If ValueList groups exist, should have at least one")
             # Check that ValueList ItemGroups have proper structure
             for vl in all_value_lists:
-                self.assertIn(vl.get('type'), ['ValueList', 'DataSpecialization'], 
-                             f"ValueLists should have ValueList or DataSpecialization type, got {vl.get('type')}")
+                self.assertIn(vl.get('type'), ['ValueList', 'DatasetSpecialization'], 
+                             f"ValueLists should have ValueList or DatasetSpecialization type, got {vl.get('type')}")
                 self.assertIsNotNone(vl.get('OID'), "ValueLists should have OID")
                 self.assertGreater(len(vl.get('items', [])), 0, "ValueLists should have items")
     

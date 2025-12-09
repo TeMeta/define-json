@@ -29,7 +29,6 @@ Alias: recalled
 
 
 
-
 ## Properties
 
 * Range: [Boolean](../types/Boolean.md)
@@ -37,9 +36,7 @@ Alias: recalled
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

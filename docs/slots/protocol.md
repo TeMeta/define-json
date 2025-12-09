@@ -29,7 +29,6 @@ Alias: protocol
 
 
 
-
 ## Properties
 
 * Range: NONE
@@ -37,9 +36,7 @@ Alias: protocol
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

@@ -30,7 +30,6 @@ Alias: studyOID
 
 
 
-
 ## Properties
 
 * Range: [String](../types/String.md)
@@ -40,9 +39,7 @@ Alias: studyOID
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

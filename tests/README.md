@@ -27,7 +27,7 @@ make test
 - **`test_json_to_xml_conversion`** - JSON → XML conversion with XML structure validation
 - **`test_roundtrip_validation`** - Complete XML → JSON → XML roundtrip validation
 - **`test_xml_to_json_validation`** - XML → JSON semantic equivalence validation
-- **`test_reference_based_structure`** - Reference-based ItemGroup children validation
+- **`test_reference_based_structure`** - Reference-based ItemGroup slices validation
 - **`test_schema_compliance`** - Generated JSON schema compliance validation
 - **`test_clinical_data_preservation`** - Clinical metadata preservation validation
 

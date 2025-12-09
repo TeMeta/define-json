@@ -30,7 +30,6 @@ Alias: creationDateTime
 
 
 
-
 ## Properties
 
 * Range: [Datetime](../types/Datetime.md)
@@ -40,9 +39,7 @@ Alias: creationDateTime
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

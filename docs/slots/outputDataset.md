@@ -29,7 +29,6 @@ Alias: outputDataset
 
 
 
-
 ## Properties
 
 * Range: [Dataset](../classes/Dataset.md)
@@ -39,9 +38,7 @@ Alias: outputDataset
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

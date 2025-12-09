@@ -17,11 +17,10 @@ Alias: conditions
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Condition](../classes/Condition.md) | A reusable, composable, and nestable logical construct allowing for complex expressions. Conditions are most useful when given a meaningful name and linked to Study Definitions. |  no  |
-| [Parameter](../classes/Parameter.md) | A variable element that describes an input used in a formal expression |  no  |
 | [MetaDataVersion](../classes/MetaDataVersion.md) | A container element that represents a given version of a specification, linking to a particular usage context such as a study, dataset, or data collection instrument. |  no  |
+| [Parameter](../classes/Parameter.md) | A variable element that describes an input used in a formal expression |  no  |
 | [WhereClause](../classes/WhereClause.md) | A conditional element that describes the circumstances under which a containing context applies, linking conditions to structures where they are used |  no  |
-
+| [Condition](../classes/Condition.md) | A reusable, composable, and nestable logical construct allowing for complex expressions. Conditions are most useful when given a meaningful name and linked to Study Definitions. |  no  |
 
 
 
@@ -35,9 +34,7 @@ Alias: conditions
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

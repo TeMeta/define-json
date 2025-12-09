@@ -30,7 +30,6 @@ Alias: keySequence
 
 
 
-
 ## Properties
 
 * Range: [Item](../classes/Item.md)
@@ -40,9 +39,7 @@ Alias: keySequence
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

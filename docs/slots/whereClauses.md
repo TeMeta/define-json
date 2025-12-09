@@ -29,7 +29,6 @@ Alias: whereClauses
 
 
 
-
 ## Properties
 
 * Range: [WhereClause](../classes/WhereClause.md)
@@ -39,9 +38,7 @@ Alias: whereClauses
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

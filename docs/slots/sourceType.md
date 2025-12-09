@@ -29,7 +29,6 @@ Alias: sourceType
 
 
 
-
 ## Properties
 
 * Range: [OriginSource](../enums/OriginSource.md)
@@ -37,9 +36,7 @@ Alias: sourceType
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

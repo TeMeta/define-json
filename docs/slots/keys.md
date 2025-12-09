@@ -29,7 +29,6 @@ Alias: keys
 
 
 
-
 ## Properties
 
 * Range: NONE&nbsp;or&nbsp;<br />[SeriesKey](../classes/SeriesKey.md)&nbsp;or&nbsp;<br />[GroupKey](../classes/GroupKey.md)
@@ -41,9 +40,7 @@ Alias: keys
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

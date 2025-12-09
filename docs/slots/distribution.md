@@ -29,7 +29,6 @@ Alias: distribution
 
 
 
-
 ## Properties
 
 * Range: [Distribution](../classes/Distribution.md)
@@ -39,9 +38,7 @@ Alias: distribution
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

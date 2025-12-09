@@ -12,7 +12,6 @@ _A temporal element that describes the timing of an event or occurrence, which c
 URI: [odm:class/Timing](https://cdisc.org/odm2/class/Timing)
 
 
-
 ```mermaid
 erDiagram
 Timing {
@@ -241,8 +240,8 @@ Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -266,7 +265,6 @@ Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | exact | usdm:Timing |
 | narrow | omop:Observation_period, omop:Drug_era, omop:Condition_era, omop:Procedure_era, fhir:Period, fhir:Age, fhir:Duration |
 | broad | fhir:Timing |
-
 
 
 

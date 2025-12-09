@@ -1,16 +1,16 @@
 
 
-# Slot: children 
+# Slot: slices 
 
 
-_Child ItemGroups nested within this item group (e.g., ValueLists under parent domains). Can be either: - Full ItemGroup objects (preferred for hierarchical nesting) - OID string references (for cross-references to avoid duplication)_
+_Slices are specific subset ItemGroups that belong to, or are used by this ItemGroup_
 
 
 
 
 
-URI: [odm:slot/children](https://cdisc.org/odm2/slot/children)
-Alias: children
+URI: [odm:slot/slices](https://cdisc.org/odm2/slot/slices)
+Alias: slices
 
 <!-- no inheritance hierarchy -->
 
@@ -30,19 +30,16 @@ Alias: children
 
 
 
-
 ## Properties
 
-* Range: [ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[String](../types/String.md)
+* Range: [ItemGroup](../classes/ItemGroup.md)
 
 * Multivalued: True
 
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 
@@ -61,8 +58,8 @@ Alias: children
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:children |
-| native | odm:children |
+| self | odm:slices |
+| native | odm:slices |
 
 
 
@@ -71,13 +68,12 @@ Alias: children
 
 <details>
 ```yaml
-name: children
-description: 'Child ItemGroups nested within this item group (e.g., ValueLists under
-  parent domains). Can be either: - Full ItemGroup objects (preferred for hierarchical
-  nesting) - OID string references (for cross-references to avoid duplication)'
+name: slices
+description: Slices are specific subset ItemGroups that belong to, or are used by
+  this ItemGroup
 from_schema: https://cdisc.org/define-json
 rank: 1000
-alias: children
+alias: slices
 owner: ItemGroup
 domain_of:
 - ItemGroup
@@ -85,9 +81,6 @@ range: ItemGroup
 multivalued: true
 inlined: true
 inlined_as_list: true
-any_of:
-- range: ItemGroup
-- range: string
 
 ```
 </details>

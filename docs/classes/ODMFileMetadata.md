@@ -12,7 +12,6 @@ _A mixin that provides ODM file-level metadata attributes including file identif
 URI: [odm:class/ODMFileMetadata](https://cdisc.org/odm2/class/ODMFileMetadata)
 
 
-
 ```mermaid
 erDiagram
 ODMFileMetadata {
@@ -67,8 +66,8 @@ ODMFileMetadata {
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -89,7 +88,6 @@ ODMFileMetadata {
 | ---  | ---  |
 | self | odm:ODMFileMetadata |
 | native | odm:ODMFileMetadata |
-
 
 
 

@@ -12,7 +12,6 @@ _A variable element that describes an input used in a formal expression_
 URI: [odm:class/Parameter](https://cdisc.org/odm2/class/Parameter)
 
 
-
 ```mermaid
 erDiagram
 Parameter {
@@ -228,8 +227,8 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -250,7 +249,6 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | ---  | ---  |
 | self | odm:Parameter |
 | native | odm:Parameter |
-
 
 
 

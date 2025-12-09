@@ -12,7 +12,6 @@ _A data cube property that describes a measurable quantity or value_
 URI: [odm:class/Measure](https://cdisc.org/odm2/class/Measure)
 
 
-
 ```mermaid
 erDiagram
 Measure {
@@ -332,8 +331,8 @@ RangeCheck ||--}o FormalExpression : "expressions"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -355,7 +354,6 @@ RangeCheck ||--}o FormalExpression : "expressions"
 | self | odm:Measure |
 | native | odm:Measure |
 | exact | qb:MeasureProperty, sdmx:Measure |
-
 
 
 

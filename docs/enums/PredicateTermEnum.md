@@ -7,7 +7,7 @@ _An enumeration that defines short variable relationship linking phrases for pro
 
 
 
-URI: [PredicateTermEnum](../enums/PredicateTermEnum.md)
+URI: [odm:enum/PredicateTermEnum](https://cdisc.org/odm2/enum/PredicateTermEnum)
 
 ## Permissible Values
 
@@ -58,9 +58,7 @@ URI: [PredicateTermEnum](../enums/PredicateTermEnum.md)
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

@@ -7,7 +7,7 @@ _An enumeration that defines the lifecycle stages for a DataProduct_
 
 
 
-URI: [DataProductLifecycleStatus](../enums/DataProductLifecycleStatus.md)
+URI: [odm:enum/DataProductLifecycleStatus](https://cdisc.org/odm2/enum/DataProductLifecycleStatus)
 
 ## Permissible Values
 
@@ -32,9 +32,7 @@ URI: [DataProductLifecycleStatus](../enums/DataProductLifecycleStatus.md)
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

@@ -29,7 +29,6 @@ Alias: datasetType
 
 
 
-
 ## Properties
 
 * Range: NONE
@@ -37,9 +36,7 @@ Alias: datasetType
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

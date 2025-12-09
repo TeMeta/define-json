@@ -25,7 +25,6 @@ Alias: publishedBy
 
 
 
-
 ## Properties
 
 * Range: NONE
@@ -33,9 +32,7 @@ Alias: publishedBy
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

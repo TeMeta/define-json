@@ -7,7 +7,7 @@ _An enumeration that defines the types of comparison operations available for a 
 
 
 
-URI: [Comparator](../enums/Comparator.md)
+URI: [odm:enum/Comparator](https://cdisc.org/odm2/enum/Comparator)
 
 ## Permissible Values
 
@@ -35,9 +35,7 @@ URI: [Comparator](../enums/Comparator.md)
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

@@ -12,7 +12,6 @@ _A container element that represents a given version of a specification, linking
 URI: [odm:class/MetaDataVersion](https://cdisc.org/odm2/class/MetaDataVersion)
 
 
-
 ```mermaid
 erDiagram
 MetaDataVersion {
@@ -535,7 +534,7 @@ Origin ||--}o DocumentReference : "documents"
 RangeCheck ||--}o FormalExpression : "expressions"
 ItemGroup ||--}o Item : "items"
 ItemGroup ||--}o Item : "keySequence"
-ItemGroup ||--}o ItemGroup : "children"
+ItemGroup ||--}o ItemGroup : "slices"
 ItemGroup ||--|o ReifiedConcept : "implementsConcept"
 ItemGroup ||--}o WhereClause : "applicableWhen"
 ItemGroup ||--}o Coding : "security"
@@ -646,8 +645,8 @@ Timing ||--}o Coding : "coding"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -669,7 +668,6 @@ Timing ||--}o Coding : "coding"
 | self | odm:MetaDataVersion |
 | native | odm:MetaDataVersion |
 | close | usdm:StudyDesign |
-
 
 
 

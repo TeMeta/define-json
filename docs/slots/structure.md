@@ -17,10 +17,9 @@ Alias: structure
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Dataflow](../classes/Dataflow.md) | An abstract representation that defines data provision for different reference periods, where a Distribution and its Dataset are instances |  no  |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures |  no  |
+| [Dataflow](../classes/Dataflow.md) | An abstract representation that defines data provision for different reference periods, where a Distribution and its Dataset are instances |  no  |
 | [ItemGroup](../classes/ItemGroup.md) | A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections |  no  |
-
 
 
 
@@ -34,9 +33,7 @@ Alias: structure
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

@@ -29,7 +29,6 @@ Alias: itemGroups
 
 
 
-
 ## Properties
 
 * Range: [ItemGroup](../classes/ItemGroup.md)
@@ -39,9 +38,7 @@ Alias: itemGroups
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

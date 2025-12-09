@@ -385,7 +385,7 @@
               "dataType": "text"
             }
           ],
-          "children": [
+          "slices": [
             {
               "OID": "VL.VS.VSORRES",
               "name": "VL_VS_VSORRES",
@@ -733,7 +733,7 @@
               "dataType": "text"
             }
           ],
-          "children": [
+          "slices": [
             {
               "OID": "VL.LB.LBORRES",
               "name": "VL_LB_LBORRES",

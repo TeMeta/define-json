@@ -97,7 +97,7 @@
             "applicableWhen": ["WC.VS.SYSBP", "WC.VS.DIABP"]
           }
         ],
-        "children": [
+        "slices": [
           {
             "OID": "VL.VS.VSORRES",
             "name": "VL_VS_VSORRES",

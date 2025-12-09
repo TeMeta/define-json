@@ -29,7 +29,6 @@ Alias: other
 
 
 
-
 ## Properties
 
 * Range: [Boolean](../types/Boolean.md)
@@ -37,9 +36,7 @@ Alias: other
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

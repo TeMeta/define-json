@@ -30,7 +30,6 @@ Alias: studyDescription
 
 
 
-
 ## Properties
 
 * Range: [String](../types/String.md)
@@ -38,9 +37,7 @@ Alias: studyDescription
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

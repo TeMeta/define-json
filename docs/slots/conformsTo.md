@@ -25,7 +25,6 @@ Alias: conformsTo
 
 
 
-
 ## Properties
 
 * Range: NONE
@@ -33,9 +32,7 @@ Alias: conformsTo
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

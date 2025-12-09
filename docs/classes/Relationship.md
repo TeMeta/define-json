@@ -12,7 +12,6 @@ _A semantic link that defines connections between elements such as Items or Item
 URI: [odm:class/Relationship](https://cdisc.org/odm2/class/Relationship)
 
 
-
 ```mermaid
 erDiagram
 Relationship {
@@ -88,8 +87,8 @@ IdentifiableElement ||--}o Coding : "coding"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -111,7 +110,6 @@ IdentifiableElement ||--}o Coding : "coding"
 | self | odm:Relationship |
 | native | odm:Relationship |
 | related | sdmx:ConceptSchemeMap |
-
 
 
 

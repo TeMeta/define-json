@@ -17,10 +17,9 @@ Alias: codeList
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
+| [ConceptProperty](../classes/ConceptProperty.md) | A reified property concept that exists within the context of its containing topic concept |  no  |
 | [Item](../classes/Item.md) | A data element that represents a specific piece of information within a defined context, with data type, constraints, and derivation methods |  no  |
 | [Parameter](../classes/Parameter.md) | A variable element that describes an input used in a formal expression |  no  |
-| [ConceptProperty](../classes/ConceptProperty.md) | A reified property concept that exists within the context of its containing topic concept |  no  |
-
 
 
 
@@ -34,9 +33,7 @@ Alias: codeList
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

@@ -29,7 +29,6 @@ Alias: relationships
 
 
 
-
 ## Properties
 
 * Range: [Relationship](../classes/Relationship.md)
@@ -39,9 +38,7 @@ Alias: relationships
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

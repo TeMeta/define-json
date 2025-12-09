@@ -7,7 +7,7 @@ _An enumeration that defines the fundamental data types available for items_
 
 
 
-URI: [DataType](../enums/DataType.md)
+URI: [odm:enum/DataType](https://cdisc.org/odm2/enum/DataType)
 
 ## Permissible Values
 
@@ -38,9 +38,7 @@ URI: [DataType](../enums/DataType.md)
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

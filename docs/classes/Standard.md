@@ -12,7 +12,6 @@ _A collection element that groups related standards within a specific context, u
 URI: [odm:class/Standard](https://cdisc.org/odm2/class/Standard)
 
 
-
 ```mermaid
 erDiagram
 Standard {
@@ -79,8 +78,8 @@ Standard ||--}o Coding : "coding"
 
 
 
-## Identifier and Mapping Information
 
+## Identifier and Mapping Information
 
 
 
@@ -101,7 +100,6 @@ Standard ||--}o Coding : "coding"
 | ---  | ---  |
 | self | odm:Standard |
 | native | odm:Standard |
-
 
 
 

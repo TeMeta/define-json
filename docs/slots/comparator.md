@@ -29,7 +29,6 @@ Alias: comparator
 
 
 
-
 ## Properties
 
 * Range: [Comparator](../enums/Comparator.md)
@@ -37,9 +36,7 @@ Alias: comparator
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

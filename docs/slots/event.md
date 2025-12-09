@@ -29,7 +29,6 @@ Alias: event
 
 
 
-
 ## Properties
 
 * Range: [String](../types/String.md)
@@ -37,9 +36,7 @@ Alias: event
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 

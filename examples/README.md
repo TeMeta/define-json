@@ -10,7 +10,7 @@ This directory contains example files demonstrating different aspects of Define-
 **Demonstrates**:
 - ✅ **Conditions** as separate objects with RangeChecks
 - ✅ **WhereClauses** referencing Conditions by OID string
-- ✅ **ValueLists** nested in `children` arrays (not top-level)
+- ✅ **ValueLists** nested in `slices` arrays (not top-level)
 - ✅ **Items** with `applicableWhen` references to WhereClauses
 - ✅ **CodeLists** with CodeListItems
 - ✅ Basic ItemGroup structure
@@ -19,7 +19,7 @@ This directory contains example files demonstrating different aspects of Define-
 - Conditions define logical checks (e.g., `VSTESTCD EQ "SYSBP"`)
 - WhereClauses combine Conditions (using AND logic)
 - Items reference WhereClauses via `applicableWhen` (using OR logic)
-- ValueLists group context-specific items and are nested in parent ItemGroup's `children`
+- ValueLists group context-specific items and are nested in parent ItemGroup's `slices`
 
 **Usage**:
 ```python

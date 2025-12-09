@@ -114,8 +114,8 @@ def run_roundtrip_test(original_xml_path: Path, converted_json_path: Path) -> Di
     
     # Count domain ItemGroups and ValueList ItemGroups separately - handle both formats
     all_item_groups = json_data.get('itemGroups', []) or json_data.get('Datasets', [])
-    domain_item_groups = [ig for ig in all_item_groups if ig.get('type') != 'DataSpecialization']
-    value_list_item_groups = [ig for ig in all_item_groups if ig.get('type') == 'DataSpecialization']
+    domain_item_groups = [ig for ig in all_item_groups if ig.get('type') != 'DatasetSpecialization']
+    value_list_item_groups = [ig for ig in all_item_groups if ig.get('type') == 'DatasetSpecialization']
     
     # Handle both field name formats
     items = json_data.get('items', []) or json_data.get('Variables', [])

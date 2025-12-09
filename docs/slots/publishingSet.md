@@ -29,7 +29,6 @@ Alias: publishingSet
 
 
 
-
 ## Properties
 
 * Range: [PublishingSet](../enums/PublishingSet.md)
@@ -37,9 +36,7 @@ Alias: publishingSet
 
 
 
-
 ## Identifier and Mapping Information
-
 
 
 
