@@ -19,6 +19,7 @@ CodeList {
     string formatName  
     string version  
     string href  
+    boolean isNonStandard  
     string OID  
     string uuid  
     string name  
@@ -68,6 +69,18 @@ Coding {
     string codeSystemVersion  
     AliasPredicate aliasType  
 }
+Standard {
+    StandardName name  
+    StandardType type  
+    PublishingSet publishingSet  
+    string version  
+    StandardStatus status  
+    string OID  
+    string uuid  
+    string description  
+    string label  
+    stringList aliases  
+}
 Resource {
     string resourceType  
     string attribute  
@@ -102,6 +115,7 @@ CodeListItem {
 
 CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
+CodeList ||--|o Standard : "standard"
 CodeList ||--}o Coding : "coding"
 CodeList ||--}o Comment : "comments"
 CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -112,6 +126,7 @@ Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 Comment ||--}o Comment : "comments"
 Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Standard ||--}o Coding : "coding"
 Resource ||--}o FormalExpression : "selection"
 Resource ||--}o Coding : "coding"
 FormalExpression ||--}o Parameter : "parameters"
@@ -127,7 +142,7 @@ CodeListItem ||--|o Coding : "coding"
 
 ## Inheritance
 * [GovernedElement](../classes/GovernedElement.md) [ [Identifiable](../classes/Identifiable.md) [Labelled](../classes/Labelled.md) [Governed](../classes/Governed.md)]
-    * **CodeList** [ [Versioned](../classes/Versioned.md)]
+    * **CodeList** [ [Versioned](../classes/Versioned.md) [IsODMStandard](../classes/IsODMStandard.md)]
 
 
 
@@ -141,6 +156,8 @@ CodeListItem ||--|o Coding : "coding"
 | [externalCodeList](../slots/externalCodeList.md) | 0..1 <br/> [Resource](../classes/Resource.md) | Reference to a code list that is defined externally to this study | direct |
 | [version](../slots/version.md) | 0..1 <br/> [String](../types/String.md) | The version of the external resources | [Versioned](../classes/Versioned.md) |
 | [href](../slots/href.md) | 0..1 <br/> [String](../types/String.md) | Machine-readable instructions to obtain the resource e.g. FHIR path, URL | [Versioned](../classes/Versioned.md) |
+| [standard](../slots/standard.md) | 0..1 <br/> [Standard](../classes/Standard.md) | Reference to the standard being implemented | [IsODMStandard](../classes/IsODMStandard.md) |
+| [isNonStandard](../slots/isNonStandard.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | One or more members of this set are non-standard extensions | [IsODMStandard](../classes/IsODMStandard.md) |
 | [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
 | [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
 | [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
@@ -261,6 +278,7 @@ narrow_mappings:
 is_a: GovernedElement
 mixins:
 - Versioned
+- IsODMStandard
 attributes:
   dataType:
     name: dataType
@@ -329,6 +347,7 @@ narrow_mappings:
 is_a: GovernedElement
 mixins:
 - Versioned
+- IsODMStandard
 attributes:
   dataType:
     name: dataType
@@ -399,6 +418,26 @@ attributes:
     - Versioned
     range: string
     required: false
+  standard:
+    name: standard
+    description: Reference to the standard being implemented
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    alias: standard
+    owner: CodeList
+    domain_of:
+    - IsODMStandard
+    range: Standard
+  isNonStandard:
+    name: isNonStandard
+    description: One or more members of this set are non-standard extensions
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    alias: isNonStandard
+    owner: CodeList
+    domain_of:
+    - IsODMStandard
+    range: boolean
   OID:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format

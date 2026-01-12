@@ -1,16 +1,16 @@
 
 
-# Slot: profile 
+# Slot: standard 
 
 
-_Profiles this resource claims to conform to_
+_Reference to the standard being implemented_
 
 
 
 
 
-URI: [odm:slot/profile](https://cdisc.org/odm2/slot/profile)
-Alias: profile
+URI: [odm:slot/standard](https://cdisc.org/odm2/slot/standard)
+Alias: standard
 
 <!-- no inheritance hierarchy -->
 
@@ -23,9 +23,9 @@ Alias: profile
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
 | [ItemGroup](../classes/ItemGroup.md) | A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections |  no  |
+| [IsODMStandard](../classes/IsODMStandard.md) | A mixin that provides properties to indicate standards compliance |  no  |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures |  no  |
-| [Dataset](../classes/Dataset.md) | A collection element that groups observations sharing the same dimensionality, expressed as a set of unique dimensions within a Data Product context |  no  |
-| [IsProfile](../classes/IsProfile.md) | A mixin that provides additional metadata for FHIR resources and Data Products, including profiles, security tags, and validity periods |  no  |
+| [CodeList](../classes/CodeList.md) | A value set that defines a discrete collection of permissible values for an item, corresponding to the ODM CodeList construct |  no  |
 
 
 
@@ -34,9 +34,7 @@ Alias: profile
 
 ## Properties
 
-* Range: [String](../types/String.md)
-
-* Multivalued: True
+* Range: [Standard](../classes/Standard.md)
 
 
 
@@ -60,8 +58,8 @@ Alias: profile
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:profile |
-| native | odm:profile |
+| self | odm:standard |
+| native | odm:standard |
 
 
 
@@ -70,16 +68,15 @@ Alias: profile
 
 <details>
 ```yaml
-name: profile
-description: Profiles this resource claims to conform to
+name: standard
+description: Reference to the standard being implemented
 from_schema: https://cdisc.org/define-json
 rank: 1000
-alias: profile
-owner: IsProfile
+alias: standard
+owner: IsODMStandard
 domain_of:
-- IsProfile
-range: string
-multivalued: true
+- IsODMStandard
+range: Standard
 
 ```
 </details>

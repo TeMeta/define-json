@@ -383,6 +383,13 @@
                         "null"
                     ]
                 },
+                "isNonStandard": {
+                    "description": "One or more members of this set are non-standard extensions",
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
                 "label": {
                     "anyOf": [
                         {
@@ -457,6 +464,13 @@
                     },
                     "type": [
                         "array",
+                        "null"
+                    ]
+                },
+                "standard": {
+                    "description": "Reference to the standard being implemented",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -2364,6 +2378,13 @@
                         "null"
                     ]
                 },
+                "hasNoData": {
+                    "description": "Used to indicate that this ItemGroup has no data, e.g. for a manifest.",
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
                 "href": {
                     "description": "Machine-readable instructions to obtain the resource e.g. FHIR path, URL",
                     "type": [
@@ -2375,6 +2396,13 @@
                     "description": "Reference to a abstract concept topic that this item group is a specialization of",
                     "type": [
                         "string",
+                        "null"
+                    ]
+                },
+                "isNonStandard": {
+                    "description": "One or more members of this set are non-standard extensions",
+                    "type": [
+                        "boolean",
                         "null"
                     ]
                 },
@@ -2518,6 +2546,13 @@
                     },
                     "type": [
                         "array",
+                        "null"
+                    ]
+                },
+                "standard": {
+                    "description": "Reference to the standard being implemented",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },
@@ -4207,7 +4242,7 @@
                     ]
                 },
                 "hasNoData": {
-                    "description": "Set to Yes if this is a manifest and there is no data for this item",
+                    "description": "True if this is a manifest and there is no data for this item",
                     "type": [
                         "boolean",
                         "null"
@@ -4536,6 +4571,13 @@
                         "null"
                     ]
                 },
+                "hasNoData": {
+                    "description": "Used to indicate that this ItemGroup has no data, e.g. for a manifest.",
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
                 "href": {
                     "description": "Machine-readable instructions to obtain the resource e.g. FHIR path, URL",
                     "type": [
@@ -4547,6 +4589,13 @@
                     "description": "Reference to a abstract concept topic that this item group is a specialization of",
                     "type": [
                         "string",
+                        "null"
+                    ]
+                },
+                "isNonStandard": {
+                    "description": "One or more members of this set are non-standard extensions",
+                    "type": [
+                        "boolean",
                         "null"
                     ]
                 },
@@ -4681,6 +4730,13 @@
                     },
                     "type": [
                         "array",
+                        "null"
+                    ]
+                },
+                "standard": {
+                    "description": "Reference to the standard being implemented",
+                    "type": [
+                        "string",
                         "null"
                     ]
                 },

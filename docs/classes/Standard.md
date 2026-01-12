@@ -71,7 +71,11 @@ Standard ||--}o Coding : "coding"
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
+| [IsODMStandard](../classes/IsODMStandard.md) | [standard](../slots/standard.md) | range | [Standard](../classes/Standard.md) |
 | [MetaDataVersion](../classes/MetaDataVersion.md) | [standards](../slots/standards.md) | range | [Standard](../classes/Standard.md) |
+| [ItemGroup](../classes/ItemGroup.md) | [standard](../slots/standard.md) | range | [Standard](../classes/Standard.md) |
+| [CodeList](../classes/CodeList.md) | [standard](../slots/standard.md) | range | [Standard](../classes/Standard.md) |
+| [DataStructureDefinition](../classes/DataStructureDefinition.md) | [standard](../slots/standard.md) | range | [Standard](../classes/Standard.md) |
 
 
 
@@ -100,6 +104,7 @@ Standard ||--}o Coding : "coding"
 | ---  | ---  |
 | self | odm:Standard |
 | native | odm:Standard |
+| exact | odm:Standard |
 
 
 
@@ -118,6 +123,8 @@ name: Standard
 description: A collection element that groups related standards within a specific
   context, used for defining CDISC implementation guides and controlled terminologies
 from_schema: https://cdisc.org/define-json
+exact_mappings:
+- odm:Standard
 is_a: IdentifiableElement
 attributes:
   name:
@@ -176,6 +183,8 @@ name: Standard
 description: A collection element that groups related standards within a specific
   context, used for defining CDISC implementation guides and controlled terminologies
 from_schema: https://cdisc.org/define-json
+exact_mappings:
+- odm:Standard
 is_a: IdentifiableElement
 attributes:
   name:

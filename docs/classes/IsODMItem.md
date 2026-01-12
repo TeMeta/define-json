@@ -97,6 +97,7 @@ CodeList {
     string formatName  
     string version  
     string href  
+    boolean isNonStandard  
     string OID  
     string uuid  
     string name  
@@ -108,6 +109,18 @@ CodeList {
     datetime lastUpdated  
     string owner  
     string wasDerivedFrom  
+}
+Standard {
+    StandardName name  
+    StandardType type  
+    PublishingSet publishingSet  
+    string version  
+    StandardStatus status  
+    string OID  
+    string uuid  
+    string description  
+    string label  
+    stringList aliases  
 }
 Resource {
     string resourceType  
@@ -152,9 +165,11 @@ FormalExpression ||--}o Coding : "coding"
 RangeCheck ||--}o FormalExpression : "expressions"
 CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
+CodeList ||--|o Standard : "standard"
 CodeList ||--}o Coding : "coding"
 CodeList ||--}o Comment : "comments"
 CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Standard ||--}o Coding : "coding"
 Resource ||--}o FormalExpression : "selection"
 Resource ||--}o Coding : "coding"
 CodeListItem ||--|o Coding : "coding"
@@ -172,7 +187,7 @@ CodeListItem ||--|o Coding : "coding"
 | ---  | --- | --- | --- |
 | [role](../slots/role.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Identifies the role of the item within the containing context, taken from the roleCodeList | direct |
 | [roleCodeList](../slots/roleCodeList.md) | 0..1 <br/> [CodeList](../classes/CodeList.md) | Reference to the CodeList that defines the roles for this item | direct |
-| [hasNoData](../slots/hasNoData.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Set to Yes if this is a manifest and there is no data for this item | direct |
+| [hasNoData](../slots/hasNoData.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | True if this is a manifest and there is no data for this item | direct |
 | [crfCompletionInstructions](../slots/crfCompletionInstructions.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | CRFCompletionInstructions reference: Instructions for the clinical site on how to enter collected information on the CRF | direct |
 | [cdiscNotes](../slots/cdiscNotes.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | CDISCNotes reference: Explanatory text for the variable | direct |
 | [implementationNotes](../slots/implementationNotes.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | ImplementationNotes reference: Further information, such as rationale and implementation instructions, on how to implement the CRF data collection fields | direct |
@@ -259,11 +274,12 @@ attributes:
     range: CodeList
   hasNoData:
     name: hasNoData
-    description: Set to Yes if this is a manifest and there is no data for this item
+    description: True if this is a manifest and there is no data for this item
     from_schema: https://cdisc.org/define-json
     rank: 1000
     domain_of:
     - IsODMItem
+    - ItemGroup
     range: boolean
   crfCompletionInstructions:
     name: crfCompletionInstructions
@@ -358,13 +374,14 @@ attributes:
     range: CodeList
   hasNoData:
     name: hasNoData
-    description: Set to Yes if this is a manifest and there is no data for this item
+    description: True if this is a manifest and there is no data for this item
     from_schema: https://cdisc.org/define-json
     rank: 1000
     alias: hasNoData
     owner: IsODMItem
     domain_of:
     - IsODMItem
+    - ItemGroup
     range: boolean
   crfCompletionInstructions:
     name: crfCompletionInstructions

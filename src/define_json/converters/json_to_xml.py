@@ -1775,14 +1775,18 @@ class DefineJSONToXMLConverter:
                 if item.get('method'):
                     item_ref.set('MethodOID', item['method'])
                 
-                # def:HasNoData - from item metadata
-                xml_metadata = getattr(self, '_current_xml_metadata', {})
-                item_group_supp = xml_metadata.get('itemGroupSupplemental', {})
-                item_origin_metadata = item_group_supp.get('_itemOriginMetadata', {})
-                item_metadata = item_origin_metadata.get(item_oid, {})
-                has_no_data = item_metadata.get('hasNoData')
+                # def:HasNoData - yesonly
+                has_no_data = item.get('hasNoData')
                 if has_no_data and def_ns:
-                    item_ref.set(f'{{{def_ns}}}HasNoData', has_no_data)
+                    xml_value = item.get('hasNoDataXmlValue', 'Yes')
+                    item_ref.set(f'{{{def_ns}}}HasNoData', xml_value)
+                elif def_ns:
+                    xml_metadata = getattr(self, '_current_xml_metadata', {})
+                    item_group_supp = xml_metadata.get('itemGroupSupplemental', {})
+                    item_origin_metadata = item_group_supp.get('_itemOriginMetadata', {})
+                    item_metadata = item_origin_metadata.get(item_oid, {})
+                    if item_metadata.get('hasNoData') == 'Yes':
+                        item_ref.set(f'{{{def_ns}}}HasNoData', item_metadata['hasNoData'])
                 
                 # WhereClauseRef (from whereClauseOID or applicableWhen)
                 where_clause_oid = item.get('whereClauseOID')
@@ -1829,15 +1833,32 @@ class DefineJSONToXMLConverter:
                 # def:CommentOID - from supplemental
                 if merged_ds.get('commentOID'):
                     ig_elem.set(f'{{{def_ns}}}CommentOID', merged_ds['commentOID'])
-                # def:StandardOID - from supplemental
-                if merged_ds.get('standardOID'):
+                
+                # def:StandardOID from native field or supplemental
+                standard = merged_ds.get('standard')
+                if standard:
+                    if isinstance(standard, dict) and standard.get('OID'):
+                        standard_oid = standard['OID']
+                    elif isinstance(standard, str):
+                        standard_oid = standard
+                    else:
+                        standard_oid = None
+                    if standard_oid:
+                        ig_elem.set(f'{{{def_ns}}}StandardOID', standard_oid)
+                elif merged_ds.get('standardOID'):
                     ig_elem.set(f'{{{def_ns}}}StandardOID', merged_ds['standardOID'])
-                # def:IsNonStandard - from supplemental
-                if merged_ds.get('isNonStandard'):
-                    ig_elem.set(f'{{{def_ns}}}IsNonStandard', merged_ds['isNonStandard'])
-                # def:HasNoData - from supplemental
-                if merged_ds.get('hasNoData'):
-                    ig_elem.set(f'{{{def_ns}}}HasNoData', merged_ds['hasNoData'])
+                
+                # def:IsNonStandard - yesonly
+                is_non_standard = merged_ds.get('isNonStandard')
+                if is_non_standard:
+                    xml_value = merged_ds.get('isNonStandardXmlValue', 'Yes')
+                    ig_elem.set(f'{{{def_ns}}}IsNonStandard', xml_value)
+                
+                # def:HasNoData - yesonly
+                has_no_data = merged_ds.get('hasNoData')
+                if has_no_data:
+                    xml_value = merged_ds.get('hasNoDataXmlValue', 'Yes')
+                    ig_elem.set(f'{{{def_ns}}}HasNoData', xml_value)
             
             # Write Comment attribute - prefer native comments array, fall back to supplemental
             if merged_ds.get('comments') and len(merged_ds['comments']) > 0:
@@ -1940,14 +1961,19 @@ class DefineJSONToXMLConverter:
         if method_oid:
             item_ref.set('MethodOID', method_oid)
         
-        # def:HasNoData - from item metadata
-        xml_metadata = getattr(self, '_current_xml_metadata', {})
-        item_group_supp = xml_metadata.get('itemGroupSupplemental', {})
-        item_origin_metadata = item_group_supp.get('_itemOriginMetadata', {})
-        item_metadata = item_origin_metadata.get(item_oid, {})
-        has_no_data = item_metadata.get('hasNoData')
-        if has_no_data and def_ns:
-            item_ref.set(f'{{{def_ns}}}HasNoData', has_no_data)
+        # def:HasNoData - yesonly
+        has_no_data = item.get('hasNoData')
+        if has_no_data:
+            xml_value = item.get('hasNoDataXmlValue', 'Yes')
+            if def_ns:
+                item_ref.set(f'{{{def_ns}}}HasNoData', xml_value)
+        elif def_ns:
+            xml_metadata = getattr(self, '_current_xml_metadata', {})
+            item_group_supp = xml_metadata.get('itemGroupSupplemental', {})
+            item_origin_metadata = item_group_supp.get('_itemOriginMetadata', {})
+            item_metadata = item_origin_metadata.get(item_oid, {})
+            if item_metadata.get('hasNoData') == 'Yes':
+                item_ref.set(f'{{{def_ns}}}HasNoData', item_metadata['hasNoData'])
         
         # WhereClauseRef (from whereClauseOID or applicableWhen)
         where_clause_oid = item.get('whereClauseOID')
@@ -2235,15 +2261,29 @@ class DefineJSONToXMLConverter:
             
             # Add def: namespaced attributes from supplemental
             if def_ns:
-                # def:StandardOID
-                if cl_supp.get('standardOID'):
+                # def:StandardOID from native field or supplemental
+                standard = cl.get('standard')
+                if standard:
+                    if isinstance(standard, dict) and standard.get('OID'):
+                        standard_oid = standard['OID']
+                    elif isinstance(standard, str):
+                        standard_oid = standard
+                    else:
+                        standard_oid = None
+                    if standard_oid:
+                        cl_elem.set(f'{{{def_ns}}}StandardOID', standard_oid)
+                elif cl_supp.get('standardOID'):
                     cl_elem.set(f'{{{def_ns}}}StandardOID', cl_supp['standardOID'])
+                
                 # def:CommentOID
                 if cl_supp.get('commentOID'):
                     cl_elem.set(f'{{{def_ns}}}CommentOID', cl_supp['commentOID'])
-                # def:IsNonStandard
-                if cl_supp.get('isNonStandard'):
-                    cl_elem.set(f'{{{def_ns}}}IsNonStandard', cl_supp['isNonStandard'])
+                
+                # def:IsNonStandard - yesonly
+                is_non_standard = cl.get('isNonStandard')
+                if is_non_standard:
+                    xml_value = cl_supp.get('isNonStandardXmlValue', 'Yes')
+                    cl_elem.set(f'{{{def_ns}}}IsNonStandard', xml_value)
             
             # SASFormatName attribute
             if cl_supp.get('sasFormatName'):

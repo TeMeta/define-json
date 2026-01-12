@@ -19,8 +19,10 @@ ItemGroup {
     string structure  
     boolean isReferenceData  
     ItemGroupType type  
+    boolean hasNoData  
     stringList profile  
     string authenticator  
+    boolean isNonStandard  
     string OID  
     string uuid  
     string name  
@@ -71,6 +73,18 @@ Coding {
     string codeSystem  
     string codeSystemVersion  
     AliasPredicate aliasType  
+}
+Standard {
+    StandardName name  
+    StandardType type  
+    PublishingSet publishingSet  
+    string version  
+    StandardStatus status  
+    string OID  
+    string uuid  
+    string description  
+    string label  
+    stringList aliases  
 }
 Timing {
     TimingType type  
@@ -202,6 +216,7 @@ CodeList {
     string formatName  
     string version  
     string href  
+    boolean isNonStandard  
     string OID  
     string uuid  
     string name  
@@ -233,6 +248,7 @@ ItemGroup ||--|o ReifiedConcept : "implementsConcept"
 ItemGroup ||--}o WhereClause : "applicableWhen"
 ItemGroup ||--}o Coding : "security"
 ItemGroup ||--|o Timing : "validityPeriod"
+ItemGroup ||--|o Standard : "standard"
 ItemGroup ||--}o Coding : "coding"
 ItemGroup ||--}o Comment : "comments"
 ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -243,6 +259,7 @@ Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 Comment ||--}o Comment : "comments"
 Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Standard ||--}o Coding : "coding"
 Timing ||--|o NominalOccurrence : "relativeTo"
 Timing ||--|o NominalOccurrence : "relativeFrom"
 Timing ||--|o Method : "imputation"
@@ -289,6 +306,7 @@ Item ||--}o Comment : "comments"
 Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
+CodeList ||--|o Standard : "standard"
 CodeList ||--}o Coding : "coding"
 CodeList ||--}o Comment : "comments"
 CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -303,7 +321,7 @@ RangeCheck ||--}o FormalExpression : "expressions"
 
 ## Inheritance
 * [GovernedElement](../classes/GovernedElement.md) [ [Identifiable](../classes/Identifiable.md) [Labelled](../classes/Labelled.md) [Governed](../classes/Governed.md)]
-    * **ItemGroup** [ [IsProfile](../classes/IsProfile.md)]
+    * **ItemGroup** [ [IsProfile](../classes/IsProfile.md) [IsODMStandard](../classes/IsODMStandard.md)]
         * [DataStructureDefinition](../classes/DataStructureDefinition.md)
 
 
@@ -321,10 +339,13 @@ RangeCheck ||--}o FormalExpression : "expressions"
 | [slices](../slots/slices.md) | * <br/> [ItemGroup](../classes/ItemGroup.md) | Slices are specific subset ItemGroups that belong to, or are used by this ItemGroup | direct |
 | [implementsConcept](../slots/implementsConcept.md) | 0..1 <br/> [ReifiedConcept](../classes/ReifiedConcept.md) | Reference to a abstract concept topic that this item group is a specialization of | direct |
 | [applicableWhen](../slots/applicableWhen.md) | * <br/> [WhereClause](../classes/WhereClause.md) | References to different situations that define when this item applies.<br>Multiple whereClauses are combined with OR logic: the item applies if ANY referenced WhereClause matches.<br>Within each WhereClause, conditions are combined with AND logic: all conditions must be true.<br><br>Example: whereClause: ["WC.SYSBP", "WC.DIABP"] means the item applies when<br>(all conditions in WC.SYSBP are true) OR (all conditions in WC.DIABP are true). | direct |
+| [hasNoData](../slots/hasNoData.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Used to indicate that this ItemGroup has no data, e.g. for a manifest. | direct |
 | [profile](../slots/profile.md) | * <br/> [String](../types/String.md) | Profiles this resource claims to conform to | [IsProfile](../classes/IsProfile.md) |
 | [security](../slots/security.md) | * <br/> [Coding](../classes/Coding.md) | Security tags applied to this resource | [IsProfile](../classes/IsProfile.md) |
 | [authenticator](../slots/authenticator.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Who/what authenticated the resource | [IsProfile](../classes/IsProfile.md) |
 | [validityPeriod](../slots/validityPeriod.md) | 0..1 <br/> [Timing](../classes/Timing.md) | Time period during which the resouce is valid | [IsProfile](../classes/IsProfile.md) |
+| [standard](../slots/standard.md) | 0..1 <br/> [Standard](../classes/Standard.md) | Reference to the standard being implemented | [IsODMStandard](../classes/IsODMStandard.md) |
+| [isNonStandard](../slots/isNonStandard.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | One or more members of this set are non-standard extensions | [IsODMStandard](../classes/IsODMStandard.md) |
 | [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
 | [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
 | [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
@@ -449,6 +470,7 @@ narrow_mappings:
 is_a: GovernedElement
 mixins:
 - IsProfile
+- IsODMStandard
 attributes:
   domain:
     name: domain
@@ -575,6 +597,14 @@ attributes:
     range: WhereClause
     multivalued: true
     inlined: false
+  hasNoData:
+    name: hasNoData
+    description: Used to indicate that this ItemGroup has no data, e.g. for a manifest.
+    from_schema: https://cdisc.org/define-json
+    domain_of:
+    - IsODMItem
+    - ItemGroup
+    range: boolean
 
 ```
 </details>
@@ -609,6 +639,7 @@ narrow_mappings:
 is_a: GovernedElement
 mixins:
 - IsProfile
+- IsODMStandard
 attributes:
   domain:
     name: domain
@@ -753,6 +784,16 @@ attributes:
     range: WhereClause
     multivalued: true
     inlined: false
+  hasNoData:
+    name: hasNoData
+    description: Used to indicate that this ItemGroup has no data, e.g. for a manifest.
+    from_schema: https://cdisc.org/define-json
+    alias: hasNoData
+    owner: ItemGroup
+    domain_of:
+    - IsODMItem
+    - ItemGroup
+    range: boolean
   profile:
     name: profile
     description: Profiles this resource claims to conform to
@@ -803,6 +844,26 @@ attributes:
     - IsProfile
     range: Timing
     required: false
+  standard:
+    name: standard
+    description: Reference to the standard being implemented
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    alias: standard
+    owner: ItemGroup
+    domain_of:
+    - IsODMStandard
+    range: Standard
+  isNonStandard:
+    name: isNonStandard
+    description: One or more members of this set are non-standard extensions
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    alias: isNonStandard
+    owner: ItemGroup
+    domain_of:
+    - IsODMStandard
+    range: boolean
   OID:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format

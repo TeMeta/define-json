@@ -18,7 +18,7 @@ prefixes:
   prov: http://www.w3.org/ns/prov#
   dcat: http://www.w3.org/ns/dcat#
   osb: https://openstudybuilder.com/
-  dct: http://purl.org/dc/terms/
+  dcterms: http://purl.org/dc/terms/
 default_prefix: odm
 
 imports:
@@ -235,7 +235,7 @@ classes:
         range: CodeList
       hasNoData:
         description: >-
-          Set to Yes if this is a manifest and there is no data for this item
+          True if this is a manifest and there is no data for this item
         range: boolean
       crfCompletionInstructions:
         any_of:
@@ -265,6 +265,18 @@ classes:
         any_of:
           - range: string
           - range: TranslatedText
+
+  IsODMStandard:
+    description: >-
+      A mixin that provides properties to indicate standards compliance
+    mixin: true
+    attributes:
+      standard:
+        description: Reference to the standard being implemented
+        range: Standard
+      isNonStandard:
+        description: One or more members of this set are non-standard extensions
+        range: boolean
 
   ODMFileMetadata:
     description: >-
@@ -550,6 +562,7 @@ classes:
     is_a: GovernedElement
     mixins:
       - IsProfile
+      - IsODMStandard
     attributes:
       domain:
         description: >-
@@ -617,6 +630,10 @@ classes:
         inlined: false
         close_mappings:
           - fhir:StructureDefinition/context
+      hasNoData:
+        description: >-
+          Used to indicate that this ItemGroup has no data, e.g. for a manifest.
+        range: boolean
 
   Relationship:
     description: >-
@@ -691,6 +708,7 @@ classes:
     is_a: GovernedElement
     mixins:
       - Versioned
+      - IsODMStandard
     attributes:
       dataType:
         description: >-
@@ -1323,6 +1341,8 @@ classes:
   Standard:
     description: >-
       A collection element that groups related standards within a specific context, used for defining CDISC implementation guides and controlled terminologies
+    exact_mappings:
+      - odm:Standard
     is_a: IdentifiableElement
     attributes:
       name:
@@ -1487,58 +1507,6 @@ classes:
         range: Condition
         multivalued: true
 
-  # Illustrating relative level of detail in FHIR
-  # IsFHIRDocument:
-  #   mixin: true
-  #   attributes:
-  #     status:
-  #       description: The status of this reference (current | superseded | entered-in-error)
-  #       range: string
-  #       required: false
-  #   attributes:
-  #     contentType:
-  #       description: MIME type of the document
-  #       range: string
-  #       required: false
-  #     language:
-  #       description: The human language of the content
-  #       range: string
-  #       required: false
-  #     size:
-  #       description: Size of the document in bytes
-  #       range: integer
-  #       required: false
-  #     hash:
-  #       description: Hash of document content for integrity verification
-  #       range: string
-  #       required: false
-  #     resourceType:
-  #       description: Indicates the FHIR resource type (typically "DocumentReference")
-  #       range: string
-  #       required: false
-  #     creationContext:
-  #       description: Clinical context in which the document was created
-  #       range: string
-  #       required: false
-  #     docStatus:
-  #       description: Status of the underlying document (preliminary | final | amended | entered-in-error)
-  #       range: string
-  #       required: false
-  #     category:
-  #       description: Categorization of document (e.g., clinical, administrative)
-  #       range: string
-  #       multivalued: true
-  #       required: false
-
-  # FHIRDocument:
-  #   is_a: DocumentReference
-  #   mixins:
-  #     - Identifiable
-  #     - labelled
-  #     - Governed
-  #     - IsProfile
-  #     - IsFHIRDocument
-
   # New classes for Data Cube, Analysis Concept, and DTA governance
   DataStructureDefinition:
     description: >-
@@ -1687,7 +1655,7 @@ classes:
       conformsTo:
         description: Specification or standard that this dataset conforms to
         close_mappings:
-          - dct:conformsTo
+          - dcterms:conformsTo
       hasPolicy:
         description: Access or usage policy applied to this dataset
         multivalued: true
@@ -1804,7 +1772,6 @@ classes:
         inlined_as_list: true
 
   # How a dataset is constructed, by attaching attributes to dimensions and measures at different levels
-  # @Lex how do these relationships relate to SDTM DSS relationships?
   MeasureRelationship:
     description: >-
       A relationship element that associates a DataAttribute with a Measure

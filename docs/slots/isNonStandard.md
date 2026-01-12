@@ -1,16 +1,16 @@
 
 
-# Slot: profile 
+# Slot: isNonStandard 
 
 
-_Profiles this resource claims to conform to_
+_One or more members of this set are non-standard extensions_
 
 
 
 
 
-URI: [odm:slot/profile](https://cdisc.org/odm2/slot/profile)
-Alias: profile
+URI: [odm:slot/isNonStandard](https://cdisc.org/odm2/slot/isNonStandard)
+Alias: isNonStandard
 
 <!-- no inheritance hierarchy -->
 
@@ -23,9 +23,9 @@ Alias: profile
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
 | [ItemGroup](../classes/ItemGroup.md) | A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections |  no  |
+| [IsODMStandard](../classes/IsODMStandard.md) | A mixin that provides properties to indicate standards compliance |  no  |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures |  no  |
-| [Dataset](../classes/Dataset.md) | A collection element that groups observations sharing the same dimensionality, expressed as a set of unique dimensions within a Data Product context |  no  |
-| [IsProfile](../classes/IsProfile.md) | A mixin that provides additional metadata for FHIR resources and Data Products, including profiles, security tags, and validity periods |  no  |
+| [CodeList](../classes/CodeList.md) | A value set that defines a discrete collection of permissible values for an item, corresponding to the ODM CodeList construct |  no  |
 
 
 
@@ -34,9 +34,7 @@ Alias: profile
 
 ## Properties
 
-* Range: [String](../types/String.md)
-
-* Multivalued: True
+* Range: [Boolean](../types/Boolean.md)
 
 
 
@@ -60,8 +58,8 @@ Alias: profile
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:profile |
-| native | odm:profile |
+| self | odm:isNonStandard |
+| native | odm:isNonStandard |
 
 
 
@@ -70,16 +68,15 @@ Alias: profile
 
 <details>
 ```yaml
-name: profile
-description: Profiles this resource claims to conform to
+name: isNonStandard
+description: One or more members of this set are non-standard extensions
 from_schema: https://cdisc.org/define-json
 rank: 1000
-alias: profile
-owner: IsProfile
+alias: isNonStandard
+owner: IsODMStandard
 domain_of:
-- IsProfile
-range: string
-multivalued: true
+- IsODMStandard
+range: boolean
 
 ```
 </details>

@@ -82,8 +82,8 @@ Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 * **GovernedElement** [ [Identifiable](../classes/Identifiable.md) [Labelled](../classes/Labelled.md) [Governed](../classes/Governed.md)]
     * [MetaDataVersion](../classes/MetaDataVersion.md) [ [ODMFileMetadata](../classes/ODMFileMetadata.md) [StudyMetadata](../classes/StudyMetadata.md)]
     * [Item](../classes/Item.md) [ [IsODMItem](../classes/IsODMItem.md) [Formatted](../classes/Formatted.md)]
-    * [ItemGroup](../classes/ItemGroup.md) [ [IsProfile](../classes/IsProfile.md)]
-    * [CodeList](../classes/CodeList.md) [ [Versioned](../classes/Versioned.md)]
+    * [ItemGroup](../classes/ItemGroup.md) [ [IsProfile](../classes/IsProfile.md) [IsODMStandard](../classes/IsODMStandard.md)]
+    * [CodeList](../classes/CodeList.md) [ [Versioned](../classes/Versioned.md) [IsODMStandard](../classes/IsODMStandard.md)]
     * [Comment](../classes/Comment.md)
     * [ReifiedConcept](../classes/ReifiedConcept.md) [ [Versioned](../classes/Versioned.md)]
     * [ConceptProperty](../classes/ConceptProperty.md)
