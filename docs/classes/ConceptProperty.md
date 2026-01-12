@@ -71,6 +71,7 @@ CodeList {
     string formatName  
     string version  
     string href  
+    boolean isNonStandard  
     string OID  
     string uuid  
     string name  
@@ -82,6 +83,18 @@ CodeList {
     datetime lastUpdated  
     string owner  
     string wasDerivedFrom  
+}
+Standard {
+    StandardName name  
+    StandardType type  
+    PublishingSet publishingSet  
+    string version  
+    StandardStatus status  
+    string OID  
+    string uuid  
+    string description  
+    string label  
+    stringList aliases  
 }
 Resource {
     string resourceType  
@@ -117,9 +130,11 @@ Comment ||--}o Comment : "comments"
 Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
+CodeList ||--|o Standard : "standard"
 CodeList ||--}o Coding : "coding"
 CodeList ||--}o Comment : "comments"
 CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Standard ||--}o Coding : "coding"
 Resource ||--}o FormalExpression : "selection"
 Resource ||--}o Coding : "coding"
 CodeListItem ||--|o Coding : "coding"

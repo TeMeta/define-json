@@ -161,8 +161,10 @@ DataStructureDefinition {
     string structure  
     boolean isReferenceData  
     ItemGroupType type  
+    boolean hasNoData  
     stringList profile  
     string authenticator  
+    boolean isNonStandard  
     string OID  
     string uuid  
     string name  
@@ -240,6 +242,7 @@ DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
 DataStructureDefinition ||--}o WhereClause : "applicableWhen"
 DataStructureDefinition ||--}o Coding : "security"
 DataStructureDefinition ||--|o Timing : "validityPeriod"
+DataStructureDefinition ||--|o Standard : "standard"
 DataStructureDefinition ||--}o Coding : "coding"
 DataStructureDefinition ||--}o Comment : "comments"
 DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"

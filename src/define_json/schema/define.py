@@ -72,8 +72,8 @@ linkml_meta = LinkMLMeta({'default_prefix': 'odm',
      'name': 'Define-JSON',
      'prefixes': {'dcat': {'prefix_prefix': 'dcat',
                            'prefix_reference': 'http://www.w3.org/ns/dcat#'},
-                  'dct': {'prefix_prefix': 'dct',
-                          'prefix_reference': 'http://purl.org/dc/terms/'},
+                  'dcterms': {'prefix_prefix': 'dcterms',
+                              'prefix_reference': 'http://purl.org/dc/terms/'},
                   'dprod': {'prefix_prefix': 'dprod',
                             'prefix_reference': 'https://ekgf.github.io/dprod/'},
                   'fhir': {'prefix_prefix': 'fhir',
@@ -816,7 +816,7 @@ class IsODMItem(ConfiguredBaseModel):
          'any_of': [{'range': 'string'}, {'range': 'TranslatedText'}],
          'domain_of': ['IsODMItem', 'Organization', 'CubeComponent']} })
     roleCodeList: Optional[str] = Field(default=None, description="""Reference to the CodeList that defines the roles for this item""", json_schema_extra = { "linkml_meta": {'alias': 'roleCodeList', 'domain_of': ['IsODMItem']} })
-    hasNoData: Optional[bool] = Field(default=None, description="""Set to Yes if this is a manifest and there is no data for this item""", json_schema_extra = { "linkml_meta": {'alias': 'hasNoData', 'domain_of': ['IsODMItem']} })
+    hasNoData: Optional[bool] = Field(default=None, description="""True if this is a manifest and there is no data for this item""", json_schema_extra = { "linkml_meta": {'alias': 'hasNoData', 'domain_of': ['IsODMItem', 'ItemGroup']} })
     crfCompletionInstructions: Optional[Union[TranslatedText, str]] = Field(default=None, description="""CRFCompletionInstructions reference: Instructions for the clinical site on how to enter collected information on the CRF""", json_schema_extra = { "linkml_meta": {'alias': 'crfCompletionInstructions',
          'any_of': [{'range': 'string'}, {'range': 'TranslatedText'}],
          'domain_of': ['IsODMItem']} })
@@ -830,6 +830,16 @@ class IsODMItem(ConfiguredBaseModel):
     preSpecifiedValue: Optional[Union[TranslatedText, str]] = Field(default=None, description="""Prefill value or a default value for a field that is automatically populated.""", json_schema_extra = { "linkml_meta": {'alias': 'preSpecifiedValue',
          'any_of': [{'range': 'string'}, {'range': 'TranslatedText'}],
          'domain_of': ['IsODMItem']} })
+
+
+class IsODMStandard(ConfiguredBaseModel):
+    """
+    A mixin that provides properties to indicate standards compliance
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://cdisc.org/define-json', 'mixin': True})
+
+    standard: Optional[str] = Field(default=None, description="""Reference to the standard being implemented""", json_schema_extra = { "linkml_meta": {'alias': 'standard', 'domain_of': ['IsODMStandard']} })
+    isNonStandard: Optional[bool] = Field(default=None, description="""One or more members of this set are non-standard extensions""", json_schema_extra = { "linkml_meta": {'alias': 'isNonStandard', 'domain_of': ['IsODMStandard']} })
 
 
 class ODMFileMetadata(ConfiguredBaseModel):
@@ -999,7 +1009,7 @@ Example: whereClause: [\"WC.SYSBP\", \"WC.DIABP\"] means the item applies when
          'any_of': [{'range': 'string'}, {'range': 'TranslatedText'}],
          'domain_of': ['IsODMItem', 'Organization', 'CubeComponent']} })
     roleCodeList: Optional[str] = Field(default=None, description="""Reference to the CodeList that defines the roles for this item""", json_schema_extra = { "linkml_meta": {'alias': 'roleCodeList', 'domain_of': ['IsODMItem']} })
-    hasNoData: Optional[bool] = Field(default=None, description="""Set to Yes if this is a manifest and there is no data for this item""", json_schema_extra = { "linkml_meta": {'alias': 'hasNoData', 'domain_of': ['IsODMItem']} })
+    hasNoData: Optional[bool] = Field(default=None, description="""True if this is a manifest and there is no data for this item""", json_schema_extra = { "linkml_meta": {'alias': 'hasNoData', 'domain_of': ['IsODMItem', 'ItemGroup']} })
     crfCompletionInstructions: Optional[Union[TranslatedText, str]] = Field(default=None, description="""CRFCompletionInstructions reference: Instructions for the clinical site on how to enter collected information on the CRF""", json_schema_extra = { "linkml_meta": {'alias': 'crfCompletionInstructions',
          'any_of': [{'range': 'string'}, {'range': 'TranslatedText'}],
          'domain_of': ['IsODMItem']} })
@@ -1060,7 +1070,7 @@ Example: whereClause: [\"WC.SYSBP\", \"WC.DIABP\"] means the item applies when
          'exact_mappings': ['prov:wasDerivedFrom']} })
 
 
-class ItemGroup(IsProfile, GovernedElement):
+class ItemGroup(IsODMStandard, IsProfile, GovernedElement):
     """
     A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections
     """
@@ -1068,7 +1078,7 @@ class ItemGroup(IsProfile, GovernedElement):
                             'odm:ItemGroupRef',
                             'osb:ActivityInstance'],
          'from_schema': 'https://cdisc.org/define-json',
-         'mixins': ['IsProfile'],
+         'mixins': ['IsProfile', 'IsODMStandard'],
          'narrow_mappings': ['fhir:StructureDefinition',
                              'fhir:ViewDefinition',
                              'fhir:Questionnaire',
@@ -1112,12 +1122,15 @@ Example: whereClause: [\"WC.SYSBP\", \"WC.DIABP\"] means the item applies when
 """, json_schema_extra = { "linkml_meta": {'alias': 'applicableWhen',
          'close_mappings': ['fhir:StructureDefinition/context'],
          'domain_of': ['Item', 'ItemGroup', 'Parameter', 'Analysis']} })
+    hasNoData: Optional[bool] = Field(default=None, description="""Used to indicate that this ItemGroup has no data, e.g. for a manifest.""", json_schema_extra = { "linkml_meta": {'alias': 'hasNoData', 'domain_of': ['IsODMItem', 'ItemGroup']} })
     profile: Optional[list[str]] = Field(default=None, description="""Profiles this resource claims to conform to""", json_schema_extra = { "linkml_meta": {'alias': 'profile', 'domain_of': ['IsProfile']} })
     security: Optional[list[Coding]] = Field(default=None, description="""Security tags applied to this resource""", json_schema_extra = { "linkml_meta": {'alias': 'security', 'domain_of': ['IsProfile']} })
     authenticator: Optional[str] = Field(default=None, description="""Who/what authenticated the resource""", json_schema_extra = { "linkml_meta": {'alias': 'authenticator',
          'any_of': [{'range': 'User'}, {'range': 'Organization'}, {'range': 'string'}],
          'domain_of': ['IsProfile']} })
     validityPeriod: Optional[str] = Field(default=None, description="""Time period during which the resouce is valid""", json_schema_extra = { "linkml_meta": {'alias': 'validityPeriod', 'domain_of': ['IsProfile']} })
+    standard: Optional[str] = Field(default=None, description="""Reference to the standard being implemented""", json_schema_extra = { "linkml_meta": {'alias': 'standard', 'domain_of': ['IsODMStandard']} })
+    isNonStandard: Optional[bool] = Field(default=None, description="""One or more members of this set are non-standard extensions""", json_schema_extra = { "linkml_meta": {'alias': 'isNonStandard', 'domain_of': ['IsODMStandard']} })
     OID: str = Field(default=..., description="""Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.""", json_schema_extra = { "linkml_meta": {'alias': 'OID', 'domain_of': ['Identifiable']} })
     uuid: Optional[str] = Field(default=None, description="""Universal unique identifier""", json_schema_extra = { "linkml_meta": {'alias': 'uuid', 'domain_of': ['Identifiable']} })
     name: Optional[str] = Field(default=None, description="""Short name or identifier, used for field names""", json_schema_extra = { "linkml_meta": {'alias': 'name', 'domain_of': ['Labelled', 'Standard']} })
@@ -1209,14 +1222,14 @@ class TranslatedText(ConfiguredBaseModel):
     translations: Optional[list[Translation]] = Field(default=None, json_schema_extra = { "linkml_meta": {'alias': 'translations', 'domain_of': ['TranslatedText']} })
 
 
-class CodeList(Versioned, GovernedElement):
+class CodeList(IsODMStandard, Versioned, GovernedElement):
     """
     A value set that defines a discrete collection of permissible values for an item, corresponding to the ODM CodeList construct
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'close_mappings': ['skos:Collection', 'sdmx:ItemScheme', 'qb:codeList'],
          'exact_mappings': ['odm:CodeList', 'omop:Vocabulary', 'fhir:ValueSet'],
          'from_schema': 'https://cdisc.org/define-json',
-         'mixins': ['Versioned'],
+         'mixins': ['Versioned', 'IsODMStandard'],
          'narrow_mappings': ['sdmx:Codelist', 'sdmx:ValueList', 'sdmx:ConceptScheme'],
          'related_mappings': ['usdm:BiomedicalConceptProperty/responseCodes']})
 
@@ -1227,6 +1240,8 @@ class CodeList(Versioned, GovernedElement):
     externalCodeList: Optional[str] = Field(default=None, description="""Reference to a code list that is defined externally to this study""", json_schema_extra = { "linkml_meta": {'alias': 'externalCodeList', 'domain_of': ['CodeList']} })
     version: Optional[str] = Field(default=None, description="""The version of the external resources""", json_schema_extra = { "linkml_meta": {'alias': 'version', 'domain_of': ['Versioned', 'Standard']} })
     href: Optional[str] = Field(default=None, description="""Machine-readable instructions to obtain the resource e.g. FHIR path, URL""", json_schema_extra = { "linkml_meta": {'alias': 'href', 'domain_of': ['Versioned']} })
+    standard: Optional[str] = Field(default=None, description="""Reference to the standard being implemented""", json_schema_extra = { "linkml_meta": {'alias': 'standard', 'domain_of': ['IsODMStandard']} })
+    isNonStandard: Optional[bool] = Field(default=None, description="""One or more members of this set are non-standard extensions""", json_schema_extra = { "linkml_meta": {'alias': 'isNonStandard', 'domain_of': ['IsODMStandard']} })
     OID: str = Field(default=..., description="""Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.""", json_schema_extra = { "linkml_meta": {'alias': 'OID', 'domain_of': ['Identifiable']} })
     uuid: Optional[str] = Field(default=None, description="""Universal unique identifier""", json_schema_extra = { "linkml_meta": {'alias': 'uuid', 'domain_of': ['Identifiable']} })
     name: Optional[str] = Field(default=None, description="""Short name or identifier, used for field names""", json_schema_extra = { "linkml_meta": {'alias': 'name', 'domain_of': ['Labelled', 'Standard']} })
@@ -2014,7 +2029,8 @@ class Standard(IdentifiableElement):
     """
     A collection element that groups related standards within a specific context, used for defining CDISC implementation guides and controlled terminologies
     """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://cdisc.org/define-json'})
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'exact_mappings': ['odm:Standard'],
+         'from_schema': 'https://cdisc.org/define-json'})
 
     name: Optional[StandardName] = Field(default=None, description="""Name of a standard""", json_schema_extra = { "linkml_meta": {'alias': 'name', 'domain_of': ['Labelled', 'Standard']} })
     type: Optional[StandardType] = Field(default=None, description="""Type of a standard""", json_schema_extra = { "linkml_meta": {'alias': 'type',
@@ -2265,12 +2281,15 @@ Example: whereClause: [\"WC.SYSBP\", \"WC.DIABP\"] means the item applies when
 """, json_schema_extra = { "linkml_meta": {'alias': 'applicableWhen',
          'close_mappings': ['fhir:StructureDefinition/context'],
          'domain_of': ['Item', 'ItemGroup', 'Parameter', 'Analysis']} })
+    hasNoData: Optional[bool] = Field(default=None, description="""Used to indicate that this ItemGroup has no data, e.g. for a manifest.""", json_schema_extra = { "linkml_meta": {'alias': 'hasNoData', 'domain_of': ['IsODMItem', 'ItemGroup']} })
     profile: Optional[list[str]] = Field(default=None, description="""Profiles this resource claims to conform to""", json_schema_extra = { "linkml_meta": {'alias': 'profile', 'domain_of': ['IsProfile']} })
     security: Optional[list[Coding]] = Field(default=None, description="""Security tags applied to this resource""", json_schema_extra = { "linkml_meta": {'alias': 'security', 'domain_of': ['IsProfile']} })
     authenticator: Optional[str] = Field(default=None, description="""Who/what authenticated the resource""", json_schema_extra = { "linkml_meta": {'alias': 'authenticator',
          'any_of': [{'range': 'User'}, {'range': 'Organization'}, {'range': 'string'}],
          'domain_of': ['IsProfile']} })
     validityPeriod: Optional[str] = Field(default=None, description="""Time period during which the resouce is valid""", json_schema_extra = { "linkml_meta": {'alias': 'validityPeriod', 'domain_of': ['IsProfile']} })
+    standard: Optional[str] = Field(default=None, description="""Reference to the standard being implemented""", json_schema_extra = { "linkml_meta": {'alias': 'standard', 'domain_of': ['IsODMStandard']} })
+    isNonStandard: Optional[bool] = Field(default=None, description="""One or more members of this set are non-standard extensions""", json_schema_extra = { "linkml_meta": {'alias': 'isNonStandard', 'domain_of': ['IsODMStandard']} })
     OID: str = Field(default=..., description="""Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.""", json_schema_extra = { "linkml_meta": {'alias': 'OID', 'domain_of': ['Identifiable']} })
     uuid: Optional[str] = Field(default=None, description="""Universal unique identifier""", json_schema_extra = { "linkml_meta": {'alias': 'uuid', 'domain_of': ['Identifiable']} })
     name: Optional[str] = Field(default=None, description="""Short name or identifier, used for field names""", json_schema_extra = { "linkml_meta": {'alias': 'name', 'domain_of': ['Labelled', 'Standard']} })
@@ -2421,7 +2440,7 @@ class Dataset(IsSdmxDataset, IsProfile, Versioned, IdentifiableElement):
          'domain_of': ['Dataset'],
          'exact_mappings': ['dcat:distribution']} })
     conformsTo: Optional[str] = Field(default=None, description="""Specification or standard that this dataset conforms to""", json_schema_extra = { "linkml_meta": {'alias': 'conformsTo',
-         'close_mappings': ['dct:conformsTo'],
+         'close_mappings': ['dcterms:conformsTo'],
          'domain_of': ['Dataset', 'Distribution']} })
     hasPolicy: Optional[list[str]] = Field(default=None, description="""Access or usage policy applied to this dataset""", json_schema_extra = { "linkml_meta": {'alias': 'hasPolicy', 'domain_of': ['Dataset', 'DataProduct']} })
     informationSensitivityClassification: Optional[str] = Field(default=None, description="""Classification of the dataset's sensitivity or confidentiality""", json_schema_extra = { "linkml_meta": {'alias': 'informationSensitivityClassification', 'domain_of': ['Dataset']} })
@@ -3231,6 +3250,7 @@ Formatted.model_rebuild()
 Versioned.model_rebuild()
 IsProfile.model_rebuild()
 IsODMItem.model_rebuild()
+IsODMStandard.model_rebuild()
 ODMFileMetadata.model_rebuild()
 StudyMetadata.model_rebuild()
 MetaDataVersion.model_rebuild()

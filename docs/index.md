@@ -162,6 +162,7 @@ CodeList {
     string formatName  
     string version  
     string href  
+    boolean isNonStandard  
     string OID  
     string uuid  
     string name  
@@ -173,6 +174,18 @@ CodeList {
     datetime lastUpdated  
     string owner  
     string wasDerivedFrom  
+}
+Standard {
+    StandardName name  
+    StandardType type  
+    PublishingSet publishingSet  
+    string version  
+    StandardStatus status  
+    string OID  
+    string uuid  
+    string description  
+    string label  
+    stringList aliases  
 }
 Resource {
     string resourceType  
@@ -375,8 +388,10 @@ DataStructureDefinition {
     string structure  
     boolean isReferenceData  
     ItemGroupType type  
+    boolean hasNoData  
     stringList profile  
     string authenticator  
+    boolean isNonStandard  
     string OID  
     string uuid  
     string name  
@@ -396,8 +411,10 @@ ItemGroup {
     string structure  
     boolean isReferenceData  
     ItemGroupType type  
+    boolean hasNoData  
     stringList profile  
     string authenticator  
+    boolean isNonStandard  
     string OID  
     string uuid  
     string name  
@@ -509,18 +526,6 @@ Dataflow {
     string owner  
     string wasDerivedFrom  
 }
-Standard {
-    StandardName name  
-    StandardType type  
-    PublishingSet publishingSet  
-    string version  
-    StandardStatus status  
-    string OID  
-    string uuid  
-    string description  
-    string label  
-    stringList aliases  
-}
 Dictionary {
     string publishedBy  
     string version  
@@ -599,9 +604,11 @@ ConceptProperty ||--}o Comment : "comments"
 ConceptProperty ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
+CodeList ||--|o Standard : "standard"
 CodeList ||--}o Coding : "coding"
 CodeList ||--}o Comment : "comments"
 CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Standard ||--}o Coding : "coding"
 Resource ||--}o FormalExpression : "selection"
 Resource ||--}o Coding : "coding"
 FormalExpression ||--}o Parameter : "parameters"
@@ -670,6 +677,7 @@ DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
 DataStructureDefinition ||--}o WhereClause : "applicableWhen"
 DataStructureDefinition ||--}o Coding : "security"
 DataStructureDefinition ||--|o Timing : "validityPeriod"
+DataStructureDefinition ||--|o Standard : "standard"
 DataStructureDefinition ||--}o Coding : "coding"
 DataStructureDefinition ||--}o Comment : "comments"
 DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -680,6 +688,7 @@ ItemGroup ||--|o ReifiedConcept : "implementsConcept"
 ItemGroup ||--}o WhereClause : "applicableWhen"
 ItemGroup ||--}o Coding : "security"
 ItemGroup ||--|o Timing : "validityPeriod"
+ItemGroup ||--|o Standard : "standard"
 ItemGroup ||--}o Coding : "coding"
 ItemGroup ||--}o Comment : "comments"
 ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -724,7 +733,6 @@ Dataflow ||--|o Analysis : "analysisMethod"
 Dataflow ||--}o Coding : "coding"
 Dataflow ||--}o Comment : "comments"
 Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-Standard ||--}o Coding : "coding"
 Dictionary ||--}o Coding : "terms"
 Dictionary ||--}o Coding : "coding"
 Relationship ||--|| IdentifiableElement : "subject"
@@ -791,6 +799,7 @@ IdentifiableElement ||--}o Coding : "coding"
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Timing](classes/Timing.md) | A temporal element that describes the timing of an event or occurrence, which can be absolute, relative, or nominal |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[User](classes/User.md) | An entity that represents information about a specific user of a clinical data collection or data management system |
 | [IsODMItem](classes/IsODMItem.md) | A mixin that provides additional attributes for CDISC Operational Data Model items, including roles, completion instructions, and implementation notes |
+| [IsODMStandard](classes/IsODMStandard.md) | A mixin that provides properties to indicate standards compliance |
 | [IsProfile](classes/IsProfile.md) | A mixin that provides additional metadata for FHIR resources and Data Products, including profiles, security tags, and validity periods |
 | [IsSdmxDataset](classes/IsSdmxDataset.md) | A mixin that provides additional metadata specific to SDMX Datasets |
 | [Labelled](classes/Labelled.md) | A mixin that provides slots for detailing meanings and multilingual descriptions |
@@ -836,12 +845,14 @@ IdentifiableElement ||--}o Coding : "coding"
 | [validityPeriod](slots/validityPeriod.md) | Time period during which the resouce is valid |
 | [role](slots/role.md) | Identifies the role of the item within the containing context, taken from the roleCodeList |
 | [roleCodeList](slots/roleCodeList.md) | Reference to the CodeList that defines the roles for this item |
-| [hasNoData](slots/hasNoData.md) | Set to Yes if this is a manifest and there is no data for this item |
+| [hasNoData](slots/hasNoData.md) | True if this is a manifest and there is no data for this item |
 | [crfCompletionInstructions](slots/crfCompletionInstructions.md) | CRFCompletionInstructions reference: Instructions for the clinical site on how to enter collected information on the CRF |
 | [cdiscNotes](slots/cdiscNotes.md) | CDISCNotes reference: Explanatory text for the variable |
 | [implementationNotes](slots/implementationNotes.md) | ImplementationNotes reference: Further information, such as rationale and implementation instructions, on how to implement the CRF data collection fields |
 | [collectionExceptionCondition](slots/collectionExceptionCondition.md) | Condition that defines when collection may be exempted |
 | [preSpecifiedValue](slots/preSpecifiedValue.md) | Prefill value or a default value for a field that is automatically populated. |
+| [standard](slots/standard.md) | Reference to the standard being implemented |
+| [isNonStandard](slots/isNonStandard.md) | One or more members of this set are non-standard extensions |
 | [fileOID](slots/fileOID.md) | Unique identifier for the ODM file |
 | [asOfDateTime](slots/asOfDateTime.md) | Date and time when the data snapshot was taken |
 | [creationDateTime](slots/creationDateTime.md) | Date and time when the ODM file was created |

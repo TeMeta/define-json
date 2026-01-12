@@ -1184,20 +1184,23 @@ class DefineXMLToJSONConverter:
             if comment_oid:
                 ig_supp['commentOID'] = comment_oid
             
-            # def:StandardOID - preserve for roundtrip
+            # def:StandardOID - native field
             standard_oid = ig_elem.get('{%s}StandardOID' % self.active_namespaces['def'])
             if standard_oid:
+                ig_data['standard'] = standard_oid
                 ig_supp['standardOID'] = standard_oid
             
-            # def:IsNonStandard - preserve for roundtrip
+            # def:IsNonStandard - yesonly boolean
             is_non_standard = ig_elem.get('{%s}IsNonStandard' % self.active_namespaces['def'])
             if is_non_standard:
-                ig_supp['isNonStandard'] = is_non_standard
+                ig_data['isNonStandard'] = is_non_standard.upper() in ['YES', 'Y']
+                ig_supp['isNonStandardXmlValue'] = is_non_standard
             
-            # def:HasNoData - preserve for roundtrip
+            # def:HasNoData - yesonly boolean
             has_no_data = ig_elem.get('{%s}HasNoData' % self.active_namespaces['def'])
             if has_no_data:
-                ig_supp['hasNoData'] = has_no_data
+                ig_data['hasNoData'] = has_no_data.upper() in ['YES', 'Y']
+                ig_supp['hasNoDataXmlValue'] = has_no_data
             
             # Process Alias elements - store as Coding objects
             # Alias with Context/Name maps to Coding (codeSystem=Context, code=Name)
@@ -1443,10 +1446,11 @@ class DefineXMLToJSONConverter:
             if method_oid:
                 item_data['method'] = method_oid
             
-            # def:HasNoData - preserve for roundtrip
+            # def:HasNoData - yesonly boolean
             has_no_data = item_ref.get('{%s}HasNoData' % self.active_namespaces['def'])
             if has_no_data:
-                item_supp['hasNoData'] = has_no_data
+                item_data['hasNoData'] = has_no_data.upper() in ['YES', 'Y']
+                item_supp['hasNoDataXmlValue'] = has_no_data
             
             # KeySequence - now stored at ItemGroup level, not per-item
             # (extracted in _process_domain_item_groups)
@@ -1794,9 +1798,10 @@ class DefineXMLToJSONConverter:
                 cl_data['coding'] = codings
             
             # Extract def: namespaced attributes for roundtrip
-            # def:StandardOID
+            # def:StandardOID - native field
             standard_oid = cl_elem.get('{%s}StandardOID' % self.active_namespaces['def'])
             if standard_oid:
+                cl_data['standard'] = standard_oid
                 cl_supp['standardOID'] = standard_oid
             
             # def:CommentOID
@@ -1804,10 +1809,11 @@ class DefineXMLToJSONConverter:
             if comment_oid:
                 cl_supp['commentOID'] = comment_oid
             
-            # def:IsNonStandard
+            # def:IsNonStandard - yesonly boolean
             is_non_standard = cl_elem.get('{%s}IsNonStandard' % self.active_namespaces['def'])
             if is_non_standard:
-                cl_supp['isNonStandard'] = is_non_standard
+                cl_data['isNonStandard'] = is_non_standard.upper() in ['YES', 'Y']
+                cl_supp['isNonStandardXmlValue'] = is_non_standard
             
             # SASFormatName
             sas_format = cl_elem.get('SASFormatName')
