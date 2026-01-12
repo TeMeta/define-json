@@ -107,6 +107,7 @@ CodeList {
     string formatName  
     string version  
     string href  
+    boolean isNonStandard  
     string OID  
     string uuid  
     string name  
@@ -156,6 +157,18 @@ Coding {
     string codeSystemVersion  
     AliasPredicate aliasType  
 }
+Standard {
+    StandardName name  
+    StandardType type  
+    PublishingSet publishingSet  
+    string version  
+    StandardStatus status  
+    string OID  
+    string uuid  
+    string description  
+    string label  
+    stringList aliases  
+}
 Resource {
     string resourceType  
     string attribute  
@@ -190,6 +203,7 @@ CodeListItem {
 
 CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
+CodeList ||--|o Standard : "standard"
 CodeList ||--}o Coding : "coding"
 CodeList ||--}o Comment : "comments"
 CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -200,6 +214,7 @@ Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 Comment ||--}o Comment : "comments"
 Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Standard ||--}o Coding : "coding"
 Resource ||--}o FormalExpression : "selection"
 Resource ||--}o Coding : "coding"
 FormalExpression ||--}o Parameter : "parameters"
@@ -212,7 +227,7 @@ CodeListItem ||--|o Coding : "coding"
 <h2 id="inheritance">Inheritance</h2>
 <ul>
 <li><a href="../GovernedElement/">GovernedElement</a> [ <a href="../Identifiable/">Identifiable</a> <a href="../Labelled/">Labelled</a> <a href="../Governed/">Governed</a>]<ul>
-<li><strong>CodeList</strong> [ <a href="../Versioned/">Versioned</a>]</li>
+<li><strong>CodeList</strong> [ <a href="../Versioned/">Versioned</a> <a href="../IsODMStandard/">IsODMStandard</a>]</li>
 </ul>
 </li>
 </ul>
@@ -262,6 +277,18 @@ CodeListItem ||--|o Coding : "coding"
 <td>0..1 <br/> <a href="../../types/String/">String</a></td>
 <td>Machine-readable instructions to obtain the resource e.g. FHIR path, URL</td>
 <td><a href="../Versioned/">Versioned</a></td>
+</tr>
+<tr>
+<td><a href="../../slots/standard/">standard</a></td>
+<td>0..1 <br/> <a href="../Standard/">Standard</a></td>
+<td>Reference to the standard being implemented</td>
+<td><a href="../IsODMStandard/">IsODMStandard</a></td>
+</tr>
+<tr>
+<td><a href="../../slots/isNonStandard/">isNonStandard</a></td>
+<td>0..1 <br/> <a href="../../types/Boolean/">Boolean</a></td>
+<td>One or more members of this set are non-standard extensions</td>
+<td><a href="../IsODMStandard/">IsODMStandard</a></td>
 </tr>
 <tr>
 <td><a href="../../slots/OID/">OID</a></td>
@@ -607,6 +634,7 @@ CodeListItem ||--|o Coding : "coding"
 <span class="nt">is_a</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GovernedElement</span>
 <span class="nt">mixins</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Versioned</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IsODMStandard</span>
 <span class="nt">attributes</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">dataType</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dataType</span>
@@ -671,6 +699,7 @@ CodeListItem ||--|o Coding : "coding"
 <span class="nt">is_a</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">GovernedElement</span>
 <span class="nt">mixins</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Versioned</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IsODMStandard</span>
 <span class="nt">attributes</span><span class="p">:</span>
 <span class="w">  </span><span class="nt">dataType</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dataType</span>
@@ -741,6 +770,26 @@ CodeListItem ||--|o Coding : "coding"
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Versioned</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">standard</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">standard</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reference to the standard being implemented</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">standard</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IsODMStandard</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Standard</span>
+<span class="w">  </span><span class="nt">isNonStandard</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">isNonStandard</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">One or more members of this set are non-standard extensions</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">isNonStandard</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IsODMStandard</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">boolean</span>
 <span class="w">  </span><span class="nt">OID</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OID</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Local identifier within this study/context. Use CDISC OID format</span>

@@ -108,8 +108,10 @@ DataStructureDefinition {
     string structure  
     boolean isReferenceData  
     ItemGroupType type  
+    boolean hasNoData  
     stringList profile  
     string authenticator  
+    boolean isNonStandard  
     string OID  
     string uuid  
     string name  
@@ -160,6 +162,18 @@ Coding {
     string codeSystem  
     string codeSystemVersion  
     AliasPredicate aliasType  
+}
+Standard {
+    StandardName name  
+    StandardType type  
+    PublishingSet publishingSet  
+    string version  
+    StandardStatus status  
+    string OID  
+    string uuid  
+    string description  
+    string label  
+    stringList aliases  
 }
 Timing {
     TimingType type  
@@ -267,8 +281,10 @@ ItemGroup {
     string structure  
     boolean isReferenceData  
     ItemGroupType type  
+    boolean hasNoData  
     stringList profile  
     string authenticator  
+    boolean isNonStandard  
     string OID  
     string uuid  
     string name  
@@ -370,6 +386,7 @@ DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
 DataStructureDefinition ||--}o WhereClause : "applicableWhen"
 DataStructureDefinition ||--}o Coding : "security"
 DataStructureDefinition ||--|o Timing : "validityPeriod"
+DataStructureDefinition ||--|o Standard : "standard"
 DataStructureDefinition ||--}o Coding : "coding"
 DataStructureDefinition ||--}o Comment : "comments"
 DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -380,6 +397,7 @@ Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 Comment ||--}o Comment : "comments"
 Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Standard ||--}o Coding : "coding"
 Timing ||--|o NominalOccurrence : "relativeTo"
 Timing ||--|o NominalOccurrence : "relativeFrom"
 Timing ||--|o Method : "imputation"
@@ -420,6 +438,7 @@ ItemGroup ||--|o ReifiedConcept : "implementsConcept"
 ItemGroup ||--}o WhereClause : "applicableWhen"
 ItemGroup ||--}o Coding : "security"
 ItemGroup ||--|o Timing : "validityPeriod"
+ItemGroup ||--|o Standard : "standard"
 ItemGroup ||--}o Coding : "coding"
 ItemGroup ||--}o Comment : "comments"
 ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -458,7 +477,7 @@ Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <h2 id="inheritance">Inheritance</h2>
 <ul>
 <li><a href="../GovernedElement/">GovernedElement</a> [ <a href="../Identifiable/">Identifiable</a> <a href="../Labelled/">Labelled</a> <a href="../Governed/">Governed</a>]<ul>
-<li><a href="../ItemGroup/">ItemGroup</a> [ <a href="../IsProfile/">IsProfile</a>]<ul>
+<li><a href="../ItemGroup/">ItemGroup</a> [ <a href="../IsProfile/">IsProfile</a> <a href="../IsODMStandard/">IsODMStandard</a>]<ul>
 <li><strong>DataStructureDefinition</strong></li>
 </ul>
 </li>
@@ -561,6 +580,12 @@ Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <td><a href="../ItemGroup/">ItemGroup</a></td>
 </tr>
 <tr>
+<td><a href="../../slots/hasNoData/">hasNoData</a></td>
+<td>0..1 <br> <a href="../../types/Boolean/">Boolean</a></br></td>
+<td>Used to indicate that this ItemGroup has no data, e.g. for a manifest.</td>
+<td><a href="../ItemGroup/">ItemGroup</a></td>
+</tr>
+<tr>
 <td><a href="../../slots/profile/">profile</a></td>
 <td>* <br> <a href="../../types/String/">String</a></br></td>
 <td>Profiles this resource claims to conform to</td>
@@ -574,7 +599,7 @@ Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 </tr>
 <tr>
 <td><a href="../../slots/authenticator/">authenticator</a></td>
-<td>0..1 <br> <a href="../../types/String/">String</a> or <br><a href="../User/">User</a> or <br><a href="../Organization/">Organization</a> or <br/><a href="../../types/String/">String</a></br></br></br></td>
+<td>0..1 <br> <a href="../../types/String/">String</a> or <br><a href="../User/">User</a> or <br/><a href="../Organization/">Organization</a> or <br/><a href="../../types/String/">String</a></br></br></td>
 <td>Who/what authenticated the resource</td>
 <td><a href="../IsProfile/">IsProfile</a></td>
 </tr>
@@ -583,6 +608,18 @@ Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <td>0..1 <br/> <a href="../Timing/">Timing</a></td>
 <td>Time period during which the resouce is valid</td>
 <td><a href="../IsProfile/">IsProfile</a></td>
+</tr>
+<tr>
+<td><a href="../../slots/standard/">standard</a></td>
+<td>0..1 <br/> <a href="../Standard/">Standard</a></td>
+<td>Reference to the standard being implemented</td>
+<td><a href="../IsODMStandard/">IsODMStandard</a></td>
+</tr>
+<tr>
+<td><a href="../../slots/isNonStandard/">isNonStandard</a></td>
+<td>0..1 <br/> <a href="../../types/Boolean/">Boolean</a></td>
+<td>One or more members of this set are non-standard extensions</td>
+<td><a href="../IsODMStandard/">IsODMStandard</a></td>
 </tr>
 <tr>
 <td><a href="../../slots/OID/">OID</a></td>
@@ -1005,6 +1042,16 @@ Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">WhereClause</span>
 <span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">hasNoData</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hasNoData</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Used to indicate that this ItemGroup has no data, e.g. for a manifest.</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hasNoData</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataStructureDefinition</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IsODMItem</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">boolean</span>
 <span class="w">  </span><span class="nt">profile</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">profile</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Profiles this resource claims to conform to</span>
@@ -1055,6 +1102,26 @@ Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IsProfile</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Timing</span>
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">  </span><span class="nt">standard</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">standard</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reference to the standard being implemented</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">standard</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataStructureDefinition</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IsODMStandard</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Standard</span>
+<span class="w">  </span><span class="nt">isNonStandard</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">isNonStandard</span>
+<span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">One or more members of this set are non-standard extensions</span>
+<span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
+<span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">isNonStandard</span>
+<span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataStructureDefinition</span>
+<span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IsODMStandard</span>
+<span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">boolean</span>
 <span class="w">  </span><span class="nt">OID</span><span class="p">:</span>
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OID</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Local identifier within this study/context. Use CDISC OID format</span>

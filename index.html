@@ -265,6 +265,7 @@ CodeList {
     string formatName  
     string version  
     string href  
+    boolean isNonStandard  
     string OID  
     string uuid  
     string name  
@@ -276,6 +277,18 @@ CodeList {
     datetime lastUpdated  
     string owner  
     string wasDerivedFrom  
+}
+Standard {
+    StandardName name  
+    StandardType type  
+    PublishingSet publishingSet  
+    string version  
+    StandardStatus status  
+    string OID  
+    string uuid  
+    string description  
+    string label  
+    stringList aliases  
 }
 Resource {
     string resourceType  
@@ -478,8 +491,10 @@ DataStructureDefinition {
     string structure  
     boolean isReferenceData  
     ItemGroupType type  
+    boolean hasNoData  
     stringList profile  
     string authenticator  
+    boolean isNonStandard  
     string OID  
     string uuid  
     string name  
@@ -499,8 +514,10 @@ ItemGroup {
     string structure  
     boolean isReferenceData  
     ItemGroupType type  
+    boolean hasNoData  
     stringList profile  
     string authenticator  
+    boolean isNonStandard  
     string OID  
     string uuid  
     string name  
@@ -612,18 +629,6 @@ Dataflow {
     string owner  
     string wasDerivedFrom  
 }
-Standard {
-    StandardName name  
-    StandardType type  
-    PublishingSet publishingSet  
-    string version  
-    StandardStatus status  
-    string OID  
-    string uuid  
-    string description  
-    string label  
-    stringList aliases  
-}
 Dictionary {
     string publishedBy  
     string version  
@@ -702,9 +707,11 @@ ConceptProperty ||--}o Comment : "comments"
 ConceptProperty ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
+CodeList ||--|o Standard : "standard"
 CodeList ||--}o Coding : "coding"
 CodeList ||--}o Comment : "comments"
 CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Standard ||--}o Coding : "coding"
 Resource ||--}o FormalExpression : "selection"
 Resource ||--}o Coding : "coding"
 FormalExpression ||--}o Parameter : "parameters"
@@ -773,6 +780,7 @@ DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
 DataStructureDefinition ||--}o WhereClause : "applicableWhen"
 DataStructureDefinition ||--}o Coding : "security"
 DataStructureDefinition ||--|o Timing : "validityPeriod"
+DataStructureDefinition ||--|o Standard : "standard"
 DataStructureDefinition ||--}o Coding : "coding"
 DataStructureDefinition ||--}o Comment : "comments"
 DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -783,6 +791,7 @@ ItemGroup ||--|o ReifiedConcept : "implementsConcept"
 ItemGroup ||--}o WhereClause : "applicableWhen"
 ItemGroup ||--}o Coding : "security"
 ItemGroup ||--|o Timing : "validityPeriod"
+ItemGroup ||--|o Standard : "standard"
 ItemGroup ||--}o Coding : "coding"
 ItemGroup ||--}o Comment : "comments"
 ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -827,7 +836,6 @@ Dataflow ||--|o Analysis : "analysisMethod"
 Dataflow ||--}o Coding : "coding"
 Dataflow ||--}o Comment : "comments"
 Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-Standard ||--}o Coding : "coding"
 Dictionary ||--}o Coding : "terms"
 Dictionary ||--}o Coding : "coding"
 Relationship ||--|| IdentifiableElement : "subject"
@@ -1054,6 +1062,10 @@ IdentifiableElement ||--}o Coding : "coding"
 <td>A mixin that provides additional attributes for CDISC Operational Data Model items, including roles, completion instructions, and implementation notes</td>
 </tr>
 <tr>
+<td><a href="classes/IsODMStandard/">IsODMStandard</a></td>
+<td>A mixin that provides properties to indicate standards compliance</td>
+</tr>
+<tr>
 <td><a href="classes/IsProfile/">IsProfile</a></td>
 <td>A mixin that provides additional metadata for FHIR resources and Data Products, including profiles, security tags, and validity periods</td>
 </tr>
@@ -1218,7 +1230,7 @@ IdentifiableElement ||--}o Coding : "coding"
 </tr>
 <tr>
 <td><a href="slots/hasNoData/">hasNoData</a></td>
-<td>Set to Yes if this is a manifest and there is no data for this item</td>
+<td>True if this is a manifest and there is no data for this item</td>
 </tr>
 <tr>
 <td><a href="slots/crfCompletionInstructions/">crfCompletionInstructions</a></td>
@@ -1239,6 +1251,14 @@ IdentifiableElement ||--}o Coding : "coding"
 <tr>
 <td><a href="slots/preSpecifiedValue/">preSpecifiedValue</a></td>
 <td>Prefill value or a default value for a field that is automatically populated.</td>
+</tr>
+<tr>
+<td><a href="slots/standard/">standard</a></td>
+<td>Reference to the standard being implemented</td>
+</tr>
+<tr>
+<td><a href="slots/isNonStandard/">isNonStandard</a></td>
+<td>One or more members of this set are non-standard extensions</td>
 </tr>
 <tr>
 <td><a href="slots/fileOID/">fileOID</a></td>
@@ -2186,5 +2206,5 @@ IdentifiableElement ||--}o Coding : "coding"
 </html>
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2025-12-09 13:54:35.557777+00:00
+Build Date UTC : 2026-01-12 20:48:04.885752+00:00
 -->

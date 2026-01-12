@@ -202,8 +202,10 @@ DataStructureDefinition {
     string structure  
     boolean isReferenceData  
     ItemGroupType type  
+    boolean hasNoData  
     stringList profile  
     string authenticator  
+    boolean isNonStandard  
     string OID  
     string uuid  
     string name  
@@ -248,6 +250,18 @@ Comment {
     string owner  
     string wasDerivedFrom  
 }
+Standard {
+    StandardName name  
+    StandardType type  
+    PublishingSet publishingSet  
+    string version  
+    StandardStatus status  
+    string OID  
+    string uuid  
+    string description  
+    string label  
+    stringList aliases  
+}
 WhereClause {
     string OID  
     string uuid  
@@ -281,8 +295,10 @@ ItemGroup {
     string structure  
     boolean isReferenceData  
     ItemGroupType type  
+    boolean hasNoData  
     stringList profile  
     string authenticator  
+    boolean isNonStandard  
     string OID  
     string uuid  
     string name  
@@ -445,6 +461,7 @@ DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
 DataStructureDefinition ||--}o WhereClause : "applicableWhen"
 DataStructureDefinition ||--}o Coding : "security"
 DataStructureDefinition ||--|o Timing : "validityPeriod"
+DataStructureDefinition ||--|o Standard : "standard"
 DataStructureDefinition ||--}o Coding : "coding"
 DataStructureDefinition ||--}o Comment : "comments"
 DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -455,6 +472,7 @@ Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 Comment ||--}o Comment : "comments"
 Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Standard ||--}o Coding : "coding"
 WhereClause ||--}o Condition : "conditions"
 WhereClause ||--}o Coding : "coding"
 WhereClause ||--}o Comment : "comments"
@@ -470,6 +488,7 @@ ItemGroup ||--|o ReifiedConcept : "implementsConcept"
 ItemGroup ||--}o WhereClause : "applicableWhen"
 ItemGroup ||--}o Coding : "security"
 ItemGroup ||--|o Timing : "validityPeriod"
+ItemGroup ||--|o Standard : "standard"
 ItemGroup ||--}o Coding : "coding"
 ItemGroup ||--}o Comment : "comments"
 ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -880,7 +899,7 @@ Analysis ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Specification or standard that this dataset conforms to</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">close_mappings</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dct:conformsTo</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dcterms:conformsTo</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Dataset</span>
@@ -1008,7 +1027,7 @@ Analysis ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Specification or standard that this dataset conforms to</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">close_mappings</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dct:conformsTo</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dcterms:conformsTo</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conformsTo</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Dataset</span>
