@@ -1975,6 +1975,11 @@ classes:
         description: >-
           The Data Provider that is part of this agreement
         range: DataProvider
+    consumer:
+      any_of:
+        - range: DataProduct
+        - range: Organization
+        - range: string
       dataFlow:
         description: >-
           The Dataflow that is covered by this agreement
