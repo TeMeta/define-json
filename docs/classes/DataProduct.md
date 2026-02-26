@@ -3,7 +3,7 @@
 # Class: DataProduct 
 
 
-_A governed collection that represents a purpose-driven assembly of datasets and services with an owning team and lifecycle_
+_A governed collection that represents a purpose-driven assembly of datasets and services with an owning team and lifecycle. The DataProduct defines the boundary of accountability between data producers and consumers._
 
 
 
@@ -182,6 +182,8 @@ FormalExpression {
 
 DataProduct ||--}o DataService : "inputPort"
 DataProduct ||--}o DataService : "outputPort"
+DataProduct ||--}o Dataflow : "inputDataflow"
+DataProduct ||--}o Dataflow : "outputDataflow"
 DataProduct ||--}o Dataset : "inputDataset"
 DataProduct ||--}o Dataset : "outputDataset"
 DataProduct ||--}o Coding : "coding"
@@ -255,6 +257,8 @@ FormalExpression ||--}o Coding : "coding"
 | [lifecycleStatus](../slots/lifecycleStatus.md) | 0..1 <br/> [DataProductLifecycleStatus](../enums/DataProductLifecycleStatus.md) | Current lifecycle status of the data product | direct |
 | [inputPort](../slots/inputPort.md) | * <br/> [DataService](../classes/DataService.md) | Services that provide input into this data product | direct |
 | [outputPort](../slots/outputPort.md) | * <br/> [DataService](../classes/DataService.md) | Services that expose output from this data product | direct |
+| [inputDataflow](../slots/inputDataflow.md) | * <br/> [Dataflow](../classes/Dataflow.md) | Description of the input interface before concrete Datasets exist. Dataflows referenced here represent the demand side of a ProvisionAgreement. | direct |
+| [outputDataflow](../slots/outputDataflow.md) | * <br/> [Dataflow](../classes/Dataflow.md) | Description of the output interface before concrete Datasets exist. Dataflows referenced here represent the supply side of a ProvisionAgreement. | direct |
 | [inputDataset](../slots/inputDataset.md) | * <br/> [Dataset](../classes/Dataset.md) | Source datasets used by the data product | direct |
 | [outputDataset](../slots/outputDataset.md) | * <br/> [Dataset](../classes/Dataset.md) | Output datasets produced by the data product | direct |
 | [hasPolicy](../slots/hasPolicy.md) | * <br/> [String](../types/String.md) | Policies governing the use and access of the data product | direct |
@@ -305,6 +309,7 @@ FormalExpression ||--}o Coding : "coding"
 | [Dimension](../classes/Dimension.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
 | [DataAttribute](../classes/DataAttribute.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
 | [DataProduct](../classes/DataProduct.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [ProvisionAgreement](../classes/ProvisionAgreement.md) | [consumer](../slots/consumer.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
 | [Analysis](../classes/Analysis.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
 | [Display](../classes/Display.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
@@ -353,7 +358,8 @@ FormalExpression ||--}o Coding : "coding"
 ```yaml
 name: DataProduct
 description: A governed collection that represents a purpose-driven assembly of datasets
-  and services with an owning team and lifecycle
+  and services with an owning team and lifecycle. The DataProduct defines the boundary
+  of accountability between data producers and consumers.
 from_schema: https://cdisc.org/define-json
 exact_mappings:
 - dprod:DataProduct
@@ -412,6 +418,34 @@ attributes:
     multivalued: true
     inlined: true
     inlined_as_list: true
+  inputDataflow:
+    name: inputDataflow
+    description: Description of the input interface before concrete Datasets exist.
+      Dataflows referenced here represent the demand side of a ProvisionAgreement.
+    from_schema: https://cdisc.org/define-json
+    close_mappings:
+    - dcat:distribution
+    rank: 1000
+    domain_of:
+    - DataProduct
+    range: Dataflow
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  outputDataflow:
+    name: outputDataflow
+    description: Description of the output interface before concrete Datasets exist.
+      Dataflows referenced here represent the supply side of a ProvisionAgreement.
+    from_schema: https://cdisc.org/define-json
+    close_mappings:
+    - dcat:distribution
+    rank: 1000
+    domain_of:
+    - DataProduct
+    range: Dataflow
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
   inputDataset:
     name: inputDataset
     description: Source datasets used by the data product
@@ -454,7 +488,8 @@ attributes:
 ```yaml
 name: DataProduct
 description: A governed collection that represents a purpose-driven assembly of datasets
-  and services with an owning team and lifecycle
+  and services with an owning team and lifecycle. The DataProduct defines the boundary
+  of accountability between data producers and consumers.
 from_schema: https://cdisc.org/define-json
 exact_mappings:
 - dprod:DataProduct
@@ -520,6 +555,38 @@ attributes:
     domain_of:
     - DataProduct
     range: DataService
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  inputDataflow:
+    name: inputDataflow
+    description: Description of the input interface before concrete Datasets exist.
+      Dataflows referenced here represent the demand side of a ProvisionAgreement.
+    from_schema: https://cdisc.org/define-json
+    close_mappings:
+    - dcat:distribution
+    rank: 1000
+    alias: inputDataflow
+    owner: DataProduct
+    domain_of:
+    - DataProduct
+    range: Dataflow
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  outputDataflow:
+    name: outputDataflow
+    description: Description of the output interface before concrete Datasets exist.
+      Dataflows referenced here represent the supply side of a ProvisionAgreement.
+    from_schema: https://cdisc.org/define-json
+    close_mappings:
+    - dcat:distribution
+    rank: 1000
+    alias: outputDataflow
+    owner: DataProduct
+    domain_of:
+    - DataProduct
+    range: Dataflow
     multivalued: true
     inlined: true
     inlined_as_list: true

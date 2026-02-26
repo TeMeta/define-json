@@ -1,16 +1,16 @@
 
 
-# Slot: outputDataset 
+# Slot: inputDataflow 
 
 
-_Output datasets produced by the data product_
+_Description of the input interface before concrete Datasets exist. Dataflows referenced here represent the demand side of a ProvisionAgreement._
 
 
 
 
 
-URI: [odm:slot/outputDataset](https://cdisc.org/odm2/slot/outputDataset)
-Alias: outputDataset
+URI: [odm:slot/inputDataflow](https://cdisc.org/odm2/slot/inputDataflow)
+Alias: inputDataflow
 
 <!-- no inheritance hierarchy -->
 
@@ -31,7 +31,7 @@ Alias: outputDataset
 
 ## Properties
 
-* Range: [Dataset](../classes/Dataset.md)
+* Range: [Dataflow](../classes/Dataflow.md)
 
 * Multivalued: True
 
@@ -57,8 +57,9 @@ Alias: outputDataset
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:outputDataset |
-| native | odm:outputDataset |
+| self | odm:inputDataflow |
+| native | odm:inputDataflow |
+| close | dcat:distribution |
 
 
 
@@ -67,15 +68,18 @@ Alias: outputDataset
 
 <details>
 ```yaml
-name: outputDataset
-description: Output datasets produced by the data product
+name: inputDataflow
+description: Description of the input interface before concrete Datasets exist. Dataflows
+  referenced here represent the demand side of a ProvisionAgreement.
 from_schema: https://cdisc.org/define-json
+close_mappings:
+- dcat:distribution
 rank: 1000
-alias: outputDataset
+alias: inputDataflow
 owner: DataProduct
 domain_of:
 - DataProduct
-range: Dataset
+range: Dataflow
 multivalued: true
 inlined: true
 inlined_as_list: true

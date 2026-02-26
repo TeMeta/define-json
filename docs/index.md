@@ -635,6 +635,8 @@ WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 CodeListItem ||--|o Coding : "coding"
 DataProduct ||--}o DataService : "inputPort"
 DataProduct ||--}o DataService : "outputPort"
+DataProduct ||--}o Dataflow : "inputDataflow"
+DataProduct ||--}o Dataflow : "outputDataflow"
 DataProduct ||--}o Dataset : "inputDataset"
 DataProduct ||--}o Dataset : "outputDataset"
 DataProduct ||--}o Coding : "coding"
@@ -767,7 +769,7 @@ IdentifiableElement ||--}o Coding : "coding"
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Dimension](classes/Dimension.md) | A data cube property that describes a categorical or hierarchical dimension |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Measure](classes/Measure.md) | A data cube property that describes a measurable quantity or value |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Dataflow](classes/Dataflow.md) | An abstract representation that defines data provision for different reference periods, where a Distribution and its Dataset are instances |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[DataProduct](classes/DataProduct.md) | A governed collection that represents a purpose-driven assembly of datasets and services with an owning team and lifecycle |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[DataProduct](classes/DataProduct.md) | A governed collection that represents a purpose-driven assembly of datasets and services with an owning team and lifecycle. The DataProduct defines the boundary of accountability between data producers and consumers. |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Display](classes/Display.md) | A rendered output of an analysis result. |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Item](classes/Item.md) | A data element that represents a specific piece of information within a defined context, with data type, constraints, and derivation methods |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ItemGroup](classes/ItemGroup.md) | A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections |
@@ -1004,6 +1006,8 @@ IdentifiableElement ||--}o Coding : "coding"
 | [lifecycleStatus](slots/lifecycleStatus.md) | Current lifecycle status of the data product |
 | [inputPort](slots/inputPort.md) | Services that provide input into this data product |
 | [outputPort](slots/outputPort.md) | Services that expose output from this data product |
+| [inputDataflow](slots/inputDataflow.md) | Description of the input interface before concrete Datasets exist. Dataflows referenced here represent the demand side of a ProvisionAgreement. |
+| [outputDataflow](slots/outputDataflow.md) | Description of the output interface before concrete Datasets exist. Dataflows referenced here represent the supply side of a ProvisionAgreement. |
 | [inputDataset](slots/inputDataset.md) | Source datasets used by the data product |
 | [outputDataset](slots/outputDataset.md) | Output datasets produced by the data product |
 | [accessService](slots/accessService.md) | Service that provides access to this distribution |
@@ -1015,6 +1019,7 @@ IdentifiableElement ||--}o Coding : "coding"
 | [providesDataFor](slots/providesDataFor.md) | The Dataflows that this provider supplies data for |
 | [provisionAgreements](slots/provisionAgreements.md) | The ProvisionAgreements that this provider has with Data Consumers |
 | [provider](slots/provider.md) | The Data Provider that is part of this agreement |
+| [consumer](slots/consumer.md) | The Data Consumer that is part of this agreement |
 | [analysisReason](slots/analysisReason.md) | The reason this analysis was performed. |
 | [analysisPurpose](slots/analysisPurpose.md) | The purpose or role of this analysis in the study. |
 | [inputData](slots/inputData.md) | Datasets or slices/subsets of datasets asked for by this analysis. If a Item is referenced by a Parameter e.g. Analysis Variable, make sure to include its parent ItemGroup here. |

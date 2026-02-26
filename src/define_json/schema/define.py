@@ -2888,7 +2888,7 @@ class ObservationRelationship(ConfiguredBaseModel):
 
 class DataProduct(Versioned, GovernedElement):
     """
-    A governed collection that represents a purpose-driven assembly of datasets and services with an owning team and lifecycle
+    A governed collection that represents a purpose-driven assembly of datasets and services with an owning team and lifecycle. The DataProduct defines the boundary of accountability between data producers and consumers.
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'exact_mappings': ['dprod:DataProduct', 'dcat:DataService'],
          'from_schema': 'https://cdisc.org/define-json',
@@ -2902,6 +2902,12 @@ class DataProduct(Versioned, GovernedElement):
     lifecycleStatus: Optional[DataProductLifecycleStatus] = Field(default=None, description="""Current lifecycle status of the data product""", json_schema_extra = { "linkml_meta": {'alias': 'lifecycleStatus', 'domain_of': ['DataProduct']} })
     inputPort: Optional[list[DataService]] = Field(default=None, description="""Services that provide input into this data product""", json_schema_extra = { "linkml_meta": {'alias': 'inputPort', 'domain_of': ['DataProduct']} })
     outputPort: Optional[list[DataService]] = Field(default=None, description="""Services that expose output from this data product""", json_schema_extra = { "linkml_meta": {'alias': 'outputPort', 'domain_of': ['DataProduct']} })
+    inputDataflow: Optional[list[Dataflow]] = Field(default=None, description="""Description of the input interface before concrete Datasets exist. Dataflows referenced here represent the demand side of a ProvisionAgreement.""", json_schema_extra = { "linkml_meta": {'alias': 'inputDataflow',
+         'close_mappings': ['dcat:distribution'],
+         'domain_of': ['DataProduct']} })
+    outputDataflow: Optional[list[Dataflow]] = Field(default=None, description="""Description of the output interface before concrete Datasets exist. Dataflows referenced here represent the supply side of a ProvisionAgreement.""", json_schema_extra = { "linkml_meta": {'alias': 'outputDataflow',
+         'close_mappings': ['dcat:distribution'],
+         'domain_of': ['DataProduct']} })
     inputDataset: Optional[list[Dataset]] = Field(default=None, description="""Source datasets used by the data product""", json_schema_extra = { "linkml_meta": {'alias': 'inputDataset', 'domain_of': ['DataProduct']} })
     outputDataset: Optional[list[Dataset]] = Field(default=None, description="""Output datasets produced by the data product""", json_schema_extra = { "linkml_meta": {'alias': 'outputDataset', 'domain_of': ['DataProduct']} })
     hasPolicy: Optional[list[str]] = Field(default=None, description="""Policies governing the use and access of the data product""", json_schema_extra = { "linkml_meta": {'alias': 'hasPolicy', 'domain_of': ['Dataset', 'DataProduct']} })
@@ -3058,6 +3064,11 @@ class ProvisionAgreement(Versioned, GovernedElement):
          'mixins': ['Versioned']})
 
     provider: Optional[str] = Field(default=None, description="""The Data Provider that is part of this agreement""", json_schema_extra = { "linkml_meta": {'alias': 'provider', 'domain_of': ['ProvisionAgreement']} })
+    consumer: Optional[str] = Field(default=None, description="""The Data Consumer that is part of this agreement""", json_schema_extra = { "linkml_meta": {'alias': 'consumer',
+         'any_of': [{'range': 'DataProduct'},
+                    {'range': 'Organization'},
+                    {'range': 'string'}],
+         'domain_of': ['ProvisionAgreement']} })
     dataFlow: Optional[str] = Field(default=None, description="""The Dataflow that is covered by this agreement""", json_schema_extra = { "linkml_meta": {'alias': 'dataFlow',
          'domain_of': ['DataflowRelationship', 'ProvisionAgreement']} })
     source: Optional[str] = Field(default=None, description="""The source of the data provided under this agreement""", json_schema_extra = { "linkml_meta": {'alias': 'source',

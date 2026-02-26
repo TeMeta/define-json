@@ -22,7 +22,7 @@ Alias: inputPort
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [DataProduct](../classes/DataProduct.md) | A governed collection that represents a purpose-driven assembly of datasets and services with an owning team and lifecycle |  no  |
+| [DataProduct](../classes/DataProduct.md) | A governed collection that represents a purpose-driven assembly of datasets and services with an owning team and lifecycle. The DataProduct defines the boundary of accountability between data producers and consumers. |  no  |
 
 
 

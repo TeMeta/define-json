@@ -69,6 +69,7 @@ FormalExpression {
     stringList aliases  
 }
 ProvisionAgreement {
+    string consumer  
     string version  
     string href  
     string OID  

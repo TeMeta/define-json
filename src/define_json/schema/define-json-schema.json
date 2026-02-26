@@ -1676,7 +1676,7 @@
         },
         "DataProduct": {
             "additionalProperties": false,
-            "description": "A governed collection that represents a purpose-driven assembly of datasets and services with an owning team and lifecycle",
+            "description": "A governed collection that represents a purpose-driven assembly of datasets and services with an owning team and lifecycle. The DataProduct defines the boundary of accountability between data producers and consumers.",
             "properties": {
                 "OID": {
                     "description": "Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.",
@@ -1768,6 +1768,16 @@
                         "null"
                     ]
                 },
+                "inputDataflow": {
+                    "description": "Description of the input interface before concrete Datasets exist. Dataflows referenced here represent the demand side of a ProvisionAgreement.",
+                    "items": {
+                        "$ref": "#/$defs/Dataflow"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
                 "inputDataset": {
                     "description": "Source datasets used by the data product",
                     "items": {
@@ -1825,6 +1835,16 @@
                     "description": "Short name or identifier, used for field names",
                     "type": [
                         "string",
+                        "null"
+                    ]
+                },
+                "outputDataflow": {
+                    "description": "Description of the output interface before concrete Datasets exist. Dataflows referenced here represent the supply side of a ProvisionAgreement.",
+                    "items": {
+                        "$ref": "#/$defs/Dataflow"
+                    },
+                    "type": [
+                        "array",
                         "null"
                     ]
                 },
@@ -6567,6 +6587,23 @@
                         "array",
                         "null"
                     ]
+                },
+                "consumer": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "The Data Consumer that is part of this agreement"
                 },
                 "dataFlow": {
                     "description": "The Dataflow that is covered by this agreement",

@@ -15,6 +15,7 @@ URI: [odm:class/ProvisionAgreement](https://cdisc.org/odm2/class/ProvisionAgreem
 ```mermaid
 erDiagram
 ProvisionAgreement {
+    string consumer  
     string version  
     string href  
     string OID  
@@ -264,6 +265,7 @@ Organization ||--}o Coding : "coding"
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
 | [provider](../slots/provider.md) | 0..1 <br/> [DataProvider](../classes/DataProvider.md) | The Data Provider that is part of this agreement | direct |
+| [consumer](../slots/consumer.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | The Data Consumer that is part of this agreement | direct |
 | [dataFlow](../slots/dataFlow.md) | 0..1 <br/> [Dataflow](../classes/Dataflow.md) | The Dataflow that is covered by this agreement | direct |
 | [source](../slots/source.md) | 0..1 <br/> [Resource](../classes/Resource.md) | The source of the data provided under this agreement | direct |
 | [version](../slots/version.md) | 0..1 <br/> [String](../types/String.md) | The version of the external resources | [Versioned](../classes/Versioned.md) |
@@ -377,6 +379,17 @@ attributes:
     domain_of:
     - ProvisionAgreement
     range: DataProvider
+  consumer:
+    name: consumer
+    description: The Data Consumer that is part of this agreement
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    domain_of:
+    - ProvisionAgreement
+    any_of:
+    - range: DataProduct
+    - range: Organization
+    - range: string
   dataFlow:
     name: dataFlow
     description: The Dataflow that is covered by this agreement
@@ -423,6 +436,19 @@ attributes:
     domain_of:
     - ProvisionAgreement
     range: DataProvider
+  consumer:
+    name: consumer
+    description: The Data Consumer that is part of this agreement
+    from_schema: https://cdisc.org/define-json
+    rank: 1000
+    alias: consumer
+    owner: ProvisionAgreement
+    domain_of:
+    - ProvisionAgreement
+    any_of:
+    - range: DataProduct
+    - range: Organization
+    - range: string
   dataFlow:
     name: dataFlow
     description: The Dataflow that is covered by this agreement

@@ -1848,7 +1848,8 @@ classes:
   # DPROD to complement Dataset class and link to DCAT ontology
   DataProduct:
     description: >-
-      A governed collection that represents a purpose-driven assembly of datasets and services with an owning team and lifecycle
+      A governed collection that represents a purpose-driven assembly of datasets and services with an owning team and lifecycle.
+      The DataProduct defines the boundary of accountability between data producers and consumers.
     exact_mappings:
       - dprod:DataProduct
       - dcat:DataService
@@ -1881,6 +1882,26 @@ classes:
         multivalued: true
         inlined: true
         inlined_as_list: true
+      inputDataflow:
+        description: >-
+          Description of the input interface before concrete Datasets exist.
+          Dataflows referenced here represent the demand side of a ProvisionAgreement.
+        range: Dataflow
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+        close_mappings:
+          - dcat:distribution
+      outputDataflow:
+        description: >-
+          Description of the output interface before concrete Datasets exist.
+          Dataflows referenced here represent the supply side of a ProvisionAgreement.
+        range: Dataflow
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+        close_mappings:
+          - dcat:distribution
       inputDataset:
         description: Source datasets used by the data product
         range: Dataset
@@ -1891,6 +1912,7 @@ classes:
         description: Output datasets produced by the data product
         range: Dataset
         multivalued: true
+        inlined: true
         inlined_as_list: true
       hasPolicy:
         description: Policies governing the use and access of the data product
@@ -1975,11 +1997,13 @@ classes:
         description: >-
           The Data Provider that is part of this agreement
         range: DataProvider
-    consumer:
-      any_of:
-        - range: DataProduct
-        - range: Organization
-        - range: string
+      consumer:
+        description: >-
+          The Data Consumer that is part of this agreement
+        any_of:
+          - range: DataProduct
+          - range: Organization
+          - range: string
       dataFlow:
         description: >-
           The Dataflow that is covered by this agreement
