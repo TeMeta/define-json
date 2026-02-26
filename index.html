@@ -738,6 +738,8 @@ WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 CodeListItem ||--|o Coding : "coding"
 DataProduct ||--}o DataService : "inputPort"
 DataProduct ||--}o DataService : "outputPort"
+DataProduct ||--}o Dataflow : "inputDataflow"
+DataProduct ||--}o Dataflow : "outputDataflow"
 DataProduct ||--}o Dataset : "inputDataset"
 DataProduct ||--}o Dataset : "outputDataset"
 DataProduct ||--}o Coding : "coding"
@@ -935,7 +937,7 @@ IdentifiableElement ||--}o Coding : "coding"
 </tr>
 <tr>
 <td>        <a href="classes/DataProduct/">DataProduct</a></td>
-<td>A governed collection that represents a purpose-driven assembly of datasets and services with an owning team and lifecycle</td>
+<td>A governed collection that represents a purpose-driven assembly of datasets and services with an owning team and lifecycle. The DataProduct defines the boundary of accountability between data producers and consumers.</td>
 </tr>
 <tr>
 <td>        <a href="classes/Display/">Display</a></td>
@@ -1865,6 +1867,14 @@ IdentifiableElement ||--}o Coding : "coding"
 <td>Services that expose output from this data product</td>
 </tr>
 <tr>
+<td><a href="slots/inputDataflow/">inputDataflow</a></td>
+<td>Description of the input interface before concrete Datasets exist. Dataflows referenced here represent the demand side of a ProvisionAgreement.</td>
+</tr>
+<tr>
+<td><a href="slots/outputDataflow/">outputDataflow</a></td>
+<td>Description of the output interface before concrete Datasets exist. Dataflows referenced here represent the supply side of a ProvisionAgreement.</td>
+</tr>
+<tr>
 <td><a href="slots/inputDataset/">inputDataset</a></td>
 <td>Source datasets used by the data product</td>
 </tr>
@@ -1907,6 +1917,10 @@ IdentifiableElement ||--}o Coding : "coding"
 <tr>
 <td><a href="slots/provider/">provider</a></td>
 <td>The Data Provider that is part of this agreement</td>
+</tr>
+<tr>
+<td><a href="slots/consumer/">consumer</a></td>
+<td>The Data Consumer that is part of this agreement</td>
 </tr>
 <tr>
 <td><a href="slots/analysisReason/">analysisReason</a></td>
@@ -2206,5 +2220,5 @@ IdentifiableElement ||--}o Coding : "coding"
 </html>
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2026-01-12 21:22:56.839559+00:00
+Build Date UTC : 2026-02-26 17:32:40.684155+00:00
 -->
