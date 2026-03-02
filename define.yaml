@@ -214,7 +214,7 @@ classes:
           - range: string
         required: false
       validityPeriod:
-        description: Time period during which the resouce is valid
+        description: Time period during which the resource is valid
         range: Timing
         required: false
 
@@ -2371,7 +2371,7 @@ enums:
       identifies the reference used in the genomic test in:
       indicates heritability of the genetic variant in:
       is an identifier for a published reference for the genetic variant in:
-      is an identifier for the copy, on one of two homologous chromosones, of the genetic variant in:
+      is an identifier for the copy, on one of two homologous chromosomes, of the genetic variant in:
       is an identifier for the genetic sequence of the genetic entity represented by:
       is the chromosome that is the position of the result in:
       is the clinical trial or treatment setting for:
@@ -2379,7 +2379,7 @@ enums:
       is the date of occurrence for:
       is the intended disease outcome for:
       is the method of secondary analysis of results in:
-      is the numeric location, within a chromosone, genetic entity, or genetic sub-region, of the result in:
+      is the numeric location, within a chromosome, genetic entity, or genetic sub-region, of the result in:
       is the symbol for the genomic entity that is the position of the result in:
       is the type of genomic entity that is the position of the result in:
       is the genetic sub-location of the result in:
