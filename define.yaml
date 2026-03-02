@@ -2205,6 +2205,9 @@ enums:
       hexBinary:
         description: >-
           Hexadecimal encoded binary data.
+      durationDatetime:
+        description: >-
+          ISO 8601 duration value representing a span of time (e.g., P1Y2M3DT4H5M6S).
 
   OriginType:
     description: >-
