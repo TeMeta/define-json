@@ -982,6 +982,7 @@ classes:
           Defaults to ALL if not specified.
         range: LogicalOperator
         required: false
+        ifabsent: LogicalOperator(AND)
       conditions:
         description: >-
           Child conditions to combine using the operator.
@@ -1035,6 +1036,7 @@ classes:
           Defaults to ALL if not specified.
         range: LogicalOperator
         required: false
+        ifabsent: LogicalOperator(AND)
 
   FormalExpression:
     description: >-
