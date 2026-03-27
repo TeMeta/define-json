@@ -634,6 +634,52 @@ classes:
         description: >-
           Used to indicate that this ItemGroup has no data, e.g. for a manifest.
         range: boolean
+      observationClass:
+        description: >-
+          Identifies the predefined CDISC model Class.
+        range: DefClass
+        required: false
+
+  DefClass:
+    description: >-
+      The predefined CDISC model Class that applies to an ItemGroupDef.
+    attributes:
+      name:
+        description: >-
+          Name of the General Observation Class following CDISC Controlled Terminology.
+        range: string
+        required: true
+      subClasses:
+        description: >-
+          One or more SubClasses that further identify the specific SubClass within a Class.
+        range: SubClass
+        multivalued: true
+        required: false
+        inlined: true
+        inlined_as_list: true
+
+  SubClass:
+    description: >-
+      A specific SubClass within a CDISC model Class.
+    attributes:
+      name:
+        description: >-
+          Name of the SubClass following CDISC Controlled Terminology for SubClass.
+        range: string
+        required: true
+      parentClass:
+        description: >-
+          Name of the parent Class or SubClass following CDISC Controlled Terminology.
+        range: string
+        required: false
+      subClasses:
+        description: >-
+          Nested SubClass(es) for multi-level SubClass hierarchy.
+        range: SubClass
+        multivalued: true
+        required: false
+        inlined: true
+        inlined_as_list: true
 
   Relationship:
     description: >-
