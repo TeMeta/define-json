@@ -68,30 +68,6 @@
 <ul class="nav flex-column">
 <li class="nav-item" data-bs-level="1"><a class="nav-link" href="#class-relationship">Class: Relationship</a>
 <ul class="nav flex-column">
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#inheritance">Inheritance</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#slots">Slots</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#usages">Usages</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#identifier-and-mapping-information">Identifier and Mapping Information</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#mappings">Mappings</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#linkml-source">LinkML Source</a>
-<ul class="nav flex-column">
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -100,176 +76,124 @@
 <div class="col-md-9" role="main">
 <h1 id="class-relationship">Class: Relationship</h1>
 <p><em>A semantic link that defines connections between elements such as Items or ItemGroups, capturing relationships like "is the unit for" or "assesses seriousness of"</em></p>
-<p>URI: <a href="https://cdisc.org/odm2/class/Relationship">odm:class/Relationship</a></p>
+<div data-search-exclude="" markdown="1">
+
+
+
+URI: [odm:class/Relationship](https://cdisc.org/odm2/class/Relationship)
+
+
 <pre class="mermaid"><code>erDiagram
-Relationship {
-    PredicateTermEnum predicateTerm  
-    LinkingPhraseEnum linkingPhrase  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
 Coding {
+    AliasPredicate aliasType  
     string code  
-    string decode  
     string codeSystem  
     string codeSystemVersion  
-    AliasPredicate aliasType  
+    string decode  
 }
 IdentifiableElement {
-    string OID  
-    string uuid  
     string name  
     string description  
-    string label  
+    string OID  
     stringList aliases  
+    string label  
+    string uuid  
+}
+Relationship {
+    LinkingPhraseEnum linkingPhrase  
+    PredicateTermEnum predicateTerm  
+    string name  
+    string description  
+    string OID  
+    stringList aliases  
+    string label  
+    string uuid  
 }
 
-Relationship ||--|| IdentifiableElement : "subject"
-Relationship ||--|| IdentifiableElement : "object"
-Relationship ||--}o Coding : "coding"
 IdentifiableElement ||--}o Coding : "coding"
+Relationship ||--|| IdentifiableElement : "object, subject"
+Relationship ||--}o Coding : "coding"
 
 </code></pre>
-<h2 id="inheritance">Inheritance</h2>
-<ul>
-<li><a href="../IdentifiableElement/">IdentifiableElement</a> [ <a href="../Identifiable/">Identifiable</a> <a href="../Labelled/">Labelled</a>]<ul>
-<li><strong>Relationship</strong></li>
-</ul>
-</li>
-</ul>
-<h2 id="slots">Slots</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Cardinality and Range</th>
-<th>Description</th>
-<th>Inheritance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../../slots/subject/">subject</a></td>
-<td>1 <br/> <a href="../IdentifiableElement/">IdentifiableElement</a></td>
-<td>The starting element of the relationship (e.g., an Item or ItemGroup).</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/object/">object</a></td>
-<td>1 <br/> <a href="../IdentifiableElement/">IdentifiableElement</a></td>
-<td>The ending element of the relationship.</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/predicateTerm/">predicateTerm</a></td>
-<td>1 <br/> <a href="../../enums/PredicateTermEnum/">PredicateTermEnum</a></td>
-<td>Short variable relationship linking phrase for programming purposes.</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/linkingPhrase/">linkingPhrase</a></td>
-<td>1 <br/> <a href="../../enums/LinkingPhraseEnum/">LinkingPhraseEnum</a></td>
-<td>Variable relationship descriptive linking phrase.</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/OID/">OID</a></td>
-<td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.</td>
-<td><a href="../Identifiable/">Identifiable</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/uuid/">uuid</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Universal unique identifier</td>
-<td><a href="../Identifiable/">Identifiable</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/name/">name</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Short name or identifier, used for field names</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/description/">description</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>Detailed description, shown in tooltips</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/coding/">coding</a></td>
-<td>* <br/> <a href="../Coding/">Coding</a></td>
-<td>Semantic tags for this element</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/label/">label</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>Human-readable label, shown in UIs</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>* <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>Alternative name or identifier</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="usages">Usages</h2>
-<table>
-<thead>
-<tr>
-<th>used by</th>
-<th>used in</th>
-<th>type</th>
-<th>used</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../MetaDataVersion/">MetaDataVersion</a></td>
-<td><a href="../../slots/relationships/">relationships</a></td>
-<td>range</td>
-<td><a href="./">Relationship</a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="schema-source">Schema Source</h3>
-<ul>
-<li>from schema: https://cdisc.org/define-json</li>
-</ul>
-<h2 id="mappings">Mappings</h2>
-<table>
-<thead>
-<tr>
-<th>Mapping Type</th>
-<th>Mapped Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>self</td>
-<td>odm:Relationship</td>
-</tr>
-<tr>
-<td>native</td>
-<td>odm:Relationship</td>
-</tr>
-<tr>
-<td>related</td>
-<td>sdmx:ConceptSchemeMap</td>
-</tr>
-</tbody>
-</table>
-<h2 id="linkml-source">LinkML Source</h2>
+
+
+
+
+## Inheritance
+* [IdentifiableElement](../classes/IdentifiableElement.md) [ [Identifiable](../classes/Identifiable.md) [Labelled](../classes/Labelled.md)]
+    * **Relationship**
+
+
+## Slots
+
+| Name | Cardinality and Range | Description | Inheritance |
+| ---  | --- | --- | --- |
+| [subject](../slots/subject.md) | 1 <br/> [IdentifiableElement](../classes/IdentifiableElement.md) | The starting element of the relationship (e.g., an Item or ItemGroup). | direct |
+| [object](../slots/object.md) | 1 <br/> [IdentifiableElement](../classes/IdentifiableElement.md) | The ending element of the relationship. | direct |
+| [predicateTerm](../slots/predicateTerm.md) | 1 <br/> [PredicateTermEnum](../enums/PredicateTermEnum.md) | Short variable relationship linking phrase for programming purposes. | direct |
+| [linkingPhrase](../slots/linkingPhrase.md) | 1 <br/> [LinkingPhraseEnum](../enums/LinkingPhraseEnum.md) | Variable relationship descriptive linking phrase. | direct |
+| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
+| [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
+| [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
+| [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md) or <br/>[TranslatedText](../classes/TranslatedText.md) | Detailed description, shown in tooltips | [Labelled](../classes/Labelled.md) |
+| [coding](../slots/coding.md) | * <br/> [Coding](../classes/Coding.md) | Semantic tags for this element | [Labelled](../classes/Labelled.md) |
+| [label](../slots/label.md) | 0..1 <br/> [String](../types/String.md) or <br/>[TranslatedText](../classes/TranslatedText.md) | Human-readable label, shown in UIs | [Labelled](../classes/Labelled.md) |
+| [aliases](../slots/aliases.md) | * <br/> [String](../types/String.md) or <br/>[TranslatedText](../classes/TranslatedText.md) | Alternative name or identifier | [Labelled](../classes/Labelled.md) |
+
+
+
+
+
+## Usages
+
+| used by | used in | type | used |
+| ---  | --- | --- | --- |
+| [MetaDataVersion](../classes/MetaDataVersion.md) | [relationships](../slots/relationships.md) | range | [Relationship](../classes/Relationship.md) |
+
+
+
+
+
+
+
+
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://cdisc.org/define-json
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | odm:Relationship |
+| native | odm:Relationship |
+| related | sdmx:ConceptSchemeMap |
+
+
+
+
+
+
+## LinkML Source
+
 <!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
-<h3 id="direct">Direct</h3>
+
+### Direct
+
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Relationship</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A semantic link that defines connections between elements such as Items</span>
@@ -318,7 +242,9 @@ IdentifiableElement ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 </details>
-<h3 id="induced">Induced</h3>
+
+### Induced
+
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Relationship</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A semantic link that defines connections between elements such as Items</span>
@@ -334,7 +260,6 @@ IdentifiableElement ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The starting element of the relationship (e.g., an Item or ItemGroup).</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">subject</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Relationship</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Relationship</span>
@@ -345,7 +270,6 @@ IdentifiableElement ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The ending element of the relationship.</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">object</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Relationship</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Relationship</span>
@@ -356,7 +280,6 @@ IdentifiableElement ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Short variable relationship linking phrase for programming purposes.</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">predicateTerm</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Relationship</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Relationship</span>
@@ -367,7 +290,6 @@ IdentifiableElement ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Variable relationship descriptive linking phrase.</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">linkingPhrase</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Relationship</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Relationship</span>
@@ -380,7 +302,6 @@ IdentifiableElement ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">identifier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OID</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Relationship</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Identifiable</span>
@@ -391,7 +312,6 @@ IdentifiableElement ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Universal unique identifier</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uuid</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Relationship</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Identifiable</span>
@@ -401,10 +321,11 @@ IdentifiableElement ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Short name or identifier, used for field names</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">name</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Relationship</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DefClass</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SubClass</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Standard</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 <span class="w">  </span><span class="nt">description</span><span class="p">:</span>
@@ -412,7 +333,6 @@ IdentifiableElement ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Detailed description, shown in tooltips</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">description</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Relationship</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
@@ -426,7 +346,6 @@ IdentifiableElement ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Semantic tags for this element</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">coding</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Relationship</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
@@ -443,7 +362,6 @@ IdentifiableElement ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">exact_mappings</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">skos:prefLabel</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">label</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Relationship</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
@@ -458,7 +376,6 @@ IdentifiableElement ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">exact_mappings</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">skos:altLabel</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">aliases</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Relationship</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
@@ -471,7 +388,7 @@ IdentifiableElement ||--}o Coding : "coding"
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TranslatedText</span>
 </code></pre></div>
-</details></div>
+</details></div></div>
 </div>
 </div>
 <footer class="col-md-12">

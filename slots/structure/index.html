@@ -68,26 +68,6 @@
 <ul class="nav flex-column">
 <li class="nav-item" data-bs-level="1"><a class="nav-link" href="#slot-structure">Slot: structure</a>
 <ul class="nav flex-column">
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#applicable-classes">Applicable Classes</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#properties">Properties</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#identifier-and-mapping-information">Identifier and Mapping Information</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#mappings">Mappings</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#linkml-source">LinkML Source</a>
-<ul class="nav flex-column">
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -95,69 +75,79 @@
 </div></div>
 <div class="col-md-9" role="main">
 <h1 id="slot-structure">Slot: structure</h1>
-<p>URI: <a href="https://cdisc.org/odm2/slot/structure">odm:slot/structure</a>
-Alias: structure</p>
+<div data-search-exclude="" markdown="1">
+
+
+
+URI: [odm:slot/structure](https://cdisc.org/odm2/slot/structure)
 <!-- no inheritance hierarchy -->
-<h2 id="applicable-classes">Applicable Classes</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-<th>Modifies Slot</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../../classes/DataStructureDefinition/">DataStructureDefinition</a></td>
-<td>A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/ItemGroup/">ItemGroup</a></td>
-<td>A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../../classes/Dataflow/">Dataflow</a></td>
-<td>An abstract representation that defines data provision for different reference periods, where a Distribution and its Dataset are instances</td>
-<td>no</td>
-</tr>
-</tbody>
-</table>
-<h2 id="properties">Properties</h2>
-<ul>
-<li>Range: NONE</li>
-</ul>
-<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h2 id="mappings">Mappings</h2>
-<table>
-<thead>
-<tr>
-<th>Mapping Type</th>
-<th>Mapped Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>self</td>
-<td>odm:structure</td>
-</tr>
-<tr>
-<td>native</td>
-<td>odm:structure</td>
-</tr>
-</tbody>
-</table>
-<h2 id="linkml-source">LinkML Source</h2>
+
+
+
+
+
+## Applicable Classes
+
+| Name | Description | Modifies Slot |
+| --- | --- | --- |
+| [ItemGroup](../classes/ItemGroup.md) | A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections |  no  |
+| [DataStructureDefinition](../classes/DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures |  no  |
+| [Dataflow](../classes/Dataflow.md) | An abstract representation that defines data provision for different reference periods, where a Distribution and its Dataset are instances |  no  |
+
+
+
+
+
+
+## Properties
+
+### Type and Range
+
+| Property | Value |
+| --- | --- |
+| Range | NONE |
+| Domain Of | [ItemGroup](../classes/ItemGroup.md), [Dataflow](../classes/Dataflow.md) |
+
+### Cardinality and Requirements
+
+| Property | Value |
+| --- | --- |
+
+
+
+
+
+
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | odm:structure |
+| native | odm:structure |
+
+
+
+
+## LinkML Source
+
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">structure</span>
-<span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">structure</span>
 <span class="nt">domain_of</span><span class="p">:</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Dataflow</span>
 </code></pre></div>
-</details></div>
+</details></div></div>
 </div>
 </div>
 <footer class="col-md-12">

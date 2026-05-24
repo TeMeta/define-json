@@ -68,30 +68,6 @@
 <ul class="nav flex-column">
 <li class="nav-item" data-bs-level="1"><a class="nav-link" href="#class-identifiableelement">Class: IdentifiableElement</a>
 <ul class="nav flex-column">
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#inheritance">Inheritance</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#slots">Slots</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#usages">Usages</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#identifier-and-mapping-information">Identifier and Mapping Information</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#mappings">Mappings</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#linkml-source">LinkML Source</a>
-<ul class="nav flex-column">
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -99,156 +75,122 @@
 </div></div>
 <div class="col-md-9" role="main">
 <h1 id="class-identifiableelement">Class: IdentifiableElement</h1>
-<ul>
-<li><strong>NOTE</strong>: this is an abstract class and should not be instantiated directly</li>
-</ul>
-<p>URI: <a href="https://cdisc.org/odm2/class/IdentifiableElement">odm:class/IdentifiableElement</a></p>
+<div data-search-exclude="" markdown="1">
+
+
+* __NOTE__: this is an abstract class and should not be instantiated directly
+
+
+URI: [odm:class/IdentifiableElement](https://cdisc.org/odm2/class/IdentifiableElement)
+
+
 <pre class="mermaid"><code>erDiagram
-IdentifiableElement {
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
 Coding {
+    AliasPredicate aliasType  
     string code  
-    string decode  
     string codeSystem  
     string codeSystemVersion  
-    AliasPredicate aliasType  
+    string decode  
+}
+IdentifiableElement {
+    string name  
+    string description  
+    string OID  
+    stringList aliases  
+    string label  
+    string uuid  
 }
 
 IdentifiableElement ||--}o Coding : "coding"
 
 </code></pre>
-<h2 id="inheritance">Inheritance</h2>
-<ul>
-<li><strong>IdentifiableElement</strong> [ <a href="../Identifiable/">Identifiable</a> <a href="../Labelled/">Labelled</a>]<ul>
-<li><a href="../Relationship/">Relationship</a></li>
-<li><a href="../Dictionary/">Dictionary</a> [ <a href="../Versioned/">Versioned</a>]</li>
-<li><a href="../FormalExpression/">FormalExpression</a></li>
-<li><a href="../Parameter/">Parameter</a></li>
-<li><a href="../ReturnValue/">ReturnValue</a></li>
-<li><a href="../User/">User</a></li>
-<li><a href="../Organization/">Organization</a></li>
-<li><a href="../Standard/">Standard</a></li>
-<li><a href="../Resource/">Resource</a> [ <a href="../Versioned/">Versioned</a>]</li>
-<li><a href="../DocumentReference/">DocumentReference</a> [ <a href="../Versioned/">Versioned</a>]</li>
-<li><a href="../Timing/">Timing</a></li>
-<li><a href="../Dataset/">Dataset</a> [ <a href="../Versioned/">Versioned</a> <a href="../IsProfile/">IsProfile</a> <a href="../IsSdmxDataset/">IsSdmxDataset</a>]</li>
-<li><a href="../ComponentList/">ComponentList</a></li>
-</ul>
-</li>
-</ul>
-<h2 id="slots">Slots</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Cardinality and Range</th>
-<th>Description</th>
-<th>Inheritance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../../slots/OID/">OID</a></td>
-<td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.</td>
-<td><a href="../Identifiable/">Identifiable</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/uuid/">uuid</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Universal unique identifier</td>
-<td><a href="../Identifiable/">Identifiable</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/name/">name</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Short name or identifier, used for field names</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/description/">description</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>Detailed description, shown in tooltips</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/coding/">coding</a></td>
-<td>* <br/> <a href="../Coding/">Coding</a></td>
-<td>Semantic tags for this element</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/label/">label</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>Human-readable label, shown in UIs</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>* <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>Alternative name or identifier</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="usages">Usages</h2>
-<table>
-<thead>
-<tr>
-<th>used by</th>
-<th>used in</th>
-<th>type</th>
-<th>used</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../Relationship/">Relationship</a></td>
-<td><a href="../../slots/subject/">subject</a></td>
-<td>range</td>
-<td><a href="./">IdentifiableElement</a></td>
-</tr>
-<tr>
-<td><a href="../Relationship/">Relationship</a></td>
-<td><a href="../../slots/object/">object</a></td>
-<td>range</td>
-<td><a href="./">IdentifiableElement</a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="schema-source">Schema Source</h3>
-<ul>
-<li>from schema: https://cdisc.org/define-json</li>
-</ul>
-<h2 id="mappings">Mappings</h2>
-<table>
-<thead>
-<tr>
-<th>Mapping Type</th>
-<th>Mapped Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>self</td>
-<td>odm:IdentifiableElement</td>
-</tr>
-<tr>
-<td>native</td>
-<td>odm:IdentifiableElement</td>
-</tr>
-</tbody>
-</table>
-<h2 id="linkml-source">LinkML Source</h2>
+
+
+
+
+## Inheritance
+* **IdentifiableElement** [ [Identifiable](../classes/Identifiable.md) [Labelled](../classes/Labelled.md)]
+    * [Relationship](../classes/Relationship.md)
+    * [Dictionary](../classes/Dictionary.md) [ [Versioned](../classes/Versioned.md)]
+    * [FormalExpression](../classes/FormalExpression.md)
+    * [Parameter](../classes/Parameter.md)
+    * [ReturnValue](../classes/ReturnValue.md)
+    * [User](../classes/User.md)
+    * [Organization](../classes/Organization.md)
+    * [Standard](../classes/Standard.md)
+    * [Resource](../classes/Resource.md) [ [Versioned](../classes/Versioned.md)]
+    * [DocumentReference](../classes/DocumentReference.md) [ [Versioned](../classes/Versioned.md)]
+    * [Timing](../classes/Timing.md)
+    * [Dataset](../classes/Dataset.md) [ [Versioned](../classes/Versioned.md) [IsProfile](../classes/IsProfile.md) [IsSdmxDataset](../classes/IsSdmxDataset.md)]
+    * [ComponentList](../classes/ComponentList.md)
+
+
+## Slots
+
+| Name | Cardinality and Range | Description | Inheritance |
+| ---  | --- | --- | --- |
+| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
+| [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
+| [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
+| [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md) or <br/>[TranslatedText](../classes/TranslatedText.md) | Detailed description, shown in tooltips | [Labelled](../classes/Labelled.md) |
+| [coding](../slots/coding.md) | * <br/> [Coding](../classes/Coding.md) | Semantic tags for this element | [Labelled](../classes/Labelled.md) |
+| [label](../slots/label.md) | 0..1 <br/> [String](../types/String.md) or <br/>[TranslatedText](../classes/TranslatedText.md) | Human-readable label, shown in UIs | [Labelled](../classes/Labelled.md) |
+| [aliases](../slots/aliases.md) | * <br/> [String](../types/String.md) or <br/>[TranslatedText](../classes/TranslatedText.md) | Alternative name or identifier | [Labelled](../classes/Labelled.md) |
+
+
+
+
+
+## Usages
+
+| used by | used in | type | used |
+| ---  | --- | --- | --- |
+| [Relationship](../classes/Relationship.md) | [subject](../slots/subject.md) | range | [IdentifiableElement](../classes/IdentifiableElement.md) |
+| [Relationship](../classes/Relationship.md) | [object](../slots/object.md) | range | [IdentifiableElement](../classes/IdentifiableElement.md) |
+
+
+
+
+
+
+
+
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://cdisc.org/define-json
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | odm:IdentifiableElement |
+| native | odm:IdentifiableElement |
+
+
+
+
+
+
+## LinkML Source
+
 <!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
-<h3 id="direct">Direct</h3>
+
+### Direct
+
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IdentifiableElement</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
@@ -258,7 +200,9 @@ IdentifiableElement ||--}o Coding : "coding"
 <span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
 </code></pre></div>
 </details>
-<h3 id="induced">Induced</h3>
+
+### Induced
+
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IdentifiableElement</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
@@ -274,7 +218,6 @@ IdentifiableElement ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">identifier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OID</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IdentifiableElement</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Identifiable</span>
@@ -285,7 +228,6 @@ IdentifiableElement ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Universal unique identifier</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uuid</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IdentifiableElement</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Identifiable</span>
@@ -295,10 +237,11 @@ IdentifiableElement ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Short name or identifier, used for field names</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">name</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IdentifiableElement</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DefClass</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SubClass</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Standard</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 <span class="w">  </span><span class="nt">description</span><span class="p">:</span>
@@ -306,7 +249,6 @@ IdentifiableElement ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Detailed description, shown in tooltips</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">description</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IdentifiableElement</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
@@ -320,7 +262,6 @@ IdentifiableElement ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Semantic tags for this element</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">coding</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IdentifiableElement</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
@@ -337,7 +278,6 @@ IdentifiableElement ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">exact_mappings</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">skos:prefLabel</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">label</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IdentifiableElement</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
@@ -352,7 +292,6 @@ IdentifiableElement ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">exact_mappings</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">skos:altLabel</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">aliases</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IdentifiableElement</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
@@ -365,7 +304,7 @@ IdentifiableElement ||--}o Coding : "coding"
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TranslatedText</span>
 </code></pre></div>
-</details></div>
+</details></div></div>
 </div>
 </div>
 <footer class="col-md-12">

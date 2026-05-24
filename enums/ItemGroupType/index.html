@@ -68,22 +68,6 @@
 <ul class="nav flex-column">
 <li class="nav-item" data-bs-level="1"><a class="nav-link" href="#enum-itemgrouptype">Enum: ItemGroupType</a>
 <ul class="nav flex-column">
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#permissible-values">Permissible Values</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#slots">Slots</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#identifier-and-mapping-information">Identifier and Mapping Information</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#linkml-source">LinkML Source</a>
-<ul class="nav flex-column">
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -92,75 +76,57 @@
 <div class="col-md-9" role="main">
 <h1 id="enum-itemgrouptype">Enum: ItemGroupType</h1>
 <p><em>An enumeration that defines the roles of an item group within a specific context</em></p>
-<p>URI: <a href="https://cdisc.org/odm2/enum/ItemGroupType">odm:enum/ItemGroupType</a></p>
-<h2 id="permissible-values">Permissible Values</h2>
-<table>
-<thead>
-<tr>
-<th>Value</th>
-<th>Meaning</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>DataCube</td>
-<td>None</td>
-<td>A Data Structure Definition for an Analysis Data Cube of dimensions, measures, and attributes.</td>
-</tr>
-<tr>
-<td>Table</td>
-<td>None</td>
-<td>A simple table or data frame.</td>
-</tr>
-<tr>
-<td>Object</td>
-<td>None</td>
-<td>An object or profile of a FHIR resource.</td>
-</tr>
-<tr>
-<td>DatasetSpecialization</td>
-<td>None</td>
-<td>A data specialization of a concept.</td>
-</tr>
-<tr>
-<td>ValueList</td>
-<td>None</td>
-<td>A list of topic-specific items for a specific column (from Define-XML).</td>
-</tr>
-<tr>
-<td>Section</td>
-<td>None</td>
-<td>A section of a form.</td>
-</tr>
-<tr>
-<td>Form</td>
-<td>None</td>
-<td>A data collection form.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="slots">Slots</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../../slots/type/">type</a></td>
-<td>Type of item group</td>
-</tr>
-</tbody>
-</table>
-<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="schema-source">Schema Source</h3>
-<ul>
-<li>from schema: https://cdisc.org/define-json</li>
-</ul>
-<h2 id="linkml-source">LinkML Source</h2>
+<div data-search-exclude="" markdown="1">
+
+URI: [odm:enum/ItemGroupType](https://cdisc.org/odm2/enum/ItemGroupType)
+
+## Permissible Values
+| Value | Meaning | Description |
+| --- | --- | --- |
+| DataCube | None | A Data Structure Definition for an Analysis Data Cube of dimensions, measures, and attributes. |
+| Table | None | A simple table or data frame. |
+| Object | None | An object or profile of a FHIR resource. |
+| DatasetSpecialization | None | A data specialization of a concept. |
+| ValueList | None | A list of topic-specific items for a specific column (from Define-XML). |
+| Section | None | A section of a form. |
+| Form | None | A data collection form. |
+
+
+
+
+## Slots
+
+| Name | Description |
+| ---  | --- |
+| [type](../slots/type.md) | Type of item group |
+
+
+
+
+
+
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://cdisc.org/define-json
+
+
+
+
+
+
+## LinkML Source
+
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroupType</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">An enumeration that defines the roles of an item group within a specific</span>
@@ -191,7 +157,8 @@
 <span class="w">    </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Form</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A data collection form.</span>
 </code></pre></div>
-</details></div>
+</details>
+</div></div>
 </div>
 </div>
 <footer class="col-md-12">

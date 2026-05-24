@@ -68,18 +68,6 @@
 <ul class="nav flex-column">
 <li class="nav-item" data-bs-level="1"><a class="nav-link" href="#enum-origintype">Enum: OriginType</a>
 <ul class="nav flex-column">
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#permissible-values">Permissible Values</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#identifier-and-mapping-information">Identifier and Mapping Information</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#linkml-source">LinkML Source</a>
-<ul class="nav flex-column">
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -88,60 +76,51 @@
 <div class="col-md-9" role="main">
 <h1 id="enum-origintype">Enum: OriginType</h1>
 <p><em>An enumeration that defines the types of origins for data items.</em></p>
-<p>URI: <a href="https://cdisc.org/odm2/enum/OriginType">odm:enum/OriginType</a></p>
-<h2 id="permissible-values">Permissible Values</h2>
-<table>
-<thead>
-<tr>
-<th>Value</th>
-<th>Meaning</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Assigned</td>
-<td>ncit:C170547</td>
-<td>A value that is derived through designation, such as values from a look up table or a label on a CRF.</td>
-</tr>
-<tr>
-<td>Collected</td>
-<td>ncit:C170548</td>
-<td>A value that is actually observed and recorded by a person or obtained by an instrument.</td>
-</tr>
-<tr>
-<td>Derived</td>
-<td>ncit:C170549</td>
-<td>A value that is calculated by an algorithm or reproducible rule, and which is dependent upon other data values.</td>
-</tr>
-<tr>
-<td>Not Available</td>
-<td>ncit:C126101</td>
-<td>A value that is not discoverable or accessible.</td>
-</tr>
-<tr>
-<td>Other</td>
-<td>None</td>
-<td>Different than the one(s) previously specified or mentioned. (NCI)</td>
-</tr>
-<tr>
-<td>Predecessor</td>
-<td>ncit:C170550</td>
-<td>A value that is copied from another variable.</td>
-</tr>
-<tr>
-<td>Protocol</td>
-<td>ncit:C170551</td>
-<td>A value that is included as part of the study protocol.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="schema-source">Schema Source</h3>
-<ul>
-<li>from schema: https://cdisc.org/define-json</li>
-</ul>
-<h2 id="linkml-source">LinkML Source</h2>
+<div data-search-exclude="" markdown="1">
+
+URI: [odm:enum/OriginType](https://cdisc.org/odm2/enum/OriginType)
+
+## Permissible Values
+| Value | Meaning | Description |
+| --- | --- | --- |
+| Assigned | ncit:C170547 | A value that is derived through designation, such as values from a look up table or a label on a CRF. |
+| Collected | ncit:C170548 | A value that is actually observed and recorded by a person or obtained by an instrument. |
+| Derived | ncit:C170549 | A value that is calculated by an algorithm or reproducible rule, and which is dependent upon other data values. |
+| Not Available | ncit:C126101 | A value that is not discoverable or accessible. |
+| Other | None | Different than the one(s) previously specified or mentioned. (NCI) |
+| Predecessor | ncit:C170550 | A value that is copied from another variable. |
+| Protocol | ncit:C170551 | A value that is included as part of the study protocol. |
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://cdisc.org/define-json
+
+
+
+
+
+
+## LinkML Source
+
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OriginType</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">An enumeration that defines the types of origins for data items.</span>
@@ -179,7 +158,8 @@
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A value that is included as part of the study protocol.</span>
 <span class="w">    </span><span class="nt">meaning</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ncit:C170551</span>
 </code></pre></div>
-</details></div>
+</details>
+</div></div>
 </div>
 </div>
 <footer class="col-md-12">

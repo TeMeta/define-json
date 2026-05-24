@@ -68,26 +68,6 @@
 <ul class="nav flex-column">
 <li class="nav-item" data-bs-level="1"><a class="nav-link" href="#class-versioned">Class: Versioned</a>
 <ul class="nav flex-column">
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#slots">Slots</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#mixin-usage">Mixin Usage</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#identifier-and-mapping-information">Identifier and Mapping Information</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#mappings">Mappings</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#linkml-source">LinkML Source</a>
-<ul class="nav flex-column">
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -96,128 +76,102 @@
 <div class="col-md-9" role="main">
 <h1 id="class-versioned">Class: Versioned</h1>
 <p><em>A mixin that provides version and connectivity information, including version numbers and resource references</em></p>
-<p>URI: <a href="https://cdisc.org/odm2/class/Versioned">odm:class/Versioned</a></p>
+<div data-search-exclude="" markdown="1">
+
+
+
+URI: [odm:class/Versioned](https://cdisc.org/odm2/class/Versioned)
+
+
 <pre class="mermaid"><code>erDiagram
 Versioned {
-    string version  
     string href  
+    string version  
 }
 
 
 
 </code></pre>
 <!-- no inheritance hierarchy -->
-<h2 id="slots">Slots</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Cardinality and Range</th>
-<th>Description</th>
-<th>Inheritance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../../slots/version/">version</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>The version of the external resources</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/href/">href</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Machine-readable instructions to obtain the resource e.g. FHIR path, URL</td>
-<td>direct</td>
-</tr>
-</tbody>
-</table>
-<h2 id="mixin-usage">Mixin Usage</h2>
-<table>
-<thead>
-<tr>
-<th>mixed into</th>
-<th>description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../IsProfile/">IsProfile</a></td>
-<td>A mixin that provides additional metadata for FHIR resources and Data Products, including profiles, security tags, and validity periods</td>
-</tr>
-<tr>
-<td><a href="../CodeList/">CodeList</a></td>
-<td>A value set that defines a discrete collection of permissible values for an item, corresponding to the ODM CodeList construct</td>
-</tr>
-<tr>
-<td><a href="../Dictionary/">Dictionary</a></td>
-<td>A dictionary that defines a set of codes and their meanings</td>
-</tr>
-<tr>
-<td><a href="../ReifiedConcept/">ReifiedConcept</a></td>
-<td>A canonical information layer that makes abstract concepts explicit and referenceable, showing how different data implementations represent the same underlying meanings through a star schema structure with multiple properties</td>
-</tr>
-<tr>
-<td><a href="../Resource/">Resource</a></td>
-<td>An external reference that serves as the source for a Dataset, ItemGroup, or Item</td>
-</tr>
-<tr>
-<td><a href="../DocumentReference/">DocumentReference</a></td>
-<td>A comprehensive reference element that points to an external document, combining elements from ODM and FHIR</td>
-</tr>
-<tr>
-<td><a href="../Dataflow/">Dataflow</a></td>
-<td>An abstract representation that defines data provision for different reference periods, where a Distribution and its Dataset are instances</td>
-</tr>
-<tr>
-<td><a href="../Dataset/">Dataset</a></td>
-<td>A collection element that groups observations sharing the same dimensionality, expressed as a set of unique dimensions within a Data Product context</td>
-</tr>
-<tr>
-<td><a href="../DataProduct/">DataProduct</a></td>
-<td>A governed collection that represents a purpose-driven assembly of datasets and services with an owning team and lifecycle. The DataProduct defines the boundary of accountability between data producers and consumers.</td>
-</tr>
-<tr>
-<td><a href="../ProvisionAgreement/">ProvisionAgreement</a></td>
-<td>An agreement element that describes the contractual relationship between a Data Provider and a Data Consumer regarding data provision</td>
-</tr>
-<tr>
-<td><a href="../Analysis/">Analysis</a></td>
-<td>Analysis extends Method to capture analysis-specific metadata including the reason for analysis, its purpose, and data traceability for the results used.<br/>Expressions and parameters from Method can be generic or implementation-specific.</td>
-</tr>
-<tr>
-<td><a href="../Display/">Display</a></td>
-<td>A rendered output of an analysis result.</td>
-</tr>
-</tbody>
-</table>
-<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="schema-source">Schema Source</h3>
-<ul>
-<li>from schema: https://cdisc.org/define-json</li>
-</ul>
-<h2 id="mappings">Mappings</h2>
-<table>
-<thead>
-<tr>
-<th>Mapping Type</th>
-<th>Mapped Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>self</td>
-<td>odm:Versioned</td>
-</tr>
-<tr>
-<td>native</td>
-<td>odm:Versioned</td>
-</tr>
-</tbody>
-</table>
-<h2 id="linkml-source">LinkML Source</h2>
+
+## Class Properties
+
+| Property | Value |
+| --- | --- |
+| Mixin | Yes |
+
+
+## Slots
+
+| Name | Cardinality and Range | Description | Inheritance |
+| ---  | --- | --- | --- |
+| [version](../slots/version.md) | 0..1 <br/> [String](../types/String.md) | The version of the external resources | direct |
+| [href](../slots/href.md) | 0..1 <br/> [String](../types/String.md) | Machine-readable instructions to obtain the resource e.g. FHIR path, URL | direct |
+
+
+
+## Mixin Usage
+
+| mixed into | description |
+| --- | --- |
+| [IsProfile](../classes/IsProfile.md) | A mixin that provides additional metadata for FHIR resources and Data Products, including profiles, security tags, and validity periods |
+| [CodeList](../classes/CodeList.md) | A value set that defines a discrete collection of permissible values for an item, corresponding to the ODM CodeList construct |
+| [Dictionary](../classes/Dictionary.md) | A dictionary that defines a set of codes and their meanings |
+| [ReifiedConcept](../classes/ReifiedConcept.md) | A canonical information layer that makes abstract concepts explicit and referenceable, showing how different data implementations represent the same underlying meanings through a star schema structure with multiple properties |
+| [Resource](../classes/Resource.md) | An external reference that serves as the source for a Dataset, ItemGroup, or Item |
+| [DocumentReference](../classes/DocumentReference.md) | A comprehensive reference element that points to an external document, combining elements from ODM and FHIR |
+| [Dataflow](../classes/Dataflow.md) | An abstract representation that defines data provision for different reference periods, where a Distribution and its Dataset are instances |
+| [Dataset](../classes/Dataset.md) | A collection element that groups observations sharing the same dimensionality, expressed as a set of unique dimensions within a Data Product context |
+| [DataProduct](../classes/DataProduct.md) | A governed collection that represents a purpose-driven assembly of datasets and services with an owning team and lifecycle. The DataProduct defines the boundary of accountability between data producers and consumers. |
+| [ProvisionAgreement](../classes/ProvisionAgreement.md) | An agreement element that describes the contractual relationship between a Data Provider and a Data Consumer regarding data provision |
+| [Analysis](../classes/Analysis.md) | Analysis extends Method to capture analysis-specific metadata including the reason for analysis, its purpose, and data traceability for the results used.<br/>Expressions and parameters from Method can be generic or implementation-specific. |
+| [Display](../classes/Display.md) | A rendered output of an analysis result. |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://cdisc.org/define-json
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | odm:Versioned |
+| native | odm:Versioned |
+
+
+
+
+
+
+## LinkML Source
+
 <!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
-<h3 id="direct">Direct</h3>
+
+### Direct
+
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Versioned</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A mixin that provides version and connectivity information, including</span>
@@ -246,7 +200,9 @@ Versioned {
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </code></pre></div>
 </details>
-<h3 id="induced">Induced</h3>
+
+### Induced
+
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Versioned</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A mixin that provides version and connectivity information, including</span>
@@ -259,7 +215,6 @@ Versioned {
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The version of the external resources</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">version</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Versioned</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Versioned</span>
@@ -271,14 +226,13 @@ Versioned {
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">URL</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">href</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Versioned</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Versioned</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 <span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </code></pre></div>
-</details></div>
+</details></div></div>
 </div>
 </div>
 <footer class="col-md-12">

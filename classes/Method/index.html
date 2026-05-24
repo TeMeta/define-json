@@ -68,30 +68,6 @@
 <ul class="nav flex-column">
 <li class="nav-item" data-bs-level="1"><a class="nav-link" href="#class-method">Class: Method</a>
 <ul class="nav flex-column">
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#inheritance">Inheritance</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#slots">Slots</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#usages">Usages</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#identifier-and-mapping-information">Identifier and Mapping Information</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#mappings">Mappings</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#linkml-source">LinkML Source</a>
-<ul class="nav flex-column">
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -101,575 +77,314 @@
 <h1 id="class-method">Class: Method</h1>
 <p><em>A reusable computational procedure that describes how to derive values and can be referenced by Items.</em></p>
 <p><em>Analysis and Derivation concepts can be implemented by a Method. Properties can be referenced by Parameters in its expressions.</em></p>
-<p>URI: <a href="https://cdisc.org/odm2/class/Method">odm:class/Method</a></p>
+<div data-search-exclude="" markdown="1">
+
+
+
+URI: [odm:class/Method](https://cdisc.org/odm2/class/Method)
+
+
 <pre class="mermaid"><code>erDiagram
-Method {
-    MethodType type  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-SiteOrSponsorComment {
-    string text  
-    OriginSource sourceType  
-    string source  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
+Coding {
+    AliasPredicate aliasType  
+    string code  
+    string codeSystem  
+    string codeSystemVersion  
+    string decode  
 }
 Comment {
     string text  
-    string OID  
-    string uuid  
     string name  
     string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-Coding {
-    string code  
-    string decode  
-    string codeSystem  
-    string codeSystemVersion  
-    AliasPredicate aliasType  
-}
-ReifiedConcept {
-    string version  
-    string href  
     string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
     stringList aliases  
-    boolean mandatory  
-    string purpose  
+    string label  
     datetime lastUpdated  
+    boolean mandatory  
     string owner  
+    string purpose  
+    string uuid  
     string wasDerivedFrom  
 }
 ConceptProperty {
-    integer minOccurs  
     integer maxOccurs  
-    string OID  
-    string uuid  
+    integer minOccurs  
     string name  
     string description  
-    string label  
+    string OID  
     stringList aliases  
-    boolean mandatory  
-    string purpose  
+    string label  
     datetime lastUpdated  
+    boolean mandatory  
     string owner  
+    string purpose  
+    string uuid  
     string wasDerivedFrom  
 }
 DocumentReference {
-    string title  
     string leafID  
     integerList pages  
     string relationship  
-    string version  
-    string href  
-    string OID  
-    string uuid  
+    string title  
     string name  
     string description  
-    string label  
+    string OID  
     stringList aliases  
+    string href  
+    string label  
+    string uuid  
+    string version  
 }
 FormalExpression {
-    string context  
     string expression  
     string returnType  
-    string OID  
-    string uuid  
+    string context  
     string name  
     string description  
-    string label  
+    string OID  
     stringList aliases  
+    string label  
+    string uuid  
 }
-Resource {
-    string resourceType  
-    string attribute  
-    string version  
-    string href  
-    string OID  
-    string uuid  
+Method {
+    MethodType type  
     string name  
     string description  
-    string label  
-    stringList aliases  
-}
-ReturnValue {
-    DataType dataType  
-    stringList valueList  
     string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
     stringList aliases  
+    string label  
+    datetime lastUpdated  
+    boolean mandatory  
+    string owner  
+    string purpose  
+    string uuid  
+    string wasDerivedFrom  
 }
 Parameter {
-    DataType dataType  
-    string value  
     string defaultValue  
-    stringList items  
     boolean required  
-    string OID  
-    string uuid  
+    DataType dataType  
+    stringList items  
+    string value  
     string name  
     string description  
-    string label  
+    string OID  
     stringList aliases  
+    string label  
+    string uuid  
+}
+ReifiedConcept {
+    string name  
+    string description  
+    string OID  
+    stringList aliases  
+    string href  
+    string label  
+    datetime lastUpdated  
+    boolean mandatory  
+    string owner  
+    string purpose  
+    string uuid  
+    string version  
+    string wasDerivedFrom  
+}
+Resource {
+    string attribute  
+    string resourceType  
+    string name  
+    string description  
+    string OID  
+    stringList aliases  
+    string href  
+    string label  
+    string uuid  
+    string version  
+}
+ReturnValue {
+    stringList valueList  
+    DataType dataType  
+    string name  
+    string description  
+    string OID  
+    stringList aliases  
+    string label  
+    string uuid  
+}
+SiteOrSponsorComment {
+    OriginSource sourceType  
+    string source  
+    string text  
+    string name  
+    string description  
+    string OID  
+    stringList aliases  
+    string label  
+    datetime lastUpdated  
+    boolean mandatory  
+    string owner  
+    string purpose  
+    string uuid  
+    string wasDerivedFrom  
 }
 
-Method ||--}o FormalExpression : "expressions"
-Method ||--}o DocumentReference : "documents"
-Method ||--|o ReifiedConcept : "implementsConcept"
-Method ||--}o Coding : "coding"
-Method ||--}o Comment : "comments"
-Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-SiteOrSponsorComment ||--}o Coding : "coding"
-SiteOrSponsorComment ||--}o Comment : "comments"
-SiteOrSponsorComment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 Comment ||--}o Comment : "comments"
+Comment ||--}o DocumentReference : "documents"
 Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-ReifiedConcept ||--}o ConceptProperty : "properties"
-ReifiedConcept ||--}o Coding : "coding"
-ReifiedConcept ||--}o Comment : "comments"
-ReifiedConcept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ConceptProperty ||--|o CodeList : "codeList"
 ConceptProperty ||--}o Coding : "coding"
 ConceptProperty ||--}o Comment : "comments"
 ConceptProperty ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 DocumentReference ||--}o Coding : "coding"
-FormalExpression ||--}o Parameter : "parameters"
 FormalExpression ||--|o ReturnValue : "returnValue"
-FormalExpression ||--}o Resource : "externalCodeLibs"
 FormalExpression ||--}o Coding : "coding"
-Resource ||--}o FormalExpression : "selection"
-Resource ||--}o Coding : "coding"
-ReturnValue ||--}o Coding : "coding"
+FormalExpression ||--}o Parameter : "parameters"
+FormalExpression ||--}o Resource : "externalCodeLibs"
+Method ||--|o ReifiedConcept : "implementsConcept"
+Method ||--}o Coding : "coding"
+Method ||--}o Comment : "comments"
+Method ||--}o DocumentReference : "documents"
+Method ||--}o FormalExpression : "expressions"
+Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Parameter ||--}o CodeList : "codeList"
-Parameter ||--}o ConceptProperty : "conceptProperty"
-Parameter ||--}o WhereClause : "applicableWhen"
-Parameter ||--}o Condition : "conditions"
 Parameter ||--}o Coding : "coding"
+Parameter ||--}o ConceptProperty : "conceptProperty"
+Parameter ||--}o Condition : "conditions"
+Parameter ||--}o WhereClause : "applicableWhen"
+ReifiedConcept ||--}o Coding : "coding"
+ReifiedConcept ||--}o Comment : "comments"
+ReifiedConcept ||--}o ConceptProperty : "properties"
+ReifiedConcept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Resource ||--}o Coding : "coding"
+Resource ||--}o FormalExpression : "selection"
+ReturnValue ||--}o Coding : "coding"
+SiteOrSponsorComment ||--}o Coding : "coding"
+SiteOrSponsorComment ||--}o Comment : "comments"
+SiteOrSponsorComment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 </code></pre>
-<h2 id="inheritance">Inheritance</h2>
-<ul>
-<li><a href="../GovernedElement/">GovernedElement</a> [ <a href="../Identifiable/">Identifiable</a> <a href="../Labelled/">Labelled</a> <a href="../Governed/">Governed</a>]<ul>
-<li><strong>Method</strong><ul>
-<li><a href="../Analysis/">Analysis</a> [ <a href="../Versioned/">Versioned</a>]</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="slots">Slots</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Cardinality and Range</th>
-<th>Description</th>
-<th>Inheritance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../../slots/type/">type</a></td>
-<td>0..1 <br/> <a href="../../enums/MethodType/">MethodType</a></td>
-<td>The type of method e.g. Computation, Imputation, Transformation.</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/expressions/">expressions</a></td>
-<td>* <br/> <a href="../FormalExpression/">FormalExpression</a></td>
-<td>Formal expressions used by this method</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/documents/">documents</a></td>
-<td>* <br/> <a href="../DocumentReference/">DocumentReference</a></td>
-<td>Reference to a document that describes this method in detail.</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/implementsConcept/">implementsConcept</a></td>
-<td>0..1 <br/> <a href="../ReifiedConcept/">ReifiedConcept</a></td>
-<td>Reference to a specific concept that this Method implements.</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/OID/">OID</a></td>
-<td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.</td>
-<td><a href="../Identifiable/">Identifiable</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/uuid/">uuid</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Universal unique identifier</td>
-<td><a href="../Identifiable/">Identifiable</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/name/">name</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Short name or identifier, used for field names</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/description/">description</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>Detailed description, shown in tooltips</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/coding/">coding</a></td>
-<td>* <br/> <a href="../Coding/">Coding</a></td>
-<td>Semantic tags for this element</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/label/">label</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>Human-readable label, shown in UIs</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>* <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>Alternative name or identifier</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/mandatory/">mandatory</a></td>
-<td>0..1 <br/> <a href="../../types/Boolean/">Boolean</a></td>
-<td>Is this element required?</td>
-<td><a href="../Governed/">Governed</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/comments/">comments</a></td>
-<td>* <br/> <a href="../Comment/">Comment</a></td>
-<td>Comment on the element, such as a rationale for its inclusion or exclusion</td>
-<td><a href="../Governed/">Governed</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
-<td>* <br/> <a href="../SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
-<td>Comment on the element, such as a rationale for its inclusion or exclusion</td>
-<td><a href="../Governed/">Governed</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/purpose/">purpose</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>Purpose or rationale for this data element</td>
-<td><a href="../Governed/">Governed</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/lastUpdated/">lastUpdated</a></td>
-<td>0..1 <br/> <a href="../../types/Datetime/">Datetime</a></td>
-<td>When the resource was last updated</td>
-<td><a href="../Governed/">Governed</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/owner/">owner</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../User/">User</a> or <br/><a href="../Organization/">Organization</a> or <br/><a href="../../types/String/">String</a></td>
-<td>Party responsible for this element</td>
-<td><a href="../Governed/">Governed</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../Item/">Item</a> or <br/><a href="../ItemGroup/">ItemGroup</a> or <br/><a href="../MetaDataVersion/">MetaDataVersion</a> or <br/><a href="../CodeList/">CodeList</a> or <br/><a href="../ReifiedConcept/">ReifiedConcept</a> or <br/><a href="../ConceptProperty/">ConceptProperty</a> or <br/><a href="../Condition/">Condition</a> or <br/><a href="./">Method</a> or <br/><a href="../NominalOccurrence/">NominalOccurrence</a> or <br/><a href="../Dataflow/">Dataflow</a> or <br/><a href="../CubeComponent/">CubeComponent</a> or <br/><a href="../DataProduct/">DataProduct</a> or <br/><a href="../ProvisionAgreement/">ProvisionAgreement</a></td>
-<td>Reference to another item that this item implements or extends, e.g. a template Item definition.</td>
-<td><a href="../Governed/">Governed</a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="usages">Usages</h2>
-<table>
-<thead>
-<tr>
-<th>used by</th>
-<th>used in</th>
-<th>type</th>
-<th>used</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../GovernedElement/">GovernedElement</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../Governed/">Governed</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../MetaDataVersion/">MetaDataVersion</a></td>
-<td><a href="../../slots/methods/">methods</a></td>
-<td>range</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../MetaDataVersion/">MetaDataVersion</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../Item/">Item</a></td>
-<td><a href="../../slots/method/">method</a></td>
-<td>range</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../Item/">Item</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../ItemGroup/">ItemGroup</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../CodeList/">CodeList</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../Comment/">Comment</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../ReifiedConcept/">ReifiedConcept</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../ConceptProperty/">ConceptProperty</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../WhereClause/">WhereClause</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../Condition/">Condition</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="./">Method</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../Timing/">Timing</a></td>
-<td><a href="../../slots/imputation/">imputation</a></td>
-<td>range</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../NominalOccurrence/">NominalOccurrence</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../DataStructureDefinition/">DataStructureDefinition</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../Dataflow/">Dataflow</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../CubeComponent/">CubeComponent</a></td>
-<td><a href="../../slots/missingHandling/">missingHandling</a></td>
-<td>range</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../CubeComponent/">CubeComponent</a></td>
-<td><a href="../../slots/imputation/">imputation</a></td>
-<td>range</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../CubeComponent/">CubeComponent</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../Measure/">Measure</a></td>
-<td><a href="../../slots/missingHandling/">missingHandling</a></td>
-<td>range</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../Measure/">Measure</a></td>
-<td><a href="../../slots/imputation/">imputation</a></td>
-<td>range</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../Measure/">Measure</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../Dimension/">Dimension</a></td>
-<td><a href="../../slots/missingHandling/">missingHandling</a></td>
-<td>range</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../Dimension/">Dimension</a></td>
-<td><a href="../../slots/imputation/">imputation</a></td>
-<td>range</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../Dimension/">Dimension</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../DataAttribute/">DataAttribute</a></td>
-<td><a href="../../slots/missingHandling/">missingHandling</a></td>
-<td>range</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../DataAttribute/">DataAttribute</a></td>
-<td><a href="../../slots/imputation/">imputation</a></td>
-<td>range</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../DataAttribute/">DataAttribute</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../DataProduct/">DataProduct</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../ProvisionAgreement/">ProvisionAgreement</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../Analysis/">Analysis</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">Method</a></td>
-</tr>
-<tr>
-<td><a href="../Display/">Display</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">Method</a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="schema-source">Schema Source</h3>
-<ul>
-<li>from schema: https://cdisc.org/define-json</li>
-</ul>
-<h2 id="mappings">Mappings</h2>
-<table>
-<thead>
-<tr>
-<th>Mapping Type</th>
-<th>Mapped Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>self</td>
-<td>odm:Method</td>
-</tr>
-<tr>
-<td>native</td>
-<td>odm:Method</td>
-</tr>
-<tr>
-<td>exact</td>
-<td>odm:MethodRef, odm:MethodDef</td>
-</tr>
-<tr>
-<td>close</td>
-<td>fhir:Expression, omop:Transformation</td>
-</tr>
-</tbody>
-</table>
-<h2 id="linkml-source">LinkML Source</h2>
+
+
+
+
+## Inheritance
+* [GovernedElement](../classes/GovernedElement.md) [ [Identifiable](../classes/Identifiable.md) [Labelled](../classes/Labelled.md) [Governed](../classes/Governed.md)]
+    * **Method**
+        * [Analysis](../classes/Analysis.md) [ [Versioned](../classes/Versioned.md)]
+
+
+## Slots
+
+| Name | Cardinality and Range | Description | Inheritance |
+| ---  | --- | --- | --- |
+| [type](../slots/type.md) | 0..1 <br/> [MethodType](../enums/MethodType.md) | The type of method e.g. Computation, Imputation, Transformation. | direct |
+| [expressions](../slots/expressions.md) | * <br/> [FormalExpression](../classes/FormalExpression.md) | Formal expressions used by this method | direct |
+| [documents](../slots/documents.md) | * <br/> [DocumentReference](../classes/DocumentReference.md) | Reference to a document that describes this method in detail. | direct |
+| [implementsConcept](../slots/implementsConcept.md) | 0..1 <br/> [ReifiedConcept](../classes/ReifiedConcept.md) | Reference to a specific concept that this Method implements. | direct |
+| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
+| [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
+| [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
+| [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md) or <br/>[TranslatedText](../classes/TranslatedText.md) | Detailed description, shown in tooltips | [Labelled](../classes/Labelled.md) |
+| [coding](../slots/coding.md) | * <br/> [Coding](../classes/Coding.md) | Semantic tags for this element | [Labelled](../classes/Labelled.md) |
+| [label](../slots/label.md) | 0..1 <br/> [String](../types/String.md) or <br/>[TranslatedText](../classes/TranslatedText.md) | Human-readable label, shown in UIs | [Labelled](../classes/Labelled.md) |
+| [aliases](../slots/aliases.md) | * <br/> [String](../types/String.md) or <br/>[TranslatedText](../classes/TranslatedText.md) | Alternative name or identifier | [Labelled](../classes/Labelled.md) |
+| [mandatory](../slots/mandatory.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Is this element required? | [Governed](../classes/Governed.md) |
+| [comments](../slots/comments.md) | * <br/> [Comment](../classes/Comment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
+| [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | * <br/> [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
+| [purpose](../slots/purpose.md) | 0..1 <br/> [String](../types/String.md) or <br/>[TranslatedText](../classes/TranslatedText.md) | Purpose or rationale for this data element | [Governed](../classes/Governed.md) |
+| [lastUpdated](../slots/lastUpdated.md) | 0..1 <br/> [Datetime](../types/Datetime.md) | When the resource was last updated | [Governed](../classes/Governed.md) |
+| [owner](../slots/owner.md) | 0..1 <br/> [String](../types/String.md) or <br/>[User](../classes/User.md) or <br/>[Organization](../classes/Organization.md) | Party responsible for this element | [Governed](../classes/Governed.md) |
+| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md) or <br/>[Item](../classes/Item.md) or <br/>[ItemGroup](../classes/ItemGroup.md) or <br/>[MetaDataVersion](../classes/MetaDataVersion.md) or <br/>[CodeList](../classes/CodeList.md) or <br/>[ReifiedConcept](../classes/ReifiedConcept.md) or <br/>[ConceptProperty](../classes/ConceptProperty.md) or <br/>[Condition](../classes/Condition.md) or <br/>[Method](../classes/Method.md) or <br/>[NominalOccurrence](../classes/NominalOccurrence.md) or <br/>[Dataflow](../classes/Dataflow.md) or <br/>[CubeComponent](../classes/CubeComponent.md) or <br/>[DataProduct](../classes/DataProduct.md) or <br/>[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
+
+
+
+
+
+## Usages
+
+| used by | used in | type | used |
+| ---  | --- | --- | --- |
+| [GovernedElement](../classes/GovernedElement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [Governed](../classes/Governed.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [MetaDataVersion](../classes/MetaDataVersion.md) | [methods](../slots/methods.md) | range | [Method](../classes/Method.md) |
+| [MetaDataVersion](../classes/MetaDataVersion.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [Item](../classes/Item.md) | [method](../slots/method.md) | range | [Method](../classes/Method.md) |
+| [Item](../classes/Item.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [ItemGroup](../classes/ItemGroup.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [CodeList](../classes/CodeList.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [Comment](../classes/Comment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [ReifiedConcept](../classes/ReifiedConcept.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [ConceptProperty](../classes/ConceptProperty.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [WhereClause](../classes/WhereClause.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [Condition](../classes/Condition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [Method](../classes/Method.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [Timing](../classes/Timing.md) | [imputation](../slots/imputation.md) | range | [Method](../classes/Method.md) |
+| [NominalOccurrence](../classes/NominalOccurrence.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [DataStructureDefinition](../classes/DataStructureDefinition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [Dataflow](../classes/Dataflow.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [CubeComponent](../classes/CubeComponent.md) | [missingHandling](../slots/missingHandling.md) | range | [Method](../classes/Method.md) |
+| [CubeComponent](../classes/CubeComponent.md) | [imputation](../slots/imputation.md) | range | [Method](../classes/Method.md) |
+| [CubeComponent](../classes/CubeComponent.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [Measure](../classes/Measure.md) | [missingHandling](../slots/missingHandling.md) | range | [Method](../classes/Method.md) |
+| [Measure](../classes/Measure.md) | [imputation](../slots/imputation.md) | range | [Method](../classes/Method.md) |
+| [Measure](../classes/Measure.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [Dimension](../classes/Dimension.md) | [missingHandling](../slots/missingHandling.md) | range | [Method](../classes/Method.md) |
+| [Dimension](../classes/Dimension.md) | [imputation](../slots/imputation.md) | range | [Method](../classes/Method.md) |
+| [Dimension](../classes/Dimension.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [DataAttribute](../classes/DataAttribute.md) | [missingHandling](../slots/missingHandling.md) | range | [Method](../classes/Method.md) |
+| [DataAttribute](../classes/DataAttribute.md) | [imputation](../slots/imputation.md) | range | [Method](../classes/Method.md) |
+| [DataAttribute](../classes/DataAttribute.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [DataProduct](../classes/DataProduct.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [ProvisionAgreement](../classes/ProvisionAgreement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [Analysis](../classes/Analysis.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+| [Display](../classes/Display.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Method](../classes/Method.md) |
+
+
+
+
+
+
+
+
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://cdisc.org/define-json
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | odm:Method |
+| native | odm:Method |
+| exact | odm:MethodRef, odm:MethodDef |
+| close | fhir:Expression, omop:Transformation |
+
+
+
+
+
+
+## LinkML Source
+
 <!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
-<h3 id="direct">Direct</h3>
+
+### Direct
+
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Method</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'A</span><span class="nv"> </span><span class="s">reusable</span><span class="nv"> </span><span class="s">computational</span><span class="nv"> </span><span class="s">procedure</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">describes</span><span class="nv"> </span><span class="s">how</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">derive</span><span class="nv"> </span><span class="s">values</span>
@@ -733,7 +448,9 @@ Parameter ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 </code></pre></div>
 </details>
-<h3 id="induced">Induced</h3>
+
+### Induced
+
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Method</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">'A</span><span class="nv"> </span><span class="s">reusable</span><span class="nv"> </span><span class="s">computational</span><span class="nv"> </span><span class="s">procedure</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">describes</span><span class="nv"> </span><span class="s">how</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">derive</span><span class="nv"> </span><span class="s">values</span>
@@ -754,7 +471,6 @@ Parameter ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">type</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The type of method e.g. Computation, Imputation, Transformation.</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">type</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Method</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
@@ -768,7 +484,6 @@ Parameter ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">expressions</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Formal expressions used by this method</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">expressions</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Method</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Condition</span>
@@ -782,7 +497,6 @@ Parameter ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">documents</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reference to a document that describes this method in detail.</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">documents</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Method</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Comment</span>
@@ -796,7 +510,6 @@ Parameter ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">implementsConcept</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reference to a specific concept that this Method implements.</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">implementsConcept</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Method</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
@@ -810,7 +523,6 @@ Parameter ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">identifier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OID</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Method</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Identifiable</span>
@@ -821,7 +533,6 @@ Parameter ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Universal unique identifier</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uuid</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Method</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Identifiable</span>
@@ -831,10 +542,11 @@ Parameter ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Short name or identifier, used for field names</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">name</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Method</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DefClass</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SubClass</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Standard</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 <span class="w">  </span><span class="nt">description</span><span class="p">:</span>
@@ -842,7 +554,6 @@ Parameter ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Detailed description, shown in tooltips</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">description</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Method</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
@@ -856,7 +567,6 @@ Parameter ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Semantic tags for this element</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">coding</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Method</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
@@ -873,7 +583,6 @@ Parameter ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">exact_mappings</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">skos:prefLabel</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">label</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Method</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
@@ -888,7 +597,6 @@ Parameter ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">exact_mappings</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">skos:altLabel</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">aliases</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Method</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
@@ -905,7 +613,6 @@ Parameter ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Is this element required?</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mandatory</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Method</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
@@ -916,7 +623,6 @@ Parameter ||--}o Coding : "coding"
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">exclusion</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">comments</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Method</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
@@ -929,7 +635,6 @@ Parameter ||--}o Coding : "coding"
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">exclusion</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">siteOrSponsorComments</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Method</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
@@ -941,7 +646,6 @@ Parameter ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Purpose or rationale for this data element</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">purpose</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Method</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
@@ -954,7 +658,6 @@ Parameter ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">When the resource was last updated</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lastUpdated</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Method</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
@@ -967,7 +670,6 @@ Parameter ||--}o Coding : "coding"
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prov:wasAttributedTo</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prov:wasAssociatedBy</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">owner</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Method</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
@@ -984,7 +686,6 @@ Parameter ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">exact_mappings</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prov:wasDerivedFrom</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wasDerivedFrom</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Method</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
@@ -1004,7 +705,7 @@ Parameter ||--}o Coding : "coding"
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ProvisionAgreement</span>
 </code></pre></div>
-</details></div>
+</details></div></div>
 </div>
 </div>
 <footer class="col-md-12">

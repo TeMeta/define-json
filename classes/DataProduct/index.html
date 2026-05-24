@@ -68,30 +68,6 @@
 <ul class="nav flex-column">
 <li class="nav-item" data-bs-level="1"><a class="nav-link" href="#class-dataproduct">Class: DataProduct</a>
 <ul class="nav flex-column">
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#inheritance">Inheritance</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#slots">Slots</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#usages">Usages</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#identifier-and-mapping-information">Identifier and Mapping Information</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#mappings">Mappings</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#linkml-source">LinkML Source</a>
-<ul class="nav flex-column">
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -100,608 +76,351 @@
 <div class="col-md-9" role="main">
 <h1 id="class-dataproduct">Class: DataProduct</h1>
 <p><em>A governed collection that represents a purpose-driven assembly of datasets and services with an owning team and lifecycle. The DataProduct defines the boundary of accountability between data producers and consumers.</em></p>
-<p>URI: <a href="https://cdisc.org/odm2/class/DataProduct">odm:class/DataProduct</a></p>
+<div data-search-exclude="" markdown="1">
+
+
+
+URI: [odm:class/DataProduct](https://cdisc.org/odm2/class/DataProduct)
+
+
 <pre class="mermaid"><code>erDiagram
-DataProduct {
-    string dataProductOwner  
-    string domain  
-    DataProductLifecycleStatus lifecycleStatus  
-    stringList hasPolicy  
-    string version  
-    string href  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-SiteOrSponsorComment {
-    string text  
-    OriginSource sourceType  
-    string source  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
+Coding {
+    AliasPredicate aliasType  
+    string code  
+    string codeSystem  
+    string codeSystemVersion  
+    string decode  
 }
 Comment {
     string text  
-    string OID  
-    string uuid  
     string name  
     string description  
-    string label  
+    string OID  
     stringList aliases  
-    boolean mandatory  
-    string purpose  
+    string label  
     datetime lastUpdated  
+    boolean mandatory  
     string owner  
+    string purpose  
+    string uuid  
     string wasDerivedFrom  
 }
-Coding {
-    string code  
-    string decode  
-    string codeSystem  
-    string codeSystemVersion  
-    AliasPredicate aliasType  
-}
-Dataset {
-    string publishedBy  
-    stringList keys  
-    string datasetType  
-    string conformsTo  
-    stringList hasPolicy  
-    string informationSensitivityClassification  
-    string version  
-    string href  
-    stringList profile  
-    string authenticator  
-    string action  
-    string reportingBegin  
-    string reportingEnd  
-    string dataExtractionDate  
-    string validFrom  
-    string validTo  
-    string publicationYear  
-    string publicationPeriod  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
-Timing {
-    TimingType type  
-    boolean isNominal  
-    string value  
-    datetime windowLower  
-    datetime windowUpper  
-    boolean recalled  
-    string frequency  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
-Distribution {
-    string conformsTo  
-    string format  
-}
-DataStructureDefinition {
-    boolean evolvingStructure  
+DataProduct {
+    string dataProductOwner  
+    DataProductLifecycleStatus lifecycleStatus  
     string domain  
-    string structure  
-    boolean isReferenceData  
-    ItemGroupType type  
-    boolean hasNoData  
-    stringList profile  
-    string authenticator  
-    boolean isNonStandard  
-    string OID  
-    string uuid  
+    stringList hasPolicy  
     string name  
     string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-    string version  
-    string href  
-}
-Dataflow {
-    string version  
-    string href  
     string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
     stringList aliases  
-    boolean mandatory  
-    string purpose  
+    string href  
+    string label  
     datetime lastUpdated  
+    boolean mandatory  
     string owner  
+    string purpose  
+    string uuid  
+    string version  
     string wasDerivedFrom  
 }
 DataService {
     string protocol  
     string securitySchemaType  
-    string resourceType  
-    string attribute  
-    string version  
-    string href  
-    string OID  
-    string uuid  
     string name  
     string description  
-    string label  
+    string OID  
     stringList aliases  
+    string attribute  
+    string href  
+    string label  
+    string resourceType  
+    string uuid  
+    string version  
+}
+DataStructureDefinition {
+    boolean evolvingStructure  
+    string name  
+    string description  
+    string OID  
+    stringList aliases  
+    string authenticator  
+    string domain  
+    string href  
+    boolean isNonStandard  
+    boolean isReferenceData  
+    string label  
+    datetime lastUpdated  
+    boolean mandatory  
+    string owner  
+    stringList profile  
+    string purpose  
+    string structure  
+    ItemGroupType type  
+    string uuid  
+    string version  
+    string wasDerivedFrom  
+    boolean hasNoData  
+}
+Dataflow {
+    string name  
+    string description  
+    string OID  
+    stringList aliases  
+    string href  
+    string label  
+    datetime lastUpdated  
+    boolean mandatory  
+    string owner  
+    string purpose  
+    string uuid  
+    string version  
+    string wasDerivedFrom  
+}
+Dataset {
+    string conformsTo  
+    string datasetType  
+    stringList hasPolicy  
+    string informationSensitivityClassification  
+    stringList keys  
+    string publishedBy  
+    string name  
+    string description  
+    string OID  
+    string action  
+    stringList aliases  
+    string authenticator  
+    string dataExtractionDate  
+    string href  
+    string label  
+    stringList profile  
+    string publicationPeriod  
+    string publicationYear  
+    string reportingBegin  
+    string reportingEnd  
+    string uuid  
+    string validFrom  
+    string validTo  
+    string version  
+}
+Distribution {
+    string format  
+    string conformsTo  
 }
 FormalExpression {
-    string context  
     string expression  
     string returnType  
-    string OID  
-    string uuid  
+    string context  
     string name  
     string description  
-    string label  
+    string OID  
     stringList aliases  
+    string label  
+    string uuid  
+}
+SiteOrSponsorComment {
+    OriginSource sourceType  
+    string source  
+    string text  
+    string name  
+    string description  
+    string OID  
+    stringList aliases  
+    string label  
+    datetime lastUpdated  
+    boolean mandatory  
+    string owner  
+    string purpose  
+    string uuid  
+    string wasDerivedFrom  
+}
+Timing {
+    string frequency  
+    boolean isNominal  
+    boolean recalled  
+    datetime windowLower  
+    datetime windowUpper  
+    TimingType type  
+    string value  
+    string name  
+    string description  
+    string OID  
+    stringList aliases  
+    string label  
+    string uuid  
 }
 
-DataProduct ||--}o DataService : "inputPort"
-DataProduct ||--}o DataService : "outputPort"
-DataProduct ||--}o Dataflow : "inputDataflow"
-DataProduct ||--}o Dataflow : "outputDataflow"
-DataProduct ||--}o Dataset : "inputDataset"
-DataProduct ||--}o Dataset : "outputDataset"
+Comment ||--}o Coding : "coding"
+Comment ||--}o Comment : "comments"
+Comment ||--}o DocumentReference : "documents"
+Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 DataProduct ||--}o Coding : "coding"
 DataProduct ||--}o Comment : "comments"
+DataProduct ||--}o DataService : "inputPort, outputPort"
+DataProduct ||--}o Dataflow : "inputDataflow, outputDataflow"
+DataProduct ||--}o Dataset : "inputDataset, outputDataset"
 DataProduct ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+DataService ||--|o Distribution : "isAccessServiceOf"
+DataService ||--}o Coding : "coding"
+DataService ||--}o FormalExpression : "selection"
+DataStructureDefinition ||--|o ComponentList : "grouping"
+DataStructureDefinition ||--|o DefClass : "observationClass"
+DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
+DataStructureDefinition ||--|o Standard : "standard"
+DataStructureDefinition ||--|o Timing : "validityPeriod"
+DataStructureDefinition ||--}o Coding : "coding, security"
+DataStructureDefinition ||--}o Comment : "comments"
+DataStructureDefinition ||--}o DataAttribute : "attributes"
+DataStructureDefinition ||--}o Dimension : "dimensions"
+DataStructureDefinition ||--}o Item : "items, keySequence"
+DataStructureDefinition ||--}o ItemGroup : "slices"
+DataStructureDefinition ||--}o Measure : "measures"
+DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+DataStructureDefinition ||--}o WhereClause : "applicableWhen"
+Dataflow ||--|o Analysis : "analysisMethod"
+Dataflow ||--|| DataStructureDefinition : "structure"
+Dataflow ||--}o Coding : "coding"
+Dataflow ||--}o Comment : "comments"
+Dataflow ||--}o Dimension : "dimensionConstraint"
+Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Dataset ||--|o DataStructureDefinition : "structuredBy"
+Dataset ||--|o Dataflow : "describedBy"
+Dataset ||--|o Timing : "validityPeriod"
+Dataset ||--}o Coding : "coding, security"
+Dataset ||--}o Distribution : "distribution"
+Distribution ||--|o DataService : "accessService"
+Distribution ||--|o Dataset : "isDistributionOf"
+FormalExpression ||--|o ReturnValue : "returnValue"
+FormalExpression ||--}o Coding : "coding"
+FormalExpression ||--}o Parameter : "parameters"
+FormalExpression ||--}o Resource : "externalCodeLibs"
 SiteOrSponsorComment ||--}o Coding : "coding"
 SiteOrSponsorComment ||--}o Comment : "comments"
 SiteOrSponsorComment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-Comment ||--}o DocumentReference : "documents"
-Comment ||--}o Coding : "coding"
-Comment ||--}o Comment : "comments"
-Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-Dataset ||--|o Dataflow : "describedBy"
-Dataset ||--|o DataStructureDefinition : "structuredBy"
-Dataset ||--}o Distribution : "distribution"
-Dataset ||--}o Coding : "security"
-Dataset ||--|o Timing : "validityPeriod"
-Dataset ||--}o Coding : "coding"
-Timing ||--|o NominalOccurrence : "relativeTo"
-Timing ||--|o NominalOccurrence : "relativeFrom"
 Timing ||--|o Method : "imputation"
+Timing ||--|o NominalOccurrence : "relativeFrom, relativeTo"
 Timing ||--}o Coding : "coding"
-Distribution ||--|o DataService : "accessService"
-Distribution ||--|o Dataset : "isDistributionOf"
-DataStructureDefinition ||--}o Dimension : "dimensions"
-DataStructureDefinition ||--}o Measure : "measures"
-DataStructureDefinition ||--}o DataAttribute : "attributes"
-DataStructureDefinition ||--|o ComponentList : "grouping"
-DataStructureDefinition ||--}o Item : "items"
-DataStructureDefinition ||--}o Item : "keySequence"
-DataStructureDefinition ||--}o ItemGroup : "slices"
-DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
-DataStructureDefinition ||--}o WhereClause : "applicableWhen"
-DataStructureDefinition ||--}o Coding : "security"
-DataStructureDefinition ||--|o Timing : "validityPeriod"
-DataStructureDefinition ||--|o Standard : "standard"
-DataStructureDefinition ||--}o Coding : "coding"
-DataStructureDefinition ||--}o Comment : "comments"
-DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-Dataflow ||--|| DataStructureDefinition : "structure"
-Dataflow ||--}o Dimension : "dimensionConstraint"
-Dataflow ||--|o Analysis : "analysisMethod"
-Dataflow ||--}o Coding : "coding"
-Dataflow ||--}o Comment : "comments"
-Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-DataService ||--|o Distribution : "isAccessServiceOf"
-DataService ||--}o FormalExpression : "selection"
-DataService ||--}o Coding : "coding"
-FormalExpression ||--}o Parameter : "parameters"
-FormalExpression ||--|o ReturnValue : "returnValue"
-FormalExpression ||--}o Resource : "externalCodeLibs"
-FormalExpression ||--}o Coding : "coding"
 
 </code></pre>
-<h2 id="inheritance">Inheritance</h2>
-<ul>
-<li><a href="../GovernedElement/">GovernedElement</a> [ <a href="../Identifiable/">Identifiable</a> <a href="../Labelled/">Labelled</a> <a href="../Governed/">Governed</a>]<ul>
-<li><strong>DataProduct</strong> [ <a href="../Versioned/">Versioned</a>]</li>
-</ul>
-</li>
-</ul>
-<h2 id="slots">Slots</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Cardinality and Range</th>
-<th>Description</th>
-<th>Inheritance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../../slots/dataProductOwner/">dataProductOwner</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../User/">User</a> or <br/><a href="../Organization/">Organization</a> or <br/><a href="../../types/String/">String</a></td>
-<td>The person or team accountable for this data product</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/domain/">domain</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>The functional domain or business area this product serves</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/lifecycleStatus/">lifecycleStatus</a></td>
-<td>0..1 <br/> <a href="../../enums/DataProductLifecycleStatus/">DataProductLifecycleStatus</a></td>
-<td>Current lifecycle status of the data product</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/inputPort/">inputPort</a></td>
-<td>* <br/> <a href="../DataService/">DataService</a></td>
-<td>Services that provide input into this data product</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/outputPort/">outputPort</a></td>
-<td>* <br/> <a href="../DataService/">DataService</a></td>
-<td>Services that expose output from this data product</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/inputDataflow/">inputDataflow</a></td>
-<td>* <br/> <a href="../Dataflow/">Dataflow</a></td>
-<td>Description of the input interface before concrete Datasets exist. Dataflows referenced here represent the demand side of a ProvisionAgreement.</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/outputDataflow/">outputDataflow</a></td>
-<td>* <br/> <a href="../Dataflow/">Dataflow</a></td>
-<td>Description of the output interface before concrete Datasets exist. Dataflows referenced here represent the supply side of a ProvisionAgreement.</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/inputDataset/">inputDataset</a></td>
-<td>* <br/> <a href="../Dataset/">Dataset</a></td>
-<td>Source datasets used by the data product</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/outputDataset/">outputDataset</a></td>
-<td>* <br/> <a href="../Dataset/">Dataset</a></td>
-<td>Output datasets produced by the data product</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/hasPolicy/">hasPolicy</a></td>
-<td>* <br/> <a href="../../types/String/">String</a></td>
-<td>Policies governing the use and access of the data product</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/version/">version</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>The version of the external resources</td>
-<td><a href="../Versioned/">Versioned</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/href/">href</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Machine-readable instructions to obtain the resource e.g. FHIR path, URL</td>
-<td><a href="../Versioned/">Versioned</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/OID/">OID</a></td>
-<td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.</td>
-<td><a href="../Identifiable/">Identifiable</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/uuid/">uuid</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Universal unique identifier</td>
-<td><a href="../Identifiable/">Identifiable</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/name/">name</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Short name or identifier, used for field names</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/description/">description</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>Detailed description, shown in tooltips</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/coding/">coding</a></td>
-<td>* <br/> <a href="../Coding/">Coding</a></td>
-<td>Semantic tags for this element</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/label/">label</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>Human-readable label, shown in UIs</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>* <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>Alternative name or identifier</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/mandatory/">mandatory</a></td>
-<td>0..1 <br/> <a href="../../types/Boolean/">Boolean</a></td>
-<td>Is this element required?</td>
-<td><a href="../Governed/">Governed</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/comments/">comments</a></td>
-<td>* <br/> <a href="../Comment/">Comment</a></td>
-<td>Comment on the element, such as a rationale for its inclusion or exclusion</td>
-<td><a href="../Governed/">Governed</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
-<td>* <br/> <a href="../SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
-<td>Comment on the element, such as a rationale for its inclusion or exclusion</td>
-<td><a href="../Governed/">Governed</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/purpose/">purpose</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>Purpose or rationale for this data element</td>
-<td><a href="../Governed/">Governed</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/lastUpdated/">lastUpdated</a></td>
-<td>0..1 <br/> <a href="../../types/Datetime/">Datetime</a></td>
-<td>When the resource was last updated</td>
-<td><a href="../Governed/">Governed</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/owner/">owner</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../User/">User</a> or <br/><a href="../Organization/">Organization</a> or <br/><a href="../../types/String/">String</a></td>
-<td>Party responsible for this element</td>
-<td><a href="../Governed/">Governed</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../Item/">Item</a> or <br/><a href="../ItemGroup/">ItemGroup</a> or <br/><a href="../MetaDataVersion/">MetaDataVersion</a> or <br/><a href="../CodeList/">CodeList</a> or <br/><a href="../ReifiedConcept/">ReifiedConcept</a> or <br/><a href="../ConceptProperty/">ConceptProperty</a> or <br/><a href="../Condition/">Condition</a> or <br/><a href="../Method/">Method</a> or <br/><a href="../NominalOccurrence/">NominalOccurrence</a> or <br/><a href="../Dataflow/">Dataflow</a> or <br/><a href="../CubeComponent/">CubeComponent</a> or <br/><a href="./">DataProduct</a> or <br/><a href="../ProvisionAgreement/">ProvisionAgreement</a></td>
-<td>Reference to another item that this item implements or extends, e.g. a template Item definition.</td>
-<td><a href="../Governed/">Governed</a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="usages">Usages</h2>
-<table>
-<thead>
-<tr>
-<th>used by</th>
-<th>used in</th>
-<th>type</th>
-<th>used</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../GovernedElement/">GovernedElement</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">DataProduct</a></td>
-</tr>
-<tr>
-<td><a href="../Governed/">Governed</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">DataProduct</a></td>
-</tr>
-<tr>
-<td><a href="../MetaDataVersion/">MetaDataVersion</a></td>
-<td><a href="../../slots/dataProducts/">dataProducts</a></td>
-<td>range</td>
-<td><a href="./">DataProduct</a></td>
-</tr>
-<tr>
-<td><a href="../MetaDataVersion/">MetaDataVersion</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">DataProduct</a></td>
-</tr>
-<tr>
-<td><a href="../Item/">Item</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">DataProduct</a></td>
-</tr>
-<tr>
-<td><a href="../ItemGroup/">ItemGroup</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">DataProduct</a></td>
-</tr>
-<tr>
-<td><a href="../CodeList/">CodeList</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">DataProduct</a></td>
-</tr>
-<tr>
-<td><a href="../Comment/">Comment</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">DataProduct</a></td>
-</tr>
-<tr>
-<td><a href="../ReifiedConcept/">ReifiedConcept</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">DataProduct</a></td>
-</tr>
-<tr>
-<td><a href="../ConceptProperty/">ConceptProperty</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">DataProduct</a></td>
-</tr>
-<tr>
-<td><a href="../WhereClause/">WhereClause</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">DataProduct</a></td>
-</tr>
-<tr>
-<td><a href="../Condition/">Condition</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">DataProduct</a></td>
-</tr>
-<tr>
-<td><a href="../Method/">Method</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">DataProduct</a></td>
-</tr>
-<tr>
-<td><a href="../SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">DataProduct</a></td>
-</tr>
-<tr>
-<td><a href="../NominalOccurrence/">NominalOccurrence</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">DataProduct</a></td>
-</tr>
-<tr>
-<td><a href="../DataStructureDefinition/">DataStructureDefinition</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">DataProduct</a></td>
-</tr>
-<tr>
-<td><a href="../Dataflow/">Dataflow</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">DataProduct</a></td>
-</tr>
-<tr>
-<td><a href="../CubeComponent/">CubeComponent</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">DataProduct</a></td>
-</tr>
-<tr>
-<td><a href="../Measure/">Measure</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">DataProduct</a></td>
-</tr>
-<tr>
-<td><a href="../Dimension/">Dimension</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">DataProduct</a></td>
-</tr>
-<tr>
-<td><a href="../DataAttribute/">DataAttribute</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">DataProduct</a></td>
-</tr>
-<tr>
-<td><a href="./">DataProduct</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">DataProduct</a></td>
-</tr>
-<tr>
-<td><a href="../ProvisionAgreement/">ProvisionAgreement</a></td>
-<td><a href="../../slots/consumer/">consumer</a></td>
-<td>any_of[range]</td>
-<td><a href="./">DataProduct</a></td>
-</tr>
-<tr>
-<td><a href="../ProvisionAgreement/">ProvisionAgreement</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">DataProduct</a></td>
-</tr>
-<tr>
-<td><a href="../Analysis/">Analysis</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">DataProduct</a></td>
-</tr>
-<tr>
-<td><a href="../Display/">Display</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">DataProduct</a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="schema-source">Schema Source</h3>
-<ul>
-<li>from schema: https://cdisc.org/define-json</li>
-</ul>
-<h2 id="mappings">Mappings</h2>
-<table>
-<thead>
-<tr>
-<th>Mapping Type</th>
-<th>Mapped Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>self</td>
-<td>odm:DataProduct</td>
-</tr>
-<tr>
-<td>native</td>
-<td>odm:DataProduct</td>
-</tr>
-<tr>
-<td>exact</td>
-<td>dprod:DataProduct, dcat:DataService</td>
-</tr>
-</tbody>
-</table>
-<h2 id="linkml-source">LinkML Source</h2>
+
+
+
+
+## Inheritance
+* [GovernedElement](../classes/GovernedElement.md) [ [Identifiable](../classes/Identifiable.md) [Labelled](../classes/Labelled.md) [Governed](../classes/Governed.md)]
+    * **DataProduct** [ [Versioned](../classes/Versioned.md)]
+
+
+## Slots
+
+| Name | Cardinality and Range | Description | Inheritance |
+| ---  | --- | --- | --- |
+| [dataProductOwner](../slots/dataProductOwner.md) | 0..1 <br/> [String](../types/String.md) or <br/>[User](../classes/User.md) or <br/>[Organization](../classes/Organization.md) | The person or team accountable for this data product | direct |
+| [domain](../slots/domain.md) | 0..1 <br/> [String](../types/String.md) | The functional domain or business area this product serves | direct |
+| [lifecycleStatus](../slots/lifecycleStatus.md) | 0..1 <br/> [DataProductLifecycleStatus](../enums/DataProductLifecycleStatus.md) | Current lifecycle status of the data product | direct |
+| [inputPort](../slots/inputPort.md) | * <br/> [DataService](../classes/DataService.md) | Services that provide input into this data product | direct |
+| [outputPort](../slots/outputPort.md) | * <br/> [DataService](../classes/DataService.md) | Services that expose output from this data product | direct |
+| [inputDataflow](../slots/inputDataflow.md) | * <br/> [Dataflow](../classes/Dataflow.md) | Description of the input interface before concrete Datasets exist. Dataflows referenced here represent the demand side of a ProvisionAgreement. | direct |
+| [outputDataflow](../slots/outputDataflow.md) | * <br/> [Dataflow](../classes/Dataflow.md) | Description of the output interface before concrete Datasets exist. Dataflows referenced here represent the supply side of a ProvisionAgreement. | direct |
+| [inputDataset](../slots/inputDataset.md) | * <br/> [Dataset](../classes/Dataset.md) | Source datasets used by the data product | direct |
+| [outputDataset](../slots/outputDataset.md) | * <br/> [Dataset](../classes/Dataset.md) | Output datasets produced by the data product | direct |
+| [hasPolicy](../slots/hasPolicy.md) | * <br/> [String](../types/String.md) | Policies governing the use and access of the data product | direct |
+| [version](../slots/version.md) | 0..1 <br/> [String](../types/String.md) | The version of the external resources | [Versioned](../classes/Versioned.md) |
+| [href](../slots/href.md) | 0..1 <br/> [String](../types/String.md) | Machine-readable instructions to obtain the resource e.g. FHIR path, URL | [Versioned](../classes/Versioned.md) |
+| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
+| [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
+| [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
+| [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md) or <br/>[TranslatedText](../classes/TranslatedText.md) | Detailed description, shown in tooltips | [Labelled](../classes/Labelled.md) |
+| [coding](../slots/coding.md) | * <br/> [Coding](../classes/Coding.md) | Semantic tags for this element | [Labelled](../classes/Labelled.md) |
+| [label](../slots/label.md) | 0..1 <br/> [String](../types/String.md) or <br/>[TranslatedText](../classes/TranslatedText.md) | Human-readable label, shown in UIs | [Labelled](../classes/Labelled.md) |
+| [aliases](../slots/aliases.md) | * <br/> [String](../types/String.md) or <br/>[TranslatedText](../classes/TranslatedText.md) | Alternative name or identifier | [Labelled](../classes/Labelled.md) |
+| [mandatory](../slots/mandatory.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Is this element required? | [Governed](../classes/Governed.md) |
+| [comments](../slots/comments.md) | * <br/> [Comment](../classes/Comment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
+| [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | * <br/> [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
+| [purpose](../slots/purpose.md) | 0..1 <br/> [String](../types/String.md) or <br/>[TranslatedText](../classes/TranslatedText.md) | Purpose or rationale for this data element | [Governed](../classes/Governed.md) |
+| [lastUpdated](../slots/lastUpdated.md) | 0..1 <br/> [Datetime](../types/Datetime.md) | When the resource was last updated | [Governed](../classes/Governed.md) |
+| [owner](../slots/owner.md) | 0..1 <br/> [String](../types/String.md) or <br/>[User](../classes/User.md) or <br/>[Organization](../classes/Organization.md) | Party responsible for this element | [Governed](../classes/Governed.md) |
+| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md) or <br/>[Item](../classes/Item.md) or <br/>[ItemGroup](../classes/ItemGroup.md) or <br/>[MetaDataVersion](../classes/MetaDataVersion.md) or <br/>[CodeList](../classes/CodeList.md) or <br/>[ReifiedConcept](../classes/ReifiedConcept.md) or <br/>[ConceptProperty](../classes/ConceptProperty.md) or <br/>[Condition](../classes/Condition.md) or <br/>[Method](../classes/Method.md) or <br/>[NominalOccurrence](../classes/NominalOccurrence.md) or <br/>[Dataflow](../classes/Dataflow.md) or <br/>[CubeComponent](../classes/CubeComponent.md) or <br/>[DataProduct](../classes/DataProduct.md) or <br/>[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
+
+
+
+
+
+## Usages
+
+| used by | used in | type | used |
+| ---  | --- | --- | --- |
+| [GovernedElement](../classes/GovernedElement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [Governed](../classes/Governed.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [MetaDataVersion](../classes/MetaDataVersion.md) | [dataProducts](../slots/dataProducts.md) | range | [DataProduct](../classes/DataProduct.md) |
+| [MetaDataVersion](../classes/MetaDataVersion.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [Item](../classes/Item.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [ItemGroup](../classes/ItemGroup.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [CodeList](../classes/CodeList.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [Comment](../classes/Comment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [ReifiedConcept](../classes/ReifiedConcept.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [ConceptProperty](../classes/ConceptProperty.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [WhereClause](../classes/WhereClause.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [Condition](../classes/Condition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [Method](../classes/Method.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [NominalOccurrence](../classes/NominalOccurrence.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [DataStructureDefinition](../classes/DataStructureDefinition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [Dataflow](../classes/Dataflow.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [CubeComponent](../classes/CubeComponent.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [Measure](../classes/Measure.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [Dimension](../classes/Dimension.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [DataAttribute](../classes/DataAttribute.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [DataProduct](../classes/DataProduct.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [ProvisionAgreement](../classes/ProvisionAgreement.md) | [consumer](../slots/consumer.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [ProvisionAgreement](../classes/ProvisionAgreement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [Analysis](../classes/Analysis.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [Display](../classes/Display.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+
+
+
+
+
+
+
+
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://cdisc.org/define-json
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | odm:DataProduct |
+| native | odm:DataProduct |
+| exact | dprod:DataProduct, dcat:DataService |
+
+
+
+
+
+
+## LinkML Source
+
 <!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
-<h3 id="direct">Direct</h3>
+
+### Direct
+
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A governed collection that represents a purpose-driven assembly of datasets</span>
@@ -827,7 +546,9 @@ FormalExpression ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 </details>
-<h3 id="induced">Induced</h3>
+
+### Induced
+
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A governed collection that represents a purpose-driven assembly of datasets</span>
@@ -848,7 +569,6 @@ FormalExpression ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">exact_mappings</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prov:wasAttributedTo</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dataProductOwner</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
@@ -860,7 +580,6 @@ FormalExpression ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">domain</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The functional domain or business area this product serves</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">domain</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ItemGroup</span>
@@ -870,7 +589,6 @@ FormalExpression ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Current lifecycle status of the data product</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lifecycleStatus</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
@@ -880,7 +598,6 @@ FormalExpression ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Services that provide input into this data product</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">inputPort</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
@@ -893,7 +610,6 @@ FormalExpression ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Services that expose output from this data product</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">outputPort</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
@@ -909,7 +625,6 @@ FormalExpression ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">close_mappings</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dcat:distribution</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">inputDataflow</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
@@ -925,7 +640,6 @@ FormalExpression ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">close_mappings</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dcat:distribution</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">outputDataflow</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
@@ -938,7 +652,6 @@ FormalExpression ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Source datasets used by the data product</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">inputDataset</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
@@ -951,7 +664,6 @@ FormalExpression ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Output datasets produced by the data product</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">outputDataset</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
@@ -963,7 +675,6 @@ FormalExpression ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hasPolicy</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Policies governing the use and access of the data product</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hasPolicy</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Dataset</span>
@@ -976,7 +687,6 @@ FormalExpression ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The version of the external resources</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">version</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Versioned</span>
@@ -988,7 +698,6 @@ FormalExpression ||--}o Coding : "coding"
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">URL</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">href</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Versioned</span>
@@ -1001,7 +710,6 @@ FormalExpression ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">identifier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OID</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Identifiable</span>
@@ -1012,7 +720,6 @@ FormalExpression ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Universal unique identifier</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uuid</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Identifiable</span>
@@ -1022,10 +729,11 @@ FormalExpression ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Short name or identifier, used for field names</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">name</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DefClass</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SubClass</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Standard</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 <span class="w">  </span><span class="nt">description</span><span class="p">:</span>
@@ -1033,7 +741,6 @@ FormalExpression ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Detailed description, shown in tooltips</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">description</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
@@ -1047,7 +754,6 @@ FormalExpression ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Semantic tags for this element</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">coding</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
@@ -1064,7 +770,6 @@ FormalExpression ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">exact_mappings</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">skos:prefLabel</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">label</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
@@ -1079,7 +784,6 @@ FormalExpression ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">exact_mappings</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">skos:altLabel</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">aliases</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
@@ -1096,7 +800,6 @@ FormalExpression ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Is this element required?</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mandatory</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
@@ -1107,7 +810,6 @@ FormalExpression ||--}o Coding : "coding"
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">exclusion</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">comments</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
@@ -1120,7 +822,6 @@ FormalExpression ||--}o Coding : "coding"
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">exclusion</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">siteOrSponsorComments</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
@@ -1132,7 +833,6 @@ FormalExpression ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Purpose or rationale for this data element</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">purpose</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
@@ -1145,7 +845,6 @@ FormalExpression ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">When the resource was last updated</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lastUpdated</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
@@ -1158,7 +857,6 @@ FormalExpression ||--}o Coding : "coding"
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prov:wasAttributedTo</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prov:wasAssociatedBy</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">owner</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
@@ -1175,7 +873,6 @@ FormalExpression ||--}o Coding : "coding"
 <span class="w">    </span><span class="nt">exact_mappings</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prov:wasDerivedFrom</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wasDerivedFrom</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
@@ -1195,7 +892,7 @@ FormalExpression ||--}o Coding : "coding"
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ProvisionAgreement</span>
 </code></pre></div>
-</details></div>
+</details></div></div>
 </div>
 </div>
 <footer class="col-md-12">

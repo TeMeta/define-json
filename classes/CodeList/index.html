@@ -68,30 +68,6 @@
 <ul class="nav flex-column">
 <li class="nav-item" data-bs-level="1"><a class="nav-link" href="#class-codelist">Class: CodeList</a>
 <ul class="nav flex-column">
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#inheritance">Inheritance</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#slots">Slots</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#usages">Usages</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#identifier-and-mapping-information">Identifier and Mapping Information</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#mappings">Mappings</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#linkml-source">LinkML Source</a>
-<ul class="nav flex-column">
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -100,518 +76,258 @@
 <div class="col-md-9" role="main">
 <h1 id="class-codelist">Class: CodeList</h1>
 <p><em>A value set that defines a discrete collection of permissible values for an item, corresponding to the ODM CodeList construct</em></p>
-<p>URI: <a href="https://cdisc.org/odm2/class/CodeList">odm:class/CodeList</a></p>
+<div data-search-exclude="" markdown="1">
+
+
+
+URI: [odm:class/CodeList](https://cdisc.org/odm2/class/CodeList)
+
+
 <pre class="mermaid"><code>erDiagram
 CodeList {
-    DataType dataType  
     string formatName  
-    string version  
+    DataType dataType  
+    string name  
+    string description  
+    string OID  
+    stringList aliases  
     string href  
     boolean isNonStandard  
-    string OID  
-    string uuid  
-    string name  
-    string description  
     string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
     datetime lastUpdated  
+    boolean mandatory  
     string owner  
+    string purpose  
+    string uuid  
+    string version  
     string wasDerivedFrom  
 }
-SiteOrSponsorComment {
-    string text  
-    OriginSource sourceType  
-    string source  
-    string OID  
-    string uuid  
-    string name  
+CodeListItem {
     string description  
-    string label  
+    string codedValue  
+    string decode  
+    boolean other  
+    decimal weight  
     stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
+}
+Coding {
+    AliasPredicate aliasType  
+    string code  
+    string codeSystem  
+    string codeSystemVersion  
+    string decode  
 }
 Comment {
     string text  
-    string OID  
-    string uuid  
     string name  
     string description  
-    string label  
+    string OID  
     stringList aliases  
-    boolean mandatory  
-    string purpose  
+    string label  
     datetime lastUpdated  
+    boolean mandatory  
     string owner  
+    string purpose  
+    string uuid  
     string wasDerivedFrom  
 }
-Coding {
-    string code  
-    string decode  
-    string codeSystem  
-    string codeSystemVersion  
-    AliasPredicate aliasType  
-}
-Standard {
-    StandardName name  
-    StandardType type  
-    PublishingSet publishingSet  
-    string version  
-    StandardStatus status  
-    string OID  
-    string uuid  
-    string description  
-    string label  
-    stringList aliases  
-}
-Resource {
-    string resourceType  
-    string attribute  
-    string version  
-    string href  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
 FormalExpression {
-    string context  
     string expression  
     string returnType  
-    string OID  
-    string uuid  
+    string context  
     string name  
     string description  
+    string OID  
+    stringList aliases  
     string label  
-    stringList aliases  
+    string uuid  
 }
-CodeListItem {
-    string codedValue  
-    string decode  
+Resource {
+    string attribute  
+    string resourceType  
+    string name  
     string description  
+    string OID  
     stringList aliases  
-    decimal weight  
-    boolean other  
+    string href  
+    string label  
+    string uuid  
+    string version  
+}
+SiteOrSponsorComment {
+    OriginSource sourceType  
+    string source  
+    string text  
+    string name  
+    string description  
+    string OID  
+    stringList aliases  
+    string label  
+    datetime lastUpdated  
+    boolean mandatory  
+    string owner  
+    string purpose  
+    string uuid  
+    string wasDerivedFrom  
+}
+Standard {
+    PublishingSet publishingSet  
+    StandardStatus status  
+    StandardType type  
+    string version  
+    StandardName name  
+    string description  
+    string OID  
+    stringList aliases  
+    string label  
+    string uuid  
 }
 
-CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
 CodeList ||--|o Standard : "standard"
+CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--}o Coding : "coding"
 CodeList ||--}o Comment : "comments"
 CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+CodeListItem ||--|o Coding : "coding"
+Comment ||--}o Coding : "coding"
+Comment ||--}o Comment : "comments"
+Comment ||--}o DocumentReference : "documents"
+Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+FormalExpression ||--|o ReturnValue : "returnValue"
+FormalExpression ||--}o Coding : "coding"
+FormalExpression ||--}o Parameter : "parameters"
+FormalExpression ||--}o Resource : "externalCodeLibs"
+Resource ||--}o Coding : "coding"
+Resource ||--}o FormalExpression : "selection"
 SiteOrSponsorComment ||--}o Coding : "coding"
 SiteOrSponsorComment ||--}o Comment : "comments"
 SiteOrSponsorComment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-Comment ||--}o DocumentReference : "documents"
-Comment ||--}o Coding : "coding"
-Comment ||--}o Comment : "comments"
-Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Standard ||--}o Coding : "coding"
-Resource ||--}o FormalExpression : "selection"
-Resource ||--}o Coding : "coding"
-FormalExpression ||--}o Parameter : "parameters"
-FormalExpression ||--|o ReturnValue : "returnValue"
-FormalExpression ||--}o Resource : "externalCodeLibs"
-FormalExpression ||--}o Coding : "coding"
-CodeListItem ||--|o Coding : "coding"
 
 </code></pre>
-<h2 id="inheritance">Inheritance</h2>
-<ul>
-<li><a href="../GovernedElement/">GovernedElement</a> [ <a href="../Identifiable/">Identifiable</a> <a href="../Labelled/">Labelled</a> <a href="../Governed/">Governed</a>]<ul>
-<li><strong>CodeList</strong> [ <a href="../Versioned/">Versioned</a> <a href="../IsODMStandard/">IsODMStandard</a>]</li>
-</ul>
-</li>
-</ul>
-<h2 id="slots">Slots</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Cardinality and Range</th>
-<th>Description</th>
-<th>Inheritance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../../slots/dataType/">dataType</a></td>
-<td>0..1 <br/> <a href="../../enums/DataType/">DataType</a></td>
-<td>The data type for the values in the code list</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/formatName/">formatName</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Name of a standard format definition</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/codeListItems/">codeListItems</a></td>
-<td>* <br/> <a href="../CodeListItem/">CodeListItem</a></td>
-<td>The individual values that make up this CodeList. The type of CodeListItem included determines its behaviour</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/externalCodeList/">externalCodeList</a></td>
-<td>0..1 <br/> <a href="../Resource/">Resource</a></td>
-<td>Reference to a code list that is defined externally to this study</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/version/">version</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>The version of the external resources</td>
-<td><a href="../Versioned/">Versioned</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/href/">href</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Machine-readable instructions to obtain the resource e.g. FHIR path, URL</td>
-<td><a href="../Versioned/">Versioned</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/standard/">standard</a></td>
-<td>0..1 <br/> <a href="../Standard/">Standard</a></td>
-<td>Reference to the standard being implemented</td>
-<td><a href="../IsODMStandard/">IsODMStandard</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/isNonStandard/">isNonStandard</a></td>
-<td>0..1 <br/> <a href="../../types/Boolean/">Boolean</a></td>
-<td>One or more members of this set are non-standard extensions</td>
-<td><a href="../IsODMStandard/">IsODMStandard</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/OID/">OID</a></td>
-<td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.</td>
-<td><a href="../Identifiable/">Identifiable</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/uuid/">uuid</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Universal unique identifier</td>
-<td><a href="../Identifiable/">Identifiable</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/name/">name</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Short name or identifier, used for field names</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/description/">description</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>Detailed description, shown in tooltips</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/coding/">coding</a></td>
-<td>* <br/> <a href="../Coding/">Coding</a></td>
-<td>Semantic tags for this element</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/label/">label</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>Human-readable label, shown in UIs</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>* <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>Alternative name or identifier</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/mandatory/">mandatory</a></td>
-<td>0..1 <br/> <a href="../../types/Boolean/">Boolean</a></td>
-<td>Is this element required?</td>
-<td><a href="../Governed/">Governed</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/comments/">comments</a></td>
-<td>* <br/> <a href="../Comment/">Comment</a></td>
-<td>Comment on the element, such as a rationale for its inclusion or exclusion</td>
-<td><a href="../Governed/">Governed</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/siteOrSponsorComments/">siteOrSponsorComments</a></td>
-<td>* <br/> <a href="../SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
-<td>Comment on the element, such as a rationale for its inclusion or exclusion</td>
-<td><a href="../Governed/">Governed</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/purpose/">purpose</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>Purpose or rationale for this data element</td>
-<td><a href="../Governed/">Governed</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/lastUpdated/">lastUpdated</a></td>
-<td>0..1 <br/> <a href="../../types/Datetime/">Datetime</a></td>
-<td>When the resource was last updated</td>
-<td><a href="../Governed/">Governed</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/owner/">owner</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../User/">User</a> or <br/><a href="../Organization/">Organization</a> or <br/><a href="../../types/String/">String</a></td>
-<td>Party responsible for this element</td>
-<td><a href="../Governed/">Governed</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../Item/">Item</a> or <br/><a href="../ItemGroup/">ItemGroup</a> or <br/><a href="../MetaDataVersion/">MetaDataVersion</a> or <br/><a href="./">CodeList</a> or <br/><a href="../ReifiedConcept/">ReifiedConcept</a> or <br/><a href="../ConceptProperty/">ConceptProperty</a> or <br/><a href="../Condition/">Condition</a> or <br/><a href="../Method/">Method</a> or <br/><a href="../NominalOccurrence/">NominalOccurrence</a> or <br/><a href="../Dataflow/">Dataflow</a> or <br/><a href="../CubeComponent/">CubeComponent</a> or <br/><a href="../DataProduct/">DataProduct</a> or <br/><a href="../ProvisionAgreement/">ProvisionAgreement</a></td>
-<td>Reference to another item that this item implements or extends, e.g. a template Item definition.</td>
-<td><a href="../Governed/">Governed</a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="usages">Usages</h2>
-<table>
-<thead>
-<tr>
-<th>used by</th>
-<th>used in</th>
-<th>type</th>
-<th>used</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../GovernedElement/">GovernedElement</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="../Governed/">Governed</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="../IsODMItem/">IsODMItem</a></td>
-<td><a href="../../slots/roleCodeList/">roleCodeList</a></td>
-<td>range</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="../MetaDataVersion/">MetaDataVersion</a></td>
-<td><a href="../../slots/codeLists/">codeLists</a></td>
-<td>range</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="../MetaDataVersion/">MetaDataVersion</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="../Item/">Item</a></td>
-<td><a href="../../slots/codeList/">codeList</a></td>
-<td>range</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="../Item/">Item</a></td>
-<td><a href="../../slots/roleCodeList/">roleCodeList</a></td>
-<td>range</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="../Item/">Item</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="../ItemGroup/">ItemGroup</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="./">CodeList</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="../Comment/">Comment</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="../ReifiedConcept/">ReifiedConcept</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="../ConceptProperty/">ConceptProperty</a></td>
-<td><a href="../../slots/codeList/">codeList</a></td>
-<td>range</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="../ConceptProperty/">ConceptProperty</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="../WhereClause/">WhereClause</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="../Condition/">Condition</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="../Method/">Method</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="../Parameter/">Parameter</a></td>
-<td><a href="../../slots/codeList/">codeList</a></td>
-<td>range</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="../SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="../NominalOccurrence/">NominalOccurrence</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="../DataStructureDefinition/">DataStructureDefinition</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="../Dataflow/">Dataflow</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="../CubeComponent/">CubeComponent</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="../Measure/">Measure</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="../Dimension/">Dimension</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="../DataAttribute/">DataAttribute</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="../DataProduct/">DataProduct</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="../ProvisionAgreement/">ProvisionAgreement</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="../Analysis/">Analysis</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-<tr>
-<td><a href="../Display/">Display</a></td>
-<td><a href="../../slots/wasDerivedFrom/">wasDerivedFrom</a></td>
-<td>any_of[range]</td>
-<td><a href="./">CodeList</a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="schema-source">Schema Source</h3>
-<ul>
-<li>from schema: https://cdisc.org/define-json</li>
-</ul>
-<h2 id="mappings">Mappings</h2>
-<table>
-<thead>
-<tr>
-<th>Mapping Type</th>
-<th>Mapped Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>self</td>
-<td>odm:CodeList</td>
-</tr>
-<tr>
-<td>native</td>
-<td>odm:CodeList</td>
-</tr>
-<tr>
-<td>exact</td>
-<td>odm:CodeList, omop:Vocabulary, fhir:ValueSet</td>
-</tr>
-<tr>
-<td>narrow</td>
-<td>sdmx:Codelist, sdmx:ValueList, sdmx:ConceptScheme</td>
-</tr>
-<tr>
-<td>related</td>
-<td>usdm:BiomedicalConceptProperty/responseCodes</td>
-</tr>
-<tr>
-<td>close</td>
-<td>skos:Collection, sdmx:ItemScheme, qb:codeList</td>
-</tr>
-</tbody>
-</table>
-<h2 id="linkml-source">LinkML Source</h2>
+
+
+
+
+## Inheritance
+* [GovernedElement](../classes/GovernedElement.md) [ [Identifiable](../classes/Identifiable.md) [Labelled](../classes/Labelled.md) [Governed](../classes/Governed.md)]
+    * **CodeList** [ [Versioned](../classes/Versioned.md) [IsODMStandard](../classes/IsODMStandard.md)]
+
+
+## Slots
+
+| Name | Cardinality and Range | Description | Inheritance |
+| ---  | --- | --- | --- |
+| [dataType](../slots/dataType.md) | 0..1 <br/> [DataType](../enums/DataType.md) | The data type for the values in the code list | direct |
+| [formatName](../slots/formatName.md) | 0..1 <br/> [String](../types/String.md) | Name of a standard format definition | direct |
+| [codeListItems](../slots/codeListItems.md) | * <br/> [CodeListItem](../classes/CodeListItem.md) | The individual values that make up this CodeList. The type of CodeListItem included determines its behaviour | direct |
+| [externalCodeList](../slots/externalCodeList.md) | 0..1 <br/> [Resource](../classes/Resource.md) | Reference to a code list that is defined externally to this study | direct |
+| [version](../slots/version.md) | 0..1 <br/> [String](../types/String.md) | The version of the external resources | [Versioned](../classes/Versioned.md) |
+| [href](../slots/href.md) | 0..1 <br/> [String](../types/String.md) | Machine-readable instructions to obtain the resource e.g. FHIR path, URL | [Versioned](../classes/Versioned.md) |
+| [standard](../slots/standard.md) | 0..1 <br/> [Standard](../classes/Standard.md) | Reference to the standard being implemented | [IsODMStandard](../classes/IsODMStandard.md) |
+| [isNonStandard](../slots/isNonStandard.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | One or more members of this set are non-standard extensions | [IsODMStandard](../classes/IsODMStandard.md) |
+| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
+| [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
+| [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
+| [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md) or <br/>[TranslatedText](../classes/TranslatedText.md) | Detailed description, shown in tooltips | [Labelled](../classes/Labelled.md) |
+| [coding](../slots/coding.md) | * <br/> [Coding](../classes/Coding.md) | Semantic tags for this element | [Labelled](../classes/Labelled.md) |
+| [label](../slots/label.md) | 0..1 <br/> [String](../types/String.md) or <br/>[TranslatedText](../classes/TranslatedText.md) | Human-readable label, shown in UIs | [Labelled](../classes/Labelled.md) |
+| [aliases](../slots/aliases.md) | * <br/> [String](../types/String.md) or <br/>[TranslatedText](../classes/TranslatedText.md) | Alternative name or identifier | [Labelled](../classes/Labelled.md) |
+| [mandatory](../slots/mandatory.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Is this element required? | [Governed](../classes/Governed.md) |
+| [comments](../slots/comments.md) | * <br/> [Comment](../classes/Comment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
+| [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | * <br/> [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
+| [purpose](../slots/purpose.md) | 0..1 <br/> [String](../types/String.md) or <br/>[TranslatedText](../classes/TranslatedText.md) | Purpose or rationale for this data element | [Governed](../classes/Governed.md) |
+| [lastUpdated](../slots/lastUpdated.md) | 0..1 <br/> [Datetime](../types/Datetime.md) | When the resource was last updated | [Governed](../classes/Governed.md) |
+| [owner](../slots/owner.md) | 0..1 <br/> [String](../types/String.md) or <br/>[User](../classes/User.md) or <br/>[Organization](../classes/Organization.md) | Party responsible for this element | [Governed](../classes/Governed.md) |
+| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md) or <br/>[Item](../classes/Item.md) or <br/>[ItemGroup](../classes/ItemGroup.md) or <br/>[MetaDataVersion](../classes/MetaDataVersion.md) or <br/>[CodeList](../classes/CodeList.md) or <br/>[ReifiedConcept](../classes/ReifiedConcept.md) or <br/>[ConceptProperty](../classes/ConceptProperty.md) or <br/>[Condition](../classes/Condition.md) or <br/>[Method](../classes/Method.md) or <br/>[NominalOccurrence](../classes/NominalOccurrence.md) or <br/>[Dataflow](../classes/Dataflow.md) or <br/>[CubeComponent](../classes/CubeComponent.md) or <br/>[DataProduct](../classes/DataProduct.md) or <br/>[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
+
+
+
+
+
+## Usages
+
+| used by | used in | type | used |
+| ---  | --- | --- | --- |
+| [GovernedElement](../classes/GovernedElement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [Governed](../classes/Governed.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [IsODMItem](../classes/IsODMItem.md) | [roleCodeList](../slots/roleCodeList.md) | range | [CodeList](../classes/CodeList.md) |
+| [MetaDataVersion](../classes/MetaDataVersion.md) | [codeLists](../slots/codeLists.md) | range | [CodeList](../classes/CodeList.md) |
+| [MetaDataVersion](../classes/MetaDataVersion.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [Item](../classes/Item.md) | [codeList](../slots/codeList.md) | range | [CodeList](../classes/CodeList.md) |
+| [Item](../classes/Item.md) | [roleCodeList](../slots/roleCodeList.md) | range | [CodeList](../classes/CodeList.md) |
+| [Item](../classes/Item.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [ItemGroup](../classes/ItemGroup.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [CodeList](../classes/CodeList.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [Comment](../classes/Comment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [ReifiedConcept](../classes/ReifiedConcept.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [ConceptProperty](../classes/ConceptProperty.md) | [codeList](../slots/codeList.md) | range | [CodeList](../classes/CodeList.md) |
+| [ConceptProperty](../classes/ConceptProperty.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [WhereClause](../classes/WhereClause.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [Condition](../classes/Condition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [Method](../classes/Method.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [Parameter](../classes/Parameter.md) | [codeList](../slots/codeList.md) | range | [CodeList](../classes/CodeList.md) |
+| [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [NominalOccurrence](../classes/NominalOccurrence.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [DataStructureDefinition](../classes/DataStructureDefinition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [Dataflow](../classes/Dataflow.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [CubeComponent](../classes/CubeComponent.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [Measure](../classes/Measure.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [Dimension](../classes/Dimension.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [DataAttribute](../classes/DataAttribute.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [DataProduct](../classes/DataProduct.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [ProvisionAgreement](../classes/ProvisionAgreement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [Analysis](../classes/Analysis.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [Display](../classes/Display.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+
+
+
+
+
+
+
+
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://cdisc.org/define-json
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | odm:CodeList |
+| native | odm:CodeList |
+| exact | odm:CodeList, omop:Vocabulary, fhir:ValueSet |
+| narrow | sdmx:Codelist, sdmx:ValueList, sdmx:ConceptScheme |
+| related | usdm:BiomedicalConceptProperty/responseCodes |
+| close | skos:Collection, sdmx:ItemScheme, qb:codeList |
+
+
+
+
+
+
+## LinkML Source
+
 <!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
-<h3 id="direct">Direct</h3>
+
+### Direct
+
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A value set that defines a discrete collection of permissible values</span>
@@ -676,7 +392,9 @@ CodeListItem ||--|o Coding : "coding"
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Resource</span>
 </code></pre></div>
 </details>
-<h3 id="induced">Induced</h3>
+
+### Induced
+
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A value set that defines a discrete collection of permissible values</span>
@@ -705,7 +423,6 @@ CodeListItem ||--|o Coding : "coding"
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dataType</span>
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The data type for the values in the code list</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dataType</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Item</span>
@@ -718,7 +435,6 @@ CodeListItem ||--|o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Name of a standard format definition</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">formatName</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
@@ -729,7 +445,6 @@ CodeListItem ||--|o Coding : "coding"
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">included determines its behaviour</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">codeListItems</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
@@ -742,7 +457,6 @@ CodeListItem ||--|o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reference to a code list that is defined externally to this study</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">externalCodeList</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
@@ -752,7 +466,6 @@ CodeListItem ||--|o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The version of the external resources</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">version</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Versioned</span>
@@ -764,7 +477,6 @@ CodeListItem ||--|o Coding : "coding"
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">URL</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">href</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Versioned</span>
@@ -775,7 +487,6 @@ CodeListItem ||--|o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Reference to the standard being implemented</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">standard</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IsODMStandard</span>
@@ -785,7 +496,6 @@ CodeListItem ||--|o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">One or more members of this set are non-standard extensions</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">isNonStandard</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">IsODMStandard</span>
@@ -797,7 +507,6 @@ CodeListItem ||--|o Coding : "coding"
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">identifier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OID</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Identifiable</span>
@@ -808,7 +517,6 @@ CodeListItem ||--|o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Universal unique identifier</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uuid</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Identifiable</span>
@@ -818,10 +526,11 @@ CodeListItem ||--|o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Short name or identifier, used for field names</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">name</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DefClass</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SubClass</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Standard</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 <span class="w">  </span><span class="nt">description</span><span class="p">:</span>
@@ -829,7 +538,6 @@ CodeListItem ||--|o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Detailed description, shown in tooltips</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">description</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
@@ -843,7 +551,6 @@ CodeListItem ||--|o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Semantic tags for this element</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">coding</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
@@ -860,7 +567,6 @@ CodeListItem ||--|o Coding : "coding"
 <span class="w">    </span><span class="nt">exact_mappings</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">skos:prefLabel</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">label</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
@@ -875,7 +581,6 @@ CodeListItem ||--|o Coding : "coding"
 <span class="w">    </span><span class="nt">exact_mappings</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">skos:altLabel</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">aliases</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
@@ -892,7 +597,6 @@ CodeListItem ||--|o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Is this element required?</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mandatory</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
@@ -903,7 +607,6 @@ CodeListItem ||--|o Coding : "coding"
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">exclusion</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">comments</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
@@ -916,7 +619,6 @@ CodeListItem ||--|o Coding : "coding"
 <span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">exclusion</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">siteOrSponsorComments</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
@@ -928,7 +630,6 @@ CodeListItem ||--|o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Purpose or rationale for this data element</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">purpose</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
@@ -941,7 +642,6 @@ CodeListItem ||--|o Coding : "coding"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">When the resource was last updated</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lastUpdated</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
@@ -954,7 +654,6 @@ CodeListItem ||--|o Coding : "coding"
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prov:wasAttributedTo</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prov:wasAssociatedBy</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">owner</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
@@ -971,7 +670,6 @@ CodeListItem ||--|o Coding : "coding"
 <span class="w">    </span><span class="nt">exact_mappings</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prov:wasDerivedFrom</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wasDerivedFrom</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">CodeList</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Governed</span>
@@ -991,7 +689,7 @@ CodeListItem ||--|o Coding : "coding"
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DataProduct</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ProvisionAgreement</span>
 </code></pre></div>
-</details></div>
+</details></div></div>
 </div>
 </div>
 <footer class="col-md-12">

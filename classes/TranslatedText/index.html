@@ -68,26 +68,6 @@
 <ul class="nav flex-column">
 <li class="nav-item" data-bs-level="1"><a class="nav-link" href="#class-translatedtext">Class: TranslatedText</a>
 <ul class="nav flex-column">
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#slots">Slots</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#usages">Usages</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#identifier-and-mapping-information">Identifier and Mapping Information</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#mappings">Mappings</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#linkml-source">LinkML Source</a>
-<ul class="nav flex-column">
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -95,7 +75,13 @@
 </div></div>
 <div class="col-md-9" role="main">
 <h1 id="class-translatedtext">Class: TranslatedText</h1>
-<p>URI: <a href="https://cdisc.org/odm2/class/TranslatedText">odm:class/TranslatedText</a></p>
+<div data-search-exclude="" markdown="1">
+
+
+
+URI: [odm:class/TranslatedText](https://cdisc.org/odm2/class/TranslatedText)
+
+
 <pre class="mermaid"><code>erDiagram
 TranslatedText {
 
@@ -109,1031 +95,226 @@ TranslatedText ||--}o Translation : "translations"
 
 </code></pre>
 <!-- no inheritance hierarchy -->
-<h2 id="slots">Slots</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Cardinality and Range</th>
-<th>Description</th>
-<th>Inheritance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../../slots/translations/">translations</a></td>
-<td>* <br/> <a href="../Translation/">Translation</a></td>
-<td></td>
-<td>direct</td>
-</tr>
-</tbody>
-</table>
-<h2 id="usages">Usages</h2>
-<table>
-<thead>
-<tr>
-<th>used by</th>
-<th>used in</th>
-<th>type</th>
-<th>used</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../IdentifiableElement/">IdentifiableElement</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../IdentifiableElement/">IdentifiableElement</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../IdentifiableElement/">IdentifiableElement</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../GovernedElement/">GovernedElement</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../GovernedElement/">GovernedElement</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../GovernedElement/">GovernedElement</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../GovernedElement/">GovernedElement</a></td>
-<td><a href="../../slots/purpose/">purpose</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Governed/">Governed</a></td>
-<td><a href="../../slots/purpose/">purpose</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Labelled/">Labelled</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Labelled/">Labelled</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Labelled/">Labelled</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../IsODMItem/">IsODMItem</a></td>
-<td><a href="../../slots/role/">role</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../IsODMItem/">IsODMItem</a></td>
-<td><a href="../../slots/crfCompletionInstructions/">crfCompletionInstructions</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../IsODMItem/">IsODMItem</a></td>
-<td><a href="../../slots/cdiscNotes/">cdiscNotes</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../IsODMItem/">IsODMItem</a></td>
-<td><a href="../../slots/implementationNotes/">implementationNotes</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../IsODMItem/">IsODMItem</a></td>
-<td><a href="../../slots/preSpecifiedValue/">preSpecifiedValue</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../MetaDataVersion/">MetaDataVersion</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../MetaDataVersion/">MetaDataVersion</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../MetaDataVersion/">MetaDataVersion</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../MetaDataVersion/">MetaDataVersion</a></td>
-<td><a href="../../slots/purpose/">purpose</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Item/">Item</a></td>
-<td><a href="../../slots/role/">role</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Item/">Item</a></td>
-<td><a href="../../slots/crfCompletionInstructions/">crfCompletionInstructions</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Item/">Item</a></td>
-<td><a href="../../slots/cdiscNotes/">cdiscNotes</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Item/">Item</a></td>
-<td><a href="../../slots/implementationNotes/">implementationNotes</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Item/">Item</a></td>
-<td><a href="../../slots/preSpecifiedValue/">preSpecifiedValue</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Item/">Item</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Item/">Item</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Item/">Item</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Item/">Item</a></td>
-<td><a href="../../slots/purpose/">purpose</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../ItemGroup/">ItemGroup</a></td>
-<td><a href="../../slots/structure/">structure</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../ItemGroup/">ItemGroup</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../ItemGroup/">ItemGroup</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../ItemGroup/">ItemGroup</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../ItemGroup/">ItemGroup</a></td>
-<td><a href="../../slots/purpose/">purpose</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Relationship/">Relationship</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Relationship/">Relationship</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Relationship/">Relationship</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../CodeList/">CodeList</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../CodeList/">CodeList</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../CodeList/">CodeList</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../CodeList/">CodeList</a></td>
-<td><a href="../../slots/purpose/">purpose</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../CodeListItem/">CodeListItem</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../CodeListItem/">CodeListItem</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Comment/">Comment</a></td>
-<td><a href="../../slots/text/">text</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Comment/">Comment</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Comment/">Comment</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Comment/">Comment</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Comment/">Comment</a></td>
-<td><a href="../../slots/purpose/">purpose</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Coding/">Coding</a></td>
-<td><a href="../../slots/decode/">decode</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Dictionary/">Dictionary</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Dictionary/">Dictionary</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Dictionary/">Dictionary</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../ReifiedConcept/">ReifiedConcept</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../ReifiedConcept/">ReifiedConcept</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../ReifiedConcept/">ReifiedConcept</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../ReifiedConcept/">ReifiedConcept</a></td>
-<td><a href="../../slots/purpose/">purpose</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../ConceptProperty/">ConceptProperty</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../ConceptProperty/">ConceptProperty</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../ConceptProperty/">ConceptProperty</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../ConceptProperty/">ConceptProperty</a></td>
-<td><a href="../../slots/purpose/">purpose</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../WhereClause/">WhereClause</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../WhereClause/">WhereClause</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../WhereClause/">WhereClause</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../WhereClause/">WhereClause</a></td>
-<td><a href="../../slots/purpose/">purpose</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Condition/">Condition</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Condition/">Condition</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Condition/">Condition</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Condition/">Condition</a></td>
-<td><a href="../../slots/purpose/">purpose</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../FormalExpression/">FormalExpression</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../FormalExpression/">FormalExpression</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../FormalExpression/">FormalExpression</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Method/">Method</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Method/">Method</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Method/">Method</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Method/">Method</a></td>
-<td><a href="../../slots/purpose/">purpose</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Parameter/">Parameter</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Parameter/">Parameter</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Parameter/">Parameter</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../ReturnValue/">ReturnValue</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../ReturnValue/">ReturnValue</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../ReturnValue/">ReturnValue</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
-<td><a href="../../slots/text/">text</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../SiteOrSponsorComment/">SiteOrSponsorComment</a></td>
-<td><a href="../../slots/purpose/">purpose</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../User/">User</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../User/">User</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../User/">User</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Organization/">Organization</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Organization/">Organization</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Organization/">Organization</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Standard/">Standard</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Standard/">Standard</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Standard/">Standard</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Resource/">Resource</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Resource/">Resource</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Resource/">Resource</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../DocumentReference/">DocumentReference</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../DocumentReference/">DocumentReference</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../DocumentReference/">DocumentReference</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Timing/">Timing</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Timing/">Timing</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Timing/">Timing</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../NominalOccurrence/">NominalOccurrence</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../NominalOccurrence/">NominalOccurrence</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../NominalOccurrence/">NominalOccurrence</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../NominalOccurrence/">NominalOccurrence</a></td>
-<td><a href="../../slots/purpose/">purpose</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../DataStructureDefinition/">DataStructureDefinition</a></td>
-<td><a href="../../slots/structure/">structure</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../DataStructureDefinition/">DataStructureDefinition</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../DataStructureDefinition/">DataStructureDefinition</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../DataStructureDefinition/">DataStructureDefinition</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../DataStructureDefinition/">DataStructureDefinition</a></td>
-<td><a href="../../slots/purpose/">purpose</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Dataflow/">Dataflow</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Dataflow/">Dataflow</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Dataflow/">Dataflow</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Dataflow/">Dataflow</a></td>
-<td><a href="../../slots/purpose/">purpose</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Dataset/">Dataset</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Dataset/">Dataset</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Dataset/">Dataset</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../CubeComponent/">CubeComponent</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../CubeComponent/">CubeComponent</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../CubeComponent/">CubeComponent</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../CubeComponent/">CubeComponent</a></td>
-<td><a href="../../slots/purpose/">purpose</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Measure/">Measure</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Measure/">Measure</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Measure/">Measure</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Measure/">Measure</a></td>
-<td><a href="../../slots/purpose/">purpose</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Dimension/">Dimension</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Dimension/">Dimension</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Dimension/">Dimension</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Dimension/">Dimension</a></td>
-<td><a href="../../slots/purpose/">purpose</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../DataAttribute/">DataAttribute</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../DataAttribute/">DataAttribute</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../DataAttribute/">DataAttribute</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../DataAttribute/">DataAttribute</a></td>
-<td><a href="../../slots/purpose/">purpose</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../ComponentList/">ComponentList</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../ComponentList/">ComponentList</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../ComponentList/">ComponentList</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../DataProduct/">DataProduct</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../DataProduct/">DataProduct</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../DataProduct/">DataProduct</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../DataProduct/">DataProduct</a></td>
-<td><a href="../../slots/purpose/">purpose</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../DataService/">DataService</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../DataService/">DataService</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../DataService/">DataService</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../DataProvider/">DataProvider</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../DataProvider/">DataProvider</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../DataProvider/">DataProvider</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../ProvisionAgreement/">ProvisionAgreement</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../ProvisionAgreement/">ProvisionAgreement</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../ProvisionAgreement/">ProvisionAgreement</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../ProvisionAgreement/">ProvisionAgreement</a></td>
-<td><a href="../../slots/purpose/">purpose</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Analysis/">Analysis</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Analysis/">Analysis</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Analysis/">Analysis</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Analysis/">Analysis</a></td>
-<td><a href="../../slots/purpose/">purpose</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Display/">Display</a></td>
-<td><a href="../../slots/description/">description</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Display/">Display</a></td>
-<td><a href="../../slots/label/">label</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Display/">Display</a></td>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-<tr>
-<td><a href="../Display/">Display</a></td>
-<td><a href="../../slots/purpose/">purpose</a></td>
-<td>any_of[range]</td>
-<td><a href="./">TranslatedText</a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="schema-source">Schema Source</h3>
-<ul>
-<li>from schema: https://cdisc.org/define-json</li>
-</ul>
-<h2 id="mappings">Mappings</h2>
-<table>
-<thead>
-<tr>
-<th>Mapping Type</th>
-<th>Mapped Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>self</td>
-<td>odm:TranslatedText</td>
-</tr>
-<tr>
-<td>native</td>
-<td>odm:TranslatedText</td>
-</tr>
-</tbody>
-</table>
-<h2 id="linkml-source">LinkML Source</h2>
+
+## Slots
+
+| Name | Cardinality and Range | Description | Inheritance |
+| ---  | --- | --- | --- |
+| [translations](../slots/translations.md) | * <br/> [Translation](../classes/Translation.md) |  | direct |
+
+
+
+
+
+## Usages
+
+| used by | used in | type | used |
+| ---  | --- | --- | --- |
+| [IdentifiableElement](../classes/IdentifiableElement.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [IdentifiableElement](../classes/IdentifiableElement.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [IdentifiableElement](../classes/IdentifiableElement.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [GovernedElement](../classes/GovernedElement.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [GovernedElement](../classes/GovernedElement.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [GovernedElement](../classes/GovernedElement.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [GovernedElement](../classes/GovernedElement.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Governed](../classes/Governed.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Labelled](../classes/Labelled.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Labelled](../classes/Labelled.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Labelled](../classes/Labelled.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [IsODMItem](../classes/IsODMItem.md) | [role](../slots/role.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [IsODMItem](../classes/IsODMItem.md) | [crfCompletionInstructions](../slots/crfCompletionInstructions.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [IsODMItem](../classes/IsODMItem.md) | [cdiscNotes](../slots/cdiscNotes.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [IsODMItem](../classes/IsODMItem.md) | [implementationNotes](../slots/implementationNotes.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [IsODMItem](../classes/IsODMItem.md) | [preSpecifiedValue](../slots/preSpecifiedValue.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [MetaDataVersion](../classes/MetaDataVersion.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [MetaDataVersion](../classes/MetaDataVersion.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [MetaDataVersion](../classes/MetaDataVersion.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [MetaDataVersion](../classes/MetaDataVersion.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Item](../classes/Item.md) | [role](../slots/role.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Item](../classes/Item.md) | [crfCompletionInstructions](../slots/crfCompletionInstructions.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Item](../classes/Item.md) | [cdiscNotes](../slots/cdiscNotes.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Item](../classes/Item.md) | [implementationNotes](../slots/implementationNotes.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Item](../classes/Item.md) | [preSpecifiedValue](../slots/preSpecifiedValue.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Item](../classes/Item.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Item](../classes/Item.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Item](../classes/Item.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Item](../classes/Item.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ItemGroup](../classes/ItemGroup.md) | [structure](../slots/structure.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ItemGroup](../classes/ItemGroup.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ItemGroup](../classes/ItemGroup.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ItemGroup](../classes/ItemGroup.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ItemGroup](../classes/ItemGroup.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Relationship](../classes/Relationship.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Relationship](../classes/Relationship.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Relationship](../classes/Relationship.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [CodeList](../classes/CodeList.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [CodeList](../classes/CodeList.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [CodeList](../classes/CodeList.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [CodeList](../classes/CodeList.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [CodeListItem](../classes/CodeListItem.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [CodeListItem](../classes/CodeListItem.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Comment](../classes/Comment.md) | [text](../slots/text.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Comment](../classes/Comment.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Comment](../classes/Comment.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Comment](../classes/Comment.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Comment](../classes/Comment.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Coding](../classes/Coding.md) | [decode](../slots/decode.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Dictionary](../classes/Dictionary.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Dictionary](../classes/Dictionary.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Dictionary](../classes/Dictionary.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ReifiedConcept](../classes/ReifiedConcept.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ReifiedConcept](../classes/ReifiedConcept.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ReifiedConcept](../classes/ReifiedConcept.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ReifiedConcept](../classes/ReifiedConcept.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ConceptProperty](../classes/ConceptProperty.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ConceptProperty](../classes/ConceptProperty.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ConceptProperty](../classes/ConceptProperty.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ConceptProperty](../classes/ConceptProperty.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [WhereClause](../classes/WhereClause.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [WhereClause](../classes/WhereClause.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [WhereClause](../classes/WhereClause.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [WhereClause](../classes/WhereClause.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Condition](../classes/Condition.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Condition](../classes/Condition.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Condition](../classes/Condition.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Condition](../classes/Condition.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [FormalExpression](../classes/FormalExpression.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [FormalExpression](../classes/FormalExpression.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [FormalExpression](../classes/FormalExpression.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Method](../classes/Method.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Method](../classes/Method.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Method](../classes/Method.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Method](../classes/Method.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Parameter](../classes/Parameter.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Parameter](../classes/Parameter.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Parameter](../classes/Parameter.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ReturnValue](../classes/ReturnValue.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ReturnValue](../classes/ReturnValue.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ReturnValue](../classes/ReturnValue.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [text](../slots/text.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [User](../classes/User.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [User](../classes/User.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [User](../classes/User.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Organization](../classes/Organization.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Organization](../classes/Organization.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Organization](../classes/Organization.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Standard](../classes/Standard.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Standard](../classes/Standard.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Standard](../classes/Standard.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Resource](../classes/Resource.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Resource](../classes/Resource.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Resource](../classes/Resource.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [DocumentReference](../classes/DocumentReference.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [DocumentReference](../classes/DocumentReference.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [DocumentReference](../classes/DocumentReference.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Timing](../classes/Timing.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Timing](../classes/Timing.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Timing](../classes/Timing.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [NominalOccurrence](../classes/NominalOccurrence.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [NominalOccurrence](../classes/NominalOccurrence.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [NominalOccurrence](../classes/NominalOccurrence.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [NominalOccurrence](../classes/NominalOccurrence.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [DataStructureDefinition](../classes/DataStructureDefinition.md) | [structure](../slots/structure.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [DataStructureDefinition](../classes/DataStructureDefinition.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [DataStructureDefinition](../classes/DataStructureDefinition.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [DataStructureDefinition](../classes/DataStructureDefinition.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [DataStructureDefinition](../classes/DataStructureDefinition.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Dataflow](../classes/Dataflow.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Dataflow](../classes/Dataflow.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Dataflow](../classes/Dataflow.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Dataflow](../classes/Dataflow.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Dataset](../classes/Dataset.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Dataset](../classes/Dataset.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Dataset](../classes/Dataset.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [CubeComponent](../classes/CubeComponent.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [CubeComponent](../classes/CubeComponent.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [CubeComponent](../classes/CubeComponent.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [CubeComponent](../classes/CubeComponent.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Measure](../classes/Measure.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Measure](../classes/Measure.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Measure](../classes/Measure.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Measure](../classes/Measure.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Dimension](../classes/Dimension.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Dimension](../classes/Dimension.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Dimension](../classes/Dimension.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Dimension](../classes/Dimension.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [DataAttribute](../classes/DataAttribute.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [DataAttribute](../classes/DataAttribute.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [DataAttribute](../classes/DataAttribute.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [DataAttribute](../classes/DataAttribute.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ComponentList](../classes/ComponentList.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ComponentList](../classes/ComponentList.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ComponentList](../classes/ComponentList.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [DataProduct](../classes/DataProduct.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [DataProduct](../classes/DataProduct.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [DataProduct](../classes/DataProduct.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [DataProduct](../classes/DataProduct.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [DataService](../classes/DataService.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [DataService](../classes/DataService.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [DataService](../classes/DataService.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [DataProvider](../classes/DataProvider.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [DataProvider](../classes/DataProvider.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [DataProvider](../classes/DataProvider.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ProvisionAgreement](../classes/ProvisionAgreement.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ProvisionAgreement](../classes/ProvisionAgreement.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ProvisionAgreement](../classes/ProvisionAgreement.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ProvisionAgreement](../classes/ProvisionAgreement.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Analysis](../classes/Analysis.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Analysis](../classes/Analysis.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Analysis](../classes/Analysis.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Analysis](../classes/Analysis.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Display](../classes/Display.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Display](../classes/Display.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Display](../classes/Display.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Display](../classes/Display.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+
+
+
+
+
+
+
+
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://cdisc.org/define-json
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | odm:TranslatedText |
+| native | odm:TranslatedText |
+
+
+
+
+
+
+## LinkML Source
+
 <!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
-<h3 id="direct">Direct</h3>
+
+### Direct
+
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TranslatedText</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
@@ -1150,7 +331,9 @@ TranslatedText ||--}o Translation : "translations"
 <span class="w">    </span><span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 </details>
-<h3 id="induced">Induced</h3>
+
+### Induced
+
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TranslatedText</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
@@ -1159,7 +342,6 @@ TranslatedText ||--}o Translation : "translations"
 <span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">translations</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">translations</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TranslatedText</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TranslatedText</span>
@@ -1168,7 +350,7 @@ TranslatedText ||--}o Translation : "translations"
 <span class="w">    </span><span class="nt">inlined</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 <span class="w">    </span><span class="nt">inlined_as_list</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
-</details></div>
+</details></div></div>
 </div>
 </div>
 <footer class="col-md-12">

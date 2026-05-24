@@ -68,30 +68,6 @@
 <ul class="nav flex-column">
 <li class="nav-item" data-bs-level="1"><a class="nav-link" href="#class-formalexpression">Class: FormalExpression</a>
 <ul class="nav flex-column">
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#inheritance">Inheritance</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#slots">Slots</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#usages">Usages</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#identifier-and-mapping-information">Identifier and Mapping Information</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#mappings">Mappings</a>
-<ul class="nav flex-column">
-</ul>
-</li>
-<li class="nav-item" data-bs-level="2"><a class="nav-link" href="#linkml-source">LinkML Source</a>
-<ul class="nav flex-column">
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -100,335 +76,249 @@
 <div class="col-md-9" role="main">
 <h1 id="class-formalexpression">Class: FormalExpression</h1>
 <p><em>A computational element that defines the execution of a data derivation within a specific context</em></p>
-<p>URI: <a href="https://cdisc.org/odm2/class/FormalExpression">odm:class/FormalExpression</a></p>
+<div data-search-exclude="" markdown="1">
+
+
+
+URI: [odm:class/FormalExpression](https://cdisc.org/odm2/class/FormalExpression)
+
+
 <pre class="mermaid"><code>erDiagram
-FormalExpression {
-    string context  
-    string expression  
-    string returnType  
-    string OID  
-    string uuid  
+CodeList {
+    string formatName  
+    DataType dataType  
     string name  
     string description  
-    string label  
+    string OID  
     stringList aliases  
+    string href  
+    boolean isNonStandard  
+    string label  
+    datetime lastUpdated  
+    boolean mandatory  
+    string owner  
+    string purpose  
+    string uuid  
+    string version  
+    string wasDerivedFrom  
 }
 Coding {
+    AliasPredicate aliasType  
     string code  
-    string decode  
     string codeSystem  
     string codeSystemVersion  
-    AliasPredicate aliasType  
+    string decode  
 }
-Resource {
-    string resourceType  
-    string attribute  
-    string version  
-    string href  
-    string OID  
-    string uuid  
+ConceptProperty {
+    integer maxOccurs  
+    integer minOccurs  
     string name  
     string description  
-    string label  
-    stringList aliases  
-}
-ReturnValue {
-    DataType dataType  
-    stringList valueList  
     string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
     stringList aliases  
-}
-Parameter {
-    DataType dataType  
-    string value  
-    string defaultValue  
-    stringList items  
-    boolean required  
-    string OID  
-    string uuid  
-    string name  
-    string description  
     string label  
-    stringList aliases  
+    datetime lastUpdated  
+    boolean mandatory  
+    string owner  
+    string purpose  
+    string uuid  
+    string wasDerivedFrom  
 }
 Condition {
     string implementsCondition  
     LogicalOperator operator  
-    string OID  
-    string uuid  
     string name  
     string description  
-    string label  
+    string OID  
     stringList aliases  
-    boolean mandatory  
-    string purpose  
+    string label  
     datetime lastUpdated  
+    boolean mandatory  
     string owner  
+    string purpose  
+    string uuid  
     string wasDerivedFrom  
+}
+FormalExpression {
+    string expression  
+    string returnType  
+    string context  
+    string name  
+    string description  
+    string OID  
+    stringList aliases  
+    string label  
+    string uuid  
+}
+Parameter {
+    string defaultValue  
+    boolean required  
+    DataType dataType  
+    stringList items  
+    string value  
+    string name  
+    string description  
+    string OID  
+    stringList aliases  
+    string label  
+    string uuid  
+}
+Resource {
+    string attribute  
+    string resourceType  
+    string name  
+    string description  
+    string OID  
+    stringList aliases  
+    string href  
+    string label  
+    string uuid  
+    string version  
+}
+ReturnValue {
+    stringList valueList  
+    DataType dataType  
+    string name  
+    string description  
+    string OID  
+    stringList aliases  
+    string label  
+    string uuid  
 }
 WhereClause {
-    string OID  
-    string uuid  
     string name  
     string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-ConceptProperty {
-    integer minOccurs  
-    integer maxOccurs  
     string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
     stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-CodeList {
-    DataType dataType  
-    string formatName  
-    string version  
-    string href  
-    boolean isNonStandard  
-    string OID  
-    string uuid  
-    string name  
-    string description  
     string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
     datetime lastUpdated  
+    boolean mandatory  
     string owner  
+    string purpose  
+    string uuid  
     string wasDerivedFrom  
 }
 
-FormalExpression ||--}o Parameter : "parameters"
-FormalExpression ||--|o ReturnValue : "returnValue"
-FormalExpression ||--}o Resource : "externalCodeLibs"
-FormalExpression ||--}o Coding : "coding"
-Resource ||--}o FormalExpression : "selection"
-Resource ||--}o Coding : "coding"
-ReturnValue ||--}o Coding : "coding"
-Parameter ||--}o CodeList : "codeList"
-Parameter ||--}o ConceptProperty : "conceptProperty"
-Parameter ||--}o WhereClause : "applicableWhen"
-Parameter ||--}o Condition : "conditions"
-Parameter ||--}o Coding : "coding"
-Condition ||--}o RangeCheck : "rangeChecks"
-Condition ||--}o FormalExpression : "expressions"
-Condition ||--}o Condition : "conditions"
-Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comments"
-Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-WhereClause ||--}o Condition : "conditions"
-WhereClause ||--}o Coding : "coding"
-WhereClause ||--}o Comment : "comments"
-WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+CodeList ||--|o Resource : "externalCodeList"
+CodeList ||--|o Standard : "standard"
+CodeList ||--}o CodeListItem : "codeListItems"
+CodeList ||--}o Coding : "coding"
+CodeList ||--}o Comment : "comments"
+CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ConceptProperty ||--|o CodeList : "codeList"
 ConceptProperty ||--}o Coding : "coding"
 ConceptProperty ||--}o Comment : "comments"
 ConceptProperty ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-CodeList ||--}o CodeListItem : "codeListItems"
-CodeList ||--|o Resource : "externalCodeList"
-CodeList ||--|o Standard : "standard"
-CodeList ||--}o Coding : "coding"
-CodeList ||--}o Comment : "comments"
-CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Condition ||--}o Coding : "coding"
+Condition ||--}o Comment : "comments"
+Condition ||--}o Condition : "conditions"
+Condition ||--}o FormalExpression : "expressions"
+Condition ||--}o RangeCheck : "rangeChecks"
+Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+FormalExpression ||--|o ReturnValue : "returnValue"
+FormalExpression ||--}o Coding : "coding"
+FormalExpression ||--}o Parameter : "parameters"
+FormalExpression ||--}o Resource : "externalCodeLibs"
+Parameter ||--}o CodeList : "codeList"
+Parameter ||--}o Coding : "coding"
+Parameter ||--}o ConceptProperty : "conceptProperty"
+Parameter ||--}o Condition : "conditions"
+Parameter ||--}o WhereClause : "applicableWhen"
+Resource ||--}o Coding : "coding"
+Resource ||--}o FormalExpression : "selection"
+ReturnValue ||--}o Coding : "coding"
+WhereClause ||--}o Coding : "coding"
+WhereClause ||--}o Comment : "comments"
+WhereClause ||--}o Condition : "conditions"
+WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 </code></pre>
-<h2 id="inheritance">Inheritance</h2>
-<ul>
-<li><a href="../IdentifiableElement/">IdentifiableElement</a> [ <a href="../Identifiable/">Identifiable</a> <a href="../Labelled/">Labelled</a>]<ul>
-<li><strong>FormalExpression</strong></li>
-</ul>
-</li>
-</ul>
-<h2 id="slots">Slots</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Cardinality and Range</th>
-<th>Description</th>
-<th>Inheritance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../../slots/context/">context</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>The specific context within the containing element to which this formal expression applies.</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/expression/">expression</a></td>
-<td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>The actual text of the formal expression (renamed from 'code' for disambiguation).</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/returnType/">returnType</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Return type of the expression</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/parameters/">parameters</a></td>
-<td>* <br/> <a href="../Parameter/">Parameter</a></td>
-<td>Parameters used in the expression</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/returnValue/">returnValue</a></td>
-<td>0..1 <br/> <a href="../ReturnValue/">ReturnValue</a></td>
-<td>Return value details</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/externalCodeLibs/">externalCodeLibs</a></td>
-<td>* <br/> <a href="../Resource/">Resource</a></td>
-<td>External code libraries referenced</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../../slots/OID/">OID</a></td>
-<td>1 <br/> <a href="../../types/String/">String</a></td>
-<td>Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use.</td>
-<td><a href="../Identifiable/">Identifiable</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/uuid/">uuid</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Universal unique identifier</td>
-<td><a href="../Identifiable/">Identifiable</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/name/">name</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a></td>
-<td>Short name or identifier, used for field names</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/description/">description</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>Detailed description, shown in tooltips</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/coding/">coding</a></td>
-<td>* <br/> <a href="../Coding/">Coding</a></td>
-<td>Semantic tags for this element</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/label/">label</a></td>
-<td>0..1 <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>Human-readable label, shown in UIs</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-<tr>
-<td><a href="../../slots/aliases/">aliases</a></td>
-<td>* <br/> <a href="../../types/String/">String</a> or <br/><a href="../../types/String/">String</a> or <br/><a href="../TranslatedText/">TranslatedText</a></td>
-<td>Alternative name or identifier</td>
-<td><a href="../Labelled/">Labelled</a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="usages">Usages</h2>
-<table>
-<thead>
-<tr>
-<th>used by</th>
-<th>used in</th>
-<th>type</th>
-<th>used</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../Condition/">Condition</a></td>
-<td><a href="../../slots/expressions/">expressions</a></td>
-<td>range</td>
-<td><a href="./">FormalExpression</a></td>
-</tr>
-<tr>
-<td><a href="../RangeCheck/">RangeCheck</a></td>
-<td><a href="../../slots/expressions/">expressions</a></td>
-<td>range</td>
-<td><a href="./">FormalExpression</a></td>
-</tr>
-<tr>
-<td><a href="../Method/">Method</a></td>
-<td><a href="../../slots/expressions/">expressions</a></td>
-<td>range</td>
-<td><a href="./">FormalExpression</a></td>
-</tr>
-<tr>
-<td><a href="../Resource/">Resource</a></td>
-<td><a href="../../slots/selection/">selection</a></td>
-<td>range</td>
-<td><a href="./">FormalExpression</a></td>
-</tr>
-<tr>
-<td><a href="../DataService/">DataService</a></td>
-<td><a href="../../slots/selection/">selection</a></td>
-<td>range</td>
-<td><a href="./">FormalExpression</a></td>
-</tr>
-<tr>
-<td><a href="../Analysis/">Analysis</a></td>
-<td><a href="../../slots/expressions/">expressions</a></td>
-<td>range</td>
-<td><a href="./">FormalExpression</a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="schema-source">Schema Source</h3>
-<ul>
-<li>from schema: https://cdisc.org/define-json</li>
-</ul>
-<h2 id="mappings">Mappings</h2>
-<table>
-<thead>
-<tr>
-<th>Mapping Type</th>
-<th>Mapped Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>self</td>
-<td>odm:FormalExpression</td>
-</tr>
-<tr>
-<td>native</td>
-<td>odm:FormalExpression</td>
-</tr>
-<tr>
-<td>exact</td>
-<td>odm:FormalExpression, odm:FormalExpressionRef, fhir:Expression</td>
-</tr>
-</tbody>
-</table>
-<h2 id="linkml-source">LinkML Source</h2>
+
+
+
+
+## Inheritance
+* [IdentifiableElement](../classes/IdentifiableElement.md) [ [Identifiable](../classes/Identifiable.md) [Labelled](../classes/Labelled.md)]
+    * **FormalExpression**
+
+
+## Slots
+
+| Name | Cardinality and Range | Description | Inheritance |
+| ---  | --- | --- | --- |
+| [context](../slots/context.md) | 0..1 <br/> [String](../types/String.md) | The specific context within the containing element to which this formal expression applies. | direct |
+| [expression](../slots/expression.md) | 1 <br/> [String](../types/String.md) | The actual text of the formal expression (renamed from 'code' for disambiguation). | direct |
+| [returnType](../slots/returnType.md) | 0..1 <br/> [String](../types/String.md) | Return type of the expression | direct |
+| [parameters](../slots/parameters.md) | * <br/> [Parameter](../classes/Parameter.md) | Parameters used in the expression | direct |
+| [returnValue](../slots/returnValue.md) | 0..1 <br/> [ReturnValue](../classes/ReturnValue.md) | Return value details | direct |
+| [externalCodeLibs](../slots/externalCodeLibs.md) | * <br/> [Resource](../classes/Resource.md) | External code libraries referenced | direct |
+| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
+| [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
+| [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
+| [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md) or <br/>[TranslatedText](../classes/TranslatedText.md) | Detailed description, shown in tooltips | [Labelled](../classes/Labelled.md) |
+| [coding](../slots/coding.md) | * <br/> [Coding](../classes/Coding.md) | Semantic tags for this element | [Labelled](../classes/Labelled.md) |
+| [label](../slots/label.md) | 0..1 <br/> [String](../types/String.md) or <br/>[TranslatedText](../classes/TranslatedText.md) | Human-readable label, shown in UIs | [Labelled](../classes/Labelled.md) |
+| [aliases](../slots/aliases.md) | * <br/> [String](../types/String.md) or <br/>[TranslatedText](../classes/TranslatedText.md) | Alternative name or identifier | [Labelled](../classes/Labelled.md) |
+
+
+
+
+
+## Usages
+
+| used by | used in | type | used |
+| ---  | --- | --- | --- |
+| [Condition](../classes/Condition.md) | [expressions](../slots/expressions.md) | range | [FormalExpression](../classes/FormalExpression.md) |
+| [RangeCheck](../classes/RangeCheck.md) | [expressions](../slots/expressions.md) | range | [FormalExpression](../classes/FormalExpression.md) |
+| [Method](../classes/Method.md) | [expressions](../slots/expressions.md) | range | [FormalExpression](../classes/FormalExpression.md) |
+| [Resource](../classes/Resource.md) | [selection](../slots/selection.md) | range | [FormalExpression](../classes/FormalExpression.md) |
+| [DataService](../classes/DataService.md) | [selection](../slots/selection.md) | range | [FormalExpression](../classes/FormalExpression.md) |
+| [Analysis](../classes/Analysis.md) | [expressions](../slots/expressions.md) | range | [FormalExpression](../classes/FormalExpression.md) |
+
+
+
+
+
+
+
+
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://cdisc.org/define-json
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | odm:FormalExpression |
+| native | odm:FormalExpression |
+| exact | odm:FormalExpression, odm:FormalExpressionRef, fhir:Expression |
+
+
+
+
+
+
+## LinkML Source
+
 <!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
-<h3 id="direct">Direct</h3>
+
+### Direct
+
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FormalExpression</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A computational element that defines the execution of a data derivation</span>
@@ -501,7 +391,9 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 </details>
-<h3 id="induced">Induced</h3>
+
+### Induced
+
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FormalExpression</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A computational element that defines the execution of a data derivation</span>
@@ -520,7 +412,6 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">exact_mappings</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">fhir:Expression/language</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">context</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FormalExpression</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ODMFileMetadata</span>
@@ -534,7 +425,6 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <span class="w">    </span><span class="nt">aliases</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">code</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">expression</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FormalExpression</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FormalExpression</span>
@@ -545,7 +435,6 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Return type of the expression</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">returnType</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FormalExpression</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FormalExpression</span>
@@ -555,7 +444,6 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Parameters used in the expression</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">parameters</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FormalExpression</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FormalExpression</span>
@@ -568,7 +456,6 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Return value details</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">returnValue</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FormalExpression</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FormalExpression</span>
@@ -578,7 +465,6 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">External code libraries referenced</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">externalCodeLibs</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FormalExpression</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FormalExpression</span>
@@ -591,7 +477,6 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="w">    </span><span class="nt">identifier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">OID</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FormalExpression</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Identifiable</span>
@@ -602,7 +487,6 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Universal unique identifier</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uuid</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FormalExpression</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Identifiable</span>
@@ -612,10 +496,11 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Short name or identifier, used for field names</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">name</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FormalExpression</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DefClass</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SubClass</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Standard</span>
 <span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 <span class="w">  </span><span class="nt">description</span><span class="p">:</span>
@@ -623,7 +508,6 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Detailed description, shown in tooltips</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">description</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FormalExpression</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
@@ -637,7 +521,6 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Semantic tags for this element</span>
 <span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cdisc.org/define-json</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">coding</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FormalExpression</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
@@ -654,7 +537,6 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <span class="w">    </span><span class="nt">exact_mappings</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">skos:prefLabel</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">label</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FormalExpression</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
@@ -669,7 +551,6 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <span class="w">    </span><span class="nt">exact_mappings</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">skos:altLabel</span>
 <span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-<span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">aliases</span>
 <span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FormalExpression</span>
 <span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Labelled</span>
@@ -682,7 +563,7 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
 <span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TranslatedText</span>
 </code></pre></div>
-</details></div>
+</details></div></div>
 </div>
 </div>
 <footer class="col-md-12">
