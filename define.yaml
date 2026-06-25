@@ -278,9 +278,12 @@ classes:
         description: One or more members of this set are non-standard extensions
         range: boolean
 
-  ODMFileMetadata:
+  ODMSerializationMetadata:
     description: >-
-      A mixin that provides ODM file-level metadata attributes including file identifiers, timestamps, and system information
+      A mixin providing ODM/Define-XML file-level attributes required only when
+      serializing to ODM or Define-XML format. Applied by the ODM output generator,
+      not by the canonical model itself. These attributes (fileOID, odmVersion,
+      defineVersion, etc.) have no meaning in FHIR, OMOP, or SDMX projections.
     mixin: true
     attributes:
       fileOID:
@@ -339,7 +342,7 @@ classes:
       - omop:cdm_source
     is_a: GovernedElement
     mixins:
-      - ODMFileMetadata
+      - ODMSerializationMetadata
       - StudyMetadata
     attributes:
       itemGroups:
