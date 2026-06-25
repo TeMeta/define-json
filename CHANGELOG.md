@@ -4,6 +4,52 @@ Notable changes to `define.yaml` (the Data Definition Specification LinkML schem
 follows [Keep a Changelog](https://keepachangelog.com). The schema is not yet
 semver-versioned, so entries are dated.
 
+## [Unreleased] — DDS repositioning (standards-agnostic) — 2026-06-25
+
+Repositions the schema as a **standards-agnostic canonical model**: ODM/Define-XML
+is one serialization facet applied by the output generator, not the source of the
+model. Applied as a series of atomic commits; each change validated with
+`gen-linkml`. **Breaking** (class/slot renames). Generated docs need a `make docs`
+refresh and downstream instances must migrate renamed names.
+
+### Fixed (§1)
+
+- Moved the required-`OID` `slot_usage` from the `Governed` mixin (which does not
+  inherit `Identifiable`, where `OID` is defined) to `GovernedElement` (§1.2).
+- Demoted OMOP era mappings on `Timing` from `narrow_mappings` (false OWL
+  subsumption) to `related_mappings`; kept FHIR Period/Age/Duration as narrow (§1.3).
+- Removed invalid `from_schema: ncit:C…` from `OriginType`/`OriginSource` (it must be
+  a schema URI); provenance preserved in descriptions (§1.4).
+
+### Changed — identity (§0)
+
+- Neutral schema `id` (`https://w3id.org/dds`) and `default_prefix: dds` (added `dds`
+  prefix) replacing the `cdisc.org`/`odm` defaults; description reframed as
+  standards-agnostic. (Neutral namespace chosen over the doc's `cdisc.org`.)
+
+### Changed — renames (§2)
+
+- `ReifiedConcept` → `Concept`; `MetaDataVersion` → `Specification` (tree_root);
+  `WhereClause` → `ApplicabilityCondition` (+ `whereClauses` slot →
+  `applicabilityConditions`); `Condition` → `LogicalPredicate` (+ `conditions` slots
+  → `predicates`/`validationPredicates`, `collectionExceptionCondition` →
+  `collectionExceptionPredicate`, `implementsCondition` → `implementsPredicate`;
+  external `usdm:Condition`/`odm:ConditionDef` mappings preserved);
+  `ODMFileMetadata` → `ODMSerializationMetadata`; `IsODMItem` →
+  `ODMItemSerialization`; `IsODMStandard` → `ODMStandardReference`.
+
+### Changed — structure (§3)
+
+- Detached `ODMSerializationMetadata` from `Specification` and
+  `ODMItemSerialization` from `Item` (generator-applied, not canonical) (§3.1/§3.2).
+- Replaced `NominalOccurrence` (planned/actual conflation) with a `TimingLandmark`
+  enum + free-form USDM `ScheduledActivityInstance` reference on
+  `Timing.relativeTo`/`relativeFrom` (§3.3).
+- Added `Specification.usdmStudyDesignId` (defer study design to USDM) (§3.4).
+- Flipped `Dataflow.analysisMethod` → `Analysis.inputDataflows` (correct dependency
+  direction) (§3.5).
+- Annotated `ItemGroupType.ValueList` as an ODM serialization hint (§3.6).
+
 ## [Unreleased] — Queries, reusable checks, key split — 2026-06-25
 
 **Backward-compatible / additive.** New classes/slots/enum only; one slot
