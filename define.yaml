@@ -41,6 +41,9 @@ classes:
       - Identifiable
       - Labelled
       - Governed
+    slot_usage:
+      OID:
+        required: true
 
   Identifiable:
     description: >-
@@ -61,9 +64,6 @@ classes:
     description: >-
       A mixin that provides slots for audit trail and standards governance, including mandatory status, comments, and attribution
     mixin: true
-    slot_usage:
-      OID:
-        required: true
     attributes:
       mandatory:
         description: >-
