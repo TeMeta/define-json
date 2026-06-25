@@ -339,6 +339,7 @@ classes:
       data model for a study or data product. Links items, item groups, methods,
       code lists, concepts, and study design references. Projects to Define-XML
       MetaDataVersion, FHIR ImplementationGuide, and OMOP CDM metadata.
+      ODMSerializationMetadata is applied by the ODM output generator, not here.
     close_mappings:
       - usdm:StudyDesign
     related_mappings:
@@ -346,7 +347,6 @@ classes:
       - omop:cdm_source
     is_a: GovernedElement
     mixins:
-      - ODMSerializationMetadata
       - StudyMetadata
     attributes:
       itemGroups:
@@ -508,8 +508,8 @@ classes:
       - osb:std_unit
     is_a: GovernedElement
     mixins:
-      - ODMItemSerialization
       - Formatted
+    # ODMItemSerialization is applied by the ODM output generator, not here.
     attributes:
       dataType:
         description: >-
