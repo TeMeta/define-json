@@ -46,7 +46,7 @@ Alias: event
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -67,7 +67,7 @@ Alias: event
 ```yaml
 name: event
 description: The ID of the event in a Schedule.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: event
 owner: NominalOccurrence

@@ -1,11 +1,11 @@
-site_name: Define-JSON Documentation
+site_name: Data Definition Specification Documentation
 site_description: Data model for supply and demand data contracts to complement CDISC USDM, ODM, and Dataset-JSON
 site_author: CDISC
-site_url: https://TeMeta.github.io/define-json/
+site_url: https://TeMeta.github.io/data-definition-spec/
 
 # Repository
-repo_name: define-json
-repo_url: https://github.com/TeMeta/define-json
+repo_name: data-definition-spec
+repo_url: https://github.com/TeMeta/data-definition-spec
 edit_uri: edit/main/
 
 site_dir: './site'

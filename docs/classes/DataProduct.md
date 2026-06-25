@@ -9,7 +9,7 @@ _A governed collection that represents a purpose-driven assembly of datasets and
 
 
 
-URI: [odm:class/DataProduct](https://cdisc.org/odm2/class/DataProduct)
+URI: [dds:class/DataProduct](https://w3id.org/dds/class/DataProduct)
 
 
 ```mermaid
@@ -18,7 +18,6 @@ DataProduct {
     string dataProductOwner  
     string domain  
     DataProductLifecycleStatus lifecycleStatus  
-    stringList hasPolicy  
     string version  
     string href  
     string OID  
@@ -70,12 +69,84 @@ Coding {
     string codeSystemVersion  
     AliasPredicate aliasType  
 }
+ProvisionAgreement {
+    string consumer  
+    string version  
+    string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+Policy {
+    PolicyType policyType  
+    string profile  
+    string assigner  
+    string assignee  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+Resource {
+    string resourceType  
+    string attribute  
+    string version  
+    string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+Dataflow {
+    stringList deliverySchedule  
+    string version  
+    string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+DataProvider {
+    string role  
+    OrganizationType type  
+    string location  
+    string address  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
 Dataset {
     string publishedBy  
     stringList keys  
     string datasetType  
     string conformsTo  
-    stringList hasPolicy  
     string informationSensitivityClassification  
     string version  
     string href  
@@ -100,6 +171,8 @@ Timing {
     TimingType type  
     boolean isNominal  
     string value  
+    string relativeTo  
+    string relativeFrom  
     datetime windowLower  
     datetime windowUpper  
     boolean recalled  
@@ -139,21 +212,6 @@ DataStructureDefinition {
     string version  
     string href  
 }
-Dataflow {
-    string version  
-    string href  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
 DataService {
     string protocol  
     string securitySchemaType  
@@ -186,6 +244,8 @@ DataProduct ||--}o Dataflow : "inputDataflow"
 DataProduct ||--}o Dataflow : "outputDataflow"
 DataProduct ||--}o Dataset : "inputDataset"
 DataProduct ||--}o Dataset : "outputDataset"
+DataProduct ||--}o Policy : "hasPolicy"
+DataProduct ||--}o ProvisionAgreement : "provisionAgreement"
 DataProduct ||--}o Coding : "coding"
 DataProduct ||--}o Comment : "comments"
 DataProduct ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -196,14 +256,38 @@ Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 Comment ||--}o Comment : "comments"
 Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+ProvisionAgreement ||--|o DataProvider : "provider"
+ProvisionAgreement ||--|o Dataflow : "dataFlow"
+ProvisionAgreement ||--|o Resource : "source"
+ProvisionAgreement ||--}o Policy : "hasPolicy"
+ProvisionAgreement ||--}o Coding : "coding"
+ProvisionAgreement ||--}o Comment : "comments"
+ProvisionAgreement ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Policy ||--}o Rule : "permission"
+Policy ||--}o Rule : "prohibition"
+Policy ||--}o Rule : "obligation"
+Policy ||--}o Coding : "coding"
+Policy ||--}o Comment : "comments"
+Policy ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Resource ||--}o FormalExpression : "selection"
+Resource ||--}o Coding : "coding"
+Dataflow ||--|| DataStructureDefinition : "structure"
+Dataflow ||--}o Dimension : "dimensionConstraint"
+Dataflow ||--}o Coding : "coding"
+Dataflow ||--}o Comment : "comments"
+Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+DataProvider ||--}o Dataflow : "providesDataFor"
+DataProvider ||--}o ProvisionAgreement : "provisionAgreements"
+DataProvider ||--}o Resource : "source"
+DataProvider ||--|o Organization : "partOfOrganization"
+DataProvider ||--}o Coding : "coding"
 Dataset ||--|o Dataflow : "describedBy"
 Dataset ||--|o DataStructureDefinition : "structuredBy"
 Dataset ||--}o Distribution : "distribution"
+Dataset ||--}o Policy : "hasPolicy"
 Dataset ||--}o Coding : "security"
 Dataset ||--|o Timing : "validityPeriod"
 Dataset ||--}o Coding : "coding"
-Timing ||--|o NominalOccurrence : "relativeTo"
-Timing ||--|o NominalOccurrence : "relativeFrom"
 Timing ||--|o Method : "imputation"
 Timing ||--}o Coding : "coding"
 Distribution ||--|o DataService : "accessService"
@@ -213,22 +297,18 @@ DataStructureDefinition ||--}o Measure : "measures"
 DataStructureDefinition ||--}o DataAttribute : "attributes"
 DataStructureDefinition ||--|o ComponentList : "grouping"
 DataStructureDefinition ||--}o Item : "items"
+DataStructureDefinition ||--}o Item : "uniqueKey"
 DataStructureDefinition ||--}o Item : "keySequence"
 DataStructureDefinition ||--}o ItemGroup : "slices"
-DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
-DataStructureDefinition ||--}o WhereClause : "applicableWhen"
+DataStructureDefinition ||--|o Concept : "implementsConcept"
+DataStructureDefinition ||--}o ApplicabilityCondition : "applicableWhen"
+DataStructureDefinition ||--|o DefClass : "observationClass"
 DataStructureDefinition ||--}o Coding : "security"
 DataStructureDefinition ||--|o Timing : "validityPeriod"
 DataStructureDefinition ||--|o Standard : "standard"
 DataStructureDefinition ||--}o Coding : "coding"
 DataStructureDefinition ||--}o Comment : "comments"
 DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-Dataflow ||--|| DataStructureDefinition : "structure"
-Dataflow ||--}o Dimension : "dimensionConstraint"
-Dataflow ||--|o Analysis : "analysisMethod"
-Dataflow ||--}o Coding : "coding"
-Dataflow ||--}o Comment : "comments"
-Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 DataService ||--|o Distribution : "isAccessServiceOf"
 DataService ||--}o FormalExpression : "selection"
 DataService ||--}o Coding : "coding"
@@ -261,7 +341,8 @@ FormalExpression ||--}o Coding : "coding"
 | [outputDataflow](../slots/outputDataflow.md) | * <br/> [Dataflow](../classes/Dataflow.md) | Description of the output interface before concrete Datasets exist. Dataflows referenced here represent the supply side of a ProvisionAgreement. | direct |
 | [inputDataset](../slots/inputDataset.md) | * <br/> [Dataset](../classes/Dataset.md) | Source datasets used by the data product | direct |
 | [outputDataset](../slots/outputDataset.md) | * <br/> [Dataset](../classes/Dataset.md) | Output datasets produced by the data product | direct |
-| [hasPolicy](../slots/hasPolicy.md) | * <br/> [String](../types/String.md) | Policies governing the use and access of the data product | direct |
+| [hasPolicy](../slots/hasPolicy.md) | * <br/> [Policy](../classes/Policy.md) | Policies governing the use and access of the data product | direct |
+| [provisionAgreement](../slots/provisionAgreement.md) | * <br/> [ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference(s) to standalone Data Transfer Agreements (ProvisionAgreement) that govern this product's flows. Referenced by OID/URI, not embedded, so the agreement remains an independently maintained artifact. | direct |
 | [version](../slots/version.md) | 0..1 <br/> [String](../types/String.md) | The version of the external resources | [Versioned](../classes/Versioned.md) |
 | [href](../slots/href.md) | 0..1 <br/> [String](../types/String.md) | Machine-readable instructions to obtain the resource e.g. FHIR path, URL | [Versioned](../classes/Versioned.md) |
 | [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
@@ -277,7 +358,7 @@ FormalExpression ||--}o Coding : "coding"
 | [purpose](../slots/purpose.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Purpose or rationale for this data element | [Governed](../classes/Governed.md) |
 | [lastUpdated](../slots/lastUpdated.md) | 0..1 <br/> [Datetime](../types/Datetime.md) | When the resource was last updated | [Governed](../classes/Governed.md) |
 | [owner](../slots/owner.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Party responsible for this element | [Governed](../classes/Governed.md) |
-| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[MetaDataVersion](../classes/MetaDataVersion.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[ReifiedConcept](../classes/ReifiedConcept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[Condition](../classes/Condition.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[NominalOccurrence](../classes/NominalOccurrence.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
+| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[Specification](../classes/Specification.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[Concept](../classes/Concept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[LogicalPredicate](../classes/LogicalPredicate.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
 
 
 
@@ -289,19 +370,20 @@ FormalExpression ||--}o Coding : "coding"
 | ---  | --- | --- | --- |
 | [GovernedElement](../classes/GovernedElement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
 | [Governed](../classes/Governed.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | [dataProducts](../slots/dataProducts.md) | range | [DataProduct](../classes/DataProduct.md) |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [Specification](../classes/Specification.md) | [dataProducts](../slots/dataProducts.md) | range | [DataProduct](../classes/DataProduct.md) |
+| [Specification](../classes/Specification.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
 | [Item](../classes/Item.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
 | [ItemGroup](../classes/ItemGroup.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [Query](../classes/Query.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
 | [CodeList](../classes/CodeList.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
 | [Comment](../classes/Comment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
-| [ReifiedConcept](../classes/ReifiedConcept.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [Concept](../classes/Concept.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
 | [ConceptProperty](../classes/ConceptProperty.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
-| [WhereClause](../classes/WhereClause.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
-| [Condition](../classes/Condition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [ApplicabilityCondition](../classes/ApplicabilityCondition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [LogicalPredicate](../classes/LogicalPredicate.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [Check](../classes/Check.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
 | [Method](../classes/Method.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
 | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
-| [NominalOccurrence](../classes/NominalOccurrence.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
 | [Dataflow](../classes/Dataflow.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
 | [CubeComponent](../classes/CubeComponent.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
@@ -311,6 +393,7 @@ FormalExpression ||--}o Coding : "coding"
 | [DataProduct](../classes/DataProduct.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [consumer](../slots/consumer.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
+| [Policy](../classes/Policy.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
 | [Analysis](../classes/Analysis.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
 | [Display](../classes/Display.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [DataProduct](../classes/DataProduct.md) |
 
@@ -330,7 +413,7 @@ FormalExpression ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -339,8 +422,8 @@ FormalExpression ||--}o Coding : "coding"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:DataProduct |
-| native | odm:DataProduct |
+| self | dds:DataProduct |
+| native | dds:DataProduct |
 | exact | dprod:DataProduct, dcat:DataService |
 
 
@@ -360,7 +443,7 @@ name: DataProduct
 description: A governed collection that represents a purpose-driven assembly of datasets
   and services with an owning team and lifecycle. The DataProduct defines the boundary
   of accountability between data producers and consumers.
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 exact_mappings:
 - dprod:DataProduct
 - dcat:DataService
@@ -371,7 +454,7 @@ attributes:
   dataProductOwner:
     name: dataProductOwner
     description: The person or team accountable for this data product
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - prov:wasAttributedTo
     rank: 1000
@@ -384,14 +467,14 @@ attributes:
   domain:
     name: domain
     description: The functional domain or business area this product serves
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     domain_of:
     - ItemGroup
     - DataProduct
   lifecycleStatus:
     name: lifecycleStatus
     description: Current lifecycle status of the data product
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - DataProduct
@@ -399,7 +482,7 @@ attributes:
   inputPort:
     name: inputPort
     description: Services that provide input into this data product
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - DataProduct
@@ -410,7 +493,7 @@ attributes:
   outputPort:
     name: outputPort
     description: Services that expose output from this data product
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - DataProduct
@@ -422,7 +505,7 @@ attributes:
     name: inputDataflow
     description: Description of the input interface before concrete Datasets exist.
       Dataflows referenced here represent the demand side of a ProvisionAgreement.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     close_mappings:
     - dcat:distribution
     rank: 1000
@@ -436,7 +519,7 @@ attributes:
     name: outputDataflow
     description: Description of the output interface before concrete Datasets exist.
       Dataflows referenced here represent the supply side of a ProvisionAgreement.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     close_mappings:
     - dcat:distribution
     rank: 1000
@@ -449,7 +532,7 @@ attributes:
   inputDataset:
     name: inputDataset
     description: Source datasets used by the data product
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - DataProduct
@@ -460,7 +543,7 @@ attributes:
   outputDataset:
     name: outputDataset
     description: Output datasets produced by the data product
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - DataProduct
@@ -471,13 +554,27 @@ attributes:
   hasPolicy:
     name: hasPolicy
     description: Policies governing the use and access of the data product
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     domain_of:
     - Dataset
     - DataProduct
+    - ProvisionAgreement
+    range: Policy
     multivalued: true
     inlined: true
     inlined_as_list: true
+  provisionAgreement:
+    name: provisionAgreement
+    description: Reference(s) to standalone Data Transfer Agreements (ProvisionAgreement)
+      that govern this product's flows. Referenced by OID/URI, not embedded, so the
+      agreement remains an independently maintained artifact.
+    from_schema: https://w3id.org/dds
+    rank: 1000
+    domain_of:
+    - DataProduct
+    range: ProvisionAgreement
+    multivalued: true
+    inlined: false
 
 ```
 </details>
@@ -490,7 +587,7 @@ name: DataProduct
 description: A governed collection that represents a purpose-driven assembly of datasets
   and services with an owning team and lifecycle. The DataProduct defines the boundary
   of accountability between data producers and consumers.
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 exact_mappings:
 - dprod:DataProduct
 - dcat:DataService
@@ -501,7 +598,7 @@ attributes:
   dataProductOwner:
     name: dataProductOwner
     description: The person or team accountable for this data product
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - prov:wasAttributedTo
     rank: 1000
@@ -509,6 +606,7 @@ attributes:
     owner: DataProduct
     domain_of:
     - DataProduct
+    range: string
     any_of:
     - range: User
     - range: Organization
@@ -516,16 +614,17 @@ attributes:
   domain:
     name: domain
     description: The functional domain or business area this product serves
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     alias: domain
     owner: DataProduct
     domain_of:
     - ItemGroup
     - DataProduct
+    range: string
   lifecycleStatus:
     name: lifecycleStatus
     description: Current lifecycle status of the data product
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: lifecycleStatus
     owner: DataProduct
@@ -535,7 +634,7 @@ attributes:
   inputPort:
     name: inputPort
     description: Services that provide input into this data product
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: inputPort
     owner: DataProduct
@@ -548,7 +647,7 @@ attributes:
   outputPort:
     name: outputPort
     description: Services that expose output from this data product
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: outputPort
     owner: DataProduct
@@ -562,7 +661,7 @@ attributes:
     name: inputDataflow
     description: Description of the input interface before concrete Datasets exist.
       Dataflows referenced here represent the demand side of a ProvisionAgreement.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     close_mappings:
     - dcat:distribution
     rank: 1000
@@ -578,7 +677,7 @@ attributes:
     name: outputDataflow
     description: Description of the output interface before concrete Datasets exist.
       Dataflows referenced here represent the supply side of a ProvisionAgreement.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     close_mappings:
     - dcat:distribution
     rank: 1000
@@ -593,7 +692,7 @@ attributes:
   inputDataset:
     name: inputDataset
     description: Source datasets used by the data product
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: inputDataset
     owner: DataProduct
@@ -606,7 +705,7 @@ attributes:
   outputDataset:
     name: outputDataset
     description: Output datasets produced by the data product
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: outputDataset
     owner: DataProduct
@@ -619,19 +718,35 @@ attributes:
   hasPolicy:
     name: hasPolicy
     description: Policies governing the use and access of the data product
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     alias: hasPolicy
     owner: DataProduct
     domain_of:
     - Dataset
     - DataProduct
+    - ProvisionAgreement
+    range: Policy
     multivalued: true
     inlined: true
     inlined_as_list: true
+  provisionAgreement:
+    name: provisionAgreement
+    description: Reference(s) to standalone Data Transfer Agreements (ProvisionAgreement)
+      that govern this product's flows. Referenced by OID/URI, not embedded, so the
+      agreement remains an independently maintained artifact.
+    from_schema: https://w3id.org/dds
+    rank: 1000
+    alias: provisionAgreement
+    owner: DataProduct
+    domain_of:
+    - DataProduct
+    range: ProvisionAgreement
+    multivalued: true
+    inlined: false
   version:
     name: version
     description: The version of the external resources
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: version
     owner: DataProduct
@@ -643,7 +758,7 @@ attributes:
     name: href
     description: Machine-readable instructions to obtain the resource e.g. FHIR path,
       URL
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: href
     owner: DataProduct
@@ -655,7 +770,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     identifier: true
     alias: OID
@@ -667,7 +782,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: uuid
     owner: DataProduct
@@ -677,18 +792,20 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: name
     owner: DataProduct
     domain_of:
     - Labelled
+    - DefClass
+    - SubClass
     - Standard
     range: string
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: description
     owner: DataProduct
@@ -702,7 +819,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: coding
     owner: DataProduct
@@ -717,7 +834,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -732,7 +849,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:altLabel
     rank: 1000
@@ -751,7 +868,7 @@ attributes:
   mandatory:
     name: mandatory
     description: Is this element required?
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: mandatory
     owner: DataProduct
@@ -762,7 +879,7 @@ attributes:
     name: comments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: comments
     owner: DataProduct
@@ -775,7 +892,7 @@ attributes:
     name: siteOrSponsorComments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: siteOrSponsorComments
     owner: DataProduct
@@ -787,7 +904,7 @@ attributes:
   purpose:
     name: purpose
     description: Purpose or rationale for this data element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: purpose
     owner: DataProduct
@@ -800,7 +917,7 @@ attributes:
   lastUpdated:
     name: lastUpdated
     description: When the resource was last updated
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: lastUpdated
     owner: DataProduct
@@ -810,7 +927,7 @@ attributes:
   owner:
     name: owner
     description: Party responsible for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     narrow_mappings:
     - prov:wasAttributedTo
     - prov:wasAssociatedBy
@@ -828,7 +945,7 @@ attributes:
     name: wasDerivedFrom
     description: Reference to another item that this item implements or extends, e.g.
       a template Item definition.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - prov:wasDerivedFrom
     rank: 1000
@@ -840,13 +957,12 @@ attributes:
     any_of:
     - range: Item
     - range: ItemGroup
-    - range: MetaDataVersion
+    - range: Specification
     - range: CodeList
-    - range: ReifiedConcept
+    - range: Concept
     - range: ConceptProperty
-    - range: Condition
+    - range: LogicalPredicate
     - range: Method
-    - range: NominalOccurrence
     - range: Dataflow
     - range: CubeComponent
     - range: DataProduct

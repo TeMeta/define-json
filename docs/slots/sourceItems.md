@@ -9,7 +9,7 @@ _Source items for this origin_
 
 
 
-URI: [odm:slot/sourceItems](https://cdisc.org/odm2/slot/sourceItems)
+URI: [dds:slot/sourceItems](https://w3id.org/dds/slot/sourceItems)
 Alias: sourceItems
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: sourceItems
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: sourceItems
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:sourceItems |
-| native | odm:sourceItems |
+| self | dds:sourceItems |
+| native | dds:sourceItems |
 
 
 
@@ -69,7 +69,7 @@ Alias: sourceItems
 ```yaml
 name: sourceItems
 description: Source items for this origin
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: sourceItems
 owner: Origin

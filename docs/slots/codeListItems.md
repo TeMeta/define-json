@@ -9,7 +9,7 @@ _The individual values that make up this CodeList. The type of CodeListItem incl
 
 
 
-URI: [odm:slot/codeListItems](https://cdisc.org/odm2/slot/codeListItems)
+URI: [dds:slot/codeListItems](https://w3id.org/dds/slot/codeListItems)
 Alias: codeListItems
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: codeListItems
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: codeListItems
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:codeListItems |
-| native | odm:codeListItems |
+| self | dds:codeListItems |
+| native | dds:codeListItems |
 
 
 
@@ -70,7 +70,7 @@ Alias: codeListItems
 name: codeListItems
 description: The individual values that make up this CodeList. The type of CodeListItem
   included determines its behaviour
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: codeListItems
 owner: CodeList

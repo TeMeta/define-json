@@ -9,7 +9,7 @@ _How this coding is related in the context of its parent element_
 
 
 
-URI: [odm:slot/aliasType](https://cdisc.org/odm2/slot/aliasType)
+URI: [dds:slot/aliasType](https://w3id.org/dds/slot/aliasType)
 Alias: aliasType
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: aliasType
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: aliasType
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:aliasType |
-| native | odm:aliasType |
+| self | dds:aliasType |
+| native | dds:aliasType |
 
 
 
@@ -67,7 +67,7 @@ Alias: aliasType
 ```yaml
 name: aliasType
 description: How this coding is related in the context of its parent element
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: aliasType
 owner: Coding

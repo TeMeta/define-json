@@ -6,7 +6,7 @@
 * __NOTE__: this is an abstract class and should not be instantiated directly
 
 
-URI: [odm:class/IdentifiableElement](https://cdisc.org/odm2/class/IdentifiableElement)
+URI: [dds:class/IdentifiableElement](https://w3id.org/dds/class/IdentifiableElement)
 
 
 ```mermaid
@@ -49,6 +49,8 @@ IdentifiableElement ||--}o Coding : "coding"
     * [Timing](../classes/Timing.md)
     * [Dataset](../classes/Dataset.md) [ [Versioned](../classes/Versioned.md) [IsProfile](../classes/IsProfile.md) [IsSdmxDataset](../classes/IsSdmxDataset.md)]
     * [ComponentList](../classes/ComponentList.md)
+    * [Rule](../classes/Rule.md)
+    * [Constraint](../classes/Constraint.md)
 
 
 
@@ -74,6 +76,8 @@ IdentifiableElement ||--}o Coding : "coding"
 | ---  | --- | --- | --- |
 | [Relationship](../classes/Relationship.md) | [subject](../slots/subject.md) | range | [IdentifiableElement](../classes/IdentifiableElement.md) |
 | [Relationship](../classes/Relationship.md) | [object](../slots/object.md) | range | [IdentifiableElement](../classes/IdentifiableElement.md) |
+| [Query](../classes/Query.md) | [about](../slots/about.md) | range | [IdentifiableElement](../classes/IdentifiableElement.md) |
+| [Check](../classes/Check.md) | [appliesTo](../slots/appliesTo.md) | range | [IdentifiableElement](../classes/IdentifiableElement.md) |
 
 
 
@@ -91,7 +95,7 @@ IdentifiableElement ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -100,8 +104,8 @@ IdentifiableElement ||--}o Coding : "coding"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:IdentifiableElement |
-| native | odm:IdentifiableElement |
+| self | dds:IdentifiableElement |
+| native | dds:IdentifiableElement |
 
 
 
@@ -117,7 +121,7 @@ IdentifiableElement ||--}o Coding : "coding"
 <details>
 ```yaml
 name: IdentifiableElement
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 abstract: true
 mixins:
 - Identifiable
@@ -131,7 +135,7 @@ mixins:
 <details>
 ```yaml
 name: IdentifiableElement
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 abstract: true
 mixins:
 - Identifiable
@@ -141,7 +145,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     identifier: true
     alias: OID
@@ -153,7 +157,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: uuid
     owner: IdentifiableElement
@@ -163,18 +167,20 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: name
     owner: IdentifiableElement
     domain_of:
     - Labelled
+    - DefClass
+    - SubClass
     - Standard
     range: string
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: description
     owner: IdentifiableElement
@@ -188,7 +194,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: coding
     owner: IdentifiableElement
@@ -203,7 +209,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -218,7 +224,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:altLabel
     rank: 1000

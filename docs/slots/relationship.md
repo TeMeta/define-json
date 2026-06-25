@@ -9,7 +9,7 @@ _Relationship to the referencing entity_
 
 
 
-URI: [odm:slot/relationship](https://cdisc.org/odm2/slot/relationship)
+URI: [dds:slot/relationship](https://w3id.org/dds/slot/relationship)
 Alias: relationship
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: relationship
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: relationship
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:relationship |
-| native | odm:relationship |
+| self | dds:relationship |
+| native | dds:relationship |
 
 
 
@@ -67,7 +67,7 @@ Alias: relationship
 ```yaml
 name: relationship
 description: Relationship to the referencing entity
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: relationship
 owner: DocumentReference

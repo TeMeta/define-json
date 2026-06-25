@@ -7,7 +7,7 @@ _An enumeration that defines the types of organizations involved in clinical res
 
 
 
-URI: [odm:enum/OrganizationType](https://cdisc.org/odm2/enum/OrganizationType)
+URI: [dds:enum/OrganizationType](https://w3id.org/dds/enum/OrganizationType)
 
 ## Permissible Values
 
@@ -37,7 +37,7 @@ URI: [odm:enum/OrganizationType](https://cdisc.org/odm2/enum/OrganizationType)
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -51,7 +51,7 @@ URI: [odm:enum/OrganizationType](https://cdisc.org/odm2/enum/OrganizationType)
 name: OrganizationType
 description: An enumeration that defines the types of organizations involved in clinical
   research
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 permissible_values:
   Sponsor:

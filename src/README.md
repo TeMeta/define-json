@@ -1,17 +1,17 @@
-# Define-JSON Source Code
+# Data Definition Specification Source Code
 
-This directory contains the modular source code for the Define-JSON project, organized into a proper Python package structure.
+This directory contains the modular source code for the Data Definition Specification project, organized into a proper Python package structure.
 
 ## Structure
 
 ```
-src/define_json/
+src/data_definition_spec/
 ├── __init__.py                 # Package initialization and exports
-├── __main__.py                 # CLI entry point (python -m define_json)
+├── __main__.py                 # CLI entry point (python -m data_definition_spec)
 ├── converters/                 # Bidirectional conversion modules
 │   ├── __init__.py
-│   ├── xml_to_json.py         # Define-XML → Define-JSON converter
-│   └── json_to_xml.py         # Define-JSON → Define-XML converter
+│   ├── xml_to_json.py         # Define-XML → Data Definition Specification converter
+│   └── json_to_xml.py         # Data Definition Specification → Define-XML converter
 ├── validation/                 # Validation and testing modules
 │   ├── __init__.py
 │   ├── roundtrip.py           # Roundtrip validation functions
@@ -43,8 +43,8 @@ src/define_json/
 
 ### As a Package
 ```python
-from define_json.converters import DefineXMLToJSONConverter
-from define_json.validation import run_roundtrip_test
+from data_definition_spec.converters import DefineXMLToJSONConverter
+from data_definition_spec.validation import run_roundtrip_test
 
 # Convert XML to JSON
 converter = DefineXMLToJSONConverter()
@@ -57,13 +57,13 @@ results = run_roundtrip_test('input.xml', 'output.json')
 ### CLI Interface
 ```bash
 # Convert XML to JSON
-python -m define_json xml2json input.xml output.json
+python -m data_definition_spec xml2json input.xml output.json
 
 # Run complete roundtrip test
-python -m define_json roundtrip input.xml converted.json --recreate-xml roundtrip.xml
+python -m data_definition_spec roundtrip input.xml converted.json --recreate-xml roundtrip.xml
 
 # Validate JSON schema
-python -m define_json validate output.json
+python -m data_definition_spec validate output.json
 ```
 
 ### Simple Scripts

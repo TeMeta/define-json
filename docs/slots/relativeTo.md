@@ -3,13 +3,13 @@
 # Slot: relativeTo 
 
 
-_Reference to the event or occurrence that this timing is relative to._
+_The protocol anchor this timing is relative to. Either a TimingLandmark (well-known protocol event such as RANDOMIZATION or FIRST_DOSE) or a free-form OID/identifier referencing a USDM ScheduledActivityInstance._
 
 
 
 
 
-URI: [odm:slot/relativeTo](https://cdisc.org/odm2/slot/relativeTo)
+URI: [dds:slot/relativeTo](https://w3id.org/dds/slot/relativeTo)
 Alias: relativeTo
 
 <!-- no inheritance hierarchy -->
@@ -31,7 +31,7 @@ Alias: relativeTo
 
 ## Properties
 
-* Range: [NominalOccurrence](../classes/NominalOccurrence.md)
+* Range: [String](../types/String.md)&nbsp;or&nbsp;<br />[TimingLandmark](../enums/TimingLandmark.md)&nbsp;or&nbsp;<br />[String](../types/String.md)
 
 
 
@@ -46,7 +46,7 @@ Alias: relativeTo
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: relativeTo
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:relativeTo |
-| native | odm:relativeTo |
+| self | dds:relativeTo |
+| native | dds:relativeTo |
 
 
 
@@ -66,14 +66,19 @@ Alias: relativeTo
 <details>
 ```yaml
 name: relativeTo
-description: Reference to the event or occurrence that this timing is relative to.
-from_schema: https://cdisc.org/define-json
+description: The protocol anchor this timing is relative to. Either a TimingLandmark
+  (well-known protocol event such as RANDOMIZATION or FIRST_DOSE) or a free-form OID/identifier
+  referencing a USDM ScheduledActivityInstance.
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: relativeTo
 owner: Timing
 domain_of:
 - Timing
-range: NominalOccurrence
+range: string
+any_of:
+- range: TimingLandmark
+- range: string
 
 ```
 </details>

@@ -4,7 +4,7 @@
 
 
 
-URI: [odm:slot/dimensions](https://cdisc.org/odm2/slot/dimensions)
+URI: [dds:slot/dimensions](https://w3id.org/dds/slot/dimensions)
 Alias: dimensions
 
 <!-- no inheritance hierarchy -->
@@ -27,7 +27,7 @@ Alias: dimensions
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -44,8 +44,8 @@ Alias: dimensions
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:dimensions |
-| native | odm:dimensions |
+| self | dds:dimensions |
+| native | dds:dimensions |
 
 
 
@@ -59,6 +59,7 @@ alias: dimensions
 domain_of:
 - DataStructureDefinition
 - DimensionRelationship
+range: string
 
 ```
 </details>

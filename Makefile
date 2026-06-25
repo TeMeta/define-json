@@ -1,9 +1,9 @@
-# Define-JSON Testing, Validation and Conversion Makefile
+# Data Definition Specification Testing, Validation and Conversion Makefile
 
 .PHONY: help install test validate lint clean check-syntax linkml-lint generate-json-schema generate-pydantic docs docs-serve docs-build docs-deploy demo roundtrip convert test-roundtrip format setup test-xml-roundtrip-360i test-xml-roundtrip-LZZT test-xml-roundtrip-v21-adam test-xml-roundtrip-v21-sdtm test-xml-roundtrips reverse-engineer reverse-engineer-lb reverse-engineer-vs
 
 help:
-	@echo "Define-JSON Testing, Validation and Conversion"
+	@echo "Data Definition Specification Testing, Validation and Conversion"
 	@echo "=============================================="
 	@echo ""
 	@echo "Main targets:"
@@ -12,7 +12,7 @@ help:
 	@echo "  convert                    - Convert sample XML to JSON"
 	@echo ""
 	@echo "Reverse Engineering:"
-	@echo "  reverse-engineer           - Reverse engineer Define-JSON from Dataset-JSON"
+	@echo "  reverse-engineer           - Reverse engineer Data Definition Specification from Dataset-JSON"
 	@echo "  reverse-engineer-lb        - Run reverse engineering on LB sample"
 	@echo "  reverse-engineer-vs        - Run reverse engineering on VS sample"
 	@echo ""
@@ -68,8 +68,8 @@ linkml-lint:
 
 generate-json-schema:
 	@echo "Generating JSON Schema from LinkML..."
-	poetry run linkml generate json-schema define.yaml > generated/define-json-schema.json
-	@echo "JSON Schema generated: generated/define-json-schema.json"
+	poetry run linkml generate json-schema define.yaml > generated/data-definition-spec-schema.json
+	@echo "JSON Schema generated: generated/data-definition-spec-schema.json"
 
 generate-pydantic:
 	@echo "Generating Pydantic models from LinkML..."
@@ -82,40 +82,43 @@ demo:
 
 roundtrip:
 	@echo "Testing XML→JSON→XML roundtrip conversion..."
-	poetry run python -m src.define_json test-roundtrip data/define-360i.xml
+	poetry run python -m src.data_definition_spec test-roundtrip data/define-360i.xml
 
 convert:
 	@echo "Converting sample XML to JSON..."
-	poetry run python -m src.define_json xml2json data/define-360i.xml data/define-360i.json
+	poetry run python -m src.data_definition_spec xml2json data/define-360i.xml data/define-360i.json
 
 # Testing targets
 test: check-syntax validate linkml-lint
 	@echo "Running unit tests..."
 	poetry run python -m unittest discover tests/ -v
-roundtrip; from pathlib import Path; result = validate_true_roundtrip(Path('data/define-360i.xml'), Path('data/define-360i-recreated.xml')); print('Roundtrip test passed' if result.get('passed') else 'Roundtrip test failed')"
+
+test-roundtrip:
+	@echo "Testing roundtrip functionality..."
+	poetry run python -c "from src.data_definition_spec.validation.roundtrip import validate_true_roundtrip; from pathlib import Path; result = validate_true_roundtrip(Path('data/define-360i.xml'), Path('data/define-360i-recreated.xml')); print('Roundtrip test passed' if result.get('passed') else 'Roundtrip test failed')"
 
 test-xml-roundtrip-LZZT:
 	@echo "Testing XML→JSON→XML roundtrip conversion for define_LZZT_ADaM..."
-	poetry run python -m src.define_json xml2json data/define_LZZT_ADaM.xml data/define_LZZT_ADaM.json --preserve-original
-	poetry run python -m src.define_json json2xml data/define_LZZT_ADaM.json data/define_LZZT_ADaM_roundtrip.xml --strict-mode
+	poetry run python -m src.data_definition_spec xml2json data/define_LZZT_ADaM.xml data/define_LZZT_ADaM.json --preserve-original
+	poetry run python -m src.data_definition_spec json2xml data/define_LZZT_ADaM.json data/define_LZZT_ADaM_roundtrip.xml --strict-mode
 	poetry run python -m scripts.compare_xml_roundtrip data/define_LZZT_ADaM.xml data/define_LZZT_ADaM_roundtrip.xml --validate-only --ignore-order-numbers
 
 test-xml-roundtrip-360i:
 	@echo "Testing XML→JSON→XML roundtrip conversion for define-360i..."
-	poetry run python -m src.define_json xml2json data/define-360i.xml data/define-360i.json --preserve-original
-	poetry run python -m src.define_json json2xml data/define-360i.json data/define-360i_roundtrip.xml --strict-mode
+	poetry run python -m src.data_definition_spec xml2json data/define-360i.xml data/define-360i.json --preserve-original
+	poetry run python -m src.data_definition_spec json2xml data/define-360i.json data/define-360i_roundtrip.xml --strict-mode
 	poetry run python -m scripts.compare_xml_roundtrip data/define-360i.xml data/define-360i_roundtrip.xml --validate-only --ignore-order-numbers
 
 test-xml-roundtrip-v21-adam:
 	@echo "Testing XML→JSON→XML roundtrip conversion for defineV21-ADaM..."
-	poetry run python -m src.define_json xml2json data/defineV21-ADaM.xml data/defineV21-ADaM.json --preserve-original
-	poetry run python -m src.define_json json2xml data/defineV21-ADaM.json data/defineV21-ADaM_roundtrip.xml --strict-mode
+	poetry run python -m src.data_definition_spec xml2json data/defineV21-ADaM.xml data/defineV21-ADaM.json --preserve-original
+	poetry run python -m src.data_definition_spec json2xml data/defineV21-ADaM.json data/defineV21-ADaM_roundtrip.xml --strict-mode
 	poetry run python -m scripts.compare_xml_roundtrip data/defineV21-ADaM.xml data/defineV21-ADaM_roundtrip.xml --validate-only --ignore-order-numbers
 
 test-xml-roundtrip-v21-sdtm:
 	@echo "Testing XML→JSON→XML roundtrip conversion for defineV21-SDTM..."
-	poetry run python -m src.define_json xml2json data/defineV21-SDTM.xml data/defineV21-SDTM.json --preserve-original
-	poetry run python -m src.define_json json2xml data/defineV21-SDTM.json data/defineV21-SDTM_roundtrip.xml --strict-mode
+	poetry run python -m src.data_definition_spec xml2json data/defineV21-SDTM.xml data/defineV21-SDTM.json --preserve-original
+	poetry run python -m src.data_definition_spec json2xml data/defineV21-SDTM.json data/defineV21-SDTM_roundtrip.xml --strict-mode
 	poetry run python -m scripts.compare_xml_roundtrip data/defineV21-SDTM.xml data/defineV21-SDTM_roundtrip.xml --validate-only --ignore-order-numbers
 
 test-xml-roundtrips: test-xml-roundtrip-360i test-xml-roundtrip-LZZT test-xml-roundtrip-v21-adam test-xml-roundtrip-v21-sdtm
@@ -169,7 +172,7 @@ setup: install
 
 # Reverse Engineering targets
 reverse-engineer:
-	@echo "Reverse engineering Define-JSON from Dataset-JSON..."
+	@echo "Reverse engineering Data Definition Specification from Dataset-JSON..."
 	@echo "Usage: make reverse-engineer-lb or make reverse-engineer-vs"
 	@echo "Or run directly: python scripts/reverse_engineer_define.py <dataset-json-file>"
 

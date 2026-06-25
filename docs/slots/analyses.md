@@ -9,7 +9,7 @@ _Analyses defined in this version of the metadata._
 
 
 
-URI: [odm:slot/analyses](https://cdisc.org/odm2/slot/analyses)
+URI: [dds:slot/analyses](https://w3id.org/dds/slot/analyses)
 Alias: analyses
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: analyses
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | A container element that represents a given version of a specification, linking to a particular usage context such as a study, dataset, or data collection instrument. |  no  |
+| [Specification](../classes/Specification.md) | The root specification container: a versioned, governed definition of the data model for a study or data product. Links items, item groups, methods, code lists, concepts, and study design references. Projects to Define-XML MetaDataVersion, FHIR ImplementationGuide, and OMOP CDM metadata. ODMSerializationMetadata is applied by the ODM output generator, not here. |  no  |
 
 
 
@@ -48,7 +48,7 @@ Alias: analyses
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: analyses
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:analyses |
-| native | odm:analyses |
+| self | dds:analyses |
+| native | dds:analyses |
 
 
 
@@ -69,12 +69,12 @@ Alias: analyses
 ```yaml
 name: analyses
 description: Analyses defined in this version of the metadata.
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: analyses
-owner: MetaDataVersion
+owner: Specification
 domain_of:
-- MetaDataVersion
+- Specification
 range: Analysis
 multivalued: true
 inlined: true

@@ -9,7 +9,7 @@ _The Dataflows that this provider supplies data for_
 
 
 
-URI: [odm:slot/providesDataFor](https://cdisc.org/odm2/slot/providesDataFor)
+URI: [dds:slot/providesDataFor](https://w3id.org/dds/slot/providesDataFor)
 Alias: providesDataFor
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: providesDataFor
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: providesDataFor
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:providesDataFor |
-| native | odm:providesDataFor |
+| self | dds:providesDataFor |
+| native | dds:providesDataFor |
 
 
 
@@ -69,7 +69,7 @@ Alias: providesDataFor
 ```yaml
 name: providesDataFor
 description: The Dataflows that this provider supplies data for
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: providesDataFor
 owner: DataProvider

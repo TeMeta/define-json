@@ -9,7 +9,7 @@ _Indicates the inclusive end time indicating the validity of the information in 
 
 
 
-URI: [odm:slot/validTo](https://cdisc.org/odm2/slot/validTo)
+URI: [dds:slot/validTo](https://w3id.org/dds/slot/validTo)
 Alias: validTo
 
 <!-- no inheritance hierarchy -->
@@ -32,7 +32,7 @@ Alias: validTo
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -47,7 +47,7 @@ Alias: validTo
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -56,8 +56,8 @@ Alias: validTo
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:validTo |
-| native | odm:validTo |
+| self | dds:validTo |
+| native | dds:validTo |
 
 
 
@@ -69,12 +69,13 @@ Alias: validTo
 name: validTo
 description: Indicates the inclusive end time indicating the validity of the information
   in the data set.
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: validTo
 owner: IsSdmxDataset
 domain_of:
 - IsSdmxDataset
+range: string
 
 ```
 </details>

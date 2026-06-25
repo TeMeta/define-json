@@ -4,7 +4,7 @@
 
 
 
-URI: [odm:slot/conceptProperty](https://cdisc.org/odm2/slot/conceptProperty)
+URI: [dds:slot/conceptProperty](https://w3id.org/dds/slot/conceptProperty)
 Alias: conceptProperty
 
 <!-- no inheritance hierarchy -->
@@ -17,8 +17,8 @@ Alias: conceptProperty
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Item](../classes/Item.md) | A data element that represents a specific piece of information within a defined context, with data type, constraints, and derivation methods |  no  |
 | [Parameter](../classes/Parameter.md) | A variable element that describes an input used in a formal expression |  no  |
+| [Item](../classes/Item.md) | A data element that represents a specific piece of information within a defined context, with data type, constraints, and derivation methods |  no  |
 
 
 
@@ -27,7 +27,7 @@ Alias: conceptProperty
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -44,8 +44,8 @@ Alias: conceptProperty
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:conceptProperty |
-| native | odm:conceptProperty |
+| self | dds:conceptProperty |
+| native | dds:conceptProperty |
 
 
 
@@ -59,6 +59,7 @@ alias: conceptProperty
 domain_of:
 - Item
 - Parameter
+range: string
 
 ```
 </details>

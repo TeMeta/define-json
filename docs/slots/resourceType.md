@@ -9,7 +9,7 @@ _Type of resource (e.g.,  "ODM", "HL7-FHIR", "HL7-CDA", "HL7-v2", "OpenEHR-extra
 
 
 
-URI: [odm:slot/resourceType](https://cdisc.org/odm2/slot/resourceType)
+URI: [dds:slot/resourceType](https://w3id.org/dds/slot/resourceType)
 Alias: resourceType
 
 <!-- no inheritance hierarchy -->
@@ -22,8 +22,8 @@ Alias: resourceType
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [DataService](../classes/DataService.md) | A service element that provides an API or endpoint for serving or receiving data |  no  |
 | [Resource](../classes/Resource.md) | An external reference that serves as the source for a Dataset, ItemGroup, or Item |  no  |
+| [DataService](../classes/DataService.md) | A service element that provides an API or endpoint for serving or receiving data |  no  |
 
 
 
@@ -47,7 +47,7 @@ Alias: resourceType
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -56,8 +56,8 @@ Alias: resourceType
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:resourceType |
-| native | odm:resourceType |
+| self | dds:resourceType |
+| native | dds:resourceType |
 
 
 
@@ -68,7 +68,7 @@ Alias: resourceType
 ```yaml
 name: resourceType
 description: Type of resource (e.g.,  "ODM", "HL7-FHIR", "HL7-CDA", "HL7-v2", "OpenEHR-extract")
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: resourceType
 owner: Resource

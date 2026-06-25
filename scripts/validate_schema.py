@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-CLI tool for validating Define-JSON schema.
+CLI tool for validating Data Definition Specification schema.
 """
 
 import click
@@ -26,14 +26,14 @@ console = Console()
 @click.option('--format', 'output_format', default='text', 
               type=click.Choice(['text', 'json', 'yaml']), help='Output format')
 def validate_schema(schema: str, verbose: bool, output_format: str):
-    """Validate Define-JSON schema for fit-for-purpose testing."""
+    """Validate Data Definition Specification schema for fit-for-purpose testing."""
     
     schema_path = Path(schema)
     if not schema_path.exists():
         console.print(f"[red]Error: Schema file {schema} not found[/red]")
         return 1
     
-    console.print(f"[bold blue]Validating Define-JSON Schema: {schema}[/bold blue]")
+    console.print(f"[bold blue]Validating Data Definition Specification Schema: {schema}[/bold blue]")
     
     # Load schema
     try:

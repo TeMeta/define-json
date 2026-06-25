@@ -9,7 +9,7 @@ _ImplementationNotes reference: Further information, such as rationale and imple
 
 
 
-URI: [odm:slot/implementationNotes](https://cdisc.org/odm2/slot/implementationNotes)
+URI: [dds:slot/implementationNotes](https://w3id.org/dds/slot/implementationNotes)
 Alias: implementationNotes
 
 <!-- no inheritance hierarchy -->
@@ -22,8 +22,7 @@ Alias: implementationNotes
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [IsODMItem](../classes/IsODMItem.md) | A mixin that provides additional attributes for CDISC Operational Data Model items, including roles, completion instructions, and implementation notes |  no  |
-| [Item](../classes/Item.md) | A data element that represents a specific piece of information within a defined context, with data type, constraints, and derivation methods |  no  |
+| [ODMItemSerialization](../classes/ODMItemSerialization.md) | A mixin providing ODM/CDISC-specific item attributes meaningful only in ODM/Define-XML serialization: CRF completion instructions, CDISC notes, implementation notes, collection exception predicates, and pre-specified values. Applied by the ODM output generator. Not part of the canonical Item. |  no  |
 
 
 
@@ -32,7 +31,7 @@ Alias: implementationNotes
 
 ## Properties
 
-* Range: NONE&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md)
+* Range: [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md)
 
 
 
@@ -47,7 +46,7 @@ Alias: implementationNotes
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -56,8 +55,8 @@ Alias: implementationNotes
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:implementationNotes |
-| native | odm:implementationNotes |
+| self | dds:implementationNotes |
+| native | dds:implementationNotes |
 
 
 
@@ -69,12 +68,13 @@ Alias: implementationNotes
 name: implementationNotes
 description: 'ImplementationNotes reference: Further information, such as rationale
   and implementation instructions, on how to implement the CRF data collection fields'
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: implementationNotes
-owner: IsODMItem
+owner: ODMItemSerialization
 domain_of:
-- IsODMItem
+- ODMItemSerialization
+range: string
 any_of:
 - range: string
 - range: TranslatedText

@@ -9,7 +9,7 @@ _A relationship element that associates a DataAttribute with a Measure_
 
 
 
-URI: [odm:class/MeasureRelationship](https://cdisc.org/odm2/class/MeasureRelationship)
+URI: [dds:class/MeasureRelationship](https://w3id.org/dds/class/MeasureRelationship)
 
 
 ```mermaid
@@ -85,12 +85,6 @@ Method {
 Item {
     DataType dataType  
     integer length  
-    string role  
-    boolean hasNoData  
-    string crfCompletionInstructions  
-    string cdiscNotes  
-    string implementationNotes  
-    string preSpecifiedValue  
     integer decimalDigits  
     string displayFormat  
     integer significantDigits  
@@ -138,18 +132,16 @@ Comment ||--}o Comment : "comments"
 Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Method ||--}o FormalExpression : "expressions"
 Method ||--}o DocumentReference : "documents"
-Method ||--|o ReifiedConcept : "implementsConcept"
+Method ||--|o Concept : "implementsConcept"
 Method ||--}o Coding : "coding"
 Method ||--}o Comment : "comments"
 Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--}o WhereClause : "applicableWhen"
+Item ||--}o ApplicabilityCondition : "applicableWhen"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
-Item ||--|o CodeList : "roleCodeList"
-Item ||--|o Condition : "collectionExceptionCondition"
 Item ||--}o Coding : "coding"
 Item ||--}o Comment : "comments"
 Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -193,7 +185,7 @@ Measure ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -202,8 +194,8 @@ Measure ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:MeasureRelationship |
-| native | odm:MeasureRelationship |
+| self | dds:MeasureRelationship |
+| native | dds:MeasureRelationship |
 | exact | sdmx:MeasureRelationship |
 
 
@@ -221,20 +213,20 @@ Measure ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ```yaml
 name: MeasureRelationship
 description: A relationship element that associates a DataAttribute with a Measure
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 exact_mappings:
 - sdmx:MeasureRelationship
 attributes:
   measure:
     name: measure
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - MeasureRelationship
     range: Measure
   attribute:
     name: attribute
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     domain_of:
     - Resource
     - MeasureRelationship
@@ -253,13 +245,13 @@ attributes:
 ```yaml
 name: MeasureRelationship
 description: A relationship element that associates a DataAttribute with a Measure
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 exact_mappings:
 - sdmx:MeasureRelationship
 attributes:
   measure:
     name: measure
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: measure
     owner: MeasureRelationship
@@ -268,7 +260,7 @@ attributes:
     range: Measure
   attribute:
     name: attribute
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     alias: attribute
     owner: MeasureRelationship
     domain_of:

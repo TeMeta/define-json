@@ -9,7 +9,7 @@ _A data source that provides the origin of information for an item_
 
 
 
-URI: [odm:class/SourceItem](https://cdisc.org/odm2/class/SourceItem)
+URI: [dds:class/SourceItem](https://w3id.org/dds/class/SourceItem)
 
 
 ```mermaid
@@ -41,12 +41,6 @@ DocumentReference {
 Item {
     DataType dataType  
     integer length  
-    string role  
-    boolean hasNoData  
-    string crfCompletionInstructions  
-    string cdiscNotes  
-    string implementationNotes  
-    string preSpecifiedValue  
     integer decimalDigits  
     string displayFormat  
     integer significantDigits  
@@ -92,39 +86,6 @@ Comment {
     string owner  
     string wasDerivedFrom  
 }
-Condition {
-    string implementsCondition  
-    LogicalOperator operator  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-CodeList {
-    DataType dataType  
-    string formatName  
-    string version  
-    string href  
-    boolean isNonStandard  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
 ConceptProperty {
     integer minOccurs  
     integer maxOccurs  
@@ -144,7 +105,7 @@ Origin {
     OriginType type  
     OriginSource source  
 }
-WhereClause {
+ApplicabilityCondition {
     string OID  
     string uuid  
     string name  
@@ -178,6 +139,24 @@ Method {
     string owner  
     string wasDerivedFrom  
 }
+CodeList {
+    DataType dataType  
+    string formatName  
+    string version  
+    string href  
+    boolean isNonStandard  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
 
 SourceItem ||--|o Item : "item"
 SourceItem ||--}o DocumentReference : "document"
@@ -186,11 +165,9 @@ DocumentReference ||--}o Coding : "coding"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--}o WhereClause : "applicableWhen"
+Item ||--}o ApplicabilityCondition : "applicableWhen"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
-Item ||--|o CodeList : "roleCodeList"
-Item ||--|o Condition : "collectionExceptionCondition"
 Item ||--}o Coding : "coding"
 Item ||--}o Comment : "comments"
 Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -201,35 +178,30 @@ Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 Comment ||--}o Comment : "comments"
 Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-Condition ||--}o RangeCheck : "rangeChecks"
-Condition ||--}o FormalExpression : "expressions"
-Condition ||--}o Condition : "conditions"
-Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comments"
-Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-CodeList ||--}o CodeListItem : "codeListItems"
-CodeList ||--|o Resource : "externalCodeList"
-CodeList ||--|o Standard : "standard"
-CodeList ||--}o Coding : "coding"
-CodeList ||--}o Comment : "comments"
-CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ConceptProperty ||--|o CodeList : "codeList"
 ConceptProperty ||--}o Coding : "coding"
 ConceptProperty ||--}o Comment : "comments"
 ConceptProperty ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Origin ||--}o SourceItem : "sourceItems"
 Origin ||--}o DocumentReference : "documents"
-WhereClause ||--}o Condition : "conditions"
-WhereClause ||--}o Coding : "coding"
-WhereClause ||--}o Comment : "comments"
-WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+ApplicabilityCondition ||--}o LogicalPredicate : "predicates"
+ApplicabilityCondition ||--}o Coding : "coding"
+ApplicabilityCondition ||--}o Comment : "comments"
+ApplicabilityCondition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 RangeCheck ||--}o FormalExpression : "expressions"
+RangeCheck ||--|o Check : "implementsCheck"
 Method ||--}o FormalExpression : "expressions"
 Method ||--}o DocumentReference : "documents"
-Method ||--|o ReifiedConcept : "implementsConcept"
+Method ||--|o Concept : "implementsConcept"
 Method ||--}o Coding : "coding"
 Method ||--}o Comment : "comments"
 Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+CodeList ||--}o CodeListItem : "codeListItems"
+CodeList ||--|o Resource : "externalCodeList"
+CodeList ||--|o Standard : "standard"
+CodeList ||--}o Coding : "coding"
+CodeList ||--}o Comment : "comments"
+CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 ```
 
@@ -273,7 +245,7 @@ Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -282,8 +254,8 @@ Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:SourceItem |
-| native | odm:SourceItem |
+| self | dds:SourceItem |
+| native | dds:SourceItem |
 
 
 
@@ -300,12 +272,12 @@ Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ```yaml
 name: SourceItem
 description: A data source that provides the origin of information for an item
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 attributes:
   item:
     name: item
     description: Reference to an item
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     domain_of:
     - RangeCheck
     - SourceItem
@@ -316,7 +288,7 @@ attributes:
   document:
     name: document
     description: Reference to an external document
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - SourceItem
@@ -328,7 +300,7 @@ attributes:
     name: resource
     description: Path to a resource (e.g. File, FHIR datasource) that is the source
       of this item
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - SourceItem
@@ -340,7 +312,7 @@ attributes:
   coding:
     name: coding
     description: A coding that describes the source of the item
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     domain_of:
     - Labelled
     - CodeListItem
@@ -359,12 +331,12 @@ attributes:
 ```yaml
 name: SourceItem
 description: A data source that provides the origin of information for an item
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 attributes:
   item:
     name: item
     description: Reference to an item
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     alias: item
     owner: SourceItem
     domain_of:
@@ -377,7 +349,7 @@ attributes:
   document:
     name: document
     description: Reference to an external document
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: document
     owner: SourceItem
@@ -391,12 +363,13 @@ attributes:
     name: resource
     description: Path to a resource (e.g. File, FHIR datasource) that is the source
       of this item
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: resource
     owner: SourceItem
     domain_of:
     - SourceItem
+    range: string
     multivalued: true
     inlined: false
     any_of:
@@ -405,7 +378,7 @@ attributes:
   coding:
     name: coding
     description: A coding that describes the source of the item
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     alias: coding
     owner: SourceItem
     domain_of:

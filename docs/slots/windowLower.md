@@ -9,7 +9,7 @@ _Start date/time of the timing_
 
 
 
-URI: [odm:slot/windowLower](https://cdisc.org/odm2/slot/windowLower)
+URI: [dds:slot/windowLower](https://w3id.org/dds/slot/windowLower)
 Alias: windowLower
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: windowLower
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: windowLower
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:windowLower |
-| native | odm:windowLower |
+| self | dds:windowLower |
+| native | dds:windowLower |
 
 
 
@@ -67,7 +67,7 @@ Alias: windowLower
 ```yaml
 name: windowLower
 description: Start date/time of the timing
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: windowLower
 owner: Timing

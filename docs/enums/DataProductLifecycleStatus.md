@@ -7,7 +7,7 @@ _An enumeration that defines the lifecycle stages for a DataProduct_
 
 
 
-URI: [odm:enum/DataProductLifecycleStatus](https://cdisc.org/odm2/enum/DataProductLifecycleStatus)
+URI: [dds:enum/DataProductLifecycleStatus](https://w3id.org/dds/enum/DataProductLifecycleStatus)
 
 ## Permissible Values
 
@@ -42,7 +42,7 @@ URI: [odm:enum/DataProductLifecycleStatus](https://cdisc.org/odm2/enum/DataProdu
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,7 +55,7 @@ URI: [odm:enum/DataProductLifecycleStatus](https://cdisc.org/odm2/enum/DataProdu
 ```yaml
 name: DataProductLifecycleStatus
 description: An enumeration that defines the lifecycle stages for a DataProduct
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 permissible_values:
   Ideation:

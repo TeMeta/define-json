@@ -9,7 +9,7 @@ _A specific time period in a known system of time periods that identifies the en
 
 
 
-URI: [odm:slot/reportingEnd](https://cdisc.org/odm2/slot/reportingEnd)
+URI: [dds:slot/reportingEnd](https://w3id.org/dds/slot/reportingEnd)
 Alias: reportingEnd
 
 <!-- no inheritance hierarchy -->
@@ -32,7 +32,7 @@ Alias: reportingEnd
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -47,7 +47,7 @@ Alias: reportingEnd
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -56,8 +56,8 @@ Alias: reportingEnd
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:reportingEnd |
-| native | odm:reportingEnd |
+| self | dds:reportingEnd |
+| native | dds:reportingEnd |
 
 
 
@@ -69,12 +69,13 @@ Alias: reportingEnd
 name: reportingEnd
 description: A specific time period in a known system of time periods that identifies
   the end period of a report.
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: reportingEnd
 owner: IsSdmxDataset
 domain_of:
 - IsSdmxDataset
+range: string
 
 ```
 </details>

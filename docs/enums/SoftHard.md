@@ -7,7 +7,7 @@ _An enumeration that indicates whether a validation check should be treated as a
 
 
 
-URI: [odm:enum/SoftHard](https://cdisc.org/odm2/enum/SoftHard)
+URI: [dds:enum/SoftHard](https://w3id.org/dds/enum/SoftHard)
 
 ## Permissible Values
 
@@ -24,6 +24,7 @@ URI: [odm:enum/SoftHard](https://cdisc.org/odm2/enum/SoftHard)
 | Name | Description |
 | ---  | --- |
 | [softHard](../slots/softHard.md) | Indicates whether a validation check is an error ("Hard") or a warning ("Soft") |
+| [severity](../slots/severity.md) | Whether a failure is an error ("Hard") or a warning ("Soft"). |
 
 
 
@@ -39,7 +40,7 @@ URI: [odm:enum/SoftHard](https://cdisc.org/odm2/enum/SoftHard)
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -53,7 +54,7 @@ URI: [odm:enum/SoftHard](https://cdisc.org/odm2/enum/SoftHard)
 name: SoftHard
 description: An enumeration that indicates whether a validation check should be treated
   as an error or a warning
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 permissible_values:
   Soft:

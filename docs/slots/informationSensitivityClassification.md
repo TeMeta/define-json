@@ -9,7 +9,7 @@ _Classification of the dataset's sensitivity or confidentiality_
 
 
 
-URI: [odm:slot/informationSensitivityClassification](https://cdisc.org/odm2/slot/informationSensitivityClassification)
+URI: [dds:slot/informationSensitivityClassification](https://w3id.org/dds/slot/informationSensitivityClassification)
 Alias: informationSensitivityClassification
 
 <!-- no inheritance hierarchy -->
@@ -31,7 +31,7 @@ Alias: informationSensitivityClassification
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -46,7 +46,7 @@ Alias: informationSensitivityClassification
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: informationSensitivityClassification
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:informationSensitivityClassification |
-| native | odm:informationSensitivityClassification |
+| self | dds:informationSensitivityClassification |
+| native | dds:informationSensitivityClassification |
 
 
 
@@ -67,12 +67,13 @@ Alias: informationSensitivityClassification
 ```yaml
 name: informationSensitivityClassification
 description: Classification of the dataset's sensitivity or confidentiality
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: informationSensitivityClassification
 owner: Dataset
 domain_of:
 - Dataset
+range: string
 
 ```
 </details>

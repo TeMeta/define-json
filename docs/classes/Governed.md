@@ -9,7 +9,7 @@ _A mixin that provides slots for audit trail and standards governance, including
 
 
 
-URI: [odm:class/Governed](https://cdisc.org/odm2/class/Governed)
+URI: [dds:class/Governed](https://w3id.org/dds/class/Governed)
 
 
 ```mermaid
@@ -86,7 +86,7 @@ Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | [purpose](../slots/purpose.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Purpose or rationale for this data element | direct |
 | [lastUpdated](../slots/lastUpdated.md) | 0..1 <br/> [Datetime](../types/Datetime.md) | When the resource was last updated | direct |
 | [owner](../slots/owner.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Party responsible for this element | direct |
-| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[MetaDataVersion](../classes/MetaDataVersion.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[ReifiedConcept](../classes/ReifiedConcept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[Condition](../classes/Condition.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[NominalOccurrence](../classes/NominalOccurrence.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | direct |
+| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[Specification](../classes/Specification.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[Concept](../classes/Concept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[LogicalPredicate](../classes/LogicalPredicate.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | direct |
 
 
 
@@ -114,7 +114,7 @@ Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -123,8 +123,8 @@ Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:Governed |
-| native | odm:Governed |
+| self | dds:Governed |
+| native | dds:Governed |
 
 
 
@@ -142,17 +142,13 @@ Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 name: Governed
 description: A mixin that provides slots for audit trail and standards governance,
   including mandatory status, comments, and attribution
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 mixin: true
-slot_usage:
-  OID:
-    name: OID
-    required: true
 attributes:
   mandatory:
     name: mandatory
     description: Is this element required?
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Governed
@@ -161,7 +157,7 @@ attributes:
     name: comments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Governed
@@ -172,7 +168,7 @@ attributes:
     name: siteOrSponsorComments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Governed
@@ -182,7 +178,7 @@ attributes:
   purpose:
     name: purpose
     description: Purpose or rationale for this data element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Governed
@@ -192,7 +188,7 @@ attributes:
   lastUpdated:
     name: lastUpdated
     description: When the resource was last updated
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Governed
@@ -200,7 +196,7 @@ attributes:
   owner:
     name: owner
     description: Party responsible for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     narrow_mappings:
     - prov:wasAttributedTo
     - prov:wasAssociatedBy
@@ -215,7 +211,7 @@ attributes:
     name: wasDerivedFrom
     description: Reference to another item that this item implements or extends, e.g.
       a template Item definition.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - prov:wasDerivedFrom
     rank: 1000
@@ -224,13 +220,12 @@ attributes:
     any_of:
     - range: Item
     - range: ItemGroup
-    - range: MetaDataVersion
+    - range: Specification
     - range: CodeList
-    - range: ReifiedConcept
+    - range: Concept
     - range: ConceptProperty
-    - range: Condition
+    - range: LogicalPredicate
     - range: Method
-    - range: NominalOccurrence
     - range: Dataflow
     - range: CubeComponent
     - range: DataProduct
@@ -246,17 +241,13 @@ attributes:
 name: Governed
 description: A mixin that provides slots for audit trail and standards governance,
   including mandatory status, comments, and attribution
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 mixin: true
-slot_usage:
-  OID:
-    name: OID
-    required: true
 attributes:
   mandatory:
     name: mandatory
     description: Is this element required?
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: mandatory
     owner: Governed
@@ -267,7 +258,7 @@ attributes:
     name: comments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: comments
     owner: Governed
@@ -280,7 +271,7 @@ attributes:
     name: siteOrSponsorComments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: siteOrSponsorComments
     owner: Governed
@@ -292,19 +283,20 @@ attributes:
   purpose:
     name: purpose
     description: Purpose or rationale for this data element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: purpose
     owner: Governed
     domain_of:
     - Governed
+    range: string
     any_of:
     - range: string
     - range: TranslatedText
   lastUpdated:
     name: lastUpdated
     description: When the resource was last updated
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: lastUpdated
     owner: Governed
@@ -314,7 +306,7 @@ attributes:
   owner:
     name: owner
     description: Party responsible for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     narrow_mappings:
     - prov:wasAttributedTo
     - prov:wasAssociatedBy
@@ -323,6 +315,7 @@ attributes:
     owner: Governed
     domain_of:
     - Governed
+    range: string
     any_of:
     - range: User
     - range: Organization
@@ -331,7 +324,7 @@ attributes:
     name: wasDerivedFrom
     description: Reference to another item that this item implements or extends, e.g.
       a template Item definition.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - prov:wasDerivedFrom
     rank: 1000
@@ -339,16 +332,16 @@ attributes:
     owner: Governed
     domain_of:
     - Governed
+    range: string
     any_of:
     - range: Item
     - range: ItemGroup
-    - range: MetaDataVersion
+    - range: Specification
     - range: CodeList
-    - range: ReifiedConcept
+    - range: Concept
     - range: ConceptProperty
-    - range: Condition
+    - range: LogicalPredicate
     - range: Method
-    - range: NominalOccurrence
     - range: Dataflow
     - range: CubeComponent
     - range: DataProduct

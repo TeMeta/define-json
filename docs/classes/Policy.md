@@ -1,0 +1,613 @@
+
+
+# Class: Policy 
+
+
+_A set of usage and access rules (ODRL) governing data. For a DTA this is typically an ODRL Agreement between an assigner (provider) and assignee (consumer), composed of permissions, prohibitions and obligations._
+
+
+
+
+
+URI: [dds:class/Policy](https://w3id.org/dds/class/Policy)
+
+
+```mermaid
+erDiagram
+Policy {
+    PolicyType policyType  
+    string profile  
+    string assigner  
+    string assignee  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+SiteOrSponsorComment {
+    string text  
+    OriginSource sourceType  
+    string source  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+Comment {
+    string text  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+Coding {
+    string code  
+    string decode  
+    string codeSystem  
+    string codeSystemVersion  
+    AliasPredicate aliasType  
+}
+Rule {
+    string action  
+    string target  
+    string assigner  
+    string assignee  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+Constraint {
+    string leftOperand  
+    ConstraintOperator operator  
+    string rightOperand  
+    string unit  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+
+Policy ||--}o Rule : "permission"
+Policy ||--}o Rule : "prohibition"
+Policy ||--}o Rule : "obligation"
+Policy ||--}o Coding : "coding"
+Policy ||--}o Comment : "comments"
+Policy ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+SiteOrSponsorComment ||--}o Coding : "coding"
+SiteOrSponsorComment ||--}o Comment : "comments"
+SiteOrSponsorComment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Comment ||--}o DocumentReference : "documents"
+Comment ||--}o Coding : "coding"
+Comment ||--}o Comment : "comments"
+Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Rule ||--}o Constraint : "constraint"
+Rule ||--}o Coding : "coding"
+Constraint ||--}o Coding : "coding"
+
+```
+
+
+
+
+## Inheritance
+* [GovernedElement](../classes/GovernedElement.md) [ [Identifiable](../classes/Identifiable.md) [Labelled](../classes/Labelled.md) [Governed](../classes/Governed.md)]
+    * **Policy**
+
+
+
+## Slots
+
+| Name | Cardinality and Range | Description | Inheritance |
+| ---  | --- | --- | --- |
+| [policyType](../slots/policyType.md) | 0..1 <br/> [PolicyType](../enums/PolicyType.md) | ODRL policy subtype (Set, Offer, Agreement) | direct |
+| [profile](../slots/profile.md) | 0..1 <br/> [String](../types/String.md) | IRI of the ODRL profile this policy conforms to | direct |
+| [assigner](../slots/assigner.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[DataProvider](../classes/DataProvider.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | The party issuing/granting the policy (typically the provider) | direct |
+| [assignee](../slots/assignee.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[DataConsumer](../classes/DataConsumer.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | The party the policy is granted to (typically the consumer) | direct |
+| [permission](../slots/permission.md) | * <br/> [Rule](../classes/Rule.md) | Rules granting the ability to perform an action (odrl:permission) | direct |
+| [prohibition](../slots/prohibition.md) | * <br/> [Rule](../classes/Rule.md) | Rules forbidding an action (odrl:prohibition) | direct |
+| [obligation](../slots/obligation.md) | * <br/> [Rule](../classes/Rule.md) | Duties that must be fulfilled (odrl:obligation) | direct |
+| [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
+| [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
+| [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
+| [description](../slots/description.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Detailed description, shown in tooltips | [Labelled](../classes/Labelled.md) |
+| [coding](../slots/coding.md) | * <br/> [Coding](../classes/Coding.md) | Semantic tags for this element | [Labelled](../classes/Labelled.md) |
+| [label](../slots/label.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Human-readable label, shown in UIs | [Labelled](../classes/Labelled.md) |
+| [aliases](../slots/aliases.md) | * <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Alternative name or identifier | [Labelled](../classes/Labelled.md) |
+| [mandatory](../slots/mandatory.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Is this element required? | [Governed](../classes/Governed.md) |
+| [comments](../slots/comments.md) | * <br/> [Comment](../classes/Comment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
+| [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | * <br/> [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | Comment on the element, such as a rationale for its inclusion or exclusion | [Governed](../classes/Governed.md) |
+| [purpose](../slots/purpose.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Purpose or rationale for this data element | [Governed](../classes/Governed.md) |
+| [lastUpdated](../slots/lastUpdated.md) | 0..1 <br/> [Datetime](../types/Datetime.md) | When the resource was last updated | [Governed](../classes/Governed.md) |
+| [owner](../slots/owner.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Party responsible for this element | [Governed](../classes/Governed.md) |
+| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[Specification](../classes/Specification.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[Concept](../classes/Concept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[LogicalPredicate](../classes/LogicalPredicate.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
+
+
+
+
+
+## Usages
+
+| used by | used in | type | used |
+| ---  | --- | --- | --- |
+| [Dataset](../classes/Dataset.md) | [hasPolicy](../slots/hasPolicy.md) | range | [Policy](../classes/Policy.md) |
+| [DataProduct](../classes/DataProduct.md) | [hasPolicy](../slots/hasPolicy.md) | range | [Policy](../classes/Policy.md) |
+| [ProvisionAgreement](../classes/ProvisionAgreement.md) | [hasPolicy](../slots/hasPolicy.md) | range | [Policy](../classes/Policy.md) |
+
+
+
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+
+### Schema Source
+
+
+* from schema: https://w3id.org/dds
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | dds:Policy |
+| native | dds:Policy |
+| exact | odrl:Policy |
+| close | dcat:hasPolicy |
+
+
+
+
+
+
+## LinkML Source
+
+<!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
+
+### Direct
+
+<details>
+```yaml
+name: Policy
+description: A set of usage and access rules (ODRL) governing data. For a DTA this
+  is typically an ODRL Agreement between an assigner (provider) and assignee (consumer),
+  composed of permissions, prohibitions and obligations.
+from_schema: https://w3id.org/dds
+exact_mappings:
+- odrl:Policy
+close_mappings:
+- dcat:hasPolicy
+is_a: GovernedElement
+attributes:
+  policyType:
+    name: policyType
+    description: ODRL policy subtype (Set, Offer, Agreement)
+    from_schema: https://w3id.org/dds
+    rank: 1000
+    ifabsent: PolicyType(Agreement)
+    domain_of:
+    - Policy
+    range: PolicyType
+  profile:
+    name: profile
+    description: IRI of the ODRL profile this policy conforms to
+    from_schema: https://w3id.org/dds
+    domain_of:
+    - IsProfile
+    - Policy
+  assigner:
+    name: assigner
+    description: The party issuing/granting the policy (typically the provider)
+    from_schema: https://w3id.org/dds
+    rank: 1000
+    domain_of:
+    - Policy
+    - Rule
+    any_of:
+    - range: DataProvider
+    - range: Organization
+    - range: string
+  assignee:
+    name: assignee
+    description: The party the policy is granted to (typically the consumer)
+    from_schema: https://w3id.org/dds
+    rank: 1000
+    domain_of:
+    - Policy
+    - Rule
+    any_of:
+    - range: DataConsumer
+    - range: Organization
+    - range: string
+  permission:
+    name: permission
+    description: Rules granting the ability to perform an action (odrl:permission)
+    from_schema: https://w3id.org/dds
+    exact_mappings:
+    - odrl:permission
+    rank: 1000
+    domain_of:
+    - Policy
+    range: Rule
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  prohibition:
+    name: prohibition
+    description: Rules forbidding an action (odrl:prohibition)
+    from_schema: https://w3id.org/dds
+    exact_mappings:
+    - odrl:prohibition
+    rank: 1000
+    domain_of:
+    - Policy
+    range: Rule
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  obligation:
+    name: obligation
+    description: Duties that must be fulfilled (odrl:obligation)
+    from_schema: https://w3id.org/dds
+    exact_mappings:
+    - odrl:obligation
+    rank: 1000
+    domain_of:
+    - Policy
+    range: Rule
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+
+```
+</details>
+
+### Induced
+
+<details>
+```yaml
+name: Policy
+description: A set of usage and access rules (ODRL) governing data. For a DTA this
+  is typically an ODRL Agreement between an assigner (provider) and assignee (consumer),
+  composed of permissions, prohibitions and obligations.
+from_schema: https://w3id.org/dds
+exact_mappings:
+- odrl:Policy
+close_mappings:
+- dcat:hasPolicy
+is_a: GovernedElement
+attributes:
+  policyType:
+    name: policyType
+    description: ODRL policy subtype (Set, Offer, Agreement)
+    from_schema: https://w3id.org/dds
+    rank: 1000
+    ifabsent: PolicyType(Agreement)
+    alias: policyType
+    owner: Policy
+    domain_of:
+    - Policy
+    range: PolicyType
+  profile:
+    name: profile
+    description: IRI of the ODRL profile this policy conforms to
+    from_schema: https://w3id.org/dds
+    alias: profile
+    owner: Policy
+    domain_of:
+    - IsProfile
+    - Policy
+    range: string
+  assigner:
+    name: assigner
+    description: The party issuing/granting the policy (typically the provider)
+    from_schema: https://w3id.org/dds
+    rank: 1000
+    alias: assigner
+    owner: Policy
+    domain_of:
+    - Policy
+    - Rule
+    range: string
+    any_of:
+    - range: DataProvider
+    - range: Organization
+    - range: string
+  assignee:
+    name: assignee
+    description: The party the policy is granted to (typically the consumer)
+    from_schema: https://w3id.org/dds
+    rank: 1000
+    alias: assignee
+    owner: Policy
+    domain_of:
+    - Policy
+    - Rule
+    range: string
+    any_of:
+    - range: DataConsumer
+    - range: Organization
+    - range: string
+  permission:
+    name: permission
+    description: Rules granting the ability to perform an action (odrl:permission)
+    from_schema: https://w3id.org/dds
+    exact_mappings:
+    - odrl:permission
+    rank: 1000
+    alias: permission
+    owner: Policy
+    domain_of:
+    - Policy
+    range: Rule
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  prohibition:
+    name: prohibition
+    description: Rules forbidding an action (odrl:prohibition)
+    from_schema: https://w3id.org/dds
+    exact_mappings:
+    - odrl:prohibition
+    rank: 1000
+    alias: prohibition
+    owner: Policy
+    domain_of:
+    - Policy
+    range: Rule
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  obligation:
+    name: obligation
+    description: Duties that must be fulfilled (odrl:obligation)
+    from_schema: https://w3id.org/dds
+    exact_mappings:
+    - odrl:obligation
+    rank: 1000
+    alias: obligation
+    owner: Policy
+    domain_of:
+    - Policy
+    range: Rule
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  OID:
+    name: OID
+    description: Local identifier within this study/context. Use CDISC OID format
+      for regulatory submissions, or simple strings for internal use.
+    from_schema: https://w3id.org/dds
+    rank: 1000
+    identifier: true
+    alias: OID
+    owner: Policy
+    domain_of:
+    - Identifiable
+    range: string
+    required: true
+  uuid:
+    name: uuid
+    description: Universal unique identifier
+    from_schema: https://w3id.org/dds
+    rank: 1000
+    alias: uuid
+    owner: Policy
+    domain_of:
+    - Identifiable
+    range: string
+  name:
+    name: name
+    description: Short name or identifier, used for field names
+    from_schema: https://w3id.org/dds
+    rank: 1000
+    alias: name
+    owner: Policy
+    domain_of:
+    - Labelled
+    - DefClass
+    - SubClass
+    - Standard
+    range: string
+  description:
+    name: description
+    description: Detailed description, shown in tooltips
+    from_schema: https://w3id.org/dds
+    rank: 1000
+    alias: description
+    owner: Policy
+    domain_of:
+    - Labelled
+    - CodeListItem
+    range: string
+    any_of:
+    - range: string
+    - range: TranslatedText
+  coding:
+    name: coding
+    description: Semantic tags for this element
+    from_schema: https://w3id.org/dds
+    rank: 1000
+    alias: coding
+    owner: Policy
+    domain_of:
+    - Labelled
+    - CodeListItem
+    - SourceItem
+    range: Coding
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  label:
+    name: label
+    description: Human-readable label, shown in UIs
+    from_schema: https://w3id.org/dds
+    exact_mappings:
+    - skos:prefLabel
+    rank: 1000
+    alias: label
+    owner: Policy
+    domain_of:
+    - Labelled
+    range: string
+    any_of:
+    - range: string
+    - range: TranslatedText
+  aliases:
+    name: aliases
+    description: Alternative name or identifier
+    from_schema: https://w3id.org/dds
+    exact_mappings:
+    - skos:altLabel
+    rank: 1000
+    alias: aliases
+    owner: Policy
+    domain_of:
+    - Labelled
+    - CodeListItem
+    range: string
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    any_of:
+    - range: string
+    - range: TranslatedText
+  mandatory:
+    name: mandatory
+    description: Is this element required?
+    from_schema: https://w3id.org/dds
+    rank: 1000
+    alias: mandatory
+    owner: Policy
+    domain_of:
+    - Governed
+    range: boolean
+  comments:
+    name: comments
+    description: Comment on the element, such as a rationale for its inclusion or
+      exclusion
+    from_schema: https://w3id.org/dds
+    rank: 1000
+    alias: comments
+    owner: Policy
+    domain_of:
+    - Governed
+    range: Comment
+    multivalued: true
+    inlined: false
+  siteOrSponsorComments:
+    name: siteOrSponsorComments
+    description: Comment on the element, such as a rationale for its inclusion or
+      exclusion
+    from_schema: https://w3id.org/dds
+    rank: 1000
+    alias: siteOrSponsorComments
+    owner: Policy
+    domain_of:
+    - Governed
+    range: SiteOrSponsorComment
+    multivalued: true
+    inlined: false
+  purpose:
+    name: purpose
+    description: Purpose or rationale for this data element
+    from_schema: https://w3id.org/dds
+    rank: 1000
+    alias: purpose
+    owner: Policy
+    domain_of:
+    - Governed
+    range: string
+    any_of:
+    - range: string
+    - range: TranslatedText
+  lastUpdated:
+    name: lastUpdated
+    description: When the resource was last updated
+    from_schema: https://w3id.org/dds
+    rank: 1000
+    alias: lastUpdated
+    owner: Policy
+    domain_of:
+    - Governed
+    range: datetime
+  owner:
+    name: owner
+    description: Party responsible for this element
+    from_schema: https://w3id.org/dds
+    narrow_mappings:
+    - prov:wasAttributedTo
+    - prov:wasAssociatedBy
+    rank: 1000
+    alias: owner
+    owner: Policy
+    domain_of:
+    - Governed
+    range: string
+    any_of:
+    - range: User
+    - range: Organization
+    - range: string
+  wasDerivedFrom:
+    name: wasDerivedFrom
+    description: Reference to another item that this item implements or extends, e.g.
+      a template Item definition.
+    from_schema: https://w3id.org/dds
+    exact_mappings:
+    - prov:wasDerivedFrom
+    rank: 1000
+    alias: wasDerivedFrom
+    owner: Policy
+    domain_of:
+    - Governed
+    range: string
+    any_of:
+    - range: Item
+    - range: ItemGroup
+    - range: Specification
+    - range: CodeList
+    - range: Concept
+    - range: ConceptProperty
+    - range: LogicalPredicate
+    - range: Method
+    - range: Dataflow
+    - range: CubeComponent
+    - range: DataProduct
+    - range: ProvisionAgreement
+
+```
+</details>

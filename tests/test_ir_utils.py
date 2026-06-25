@@ -9,7 +9,7 @@ import pytest
 from pathlib import Path
 from typing import Dict, Any
 
-from define_json.utils.ir import (
+from data_definition_spec.utils.ir import (
     load_mdv,
     canonicalise_whereclause,
     build_where_registry,
@@ -24,7 +24,7 @@ from define_json.utils.ir import (
 )
 
 try:
-    from define_json.converters.xml_to_json import DefineXMLToJSONConverter
+    from data_definition_spec.converters.xml_to_json import DefineXMLToJSONConverter
     CONVERTERS_AVAILABLE = True
 except ImportError:
     CONVERTERS_AVAILABLE = False
@@ -211,7 +211,7 @@ class TestSliceInvariants:
         build_canonical_slices(mdv)
         
         # Manually create empty slice
-        from define_json.schema.define import ItemGroup
+        from data_definition_spec.schema.define import ItemGroup
         empty_slice = ItemGroup.model_construct(
             OID="IG.TEST.EMPTY",
             type="DatasetSpecialization",
@@ -413,7 +413,7 @@ class TestValueListToSpecialisation:
         mdv = load_mdv(FIXTURES_DIR / "valuelist_test.json")
         
         # Count ValueLists before transformation
-        from define_json.schema.define import ItemGroupType
+        from data_definition_spec.schema.define import ItemGroupType
         value_lists_before = [
             ig for ig in mdv.itemGroups 
             if getattr(ig, "type", None) == ItemGroupType.ValueList
@@ -465,7 +465,7 @@ class TestValueListToSpecialisation:
         transform_value_lists_to_specialisation(mdv)
         
         # Find slice for WC.VS.VSORRES.TEMP
-        from define_json.schema.define import ItemGroupType
+        from data_definition_spec.schema.define import ItemGroupType
         temp_slice = None
         for ig in mdv.itemGroups:
             if (getattr(ig, "type", None) == ItemGroupType.DatasetSpecialization and
@@ -509,7 +509,7 @@ class TestValueListToSpecialisation:
         transform_value_lists_to_specialisation(mdv)
         
         # Find transformed item in slice
-        from define_json.schema.define import ItemGroupType
+        from data_definition_spec.schema.define import ItemGroupType
         transformed_item = None
         for ig in mdv.itemGroups:
             if (getattr(ig, "type", None) == ItemGroupType.DatasetSpecialization and
@@ -529,7 +529,7 @@ class TestValueListToSpecialisation:
         
         transform_value_lists_to_specialisation(mdv)
         
-        from define_json.schema.define import ItemGroupType
+        from data_definition_spec.schema.define import ItemGroupType
         slices = [
             ig for ig in mdv.itemGroups 
             if getattr(ig, "type", None) == ItemGroupType.DatasetSpecialization
@@ -548,7 +548,7 @@ class TestValueListToSpecialisation:
         transform_value_lists_to_specialisation(mdv)
         
         # VS domain should have slices from both VL.VS.VSORRES and VL.VS.VSORRESU
-        from define_json.schema.define import ItemGroupType
+        from data_definition_spec.schema.define import ItemGroupType
         vs_slices = [
             ig for ig in mdv.itemGroups 
             if (getattr(ig, "type", None) == ItemGroupType.DatasetSpecialization and
@@ -567,7 +567,7 @@ class TestValueListToSpecialisation:
         mdv = load_mdv(FIXTURES_DIR / "valuelist_test.json")
         
         # Add a ValueList with an item without applicableWhen
-        from define_json.schema.define import ItemGroup, Item, ItemGroupType
+        from data_definition_spec.schema.define import ItemGroup, Item, ItemGroupType
         vl_without_wc = ItemGroup.model_construct(
             OID="VL.VS.TEST",
             name="VL_VS_TEST",
@@ -590,7 +590,7 @@ class TestValueListToSpecialisation:
         assert not any(ig.OID == "VL.VS.TEST" for ig in mdv.itemGroups), "ValueList should be removed"
         
         # Item without applicableWhen should not appear in any slice
-        from define_json.schema.define import ItemGroupType
+        from data_definition_spec.schema.define import ItemGroupType
         all_slice_items = []
         for ig in mdv.itemGroups:
             if getattr(ig, "type", None) == ItemGroupType.DatasetSpecialization:
@@ -603,7 +603,7 @@ class TestValueListToSpecialisation:
         mdv = load_mdv(FIXTURES_DIR / "valuelist_test.json")
         
         # Add an empty ValueList
-        from define_json.schema.define import ItemGroup, ItemGroupType
+        from data_definition_spec.schema.define import ItemGroup, ItemGroupType
         empty_vl = ItemGroup.model_construct(
             OID="VL.VS.EMPTY",
             name="VL_VS_EMPTY",
@@ -795,11 +795,11 @@ class TestMultipleClausesExamples:
             mdv_data["itemGroups"] = flattened_groups
         
         # Load as MetaDataVersion
-        from define_json.schema.define import MetaDataVersion
+        from data_definition_spec.schema.define import MetaDataVersion
         mdv = MetaDataVersion.model_validate(mdv_data)
         
         # Count ValueLists before transformation
-        from define_json.schema.define import ItemGroupType
+        from data_definition_spec.schema.define import ItemGroupType
         value_lists_before = [
             ig for ig in mdv.itemGroups
             if getattr(ig, "type", None) == ItemGroupType.ValueList

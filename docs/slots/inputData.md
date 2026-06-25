@@ -9,7 +9,7 @@ _Datasets or slices/subsets of datasets asked for by this analysis. If a Item is
 
 
 
-URI: [odm:slot/inputData](https://cdisc.org/odm2/slot/inputData)
+URI: [dds:slot/inputData](https://w3id.org/dds/slot/inputData)
 Alias: inputData
 
 <!-- no inheritance hierarchy -->
@@ -31,7 +31,7 @@ Alias: inputData
 
 ## Properties
 
-* Range: NONE&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[Dataset](../classes/Dataset.md)
+* Range: [String](../types/String.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[Dataset](../classes/Dataset.md)
 
 * Multivalued: True
 
@@ -48,7 +48,7 @@ Alias: inputData
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: inputData
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:inputData |
-| native | odm:inputData |
+| self | dds:inputData |
+| native | dds:inputData |
 
 
 
@@ -71,12 +71,13 @@ name: inputData
 description: Datasets or slices/subsets of datasets asked for by this analysis. If
   a Item is referenced by a Parameter e.g. Analysis Variable, make sure to include
   its parent ItemGroup here.
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: inputData
 owner: Analysis
 domain_of:
 - Analysis
+range: string
 multivalued: true
 inlined: false
 any_of:

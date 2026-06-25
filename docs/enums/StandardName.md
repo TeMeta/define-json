@@ -7,7 +7,7 @@ _An enumeration that defines permissible values for standard names_
 
 
 
-URI: [odm:enum/StandardName](https://cdisc.org/odm2/enum/StandardName)
+URI: [dds:enum/StandardName](https://w3id.org/dds/enum/StandardName)
 
 ## Permissible Values
 
@@ -41,7 +41,7 @@ URI: [odm:enum/StandardName](https://cdisc.org/odm2/enum/StandardName)
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -54,7 +54,7 @@ URI: [odm:enum/StandardName](https://cdisc.org/odm2/enum/StandardName)
 ```yaml
 name: StandardName
 description: An enumeration that defines permissible values for standard names
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 permissible_values:
   ADaMIG:

@@ -9,7 +9,7 @@ _CDISCNotes reference: Explanatory text for the variable_
 
 
 
-URI: [odm:slot/cdiscNotes](https://cdisc.org/odm2/slot/cdiscNotes)
+URI: [dds:slot/cdiscNotes](https://w3id.org/dds/slot/cdiscNotes)
 Alias: cdiscNotes
 
 <!-- no inheritance hierarchy -->
@@ -22,8 +22,7 @@ Alias: cdiscNotes
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [IsODMItem](../classes/IsODMItem.md) | A mixin that provides additional attributes for CDISC Operational Data Model items, including roles, completion instructions, and implementation notes |  no  |
-| [Item](../classes/Item.md) | A data element that represents a specific piece of information within a defined context, with data type, constraints, and derivation methods |  no  |
+| [ODMItemSerialization](../classes/ODMItemSerialization.md) | A mixin providing ODM/CDISC-specific item attributes meaningful only in ODM/Define-XML serialization: CRF completion instructions, CDISC notes, implementation notes, collection exception predicates, and pre-specified values. Applied by the ODM output generator. Not part of the canonical Item. |  no  |
 
 
 
@@ -32,7 +31,7 @@ Alias: cdiscNotes
 
 ## Properties
 
-* Range: NONE&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md)
+* Range: [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md)
 
 
 
@@ -47,7 +46,7 @@ Alias: cdiscNotes
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -56,8 +55,8 @@ Alias: cdiscNotes
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:cdiscNotes |
-| native | odm:cdiscNotes |
+| self | dds:cdiscNotes |
+| native | dds:cdiscNotes |
 
 
 
@@ -68,12 +67,13 @@ Alias: cdiscNotes
 ```yaml
 name: cdiscNotes
 description: 'CDISCNotes reference: Explanatory text for the variable'
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: cdiscNotes
-owner: IsODMItem
+owner: ODMItemSerialization
 domain_of:
-- IsODMItem
+- ODMItemSerialization
+range: string
 any_of:
 - range: string
 - range: TranslatedText

@@ -9,7 +9,7 @@ _Slices are specific subset ItemGroups that belong to, or are used by this ItemG
 
 
 
-URI: [odm:slot/slices](https://cdisc.org/odm2/slot/slices)
+URI: [dds:slot/slices](https://w3id.org/dds/slot/slices)
 Alias: slices
 
 <!-- no inheritance hierarchy -->
@@ -49,7 +49,7 @@ Alias: slices
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -58,8 +58,8 @@ Alias: slices
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:slices |
-| native | odm:slices |
+| self | dds:slices |
+| native | dds:slices |
 
 
 
@@ -71,7 +71,7 @@ Alias: slices
 name: slices
 description: Slices are specific subset ItemGroups that belong to, or are used by
   this ItemGroup
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: slices
 owner: ItemGroup

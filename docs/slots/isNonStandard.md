@@ -9,7 +9,7 @@ _One or more members of this set are non-standard extensions_
 
 
 
-URI: [odm:slot/isNonStandard](https://cdisc.org/odm2/slot/isNonStandard)
+URI: [dds:slot/isNonStandard](https://w3id.org/dds/slot/isNonStandard)
 Alias: isNonStandard
 
 <!-- no inheritance hierarchy -->
@@ -22,10 +22,10 @@ Alias: isNonStandard
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [DataStructureDefinition](../classes/DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures |  no  |
-| [ItemGroup](../classes/ItemGroup.md) | A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections |  no  |
 | [CodeList](../classes/CodeList.md) | A value set that defines a discrete collection of permissible values for an item, corresponding to the ODM CodeList construct |  no  |
-| [IsODMStandard](../classes/IsODMStandard.md) | A mixin that provides properties to indicate standards compliance |  no  |
+| [ODMStandardReference](../classes/ODMStandardReference.md) | A mixin providing attributes for CDISC standards compliance indication. Applied when serializing to Define-XML context. Not canonical. |  no  |
+| [ItemGroup](../classes/ItemGroup.md) | A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections |  no  |
+| [DataStructureDefinition](../classes/DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures |  no  |
 
 
 
@@ -49,7 +49,7 @@ Alias: isNonStandard
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -58,8 +58,8 @@ Alias: isNonStandard
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:isNonStandard |
-| native | odm:isNonStandard |
+| self | dds:isNonStandard |
+| native | dds:isNonStandard |
 
 
 
@@ -70,12 +70,12 @@ Alias: isNonStandard
 ```yaml
 name: isNonStandard
 description: One or more members of this set are non-standard extensions
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: isNonStandard
-owner: IsODMStandard
+owner: ODMStandardReference
 domain_of:
-- IsODMStandard
+- ODMStandardReference
 range: boolean
 
 ```

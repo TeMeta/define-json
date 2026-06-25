@@ -4,7 +4,7 @@
 
 
 
-URI: [odm:slot/decode](https://cdisc.org/odm2/slot/decode)
+URI: [dds:slot/decode](https://w3id.org/dds/slot/decode)
 Alias: decode
 
 <!-- no inheritance hierarchy -->
@@ -27,7 +27,7 @@ Alias: decode
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -44,8 +44,8 @@ Alias: decode
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:decode |
-| native | odm:decode |
+| self | dds:decode |
+| native | dds:decode |
 
 
 
@@ -59,6 +59,7 @@ alias: decode
 domain_of:
 - CodeListItem
 - Coding
+range: string
 
 ```
 </details>

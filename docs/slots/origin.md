@@ -9,7 +9,7 @@ _The origin of the data_
 
 
 
-URI: [odm:slot/origin](https://cdisc.org/odm2/slot/origin)
+URI: [dds:slot/origin](https://w3id.org/dds/slot/origin)
 Alias: origin
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: origin
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: origin
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:origin |
-| native | odm:origin |
+| self | dds:origin |
+| native | dds:origin |
 
 
 
@@ -67,7 +67,7 @@ Alias: origin
 ```yaml
 name: origin
 description: The origin of the data
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: origin
 owner: Item

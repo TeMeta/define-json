@@ -9,7 +9,7 @@ _Services that provide input into this data product_
 
 
 
-URI: [odm:slot/inputPort](https://cdisc.org/odm2/slot/inputPort)
+URI: [dds:slot/inputPort](https://w3id.org/dds/slot/inputPort)
 Alias: inputPort
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: inputPort
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: inputPort
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:inputPort |
-| native | odm:inputPort |
+| self | dds:inputPort |
+| native | dds:inputPort |
 
 
 
@@ -69,7 +69,7 @@ Alias: inputPort
 ```yaml
 name: inputPort
 description: Services that provide input into this data product
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: inputPort
 owner: DataProduct

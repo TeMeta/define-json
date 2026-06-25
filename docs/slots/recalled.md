@@ -9,7 +9,7 @@ _Indicates whether the timing is recalled or not (recalled timings are less reli
 
 
 
-URI: [odm:slot/recalled](https://cdisc.org/odm2/slot/recalled)
+URI: [dds:slot/recalled](https://w3id.org/dds/slot/recalled)
 Alias: recalled
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: recalled
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: recalled
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:recalled |
-| native | odm:recalled |
+| self | dds:recalled |
+| native | dds:recalled |
 
 
 
@@ -68,7 +68,7 @@ Alias: recalled
 name: recalled
 description: Indicates whether the timing is recalled or not (recalled timings are
   less reliable).
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: recalled
 owner: Timing

@@ -3,13 +3,13 @@
 # Slot: relativeFrom 
 
 
-_Reference to the event or occurrence that this timing is relative to._
+_The protocol anchor from which this timing is measured. Either a TimingLandmark or a USDM ScheduledActivityInstance OID reference._
 
 
 
 
 
-URI: [odm:slot/relativeFrom](https://cdisc.org/odm2/slot/relativeFrom)
+URI: [dds:slot/relativeFrom](https://w3id.org/dds/slot/relativeFrom)
 Alias: relativeFrom
 
 <!-- no inheritance hierarchy -->
@@ -31,7 +31,7 @@ Alias: relativeFrom
 
 ## Properties
 
-* Range: [NominalOccurrence](../classes/NominalOccurrence.md)
+* Range: [String](../types/String.md)&nbsp;or&nbsp;<br />[TimingLandmark](../enums/TimingLandmark.md)&nbsp;or&nbsp;<br />[String](../types/String.md)
 
 
 
@@ -46,7 +46,7 @@ Alias: relativeFrom
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: relativeFrom
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:relativeFrom |
-| native | odm:relativeFrom |
+| self | dds:relativeFrom |
+| native | dds:relativeFrom |
 
 
 
@@ -66,14 +66,18 @@ Alias: relativeFrom
 <details>
 ```yaml
 name: relativeFrom
-description: Reference to the event or occurrence that this timing is relative to.
-from_schema: https://cdisc.org/define-json
+description: The protocol anchor from which this timing is measured. Either a TimingLandmark
+  or a USDM ScheduledActivityInstance OID reference.
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: relativeFrom
 owner: Timing
 domain_of:
 - Timing
-range: NominalOccurrence
+range: string
+any_of:
+- range: TimingLandmark
+- range: string
 
 ```
 </details>

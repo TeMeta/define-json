@@ -4,7 +4,7 @@
 
 
 
-URI: [odm:slot/structure](https://cdisc.org/odm2/slot/structure)
+URI: [dds:slot/structure](https://w3id.org/dds/slot/structure)
 Alias: structure
 
 <!-- no inheritance hierarchy -->
@@ -28,7 +28,7 @@ Alias: structure
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -45,8 +45,8 @@ Alias: structure
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:structure |
-| native | odm:structure |
+| self | dds:structure |
+| native | dds:structure |
 
 
 
@@ -60,6 +60,7 @@ alias: structure
 domain_of:
 - ItemGroup
 - Dataflow
+range: string
 
 ```
 </details>

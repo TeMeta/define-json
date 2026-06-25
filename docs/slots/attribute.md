@@ -4,7 +4,7 @@
 
 
 
-URI: [odm:slot/attribute](https://cdisc.org/odm2/slot/attribute)
+URI: [dds:slot/attribute](https://w3id.org/dds/slot/attribute)
 Alias: attribute
 
 <!-- no inheritance hierarchy -->
@@ -17,12 +17,12 @@ Alias: attribute
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [DataService](../classes/DataService.md) | A service element that provides an API or endpoint for serving or receiving data |  no  |
 | [Resource](../classes/Resource.md) | An external reference that serves as the source for a Dataset, ItemGroup, or Item |  no  |
-| [GroupRelationship](../classes/GroupRelationship.md) | A relationship element that associates a DataAttribute with a set of Dimensions, used when attribute values vary based on all group dimension values |  no  |
-| [MeasureRelationship](../classes/MeasureRelationship.md) | A relationship element that associates a DataAttribute with a Measure |  no  |
 | [ObservationRelationship](../classes/ObservationRelationship.md) | A relationship element that associates a DataAttribute with an Observation, allowing value-level Items to be reused across multiple different Views |  no  |
+| [MeasureRelationship](../classes/MeasureRelationship.md) | A relationship element that associates a DataAttribute with a Measure |  no  |
+| [GroupRelationship](../classes/GroupRelationship.md) | A relationship element that associates a DataAttribute with a set of Dimensions, used when attribute values vary based on all group dimension values |  no  |
 | [DataflowRelationship](../classes/DataflowRelationship.md) | A relationship element that associates a DataAttribute with a Dataflow, reported at the Dataset level |  no  |
+| [DataService](../classes/DataService.md) | A service element that provides an API or endpoint for serving or receiving data |  no  |
 | [DimensionRelationship](../classes/DimensionRelationship.md) | A relationship element that associates a DataAttribute with a specific Dimension at a specific level |  no  |
 
 
@@ -32,7 +32,7 @@ Alias: attribute
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -49,8 +49,8 @@ Alias: attribute
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:attribute |
-| native | odm:attribute |
+| self | dds:attribute |
+| native | dds:attribute |
 
 
 
@@ -68,6 +68,7 @@ domain_of:
 - GroupRelationship
 - DimensionRelationship
 - ObservationRelationship
+range: string
 
 ```
 </details>

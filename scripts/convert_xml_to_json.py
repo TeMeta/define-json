@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Simple script for XML to JSON conversion using the define_json package.
+Simple script for XML to JSON conversion using the data_definition_spec package.
 
 Example usage:
     python scripts/convert_xml_to_json.py define-360i.xml define-360i.json
@@ -13,8 +13,8 @@ from pathlib import Path
 src_path = Path(__file__).parent.parent / 'src'
 sys.path.insert(0, str(src_path))
 
-from define_json.converters import DefineXMLToJSONConverter
-from define_json.validation import run_roundtrip_test, validate_define_json
+from data_definition_spec.converters import DefineXMLToJSONConverter
+from data_definition_spec.validation import run_roundtrip_test, validate_data_definition_spec
 
 
 def main():
@@ -30,7 +30,7 @@ def main():
         print(f"Error: Input file {xml_path} not found")
         sys.exit(1)
     
-    print("🔄 Converting Define-XML to Define-JSON...")
+    print("🔄 Converting Define-XML to Data Definition Specification...")
     print("=" * 50)
     
     try:
@@ -62,7 +62,7 @@ def main():
                 print(f"   • {error}")
         
         # Schema validation
-        schema_results = validate_define_json(data)
+        schema_results = validate_data_definition_spec(data)
         if schema_results['valid']:
             print("✅ Schema: VALID")
         else:

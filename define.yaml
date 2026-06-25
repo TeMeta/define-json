@@ -1,8 +1,11 @@
-id: https://cdisc.org/define-json
-name: Define-JSON
+id: https://w3id.org/dds
+name: data-definition-spec
+title: Data Definition Specification (DDS)
 description: >-
-  Data model for supply and demand data contracts to complement CDISC USDM, ODM, and Dataset-JSON.
-  This LinkML version includes semantics to act as Rosetta Stone for SDMX, FHIR, OMOP, RDF, and CDISC.
+  Standards-agnostic canonical model for clinical data meaning, structure, and
+  governance. Projects to CDISC (SDTM/ADaM/Define-XML), FHIR, OMOP, and SDMX.
+  ODM/Define-XML is one serialization facet applied by the output generator;
+  the canonical model is not ODM-derived.
 license: MIT
 prefixes:
   linkml: https://w3id.org/linkml/
@@ -11,15 +14,19 @@ prefixes:
   usdm: https://cdisc.org/usdm/
   sdtm: https://cdisc.org/cosmos/sdtm_v1.0#
   fhir: http://hl7.org/fhir/
+  ncit: http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#
   omop: https://omop.org/omop-cdm/
   qb: http://purl.org/linked-data/cube#
   sdmx: http://purl.org/linked-data/sdmx#
   dprod: https://ekgf.github.io/dprod/
   prov: http://www.w3.org/ns/prov#
   dcat: http://www.w3.org/ns/dcat#
+  odrl: http://www.w3.org/ns/odrl/2/
   osb: https://openstudybuilder.com/
   dcterms: http://purl.org/dc/terms/
-default_prefix: odm
+  dds: https://w3id.org/dds/
+default_prefix: dds
+default_range: string
 
 imports:
   - linkml:types
@@ -37,6 +44,9 @@ classes:
       - Identifiable
       - Labelled
       - Governed
+    slot_usage:
+      OID:
+        required: true
 
   Identifiable:
     description: >-
@@ -50,18 +60,13 @@ classes:
           or simple strings for internal use.
         identifier: true
         required: false
-        range: string
       uuid:
         description: Universal unique identifier
-        range: string
 
   Governed:
     description: >-
       A mixin that provides slots for audit trail and standards governance, including mandatory status, comments, and attribution
     mixin: true
-    slot_usage:
-      OID:
-        required: true
     attributes:
       mandatory:
         description: >-
@@ -104,13 +109,12 @@ classes:
         any_of:
           - range: Item
           - range: ItemGroup
-          - range: MetaDataVersion
+          - range: Specification
           - range: CodeList
-          - range: ReifiedConcept
+          - range: Concept
           - range: ConceptProperty
-          - range: Condition
+          - range: LogicalPredicate
           - range: Method
-          - range: NominalOccurrence
           - range: Dataflow
           - range: CubeComponent
           - range: DataProduct
@@ -123,7 +127,6 @@ classes:
     attributes:
       name:
         description: Short name or identifier, used for field names
-        range: string
       description:
         description: Detailed description, shown in tooltips
         any_of:
@@ -169,7 +172,6 @@ classes:
       displayFormat:
         description: >-
           A display format for the item
-        range: string
       significantDigits:
         description: >-
           For numeric values, the number of significant digits
@@ -183,10 +185,8 @@ classes:
       version:
         description: >-
           The version of the external resources
-        range: string
       href:
         description: Machine-readable instructions to obtain the resource e.g. FHIR path, URL
-        range: string
         required: false
 
   IsProfile:
@@ -198,7 +198,6 @@ classes:
     attributes:
       profile:
         description: Profiles this resource claims to conform to
-        range: string
         multivalued: true
       security:
         description: Security tags applied to this resource
@@ -218,10 +217,13 @@ classes:
         range: Timing
         required: false
 
-  IsODMItem:
+  ODMItemSerialization:
     mixin: true
     description: >-
-      A mixin that provides additional attributes for CDISC Operational Data Model items, including roles, completion instructions, and implementation notes
+      A mixin providing ODM/CDISC-specific item attributes meaningful only in
+      ODM/Define-XML serialization: CRF completion instructions, CDISC notes,
+      implementation notes, collection exception predicates, and pre-specified
+      values. Applied by the ODM output generator. Not part of the canonical Item.
     attributes:
       role:
         description: >-
@@ -255,10 +257,10 @@ classes:
         any_of:
           - range: string
           - range: TranslatedText
-      collectionExceptionCondition:
+      collectionExceptionPredicate:
         description: >-
-          Condition that defines when collection may be exempted
-        range: Condition
+          Logical predicate defining when data collection for this item may be exempted.
+        range: LogicalPredicate
       preSpecifiedValue:
         description: >-
           Prefill value or a default value for a field that is automatically populated.
@@ -266,9 +268,10 @@ classes:
           - range: string
           - range: TranslatedText
 
-  IsODMStandard:
+  ODMStandardReference:
     description: >-
-      A mixin that provides properties to indicate standards compliance
+      A mixin providing attributes for CDISC standards compliance indication.
+      Applied when serializing to Define-XML context. Not canonical.
     mixin: true
     attributes:
       standard:
@@ -278,14 +281,16 @@ classes:
         description: One or more members of this set are non-standard extensions
         range: boolean
 
-  ODMFileMetadata:
+  ODMSerializationMetadata:
     description: >-
-      A mixin that provides ODM file-level metadata attributes including file identifiers, timestamps, and system information
+      A mixin providing ODM/Define-XML file-level attributes required only when
+      serializing to ODM or Define-XML format. Applied by the ODM output generator,
+      not by the canonical model itself. These attributes (fileOID, odmVersion,
+      defineVersion, etc.) have no meaning in FHIR, OMOP, or SDMX projections.
     mixin: true
     attributes:
       fileOID:
         description: Unique identifier for the ODM file
-        range: string
         required: true
       asOfDateTime:
         description: Date and time when the data snapshot was taken
@@ -296,27 +301,20 @@ classes:
         required: true
       odmVersion:
         description: Version of the ODM standard used
-        range: string
         required: true
       fileType:
         description: Type of ODM file (e.g., Snapshot, Transactional)
-        range: string
         required: true
       originator:
         description: Organization or system that created the ODM file
-        range: string
       sourceSystem:
         description: Source system that generated the data
-        range: string
       sourceSystemVersion:
         description: Version of the source system
-        range: string
       context:
         description: Define-XML context (usually "Other" for Define-XML)
-        range: string
       defineVersion:
         description: Version of Define-XML specification used
-        range: string
 
   StudyMetadata:
     description: >-
@@ -325,27 +323,29 @@ classes:
     attributes:
       studyOID:
         description: Unique identifier for the study
-        range: string
         required: true
       studyName:
         description: Name of the study
-        range: string
       studyDescription:
         description: Description of the study
-        range: string
       protocolName:
         description: Protocol name for the study
-        range: string
 
-  MetaDataVersion:
+  Specification:
     tree_root: true
     description: >-
-      A container element that represents a given version of a specification, linking to a particular usage context such as a study, dataset, or data collection instrument.
+      The root specification container: a versioned, governed definition of the
+      data model for a study or data product. Links items, item groups, methods,
+      code lists, concepts, and study design references. Projects to Define-XML
+      MetaDataVersion, FHIR ImplementationGuide, and OMOP CDM metadata.
+      ODMSerializationMetadata is applied by the ODM output generator, not here.
     close_mappings:
       - usdm:StudyDesign
+    related_mappings:
+      - fhir:ImplementationGuide
+      - omop:cdm_source
     is_a: GovernedElement
     mixins:
-      - ODMFileMetadata
       - StudyMetadata
     attributes:
       itemGroups:
@@ -362,17 +362,17 @@ classes:
         multivalued: true
         inlined: true
         inlined_as_list: true
-      conditions:
+      predicates:
         description: >-
-          Logical conditions that apply to this version of the metadata.
-        range: Condition
+          Reusable logical predicates defined in this specification.
+        range: LogicalPredicate
         multivalued: true
         inlined: true
         inlined_as_list: true
-      whereClauses:
+      applicabilityConditions:
         description: >-
-          Data contexts that apply to this version of the metadata.
-        range: WhereClause
+          Named applicability conditions defined in this specification.
+        range: ApplicabilityCondition
         multivalued: true
         inlined: true
         inlined_as_list: true
@@ -405,12 +405,30 @@ classes:
         inlined_as_list: true
       concepts:
         description: Structured Concepts defined in this version of the metadata
-        range: ReifiedConcept
+        range: Concept
         multivalued: true
       relationships:
         description: >-
           Relationships between items, item groups, and other elements in this version of the metadata.
         range: Relationship
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      queries:
+        description: >-
+          Queries raised against metadata and/or data elements in this specification.
+          Each Query references its target element(s) by OID, so the same query can
+          relate to many metadata and data elements (many-to-many).
+        range: Query
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      checks:
+        description: >-
+          Reusable validation checks (e.g. published CORE rules) included in this
+          metadata package. Each Check references the elements it applies to by OID
+          and may cite an external published rule, enabling reuse and loose coupling.
+        range: Check
         multivalued: true
         inlined: true
         inlined_as_list: true
@@ -457,7 +475,15 @@ classes:
         multivalued: true
         inlined: true
         inlined_as_list: true
-        
+      usdmStudyDesignId:
+        description: >-
+          OID or URI reference to the USDM StudyDesign that this specification
+          implements. When present, arms, epochs, and scheduled visit slots are
+          resolved from the referenced USDM instance. The USDM study design is the
+          authoritative source for EPOCH, VISITNUM, ARM, and timing anchors; DDS
+          does not redeclare them.
+        required: false
+
   Item:
     description: >-
       A data element that represents a specific piece of information within a defined context, with data type, constraints, and derivation methods
@@ -489,8 +515,8 @@ classes:
       - osb:std_unit
     is_a: GovernedElement
     mixins:
-      - IsODMItem
       - Formatted
+    # ODMItemSerialization is applied by the ODM output generator, not here.
     attributes:
       dataType:
         description: >-
@@ -518,12 +544,12 @@ classes:
       applicableWhen:
         description: |
           References to different situations that define when this item applies.
-          Multiple whereClauses are combined with OR logic: the item applies if ANY referenced WhereClause matches.
-          Within each WhereClause, conditions are combined with AND logic: all conditions must be true.
+          Multiple applicabilityConditions are combined with OR logic: the item applies if ANY referenced ApplicabilityCondition matches.
+          Within each ApplicabilityCondition, conditions are combined with AND logic: all conditions must be true.
           
           Example: whereClause: ["WC.SYSBP", "WC.DIABP"] means the item applies when
           (all conditions in WC.SYSBP are true) OR (all conditions in WC.DIABP are true).
-        range: WhereClause
+        range: ApplicabilityCondition
         multivalued: true
         inlined: false
         close_mappings:
@@ -562,12 +588,11 @@ classes:
     is_a: GovernedElement
     mixins:
       - IsProfile
-      - IsODMStandard
+      - ODMStandardReference
     attributes:
       domain:
         description: >-
           Domain abbreviation for the dataset.
-        range: string
       structure:
         description: >-
           Data structure of the item group, indicating how the records are organized.
@@ -593,16 +618,27 @@ classes:
           - fhir:StructureDefinition/differential
         inlined: true
         inlined_as_list: true
-      keySequence:
+      uniqueKey:
         description: >-
-          Ordered list of Items that define the dataset key structure for sorting and uniqueness.
-          Each entry is an OID reference to an Item in the items array.
-          Order determines sorting precedence, merge operations, and record uniqueness.
-          These are allowed to be null, unlike stricter dataset dimensions or primary keys.
+          Unordered set of Items whose combined values uniquely identify a record in
+          this dataset (the record key). Each entry is an OID reference to an Item in
+          the items array. Order is not significant for uniqueness — use keySequence
+          for sort order. Splitting uniqueness from sorting resolves the previous
+          overloading of keySequence.
         range: Item
         multivalued: true
         close_mappings:
           - odm:ItemRef.KeySequence
+      keySequence:
+        description: >-
+          Ordered list of Items defining the default sort order for this dataset.
+          Each entry is an OID reference to an Item in the items array; order
+          determines sorting precedence and merge operations. May reference Items
+          that are not part of uniqueKey. Distinct from uniqueKey, which establishes
+          record uniqueness.
+        range: Item
+        multivalued: true
+        close_mappings:
           - sdmx:DimensionDescriptor
       slices:
         description: >-
@@ -614,16 +650,16 @@ classes:
       implementsConcept:
         description: >-
           Reference to a abstract concept topic that this item group is a specialization of
-        range: ReifiedConcept
+        range: Concept
       applicableWhen:
         description: |
           References to different situations that define when this item applies.
-          Multiple whereClauses are combined with OR logic: the item applies if ANY referenced WhereClause matches.
-          Within each WhereClause, conditions are combined with AND logic: all conditions must be true.
+          Multiple applicabilityConditions are combined with OR logic: the item applies if ANY referenced ApplicabilityCondition matches.
+          Within each ApplicabilityCondition, conditions are combined with AND logic: all conditions must be true.
           
           Example: whereClause: ["WC.SYSBP", "WC.DIABP"] means the item applies when
           (all conditions in WC.SYSBP are true) OR (all conditions in WC.DIABP are true).
-        range: WhereClause
+        range: ApplicabilityCondition
         multivalued: true
         inlined: false
         close_mappings:
@@ -645,7 +681,6 @@ classes:
       name:
         description: >-
           Name of the General Observation Class following CDISC Controlled Terminology.
-        range: string
         required: true
       subClasses:
         description: >-
@@ -663,12 +698,10 @@ classes:
       name:
         description: >-
           Name of the SubClass following CDISC Controlled Terminology for SubClass.
-        range: string
         required: true
       parentClass:
         description: >-
           Name of the parent Class or SubClass following CDISC Controlled Terminology.
-        range: string
         required: false
       subClasses:
         description: >-
@@ -708,6 +741,45 @@ classes:
         range: LinkingPhraseEnum
         required: true
 
+  Query:
+    description: >-
+      A reified query (discrepancy, request for clarification, or annotation) raised
+      against one or more metadata and/or data elements. Modelled as an intermediate
+      relationship node so a single query can relate to many elements (many-to-many)
+      and be referenced rather than embedded. Internal queries originate within the
+      organization; external queries (e.g. site or sponsor) carry their source.
+    close_mappings:
+      - odm:Query
+    is_a: GovernedElement
+    attributes:
+      about:
+        description: >-
+          The metadata and/or data element(s) this query concerns, referenced by OID.
+          Multivalued and non-inlined to support many-to-many linkage across both
+          metadata (e.g. Item, ItemGroup) and data (e.g. Dataset) elements.
+        range: IdentifiableElement
+        multivalued: true
+        inlined: false
+        required: true
+      queryType:
+        description: >-
+          Whether the query is internal or external (e.g. site or sponsor originated).
+        range: QueryType
+      text:
+        description: The query content.
+        any_of:
+          - range: string
+          - range: TranslatedText
+        required: true
+      status:
+        description: Workflow status of the query (e.g. open, answered, closed).
+      source:
+        description: The party that raised the query.
+        any_of:
+          - range: User
+          - range: Organization
+          - range: string
+
   Translation:
     description: >-
       A text representation that provides content in a specific language, used for multilingual support
@@ -717,11 +789,9 @@ classes:
     attributes:
       "language":
         description: The language of the translation
-        range: string
         required: true
       "value":
         description: The translated text
-        range: string
         required: true
 
   TranslatedText:
@@ -752,7 +822,7 @@ classes:
     is_a: GovernedElement
     mixins:
       - Versioned
-      - IsODMStandard
+      - ODMStandardReference
     attributes:
       dataType:
         description: >-
@@ -761,7 +831,6 @@ classes:
       formatName:
         description: >-
           Name of a standard format definition
-        range: string
       codeListItems:
         description: >-
           The individual values that make up this CodeList.
@@ -792,12 +861,10 @@ classes:
       codedValue:
         description: >-
           The value of the CodeListItem before decoding
-        range: string
         required: true
       decode:
         description: >-
           The decoded value of the CodeListItem
-        range: string
       description:
         description: >-
           A detailed description of the code (e.g., for documentation purposes)
@@ -866,7 +933,6 @@ classes:
       code:
         description: >-
           The code value
-        range: string
         required: true
       decode:
         description: Human-readable meaning
@@ -878,12 +944,10 @@ classes:
       codeSystem:
         description: >-
           The code system identifier
-        range: string
         required: true
       codeSystemVersion:
         description: >-
           The code system version
-        range: string
       aliasType:
         description: >-
           How this coding is related in the context of its parent element
@@ -909,9 +973,13 @@ classes:
           - range: Organization
           - range: string
 
-  ReifiedConcept:
+  Concept:
     description: >-
-      A canonical information layer that makes abstract concepts explicit and referenceable, showing how different data implementations represent the same underlying meanings through a star schema structure with multiple properties
+      An abstract concept that can be referenced and specialised by data
+      implementations. Holds ConceptProperties describing the concept's expected
+      data shape. Multiple ItemGroups or Items can implement the same Concept,
+      allowing standard biomedical concepts to be implemented differently across
+      studies while remaining semantically aligned.
     close_mappings:
       - sdmx:MetaDataStructureDefinition
       - sdmx:Concept
@@ -971,11 +1039,16 @@ classes:
           Reference to a CodeList that constrains the values of this property
         range: CodeList
 
-  WhereClause:
+  ApplicabilityCondition:
     description: >-
-      A conditional element that describes the circumstances under which a containing context applies, linking conditions to structures where they are used
+      A reusable, named applicability condition describing the circumstances under
+      which a containing context applies. References one or more LogicalPredicates
+      combined with AND. Distinct from LogicalPredicate (the expression itself):
+      ApplicabilityCondition is the named, governed wrapper referenced from Items,
+      ItemGroups, Parameters, and Analyses.
     close_mappings:
       - sdmx:AttachmentConstraint
+      - usdm:TransitionRule
     related_mappings:
       - fhir:StructureDefinition/context
       - qb:ObservationGroup
@@ -984,16 +1057,19 @@ classes:
       - sdmx:MetadataTargetRegion
     is_a: GovernedElement
     attributes:
-      conditions:
-        description: Logical conditions that apply in this context (combined with AND)
-        range: Condition
+      predicates:
+        description: Logical predicates that apply in this context (combined with AND)
+        range: LogicalPredicate
         multivalued: true
         inlined: false
 
-  Condition:
+  LogicalPredicate:
     description: >-
-      A reusable, composable, and nestable logical construct allowing for complex expressions.
-      Conditions are most useful when given a meaningful name and linked to Study Definitions.
+      A reusable, composable, and nestable logical expression resolving to a boolean.
+      Used for applicability conditions, validation rules, eligibility criteria, and
+      skip logic. This is a data-model predicate — not a clinical condition (diagnosis).
+      Implements usdm:Condition (the study-design predicate, distinct from the clinical
+      FHIR Condition resource).
     close_mappings:
       - odm:ConditionDef
       - usdm:Condition
@@ -1006,16 +1082,16 @@ classes:
     is_a: GovernedElement
     attributes:
       rangeChecks:
-        description: Range checks that compose this condition
+        description: Range checks that compose this predicate
         range: RangeCheck
         multivalued: true
         inlined: true
         inlined_as_list: true
-      implementsCondition:
-        description: Reference to a external (e.g. USDM) condition definition that this implements
+      implementsPredicate:
+        description: Reference to an external (e.g. USDM) predicate/condition definition that this implements
       expressions:
         description: >-
-          Logical expression, resolving to a boolean, that implements this condition in a specific context
+          Logical expression, resolving to a boolean, that implements this predicate in a specific context
         range: FormalExpression
         multivalued: true
         inlined: true
@@ -1027,14 +1103,12 @@ classes:
         range: LogicalOperator
         required: false
         ifabsent: LogicalOperator(AND)
-      conditions:
+      predicates:
         description: >-
-          Child conditions to combine using the operator.
-          Multiple conditions are composed according to the operator (AND/OR/NOT).
-          Rearrange and nest to compose XOR, or combinations of AND and OR.
-          Unless the operator is EXPRESSION, in which case the formalExpression is used instead.
-          Use OID references to reuse conditions defined elsewhere.
-        range: Condition
+          Child predicates to combine using the operator (AND/OR/NOT/EXPRESSION).
+          Rearrange and nest to compose XOR or mixed AND/OR.
+          Use OID references to reuse predicates defined elsewhere.
+        range: LogicalPredicate
         multivalued: true
         inlined: false
 
@@ -1051,7 +1125,6 @@ classes:
         range: Comparator
       checkValues:
         description: Values to compare against
-        range: string
         multivalued: true
         inlined: true
         inlined_as_list: true
@@ -1081,6 +1154,52 @@ classes:
         range: LogicalOperator
         required: false
         ifabsent: LogicalOperator(AND)
+      implementsCheck:
+        description: >-
+          Optional reference (by OID) to a reusable Check (e.g. a published CORE rule)
+          that this inline RangeCheck implements.
+        range: Check
+        inlined: false
+
+  Check:
+    description: >-
+      A reusable validation check included in the metadata package, such as a
+      published CORE rule. Linked many-to-many by reference to the metadata and/or
+      data elements it applies to, and optionally citing an external published rule
+      so checks stay reusable and loosely coupled. Distinct from RangeCheck, which is
+      an inline executable comparison; a RangeCheck may implement a Check.
+    close_mappings:
+      - odm:RangeCheck
+    is_a: GovernedElement
+    attributes:
+      appliesTo:
+        description: >-
+          The metadata and/or data element(s) this check applies to, referenced by
+          OID. Multivalued and non-inlined for many-to-many, loosely coupled linkage.
+        range: IdentifiableElement
+        multivalued: true
+        inlined: false
+      publishedBy:
+        description: >-
+          The standard or authority that published this check (e.g. CDISC CORE).
+        any_of:
+          - range: Standard
+          - range: Organization
+          - range: string
+      externalReference:
+        description: >-
+          URI or CURIE of the published rule this check is sourced from (e.g. a CORE
+          rule identifier), enabling reuse across metadata packages.
+        range: uriorcurie
+      severity:
+        description: Whether a failure is an error ("Hard") or a warning ("Soft").
+        range: SoftHard
+      expressions:
+        description: Optional formal/executable expression(s) implementing the check.
+        range: FormalExpression
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
 
   FormalExpression:
     description: >-
@@ -1096,16 +1215,13 @@ classes:
           The specific context within the containing element to which this formal expression applies.
         exact_mappings:
           - fhir:Expression/language
-        range: string
       expression:
         description: >-
           The actual text of the formal expression (renamed from 'code' for disambiguation).
-        range: string
         aliases: [code]
         required: true
       returnType:
         description: Return type of the expression
-        range: string
       parameters:
         description: Parameters used in the expression
         range: Parameter
@@ -1155,7 +1271,7 @@ classes:
       implementsConcept:
         description: >-
           Reference to a specific concept that this Method implements.
-        range: ReifiedConcept
+        range: Concept
         inlined: false
 
   SourceItem:
@@ -1204,11 +1320,9 @@ classes:
       value:
         description: >-
           A specific bound value for the parameter.
-        range: string
       defaultValue:
         description: >-
           A default value for the parameter.
-        range: string
       items:
         description: >-
           A list of item dependencies for the parameter.
@@ -1229,26 +1343,22 @@ classes:
         description: >-
           References to different situations that define when this parameter 
           is applicable or required in the containing expression.
-          Multiple whereClauses are combined with OR logic: the parameter applies 
-          if ANY referenced WhereClause matches.
+          Multiple applicabilityConditions are combined with OR logic: the parameter applies 
+          if ANY referenced ApplicabilityCondition matches.
 
-          Within each WhereClause, conditions are combined with AND logic.
+          Within each ApplicabilityCondition, conditions are combined with AND logic.
           Example: applicableWhen: ["WC.ADULT", "WC.PEDIATRIC"] means the parameter 
           is needed when (all conditions in WC.ADULT are true) OR 
           (all conditions in WC.PEDIATRIC are true).
-        range: WhereClause
+        range: ApplicabilityCondition
         multivalued: true
         inlined: false
-      conditions:
+      validationPredicates:
         description: >-
-          Validation conditions that constrain this parameter's value beyond controlled terminology.
-          Multiple conditions are combined with AND logic: all must be satisfied.
-          Use these for parameter validation rules, distinct from applicableWhen 
+          Validation predicates that constrain this parameter's value beyond controlled
+          terminology. All must be satisfied (AND logic). Distinct from applicableWhen
           which determines if the parameter is needed at all.
-          
-          Example: A parameter AGE might have conditions ensuring it's >= 0 and <= 120.
-          or conditions might make up part of a componsed expression.
-        range: Condition
+        range: LogicalPredicate
         multivalued: true
         inlined: false    
       required:
@@ -1256,7 +1366,7 @@ classes:
           Indicates whether this parameter must be provided when the 
           containing expression is evaluated (technical constraint).
         range: boolean
-        ifabsent: false
+        ifabsent: 'False'
 
   ReturnValue:
     description: >-
@@ -1270,7 +1380,6 @@ classes:
       valueList:
         description: >-
           A list of possible return values.
-        range: string
         multivalued: true
 
   Origin:
@@ -1340,11 +1449,9 @@ classes:
       userName:
         description: >-
           The username of the user.
-        range: string
       fullName:
         description: >-
           The full name of the user.
-        range: string
       organization:
         description: >-
           The organization the user belongs to.
@@ -1366,7 +1473,6 @@ classes:
       role:
         description: >-
           The role of the organization in the study.
-        range: string
       type:
         description: >-
           The type of organization (e.g., site, sponsor, vendor).
@@ -1374,11 +1480,9 @@ classes:
       location:
         description: >-
           The physical location of the organization.
-        range: string
       address:
         description: >-
           The address of the organization.
-        range: string
       partOfOrganization:
         description: >-
           Reference to a parent organization if this organization is part of a larger entity.
@@ -1406,7 +1510,6 @@ classes:
       version:
         description: >-
           Version of an Implementation Guide or of a Controlled Terminology
-        range: string
       status:
         description: >-
           Status of an Implementation Guide or of a Controlled Terminology
@@ -1424,13 +1527,11 @@ classes:
       resourceType:
         description: >-
           Type of resource (e.g.,  "ODM", "HL7-FHIR", "HL7-CDA", "HL7-v2", "OpenEHR-extract")
-        range: string
         required: false
       attribute:
         description: >-
           Field provided by the Name attribute where the data or information can be obtained.
           Examples are "valueQuantity.value" or "valueQuantity.unit".
-        range: string
       selection:
         description: >-
           Machine-executable instructions for selecting data from the resource.
@@ -1448,10 +1549,8 @@ classes:
     attributes:
       title:
         description: Document title
-        range: string
       leafID:
         description: Leaf identifier for document reference in Define-XML
-        range: string
       pages:
         description: Reference to specific pages in a PDF document
         range: integer
@@ -1459,7 +1558,6 @@ classes:
         required: false
       relationship:
         description: Relationship to the referencing entity
-        range: string
         required: false
 
   Timing:
@@ -1470,13 +1568,14 @@ classes:
     broad_mappings:
       - fhir:Timing
     narrow_mappings:
+      - fhir:Period
+      - fhir:Age
+      - fhir:Duration
+    related_mappings:
       - omop:Observation_period
       - omop:Drug_era
       - omop:Condition_era
       - omop:Procedure_era
-      - fhir:Period
-      - fhir:Age
-      - fhir:Duration
     is_a: IdentifiableElement
     attributes:
       type:
@@ -1491,16 +1590,22 @@ classes:
       value:
         description: >-
           The value of the timing, which can be a date/time, duration, or event reference.
-        range: string
         required: true
       relativeTo:
         description: >-
-          Reference to the event or occurrence that this timing is relative to.
-        range: NominalOccurrence
+          The protocol anchor this timing is relative to. Either a TimingLandmark
+          (well-known protocol event such as RANDOMIZATION or FIRST_DOSE) or a
+          free-form OID/identifier referencing a USDM ScheduledActivityInstance.
+        any_of:
+          - range: TimingLandmark
+          - range: string
       relativeFrom:
         description: >-
-          Reference to the event or occurrence that this timing is relative to.
-        range: NominalOccurrence
+          The protocol anchor from which this timing is measured. Either a
+          TimingLandmark or a USDM ScheduledActivityInstance OID reference.
+        any_of:
+          - range: TimingLandmark
+          - range: string
       windowLower:
         description: Start date/time of the timing
         range: datetime
@@ -1514,44 +1619,10 @@ classes:
       frequency:
         description: >-
           Frequency. Use dose frequency terminology e.g. "BID" if applicable.
-        range: string
       imputation:
         description: >-
           The imputation method used for the Timing.
         range: Method
-
-  NominalOccurrence:
-    description: >-
-      An event element that represents occurrences such as planned or unplanned encounters or adverse events
-    narrow_mappings:
-      - usdm:ScheduledInstance
-      - usdm:Encounter
-      - usdm:InterCurrentEvent
-      - fhir:PlanDefinition/action
-      - fhir:ActivityDefinition
-      - fhir:Encounter
-      - fhir:AdverseEvent
-      - omop:Visit_occurrence
-      - omop:Condition_occurrence
-      - omop:Procedure_occurrence
-    related_mappings:
-    is_a: GovernedElement
-    attributes:
-      timing:
-        description: >-
-          A named event reference, that can nest further named timing references.
-        range: Timing
-        required: true
-      event:
-        description: >-
-          The ID of the event in a Schedule.
-        range: string
-        required: false
-      condition:
-        description: >-
-          A condition that must be met for this occurrence to be valid.
-        range: Condition
-        multivalued: true
 
   # New classes for Data Cube, Analysis Concept, and DTA governance
   DataStructureDefinition:
@@ -1578,7 +1649,7 @@ classes:
         range: ComponentList
       evolvingStructure:
         range: boolean
-        ifabsent: false
+        ifabsent: 'False'
 
   Dataflow:
     description: >-
@@ -1596,18 +1667,30 @@ classes:
     attributes:
       structure:
         description: >-
-         Structured component specification for this flow
+         Structured component specification for this flow.
+         Inlined so a standalone DTA carries its agreed structure.
         range: DataStructureDefinition
         required: true
+        inlined: true
       dimensionConstraint:
         description: >-
           Subset of dimensions that are agreed upon by the dataflow and must be included.
         range: Dimension
         multivalued: true
-      analysisMethod:
+      deliverySchedule:
         description: >-
-          Metadata about the analysis method used to produce the data in this dataflow.
-        range: Analysis
+          Recurring transfer/delivery schedule agreed for this flow. The
+          domain-neutral default is an ISO-8601 repeating interval string
+          (e.g. "R/2025-01-01/P1M"); use a Timing object only when delivery must
+          be anchored to a clinical occurrence. Agreement-level schedule;
+          concrete reporting periods of each delivered Dataset are carried by
+          IsSdmxDataset.reportingBegin/reportingEnd/dataExtractionDate.
+        any_of:
+          - range: string
+          - range: Timing
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
 
   IsSdmxDataset:
     mixin: true
@@ -1704,6 +1787,7 @@ classes:
           - dcterms:conformsTo
       hasPolicy:
         description: Access or usage policy applied to this dataset
+        range: Policy
         multivalued: true
         inlined: true
         inlined_as_list: true
@@ -1962,9 +2046,18 @@ classes:
         inlined_as_list: true
       hasPolicy:
         description: Policies governing the use and access of the data product
+        range: Policy
         multivalued: true
         inlined: true
         inlined_as_list: true
+      provisionAgreement:
+        description: >-
+          Reference(s) to standalone Data Transfer Agreements (ProvisionAgreement)
+          that govern this product's flows. Referenced by OID/URI, not embedded,
+          so the agreement remains an independently maintained artifact.
+        range: ProvisionAgreement
+        multivalued: true
+        inlined: false
 
   Distribution:
     description: >-
@@ -2041,23 +2134,175 @@ classes:
     attributes:
       provider:
         description: >-
-          The Data Provider that is part of this agreement
+          The Data Provider that is part of this agreement.
+          Inlined so a standalone DTA is a self-contained snapshot.
         range: DataProvider
+        inlined: true
       consumer:
         description: >-
           The Data Consumer that is part of this agreement
         any_of:
+          - range: DataConsumer
           - range: DataProduct
           - range: Organization
           - range: string
       dataFlow:
         description: >-
-          The Dataflow that is covered by this agreement
+          The Dataflow that is covered by this agreement.
+          Inlined so a standalone DTA is a self-contained snapshot.
         range: Dataflow
+        inlined: true
       source:
         description: >-
           The source of the data provided under this agreement
         range: Resource
+        inlined: true
+      hasPolicy:
+        description: >-
+          The usage/access policies (ODRL) that constitute the legal terms of
+          this agreement, e.g. permitted purpose, confidentiality, retention.
+        range: Policy
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+
+  DataConsumer:
+    description: >-
+      An organization element that receives data from a Data Provider under a
+      ProvisionAgreement; the demand-side counterpart of DataProvider.
+    close_mappings:
+      - sdmx:DataConsumer
+    is_a: Organization
+    attributes:
+      consumesDataFrom:
+        description: The Dataflows that this consumer receives data from
+        range: Dataflow
+        multivalued: true
+      provisionAgreements:
+        description: The ProvisionAgreements that this consumer has with Data Providers
+        range: ProvisionAgreement
+        multivalued: true
+
+  Policy:
+    description: >-
+      A set of usage and access rules (ODRL) governing data. For a DTA this is
+      typically an ODRL Agreement between an assigner (provider) and assignee
+      (consumer), composed of permissions, prohibitions and obligations.
+    exact_mappings:
+      - odrl:Policy
+    close_mappings:
+      - dcat:hasPolicy
+    is_a: GovernedElement
+    attributes:
+      policyType:
+        description: ODRL policy subtype (Set, Offer, Agreement)
+        range: PolicyType
+        ifabsent: PolicyType(Agreement)
+      profile:
+        description: IRI of the ODRL profile this policy conforms to
+      assigner:
+        description: The party issuing/granting the policy (typically the provider)
+        any_of:
+          - range: DataProvider
+          - range: Organization
+          - range: string
+      assignee:
+        description: The party the policy is granted to (typically the consumer)
+        any_of:
+          - range: DataConsumer
+          - range: Organization
+          - range: string
+      permission:
+        description: Rules granting the ability to perform an action (odrl:permission)
+        range: Rule
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+        exact_mappings:
+          - odrl:permission
+      prohibition:
+        description: Rules forbidding an action (odrl:prohibition)
+        range: Rule
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+        exact_mappings:
+          - odrl:prohibition
+      obligation:
+        description: Duties that must be fulfilled (odrl:obligation)
+        range: Rule
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+        exact_mappings:
+          - odrl:obligation
+
+  Rule:
+    description: >-
+      An ODRL rule asserting that an action is permitted, prohibited, or required
+      on a target asset, optionally restricted by constraints.
+    exact_mappings:
+      - odrl:Rule
+    is_a: IdentifiableElement
+    attributes:
+      action:
+        description: >-
+          The operation the rule governs (odrl:action), e.g. "use", "distribute",
+          "anonymize", "delete". Semantics may be tagged via coding.
+        required: true
+        exact_mappings:
+          - odrl:action
+      target:
+        description: >-
+          The asset the rule applies to (odrl:target), e.g. the Dataflow or
+          Dataset OID/IRI under agreement.
+        exact_mappings:
+          - odrl:target
+      assigner:
+        description: Party issuing the rule, if overriding the policy-level assigner
+        any_of:
+          - range: Organization
+          - range: string
+      assignee:
+        description: Party the rule is granted to, if overriding the policy-level assignee
+        any_of:
+          - range: Organization
+          - range: string
+      constraint:
+        description: Conditions that narrow when/how the rule applies (odrl:constraint)
+        range: Constraint
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+        exact_mappings:
+          - odrl:constraint
+
+  Constraint:
+    description: >-
+      An ODRL constraint expressed as leftOperand operator rightOperand,
+      e.g. purpose eq "safety-reporting", or dateTime lt "2026-01-01".
+    exact_mappings:
+      - odrl:Constraint
+    is_a: IdentifiableElement
+    attributes:
+      leftOperand:
+        description: The subject of the constraint (odrl:leftOperand), e.g. "purpose", "recipient", "dateTime"
+        required: true
+        exact_mappings:
+          - odrl:leftOperand
+      operator:
+        description: The comparison operator (odrl:operator)
+        range: ConstraintOperator
+        required: true
+        exact_mappings:
+          - odrl:operator
+      rightOperand:
+        description: The value compared against (odrl:rightOperand)
+        required: true
+        exact_mappings:
+          - odrl:rightOperand
+      unit:
+        description: Unit of the rightOperand, where applicable
 
   Analysis:
     description: >-
@@ -2079,13 +2324,11 @@ classes:
       analysisMethod:
         description: >-
           Generic method used to perform this analysis.
-          any_of:
-            - range: Method
-            - range: AnalysisMethod
+        range: Method
       applicableWhen:
         description: >-
           The conditions (e.g. population, time period etc.) that must be met for this analysis to be applicable.
-        range: WhereClause
+        range: ApplicabilityCondition
         multivalued: true
         inlined: false
       inputData:
@@ -2095,6 +2338,14 @@ classes:
         any_of:
           - range: ItemGroup
           - range: Dataset
+        multivalued: true
+        inlined: false
+      inputDataflows:
+        description: >-
+          Dataflows that supply input data for this analysis. Replaces
+          Dataflow.analysisMethod (which had the dependency backwards — a data
+          contract should not know which analyses consume it).
+        range: Dataflow
         multivalued: true
         inlined: false
 
@@ -2185,6 +2436,30 @@ enums:
       TechnologyProvider:
       Other:
 
+  PolicyType:
+    description: ODRL policy subtypes.
+    permissible_values:
+      Set:
+        meaning: odrl:Set
+      Offer:
+        meaning: odrl:Offer
+      Agreement:
+        meaning: odrl:Agreement
+
+  ConstraintOperator:
+    description: ODRL constraint operators.
+    permissible_values:
+      eq: { meaning: odrl:eq }
+      neq: { meaning: odrl:neq }
+      lt: { meaning: odrl:lt }
+      lteq: { meaning: odrl:lteq }
+      gt: { meaning: odrl:gt }
+      gteq: { meaning: odrl:gteq }
+      isPartOf: { meaning: odrl:isPartOf }
+      isA: { meaning: odrl:isA }
+      isAnyOf: { meaning: odrl:isAnyOf }
+      isNoneOf: { meaning: odrl:isNoneOf }
+
   SoftHard:
     description: >-
       An enumeration that indicates whether a validation check should be treated as an error or a warning
@@ -2193,6 +2468,16 @@ enums:
         description: Warning
       Hard:
         description: Error
+
+  QueryType:
+    description: >-
+      Whether a Query originates inside the organization (internal) or from an
+      external party such as a site or sponsor (external).
+    permissible_values:
+      Internal:
+        description: Query raised within the organization.
+      External:
+        description: Query raised by an external party (e.g. site or sponsor).
 
   MethodType:
     description: >-
@@ -2258,7 +2543,7 @@ enums:
   OriginType:
     description: >-
       An enumeration that defines the types of origins for data items.
-    from_schema: ncit:C170449
+      Values sourced from NCI Thesaurus subset C170449.
     permissible_values:
       Assigned:
         description: >-
@@ -2290,8 +2575,8 @@ enums:
 
   OriginSource:
     description: >-
-      An enumeration that defines the sources of data origin
-    from_schema: ncit:C170450
+      An enumeration that defines the sources of data origin.
+      Values sourced from NCI Thesaurus subset C170450.
     permissible_values:
       Investigator:
         text: Investigator
@@ -2324,13 +2609,50 @@ enums:
           A data specialization of a concept.
       ValueList:
         description: >-
-          A list of topic-specific items for a specific column (from Define-XML).
+          SERIALIZATION HINT for the ODM/Define-XML output generator only.
+          Signals that this ItemGroup should render as a Define-XML ValueList
+          element. Has no structural meaning in the canonical model hierarchy.
+          Consider handling this as a generator-side convention rather than a
+          canonical type in future revisions.
       Section:
         description: >-
           A section of a form.
       Form:
         description: >-
           A data collection form.
+
+  TimingLandmark:
+    description: >-
+      Well-known protocol reference points that a Timing can be expressed relative
+      to. Corresponds to USDM TimingRelativeToLandmark. For visit-specific anchors
+      not covered by this enum, use a USDM ScheduledActivityInstance OID reference
+      in Timing.relativeTo as a free string.
+    exact_mappings:
+      - usdm:TimingRelativeToLandmark
+    permissible_values:
+      INFORMED_CONSENT:
+        description: Date of informed consent
+      SCREENING:
+        description: Start of screening period
+      RANDOMIZATION:
+        description: Date of randomisation
+        meaning: usdm:Randomization
+      FIRST_DOSE:
+        description: Date of first study drug administration
+        meaning: usdm:FirstDose
+      LAST_DOSE:
+        description: Date of last study drug administration
+        meaning: usdm:LastDose
+      CYCLE_START:
+        description: Start of the current treatment cycle
+        meaning: usdm:CycleStart
+      END_OF_TREATMENT:
+        description: Date treatment was completed or discontinued
+        meaning: usdm:EndOfTreatment
+      PROCEDURE_DATE:
+        description: Date of a specified procedure
+      DIAGNOSIS_DATE:
+        description: Date of the index diagnosis
 
   TimingType:
     description: >-

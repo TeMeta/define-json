@@ -4,7 +4,7 @@
 
 
 
-URI: [odm:slot/conformsTo](https://cdisc.org/odm2/slot/conformsTo)
+URI: [dds:slot/conformsTo](https://w3id.org/dds/slot/conformsTo)
 Alias: conformsTo
 
 <!-- no inheritance hierarchy -->
@@ -27,7 +27,7 @@ Alias: conformsTo
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -44,8 +44,8 @@ Alias: conformsTo
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:conformsTo |
-| native | odm:conformsTo |
+| self | dds:conformsTo |
+| native | dds:conformsTo |
 
 
 
@@ -59,6 +59,7 @@ alias: conformsTo
 domain_of:
 - Dataset
 - Distribution
+range: string
 
 ```
 </details>

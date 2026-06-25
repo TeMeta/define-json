@@ -3,13 +3,13 @@
 # Slot: provider 
 
 
-_The Data Provider that is part of this agreement_
+_The Data Provider that is part of this agreement. Inlined so a standalone DTA is a self-contained snapshot._
 
 
 
 
 
-URI: [odm:slot/provider](https://cdisc.org/odm2/slot/provider)
+URI: [dds:slot/provider](https://w3id.org/dds/slot/provider)
 Alias: provider
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: provider
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: provider
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:provider |
-| native | odm:provider |
+| self | dds:provider |
+| native | dds:provider |
 
 
 
@@ -66,14 +66,16 @@ Alias: provider
 <details>
 ```yaml
 name: provider
-description: The Data Provider that is part of this agreement
-from_schema: https://cdisc.org/define-json
+description: The Data Provider that is part of this agreement. Inlined so a standalone
+  DTA is a self-contained snapshot.
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: provider
 owner: ProvisionAgreement
 domain_of:
 - ProvisionAgreement
 range: DataProvider
+inlined: true
 
 ```
 </details>

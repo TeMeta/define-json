@@ -9,7 +9,7 @@ _A validation element that performs a simple comparison check between a referenc
 
 
 
-URI: [odm:class/RangeCheck](https://cdisc.org/odm2/class/RangeCheck)
+URI: [dds:class/RangeCheck](https://w3id.org/dds/class/RangeCheck)
 
 
 ```mermaid
@@ -20,6 +20,59 @@ RangeCheck {
     string item  
     SoftHard softHard  
     LogicalOperator operator  
+}
+Check {
+    string publishedBy  
+    uriorcurie externalReference  
+    SoftHard severity  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+SiteOrSponsorComment {
+    string text  
+    OriginSource sourceType  
+    string source  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+Comment {
+    string text  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+Coding {
+    string code  
+    string decode  
+    string codeSystem  
+    string codeSystemVersion  
+    AliasPredicate aliasType  
 }
 FormalExpression {
     string context  
@@ -32,41 +85,7 @@ FormalExpression {
     string label  
     stringList aliases  
 }
-Coding {
-    string code  
-    string decode  
-    string codeSystem  
-    string codeSystemVersion  
-    AliasPredicate aliasType  
-}
-Resource {
-    string resourceType  
-    string attribute  
-    string version  
-    string href  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
-ReturnValue {
-    DataType dataType  
-    stringList valueList  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
-Parameter {
-    DataType dataType  
-    string value  
-    string defaultValue  
-    stringList items  
-    boolean required  
+IdentifiableElement {
     string OID  
     string uuid  
     string name  
@@ -76,18 +95,24 @@ Parameter {
 }
 
 RangeCheck ||--}o FormalExpression : "expressions"
+RangeCheck ||--|o Check : "implementsCheck"
+Check ||--}o IdentifiableElement : "appliesTo"
+Check ||--}o FormalExpression : "expressions"
+Check ||--}o Coding : "coding"
+Check ||--}o Comment : "comments"
+Check ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+SiteOrSponsorComment ||--}o Coding : "coding"
+SiteOrSponsorComment ||--}o Comment : "comments"
+SiteOrSponsorComment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Comment ||--}o DocumentReference : "documents"
+Comment ||--}o Coding : "coding"
+Comment ||--}o Comment : "comments"
+Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 FormalExpression ||--}o Parameter : "parameters"
 FormalExpression ||--|o ReturnValue : "returnValue"
 FormalExpression ||--}o Resource : "externalCodeLibs"
 FormalExpression ||--}o Coding : "coding"
-Resource ||--}o FormalExpression : "selection"
-Resource ||--}o Coding : "coding"
-ReturnValue ||--}o Coding : "coding"
-Parameter ||--}o CodeList : "codeList"
-Parameter ||--}o ConceptProperty : "conceptProperty"
-Parameter ||--}o WhereClause : "applicableWhen"
-Parameter ||--}o Condition : "conditions"
-Parameter ||--}o Coding : "coding"
+IdentifiableElement ||--}o Coding : "coding"
 
 ```
 
@@ -106,6 +131,7 @@ Parameter ||--}o Coding : "coding"
 | [softHard](../slots/softHard.md) | 0..1 <br/> [SoftHard](../enums/SoftHard.md) | Indicates whether a validation check is an error ("Hard") or a warning ("Soft") | direct |
 | [expressions](../slots/expressions.md) | * <br/> [FormalExpression](../classes/FormalExpression.md) | A formal expression for complex checks | direct |
 | [operator](../slots/operator.md) | 0..1 <br/> [LogicalOperator](../enums/LogicalOperator.md) | Logical operator for combining child conditions or range checks. Defaults to ALL if not specified. | direct |
+| [implementsCheck](../slots/implementsCheck.md) | 0..1 <br/> [Check](../classes/Check.md) | Optional reference (by OID) to a reusable Check (e.g. a published CORE rule) that this inline RangeCheck implements. | direct |
 
 
 
@@ -116,7 +142,7 @@ Parameter ||--}o Coding : "coding"
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
 | [Item](../classes/Item.md) | [rangeChecks](../slots/rangeChecks.md) | range | [RangeCheck](../classes/RangeCheck.md) |
-| [Condition](../classes/Condition.md) | [rangeChecks](../slots/rangeChecks.md) | range | [RangeCheck](../classes/RangeCheck.md) |
+| [LogicalPredicate](../classes/LogicalPredicate.md) | [rangeChecks](../slots/rangeChecks.md) | range | [RangeCheck](../classes/RangeCheck.md) |
 
 
 
@@ -134,7 +160,7 @@ Parameter ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -143,8 +169,8 @@ Parameter ||--}o Coding : "coding"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:RangeCheck |
-| native | odm:RangeCheck |
+| self | dds:RangeCheck |
+| native | dds:RangeCheck |
 | related | qb:SliceKey, sdmx:DataKey |
 
 
@@ -163,7 +189,7 @@ Parameter ||--}o Coding : "coding"
 name: RangeCheck
 description: A validation element that performs a simple comparison check between
   a referenced item's value and specified values, resolving to a boolean result
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 related_mappings:
 - qb:SliceKey
 - sdmx:DataKey
@@ -171,7 +197,7 @@ attributes:
   comparator:
     name: comparator
     description: The type of comparison to be performed
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - RangeCheck
@@ -179,11 +205,10 @@ attributes:
   checkValues:
     name: checkValues
     description: Values to compare against
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - RangeCheck
-    range: string
     multivalued: true
     inlined: true
     inlined_as_list: true
@@ -191,7 +216,7 @@ attributes:
     name: item
     description: Reference to the Item element whose value is being checked. If not
       specified, check applies to the enclosing context
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - RangeCheck
@@ -207,7 +232,7 @@ attributes:
     name: softHard
     description: Indicates whether a validation check is an error ("Hard") or a warning
       ("Soft")
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - RangeCheck
@@ -215,10 +240,11 @@ attributes:
   expressions:
     name: expressions
     description: A formal expression for complex checks
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     domain_of:
-    - Condition
+    - LogicalPredicate
     - RangeCheck
+    - Check
     - Method
     range: FormalExpression
     multivalued: true
@@ -228,12 +254,24 @@ attributes:
     name: operator
     description: Logical operator for combining child conditions or range checks.
       Defaults to ALL if not specified.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
+    ifabsent: LogicalOperator(AND)
     domain_of:
-    - Condition
+    - LogicalPredicate
     - RangeCheck
+    - Constraint
     range: LogicalOperator
     required: false
+  implementsCheck:
+    name: implementsCheck
+    description: Optional reference (by OID) to a reusable Check (e.g. a published
+      CORE rule) that this inline RangeCheck implements.
+    from_schema: https://w3id.org/dds
+    rank: 1000
+    domain_of:
+    - RangeCheck
+    range: Check
+    inlined: false
 
 ```
 </details>
@@ -245,7 +283,7 @@ attributes:
 name: RangeCheck
 description: A validation element that performs a simple comparison check between
   a referenced item's value and specified values, resolving to a boolean result
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 related_mappings:
 - qb:SliceKey
 - sdmx:DataKey
@@ -253,7 +291,7 @@ attributes:
   comparator:
     name: comparator
     description: The type of comparison to be performed
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: comparator
     owner: RangeCheck
@@ -263,7 +301,7 @@ attributes:
   checkValues:
     name: checkValues
     description: Values to compare against
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: checkValues
     owner: RangeCheck
@@ -277,7 +315,7 @@ attributes:
     name: item
     description: Reference to the Item element whose value is being checked. If not
       specified, check applies to the enclosing context
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: item
     owner: RangeCheck
@@ -286,6 +324,7 @@ attributes:
     - SourceItem
     - CubeComponent
     - ObservationRelationship
+    range: string
     any_of:
     - range: Item
     - range: Dimension
@@ -295,7 +334,7 @@ attributes:
     name: softHard
     description: Indicates whether a validation check is an error ("Hard") or a warning
       ("Soft")
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: softHard
     owner: RangeCheck
@@ -305,12 +344,13 @@ attributes:
   expressions:
     name: expressions
     description: A formal expression for complex checks
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     alias: expressions
     owner: RangeCheck
     domain_of:
-    - Condition
+    - LogicalPredicate
     - RangeCheck
+    - Check
     - Method
     range: FormalExpression
     multivalued: true
@@ -320,14 +360,28 @@ attributes:
     name: operator
     description: Logical operator for combining child conditions or range checks.
       Defaults to ALL if not specified.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
+    ifabsent: LogicalOperator(AND)
     alias: operator
     owner: RangeCheck
     domain_of:
-    - Condition
+    - LogicalPredicate
     - RangeCheck
+    - Constraint
     range: LogicalOperator
     required: false
+  implementsCheck:
+    name: implementsCheck
+    description: Optional reference (by OID) to a reusable Check (e.g. a published
+      CORE rule) that this inline RangeCheck implements.
+    from_schema: https://w3id.org/dds
+    rank: 1000
+    alias: implementsCheck
+    owner: RangeCheck
+    domain_of:
+    - RangeCheck
+    range: Check
+    inlined: false
 
 ```
 </details>

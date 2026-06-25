@@ -7,7 +7,7 @@ _An enumeration that defines CDISC timing type values indicating the temporal re
 
 
 
-URI: [odm:enum/TimingType](https://cdisc.org/odm2/enum/TimingType)
+URI: [dds:enum/TimingType](https://w3id.org/dds/enum/TimingType)
 
 ## Permissible Values
 
@@ -34,7 +34,7 @@ URI: [odm:enum/TimingType](https://cdisc.org/odm2/enum/TimingType)
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -48,7 +48,7 @@ URI: [odm:enum/TimingType](https://cdisc.org/odm2/enum/TimingType)
 name: TimingType
 description: An enumeration that defines CDISC timing type values indicating the temporal
   relationship of an observation to a reference point
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 permissible_values:
   After:

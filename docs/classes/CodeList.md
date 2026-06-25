@@ -9,7 +9,7 @@ _A value set that defines a discrete collection of permissible values for an ite
 
 
 
-URI: [odm:class/CodeList](https://cdisc.org/odm2/class/CodeList)
+URI: [dds:class/CodeList](https://w3id.org/dds/class/CodeList)
 
 
 ```mermaid
@@ -142,7 +142,7 @@ CodeListItem ||--|o Coding : "coding"
 
 ## Inheritance
 * [GovernedElement](../classes/GovernedElement.md) [ [Identifiable](../classes/Identifiable.md) [Labelled](../classes/Labelled.md) [Governed](../classes/Governed.md)]
-    * **CodeList** [ [Versioned](../classes/Versioned.md) [IsODMStandard](../classes/IsODMStandard.md)]
+    * **CodeList** [ [Versioned](../classes/Versioned.md) [ODMStandardReference](../classes/ODMStandardReference.md)]
 
 
 
@@ -156,8 +156,8 @@ CodeListItem ||--|o Coding : "coding"
 | [externalCodeList](../slots/externalCodeList.md) | 0..1 <br/> [Resource](../classes/Resource.md) | Reference to a code list that is defined externally to this study | direct |
 | [version](../slots/version.md) | 0..1 <br/> [String](../types/String.md) | The version of the external resources | [Versioned](../classes/Versioned.md) |
 | [href](../slots/href.md) | 0..1 <br/> [String](../types/String.md) | Machine-readable instructions to obtain the resource e.g. FHIR path, URL | [Versioned](../classes/Versioned.md) |
-| [standard](../slots/standard.md) | 0..1 <br/> [Standard](../classes/Standard.md) | Reference to the standard being implemented | [IsODMStandard](../classes/IsODMStandard.md) |
-| [isNonStandard](../slots/isNonStandard.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | One or more members of this set are non-standard extensions | [IsODMStandard](../classes/IsODMStandard.md) |
+| [standard](../slots/standard.md) | 0..1 <br/> [Standard](../classes/Standard.md) | Reference to the standard being implemented | [ODMStandardReference](../classes/ODMStandardReference.md) |
+| [isNonStandard](../slots/isNonStandard.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | One or more members of this set are non-standard extensions | [ODMStandardReference](../classes/ODMStandardReference.md) |
 | [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
 | [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
 | [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
@@ -171,7 +171,7 @@ CodeListItem ||--|o Coding : "coding"
 | [purpose](../slots/purpose.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Purpose or rationale for this data element | [Governed](../classes/Governed.md) |
 | [lastUpdated](../slots/lastUpdated.md) | 0..1 <br/> [Datetime](../types/Datetime.md) | When the resource was last updated | [Governed](../classes/Governed.md) |
 | [owner](../slots/owner.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Party responsible for this element | [Governed](../classes/Governed.md) |
-| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[MetaDataVersion](../classes/MetaDataVersion.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[ReifiedConcept](../classes/ReifiedConcept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[Condition](../classes/Condition.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[NominalOccurrence](../classes/NominalOccurrence.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
+| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[Specification](../classes/Specification.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[Concept](../classes/Concept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[LogicalPredicate](../classes/LogicalPredicate.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
 
 
 
@@ -183,24 +183,24 @@ CodeListItem ||--|o Coding : "coding"
 | ---  | --- | --- | --- |
 | [GovernedElement](../classes/GovernedElement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
 | [Governed](../classes/Governed.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
-| [IsODMItem](../classes/IsODMItem.md) | [roleCodeList](../slots/roleCodeList.md) | range | [CodeList](../classes/CodeList.md) |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | [codeLists](../slots/codeLists.md) | range | [CodeList](../classes/CodeList.md) |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [ODMItemSerialization](../classes/ODMItemSerialization.md) | [roleCodeList](../slots/roleCodeList.md) | range | [CodeList](../classes/CodeList.md) |
+| [Specification](../classes/Specification.md) | [codeLists](../slots/codeLists.md) | range | [CodeList](../classes/CodeList.md) |
+| [Specification](../classes/Specification.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
 | [Item](../classes/Item.md) | [codeList](../slots/codeList.md) | range | [CodeList](../classes/CodeList.md) |
-| [Item](../classes/Item.md) | [roleCodeList](../slots/roleCodeList.md) | range | [CodeList](../classes/CodeList.md) |
 | [Item](../classes/Item.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
 | [ItemGroup](../classes/ItemGroup.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [Query](../classes/Query.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
 | [CodeList](../classes/CodeList.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
 | [Comment](../classes/Comment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
-| [ReifiedConcept](../classes/ReifiedConcept.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [Concept](../classes/Concept.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
 | [ConceptProperty](../classes/ConceptProperty.md) | [codeList](../slots/codeList.md) | range | [CodeList](../classes/CodeList.md) |
 | [ConceptProperty](../classes/ConceptProperty.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
-| [WhereClause](../classes/WhereClause.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
-| [Condition](../classes/Condition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [ApplicabilityCondition](../classes/ApplicabilityCondition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [LogicalPredicate](../classes/LogicalPredicate.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [Check](../classes/Check.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
 | [Method](../classes/Method.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
 | [Parameter](../classes/Parameter.md) | [codeList](../slots/codeList.md) | range | [CodeList](../classes/CodeList.md) |
 | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
-| [NominalOccurrence](../classes/NominalOccurrence.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
 | [Dataflow](../classes/Dataflow.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
 | [CubeComponent](../classes/CubeComponent.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
@@ -209,6 +209,7 @@ CodeListItem ||--|o Coding : "coding"
 | [DataAttribute](../classes/DataAttribute.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
 | [DataProduct](../classes/DataProduct.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
+| [Policy](../classes/Policy.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
 | [Analysis](../classes/Analysis.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
 | [Display](../classes/Display.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [CodeList](../classes/CodeList.md) |
 
@@ -228,7 +229,7 @@ CodeListItem ||--|o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -237,8 +238,8 @@ CodeListItem ||--|o Coding : "coding"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:CodeList |
-| native | odm:CodeList |
+| self | dds:CodeList |
+| native | dds:CodeList |
 | exact | odm:CodeList, omop:Vocabulary, fhir:ValueSet |
 | narrow | sdmx:Codelist, sdmx:ValueList, sdmx:ConceptScheme |
 | related | usdm:BiomedicalConceptProperty/responseCodes |
@@ -260,7 +261,7 @@ CodeListItem ||--|o Coding : "coding"
 name: CodeList
 description: A value set that defines a discrete collection of permissible values
   for an item, corresponding to the ODM CodeList construct
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 exact_mappings:
 - odm:CodeList
 - omop:Vocabulary
@@ -278,12 +279,12 @@ narrow_mappings:
 is_a: GovernedElement
 mixins:
 - Versioned
-- IsODMStandard
+- ODMStandardReference
 attributes:
   dataType:
     name: dataType
     description: The data type for the values in the code list
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     domain_of:
     - Item
     - CodeList
@@ -293,16 +294,15 @@ attributes:
   formatName:
     name: formatName
     description: Name of a standard format definition
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - CodeList
-    range: string
   codeListItems:
     name: codeListItems
     description: The individual values that make up this CodeList. The type of CodeListItem
       included determines its behaviour
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - CodeList
@@ -313,7 +313,7 @@ attributes:
   externalCodeList:
     name: externalCodeList
     description: Reference to a code list that is defined externally to this study
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - CodeList
@@ -329,7 +329,7 @@ attributes:
 name: CodeList
 description: A value set that defines a discrete collection of permissible values
   for an item, corresponding to the ODM CodeList construct
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 exact_mappings:
 - odm:CodeList
 - omop:Vocabulary
@@ -347,12 +347,12 @@ narrow_mappings:
 is_a: GovernedElement
 mixins:
 - Versioned
-- IsODMStandard
+- ODMStandardReference
 attributes:
   dataType:
     name: dataType
     description: The data type for the values in the code list
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     alias: dataType
     owner: CodeList
     domain_of:
@@ -364,7 +364,7 @@ attributes:
   formatName:
     name: formatName
     description: Name of a standard format definition
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: formatName
     owner: CodeList
@@ -375,7 +375,7 @@ attributes:
     name: codeListItems
     description: The individual values that make up this CodeList. The type of CodeListItem
       included determines its behaviour
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: codeListItems
     owner: CodeList
@@ -388,7 +388,7 @@ attributes:
   externalCodeList:
     name: externalCodeList
     description: Reference to a code list that is defined externally to this study
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: externalCodeList
     owner: CodeList
@@ -398,7 +398,7 @@ attributes:
   version:
     name: version
     description: The version of the external resources
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: version
     owner: CodeList
@@ -410,7 +410,7 @@ attributes:
     name: href
     description: Machine-readable instructions to obtain the resource e.g. FHIR path,
       URL
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: href
     owner: CodeList
@@ -421,28 +421,28 @@ attributes:
   standard:
     name: standard
     description: Reference to the standard being implemented
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: standard
     owner: CodeList
     domain_of:
-    - IsODMStandard
+    - ODMStandardReference
     range: Standard
   isNonStandard:
     name: isNonStandard
     description: One or more members of this set are non-standard extensions
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: isNonStandard
     owner: CodeList
     domain_of:
-    - IsODMStandard
+    - ODMStandardReference
     range: boolean
   OID:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     identifier: true
     alias: OID
@@ -454,7 +454,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: uuid
     owner: CodeList
@@ -464,18 +464,20 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: name
     owner: CodeList
     domain_of:
     - Labelled
+    - DefClass
+    - SubClass
     - Standard
     range: string
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: description
     owner: CodeList
@@ -489,7 +491,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: coding
     owner: CodeList
@@ -504,7 +506,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -519,7 +521,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:altLabel
     rank: 1000
@@ -538,7 +540,7 @@ attributes:
   mandatory:
     name: mandatory
     description: Is this element required?
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: mandatory
     owner: CodeList
@@ -549,7 +551,7 @@ attributes:
     name: comments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: comments
     owner: CodeList
@@ -562,7 +564,7 @@ attributes:
     name: siteOrSponsorComments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: siteOrSponsorComments
     owner: CodeList
@@ -574,7 +576,7 @@ attributes:
   purpose:
     name: purpose
     description: Purpose or rationale for this data element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: purpose
     owner: CodeList
@@ -587,7 +589,7 @@ attributes:
   lastUpdated:
     name: lastUpdated
     description: When the resource was last updated
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: lastUpdated
     owner: CodeList
@@ -597,7 +599,7 @@ attributes:
   owner:
     name: owner
     description: Party responsible for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     narrow_mappings:
     - prov:wasAttributedTo
     - prov:wasAssociatedBy
@@ -615,7 +617,7 @@ attributes:
     name: wasDerivedFrom
     description: Reference to another item that this item implements or extends, e.g.
       a template Item definition.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - prov:wasDerivedFrom
     rank: 1000
@@ -627,13 +629,12 @@ attributes:
     any_of:
     - range: Item
     - range: ItemGroup
-    - range: MetaDataVersion
+    - range: Specification
     - range: CodeList
-    - range: ReifiedConcept
+    - range: Concept
     - range: ConceptProperty
-    - range: Condition
+    - range: LogicalPredicate
     - range: Method
-    - range: NominalOccurrence
     - range: Dataflow
     - range: CubeComponent
     - range: DataProduct

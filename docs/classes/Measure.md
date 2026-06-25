@@ -9,7 +9,7 @@ _A data cube property that describes a measurable quantity or value_
 
 
 
-URI: [odm:class/Measure](https://cdisc.org/odm2/class/Measure)
+URI: [dds:class/Measure](https://w3id.org/dds/class/Measure)
 
 
 ```mermaid
@@ -79,7 +79,7 @@ Method {
     string owner  
     string wasDerivedFrom  
 }
-ReifiedConcept {
+Concept {
     string version  
     string href  
     string OID  
@@ -122,48 +122,9 @@ FormalExpression {
 Item {
     DataType dataType  
     integer length  
-    string role  
-    boolean hasNoData  
-    string crfCompletionInstructions  
-    string cdiscNotes  
-    string implementationNotes  
-    string preSpecifiedValue  
     integer decimalDigits  
     string displayFormat  
     integer significantDigits  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-Condition {
-    string implementsCondition  
-    LogicalOperator operator  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-CodeList {
-    DataType dataType  
-    string formatName  
-    string version  
-    string href  
-    boolean isNonStandard  
     string OID  
     string uuid  
     string name  
@@ -195,7 +156,7 @@ Origin {
     OriginType type  
     OriginSource source  
 }
-WhereClause {
+ApplicabilityCondition {
     string OID  
     string uuid  
     string name  
@@ -215,6 +176,24 @@ RangeCheck {
     SoftHard softHard  
     LogicalOperator operator  
 }
+CodeList {
+    DataType dataType  
+    string formatName  
+    string version  
+    string href  
+    boolean isNonStandard  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
 
 Measure ||--|| Item : "item"
 Measure ||--|o Method : "missingHandling"
@@ -231,14 +210,14 @@ Comment ||--}o Comment : "comments"
 Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Method ||--}o FormalExpression : "expressions"
 Method ||--}o DocumentReference : "documents"
-Method ||--|o ReifiedConcept : "implementsConcept"
+Method ||--|o Concept : "implementsConcept"
 Method ||--}o Coding : "coding"
 Method ||--}o Comment : "comments"
 Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-ReifiedConcept ||--}o ConceptProperty : "properties"
-ReifiedConcept ||--}o Coding : "coding"
-ReifiedConcept ||--}o Comment : "comments"
-ReifiedConcept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Concept ||--}o ConceptProperty : "properties"
+Concept ||--}o Coding : "coding"
+Concept ||--}o Comment : "comments"
+Concept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 DocumentReference ||--}o Coding : "coding"
 FormalExpression ||--}o Parameter : "parameters"
 FormalExpression ||--|o ReturnValue : "returnValue"
@@ -247,37 +226,30 @@ FormalExpression ||--}o Coding : "coding"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--}o WhereClause : "applicableWhen"
+Item ||--}o ApplicabilityCondition : "applicableWhen"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
-Item ||--|o CodeList : "roleCodeList"
-Item ||--|o Condition : "collectionExceptionCondition"
 Item ||--}o Coding : "coding"
 Item ||--}o Comment : "comments"
 Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-Condition ||--}o RangeCheck : "rangeChecks"
-Condition ||--}o FormalExpression : "expressions"
-Condition ||--}o Condition : "conditions"
-Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comments"
-Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-CodeList ||--}o CodeListItem : "codeListItems"
-CodeList ||--|o Resource : "externalCodeList"
-CodeList ||--|o Standard : "standard"
-CodeList ||--}o Coding : "coding"
-CodeList ||--}o Comment : "comments"
-CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ConceptProperty ||--|o CodeList : "codeList"
 ConceptProperty ||--}o Coding : "coding"
 ConceptProperty ||--}o Comment : "comments"
 ConceptProperty ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Origin ||--}o SourceItem : "sourceItems"
 Origin ||--}o DocumentReference : "documents"
-WhereClause ||--}o Condition : "conditions"
-WhereClause ||--}o Coding : "coding"
-WhereClause ||--}o Comment : "comments"
-WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+ApplicabilityCondition ||--}o LogicalPredicate : "predicates"
+ApplicabilityCondition ||--}o Coding : "coding"
+ApplicabilityCondition ||--}o Comment : "comments"
+ApplicabilityCondition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 RangeCheck ||--}o FormalExpression : "expressions"
+RangeCheck ||--|o Check : "implementsCheck"
+CodeList ||--}o CodeListItem : "codeListItems"
+CodeList ||--|o Resource : "externalCodeList"
+CodeList ||--|o Standard : "standard"
+CodeList ||--}o Coding : "coding"
+CodeList ||--}o Comment : "comments"
+CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 ```
 
@@ -312,7 +284,7 @@ RangeCheck ||--}o FormalExpression : "expressions"
 | [purpose](../slots/purpose.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Purpose or rationale for this data element | [Governed](../classes/Governed.md) |
 | [lastUpdated](../slots/lastUpdated.md) | 0..1 <br/> [Datetime](../types/Datetime.md) | When the resource was last updated | [Governed](../classes/Governed.md) |
 | [owner](../slots/owner.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Party responsible for this element | [Governed](../classes/Governed.md) |
-| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[MetaDataVersion](../classes/MetaDataVersion.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[ReifiedConcept](../classes/ReifiedConcept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[Condition](../classes/Condition.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[NominalOccurrence](../classes/NominalOccurrence.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
+| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[Specification](../classes/Specification.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[Concept](../classes/Concept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[LogicalPredicate](../classes/LogicalPredicate.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
 
 
 
@@ -344,7 +316,7 @@ RangeCheck ||--}o FormalExpression : "expressions"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -353,8 +325,8 @@ RangeCheck ||--}o FormalExpression : "expressions"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:Measure |
-| native | odm:Measure |
+| self | dds:Measure |
+| native | dds:Measure |
 | exact | qb:MeasureProperty, sdmx:Measure |
 
 
@@ -372,7 +344,7 @@ RangeCheck ||--}o FormalExpression : "expressions"
 ```yaml
 name: Measure
 description: A data cube property that describes a measurable quantity or value
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 exact_mappings:
 - qb:MeasureProperty
 - sdmx:Measure
@@ -387,7 +359,7 @@ is_a: CubeComponent
 ```yaml
 name: Measure
 description: A data cube property that describes a measurable quantity or value
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 exact_mappings:
 - qb:MeasureProperty
 - sdmx:Measure
@@ -397,7 +369,7 @@ attributes:
     name: item
     description: Reference to the Item that defines this component's data structure
       and properties
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     alias: item
     owner: Measure
     domain_of:
@@ -410,18 +382,18 @@ attributes:
   role:
     name: role
     description: The role this component plays in its Structure Definition
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     alias: role
     owner: Measure
     domain_of:
-    - IsODMItem
+    - ODMItemSerialization
     - Organization
     - CubeComponent
     range: string
   missingHandling:
     name: missingHandling
     description: The method for handling missing values in the measure property
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: missingHandling
     owner: Measure
@@ -431,7 +403,7 @@ attributes:
   imputation:
     name: imputation
     description: The imputation method used for the measure property
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     alias: imputation
     owner: Measure
     domain_of:
@@ -442,7 +414,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     identifier: true
     alias: OID
@@ -454,7 +426,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: uuid
     owner: Measure
@@ -464,18 +436,20 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: name
     owner: Measure
     domain_of:
     - Labelled
+    - DefClass
+    - SubClass
     - Standard
     range: string
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: description
     owner: Measure
@@ -489,7 +463,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: coding
     owner: Measure
@@ -504,7 +478,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -519,7 +493,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:altLabel
     rank: 1000
@@ -538,7 +512,7 @@ attributes:
   mandatory:
     name: mandatory
     description: Is this element required?
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: mandatory
     owner: Measure
@@ -549,7 +523,7 @@ attributes:
     name: comments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: comments
     owner: Measure
@@ -562,7 +536,7 @@ attributes:
     name: siteOrSponsorComments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: siteOrSponsorComments
     owner: Measure
@@ -574,7 +548,7 @@ attributes:
   purpose:
     name: purpose
     description: Purpose or rationale for this data element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: purpose
     owner: Measure
@@ -587,7 +561,7 @@ attributes:
   lastUpdated:
     name: lastUpdated
     description: When the resource was last updated
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: lastUpdated
     owner: Measure
@@ -597,7 +571,7 @@ attributes:
   owner:
     name: owner
     description: Party responsible for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     narrow_mappings:
     - prov:wasAttributedTo
     - prov:wasAssociatedBy
@@ -615,7 +589,7 @@ attributes:
     name: wasDerivedFrom
     description: Reference to another item that this item implements or extends, e.g.
       a template Item definition.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - prov:wasDerivedFrom
     rank: 1000
@@ -627,13 +601,12 @@ attributes:
     any_of:
     - range: Item
     - range: ItemGroup
-    - range: MetaDataVersion
+    - range: Specification
     - range: CodeList
-    - range: ReifiedConcept
+    - range: Concept
     - range: ConceptProperty
-    - range: Condition
+    - range: LogicalPredicate
     - range: Method
-    - range: NominalOccurrence
     - range: Dataflow
     - range: CubeComponent
     - range: DataProduct

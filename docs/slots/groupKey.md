@@ -4,7 +4,7 @@
 
 
 
-URI: [odm:slot/groupKey](https://cdisc.org/odm2/slot/groupKey)
+URI: [dds:slot/groupKey](https://w3id.org/dds/slot/groupKey)
 Alias: groupKey
 
 <!-- no inheritance hierarchy -->
@@ -27,7 +27,7 @@ Alias: groupKey
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -44,8 +44,8 @@ Alias: groupKey
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:groupKey |
-| native | odm:groupKey |
+| self | dds:groupKey |
+| native | dds:groupKey |
 
 
 
@@ -59,6 +59,7 @@ alias: groupKey
 domain_of:
 - GroupRelationship
 - DimensionRelationship
+range: string
 
 ```
 </details>

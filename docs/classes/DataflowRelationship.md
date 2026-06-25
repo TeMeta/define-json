@@ -9,7 +9,7 @@ _A relationship element that associates a DataAttribute with a Dataflow, reporte
 
 
 
-URI: [odm:class/DataflowRelationship](https://cdisc.org/odm2/class/DataflowRelationship)
+URI: [dds:class/DataflowRelationship](https://w3id.org/dds/class/DataflowRelationship)
 
 
 ```mermaid
@@ -85,12 +85,6 @@ Method {
 Item {
     DataType dataType  
     integer length  
-    string role  
-    boolean hasNoData  
-    string crfCompletionInstructions  
-    string cdiscNotes  
-    string implementationNotes  
-    string preSpecifiedValue  
     integer decimalDigits  
     string displayFormat  
     integer significantDigits  
@@ -107,28 +101,9 @@ Item {
     string wasDerivedFrom  
 }
 Dataflow {
+    stringList deliverySchedule  
     string version  
     string href  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-Analysis {
-    string analysisReason  
-    string analysisPurpose  
-    string analysisMethod  
-    stringList inputData  
-    string version  
-    string href  
-    MethodType type  
     string OID  
     string uuid  
     string name  
@@ -197,34 +172,24 @@ Comment ||--}o Comment : "comments"
 Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Method ||--}o FormalExpression : "expressions"
 Method ||--}o DocumentReference : "documents"
-Method ||--|o ReifiedConcept : "implementsConcept"
+Method ||--|o Concept : "implementsConcept"
 Method ||--}o Coding : "coding"
 Method ||--}o Comment : "comments"
 Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--}o WhereClause : "applicableWhen"
+Item ||--}o ApplicabilityCondition : "applicableWhen"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
-Item ||--|o CodeList : "roleCodeList"
-Item ||--|o Condition : "collectionExceptionCondition"
 Item ||--}o Coding : "coding"
 Item ||--}o Comment : "comments"
 Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Dataflow ||--|| DataStructureDefinition : "structure"
 Dataflow ||--}o Dimension : "dimensionConstraint"
-Dataflow ||--|o Analysis : "analysisMethod"
 Dataflow ||--}o Coding : "coding"
 Dataflow ||--}o Comment : "comments"
 Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-Analysis ||--}o WhereClause : "applicableWhen"
-Analysis ||--}o FormalExpression : "expressions"
-Analysis ||--}o DocumentReference : "documents"
-Analysis ||--|o ReifiedConcept : "implementsConcept"
-Analysis ||--}o Coding : "coding"
-Analysis ||--}o Comment : "comments"
-Analysis ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Dimension ||--|| Item : "item"
 Dimension ||--|o Method : "missingHandling"
 Dimension ||--|o Method : "imputation"
@@ -236,10 +201,12 @@ DataStructureDefinition ||--}o Measure : "measures"
 DataStructureDefinition ||--}o DataAttribute : "attributes"
 DataStructureDefinition ||--|o ComponentList : "grouping"
 DataStructureDefinition ||--}o Item : "items"
+DataStructureDefinition ||--}o Item : "uniqueKey"
 DataStructureDefinition ||--}o Item : "keySequence"
 DataStructureDefinition ||--}o ItemGroup : "slices"
-DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
-DataStructureDefinition ||--}o WhereClause : "applicableWhen"
+DataStructureDefinition ||--|o Concept : "implementsConcept"
+DataStructureDefinition ||--}o ApplicabilityCondition : "applicableWhen"
+DataStructureDefinition ||--|o DefClass : "observationClass"
 DataStructureDefinition ||--}o Coding : "security"
 DataStructureDefinition ||--|o Timing : "validityPeriod"
 DataStructureDefinition ||--|o Standard : "standard"
@@ -280,7 +247,7 @@ DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -289,8 +256,8 @@ DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:DataflowRelationship |
-| native | odm:DataflowRelationship |
+| self | dds:DataflowRelationship |
+| native | dds:DataflowRelationship |
 | exact | sdmx:DataflowRelationship |
 
 
@@ -309,13 +276,13 @@ DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 name: DataflowRelationship
 description: A relationship element that associates a DataAttribute with a Dataflow,
   reported at the Dataset level
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 exact_mappings:
 - sdmx:DataflowRelationship
 attributes:
   dataFlow:
     name: dataFlow
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - DataflowRelationship
@@ -323,7 +290,7 @@ attributes:
     range: Dataflow
   attribute:
     name: attribute
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     domain_of:
     - Resource
     - MeasureRelationship
@@ -343,13 +310,13 @@ attributes:
 name: DataflowRelationship
 description: A relationship element that associates a DataAttribute with a Dataflow,
   reported at the Dataset level
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 exact_mappings:
 - sdmx:DataflowRelationship
 attributes:
   dataFlow:
     name: dataFlow
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: dataFlow
     owner: DataflowRelationship
@@ -359,7 +326,7 @@ attributes:
     range: Dataflow
   attribute:
     name: attribute
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     alias: attribute
     owner: DataflowRelationship
     domain_of:

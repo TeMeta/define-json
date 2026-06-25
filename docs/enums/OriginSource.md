@@ -3,11 +3,11 @@
 
 
 
-_An enumeration that defines the sources of data origin_
+_An enumeration that defines the sources of data origin. Values sourced from NCI Thesaurus subset C170450._
 
 
 
-URI: [odm:enum/OriginSource](https://cdisc.org/odm2/enum/OriginSource)
+URI: [dds:enum/OriginSource](https://w3id.org/dds/enum/OriginSource)
 
 ## Permissible Values
 
@@ -25,7 +25,6 @@ URI: [odm:enum/OriginSource](https://cdisc.org/odm2/enum/OriginSource)
 
 | Name | Description |
 | ---  | --- |
-| [source](../slots/source.md) | The source of the data, such as Investigator, Sponsor, Subject, or Vendor. |
 | [sourceType](../slots/sourceType.md) | who made the comment, such as Investigator, Sponsor. |
 
 
@@ -42,7 +41,7 @@ URI: [odm:enum/OriginSource](https://cdisc.org/odm2/enum/OriginSource)
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -54,8 +53,9 @@ URI: [odm:enum/OriginSource](https://cdisc.org/odm2/enum/OriginSource)
 <details>
 ```yaml
 name: OriginSource
-description: An enumeration that defines the sources of data origin
-from_schema: https://cdisc.org/define-json
+description: An enumeration that defines the sources of data origin. Values sourced
+  from NCI Thesaurus subset C170450.
+from_schema: https://w3id.org/dds
 rank: 1000
 permissible_values:
   Investigator:

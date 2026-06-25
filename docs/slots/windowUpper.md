@@ -9,7 +9,7 @@ _End date/time of the timing_
 
 
 
-URI: [odm:slot/windowUpper](https://cdisc.org/odm2/slot/windowUpper)
+URI: [dds:slot/windowUpper](https://w3id.org/dds/slot/windowUpper)
 Alias: windowUpper
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: windowUpper
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: windowUpper
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:windowUpper |
-| native | odm:windowUpper |
+| self | dds:windowUpper |
+| native | dds:windowUpper |
 
 
 
@@ -67,7 +67,7 @@ Alias: windowUpper
 ```yaml
 name: windowUpper
 description: End date/time of the timing
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: windowUpper
 owner: Timing

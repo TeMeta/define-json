@@ -4,7 +4,7 @@
 
 
 
-URI: [odm:slot/operator](https://cdisc.org/odm2/slot/operator)
+URI: [dds:slot/operator](https://w3id.org/dds/slot/operator)
 Alias: operator
 
 <!-- no inheritance hierarchy -->
@@ -17,8 +17,9 @@ Alias: operator
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
+| [Constraint](../classes/Constraint.md) | An ODRL constraint expressed as leftOperand operator rightOperand, e.g. purpose eq "safety-reporting", or dateTime lt "2026-01-01". |  no  |
+| [LogicalPredicate](../classes/LogicalPredicate.md) | A reusable, composable, and nestable logical expression resolving to a boolean. Used for applicability conditions, validation rules, eligibility criteria, and skip logic. This is a data-model predicate — not a clinical condition (diagnosis). Implements usdm:Condition (the study-design predicate, distinct from the clinical FHIR Condition resource). |  no  |
 | [RangeCheck](../classes/RangeCheck.md) | A validation element that performs a simple comparison check between a referenced item's value and specified values, resolving to a boolean result |  no  |
-| [Condition](../classes/Condition.md) | A reusable, composable, and nestable logical construct allowing for complex expressions. Conditions are most useful when given a meaningful name and linked to Study Definitions. |  no  |
 
 
 
@@ -27,7 +28,7 @@ Alias: operator
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -44,8 +45,8 @@ Alias: operator
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:operator |
-| native | odm:operator |
+| self | dds:operator |
+| native | dds:operator |
 
 
 
@@ -57,8 +58,10 @@ Alias: operator
 name: operator
 alias: operator
 domain_of:
-- Condition
+- LogicalPredicate
 - RangeCheck
+- Constraint
+range: string
 
 ```
 </details>

@@ -4,7 +4,7 @@
 
 
 
-URI: [odm:slot/value](https://cdisc.org/odm2/slot/value)
+URI: [dds:slot/value](https://w3id.org/dds/slot/value)
 Alias: value
 
 <!-- no inheritance hierarchy -->
@@ -17,9 +17,9 @@ Alias: value
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Timing](../classes/Timing.md) | A temporal element that describes the timing of an event or occurrence, which can be absolute, relative, or nominal |  no  |
 | [Translation](../classes/Translation.md) | A text representation that provides content in a specific language, used for multilingual support |  no  |
 | [Parameter](../classes/Parameter.md) | A variable element that describes an input used in a formal expression |  no  |
+| [Timing](../classes/Timing.md) | A temporal element that describes the timing of an event or occurrence, which can be absolute, relative, or nominal |  no  |
 
 
 
@@ -28,7 +28,7 @@ Alias: value
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -45,8 +45,8 @@ Alias: value
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:value |
-| native | odm:value |
+| self | dds:value |
+| native | dds:value |
 
 
 
@@ -61,6 +61,7 @@ domain_of:
 - Translation
 - Parameter
 - Timing
+range: string
 
 ```
 </details>

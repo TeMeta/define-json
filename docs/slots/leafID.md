@@ -9,7 +9,7 @@ _Leaf identifier for document reference in Define-XML_
 
 
 
-URI: [odm:slot/leafID](https://cdisc.org/odm2/slot/leafID)
+URI: [dds:slot/leafID](https://w3id.org/dds/slot/leafID)
 Alias: leafID
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: leafID
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: leafID
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:leafID |
-| native | odm:leafID |
+| self | dds:leafID |
+| native | dds:leafID |
 
 
 
@@ -67,7 +67,7 @@ Alias: leafID
 ```yaml
 name: leafID
 description: Leaf identifier for document reference in Define-XML
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: leafID
 owner: DocumentReference

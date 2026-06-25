@@ -9,7 +9,7 @@ _Type or classification of the dataset_
 
 
 
-URI: [odm:slot/datasetType](https://cdisc.org/odm2/slot/datasetType)
+URI: [dds:slot/datasetType](https://w3id.org/dds/slot/datasetType)
 Alias: datasetType
 
 <!-- no inheritance hierarchy -->
@@ -31,7 +31,7 @@ Alias: datasetType
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -46,7 +46,7 @@ Alias: datasetType
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: datasetType
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:datasetType |
-| native | odm:datasetType |
+| self | dds:datasetType |
+| native | dds:datasetType |
 
 
 
@@ -67,12 +67,13 @@ Alias: datasetType
 ```yaml
 name: datasetType
 description: Type or classification of the dataset
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: datasetType
 owner: Dataset
 domain_of:
 - Dataset
+range: string
 
 ```
 </details>

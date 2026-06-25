@@ -1,7 +1,7 @@
 
 ## Versioning Architecture: Copy-and-Link vs Inheritance
 
-Define-JSON employs a **copy-and-link** versioning model rather than traditional inheritance hierarchies. This architectural choice has profound implications for clinical data management, regulatory compliance, and system maintainability.
+Data Definition Specification employs a **copy-and-link** versioning model rather than traditional inheritance hierarchies. This architectural choice has profound implications for clinical data management, regulatory compliance, and system maintainability.
 
 ### The Copy-and-Link Model
 

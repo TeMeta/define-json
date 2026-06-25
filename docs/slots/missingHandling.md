@@ -9,7 +9,7 @@ _The method for handling missing values in the measure property_
 
 
 
-URI: [odm:slot/missingHandling](https://cdisc.org/odm2/slot/missingHandling)
+URI: [dds:slot/missingHandling](https://w3id.org/dds/slot/missingHandling)
 Alias: missingHandling
 
 <!-- no inheritance hierarchy -->
@@ -22,10 +22,10 @@ Alias: missingHandling
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Measure](../classes/Measure.md) | A data cube property that describes a measurable quantity or value |  no  |
-| [CubeComponent](../classes/CubeComponent.md) | An abstract data field that represents a component in a data structure definition, referencing an Item for its definition |  no  |
-| [Dimension](../classes/Dimension.md) | A data cube property that describes a categorical or hierarchical dimension |  no  |
 | [DataAttribute](../classes/DataAttribute.md) | A data cube property that describes additional characteristics or metadata about observations |  no  |
+| [CubeComponent](../classes/CubeComponent.md) | An abstract data field that represents a component in a data structure definition, referencing an Item for its definition |  no  |
+| [Measure](../classes/Measure.md) | A data cube property that describes a measurable quantity or value |  no  |
+| [Dimension](../classes/Dimension.md) | A data cube property that describes a categorical or hierarchical dimension |  no  |
 
 
 
@@ -49,7 +49,7 @@ Alias: missingHandling
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -58,8 +58,8 @@ Alias: missingHandling
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:missingHandling |
-| native | odm:missingHandling |
+| self | dds:missingHandling |
+| native | dds:missingHandling |
 
 
 
@@ -70,7 +70,7 @@ Alias: missingHandling
 ```yaml
 name: missingHandling
 description: The method for handling missing values in the measure property
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: missingHandling
 owner: CubeComponent

@@ -9,7 +9,7 @@ _who made the comment, such as Investigator, Sponsor._
 
 
 
-URI: [odm:slot/sourceType](https://cdisc.org/odm2/slot/sourceType)
+URI: [dds:slot/sourceType](https://w3id.org/dds/slot/sourceType)
 Alias: sourceType
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: sourceType
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: sourceType
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:sourceType |
-| native | odm:sourceType |
+| self | dds:sourceType |
+| native | dds:sourceType |
 
 
 
@@ -67,7 +67,7 @@ Alias: sourceType
 ```yaml
 name: sourceType
 description: who made the comment, such as Investigator, Sponsor.
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: sourceType
 owner: SiteOrSponsorComment

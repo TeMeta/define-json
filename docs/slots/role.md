@@ -4,7 +4,7 @@
 
 
 
-URI: [odm:slot/role](https://cdisc.org/odm2/slot/role)
+URI: [dds:slot/role](https://w3id.org/dds/slot/role)
 Alias: role
 
 <!-- no inheritance hierarchy -->
@@ -18,13 +18,13 @@ Alias: role
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
 | [Measure](../classes/Measure.md) | A data cube property that describes a measurable quantity or value |  no  |
-| [Organization](../classes/Organization.md) | An entity that represents organizational information, such as a site or sponsor |  no  |
-| [Dimension](../classes/Dimension.md) | A data cube property that describes a categorical or hierarchical dimension |  no  |
-| [DataAttribute](../classes/DataAttribute.md) | A data cube property that describes additional characteristics or metadata about observations |  no  |
-| [Item](../classes/Item.md) | A data element that represents a specific piece of information within a defined context, with data type, constraints, and derivation methods |  no  |
-| [IsODMItem](../classes/IsODMItem.md) | A mixin that provides additional attributes for CDISC Operational Data Model items, including roles, completion instructions, and implementation notes |  no  |
-| [DataProvider](../classes/DataProvider.md) | An organization element that provides data to a Data Consumer, which can be a sponsor, site, or any other entity that supplies data |  no  |
 | [CubeComponent](../classes/CubeComponent.md) | An abstract data field that represents a component in a data structure definition, referencing an Item for its definition |  no  |
+| [Organization](../classes/Organization.md) | An entity that represents organizational information, such as a site or sponsor |  no  |
+| [DataConsumer](../classes/DataConsumer.md) | An organization element that receives data from a Data Provider under a ProvisionAgreement; the demand-side counterpart of DataProvider. |  no  |
+| [DataAttribute](../classes/DataAttribute.md) | A data cube property that describes additional characteristics or metadata about observations |  no  |
+| [DataProvider](../classes/DataProvider.md) | An organization element that provides data to a Data Consumer, which can be a sponsor, site, or any other entity that supplies data |  no  |
+| [ODMItemSerialization](../classes/ODMItemSerialization.md) | A mixin providing ODM/CDISC-specific item attributes meaningful only in ODM/Define-XML serialization: CRF completion instructions, CDISC notes, implementation notes, collection exception predicates, and pre-specified values. Applied by the ODM output generator. Not part of the canonical Item. |  no  |
+| [Dimension](../classes/Dimension.md) | A data cube property that describes a categorical or hierarchical dimension |  no  |
 
 
 
@@ -33,7 +33,7 @@ Alias: role
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -50,8 +50,8 @@ Alias: role
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:role |
-| native | odm:role |
+| self | dds:role |
+| native | dds:role |
 
 
 
@@ -63,9 +63,10 @@ Alias: role
 name: role
 alias: role
 domain_of:
-- IsODMItem
+- ODMItemSerialization
 - Organization
 - CubeComponent
+range: string
 
 ```
 </details>

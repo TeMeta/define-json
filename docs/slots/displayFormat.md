@@ -9,7 +9,7 @@ _A display format for the item_
 
 
 
-URI: [odm:slot/displayFormat](https://cdisc.org/odm2/slot/displayFormat)
+URI: [dds:slot/displayFormat](https://w3id.org/dds/slot/displayFormat)
 Alias: displayFormat
 
 <!-- no inheritance hierarchy -->
@@ -47,7 +47,7 @@ Alias: displayFormat
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -56,8 +56,8 @@ Alias: displayFormat
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:displayFormat |
-| native | odm:displayFormat |
+| self | dds:displayFormat |
+| native | dds:displayFormat |
 
 
 
@@ -68,7 +68,7 @@ Alias: displayFormat
 ```yaml
 name: displayFormat
 description: A display format for the item
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: displayFormat
 owner: Formatted

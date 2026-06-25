@@ -1,0 +1,50 @@
+# ILLUSTRATIVE multi-standard mappings for the LB (laboratory) domain.
+#
+# Purpose: demonstrate that a data-definition-spec DTA can carry CDISC + FHIR + OMOP
+# semantics on the same structure (horizontal "model fabric" use case).
+#
+# Provenance of codes:
+#   - LOINC codes are verified (loinc.org): Hematocrit automated = 4544-3.
+#   - FHIR mappings are R4 Observation element paths.
+#   - OMOP mappings are CDM v5.4 MEASUREMENT columns. OMOP standard concept_id
+#     integers resolve via OHDSI Athena and are intentionally NOT invented here.
+#
+# This is illustrative reference data for a demonstration, not production CT.
+
+# Canonical concept this structure implements (OID reference into the Registry).
+# The concept itself is a shared artifact (see concept_LABRESULT.reifiedconcept.json),
+# not embedded per-contract.
+implementsConcept: RC.LABRESULT
+
+# Codings merged into Items by variable name. Each Coding is a representation of
+# the same element in another standard (Coding maps to fhir:Coding / omop:Concept).
+variables:
+  LBTESTCD:
+    coding:
+      - { codeSystem: "HL7-FHIR-R4", code: "Observation.code", decode: "Coded test, LOINC-bound" }
+      - { codeSystem: "OMOP-CDM-5.4", code: "measurement.measurement_concept_id", decode: "Standard measurement concept (Athena-resolved)" }
+  LBSTRESN:
+    coding:
+      - { codeSystem: "HL7-FHIR-R4", code: "Observation.valueQuantity.value", decode: "Quantitative result value" }
+      - { codeSystem: "OMOP-CDM-5.4", code: "measurement.value_as_number", decode: "Numeric measurement value" }
+  LBSTRESU:
+    coding:
+      - { codeSystem: "HL7-FHIR-R4", code: "Observation.valueQuantity.unit", decode: "Unit (UCUM)" }
+      - { codeSystem: "OMOP-CDM-5.4", code: "measurement.unit_concept_id", decode: "Unit concept (Athena-resolved)" }
+  USUBJID:
+    coding:
+      - { codeSystem: "HL7-FHIR-R4", code: "Observation.subject", decode: "Subject reference" }
+      - { codeSystem: "OMOP-CDM-5.4", code: "measurement.person_id", decode: "Person key" }
+  LBDTC:
+    coding:
+      - { codeSystem: "HL7-FHIR-R4", code: "Observation.effectiveDateTime", decode: "Specimen collection date/time" }
+      - { codeSystem: "OMOP-CDM-5.4", code: "measurement.measurement_datetime", decode: "Measurement date/time" }
+  LBSPEC:
+    coding:
+      - { codeSystem: "HL7-FHIR-R4", code: "Observation.specimen", decode: "Specimen reference" }
+      - { codeSystem: "OMOP-CDM-5.4", code: "measurement.specimen_source_value", decode: "Specimen (no standard concept in 5.4)" }
+  # Analyte-level real vocabulary code (verified). Applies to the Hematocrit value
+  # items already present in the SDTM define.
+  HCT:
+    coding:
+      - { codeSystem: "LOINC", code: "4544-3", decode: "Hematocrit [Volume Fraction] of Blood by Automated count" }

@@ -4,7 +4,7 @@
 
 
 
-URI: [odm:slot/context](https://cdisc.org/odm2/slot/context)
+URI: [dds:slot/context](https://w3id.org/dds/slot/context)
 Alias: context
 
 <!-- no inheritance hierarchy -->
@@ -17,8 +17,7 @@ Alias: context
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ODMFileMetadata](../classes/ODMFileMetadata.md) | A mixin that provides ODM file-level metadata attributes including file identifiers, timestamps, and system information |  no  |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | A container element that represents a given version of a specification, linking to a particular usage context such as a study, dataset, or data collection instrument. |  no  |
+| [ODMSerializationMetadata](../classes/ODMSerializationMetadata.md) | A mixin providing ODM/Define-XML file-level attributes required only when serializing to ODM or Define-XML format. Applied by the ODM output generator, not by the canonical model itself. These attributes (fileOID, odmVersion, defineVersion, etc.) have no meaning in FHIR, OMOP, or SDMX projections. |  no  |
 | [FormalExpression](../classes/FormalExpression.md) | A computational element that defines the execution of a data derivation within a specific context |  no  |
 
 
@@ -28,7 +27,7 @@ Alias: context
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -45,8 +44,8 @@ Alias: context
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:context |
-| native | odm:context |
+| self | dds:context |
+| native | dds:context |
 
 
 
@@ -58,8 +57,9 @@ Alias: context
 name: context
 alias: context
 domain_of:
-- ODMFileMetadata
+- ODMSerializationMetadata
 - FormalExpression
+range: string
 
 ```
 </details>

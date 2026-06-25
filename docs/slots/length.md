@@ -9,7 +9,7 @@ _The maximum length of the data item in characters._
 
 
 
-URI: [odm:slot/length](https://cdisc.org/odm2/slot/length)
+URI: [dds:slot/length](https://w3id.org/dds/slot/length)
 Alias: length
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: length
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: length
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:length |
-| native | odm:length |
+| self | dds:length |
+| native | dds:length |
 
 
 
@@ -67,7 +67,7 @@ Alias: length
 ```yaml
 name: length
 description: The maximum length of the data item in characters.
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: length
 owner: Item

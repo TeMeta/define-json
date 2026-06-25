@@ -9,7 +9,7 @@ _Publishing Set of a Controlled Terminology_
 
 
 
-URI: [odm:slot/publishingSet](https://cdisc.org/odm2/slot/publishingSet)
+URI: [dds:slot/publishingSet](https://w3id.org/dds/slot/publishingSet)
 Alias: publishingSet
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: publishingSet
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: publishingSet
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:publishingSet |
-| native | odm:publishingSet |
+| self | dds:publishingSet |
+| native | dds:publishingSet |
 
 
 
@@ -67,7 +67,7 @@ Alias: publishingSet
 ```yaml
 name: publishingSet
 description: Publishing Set of a Controlled Terminology
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: publishingSet
 owner: Standard

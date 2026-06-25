@@ -9,7 +9,7 @@ _An entity that represents organizational information, such as a site or sponsor
 
 
 
-URI: [odm:class/Organization](https://cdisc.org/odm2/class/Organization)
+URI: [dds:class/Organization](https://w3id.org/dds/class/Organization)
 
 
 ```mermaid
@@ -46,6 +46,7 @@ Organization ||--}o Coding : "coding"
 * [IdentifiableElement](../classes/IdentifiableElement.md) [ [Identifiable](../classes/Identifiable.md) [Labelled](../classes/Labelled.md)]
     * **Organization**
         * [DataProvider](../classes/DataProvider.md)
+        * [DataConsumer](../classes/DataConsumer.md)
 
 
 
@@ -77,23 +78,26 @@ Organization ||--}o Coding : "coding"
 | [GovernedElement](../classes/GovernedElement.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [Governed](../classes/Governed.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [IsProfile](../classes/IsProfile.md) | [authenticator](../slots/authenticator.md) | any_of[range] | [Organization](../classes/Organization.md) |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
+| [Specification](../classes/Specification.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [Item](../classes/Item.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [ItemGroup](../classes/ItemGroup.md) | [authenticator](../slots/authenticator.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [ItemGroup](../classes/ItemGroup.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
+| [Query](../classes/Query.md) | [source](../slots/source.md) | any_of[range] | [Organization](../classes/Organization.md) |
+| [Query](../classes/Query.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [CodeList](../classes/CodeList.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [Comment](../classes/Comment.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [Dictionary](../classes/Dictionary.md) | [publishedBy](../slots/publishedBy.md) | any_of[range] | [Organization](../classes/Organization.md) |
-| [ReifiedConcept](../classes/ReifiedConcept.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
+| [Concept](../classes/Concept.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [ConceptProperty](../classes/ConceptProperty.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
-| [WhereClause](../classes/WhereClause.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
-| [Condition](../classes/Condition.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
+| [ApplicabilityCondition](../classes/ApplicabilityCondition.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
+| [LogicalPredicate](../classes/LogicalPredicate.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
+| [Check](../classes/Check.md) | [publishedBy](../slots/publishedBy.md) | any_of[range] | [Organization](../classes/Organization.md) |
+| [Check](../classes/Check.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [Method](../classes/Method.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [source](../slots/source.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [User](../classes/User.md) | [organization](../slots/organization.md) | range | [Organization](../classes/Organization.md) |
 | [Organization](../classes/Organization.md) | [partOfOrganization](../slots/partOfOrganization.md) | range | [Organization](../classes/Organization.md) |
-| [NominalOccurrence](../classes/NominalOccurrence.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [authenticator](../slots/authenticator.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [Dataflow](../classes/Dataflow.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
@@ -108,6 +112,12 @@ Organization ||--}o Coding : "coding"
 | [DataProvider](../classes/DataProvider.md) | [partOfOrganization](../slots/partOfOrganization.md) | range | [Organization](../classes/Organization.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [consumer](../slots/consumer.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
+| [DataConsumer](../classes/DataConsumer.md) | [partOfOrganization](../slots/partOfOrganization.md) | range | [Organization](../classes/Organization.md) |
+| [Policy](../classes/Policy.md) | [assigner](../slots/assigner.md) | any_of[range] | [Organization](../classes/Organization.md) |
+| [Policy](../classes/Policy.md) | [assignee](../slots/assignee.md) | any_of[range] | [Organization](../classes/Organization.md) |
+| [Policy](../classes/Policy.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
+| [Rule](../classes/Rule.md) | [assigner](../slots/assigner.md) | any_of[range] | [Organization](../classes/Organization.md) |
+| [Rule](../classes/Rule.md) | [assignee](../slots/assignee.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [Analysis](../classes/Analysis.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [Display](../classes/Display.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
 
@@ -127,7 +137,7 @@ Organization ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -136,8 +146,8 @@ Organization ||--}o Coding : "coding"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:Organization |
-| native | odm:Organization |
+| self | dds:Organization |
+| native | dds:Organization |
 | exact | odm:Organization, usdm:Organization, sdmx:Organisation |
 | broad | prov:Agent |
 
@@ -157,7 +167,7 @@ Organization ||--}o Coding : "coding"
 name: Organization
 description: An entity that represents organizational information, such as a site
   or sponsor
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 exact_mappings:
 - odm:Organization
 - usdm:Organization
@@ -169,16 +179,15 @@ attributes:
   role:
     name: role
     description: The role of the organization in the study.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     domain_of:
-    - IsODMItem
+    - ODMItemSerialization
     - Organization
     - CubeComponent
-    range: string
   type:
     name: type
     description: The type of organization (e.g., site, sponsor, vendor).
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     domain_of:
     - ItemGroup
     - Method
@@ -190,25 +199,23 @@ attributes:
   location:
     name: location
     description: The physical location of the organization.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Organization
     - Display
-    range: string
   address:
     name: address
     description: The address of the organization.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Organization
-    range: string
   partOfOrganization:
     name: partOfOrganization
     description: Reference to a parent organization if this organization is part of
       a larger entity.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Organization
@@ -224,7 +231,7 @@ attributes:
 name: Organization
 description: An entity that represents organizational information, such as a site
   or sponsor
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 exact_mappings:
 - odm:Organization
 - usdm:Organization
@@ -236,18 +243,18 @@ attributes:
   role:
     name: role
     description: The role of the organization in the study.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     alias: role
     owner: Organization
     domain_of:
-    - IsODMItem
+    - ODMItemSerialization
     - Organization
     - CubeComponent
     range: string
   type:
     name: type
     description: The type of organization (e.g., site, sponsor, vendor).
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     alias: type
     owner: Organization
     domain_of:
@@ -261,7 +268,7 @@ attributes:
   location:
     name: location
     description: The physical location of the organization.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: location
     owner: Organization
@@ -272,7 +279,7 @@ attributes:
   address:
     name: address
     description: The address of the organization.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: address
     owner: Organization
@@ -283,7 +290,7 @@ attributes:
     name: partOfOrganization
     description: Reference to a parent organization if this organization is part of
       a larger entity.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: partOfOrganization
     owner: Organization
@@ -294,7 +301,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     identifier: true
     alias: OID
@@ -306,7 +313,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: uuid
     owner: Organization
@@ -316,18 +323,20 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: name
     owner: Organization
     domain_of:
     - Labelled
+    - DefClass
+    - SubClass
     - Standard
     range: string
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: description
     owner: Organization
@@ -341,7 +350,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: coding
     owner: Organization
@@ -356,7 +365,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -371,7 +380,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:altLabel
     rank: 1000

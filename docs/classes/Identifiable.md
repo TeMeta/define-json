@@ -9,7 +9,7 @@ _A mixin that provides slots for making an entity addressable within a study or 
 
 
 
-URI: [odm:class/Identifiable](https://cdisc.org/odm2/class/Identifiable)
+URI: [dds:class/Identifiable](https://w3id.org/dds/class/Identifiable)
 
 
 ```mermaid
@@ -62,7 +62,7 @@ Identifiable {
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -71,8 +71,8 @@ Identifiable {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:Identifiable |
-| native | odm:Identifiable |
+| self | dds:Identifiable |
+| native | dds:Identifiable |
 
 
 
@@ -90,28 +90,26 @@ Identifiable {
 name: Identifiable
 description: A mixin that provides slots for making an entity addressable within a
   study or context
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 mixin: true
 attributes:
   OID:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     identifier: true
     domain_of:
     - Identifiable
-    range: string
     required: true
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Identifiable
-    range: string
 
 ```
 </details>
@@ -123,14 +121,14 @@ attributes:
 name: Identifiable
 description: A mixin that provides slots for making an entity addressable within a
   study or context
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 mixin: true
 attributes:
   OID:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     identifier: true
     alias: OID
@@ -142,7 +140,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: uuid
     owner: Identifiable

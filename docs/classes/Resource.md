@@ -9,7 +9,7 @@ _An external reference that serves as the source for a Dataset, ItemGroup, or It
 
 
 
-URI: [odm:class/Resource](https://cdisc.org/odm2/class/Resource)
+URI: [dds:class/Resource](https://w3id.org/dds/class/Resource)
 
 
 ```mermaid
@@ -77,8 +77,8 @@ FormalExpression ||--}o Coding : "coding"
 ReturnValue ||--}o Coding : "coding"
 Parameter ||--}o CodeList : "codeList"
 Parameter ||--}o ConceptProperty : "conceptProperty"
-Parameter ||--}o WhereClause : "applicableWhen"
-Parameter ||--}o Condition : "conditions"
+Parameter ||--}o ApplicabilityCondition : "applicableWhen"
+Parameter ||--}o LogicalPredicate : "validationPredicates"
 Parameter ||--}o Coding : "coding"
 
 ```
@@ -118,7 +118,7 @@ Parameter ||--}o Coding : "coding"
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | [resources](../slots/resources.md) | any_of[range] | [Resource](../classes/Resource.md) |
+| [Specification](../classes/Specification.md) | [resources](../slots/resources.md) | any_of[range] | [Resource](../classes/Resource.md) |
 | [CodeList](../classes/CodeList.md) | [externalCodeList](../slots/externalCodeList.md) | range | [Resource](../classes/Resource.md) |
 | [FormalExpression](../classes/FormalExpression.md) | [externalCodeLibs](../slots/externalCodeLibs.md) | range | [Resource](../classes/Resource.md) |
 | [SourceItem](../classes/SourceItem.md) | [resource](../slots/resource.md) | any_of[range] | [Resource](../classes/Resource.md) |
@@ -141,7 +141,7 @@ Parameter ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -150,8 +150,8 @@ Parameter ||--}o Coding : "coding"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:Resource |
-| native | odm:Resource |
+| self | dds:Resource |
+| native | dds:Resource |
 | close | odm:Resource |
 
 
@@ -170,7 +170,7 @@ Parameter ||--}o Coding : "coding"
 name: Resource
 description: An external reference that serves as the source for a Dataset, ItemGroup,
   or Item
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 close_mappings:
 - odm:Resource
 is_a: IdentifiableElement
@@ -181,17 +181,16 @@ attributes:
     name: resourceType
     description: Type of resource (e.g.,  "ODM", "HL7-FHIR", "HL7-CDA", "HL7-v2",
       "OpenEHR-extract")
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Resource
-    range: string
     required: false
   attribute:
     name: attribute
     description: Field provided by the Name attribute where the data or information
       can be obtained. Examples are "valueQuantity.value" or "valueQuantity.unit".
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Resource
@@ -200,11 +199,10 @@ attributes:
     - GroupRelationship
     - DimensionRelationship
     - ObservationRelationship
-    range: string
   selection:
     name: selection
     description: Machine-executable instructions for selecting data from the resource.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Resource
@@ -223,7 +221,7 @@ attributes:
 name: Resource
 description: An external reference that serves as the source for a Dataset, ItemGroup,
   or Item
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 close_mappings:
 - odm:Resource
 is_a: IdentifiableElement
@@ -234,7 +232,7 @@ attributes:
     name: resourceType
     description: Type of resource (e.g.,  "ODM", "HL7-FHIR", "HL7-CDA", "HL7-v2",
       "OpenEHR-extract")
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: resourceType
     owner: Resource
@@ -246,7 +244,7 @@ attributes:
     name: attribute
     description: Field provided by the Name attribute where the data or information
       can be obtained. Examples are "valueQuantity.value" or "valueQuantity.unit".
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: attribute
     owner: Resource
@@ -261,7 +259,7 @@ attributes:
   selection:
     name: selection
     description: Machine-executable instructions for selecting data from the resource.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: selection
     owner: Resource
@@ -274,7 +272,7 @@ attributes:
   version:
     name: version
     description: The version of the external resources
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: version
     owner: Resource
@@ -286,7 +284,7 @@ attributes:
     name: href
     description: Machine-readable instructions to obtain the resource e.g. FHIR path,
       URL
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: href
     owner: Resource
@@ -298,7 +296,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     identifier: true
     alias: OID
@@ -310,7 +308,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: uuid
     owner: Resource
@@ -320,18 +318,20 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: name
     owner: Resource
     domain_of:
     - Labelled
+    - DefClass
+    - SubClass
     - Standard
     range: string
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: description
     owner: Resource
@@ -345,7 +345,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: coding
     owner: Resource
@@ -360,7 +360,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -375,7 +375,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:altLabel
     rank: 1000

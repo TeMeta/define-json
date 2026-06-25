@@ -9,7 +9,7 @@ _Document title_
 
 
 
-URI: [odm:slot/title](https://cdisc.org/odm2/slot/title)
+URI: [dds:slot/title](https://w3id.org/dds/slot/title)
 Alias: title
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: title
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: title
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:title |
-| native | odm:title |
+| self | dds:title |
+| native | dds:title |
 
 
 
@@ -67,7 +67,7 @@ Alias: title
 ```yaml
 name: title
 description: Document title
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: title
 owner: DocumentReference

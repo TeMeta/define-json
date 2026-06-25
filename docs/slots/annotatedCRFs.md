@@ -9,7 +9,7 @@ _Reference to annotated case report forms_
 
 
 
-URI: [odm:slot/annotatedCRFs](https://cdisc.org/odm2/slot/annotatedCRFs)
+URI: [dds:slot/annotatedCRFs](https://w3id.org/dds/slot/annotatedCRFs)
 Alias: annotatedCRFs
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: annotatedCRFs
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | A container element that represents a given version of a specification, linking to a particular usage context such as a study, dataset, or data collection instrument. |  no  |
+| [Specification](../classes/Specification.md) | The root specification container: a versioned, governed definition of the data model for a study or data product. Links items, item groups, methods, code lists, concepts, and study design references. Projects to Define-XML MetaDataVersion, FHIR ImplementationGuide, and OMOP CDM metadata. ODMSerializationMetadata is applied by the ODM output generator, not here. |  no  |
 
 
 
@@ -48,7 +48,7 @@ Alias: annotatedCRFs
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: annotatedCRFs
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:annotatedCRFs |
-| native | odm:annotatedCRFs |
+| self | dds:annotatedCRFs |
+| native | dds:annotatedCRFs |
 
 
 
@@ -69,12 +69,12 @@ Alias: annotatedCRFs
 ```yaml
 name: annotatedCRFs
 description: Reference to annotated case report forms
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: annotatedCRFs
-owner: MetaDataVersion
+owner: Specification
 domain_of:
-- MetaDataVersion
+- Specification
 range: DocumentReference
 multivalued: true
 inlined: true

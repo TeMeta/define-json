@@ -1,6 +1,6 @@
-# Define-JSON Tests
+# Data Definition Specification Tests
 
-Comprehensive test suite for Define-JSON schema validation and datacube functionality.
+Comprehensive test suite for Data Definition Specification schema validation and datacube functionality.
 
 ## Running Tests
 

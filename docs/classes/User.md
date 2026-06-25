@@ -9,7 +9,7 @@ _An entity that represents information about a specific user of a clinical data 
 
 
 
-URI: [odm:class/User](https://cdisc.org/odm2/class/User)
+URI: [dds:class/User](https://w3id.org/dds/class/User)
 
 
 ```mermaid
@@ -88,20 +88,22 @@ Organization ||--}o Coding : "coding"
 | [GovernedElement](../classes/GovernedElement.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 | [Governed](../classes/Governed.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 | [IsProfile](../classes/IsProfile.md) | [authenticator](../slots/authenticator.md) | any_of[range] | [User](../classes/User.md) |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
+| [Specification](../classes/Specification.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 | [Item](../classes/Item.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 | [ItemGroup](../classes/ItemGroup.md) | [authenticator](../slots/authenticator.md) | any_of[range] | [User](../classes/User.md) |
 | [ItemGroup](../classes/ItemGroup.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
+| [Query](../classes/Query.md) | [source](../slots/source.md) | any_of[range] | [User](../classes/User.md) |
+| [Query](../classes/Query.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 | [CodeList](../classes/CodeList.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 | [Comment](../classes/Comment.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
-| [ReifiedConcept](../classes/ReifiedConcept.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
+| [Concept](../classes/Concept.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 | [ConceptProperty](../classes/ConceptProperty.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
-| [WhereClause](../classes/WhereClause.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
-| [Condition](../classes/Condition.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
+| [ApplicabilityCondition](../classes/ApplicabilityCondition.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
+| [LogicalPredicate](../classes/LogicalPredicate.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
+| [Check](../classes/Check.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 | [Method](../classes/Method.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [source](../slots/source.md) | any_of[range] | [User](../classes/User.md) |
 | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
-| [NominalOccurrence](../classes/NominalOccurrence.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [authenticator](../slots/authenticator.md) | any_of[range] | [User](../classes/User.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 | [Dataflow](../classes/Dataflow.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
@@ -113,6 +115,7 @@ Organization ||--}o Coding : "coding"
 | [DataProduct](../classes/DataProduct.md) | [dataProductOwner](../slots/dataProductOwner.md) | any_of[range] | [User](../classes/User.md) |
 | [DataProduct](../classes/DataProduct.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
+| [Policy](../classes/Policy.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 | [Analysis](../classes/Analysis.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 | [Display](../classes/Display.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 
@@ -132,7 +135,7 @@ Organization ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -141,8 +144,8 @@ Organization ||--}o Coding : "coding"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:User |
-| native | odm:User |
+| self | dds:User |
+| native | dds:User |
 | exact | odm:User |
 | broad | prov:Agent |
 
@@ -162,7 +165,7 @@ Organization ||--}o Coding : "coding"
 name: User
 description: An entity that represents information about a specific user of a clinical
   data collection or data management system
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 exact_mappings:
 - odm:User
 broad_mappings:
@@ -172,7 +175,7 @@ attributes:
   userType:
     name: userType
     description: User's role in the study.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - User
@@ -180,23 +183,21 @@ attributes:
   userName:
     name: userName
     description: The username of the user.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - User
-    range: string
   fullName:
     name: fullName
     description: The full name of the user.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - User
-    range: string
   organization:
     name: organization
     description: The organization the user belongs to.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     close_mappings:
     - prov:actedOnBehalfOf
     rank: 1000
@@ -214,7 +215,7 @@ attributes:
 name: User
 description: An entity that represents information about a specific user of a clinical
   data collection or data management system
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 exact_mappings:
 - odm:User
 broad_mappings:
@@ -224,7 +225,7 @@ attributes:
   userType:
     name: userType
     description: User's role in the study.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: userType
     owner: User
@@ -234,7 +235,7 @@ attributes:
   userName:
     name: userName
     description: The username of the user.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: userName
     owner: User
@@ -244,7 +245,7 @@ attributes:
   fullName:
     name: fullName
     description: The full name of the user.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: fullName
     owner: User
@@ -254,7 +255,7 @@ attributes:
   organization:
     name: organization
     description: The organization the user belongs to.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     close_mappings:
     - prov:actedOnBehalfOf
     rank: 1000
@@ -267,7 +268,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     identifier: true
     alias: OID
@@ -279,7 +280,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: uuid
     owner: User
@@ -289,18 +290,20 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: name
     owner: User
     domain_of:
     - Labelled
+    - DefClass
+    - SubClass
     - Standard
     range: string
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: description
     owner: User
@@ -314,7 +317,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: coding
     owner: User
@@ -329,7 +332,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -344,7 +347,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:altLabel
     rank: 1000

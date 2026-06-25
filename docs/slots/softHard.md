@@ -9,7 +9,7 @@ _Indicates whether a validation check is an error ("Hard") or a warning ("Soft")
 
 
 
-URI: [odm:slot/softHard](https://cdisc.org/odm2/slot/softHard)
+URI: [dds:slot/softHard](https://w3id.org/dds/slot/softHard)
 Alias: softHard
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: softHard
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: softHard
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:softHard |
-| native | odm:softHard |
+| self | dds:softHard |
+| native | dds:softHard |
 
 
 
@@ -68,7 +68,7 @@ Alias: softHard
 name: softHard
 description: Indicates whether a validation check is an error ("Hard") or a warning
   ("Soft")
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: softHard
 owner: RangeCheck

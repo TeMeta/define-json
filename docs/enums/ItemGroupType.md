@@ -7,7 +7,7 @@ _An enumeration that defines the roles of an item group within a specific contex
 
 
 
-URI: [odm:enum/ItemGroupType](https://cdisc.org/odm2/enum/ItemGroupType)
+URI: [dds:enum/ItemGroupType](https://w3id.org/dds/enum/ItemGroupType)
 
 ## Permissible Values
 
@@ -17,7 +17,7 @@ URI: [odm:enum/ItemGroupType](https://cdisc.org/odm2/enum/ItemGroupType)
 | Table | None | A simple table or data frame. |
 | Object | None | An object or profile of a FHIR resource. |
 | DatasetSpecialization | None | A data specialization of a concept. |
-| ValueList | None | A list of topic-specific items for a specific column (from Define-XML). |
+| ValueList | None | SERIALIZATION HINT for the ODM/Define-XML output generator only. Signals that this ItemGroup should render as a Define-XML ValueList element. Has no structural meaning in the canonical model hierarchy. Consider handling this as a generator-side convention rather than a canonical type in future revisions. |
 | Section | None | A section of a form. |
 | Form | None | A data collection form. |
 
@@ -44,7 +44,7 @@ URI: [odm:enum/ItemGroupType](https://cdisc.org/odm2/enum/ItemGroupType)
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -58,7 +58,7 @@ URI: [odm:enum/ItemGroupType](https://cdisc.org/odm2/enum/ItemGroupType)
 name: ItemGroupType
 description: An enumeration that defines the roles of an item group within a specific
   context
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 permissible_values:
   DataCube:
@@ -76,7 +76,10 @@ permissible_values:
     description: A data specialization of a concept.
   ValueList:
     text: ValueList
-    description: A list of topic-specific items for a specific column (from Define-XML).
+    description: SERIALIZATION HINT for the ODM/Define-XML output generator only.
+      Signals that this ItemGroup should render as a Define-XML ValueList element.
+      Has no structural meaning in the canonical model hierarchy. Consider handling
+      this as a generator-side convention rather than a canonical type in future revisions.
   Section:
     text: Section
     description: A section of a form.

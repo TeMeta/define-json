@@ -9,7 +9,7 @@ _Frequency. Use dose frequency terminology e.g. "BID" if applicable._
 
 
 
-URI: [odm:slot/frequency](https://cdisc.org/odm2/slot/frequency)
+URI: [dds:slot/frequency](https://w3id.org/dds/slot/frequency)
 Alias: frequency
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: frequency
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: frequency
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:frequency |
-| native | odm:frequency |
+| self | dds:frequency |
+| native | dds:frequency |
 
 
 
@@ -67,7 +67,7 @@ Alias: frequency
 ```yaml
 name: frequency
 description: Frequency. Use dose frequency terminology e.g. "BID" if applicable.
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: frequency
 owner: Timing

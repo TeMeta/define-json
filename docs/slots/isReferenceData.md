@@ -9,7 +9,7 @@ _Set to Yes if this is a reference item group._
 
 
 
-URI: [odm:slot/isReferenceData](https://cdisc.org/odm2/slot/isReferenceData)
+URI: [dds:slot/isReferenceData](https://w3id.org/dds/slot/isReferenceData)
 Alias: isReferenceData
 
 <!-- no inheritance hierarchy -->
@@ -47,7 +47,7 @@ Alias: isReferenceData
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -56,8 +56,8 @@ Alias: isReferenceData
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:isReferenceData |
-| native | odm:isReferenceData |
+| self | dds:isReferenceData |
+| native | dds:isReferenceData |
 
 
 
@@ -68,7 +68,7 @@ Alias: isReferenceData
 ```yaml
 name: isReferenceData
 description: Set to Yes if this is a reference item group.
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: isReferenceData
 owner: ItemGroup

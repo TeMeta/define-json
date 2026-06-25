@@ -9,7 +9,7 @@ _The code value_
 
 
 
-URI: [odm:slot/code](https://cdisc.org/odm2/slot/code)
+URI: [dds:slot/code](https://w3id.org/dds/slot/code)
 Alias: code
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: code
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: code
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:code |
-| native | odm:code |
+| self | dds:code |
+| native | dds:code |
 
 
 
@@ -69,7 +69,7 @@ Alias: code
 ```yaml
 name: code
 description: The code value
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: code
 owner: Coding

@@ -3,13 +3,13 @@
 # Slot: keySequence 
 
 
-_Ordered list of Items that define the dataset key structure for sorting and uniqueness. Each entry is an OID reference to an Item in the items array. Order determines sorting precedence, merge operations, and record uniqueness. These are allowed to be null, unlike stricter dataset dimensions or primary keys._
+_Ordered list of Items defining the default sort order for this dataset. Each entry is an OID reference to an Item in the items array; order determines sorting precedence and merge operations. May reference Items that are not part of uniqueKey. Distinct from uniqueKey, which establishes record uniqueness._
 
 
 
 
 
-URI: [odm:slot/keySequence](https://cdisc.org/odm2/slot/keySequence)
+URI: [dds:slot/keySequence](https://w3id.org/dds/slot/keySequence)
 Alias: keySequence
 
 <!-- no inheritance hierarchy -->
@@ -49,7 +49,7 @@ Alias: keySequence
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -58,9 +58,9 @@ Alias: keySequence
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:keySequence |
-| native | odm:keySequence |
-| close | odm:ItemRef.KeySequence, sdmx:DimensionDescriptor |
+| self | dds:keySequence |
+| native | dds:keySequence |
+| close | sdmx:DimensionDescriptor |
 
 
 
@@ -70,13 +70,12 @@ Alias: keySequence
 <details>
 ```yaml
 name: keySequence
-description: Ordered list of Items that define the dataset key structure for sorting
-  and uniqueness. Each entry is an OID reference to an Item in the items array. Order
-  determines sorting precedence, merge operations, and record uniqueness. These are
-  allowed to be null, unlike stricter dataset dimensions or primary keys.
-from_schema: https://cdisc.org/define-json
+description: Ordered list of Items defining the default sort order for this dataset.
+  Each entry is an OID reference to an Item in the items array; order determines sorting
+  precedence and merge operations. May reference Items that are not part of uniqueKey.
+  Distinct from uniqueKey, which establishes record uniqueness.
+from_schema: https://w3id.org/dds
 close_mappings:
-- odm:ItemRef.KeySequence
 - sdmx:DimensionDescriptor
 rank: 1000
 alias: keySequence
@@ -85,8 +84,6 @@ domain_of:
 - ItemGroup
 range: Item
 multivalued: true
-inlined: true
-inlined_as_list: true
 
 ```
 </details>

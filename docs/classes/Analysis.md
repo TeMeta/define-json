@@ -11,7 +11,7 @@ _Expressions and parameters from Method can be generic or implementation-specifi
 
 
 
-URI: [odm:class/Analysis](https://cdisc.org/odm2/class/Analysis)
+URI: [dds:class/Analysis](https://w3id.org/dds/class/Analysis)
 
 
 ```mermaid
@@ -19,7 +19,6 @@ erDiagram
 Analysis {
     string analysisReason  
     string analysisPurpose  
-    string analysisMethod  
     stringList inputData  
     string version  
     string href  
@@ -73,7 +72,7 @@ Coding {
     string codeSystemVersion  
     AliasPredicate aliasType  
 }
-ReifiedConcept {
+Concept {
     string version  
     string href  
     string OID  
@@ -163,7 +162,10 @@ Parameter {
     string label  
     stringList aliases  
 }
-WhereClause {
+Dataflow {
+    stringList deliverySchedule  
+    string version  
+    string href  
     string OID  
     string uuid  
     string name  
@@ -176,8 +178,59 @@ WhereClause {
     string owner  
     string wasDerivedFrom  
 }
-Condition {
-    string implementsCondition  
+Dimension {
+    string role  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+DataStructureDefinition {
+    boolean evolvingStructure  
+    string domain  
+    string structure  
+    boolean isReferenceData  
+    ItemGroupType type  
+    boolean hasNoData  
+    stringList profile  
+    string authenticator  
+    boolean isNonStandard  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+    string version  
+    string href  
+}
+ApplicabilityCondition {
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+LogicalPredicate {
+    string implementsPredicate  
     LogicalOperator operator  
     string OID  
     string uuid  
@@ -191,11 +244,27 @@ Condition {
     string owner  
     string wasDerivedFrom  
 }
+Method {
+    MethodType type  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
 
-Analysis ||--}o WhereClause : "applicableWhen"
+Analysis ||--|o Method : "analysisMethod"
+Analysis ||--}o ApplicabilityCondition : "applicableWhen"
+Analysis ||--}o Dataflow : "inputDataflows"
 Analysis ||--}o FormalExpression : "expressions"
 Analysis ||--}o DocumentReference : "documents"
-Analysis ||--|o ReifiedConcept : "implementsConcept"
+Analysis ||--|o Concept : "implementsConcept"
 Analysis ||--}o Coding : "coding"
 Analysis ||--}o Comment : "comments"
 Analysis ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -206,10 +275,10 @@ Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 Comment ||--}o Comment : "comments"
 Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-ReifiedConcept ||--}o ConceptProperty : "properties"
-ReifiedConcept ||--}o Coding : "coding"
-ReifiedConcept ||--}o Comment : "comments"
-ReifiedConcept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Concept ||--}o ConceptProperty : "properties"
+Concept ||--}o Coding : "coding"
+Concept ||--}o Comment : "comments"
+Concept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ConceptProperty ||--|o CodeList : "codeList"
 ConceptProperty ||--}o Coding : "coding"
 ConceptProperty ||--}o Comment : "comments"
@@ -224,19 +293,53 @@ Resource ||--}o Coding : "coding"
 ReturnValue ||--}o Coding : "coding"
 Parameter ||--}o CodeList : "codeList"
 Parameter ||--}o ConceptProperty : "conceptProperty"
-Parameter ||--}o WhereClause : "applicableWhen"
-Parameter ||--}o Condition : "conditions"
+Parameter ||--}o ApplicabilityCondition : "applicableWhen"
+Parameter ||--}o LogicalPredicate : "validationPredicates"
 Parameter ||--}o Coding : "coding"
-WhereClause ||--}o Condition : "conditions"
-WhereClause ||--}o Coding : "coding"
-WhereClause ||--}o Comment : "comments"
-WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-Condition ||--}o RangeCheck : "rangeChecks"
-Condition ||--}o FormalExpression : "expressions"
-Condition ||--}o Condition : "conditions"
-Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comments"
-Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Dataflow ||--|| DataStructureDefinition : "structure"
+Dataflow ||--}o Dimension : "dimensionConstraint"
+Dataflow ||--}o Coding : "coding"
+Dataflow ||--}o Comment : "comments"
+Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Dimension ||--|| Item : "item"
+Dimension ||--|o Method : "missingHandling"
+Dimension ||--|o Method : "imputation"
+Dimension ||--}o Coding : "coding"
+Dimension ||--}o Comment : "comments"
+Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+DataStructureDefinition ||--}o Dimension : "dimensions"
+DataStructureDefinition ||--}o Measure : "measures"
+DataStructureDefinition ||--}o DataAttribute : "attributes"
+DataStructureDefinition ||--|o ComponentList : "grouping"
+DataStructureDefinition ||--}o Item : "items"
+DataStructureDefinition ||--}o Item : "uniqueKey"
+DataStructureDefinition ||--}o Item : "keySequence"
+DataStructureDefinition ||--}o ItemGroup : "slices"
+DataStructureDefinition ||--|o Concept : "implementsConcept"
+DataStructureDefinition ||--}o ApplicabilityCondition : "applicableWhen"
+DataStructureDefinition ||--|o DefClass : "observationClass"
+DataStructureDefinition ||--}o Coding : "security"
+DataStructureDefinition ||--|o Timing : "validityPeriod"
+DataStructureDefinition ||--|o Standard : "standard"
+DataStructureDefinition ||--}o Coding : "coding"
+DataStructureDefinition ||--}o Comment : "comments"
+DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+ApplicabilityCondition ||--}o LogicalPredicate : "predicates"
+ApplicabilityCondition ||--}o Coding : "coding"
+ApplicabilityCondition ||--}o Comment : "comments"
+ApplicabilityCondition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+LogicalPredicate ||--}o RangeCheck : "rangeChecks"
+LogicalPredicate ||--}o FormalExpression : "expressions"
+LogicalPredicate ||--}o LogicalPredicate : "predicates"
+LogicalPredicate ||--}o Coding : "coding"
+LogicalPredicate ||--}o Comment : "comments"
+LogicalPredicate ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Method ||--}o FormalExpression : "expressions"
+Method ||--}o DocumentReference : "documents"
+Method ||--|o Concept : "implementsConcept"
+Method ||--}o Coding : "coding"
+Method ||--}o Comment : "comments"
+Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 ```
 
@@ -256,15 +359,16 @@ Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | ---  | --- | --- | --- |
 | [analysisReason](../slots/analysisReason.md) | 0..1 <br/> [String](../types/String.md) | The reason this analysis was performed. | direct |
 | [analysisPurpose](../slots/analysisPurpose.md) | 0..1 <br/> [String](../types/String.md) | The purpose or role of this analysis in the study. | direct |
-| [analysisMethod](../slots/analysisMethod.md) | 0..1 <br/> [String](../types/String.md) | Generic method used to perform this analysis. any_of:<br>  - range: Method<br>  - range: AnalysisMethod | direct |
-| [applicableWhen](../slots/applicableWhen.md) | * <br/> [WhereClause](../classes/WhereClause.md) | The conditions (e.g. population, time period etc.) that must be met for this analysis to be applicable. | direct |
+| [analysisMethod](../slots/analysisMethod.md) | 0..1 <br/> [Method](../classes/Method.md) | Generic method used to perform this analysis. | direct |
+| [applicableWhen](../slots/applicableWhen.md) | * <br/> [ApplicabilityCondition](../classes/ApplicabilityCondition.md) | The conditions (e.g. population, time period etc.) that must be met for this analysis to be applicable. | direct |
 | [inputData](../slots/inputData.md) | * <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[Dataset](../classes/Dataset.md) | Datasets or slices/subsets of datasets asked for by this analysis. If a Item is referenced by a Parameter e.g. Analysis Variable, make sure to include its parent ItemGroup here. | direct |
+| [inputDataflows](../slots/inputDataflows.md) | * <br/> [Dataflow](../classes/Dataflow.md) | Dataflows that supply input data for this analysis. Replaces Dataflow.analysisMethod (which had the dependency backwards — a data contract should not know which analyses consume it). | direct |
 | [version](../slots/version.md) | 0..1 <br/> [String](../types/String.md) | The version of the external resources | [Versioned](../classes/Versioned.md) |
 | [href](../slots/href.md) | 0..1 <br/> [String](../types/String.md) | Machine-readable instructions to obtain the resource e.g. FHIR path, URL | [Versioned](../classes/Versioned.md) |
 | [type](../slots/type.md) | 0..1 <br/> [MethodType](../enums/MethodType.md) | The type of method e.g. Computation, Imputation, Transformation. | [Method](../classes/Method.md) |
 | [expressions](../slots/expressions.md) | * <br/> [FormalExpression](../classes/FormalExpression.md) | Formal expressions used by this method | [Method](../classes/Method.md) |
 | [documents](../slots/documents.md) | * <br/> [DocumentReference](../classes/DocumentReference.md) | Reference to a document that describes this method in detail. | [Method](../classes/Method.md) |
-| [implementsConcept](../slots/implementsConcept.md) | 0..1 <br/> [ReifiedConcept](../classes/ReifiedConcept.md) | Reference to a specific concept that this Method implements. | [Method](../classes/Method.md) |
+| [implementsConcept](../slots/implementsConcept.md) | 0..1 <br/> [Concept](../classes/Concept.md) | Reference to a specific concept that this Method implements. | [Method](../classes/Method.md) |
 | [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
 | [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
 | [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
@@ -278,7 +382,7 @@ Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | [purpose](../slots/purpose.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Purpose or rationale for this data element | [Governed](../classes/Governed.md) |
 | [lastUpdated](../slots/lastUpdated.md) | 0..1 <br/> [Datetime](../types/Datetime.md) | When the resource was last updated | [Governed](../classes/Governed.md) |
 | [owner](../slots/owner.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Party responsible for this element | [Governed](../classes/Governed.md) |
-| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[MetaDataVersion](../classes/MetaDataVersion.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[ReifiedConcept](../classes/ReifiedConcept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[Condition](../classes/Condition.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[NominalOccurrence](../classes/NominalOccurrence.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
+| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[Specification](../classes/Specification.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[Concept](../classes/Concept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[LogicalPredicate](../classes/LogicalPredicate.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
 
 
 
@@ -288,8 +392,7 @@ Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | [analyses](../slots/analyses.md) | range | [Analysis](../classes/Analysis.md) |
-| [Dataflow](../classes/Dataflow.md) | [analysisMethod](../slots/analysisMethod.md) | range | [Analysis](../classes/Analysis.md) |
+| [Specification](../classes/Specification.md) | [analyses](../slots/analyses.md) | range | [Analysis](../classes/Analysis.md) |
 | [Display](../classes/Display.md) | [analysis](../slots/analysis.md) | range | [Analysis](../classes/Analysis.md) |
 
 
@@ -308,7 +411,7 @@ Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -317,8 +420,8 @@ Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:Analysis |
-| native | odm:Analysis |
+| self | dds:Analysis |
+| native | dds:Analysis |
 
 
 
@@ -338,7 +441,7 @@ description: 'Analysis extends Method to capture analysis-specific metadata incl
   the reason for analysis, its purpose, and data traceability for the results used.
 
   Expressions and parameters from Method can be generic or implementation-specific.'
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 is_a: Method
 mixins:
 - Versioned
@@ -346,36 +449,36 @@ attributes:
   analysisReason:
     name: analysisReason
     description: 'The reason this analysis was performed.  '
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Analysis
   analysisPurpose:
     name: analysisPurpose
     description: The purpose or role of this analysis in the study.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Analysis
   analysisMethod:
     name: analysisMethod
-    description: "Generic method used to perform this analysis. any_of:\n  - range:\
-      \ Method\n  - range: AnalysisMethod"
-    from_schema: https://cdisc.org/define-json
+    description: Generic method used to perform this analysis.
+    from_schema: https://w3id.org/dds
+    rank: 1000
     domain_of:
-    - Dataflow
     - Analysis
+    range: Method
   applicableWhen:
     name: applicableWhen
     description: The conditions (e.g. population, time period etc.) that must be met
       for this analysis to be applicable.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     domain_of:
     - Item
     - ItemGroup
     - Parameter
     - Analysis
-    range: WhereClause
+    range: ApplicabilityCondition
     multivalued: true
     inlined: false
   inputData:
@@ -383,7 +486,7 @@ attributes:
     description: Datasets or slices/subsets of datasets asked for by this analysis.
       If a Item is referenced by a Parameter e.g. Analysis Variable, make sure to
       include its parent ItemGroup here.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Analysis
@@ -392,6 +495,18 @@ attributes:
     any_of:
     - range: ItemGroup
     - range: Dataset
+  inputDataflows:
+    name: inputDataflows
+    description: Dataflows that supply input data for this analysis. Replaces Dataflow.analysisMethod
+      (which had the dependency backwards — a data contract should not know which
+      analyses consume it).
+    from_schema: https://w3id.org/dds
+    rank: 1000
+    domain_of:
+    - Analysis
+    range: Dataflow
+    multivalued: true
+    inlined: false
 
 ```
 </details>
@@ -405,7 +520,7 @@ description: 'Analysis extends Method to capture analysis-specific metadata incl
   the reason for analysis, its purpose, and data traceability for the results used.
 
   Expressions and parameters from Method can be generic or implementation-specific.'
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 is_a: Method
 mixins:
 - Versioned
@@ -413,36 +528,38 @@ attributes:
   analysisReason:
     name: analysisReason
     description: 'The reason this analysis was performed.  '
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: analysisReason
     owner: Analysis
     domain_of:
     - Analysis
+    range: string
   analysisPurpose:
     name: analysisPurpose
     description: The purpose or role of this analysis in the study.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: analysisPurpose
     owner: Analysis
     domain_of:
     - Analysis
+    range: string
   analysisMethod:
     name: analysisMethod
-    description: "Generic method used to perform this analysis. any_of:\n  - range:\
-      \ Method\n  - range: AnalysisMethod"
-    from_schema: https://cdisc.org/define-json
+    description: Generic method used to perform this analysis.
+    from_schema: https://w3id.org/dds
+    rank: 1000
     alias: analysisMethod
     owner: Analysis
     domain_of:
-    - Dataflow
     - Analysis
+    range: Method
   applicableWhen:
     name: applicableWhen
     description: The conditions (e.g. population, time period etc.) that must be met
       for this analysis to be applicable.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     alias: applicableWhen
     owner: Analysis
     domain_of:
@@ -450,7 +567,7 @@ attributes:
     - ItemGroup
     - Parameter
     - Analysis
-    range: WhereClause
+    range: ApplicabilityCondition
     multivalued: true
     inlined: false
   inputData:
@@ -458,21 +575,36 @@ attributes:
     description: Datasets or slices/subsets of datasets asked for by this analysis.
       If a Item is referenced by a Parameter e.g. Analysis Variable, make sure to
       include its parent ItemGroup here.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: inputData
     owner: Analysis
     domain_of:
     - Analysis
+    range: string
     multivalued: true
     inlined: false
     any_of:
     - range: ItemGroup
     - range: Dataset
+  inputDataflows:
+    name: inputDataflows
+    description: Dataflows that supply input data for this analysis. Replaces Dataflow.analysisMethod
+      (which had the dependency backwards — a data contract should not know which
+      analyses consume it).
+    from_schema: https://w3id.org/dds
+    rank: 1000
+    alias: inputDataflows
+    owner: Analysis
+    domain_of:
+    - Analysis
+    range: Dataflow
+    multivalued: true
+    inlined: false
   version:
     name: version
     description: The version of the external resources
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: version
     owner: Analysis
@@ -484,7 +616,7 @@ attributes:
     name: href
     description: Machine-readable instructions to obtain the resource e.g. FHIR path,
       URL
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: href
     owner: Analysis
@@ -495,7 +627,7 @@ attributes:
   type:
     name: type
     description: The type of method e.g. Computation, Imputation, Transformation.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     alias: type
     owner: Analysis
     domain_of:
@@ -509,12 +641,13 @@ attributes:
   expressions:
     name: expressions
     description: Formal expressions used by this method
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     alias: expressions
     owner: Analysis
     domain_of:
-    - Condition
+    - LogicalPredicate
     - RangeCheck
+    - Check
     - Method
     range: FormalExpression
     multivalued: true
@@ -523,7 +656,7 @@ attributes:
   documents:
     name: documents
     description: Reference to a document that describes this method in detail.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     alias: documents
     owner: Analysis
     domain_of:
@@ -537,19 +670,19 @@ attributes:
   implementsConcept:
     name: implementsConcept
     description: Reference to a specific concept that this Method implements.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     alias: implementsConcept
     owner: Analysis
     domain_of:
     - ItemGroup
     - Method
-    range: ReifiedConcept
+    range: Concept
     inlined: false
   OID:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     identifier: true
     alias: OID
@@ -561,7 +694,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: uuid
     owner: Analysis
@@ -571,18 +704,20 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: name
     owner: Analysis
     domain_of:
     - Labelled
+    - DefClass
+    - SubClass
     - Standard
     range: string
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: description
     owner: Analysis
@@ -596,7 +731,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: coding
     owner: Analysis
@@ -611,7 +746,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -626,7 +761,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:altLabel
     rank: 1000
@@ -645,7 +780,7 @@ attributes:
   mandatory:
     name: mandatory
     description: Is this element required?
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: mandatory
     owner: Analysis
@@ -656,7 +791,7 @@ attributes:
     name: comments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: comments
     owner: Analysis
@@ -669,7 +804,7 @@ attributes:
     name: siteOrSponsorComments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: siteOrSponsorComments
     owner: Analysis
@@ -681,7 +816,7 @@ attributes:
   purpose:
     name: purpose
     description: Purpose or rationale for this data element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: purpose
     owner: Analysis
@@ -694,7 +829,7 @@ attributes:
   lastUpdated:
     name: lastUpdated
     description: When the resource was last updated
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: lastUpdated
     owner: Analysis
@@ -704,7 +839,7 @@ attributes:
   owner:
     name: owner
     description: Party responsible for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     narrow_mappings:
     - prov:wasAttributedTo
     - prov:wasAssociatedBy
@@ -722,7 +857,7 @@ attributes:
     name: wasDerivedFrom
     description: Reference to another item that this item implements or extends, e.g.
       a template Item definition.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - prov:wasDerivedFrom
     rank: 1000
@@ -734,13 +869,12 @@ attributes:
     any_of:
     - range: Item
     - range: ItemGroup
-    - range: MetaDataVersion
+    - range: Specification
     - range: CodeList
-    - range: ReifiedConcept
+    - range: Concept
     - range: ConceptProperty
-    - range: Condition
+    - range: LogicalPredicate
     - range: Method
-    - range: NominalOccurrence
     - range: Dataflow
     - range: CubeComponent
     - range: DataProduct

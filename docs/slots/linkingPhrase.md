@@ -9,7 +9,7 @@ _Variable relationship descriptive linking phrase._
 
 
 
-URI: [odm:slot/linkingPhrase](https://cdisc.org/odm2/slot/linkingPhrase)
+URI: [dds:slot/linkingPhrase](https://w3id.org/dds/slot/linkingPhrase)
 Alias: linkingPhrase
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: linkingPhrase
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: linkingPhrase
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:linkingPhrase |
-| native | odm:linkingPhrase |
+| self | dds:linkingPhrase |
+| native | dds:linkingPhrase |
 
 
 
@@ -69,7 +69,7 @@ Alias: linkingPhrase
 ```yaml
 name: linkingPhrase
 description: Variable relationship descriptive linking phrase.
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: linkingPhrase
 owner: Relationship

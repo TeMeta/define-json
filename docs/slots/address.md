@@ -9,7 +9,7 @@ _The address of the organization._
 
 
 
-URI: [odm:slot/address](https://cdisc.org/odm2/slot/address)
+URI: [dds:slot/address](https://w3id.org/dds/slot/address)
 Alias: address
 
 <!-- no inheritance hierarchy -->
@@ -22,8 +22,9 @@ Alias: address
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Organization](../classes/Organization.md) | An entity that represents organizational information, such as a site or sponsor |  no  |
 | [DataProvider](../classes/DataProvider.md) | An organization element that provides data to a Data Consumer, which can be a sponsor, site, or any other entity that supplies data |  no  |
+| [DataConsumer](../classes/DataConsumer.md) | An organization element that receives data from a Data Provider under a ProvisionAgreement; the demand-side counterpart of DataProvider. |  no  |
+| [Organization](../classes/Organization.md) | An entity that represents organizational information, such as a site or sponsor |  no  |
 
 
 
@@ -47,7 +48,7 @@ Alias: address
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -56,8 +57,8 @@ Alias: address
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:address |
-| native | odm:address |
+| self | dds:address |
+| native | dds:address |
 
 
 
@@ -68,7 +69,7 @@ Alias: address
 ```yaml
 name: address
 description: The address of the organization.
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: address
 owner: Organization

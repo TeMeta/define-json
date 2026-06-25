@@ -4,7 +4,7 @@
 
 
 
-URI: [odm:slot/evolvingStructure](https://cdisc.org/odm2/slot/evolvingStructure)
+URI: [dds:slot/evolvingStructure](https://w3id.org/dds/slot/evolvingStructure)
 Alias: evolvingStructure
 
 <!-- no inheritance hierarchy -->
@@ -41,7 +41,7 @@ Alias: evolvingStructure
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -50,8 +50,8 @@ Alias: evolvingStructure
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:evolvingStructure |
-| native | odm:evolvingStructure |
+| self | dds:evolvingStructure |
+| native | dds:evolvingStructure |
 
 
 
@@ -61,7 +61,7 @@ Alias: evolvingStructure
 <details>
 ```yaml
 name: evolvingStructure
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 ifabsent: 'False'
 alias: evolvingStructure

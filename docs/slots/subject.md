@@ -9,7 +9,7 @@ _The starting element of the relationship (e.g., an Item or ItemGroup)._
 
 
 
-URI: [odm:slot/subject](https://cdisc.org/odm2/slot/subject)
+URI: [dds:slot/subject](https://w3id.org/dds/slot/subject)
 Alias: subject
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: subject
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: subject
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:subject |
-| native | odm:subject |
+| self | dds:subject |
+| native | dds:subject |
 
 
 
@@ -69,7 +69,7 @@ Alias: subject
 ```yaml
 name: subject
 description: The starting element of the relationship (e.g., an Item or ItemGroup).
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: subject
 owner: Relationship

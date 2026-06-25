@@ -4,7 +4,7 @@
 
 
 
-URI: [odm:slot/measures](https://cdisc.org/odm2/slot/measures)
+URI: [dds:slot/measures](https://w3id.org/dds/slot/measures)
 Alias: measures
 
 <!-- no inheritance hierarchy -->
@@ -43,7 +43,7 @@ Alias: measures
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -52,8 +52,8 @@ Alias: measures
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:measures |
-| native | odm:measures |
+| self | dds:measures |
+| native | dds:measures |
 
 
 
@@ -63,7 +63,7 @@ Alias: measures
 <details>
 ```yaml
 name: measures
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: measures
 owner: DataStructureDefinition

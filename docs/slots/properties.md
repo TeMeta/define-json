@@ -9,7 +9,7 @@ _Properties of the reified object, which can be other governed elements or simpl
 
 
 
-URI: [odm:slot/properties](https://cdisc.org/odm2/slot/properties)
+URI: [dds:slot/properties](https://w3id.org/dds/slot/properties)
 Alias: properties
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: properties
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ReifiedConcept](../classes/ReifiedConcept.md) | A canonical information layer that makes abstract concepts explicit and referenceable, showing how different data implementations represent the same underlying meanings through a star schema structure with multiple properties |  no  |
+| [Concept](../classes/Concept.md) | An abstract concept that can be referenced and specialised by data implementations. Holds ConceptProperties describing the concept's expected data shape. Multiple ItemGroups or Items can implement the same Concept, allowing standard biomedical concepts to be implemented differently across studies while remaining semantically aligned. |  no  |
 
 
 
@@ -48,7 +48,7 @@ Alias: properties
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: properties
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:properties |
-| native | odm:properties |
+| self | dds:properties |
+| native | dds:properties |
 
 
 
@@ -70,12 +70,12 @@ Alias: properties
 name: properties
 description: Properties of the reified object, which can be other governed elements
   or simple values
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: properties
-owner: ReifiedConcept
+owner: Concept
 domain_of:
-- ReifiedConcept
+- Concept
 range: ConceptProperty
 multivalued: true
 inlined: true

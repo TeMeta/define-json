@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 try:
-    from define_json.utils.datacube_engine import DataCubeEngine, load_example_config, get_available_examples
+    from data_definition_spec.utils.datacube_engine import DataCubeEngine, load_example_config, get_available_examples
     DATACUBE_AVAILABLE = True
 except ImportError:
     DATACUBE_AVAILABLE = False

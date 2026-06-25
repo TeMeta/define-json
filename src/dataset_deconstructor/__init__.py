@@ -7,7 +7,7 @@ Main Components:
 - DatasetDeconstructor: Main class for dataset analysis
 - TopicDetector: Detects dataset structure and topics
 - CDISCVariableClassifier: Classifies CDISC variable types
-- SpecialisationBuilder: Builds Define-JSON structures
+- SpecialisationBuilder: Builds Data Definition Specification structures
 
 Usage:
     from dataset_deconstructor_standalone import DatasetDeconstructor

@@ -9,7 +9,7 @@ _Minimum number of occurrences of this property in the context. Set to >0 to man
 
 
 
-URI: [odm:slot/minOccurs](https://cdisc.org/odm2/slot/minOccurs)
+URI: [dds:slot/minOccurs](https://w3id.org/dds/slot/minOccurs)
 Alias: minOccurs
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: minOccurs
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: minOccurs
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:minOccurs |
-| native | odm:minOccurs |
+| self | dds:minOccurs |
+| native | dds:minOccurs |
 
 
 
@@ -68,7 +68,7 @@ Alias: minOccurs
 name: minOccurs
 description: Minimum number of occurrences of this property in the context. Set to
   >0 to mandate some number of occurrences
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: minOccurs
 owner: ConceptProperty

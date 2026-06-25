@@ -9,7 +9,7 @@ _Indicates whether this parameter must be provided when the  containing expressi
 
 
 
-URI: [odm:slot/required](https://cdisc.org/odm2/slot/required)
+URI: [dds:slot/required](https://w3id.org/dds/slot/required)
 Alias: required
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: required
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: required
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:required |
-| native | odm:required |
+| self | dds:required |
+| native | dds:required |
 
 
 
@@ -68,7 +68,7 @@ Alias: required
 name: required
 description: Indicates whether this parameter must be provided when the  containing
   expression is evaluated (technical constraint).
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 ifabsent: 'False'
 alias: required

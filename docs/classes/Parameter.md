@@ -9,7 +9,7 @@ _A variable element that describes an input used in a formal expression_
 
 
 
-URI: [odm:class/Parameter](https://cdisc.org/odm2/class/Parameter)
+URI: [dds:class/Parameter](https://w3id.org/dds/class/Parameter)
 
 
 ```mermaid
@@ -34,8 +34,8 @@ Coding {
     string codeSystemVersion  
     AliasPredicate aliasType  
 }
-Condition {
-    string implementsCondition  
+LogicalPredicate {
+    string implementsPredicate  
     LogicalOperator operator  
     string OID  
     string uuid  
@@ -97,7 +97,7 @@ RangeCheck {
     SoftHard softHard  
     LogicalOperator operator  
 }
-WhereClause {
+ApplicabilityCondition {
     string OID  
     string uuid  
     string name  
@@ -146,15 +146,15 @@ CodeList {
 
 Parameter ||--}o CodeList : "codeList"
 Parameter ||--}o ConceptProperty : "conceptProperty"
-Parameter ||--}o WhereClause : "applicableWhen"
-Parameter ||--}o Condition : "conditions"
+Parameter ||--}o ApplicabilityCondition : "applicableWhen"
+Parameter ||--}o LogicalPredicate : "validationPredicates"
 Parameter ||--}o Coding : "coding"
-Condition ||--}o RangeCheck : "rangeChecks"
-Condition ||--}o FormalExpression : "expressions"
-Condition ||--}o Condition : "conditions"
-Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comments"
-Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+LogicalPredicate ||--}o RangeCheck : "rangeChecks"
+LogicalPredicate ||--}o FormalExpression : "expressions"
+LogicalPredicate ||--}o LogicalPredicate : "predicates"
+LogicalPredicate ||--}o Coding : "coding"
+LogicalPredicate ||--}o Comment : "comments"
+LogicalPredicate ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 SiteOrSponsorComment ||--}o Coding : "coding"
 SiteOrSponsorComment ||--}o Comment : "comments"
 SiteOrSponsorComment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -167,10 +167,11 @@ FormalExpression ||--|o ReturnValue : "returnValue"
 FormalExpression ||--}o Resource : "externalCodeLibs"
 FormalExpression ||--}o Coding : "coding"
 RangeCheck ||--}o FormalExpression : "expressions"
-WhereClause ||--}o Condition : "conditions"
-WhereClause ||--}o Coding : "coding"
-WhereClause ||--}o Comment : "comments"
-WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+RangeCheck ||--|o Check : "implementsCheck"
+ApplicabilityCondition ||--}o LogicalPredicate : "predicates"
+ApplicabilityCondition ||--}o Coding : "coding"
+ApplicabilityCondition ||--}o Comment : "comments"
+ApplicabilityCondition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ConceptProperty ||--|o CodeList : "codeList"
 ConceptProperty ||--}o Coding : "coding"
 ConceptProperty ||--}o Comment : "comments"
@@ -203,8 +204,8 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | [defaultValue](../slots/defaultValue.md) | 0..1 <br/> [String](../types/String.md) | A default value for the parameter. | direct |
 | [items](../slots/items.md) | * <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[Dimension](../classes/Dimension.md)&nbsp;or&nbsp;<br />[Measure](../classes/Measure.md)&nbsp;or&nbsp;<br />[DataAttribute](../classes/DataAttribute.md) | A list of item dependencies for the parameter. | direct |
 | [conceptProperty](../slots/conceptProperty.md) | * <br/> [ConceptProperty](../classes/ConceptProperty.md) | Reference to a specific concept property that this parameter represents or modifies. | direct |
-| [applicableWhen](../slots/applicableWhen.md) | * <br/> [WhereClause](../classes/WhereClause.md) | References to different situations that define when this parameter  is applicable or required in the containing expression. Multiple whereClauses are combined with OR logic: the parameter applies  if ANY referenced WhereClause matches.<br>Within each WhereClause, conditions are combined with AND logic. Example: applicableWhen: ["WC.ADULT", "WC.PEDIATRIC"] means the parameter  is needed when (all conditions in WC.ADULT are true) OR  (all conditions in WC.PEDIATRIC are true). | direct |
-| [conditions](../slots/conditions.md) | * <br/> [Condition](../classes/Condition.md) | Validation conditions that constrain this parameter's value beyond controlled terminology. Multiple conditions are combined with AND logic: all must be satisfied. Use these for parameter validation rules, distinct from applicableWhen  which determines if the parameter is needed at all.<br>Example: A parameter AGE might have conditions ensuring it's >= 0 and <= 120. or conditions might make up part of a componsed expression. | direct |
+| [applicableWhen](../slots/applicableWhen.md) | * <br/> [ApplicabilityCondition](../classes/ApplicabilityCondition.md) | References to different situations that define when this parameter  is applicable or required in the containing expression. Multiple applicabilityConditions are combined with OR logic: the parameter applies  if ANY referenced ApplicabilityCondition matches.<br>Within each ApplicabilityCondition, conditions are combined with AND logic. Example: applicableWhen: ["WC.ADULT", "WC.PEDIATRIC"] means the parameter  is needed when (all conditions in WC.ADULT are true) OR  (all conditions in WC.PEDIATRIC are true). | direct |
+| [validationPredicates](../slots/validationPredicates.md) | * <br/> [LogicalPredicate](../classes/LogicalPredicate.md) | Validation predicates that constrain this parameter's value beyond controlled terminology. All must be satisfied (AND logic). Distinct from applicableWhen which determines if the parameter is needed at all. | direct |
 | [required](../slots/required.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Indicates whether this parameter must be provided when the  containing expression is evaluated (technical constraint). | direct |
 | [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
 | [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
@@ -240,7 +241,7 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -249,8 +250,8 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:Parameter |
-| native | odm:Parameter |
+| self | dds:Parameter |
+| native | dds:Parameter |
 
 
 
@@ -267,13 +268,13 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ```yaml
 name: Parameter
 description: A variable element that describes an input used in a formal expression
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 is_a: IdentifiableElement
 attributes:
   dataType:
     name: dataType
     description: The data type of the parameter.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     domain_of:
     - Item
     - CodeList
@@ -283,7 +284,7 @@ attributes:
   codeList:
     name: codeList
     description: A list of allowed values for the parameter.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     domain_of:
     - Item
     - ConceptProperty
@@ -293,26 +294,24 @@ attributes:
   value:
     name: value
     description: A specific bound value for the parameter.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     domain_of:
     - Translation
     - Parameter
     - Timing
-    range: string
   defaultValue:
     name: defaultValue
     description: A default value for the parameter.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Parameter
-    range: string
   items:
     name: items
     description: A list of item dependencies for the parameter.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     domain_of:
-    - MetaDataVersion
+    - Specification
     - ItemGroup
     - Parameter
     multivalued: true
@@ -326,7 +325,7 @@ attributes:
     name: conceptProperty
     description: Reference to a specific concept property that this parameter represents
       or modifies.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     domain_of:
     - Item
     - Parameter
@@ -336,45 +335,40 @@ attributes:
   applicableWhen:
     name: applicableWhen
     description: 'References to different situations that define when this parameter  is
-      applicable or required in the containing expression. Multiple whereClauses are
-      combined with OR logic: the parameter applies  if ANY referenced WhereClause
+      applicable or required in the containing expression. Multiple applicabilityConditions
+      are combined with OR logic: the parameter applies  if ANY referenced ApplicabilityCondition
       matches.
 
-      Within each WhereClause, conditions are combined with AND logic. Example: applicableWhen:
-      ["WC.ADULT", "WC.PEDIATRIC"] means the parameter  is needed when (all conditions
-      in WC.ADULT are true) OR  (all conditions in WC.PEDIATRIC are true).'
-    from_schema: https://cdisc.org/define-json
+      Within each ApplicabilityCondition, conditions are combined with AND logic.
+      Example: applicableWhen: ["WC.ADULT", "WC.PEDIATRIC"] means the parameter  is
+      needed when (all conditions in WC.ADULT are true) OR  (all conditions in WC.PEDIATRIC
+      are true).'
+    from_schema: https://w3id.org/dds
     domain_of:
     - Item
     - ItemGroup
     - Parameter
     - Analysis
-    range: WhereClause
+    range: ApplicabilityCondition
     multivalued: true
     inlined: false
-  conditions:
-    name: conditions
-    description: 'Validation conditions that constrain this parameter''s value beyond
-      controlled terminology. Multiple conditions are combined with AND logic: all
-      must be satisfied. Use these for parameter validation rules, distinct from applicableWhen  which
-      determines if the parameter is needed at all.
-
-      Example: A parameter AGE might have conditions ensuring it''s >= 0 and <= 120.
-      or conditions might make up part of a componsed expression.'
-    from_schema: https://cdisc.org/define-json
+  validationPredicates:
+    name: validationPredicates
+    description: Validation predicates that constrain this parameter's value beyond
+      controlled terminology. All must be satisfied (AND logic). Distinct from applicableWhen
+      which determines if the parameter is needed at all.
+    from_schema: https://w3id.org/dds
+    rank: 1000
     domain_of:
-    - MetaDataVersion
-    - WhereClause
-    - Condition
     - Parameter
-    range: Condition
+    range: LogicalPredicate
     multivalued: true
     inlined: false
   required:
     name: required
     description: Indicates whether this parameter must be provided when the  containing
       expression is evaluated (technical constraint).
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     ifabsent: 'False'
     domain_of:
@@ -390,13 +384,13 @@ attributes:
 ```yaml
 name: Parameter
 description: A variable element that describes an input used in a formal expression
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 is_a: IdentifiableElement
 attributes:
   dataType:
     name: dataType
     description: The data type of the parameter.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     alias: dataType
     owner: Parameter
     domain_of:
@@ -408,7 +402,7 @@ attributes:
   codeList:
     name: codeList
     description: A list of allowed values for the parameter.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     alias: codeList
     owner: Parameter
     domain_of:
@@ -420,7 +414,7 @@ attributes:
   value:
     name: value
     description: A specific bound value for the parameter.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     alias: value
     owner: Parameter
     domain_of:
@@ -431,7 +425,7 @@ attributes:
   defaultValue:
     name: defaultValue
     description: A default value for the parameter.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: defaultValue
     owner: Parameter
@@ -441,13 +435,14 @@ attributes:
   items:
     name: items
     description: A list of item dependencies for the parameter.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     alias: items
     owner: Parameter
     domain_of:
-    - MetaDataVersion
+    - Specification
     - ItemGroup
     - Parameter
+    range: string
     multivalued: true
     inlined: false
     any_of:
@@ -459,7 +454,7 @@ attributes:
     name: conceptProperty
     description: Reference to a specific concept property that this parameter represents
       or modifies.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     alias: conceptProperty
     owner: Parameter
     domain_of:
@@ -471,14 +466,15 @@ attributes:
   applicableWhen:
     name: applicableWhen
     description: 'References to different situations that define when this parameter  is
-      applicable or required in the containing expression. Multiple whereClauses are
-      combined with OR logic: the parameter applies  if ANY referenced WhereClause
+      applicable or required in the containing expression. Multiple applicabilityConditions
+      are combined with OR logic: the parameter applies  if ANY referenced ApplicabilityCondition
       matches.
 
-      Within each WhereClause, conditions are combined with AND logic. Example: applicableWhen:
-      ["WC.ADULT", "WC.PEDIATRIC"] means the parameter  is needed when (all conditions
-      in WC.ADULT are true) OR  (all conditions in WC.PEDIATRIC are true).'
-    from_schema: https://cdisc.org/define-json
+      Within each ApplicabilityCondition, conditions are combined with AND logic.
+      Example: applicableWhen: ["WC.ADULT", "WC.PEDIATRIC"] means the parameter  is
+      needed when (all conditions in WC.ADULT are true) OR  (all conditions in WC.PEDIATRIC
+      are true).'
+    from_schema: https://w3id.org/dds
     alias: applicableWhen
     owner: Parameter
     domain_of:
@@ -486,34 +482,28 @@ attributes:
     - ItemGroup
     - Parameter
     - Analysis
-    range: WhereClause
+    range: ApplicabilityCondition
     multivalued: true
     inlined: false
-  conditions:
-    name: conditions
-    description: 'Validation conditions that constrain this parameter''s value beyond
-      controlled terminology. Multiple conditions are combined with AND logic: all
-      must be satisfied. Use these for parameter validation rules, distinct from applicableWhen  which
-      determines if the parameter is needed at all.
-
-      Example: A parameter AGE might have conditions ensuring it''s >= 0 and <= 120.
-      or conditions might make up part of a componsed expression.'
-    from_schema: https://cdisc.org/define-json
-    alias: conditions
+  validationPredicates:
+    name: validationPredicates
+    description: Validation predicates that constrain this parameter's value beyond
+      controlled terminology. All must be satisfied (AND logic). Distinct from applicableWhen
+      which determines if the parameter is needed at all.
+    from_schema: https://w3id.org/dds
+    rank: 1000
+    alias: validationPredicates
     owner: Parameter
     domain_of:
-    - MetaDataVersion
-    - WhereClause
-    - Condition
     - Parameter
-    range: Condition
+    range: LogicalPredicate
     multivalued: true
     inlined: false
   required:
     name: required
     description: Indicates whether this parameter must be provided when the  containing
       expression is evaluated (technical constraint).
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     ifabsent: 'False'
     alias: required
@@ -525,7 +515,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     identifier: true
     alias: OID
@@ -537,7 +527,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: uuid
     owner: Parameter
@@ -547,18 +537,20 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: name
     owner: Parameter
     domain_of:
     - Labelled
+    - DefClass
+    - SubClass
     - Standard
     range: string
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: description
     owner: Parameter
@@ -572,7 +564,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: coding
     owner: Parameter
@@ -587,7 +579,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -602,7 +594,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:altLabel
     rank: 1000

@@ -4,7 +4,7 @@
 
 
 
-URI: [odm:slot/dataFlow](https://cdisc.org/odm2/slot/dataFlow)
+URI: [dds:slot/dataFlow](https://w3id.org/dds/slot/dataFlow)
 Alias: dataFlow
 
 <!-- no inheritance hierarchy -->
@@ -27,7 +27,7 @@ Alias: dataFlow
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -44,8 +44,8 @@ Alias: dataFlow
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:dataFlow |
-| native | odm:dataFlow |
+| self | dds:dataFlow |
+| native | dds:dataFlow |
 
 
 
@@ -59,6 +59,7 @@ alias: dataFlow
 domain_of:
 - DataflowRelationship
 - ProvisionAgreement
+range: string
 
 ```
 </details>

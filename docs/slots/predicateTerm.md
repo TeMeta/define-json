@@ -9,7 +9,7 @@ _Short variable relationship linking phrase for programming purposes._
 
 
 
-URI: [odm:slot/predicateTerm](https://cdisc.org/odm2/slot/predicateTerm)
+URI: [dds:slot/predicateTerm](https://w3id.org/dds/slot/predicateTerm)
 Alias: predicateTerm
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: predicateTerm
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: predicateTerm
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:predicateTerm |
-| native | odm:predicateTerm |
+| self | dds:predicateTerm |
+| native | dds:predicateTerm |
 
 
 
@@ -69,7 +69,7 @@ Alias: predicateTerm
 ```yaml
 name: predicateTerm
 description: Short variable relationship linking phrase for programming purposes.
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: predicateTerm
 owner: Relationship

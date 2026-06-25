@@ -9,7 +9,7 @@ _The components that make up this component list_
 
 
 
-URI: [odm:slot/components](https://cdisc.org/odm2/slot/components)
+URI: [dds:slot/components](https://w3id.org/dds/slot/components)
 Alias: components
 
 <!-- no inheritance hierarchy -->
@@ -31,7 +31,7 @@ Alias: components
 
 ## Properties
 
-* Range: NONE&nbsp;or&nbsp;<br />[Measure](../classes/Measure.md)&nbsp;or&nbsp;<br />[Dimension](../classes/Dimension.md)&nbsp;or&nbsp;<br />[DataAttribute](../classes/DataAttribute.md)
+* Range: [String](../types/String.md)&nbsp;or&nbsp;<br />[Measure](../classes/Measure.md)&nbsp;or&nbsp;<br />[Dimension](../classes/Dimension.md)&nbsp;or&nbsp;<br />[DataAttribute](../classes/DataAttribute.md)
 
 * Multivalued: True
 
@@ -48,7 +48,7 @@ Alias: components
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: components
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:components |
-| native | odm:components |
+| self | dds:components |
+| native | dds:components |
 
 
 
@@ -69,12 +69,13 @@ Alias: components
 ```yaml
 name: components
 description: The components that make up this component list
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: components
 owner: ComponentList
 domain_of:
 - ComponentList
+range: string
 multivalued: true
 inlined: true
 inlined_as_list: true

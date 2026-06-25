@@ -3,8 +3,13 @@
 # Slot: analysisMethod 
 
 
+_Generic method used to perform this analysis._
 
-URI: [odm:slot/analysisMethod](https://cdisc.org/odm2/slot/analysisMethod)
+
+
+
+
+URI: [dds:slot/analysisMethod](https://w3id.org/dds/slot/analysisMethod)
 Alias: analysisMethod
 
 <!-- no inheritance hierarchy -->
@@ -18,7 +23,6 @@ Alias: analysisMethod
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
 | [Analysis](../classes/Analysis.md) | Analysis extends Method to capture analysis-specific metadata including the reason for analysis, its purpose, and data traceability for the results used.<br>Expressions and parameters from Method can be generic or implementation-specific. |  no  |
-| [Dataflow](../classes/Dataflow.md) | An abstract representation that defines data provision for different reference periods, where a Distribution and its Dataset are instances |  no  |
 
 
 
@@ -27,7 +31,7 @@ Alias: analysisMethod
 
 ## Properties
 
-* Range: NONE
+* Range: [Method](../classes/Method.md)
 
 
 
@@ -39,13 +43,20 @@ Alias: analysisMethod
 
 
 
+### Schema Source
+
+
+* from schema: https://w3id.org/dds
+
+
+
 
 ## Mappings
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:analysisMethod |
-| native | odm:analysisMethod |
+| self | dds:analysisMethod |
+| native | dds:analysisMethod |
 
 
 
@@ -55,10 +66,14 @@ Alias: analysisMethod
 <details>
 ```yaml
 name: analysisMethod
+description: Generic method used to perform this analysis.
+from_schema: https://w3id.org/dds
+rank: 1000
 alias: analysisMethod
+owner: Analysis
 domain_of:
-- Dataflow
 - Analysis
+range: Method
 
 ```
 </details>

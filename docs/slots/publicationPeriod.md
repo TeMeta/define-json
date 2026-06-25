@@ -9,7 +9,7 @@ _Specifies the period of publication of the data or metadata in terms of whateve
 
 
 
-URI: [odm:slot/publicationPeriod](https://cdisc.org/odm2/slot/publicationPeriod)
+URI: [dds:slot/publicationPeriod](https://w3id.org/dds/slot/publicationPeriod)
 Alias: publicationPeriod
 
 <!-- no inheritance hierarchy -->
@@ -32,7 +32,7 @@ Alias: publicationPeriod
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -47,7 +47,7 @@ Alias: publicationPeriod
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://w3id.org/dds
 
 
 
@@ -56,8 +56,8 @@ Alias: publicationPeriod
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:publicationPeriod |
-| native | odm:publicationPeriod |
+| self | dds:publicationPeriod |
+| native | dds:publicationPeriod |
 
 
 
@@ -69,12 +69,13 @@ Alias: publicationPeriod
 name: publicationPeriod
 description: Specifies the period of publication of the data or metadata in terms
   of whatever provisioning agreements might be in force.
-from_schema: https://cdisc.org/define-json
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: publicationPeriod
 owner: IsSdmxDataset
 domain_of:
 - IsSdmxDataset
+range: string
 
 ```
 </details>
