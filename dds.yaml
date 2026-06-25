@@ -784,7 +784,7 @@ classes:
       A text representation that provides content in a specific language, used for multilingual support
     exact_mappings:
       - odm:TranslatedText
-      - sdmx:InternationalString
+      - sdmx:LocalisedString
     attributes:
       "language":
         description: The language of the translation
@@ -794,6 +794,11 @@ classes:
         required: true
 
   TranslatedText:
+    description: >-
+      A container of the language-specific translations of a single piece of text
+      (a set of localised strings), as opposed to one Translation.
+    exact_mappings:
+      - sdmx:InternationalString
     attributes:
       translations:
         range: Translation
