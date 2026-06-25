@@ -111,7 +111,7 @@ classes:
           - range: ItemGroup
           - range: MetaDataVersion
           - range: CodeList
-          - range: ReifiedConcept
+          - range: Concept
           - range: ConceptProperty
           - range: Condition
           - range: Method
@@ -393,7 +393,7 @@ classes:
         inlined_as_list: true
       concepts:
         description: Structured Concepts defined in this version of the metadata
-        range: ReifiedConcept
+        range: Concept
         multivalued: true
       relationships:
         description: >-
@@ -630,7 +630,7 @@ classes:
       implementsConcept:
         description: >-
           Reference to a abstract concept topic that this item group is a specialization of
-        range: ReifiedConcept
+        range: Concept
       applicableWhen:
         description: |
           References to different situations that define when this item applies.
@@ -953,9 +953,13 @@ classes:
           - range: Organization
           - range: string
 
-  ReifiedConcept:
+  Concept:
     description: >-
-      A canonical information layer that makes abstract concepts explicit and referenceable, showing how different data implementations represent the same underlying meanings through a star schema structure with multiple properties
+      An abstract concept that can be referenced and specialised by data
+      implementations. Holds ConceptProperties describing the concept's expected
+      data shape. Multiple ItemGroups or Items can implement the same Concept,
+      allowing standard biomedical concepts to be implemented differently across
+      studies while remaining semantically aligned.
     close_mappings:
       - sdmx:MetaDataStructureDefinition
       - sdmx:Concept
@@ -1241,7 +1245,7 @@ classes:
       implementsConcept:
         description: >-
           Reference to a specific concept that this Method implements.
-        range: ReifiedConcept
+        range: Concept
         inlined: false
 
   SourceItem:
