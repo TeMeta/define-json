@@ -1677,10 +1677,6 @@ classes:
           Subset of dimensions that are agreed upon by the dataflow and must be included.
         range: Dimension
         multivalued: true
-      analysisMethod:
-        description: >-
-          Metadata about the analysis method used to produce the data in this dataflow.
-        range: Analysis
       deliverySchedule:
         description: >-
           Recurring transfer/delivery schedule agreed for this flow. The
@@ -2342,6 +2338,14 @@ classes:
         any_of:
           - range: ItemGroup
           - range: Dataset
+        multivalued: true
+        inlined: false
+      inputDataflows:
+        description: >-
+          Dataflows that supply input data for this analysis. Replaces
+          Dataflow.analysisMethod (which had the dependency backwards — a data
+          contract should not know which analyses consume it).
+        range: Dataflow
         multivalued: true
         inlined: false
 
