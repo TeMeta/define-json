@@ -115,7 +115,6 @@ classes:
           - range: ConceptProperty
           - range: LogicalPredicate
           - range: Method
-          - range: NominalOccurrence
           - range: Dataflow
           - range: CubeComponent
           - range: DataProduct
@@ -1586,12 +1585,19 @@ classes:
         required: true
       relativeTo:
         description: >-
-          Reference to the event or occurrence that this timing is relative to.
-        range: NominalOccurrence
+          The protocol anchor this timing is relative to. Either a TimingLandmark
+          (well-known protocol event such as RANDOMIZATION or FIRST_DOSE) or a
+          free-form OID/identifier referencing a USDM ScheduledActivityInstance.
+        any_of:
+          - range: TimingLandmark
+          - range: string
       relativeFrom:
         description: >-
-          Reference to the event or occurrence that this timing is relative to.
-        range: NominalOccurrence
+          The protocol anchor from which this timing is measured. Either a
+          TimingLandmark or a USDM ScheduledActivityInstance OID reference.
+        any_of:
+          - range: TimingLandmark
+          - range: string
       windowLower:
         description: Start date/time of the timing
         range: datetime
@@ -1609,38 +1615,6 @@ classes:
         description: >-
           The imputation method used for the Timing.
         range: Method
-
-  NominalOccurrence:
-    description: >-
-      An event element that represents occurrences such as planned or unplanned encounters or adverse events
-    narrow_mappings:
-      - usdm:ScheduledInstance
-      - usdm:Encounter
-      - usdm:InterCurrentEvent
-      - fhir:PlanDefinition/action
-      - fhir:ActivityDefinition
-      - fhir:Encounter
-      - fhir:AdverseEvent
-      - omop:Visit_occurrence
-      - omop:Condition_occurrence
-      - omop:Procedure_occurrence
-    related_mappings:
-    is_a: GovernedElement
-    attributes:
-      timing:
-        description: >-
-          A named event reference, that can nest further named timing references.
-        range: Timing
-        required: true
-      event:
-        description: >-
-          The ID of the event in a Schedule.
-        required: false
-      condition:
-        description: >-
-          A condition that must be met for this occurrence to be valid.
-        range: LogicalPredicate
-        multivalued: true
 
   # New classes for Data Cube, Analysis Concept, and DTA governance
   DataStructureDefinition:
@@ -2630,6 +2604,39 @@ enums:
       Form:
         description: >-
           A data collection form.
+
+  TimingLandmark:
+    description: >-
+      Well-known protocol reference points that a Timing can be expressed relative
+      to. Corresponds to USDM TimingRelativeToLandmark. For visit-specific anchors
+      not covered by this enum, use a USDM ScheduledActivityInstance OID reference
+      in Timing.relativeTo as a free string.
+    exact_mappings:
+      - usdm:TimingRelativeToLandmark
+    permissible_values:
+      INFORMED_CONSENT:
+        description: Date of informed consent
+      SCREENING:
+        description: Start of screening period
+      RANDOMIZATION:
+        description: Date of randomisation
+        meaning: usdm:Randomization
+      FIRST_DOSE:
+        description: Date of first study drug administration
+        meaning: usdm:FirstDose
+      LAST_DOSE:
+        description: Date of last study drug administration
+        meaning: usdm:LastDose
+      CYCLE_START:
+        description: Start of the current treatment cycle
+        meaning: usdm:CycleStart
+      END_OF_TREATMENT:
+        description: Date treatment was completed or discontinued
+        meaning: usdm:EndOfTreatment
+      PROCEDURE_DATE:
+        description: Date of a specified procedure
+      DIAGNOSIS_DATE:
+        description: Date of the index diagnosis
 
   TimingType:
     description: >-
