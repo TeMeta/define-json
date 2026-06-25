@@ -218,10 +218,13 @@ classes:
         range: Timing
         required: false
 
-  IsODMItem:
+  ODMItemSerialization:
     mixin: true
     description: >-
-      A mixin that provides additional attributes for CDISC Operational Data Model items, including roles, completion instructions, and implementation notes
+      A mixin providing ODM/CDISC-specific item attributes meaningful only in
+      ODM/Define-XML serialization: CRF completion instructions, CDISC notes,
+      implementation notes, collection exception predicates, and pre-specified
+      values. Applied by the ODM output generator. Not part of the canonical Item.
     attributes:
       role:
         description: >-
@@ -266,9 +269,10 @@ classes:
           - range: string
           - range: TranslatedText
 
-  IsODMStandard:
+  ODMStandardReference:
     description: >-
-      A mixin that provides properties to indicate standards compliance
+      A mixin providing attributes for CDISC standards compliance indication.
+      Applied when serializing to Define-XML context. Not canonical.
     mixin: true
     attributes:
       standard:
@@ -504,7 +508,7 @@ classes:
       - osb:std_unit
     is_a: GovernedElement
     mixins:
-      - IsODMItem
+      - ODMItemSerialization
       - Formatted
     attributes:
       dataType:
@@ -577,7 +581,7 @@ classes:
     is_a: GovernedElement
     mixins:
       - IsProfile
-      - IsODMStandard
+      - ODMStandardReference
     attributes:
       domain:
         description: >-
@@ -811,7 +815,7 @@ classes:
     is_a: GovernedElement
     mixins:
       - Versioned
-      - IsODMStandard
+      - ODMStandardReference
     attributes:
       dataType:
         description: >-
