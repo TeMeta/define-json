@@ -991,7 +991,7 @@ classes:
       references a concept (sdmx:Concept / skos:Concept) but is not itself one; see
       Coding for the vocabulary-item mapping.
     close_mappings:
-      - sdmx:MetaDataStructureDefinition
+      - sdmx:MetadataStructureDefinition
       - osb:Activity
     narrow_mappings:
       - usdm:BiomedicalConcept
@@ -1020,7 +1020,7 @@ classes:
       topic concept. Structurally an SDMX MetadataAttribute (a component with
       cardinality); it references a concept (sdmx:Concept) but is not itself one.
     close_mappings:
-      - sdmx:MetaDataAttribute
+      - sdmx:MetadataAttribute
     narrow_mappings:
       - usdm:BiomedicalConceptProperty
       - usdm:DerivationConceptProperty
@@ -1089,7 +1089,7 @@ classes:
       - fhir:Expression
       - qb:SliceKey
       - sdmx:DataConstraint
-      - sdmx:MetaDataConstraint
+      - sdmx:MetadataConstraint
       - sdmx:DataKeySet
     is_a: GovernedElement
     attributes:
