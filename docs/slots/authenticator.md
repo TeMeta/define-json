@@ -9,7 +9,7 @@ _Who/what authenticated the resource_
 
 
 
-URI: [odm:slot/authenticator](https://cdisc.org/odm2/slot/authenticator)
+URI: [dds:slot/authenticator](https://w3id.org/dds/slot/authenticator)
 Alias: authenticator
 
 <!-- no inheritance hierarchy -->
@@ -22,9 +22,9 @@ Alias: authenticator
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ItemGroup](../classes/ItemGroup.md) | A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections |  no  |
 | [IsProfile](../classes/IsProfile.md) | A mixin that provides additional metadata for FHIR resources and Data Products, including profiles, security tags, and validity periods |  no  |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures |  no  |
+| [ItemGroup](../classes/ItemGroup.md) | A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections |  no  |
 | [Dataset](../classes/Dataset.md) | A collection element that groups observations sharing the same dimensionality, expressed as a set of unique dimensions within a Data Product context |  no  |
 
 
@@ -49,7 +49,7 @@ Alias: authenticator
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -58,8 +58,8 @@ Alias: authenticator
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:authenticator |
-| native | odm:authenticator |
+| self | dds:authenticator |
+| native | dds:authenticator |
 
 
 
@@ -70,7 +70,7 @@ Alias: authenticator
 ```yaml
 name: authenticator
 description: Who/what authenticated the resource
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: authenticator
 owner: IsProfile

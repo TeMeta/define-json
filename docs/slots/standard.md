@@ -9,7 +9,7 @@ _Reference to the standard being implemented_
 
 
 
-URI: [odm:slot/standard](https://cdisc.org/odm2/slot/standard)
+URI: [dds:slot/standard](https://w3id.org/dds/slot/standard)
 Alias: standard
 
 <!-- no inheritance hierarchy -->
@@ -22,10 +22,10 @@ Alias: standard
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
+| [CodeList](../classes/CodeList.md) | A value set that defines a discrete collection of permissible values for an item, corresponding to the ODM CodeList construct |  no  |
+| [ODMStandardReference](../classes/ODMStandardReference.md) | A mixin providing attributes for CDISC standards compliance indication. Applied when serializing to Define-XML context. Not canonical. |  no  |
 | [ItemGroup](../classes/ItemGroup.md) | A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections |  no  |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures |  no  |
-| [IsODMStandard](../classes/IsODMStandard.md) | A mixin that provides properties to indicate standards compliance |  no  |
-| [CodeList](../classes/CodeList.md) | A value set that defines a discrete collection of permissible values for an item, corresponding to the ODM CodeList construct |  no  |
 
 
 
@@ -49,7 +49,7 @@ Alias: standard
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -58,8 +58,8 @@ Alias: standard
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:standard |
-| native | odm:standard |
+| self | dds:standard |
+| native | dds:standard |
 
 
 
@@ -70,12 +70,12 @@ Alias: standard
 ```yaml
 name: standard
 description: Reference to the standard being implemented
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: standard
-owner: IsODMStandard
+owner: ODMStandardReference
 domain_of:
-- IsODMStandard
+- ODMStandardReference
 range: Standard
 
 ```

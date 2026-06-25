@@ -9,7 +9,7 @@ _User's role in the study._
 
 
 
-URI: [odm:slot/userType](https://cdisc.org/odm2/slot/userType)
+URI: [dds:slot/userType](https://w3id.org/dds/slot/userType)
 Alias: userType
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: userType
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: userType
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:userType |
-| native | odm:userType |
+| self | dds:userType |
+| native | dds:userType |
 
 
 
@@ -67,7 +67,7 @@ Alias: userType
 ```yaml
 name: userType
 description: User's role in the study.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: userType
 owner: User

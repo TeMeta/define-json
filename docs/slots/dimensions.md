@@ -4,7 +4,7 @@
 
 
 
-URI: [odm:slot/dimensions](https://cdisc.org/odm2/slot/dimensions)
+URI: [dds:slot/dimensions](https://w3id.org/dds/slot/dimensions)
 Alias: dimensions
 
 <!-- no inheritance hierarchy -->
@@ -17,8 +17,8 @@ Alias: dimensions
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [DimensionRelationship](../classes/DimensionRelationship.md) | A relationship element that associates a DataAttribute with a specific Dimension at a specific level |  no  |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures |  no  |
+| [DimensionRelationship](../classes/DimensionRelationship.md) | A relationship element that associates a DataAttribute with a specific Dimension at a specific level |  no  |
 
 
 
@@ -44,8 +44,8 @@ Alias: dimensions
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:dimensions |
-| native | odm:dimensions |
+| self | dds:dimensions |
+| native | dds:dimensions |
 
 
 

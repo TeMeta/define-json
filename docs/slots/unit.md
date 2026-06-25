@@ -9,7 +9,7 @@ _Unit of the rightOperand, where applicable_
 
 
 
-URI: [odm:slot/unit](https://cdisc.org/odm2/slot/unit)
+URI: [dds:slot/unit](https://w3id.org/dds/slot/unit)
 Alias: unit
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: unit
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: unit
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:unit |
-| native | odm:unit |
+| self | dds:unit |
+| native | dds:unit |
 
 
 
@@ -67,7 +67,7 @@ Alias: unit
 ```yaml
 name: unit
 description: Unit of the rightOperand, where applicable
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: unit
 owner: Constraint

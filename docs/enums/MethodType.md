@@ -7,7 +7,7 @@ _An enumeration that defines the types of computational methods available for da
 
 
 
-URI: [odm:enum/MethodType](https://cdisc.org/odm2/enum/MethodType)
+URI: [dds:enum/MethodType](https://w3id.org/dds/enum/MethodType)
 
 ## Permissible Values
 
@@ -36,7 +36,7 @@ URI: [odm:enum/MethodType](https://cdisc.org/odm2/enum/MethodType)
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -50,7 +50,7 @@ URI: [odm:enum/MethodType](https://cdisc.org/odm2/enum/MethodType)
 name: MethodType
 description: An enumeration that defines the types of computational methods available
   for data processing
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 permissible_values:
   Computation:

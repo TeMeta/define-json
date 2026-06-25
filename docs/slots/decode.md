@@ -4,7 +4,7 @@
 
 
 
-URI: [odm:slot/decode](https://cdisc.org/odm2/slot/decode)
+URI: [dds:slot/decode](https://w3id.org/dds/slot/decode)
 Alias: decode
 
 <!-- no inheritance hierarchy -->
@@ -17,8 +17,8 @@ Alias: decode
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Coding](../classes/Coding.md) | A semantic reference that provides standardized codes and their meanings from controlled vocabularies |  no  |
 | [CodeListItem](../classes/CodeListItem.md) | A structured member of a CodeList that extends the Coding class with additional context-specific properties |  no  |
+| [Coding](../classes/Coding.md) | A semantic reference that provides standardized codes and their meanings from controlled vocabularies |  no  |
 
 
 
@@ -44,8 +44,8 @@ Alias: decode
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:decode |
-| native | odm:decode |
+| self | dds:decode |
+| native | dds:decode |
 
 
 

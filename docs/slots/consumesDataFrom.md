@@ -9,7 +9,7 @@ _The Dataflows that this consumer receives data from_
 
 
 
-URI: [odm:slot/consumesDataFrom](https://cdisc.org/odm2/slot/consumesDataFrom)
+URI: [dds:slot/consumesDataFrom](https://w3id.org/dds/slot/consumesDataFrom)
 Alias: consumesDataFrom
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: consumesDataFrom
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: consumesDataFrom
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:consumesDataFrom |
-| native | odm:consumesDataFrom |
+| self | dds:consumesDataFrom |
+| native | dds:consumesDataFrom |
 
 
 
@@ -69,7 +69,7 @@ Alias: consumesDataFrom
 ```yaml
 name: consumesDataFrom
 description: The Dataflows that this consumer receives data from
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: consumesDataFrom
 owner: DataConsumer

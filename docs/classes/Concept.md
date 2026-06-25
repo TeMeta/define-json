@@ -1,20 +1,20 @@
 
 
-# Class: ReifiedConcept 
+# Class: Concept 
 
 
-_A canonical information layer that makes abstract concepts explicit and referenceable, showing how different data implementations represent the same underlying meanings through a star schema structure with multiple properties_
+_An abstract concept that can be referenced and specialised by data implementations. Holds ConceptProperties describing the concept's expected data shape. Multiple ItemGroups or Items can implement the same Concept, allowing standard biomedical concepts to be implemented differently across studies while remaining semantically aligned._
 
 
 
 
 
-URI: [odm:class/ReifiedConcept](https://cdisc.org/odm2/class/ReifiedConcept)
+URI: [dds:class/Concept](https://w3id.org/dds/class/Concept)
 
 
 ```mermaid
 erDiagram
-ReifiedConcept {
+Concept {
     string version  
     string href  
     string OID  
@@ -100,10 +100,10 @@ CodeList {
     string wasDerivedFrom  
 }
 
-ReifiedConcept ||--}o ConceptProperty : "properties"
-ReifiedConcept ||--}o Coding : "coding"
-ReifiedConcept ||--}o Comment : "comments"
-ReifiedConcept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Concept ||--}o ConceptProperty : "properties"
+Concept ||--}o Coding : "coding"
+Concept ||--}o Comment : "comments"
+Concept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 SiteOrSponsorComment ||--}o Coding : "coding"
 SiteOrSponsorComment ||--}o Comment : "comments"
 SiteOrSponsorComment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -129,7 +129,7 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 ## Inheritance
 * [GovernedElement](../classes/GovernedElement.md) [ [Identifiable](../classes/Identifiable.md) [Labelled](../classes/Labelled.md) [Governed](../classes/Governed.md)]
-    * **ReifiedConcept** [ [Versioned](../classes/Versioned.md)]
+    * **Concept** [ [Versioned](../classes/Versioned.md)]
 
 
 
@@ -153,7 +153,7 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | [purpose](../slots/purpose.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Purpose or rationale for this data element | [Governed](../classes/Governed.md) |
 | [lastUpdated](../slots/lastUpdated.md) | 0..1 <br/> [Datetime](../types/Datetime.md) | When the resource was last updated | [Governed](../classes/Governed.md) |
 | [owner](../slots/owner.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Party responsible for this element | [Governed](../classes/Governed.md) |
-| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[MetaDataVersion](../classes/MetaDataVersion.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[ReifiedConcept](../classes/ReifiedConcept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[Condition](../classes/Condition.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[NominalOccurrence](../classes/NominalOccurrence.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
+| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[Specification](../classes/Specification.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[Concept](../classes/Concept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[LogicalPredicate](../classes/LogicalPredicate.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
 
 
 
@@ -163,36 +163,37 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
-| [GovernedElement](../classes/GovernedElement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [Governed](../classes/Governed.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | [concepts](../slots/concepts.md) | range | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [Item](../classes/Item.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [ItemGroup](../classes/ItemGroup.md) | [implementsConcept](../slots/implementsConcept.md) | range | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [ItemGroup](../classes/ItemGroup.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [CodeList](../classes/CodeList.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [Comment](../classes/Comment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [ReifiedConcept](../classes/ReifiedConcept.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [ConceptProperty](../classes/ConceptProperty.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [WhereClause](../classes/WhereClause.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [Condition](../classes/Condition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [Method](../classes/Method.md) | [implementsConcept](../slots/implementsConcept.md) | range | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [Method](../classes/Method.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [NominalOccurrence](../classes/NominalOccurrence.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [DataStructureDefinition](../classes/DataStructureDefinition.md) | [implementsConcept](../slots/implementsConcept.md) | range | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [DataStructureDefinition](../classes/DataStructureDefinition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [Dataflow](../classes/Dataflow.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [CubeComponent](../classes/CubeComponent.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [Measure](../classes/Measure.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [Dimension](../classes/Dimension.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [DataAttribute](../classes/DataAttribute.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [DataProduct](../classes/DataProduct.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [ProvisionAgreement](../classes/ProvisionAgreement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [Policy](../classes/Policy.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [Analysis](../classes/Analysis.md) | [implementsConcept](../slots/implementsConcept.md) | range | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [Analysis](../classes/Analysis.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
-| [Display](../classes/Display.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ReifiedConcept](../classes/ReifiedConcept.md) |
+| [GovernedElement](../classes/GovernedElement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Concept](../classes/Concept.md) |
+| [Governed](../classes/Governed.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Concept](../classes/Concept.md) |
+| [Specification](../classes/Specification.md) | [concepts](../slots/concepts.md) | range | [Concept](../classes/Concept.md) |
+| [Specification](../classes/Specification.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Concept](../classes/Concept.md) |
+| [Item](../classes/Item.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Concept](../classes/Concept.md) |
+| [ItemGroup](../classes/ItemGroup.md) | [implementsConcept](../slots/implementsConcept.md) | range | [Concept](../classes/Concept.md) |
+| [ItemGroup](../classes/ItemGroup.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Concept](../classes/Concept.md) |
+| [Query](../classes/Query.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Concept](../classes/Concept.md) |
+| [CodeList](../classes/CodeList.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Concept](../classes/Concept.md) |
+| [Comment](../classes/Comment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Concept](../classes/Concept.md) |
+| [Concept](../classes/Concept.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Concept](../classes/Concept.md) |
+| [ConceptProperty](../classes/ConceptProperty.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Concept](../classes/Concept.md) |
+| [ApplicabilityCondition](../classes/ApplicabilityCondition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Concept](../classes/Concept.md) |
+| [LogicalPredicate](../classes/LogicalPredicate.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Concept](../classes/Concept.md) |
+| [Check](../classes/Check.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Concept](../classes/Concept.md) |
+| [Method](../classes/Method.md) | [implementsConcept](../slots/implementsConcept.md) | range | [Concept](../classes/Concept.md) |
+| [Method](../classes/Method.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Concept](../classes/Concept.md) |
+| [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Concept](../classes/Concept.md) |
+| [DataStructureDefinition](../classes/DataStructureDefinition.md) | [implementsConcept](../slots/implementsConcept.md) | range | [Concept](../classes/Concept.md) |
+| [DataStructureDefinition](../classes/DataStructureDefinition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Concept](../classes/Concept.md) |
+| [Dataflow](../classes/Dataflow.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Concept](../classes/Concept.md) |
+| [CubeComponent](../classes/CubeComponent.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Concept](../classes/Concept.md) |
+| [Measure](../classes/Measure.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Concept](../classes/Concept.md) |
+| [Dimension](../classes/Dimension.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Concept](../classes/Concept.md) |
+| [DataAttribute](../classes/DataAttribute.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Concept](../classes/Concept.md) |
+| [DataProduct](../classes/DataProduct.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Concept](../classes/Concept.md) |
+| [ProvisionAgreement](../classes/ProvisionAgreement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Concept](../classes/Concept.md) |
+| [Policy](../classes/Policy.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Concept](../classes/Concept.md) |
+| [Analysis](../classes/Analysis.md) | [implementsConcept](../slots/implementsConcept.md) | range | [Concept](../classes/Concept.md) |
+| [Analysis](../classes/Analysis.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Concept](../classes/Concept.md) |
+| [Display](../classes/Display.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Concept](../classes/Concept.md) |
 
 
 
@@ -210,7 +211,7 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -219,8 +220,8 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:ReifiedConcept |
-| native | odm:ReifiedConcept |
+| self | dds:Concept |
+| native | dds:Concept |
 | narrow | usdm:BiomedicalConcept, usdm:AnalysisConcept, usdm:DerivationConcept |
 | related | osb:ActivityInstance, osb:assm_group, osb:assm_subgroup |
 | close | sdmx:MetaDataStructureDefinition, sdmx:Concept, osb:Activity |
@@ -238,11 +239,12 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 <details>
 ```yaml
-name: ReifiedConcept
-description: A canonical information layer that makes abstract concepts explicit and
-  referenceable, showing how different data implementations represent the same underlying
-  meanings through a star schema structure with multiple properties
-from_schema: https://cdisc.org/data-definition-spec
+name: Concept
+description: An abstract concept that can be referenced and specialised by data implementations.
+  Holds ConceptProperties describing the concept's expected data shape. Multiple ItemGroups
+  or Items can implement the same Concept, allowing standard biomedical concepts to
+  be implemented differently across studies while remaining semantically aligned.
+from_schema: https://w3id.org/dds
 close_mappings:
 - sdmx:MetaDataStructureDefinition
 - sdmx:Concept
@@ -263,10 +265,10 @@ attributes:
     name: properties
     description: Properties of the reified object, which can be other governed elements
       or simple values
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - ReifiedConcept
+    - Concept
     range: ConceptProperty
     multivalued: true
     inlined: true
@@ -279,11 +281,12 @@ attributes:
 
 <details>
 ```yaml
-name: ReifiedConcept
-description: A canonical information layer that makes abstract concepts explicit and
-  referenceable, showing how different data implementations represent the same underlying
-  meanings through a star schema structure with multiple properties
-from_schema: https://cdisc.org/data-definition-spec
+name: Concept
+description: An abstract concept that can be referenced and specialised by data implementations.
+  Holds ConceptProperties describing the concept's expected data shape. Multiple ItemGroups
+  or Items can implement the same Concept, allowing standard biomedical concepts to
+  be implemented differently across studies while remaining semantically aligned.
+from_schema: https://w3id.org/dds
 close_mappings:
 - sdmx:MetaDataStructureDefinition
 - sdmx:Concept
@@ -304,12 +307,12 @@ attributes:
     name: properties
     description: Properties of the reified object, which can be other governed elements
       or simple values
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: properties
-    owner: ReifiedConcept
+    owner: Concept
     domain_of:
-    - ReifiedConcept
+    - Concept
     range: ConceptProperty
     multivalued: true
     inlined: true
@@ -317,10 +320,10 @@ attributes:
   version:
     name: version
     description: The version of the external resources
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: version
-    owner: ReifiedConcept
+    owner: Concept
     domain_of:
     - Versioned
     - Standard
@@ -329,10 +332,10 @@ attributes:
     name: href
     description: Machine-readable instructions to obtain the resource e.g. FHIR path,
       URL
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: href
-    owner: ReifiedConcept
+    owner: Concept
     domain_of:
     - Versioned
     range: string
@@ -341,11 +344,11 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     identifier: true
     alias: OID
-    owner: ReifiedConcept
+    owner: Concept
     domain_of:
     - Identifiable
     range: string
@@ -353,20 +356,20 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: uuid
-    owner: ReifiedConcept
+    owner: Concept
     domain_of:
     - Identifiable
     range: string
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: name
-    owner: ReifiedConcept
+    owner: Concept
     domain_of:
     - Labelled
     - DefClass
@@ -376,10 +379,10 @@ attributes:
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: description
-    owner: ReifiedConcept
+    owner: Concept
     domain_of:
     - Labelled
     - CodeListItem
@@ -390,10 +393,10 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: coding
-    owner: ReifiedConcept
+    owner: Concept
     domain_of:
     - Labelled
     - CodeListItem
@@ -405,12 +408,12 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:prefLabel
     rank: 1000
     alias: label
-    owner: ReifiedConcept
+    owner: Concept
     domain_of:
     - Labelled
     range: string
@@ -420,12 +423,12 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:altLabel
     rank: 1000
     alias: aliases
-    owner: ReifiedConcept
+    owner: Concept
     domain_of:
     - Labelled
     - CodeListItem
@@ -439,10 +442,10 @@ attributes:
   mandatory:
     name: mandatory
     description: Is this element required?
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: mandatory
-    owner: ReifiedConcept
+    owner: Concept
     domain_of:
     - Governed
     range: boolean
@@ -450,10 +453,10 @@ attributes:
     name: comments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: comments
-    owner: ReifiedConcept
+    owner: Concept
     domain_of:
     - Governed
     range: Comment
@@ -463,10 +466,10 @@ attributes:
     name: siteOrSponsorComments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: siteOrSponsorComments
-    owner: ReifiedConcept
+    owner: Concept
     domain_of:
     - Governed
     range: SiteOrSponsorComment
@@ -475,10 +478,10 @@ attributes:
   purpose:
     name: purpose
     description: Purpose or rationale for this data element
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: purpose
-    owner: ReifiedConcept
+    owner: Concept
     domain_of:
     - Governed
     range: string
@@ -488,23 +491,23 @@ attributes:
   lastUpdated:
     name: lastUpdated
     description: When the resource was last updated
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: lastUpdated
-    owner: ReifiedConcept
+    owner: Concept
     domain_of:
     - Governed
     range: datetime
   owner:
     name: owner
     description: Party responsible for this element
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     narrow_mappings:
     - prov:wasAttributedTo
     - prov:wasAssociatedBy
     rank: 1000
     alias: owner
-    owner: ReifiedConcept
+    owner: Concept
     domain_of:
     - Governed
     range: string
@@ -516,25 +519,24 @@ attributes:
     name: wasDerivedFrom
     description: Reference to another item that this item implements or extends, e.g.
       a template Item definition.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - prov:wasDerivedFrom
     rank: 1000
     alias: wasDerivedFrom
-    owner: ReifiedConcept
+    owner: Concept
     domain_of:
     - Governed
     range: string
     any_of:
     - range: Item
     - range: ItemGroup
-    - range: MetaDataVersion
+    - range: Specification
     - range: CodeList
-    - range: ReifiedConcept
+    - range: Concept
     - range: ConceptProperty
-    - range: Condition
+    - range: LogicalPredicate
     - range: Method
-    - range: NominalOccurrence
     - range: Dataflow
     - range: CubeComponent
     - range: DataProduct

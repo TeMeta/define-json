@@ -9,7 +9,7 @@ _Flag to indicate that the term represents "other" content_
 
 
 
-URI: [odm:slot/other](https://cdisc.org/odm2/slot/other)
+URI: [dds:slot/other](https://w3id.org/dds/slot/other)
 Alias: other
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: other
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: other
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:other |
-| native | odm:other |
+| self | dds:other |
+| native | dds:other |
 
 
 
@@ -67,7 +67,7 @@ Alias: other
 ```yaml
 name: other
 description: Flag to indicate that the term represents "other" content
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: other
 owner: CodeListItem

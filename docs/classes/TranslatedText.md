@@ -4,7 +4,7 @@
 
 
 
-URI: [odm:class/TranslatedText](https://cdisc.org/odm2/class/TranslatedText)
+URI: [dds:class/TranslatedText](https://w3id.org/dds/class/TranslatedText)
 
 
 ```mermaid
@@ -51,20 +51,15 @@ TranslatedText ||--}o Translation : "translations"
 | [Labelled](../classes/Labelled.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [Labelled](../classes/Labelled.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [Labelled](../classes/Labelled.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [IsODMItem](../classes/IsODMItem.md) | [role](../slots/role.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [IsODMItem](../classes/IsODMItem.md) | [crfCompletionInstructions](../slots/crfCompletionInstructions.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [IsODMItem](../classes/IsODMItem.md) | [cdiscNotes](../slots/cdiscNotes.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [IsODMItem](../classes/IsODMItem.md) | [implementationNotes](../slots/implementationNotes.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [IsODMItem](../classes/IsODMItem.md) | [preSpecifiedValue](../slots/preSpecifiedValue.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [Item](../classes/Item.md) | [role](../slots/role.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [Item](../classes/Item.md) | [crfCompletionInstructions](../slots/crfCompletionInstructions.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [Item](../classes/Item.md) | [cdiscNotes](../slots/cdiscNotes.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [Item](../classes/Item.md) | [implementationNotes](../slots/implementationNotes.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [Item](../classes/Item.md) | [preSpecifiedValue](../slots/preSpecifiedValue.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ODMItemSerialization](../classes/ODMItemSerialization.md) | [role](../slots/role.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ODMItemSerialization](../classes/ODMItemSerialization.md) | [crfCompletionInstructions](../slots/crfCompletionInstructions.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ODMItemSerialization](../classes/ODMItemSerialization.md) | [cdiscNotes](../slots/cdiscNotes.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ODMItemSerialization](../classes/ODMItemSerialization.md) | [implementationNotes](../slots/implementationNotes.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ODMItemSerialization](../classes/ODMItemSerialization.md) | [preSpecifiedValue](../slots/preSpecifiedValue.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Specification](../classes/Specification.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Specification](../classes/Specification.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Specification](../classes/Specification.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Specification](../classes/Specification.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [Item](../classes/Item.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [Item](../classes/Item.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [Item](../classes/Item.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
@@ -77,6 +72,11 @@ TranslatedText ||--}o Translation : "translations"
 | [Relationship](../classes/Relationship.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [Relationship](../classes/Relationship.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [Relationship](../classes/Relationship.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Query](../classes/Query.md) | [text](../slots/text.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Query](../classes/Query.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Query](../classes/Query.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Query](../classes/Query.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Query](../classes/Query.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [CodeList](../classes/CodeList.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [CodeList](../classes/CodeList.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [CodeList](../classes/CodeList.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
@@ -92,22 +92,26 @@ TranslatedText ||--}o Translation : "translations"
 | [Dictionary](../classes/Dictionary.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [Dictionary](../classes/Dictionary.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [Dictionary](../classes/Dictionary.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [ReifiedConcept](../classes/ReifiedConcept.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [ReifiedConcept](../classes/ReifiedConcept.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [ReifiedConcept](../classes/ReifiedConcept.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [ReifiedConcept](../classes/ReifiedConcept.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Concept](../classes/Concept.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Concept](../classes/Concept.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Concept](../classes/Concept.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Concept](../classes/Concept.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [ConceptProperty](../classes/ConceptProperty.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [ConceptProperty](../classes/ConceptProperty.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [ConceptProperty](../classes/ConceptProperty.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [ConceptProperty](../classes/ConceptProperty.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [WhereClause](../classes/WhereClause.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [WhereClause](../classes/WhereClause.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [WhereClause](../classes/WhereClause.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [WhereClause](../classes/WhereClause.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [Condition](../classes/Condition.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [Condition](../classes/Condition.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [Condition](../classes/Condition.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [Condition](../classes/Condition.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ApplicabilityCondition](../classes/ApplicabilityCondition.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ApplicabilityCondition](../classes/ApplicabilityCondition.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ApplicabilityCondition](../classes/ApplicabilityCondition.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [ApplicabilityCondition](../classes/ApplicabilityCondition.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [LogicalPredicate](../classes/LogicalPredicate.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [LogicalPredicate](../classes/LogicalPredicate.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [LogicalPredicate](../classes/LogicalPredicate.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [LogicalPredicate](../classes/LogicalPredicate.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Check](../classes/Check.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Check](../classes/Check.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Check](../classes/Check.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Check](../classes/Check.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [FormalExpression](../classes/FormalExpression.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [FormalExpression](../classes/FormalExpression.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [FormalExpression](../classes/FormalExpression.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
@@ -144,10 +148,6 @@ TranslatedText ||--}o Translation : "translations"
 | [Timing](../classes/Timing.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [Timing](../classes/Timing.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [Timing](../classes/Timing.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [NominalOccurrence](../classes/NominalOccurrence.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [NominalOccurrence](../classes/NominalOccurrence.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [NominalOccurrence](../classes/NominalOccurrence.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
-| [NominalOccurrence](../classes/NominalOccurrence.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [structure](../slots/structure.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
@@ -231,7 +231,7 @@ TranslatedText ||--}o Translation : "translations"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -240,8 +240,8 @@ TranslatedText ||--}o Translation : "translations"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:TranslatedText |
-| native | odm:TranslatedText |
+| self | dds:TranslatedText |
+| native | dds:TranslatedText |
 
 
 
@@ -257,11 +257,11 @@ TranslatedText ||--}o Translation : "translations"
 <details>
 ```yaml
 name: TranslatedText
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 attributes:
   translations:
     name: translations
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - TranslatedText
@@ -278,11 +278,11 @@ attributes:
 <details>
 ```yaml
 name: TranslatedText
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 attributes:
   translations:
     name: translations
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: translations
     owner: TranslatedText

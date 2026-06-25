@@ -9,7 +9,7 @@ _A mixin that provides additional metadata for FHIR resources and Data Products,
 
 
 
-URI: [odm:class/IsProfile](https://cdisc.org/odm2/class/IsProfile)
+URI: [dds:class/IsProfile](https://w3id.org/dds/class/IsProfile)
 
 
 ```mermaid
@@ -24,6 +24,8 @@ Timing {
     TimingType type  
     boolean isNominal  
     string value  
+    string relativeTo  
+    string relativeFrom  
     datetime windowLower  
     datetime windowUpper  
     boolean recalled  
@@ -56,38 +58,17 @@ Method {
     string owner  
     string wasDerivedFrom  
 }
-NominalOccurrence {
-    string event  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
 
 IsProfile ||--}o Coding : "security"
 IsProfile ||--|o Timing : "validityPeriod"
-Timing ||--|o NominalOccurrence : "relativeTo"
-Timing ||--|o NominalOccurrence : "relativeFrom"
 Timing ||--|o Method : "imputation"
 Timing ||--}o Coding : "coding"
 Method ||--}o FormalExpression : "expressions"
 Method ||--}o DocumentReference : "documents"
-Method ||--|o ReifiedConcept : "implementsConcept"
+Method ||--|o Concept : "implementsConcept"
 Method ||--}o Coding : "coding"
 Method ||--}o Comment : "comments"
 Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-NominalOccurrence ||--|| Timing : "timing"
-NominalOccurrence ||--}o Condition : "condition"
-NominalOccurrence ||--}o Coding : "coding"
-NominalOccurrence ||--}o Comment : "comments"
-NominalOccurrence ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 ```
 
@@ -137,7 +118,7 @@ NominalOccurrence ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -146,8 +127,8 @@ NominalOccurrence ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:IsProfile |
-| native | odm:IsProfile |
+| self | dds:IsProfile |
+| native | dds:IsProfile |
 
 
 
@@ -165,7 +146,7 @@ NominalOccurrence ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 name: IsProfile
 description: A mixin that provides additional metadata for FHIR resources and Data
   Products, including profiles, security tags, and validity periods
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 mixin: true
 mixins:
 - Versioned
@@ -173,7 +154,7 @@ attributes:
   profile:
     name: profile
     description: Profiles this resource claims to conform to
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - IsProfile
@@ -182,7 +163,7 @@ attributes:
   security:
     name: security
     description: Security tags applied to this resource
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - IsProfile
@@ -193,7 +174,7 @@ attributes:
   authenticator:
     name: authenticator
     description: Who/what authenticated the resource
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - IsProfile
@@ -205,7 +186,7 @@ attributes:
   validityPeriod:
     name: validityPeriod
     description: Time period during which the resource is valid
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - IsProfile
@@ -222,7 +203,7 @@ attributes:
 name: IsProfile
 description: A mixin that provides additional metadata for FHIR resources and Data
   Products, including profiles, security tags, and validity periods
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 mixin: true
 mixins:
 - Versioned
@@ -230,7 +211,7 @@ attributes:
   profile:
     name: profile
     description: Profiles this resource claims to conform to
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: profile
     owner: IsProfile
@@ -242,7 +223,7 @@ attributes:
   security:
     name: security
     description: Security tags applied to this resource
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: security
     owner: IsProfile
@@ -255,7 +236,7 @@ attributes:
   authenticator:
     name: authenticator
     description: Who/what authenticated the resource
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: authenticator
     owner: IsProfile
@@ -270,7 +251,7 @@ attributes:
   validityPeriod:
     name: validityPeriod
     description: Time period during which the resource is valid
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: validityPeriod
     owner: IsProfile
@@ -281,7 +262,7 @@ attributes:
   version:
     name: version
     description: The version of the external resources
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: version
     owner: IsProfile
@@ -293,7 +274,7 @@ attributes:
     name: href
     description: Machine-readable instructions to obtain the resource e.g. FHIR path,
       URL
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: href
     owner: IsProfile

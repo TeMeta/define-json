@@ -9,7 +9,7 @@ _A relationship element that associates a DataAttribute with an Observation, all
 
 
 
-URI: [odm:class/ObservationRelationship](https://cdisc.org/odm2/class/ObservationRelationship)
+URI: [dds:class/ObservationRelationship](https://w3id.org/dds/class/ObservationRelationship)
 
 
 ```mermaid
@@ -85,12 +85,6 @@ Method {
 Item {
     DataType dataType  
     integer length  
-    string role  
-    boolean hasNoData  
-    string crfCompletionInstructions  
-    string cdiscNotes  
-    string implementationNotes  
-    string preSpecifiedValue  
     integer decimalDigits  
     string displayFormat  
     integer significantDigits  
@@ -124,18 +118,16 @@ Comment ||--}o Comment : "comments"
 Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Method ||--}o FormalExpression : "expressions"
 Method ||--}o DocumentReference : "documents"
-Method ||--|o ReifiedConcept : "implementsConcept"
+Method ||--|o Concept : "implementsConcept"
 Method ||--}o Coding : "coding"
 Method ||--}o Comment : "comments"
 Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--}o WhereClause : "applicableWhen"
+Item ||--}o ApplicabilityCondition : "applicableWhen"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
-Item ||--|o CodeList : "roleCodeList"
-Item ||--|o Condition : "collectionExceptionCondition"
 Item ||--}o Coding : "coding"
 Item ||--}o Comment : "comments"
 Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -173,7 +165,7 @@ Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -182,8 +174,8 @@ Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:ObservationRelationship |
-| native | odm:ObservationRelationship |
+| self | dds:ObservationRelationship |
+| native | dds:ObservationRelationship |
 | exact | sdmx:ObservationRelationship |
 
 
@@ -202,7 +194,7 @@ Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 name: ObservationRelationship
 description: A relationship element that associates a DataAttribute with an Observation,
   allowing value-level Items to be reused across multiple different Views
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - sdmx:ObservationRelationship
 attributes:
@@ -211,7 +203,7 @@ attributes:
     description: Reference to the Item in an observation context that this definition
       applies to. e.g. the SDTM Variable Specialisation for a given Biomedical Concept
       Property.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - sdmx:ObservationDescriptor
     domain_of:
@@ -222,7 +214,7 @@ attributes:
     range: Item
   attribute:
     name: attribute
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     domain_of:
     - Resource
     - MeasureRelationship
@@ -242,7 +234,7 @@ attributes:
 name: ObservationRelationship
 description: A relationship element that associates a DataAttribute with an Observation,
   allowing value-level Items to be reused across multiple different Views
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - sdmx:ObservationRelationship
 attributes:
@@ -251,7 +243,7 @@ attributes:
     description: Reference to the Item in an observation context that this definition
       applies to. e.g. the SDTM Variable Specialisation for a given Biomedical Concept
       Property.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - sdmx:ObservationDescriptor
     alias: item
@@ -264,7 +256,7 @@ attributes:
     range: Item
   attribute:
     name: attribute
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     alias: attribute
     owner: ObservationRelationship
     domain_of:

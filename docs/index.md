@@ -1,8 +1,8 @@
-# Data Definition Specification
+# Data Definition Specification (DDS)
 
-Data model for supply and demand data contracts to complement CDISC USDM, ODM, and Dataset-JSON. This LinkML version includes semantics to act as Rosetta Stone for SDMX, FHIR, OMOP, RDF, and CDISC.
+Standards-agnostic canonical model for clinical data meaning, structure, and governance. Projects to CDISC (SDTM/ADaM/Define-XML), FHIR, OMOP, and SDMX. ODM/Define-XML is one serialization facet applied by the output generator; the canonical model is not ODM-derived.
 
-URI: https://cdisc.org/data-definition-spec
+URI: https://w3id.org/dds
 
 Name: data-definition-spec
 
@@ -12,18 +12,9 @@ Name: data-definition-spec
 
 ```mermaid
 erDiagram
-MetaDataVersion {
+Specification {
     stringList resources  
-    string fileOID  
-    datetime asOfDateTime  
-    datetime creationDateTime  
-    string odmVersion  
-    string fileType  
-    string originator  
-    string sourceSystem  
-    string sourceSystemVersion  
-    string context  
-    string defineVersion  
+    string usdmStudyDesignId  
     string studyOID  
     string studyName  
     string studyDescription  
@@ -126,7 +117,7 @@ Analysis {
     string owner  
     string wasDerivedFrom  
 }
-ReifiedConcept {
+Concept {
     string version  
     string href  
     string OID  
@@ -232,8 +223,8 @@ Parameter {
     string label  
     stringList aliases  
 }
-Condition {
-    string implementsCondition  
+LogicalPredicate {
+    string implementsPredicate  
     LogicalOperator operator  
     string OID  
     string uuid  
@@ -254,7 +245,31 @@ RangeCheck {
     SoftHard softHard  
     LogicalOperator operator  
 }
-WhereClause {
+Check {
+    string publishedBy  
+    uriorcurie externalReference  
+    SoftHard severity  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+IdentifiableElement {
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+ApplicabilityCondition {
     string OID  
     string uuid  
     string name  
@@ -275,8 +290,171 @@ CodeListItem {
     decimal weight  
     boolean other  
 }
+Dataflow {
+    stringList deliverySchedule  
+    string version  
+    string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+Dimension {
+    string role  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
 Method {
     MethodType type  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+Item {
+    DataType dataType  
+    integer length  
+    integer decimalDigits  
+    string displayFormat  
+    integer significantDigits  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+Origin {
+    OriginType type  
+    OriginSource source  
+}
+SourceItem {
+    stringList resource  
+}
+DataStructureDefinition {
+    boolean evolvingStructure  
+    string domain  
+    string structure  
+    boolean isReferenceData  
+    ItemGroupType type  
+    boolean hasNoData  
+    stringList profile  
+    string authenticator  
+    boolean isNonStandard  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+    string version  
+    string href  
+}
+Timing {
+    TimingType type  
+    boolean isNominal  
+    string value  
+    string relativeTo  
+    string relativeFrom  
+    datetime windowLower  
+    datetime windowUpper  
+    boolean recalled  
+    string frequency  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+DefClass {
+    string name  
+}
+SubClass {
+    string name  
+    string parentClass  
+}
+ItemGroup {
+    string domain  
+    string structure  
+    boolean isReferenceData  
+    ItemGroupType type  
+    boolean hasNoData  
+    stringList profile  
+    string authenticator  
+    boolean isNonStandard  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+    string version  
+    string href  
+}
+ComponentList {
+    stringList components  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+DataAttribute {
+    string role  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+Measure {
+    string role  
     string OID  
     string uuid  
     string name  
@@ -364,187 +542,6 @@ Constraint {
     string label  
     stringList aliases  
 }
-Dataflow {
-    stringList deliverySchedule  
-    string version  
-    string href  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-Dimension {
-    string role  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-Item {
-    DataType dataType  
-    integer length  
-    string role  
-    boolean hasNoData  
-    string crfCompletionInstructions  
-    string cdiscNotes  
-    string implementationNotes  
-    string preSpecifiedValue  
-    integer decimalDigits  
-    string displayFormat  
-    integer significantDigits  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-Origin {
-    OriginType type  
-    OriginSource source  
-}
-SourceItem {
-    stringList resource  
-}
-DataStructureDefinition {
-    boolean evolvingStructure  
-    string domain  
-    string structure  
-    boolean isReferenceData  
-    ItemGroupType type  
-    boolean hasNoData  
-    stringList profile  
-    string authenticator  
-    boolean isNonStandard  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-    string version  
-    string href  
-}
-Timing {
-    TimingType type  
-    boolean isNominal  
-    string value  
-    datetime windowLower  
-    datetime windowUpper  
-    boolean recalled  
-    string frequency  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
-NominalOccurrence {
-    string event  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-DefClass {
-    string name  
-}
-SubClass {
-    string name  
-    string parentClass  
-}
-ItemGroup {
-    string domain  
-    string structure  
-    boolean isReferenceData  
-    ItemGroupType type  
-    boolean hasNoData  
-    stringList profile  
-    string authenticator  
-    boolean isNonStandard  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-    string version  
-    string href  
-}
-ComponentList {
-    stringList components  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
-DataAttribute {
-    string role  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-Measure {
-    string role  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
 DataProvider {
     string role  
     OrganizationType type  
@@ -623,6 +620,23 @@ Dictionary {
     string label  
     stringList aliases  
 }
+Query {
+    QueryType queryType  
+    string text  
+    string status  
+    string source  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
 Relationship {
     PredicateTermEnum predicateTerm  
     LinkingPhraseEnum linkingPhrase  
@@ -633,33 +647,27 @@ Relationship {
     string label  
     stringList aliases  
 }
-IdentifiableElement {
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
 
-MetaDataVersion ||--}o ItemGroup : "itemGroups"
-MetaDataVersion ||--}o Item : "items"
-MetaDataVersion ||--}o Condition : "conditions"
-MetaDataVersion ||--}o WhereClause : "whereClauses"
-MetaDataVersion ||--}o Method : "methods"
-MetaDataVersion ||--}o Analysis : "analyses"
-MetaDataVersion ||--}o CodeList : "codeLists"
-MetaDataVersion ||--}o Coding : "codings"
-MetaDataVersion ||--}o ReifiedConcept : "concepts"
-MetaDataVersion ||--}o Relationship : "relationships"
-MetaDataVersion ||--}o Dictionary : "dictionaries"
-MetaDataVersion ||--}o Standard : "standards"
-MetaDataVersion ||--}o DocumentReference : "annotatedCRFs"
-MetaDataVersion ||--}o DataProduct : "dataProducts"
-MetaDataVersion ||--}o Display : "displays"
-MetaDataVersion ||--}o Coding : "coding"
-MetaDataVersion ||--}o Comment : "comments"
-MetaDataVersion ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Specification ||--}o ItemGroup : "itemGroups"
+Specification ||--}o Item : "items"
+Specification ||--}o LogicalPredicate : "predicates"
+Specification ||--}o ApplicabilityCondition : "applicabilityConditions"
+Specification ||--}o Method : "methods"
+Specification ||--}o Analysis : "analyses"
+Specification ||--}o CodeList : "codeLists"
+Specification ||--}o Coding : "codings"
+Specification ||--}o Concept : "concepts"
+Specification ||--}o Relationship : "relationships"
+Specification ||--}o Query : "queries"
+Specification ||--}o Check : "checks"
+Specification ||--}o Dictionary : "dictionaries"
+Specification ||--}o Standard : "standards"
+Specification ||--}o DocumentReference : "annotatedCRFs"
+Specification ||--}o DataProduct : "dataProducts"
+Specification ||--}o Display : "displays"
+Specification ||--}o Coding : "coding"
+Specification ||--}o Comment : "comments"
+Specification ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 SiteOrSponsorComment ||--}o Coding : "coding"
 SiteOrSponsorComment ||--}o Comment : "comments"
 SiteOrSponsorComment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -674,17 +682,18 @@ Display ||--}o Coding : "coding"
 Display ||--}o Comment : "comments"
 Display ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Analysis ||--|o Method : "analysisMethod"
-Analysis ||--}o WhereClause : "applicableWhen"
+Analysis ||--}o ApplicabilityCondition : "applicableWhen"
+Analysis ||--}o Dataflow : "inputDataflows"
 Analysis ||--}o FormalExpression : "expressions"
 Analysis ||--}o DocumentReference : "documents"
-Analysis ||--|o ReifiedConcept : "implementsConcept"
+Analysis ||--|o Concept : "implementsConcept"
 Analysis ||--}o Coding : "coding"
 Analysis ||--}o Comment : "comments"
 Analysis ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-ReifiedConcept ||--}o ConceptProperty : "properties"
-ReifiedConcept ||--}o Coding : "coding"
-ReifiedConcept ||--}o Comment : "comments"
-ReifiedConcept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Concept ||--}o ConceptProperty : "properties"
+Concept ||--}o Coding : "coding"
+Concept ||--}o Comment : "comments"
+Concept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ConceptProperty ||--|o CodeList : "codeList"
 ConceptProperty ||--}o Coding : "coding"
 ConceptProperty ||--}o Comment : "comments"
@@ -705,27 +714,106 @@ FormalExpression ||--}o Coding : "coding"
 ReturnValue ||--}o Coding : "coding"
 Parameter ||--}o CodeList : "codeList"
 Parameter ||--}o ConceptProperty : "conceptProperty"
-Parameter ||--}o WhereClause : "applicableWhen"
-Parameter ||--}o Condition : "conditions"
+Parameter ||--}o ApplicabilityCondition : "applicableWhen"
+Parameter ||--}o LogicalPredicate : "validationPredicates"
 Parameter ||--}o Coding : "coding"
-Condition ||--}o RangeCheck : "rangeChecks"
-Condition ||--}o FormalExpression : "expressions"
-Condition ||--}o Condition : "conditions"
-Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comments"
-Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+LogicalPredicate ||--}o RangeCheck : "rangeChecks"
+LogicalPredicate ||--}o FormalExpression : "expressions"
+LogicalPredicate ||--}o LogicalPredicate : "predicates"
+LogicalPredicate ||--}o Coding : "coding"
+LogicalPredicate ||--}o Comment : "comments"
+LogicalPredicate ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 RangeCheck ||--}o FormalExpression : "expressions"
-WhereClause ||--}o Condition : "conditions"
-WhereClause ||--}o Coding : "coding"
-WhereClause ||--}o Comment : "comments"
-WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+RangeCheck ||--|o Check : "implementsCheck"
+Check ||--}o IdentifiableElement : "appliesTo"
+Check ||--}o FormalExpression : "expressions"
+Check ||--}o Coding : "coding"
+Check ||--}o Comment : "comments"
+Check ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+IdentifiableElement ||--}o Coding : "coding"
+ApplicabilityCondition ||--}o LogicalPredicate : "predicates"
+ApplicabilityCondition ||--}o Coding : "coding"
+ApplicabilityCondition ||--}o Comment : "comments"
+ApplicabilityCondition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 CodeListItem ||--|o Coding : "coding"
+Dataflow ||--|| DataStructureDefinition : "structure"
+Dataflow ||--}o Dimension : "dimensionConstraint"
+Dataflow ||--}o Coding : "coding"
+Dataflow ||--}o Comment : "comments"
+Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Dimension ||--|| Item : "item"
+Dimension ||--|o Method : "missingHandling"
+Dimension ||--|o Method : "imputation"
+Dimension ||--}o Coding : "coding"
+Dimension ||--}o Comment : "comments"
+Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Method ||--}o FormalExpression : "expressions"
 Method ||--}o DocumentReference : "documents"
-Method ||--|o ReifiedConcept : "implementsConcept"
+Method ||--|o Concept : "implementsConcept"
 Method ||--}o Coding : "coding"
 Method ||--}o Comment : "comments"
 Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Item ||--|o CodeList : "codeList"
+Item ||--|o Method : "method"
+Item ||--}o RangeCheck : "rangeChecks"
+Item ||--}o ApplicabilityCondition : "applicableWhen"
+Item ||--|o Origin : "origin"
+Item ||--|o ConceptProperty : "conceptProperty"
+Item ||--}o Coding : "coding"
+Item ||--}o Comment : "comments"
+Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Origin ||--}o SourceItem : "sourceItems"
+Origin ||--}o DocumentReference : "documents"
+SourceItem ||--|o Item : "item"
+SourceItem ||--}o DocumentReference : "document"
+SourceItem ||--}o Coding : "coding"
+DataStructureDefinition ||--}o Dimension : "dimensions"
+DataStructureDefinition ||--}o Measure : "measures"
+DataStructureDefinition ||--}o DataAttribute : "attributes"
+DataStructureDefinition ||--|o ComponentList : "grouping"
+DataStructureDefinition ||--}o Item : "items"
+DataStructureDefinition ||--}o Item : "uniqueKey"
+DataStructureDefinition ||--}o Item : "keySequence"
+DataStructureDefinition ||--}o ItemGroup : "slices"
+DataStructureDefinition ||--|o Concept : "implementsConcept"
+DataStructureDefinition ||--}o ApplicabilityCondition : "applicableWhen"
+DataStructureDefinition ||--|o DefClass : "observationClass"
+DataStructureDefinition ||--}o Coding : "security"
+DataStructureDefinition ||--|o Timing : "validityPeriod"
+DataStructureDefinition ||--|o Standard : "standard"
+DataStructureDefinition ||--}o Coding : "coding"
+DataStructureDefinition ||--}o Comment : "comments"
+DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Timing ||--|o Method : "imputation"
+Timing ||--}o Coding : "coding"
+DefClass ||--}o SubClass : "subClasses"
+SubClass ||--}o SubClass : "subClasses"
+ItemGroup ||--}o Item : "items"
+ItemGroup ||--}o Item : "uniqueKey"
+ItemGroup ||--}o Item : "keySequence"
+ItemGroup ||--}o ItemGroup : "slices"
+ItemGroup ||--|o Concept : "implementsConcept"
+ItemGroup ||--}o ApplicabilityCondition : "applicableWhen"
+ItemGroup ||--|o DefClass : "observationClass"
+ItemGroup ||--}o Coding : "security"
+ItemGroup ||--|o Timing : "validityPeriod"
+ItemGroup ||--|o Standard : "standard"
+ItemGroup ||--}o Coding : "coding"
+ItemGroup ||--}o Comment : "comments"
+ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+ComponentList ||--}o Coding : "coding"
+DataAttribute ||--|| Item : "item"
+DataAttribute ||--|o Method : "missingHandling"
+DataAttribute ||--|o Method : "imputation"
+DataAttribute ||--}o Coding : "coding"
+DataAttribute ||--}o Comment : "comments"
+DataAttribute ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Measure ||--|| Item : "item"
+Measure ||--|o Method : "missingHandling"
+Measure ||--|o Method : "imputation"
+Measure ||--}o Coding : "coding"
+Measure ||--}o Comment : "comments"
+Measure ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 DataProduct ||--}o DataService : "inputPort"
 DataProduct ||--}o DataService : "outputPort"
 DataProduct ||--}o Dataflow : "inputDataflow"
@@ -753,86 +841,6 @@ Policy ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Rule ||--}o Constraint : "constraint"
 Rule ||--}o Coding : "coding"
 Constraint ||--}o Coding : "coding"
-Dataflow ||--|| DataStructureDefinition : "structure"
-Dataflow ||--}o Dimension : "dimensionConstraint"
-Dataflow ||--|o Analysis : "analysisMethod"
-Dataflow ||--}o Coding : "coding"
-Dataflow ||--}o Comment : "comments"
-Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-Dimension ||--|| Item : "item"
-Dimension ||--|o Method : "missingHandling"
-Dimension ||--|o Method : "imputation"
-Dimension ||--}o Coding : "coding"
-Dimension ||--}o Comment : "comments"
-Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-Item ||--|o CodeList : "codeList"
-Item ||--|o Method : "method"
-Item ||--}o RangeCheck : "rangeChecks"
-Item ||--}o WhereClause : "applicableWhen"
-Item ||--|o Origin : "origin"
-Item ||--|o ConceptProperty : "conceptProperty"
-Item ||--|o CodeList : "roleCodeList"
-Item ||--|o Condition : "collectionExceptionCondition"
-Item ||--}o Coding : "coding"
-Item ||--}o Comment : "comments"
-Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-Origin ||--}o SourceItem : "sourceItems"
-Origin ||--}o DocumentReference : "documents"
-SourceItem ||--|o Item : "item"
-SourceItem ||--}o DocumentReference : "document"
-SourceItem ||--}o Coding : "coding"
-DataStructureDefinition ||--}o Dimension : "dimensions"
-DataStructureDefinition ||--}o Measure : "measures"
-DataStructureDefinition ||--}o DataAttribute : "attributes"
-DataStructureDefinition ||--|o ComponentList : "grouping"
-DataStructureDefinition ||--}o Item : "items"
-DataStructureDefinition ||--}o Item : "keySequence"
-DataStructureDefinition ||--}o ItemGroup : "slices"
-DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
-DataStructureDefinition ||--}o WhereClause : "applicableWhen"
-DataStructureDefinition ||--|o DefClass : "observationClass"
-DataStructureDefinition ||--}o Coding : "security"
-DataStructureDefinition ||--|o Timing : "validityPeriod"
-DataStructureDefinition ||--|o Standard : "standard"
-DataStructureDefinition ||--}o Coding : "coding"
-DataStructureDefinition ||--}o Comment : "comments"
-DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-Timing ||--|o NominalOccurrence : "relativeTo"
-Timing ||--|o NominalOccurrence : "relativeFrom"
-Timing ||--|o Method : "imputation"
-Timing ||--}o Coding : "coding"
-NominalOccurrence ||--|| Timing : "timing"
-NominalOccurrence ||--}o Condition : "condition"
-NominalOccurrence ||--}o Coding : "coding"
-NominalOccurrence ||--}o Comment : "comments"
-NominalOccurrence ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-DefClass ||--}o SubClass : "subClasses"
-SubClass ||--}o SubClass : "subClasses"
-ItemGroup ||--}o Item : "items"
-ItemGroup ||--}o Item : "keySequence"
-ItemGroup ||--}o ItemGroup : "slices"
-ItemGroup ||--|o ReifiedConcept : "implementsConcept"
-ItemGroup ||--}o WhereClause : "applicableWhen"
-ItemGroup ||--|o DefClass : "observationClass"
-ItemGroup ||--}o Coding : "security"
-ItemGroup ||--|o Timing : "validityPeriod"
-ItemGroup ||--|o Standard : "standard"
-ItemGroup ||--}o Coding : "coding"
-ItemGroup ||--}o Comment : "comments"
-ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-ComponentList ||--}o Coding : "coding"
-DataAttribute ||--|| Item : "item"
-DataAttribute ||--|o Method : "missingHandling"
-DataAttribute ||--|o Method : "imputation"
-DataAttribute ||--}o Coding : "coding"
-DataAttribute ||--}o Comment : "comments"
-DataAttribute ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-Measure ||--|| Item : "item"
-Measure ||--|o Method : "missingHandling"
-Measure ||--|o Method : "imputation"
-Measure ||--}o Coding : "coding"
-Measure ||--}o Comment : "comments"
-Measure ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 DataProvider ||--}o Dataflow : "providesDataFor"
 DataProvider ||--}o ProvisionAgreement : "provisionAgreements"
 DataProvider ||--}o Resource : "source"
@@ -854,10 +862,13 @@ DataService ||--}o FormalExpression : "selection"
 DataService ||--}o Coding : "coding"
 Dictionary ||--}o Coding : "terms"
 Dictionary ||--}o Coding : "coding"
+Query ||--}| IdentifiableElement : "about"
+Query ||--}o Coding : "coding"
+Query ||--}o Comment : "comments"
+Query ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Relationship ||--|| IdentifiableElement : "subject"
 Relationship ||--|| IdentifiableElement : "object"
 Relationship ||--}o Coding : "coding"
-IdentifiableElement ||--}o Coding : "coding"
 
 ```
 
@@ -878,10 +889,12 @@ IdentifiableElement ||--}o Coding : "coding"
 | [Formatted](classes/Formatted.md) | A mixin that provides slots for reporting, exchange, or storage formatting |
 | [Governed](classes/Governed.md) | A mixin that provides slots for audit trail and standards governance, including mandatory status, comments, and attribution |
 | [GovernedElement](classes/GovernedElement.md) |  |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ApplicabilityCondition](classes/ApplicabilityCondition.md) | A reusable, named applicability condition describing the circumstances under which a containing context applies. References one or more LogicalPredicates combined with AND. Distinct from LogicalPredicate (the expression itself): ApplicabilityCondition is the named, governed wrapper referenced from Items, ItemGroups, Parameters, and Analyses. |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Check](classes/Check.md) | A reusable validation check included in the metadata package, such as a published CORE rule. Linked many-to-many by reference to the metadata and/or data elements it applies to, and optionally citing an external published rule so checks stay reusable and loosely coupled. Distinct from RangeCheck, which is an inline executable comparison; a RangeCheck may implement a Check. |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[CodeList](classes/CodeList.md) | A value set that defines a discrete collection of permissible values for an item, corresponding to the ODM CodeList construct |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Comment](classes/Comment.md) | A descriptive element that contains explanatory text provided by a data or metadata handler |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Concept](classes/Concept.md) | An abstract concept that can be referenced and specialised by data implementations. Holds ConceptProperties describing the concept's expected data shape. Multiple ItemGroups or Items can implement the same Concept, allowing standard biomedical concepts to be implemented differently across studies while remaining semantically aligned. |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ConceptProperty](classes/ConceptProperty.md) | A reified property concept that exists within the context of its containing topic concept |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Condition](classes/Condition.md) | A reusable, composable, and nestable logical construct allowing for complex expressions. Conditions are most useful when given a meaningful name and linked to Study Definitions. |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[CubeComponent](classes/CubeComponent.md) | An abstract data field that represents a component in a data structure definition, referencing an Item for its definition |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[DataAttribute](classes/DataAttribute.md) | A data cube property that describes additional characteristics or metadata about observations |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Dimension](classes/Dimension.md) | A data cube property that describes a categorical or hierarchical dimension |
@@ -892,15 +905,14 @@ IdentifiableElement ||--}o Coding : "coding"
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Item](classes/Item.md) | A data element that represents a specific piece of information within a defined context, with data type, constraints, and derivation methods |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ItemGroup](classes/ItemGroup.md) | A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[DataStructureDefinition](classes/DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[MetaDataVersion](classes/MetaDataVersion.md) | A container element that represents a given version of a specification, linking to a particular usage context such as a study, dataset, or data collection instrument. |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[LogicalPredicate](classes/LogicalPredicate.md) | A reusable, composable, and nestable logical expression resolving to a boolean. Used for applicability conditions, validation rules, eligibility criteria, and skip logic. This is a data-model predicate — not a clinical condition (diagnosis). Implements usdm:Condition (the study-design predicate, distinct from the clinical FHIR Condition resource). |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Method](classes/Method.md) | A reusable computational procedure that describes how to derive values and can be referenced by Items.<br>Analysis and Derivation concepts can be implemented by a Method. Properties can be referenced by Parameters in its expressions. |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Analysis](classes/Analysis.md) | Analysis extends Method to capture analysis-specific metadata including the reason for analysis, its purpose, and data traceability for the results used.<br>Expressions and parameters from Method can be generic or implementation-specific. |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[NominalOccurrence](classes/NominalOccurrence.md) | An event element that represents occurrences such as planned or unplanned encounters or adverse events |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Policy](classes/Policy.md) | A set of usage and access rules (ODRL) governing data. For a DTA this is typically an ODRL Agreement between an assigner (provider) and assignee (consumer), composed of permissions, prohibitions and obligations. |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ProvisionAgreement](classes/ProvisionAgreement.md) | An agreement element that describes the contractual relationship between a Data Provider and a Data Consumer regarding data provision |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[ReifiedConcept](classes/ReifiedConcept.md) | A canonical information layer that makes abstract concepts explicit and referenceable, showing how different data implementations represent the same underlying meanings through a star schema structure with multiple properties |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Query](classes/Query.md) | A reified query (discrepancy, request for clarification, or annotation) raised against one or more metadata and/or data elements. Modelled as an intermediate relationship node so a single query can relate to many elements (many-to-many) and be referenced rather than embedded. Internal queries originate within the organization; external queries (e.g. site or sponsor) carry their source. |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[SiteOrSponsorComment](classes/SiteOrSponsorComment.md) | A feedback element that contains comments from a site or sponsor, distinct from the general Comment class |
-| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[WhereClause](classes/WhereClause.md) | A conditional element that describes the circumstances under which a containing context applies, linking conditions to structures where they are used |
+| &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Specification](classes/Specification.md) | The root specification container: a versioned, governed definition of the data model for a study or data product. Links items, item groups, methods, code lists, concepts, and study design references. Projects to Define-XML MetaDataVersion, FHIR ImplementationGuide, and OMOP CDM metadata. ODMSerializationMetadata is applied by the ODM output generator, not here. |
 | [GroupRelationship](classes/GroupRelationship.md) | A relationship element that associates a DataAttribute with a set of Dimensions, used when attribute values vary based on all group dimension values |
 | [Identifiable](classes/Identifiable.md) | A mixin that provides slots for making an entity addressable within a study or context |
 | [IdentifiableElement](classes/IdentifiableElement.md) |  |
@@ -922,14 +934,14 @@ IdentifiableElement ||--}o Coding : "coding"
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Standard](classes/Standard.md) | A collection element that groups related standards within a specific context, used for defining CDISC implementation guides and controlled terminologies |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[Timing](classes/Timing.md) | A temporal element that describes the timing of an event or occurrence, which can be absolute, relative, or nominal |
 | &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[User](classes/User.md) | An entity that represents information about a specific user of a clinical data collection or data management system |
-| [IsODMItem](classes/IsODMItem.md) | A mixin that provides additional attributes for CDISC Operational Data Model items, including roles, completion instructions, and implementation notes |
-| [IsODMStandard](classes/IsODMStandard.md) | A mixin that provides properties to indicate standards compliance |
 | [IsProfile](classes/IsProfile.md) | A mixin that provides additional metadata for FHIR resources and Data Products, including profiles, security tags, and validity periods |
 | [IsSdmxDataset](classes/IsSdmxDataset.md) | A mixin that provides additional metadata specific to SDMX Datasets |
 | [Labelled](classes/Labelled.md) | A mixin that provides slots for detailing meanings and multilingual descriptions |
 | [MeasureRelationship](classes/MeasureRelationship.md) | A relationship element that associates a DataAttribute with a Measure |
 | [ObservationRelationship](classes/ObservationRelationship.md) | A relationship element that associates a DataAttribute with an Observation, allowing value-level Items to be reused across multiple different Views |
-| [ODMFileMetadata](classes/ODMFileMetadata.md) | A mixin that provides ODM file-level metadata attributes including file identifiers, timestamps, and system information |
+| [ODMItemSerialization](classes/ODMItemSerialization.md) | A mixin providing ODM/CDISC-specific item attributes meaningful only in ODM/Define-XML serialization: CRF completion instructions, CDISC notes, implementation notes, collection exception predicates, and pre-specified values. Applied by the ODM output generator. Not part of the canonical Item. |
+| [ODMSerializationMetadata](classes/ODMSerializationMetadata.md) | A mixin providing ODM/Define-XML file-level attributes required only when serializing to ODM or Define-XML format. Applied by the ODM output generator, not by the canonical model itself. These attributes (fileOID, odmVersion, defineVersion, etc.) have no meaning in FHIR, OMOP, or SDMX projections. |
+| [ODMStandardReference](classes/ODMStandardReference.md) | A mixin providing attributes for CDISC standards compliance indication. Applied when serializing to Define-XML context. Not canonical. |
 | [Origin](classes/Origin.md) | A provenance element that describes the source of data for an item |
 | [RangeCheck](classes/RangeCheck.md) | A validation element that performs a simple comparison check between a referenced item's value and specified values, resolving to a boolean result |
 | [SourceItem](classes/SourceItem.md) | A data source that provides the origin of information for an item |
@@ -974,7 +986,7 @@ IdentifiableElement ||--}o Coding : "coding"
 | [crfCompletionInstructions](slots/crfCompletionInstructions.md) | CRFCompletionInstructions reference: Instructions for the clinical site on how to enter collected information on the CRF |
 | [cdiscNotes](slots/cdiscNotes.md) | CDISCNotes reference: Explanatory text for the variable |
 | [implementationNotes](slots/implementationNotes.md) | ImplementationNotes reference: Further information, such as rationale and implementation instructions, on how to implement the CRF data collection fields |
-| [collectionExceptionCondition](slots/collectionExceptionCondition.md) | Condition that defines when collection may be exempted |
+| [collectionExceptionPredicate](slots/collectionExceptionPredicate.md) | Logical predicate defining when data collection for this item may be exempted. |
 | [preSpecifiedValue](slots/preSpecifiedValue.md) | Prefill value or a default value for a field that is automatically populated. |
 | [standard](slots/standard.md) | Reference to the standard being implemented |
 | [isNonStandard](slots/isNonStandard.md) | One or more members of this set are non-standard extensions |
@@ -994,33 +1006,37 @@ IdentifiableElement ||--}o Coding : "coding"
 | [protocolName](slots/protocolName.md) | Protocol name for the study |
 | [itemGroups](slots/itemGroups.md) | Item groups, containing items, defined in this version of the metadata |
 | [items](slots/items.md) | Template or top-level items (not belonging to any item group) defined in this version of the metadata |
-| [conditions](slots/conditions.md) | Logical conditions that apply to this version of the metadata. |
-| [whereClauses](slots/whereClauses.md) | Data contexts that apply to this version of the metadata. |
+| [predicates](slots/predicates.md) | Reusable logical predicates defined in this specification. |
+| [applicabilityConditions](slots/applicabilityConditions.md) | Named applicability conditions defined in this specification. |
 | [methods](slots/methods.md) | Methods defined in this version of the metadata. |
 | [analyses](slots/analyses.md) | Analyses defined in this version of the metadata. |
 | [codeLists](slots/codeLists.md) | Code lists defined in this version of the metadata. |
 | [codings](slots/codings.md) | Codings defined in this version of the metadata |
 | [concepts](slots/concepts.md) | Structured Concepts defined in this version of the metadata |
 | [relationships](slots/relationships.md) | Relationships between items, item groups, and other elements in this version of the metadata. |
+| [queries](slots/queries.md) | Queries raised against metadata and/or data elements in this specification. Each Query references its target element(s) by OID, so the same query can relate to many metadata and data elements (many-to-many). |
+| [checks](slots/checks.md) | Reusable validation checks (e.g. published CORE rules) included in this metadata package. Each Check references the elements it applies to by OID and may cite an external published rule, enabling reuse and loose coupling. |
 | [dictionaries](slots/dictionaries.md) | Dictionaries defined in this version of the metadata |
 | [standards](slots/standards.md) | Standards defined in this version of the metadata |
 | [annotatedCRFs](slots/annotatedCRFs.md) | Reference to annotated case report forms |
 | [resources](slots/resources.md) | References to resources and documents that describe this version of the metadata. |
 | [dataProducts](slots/dataProducts.md) | Indexed data flows with clear ownership |
 | [displays](slots/displays.md) | Displays defined in this version of the metadata. |
+| [usdmStudyDesignId](slots/usdmStudyDesignId.md) | OID or URI reference to the USDM StudyDesign that this specification implements. When present, arms, epochs, and scheduled visit slots are resolved from the referenced USDM instance. The USDM study design is the authoritative source for EPOCH, VISITNUM, ARM, and timing anchors; DDS does not redeclare them. |
 | [dataType](slots/dataType.md) | The data type of the item. |
 | [length](slots/length.md) | The maximum length of the data item in characters. |
 | [codeList](slots/codeList.md) | Reference to the CodeList that constrains the item values. |
 | [method](slots/method.md) | Reference to the Method element that describes how to derive this item's value. |
 | [rangeChecks](slots/rangeChecks.md) | Range checks applied to this item (e.g. edit checks, CORE rules) |
-| [applicableWhen](slots/applicableWhen.md) | References to different situations that define when this item applies.<br>Multiple whereClauses are combined with OR logic: the item applies if ANY referenced WhereClause matches.<br>Within each WhereClause, conditions are combined with AND logic: all conditions must be true.<br><br>Example: whereClause: ["WC.SYSBP", "WC.DIABP"] means the item applies when<br>(all conditions in WC.SYSBP are true) OR (all conditions in WC.DIABP are true). |
+| [applicableWhen](slots/applicableWhen.md) | References to different situations that define when this item applies.<br>Multiple applicabilityConditions are combined with OR logic: the item applies if ANY referenced ApplicabilityCondition matches.<br>Within each ApplicabilityCondition, conditions are combined with AND logic: all conditions must be true.<br><br>Example: whereClause: ["WC.SYSBP", "WC.DIABP"] means the item applies when<br>(all conditions in WC.SYSBP are true) OR (all conditions in WC.DIABP are true). |
 | [origin](slots/origin.md) | The origin of the data |
 | [conceptProperty](slots/conceptProperty.md) | Reference to a abstract concept property that this item is a specialization / instance of. |
 | [domain](slots/domain.md) | Domain abbreviation for the dataset. |
 | [structure](slots/structure.md) | Data structure of the item group, indicating how the records are organized. If this is a FHIR Resource, is it nested or flattened? If this is a structured concept, is it a Biomedical/Derivation/Analysis concept? |
 | [isReferenceData](slots/isReferenceData.md) | Set to Yes if this is a reference item group. |
 | [type](slots/type.md) | Type of item group |
-| [keySequence](slots/keySequence.md) | Ordered list of Items that define the dataset key structure for sorting and uniqueness. Each entry is an OID reference to an Item in the items array. Order determines sorting precedence, merge operations, and record uniqueness. These are allowed to be null, unlike stricter dataset dimensions or primary keys. |
+| [uniqueKey](slots/uniqueKey.md) | Unordered set of Items whose combined values uniquely identify a record in this dataset (the record key). Each entry is an OID reference to an Item in the items array. Order is not significant for uniqueness — use keySequence for sort order. Splitting uniqueness from sorting resolves the previous overloading of keySequence. |
+| [keySequence](slots/keySequence.md) | Ordered list of Items defining the default sort order for this dataset. Each entry is an OID reference to an Item in the items array; order determines sorting precedence and merge operations. May reference Items that are not part of uniqueKey. Distinct from uniqueKey, which establishes record uniqueness. |
 | [slices](slots/slices.md) | Slices are specific subset ItemGroups that belong to, or are used by this ItemGroup |
 | [implementsConcept](slots/implementsConcept.md) | Reference to a abstract concept topic that this item group is a specialization of |
 | [observationClass](slots/observationClass.md) | Identifies the predefined CDISC model Class. |
@@ -1030,6 +1046,11 @@ IdentifiableElement ||--}o Coding : "coding"
 | [object](slots/object.md) | The ending element of the relationship. |
 | [predicateTerm](slots/predicateTerm.md) | Short variable relationship linking phrase for programming purposes. |
 | [linkingPhrase](slots/linkingPhrase.md) | Variable relationship descriptive linking phrase. |
+| [about](slots/about.md) | The metadata and/or data element(s) this query concerns, referenced by OID. Multivalued and non-inlined to support many-to-many linkage across both metadata (e.g. Item, ItemGroup) and data (e.g. Dataset) elements. |
+| [queryType](slots/queryType.md) | Whether the query is internal or external (e.g. site or sponsor originated). |
+| [text](slots/text.md) | The query content. |
+| [status](slots/status.md) | Workflow status of the query (e.g. open, answered, closed). |
+| [source](slots/source.md) | The party that raised the query. |
 | [language](slots/language.md) | The language of the translation |
 | [value](slots/value.md) | The translated text |
 | [translations](slots/translations.md) |  |
@@ -1040,7 +1061,6 @@ IdentifiableElement ||--}o Coding : "coding"
 | [decode](slots/decode.md) | The decoded value of the CodeListItem |
 | [weight](slots/weight.md) | Numeric significance of the code (e.g., for scoring) |
 | [other](slots/other.md) | Flag to indicate that the term represents "other" content |
-| [text](slots/text.md) | The comment text. |
 | [documents](slots/documents.md) | References to documents that contain or are referenced by this comment |
 | [code](slots/code.md) | The code value |
 | [codeSystem](slots/codeSystem.md) | The code system identifier |
@@ -1051,13 +1071,17 @@ IdentifiableElement ||--}o Coding : "coding"
 | [properties](slots/properties.md) | Properties of the reified object, which can be other governed elements or simple values |
 | [minOccurs](slots/minOccurs.md) | Minimum number of occurrences of this property in the context. Set to >0 to mandate some number of occurrences |
 | [maxOccurs](slots/maxOccurs.md) | Maximum number of occurrences of this property in the context. Leave empty for unbounded. Set to 0 to disable property |
-| [implementsCondition](slots/implementsCondition.md) | Reference to a external (e.g. USDM) condition definition that this implements |
-| [expressions](slots/expressions.md) | Logical expression, resolving to a boolean, that implements this condition in a specific context |
+| [implementsPredicate](slots/implementsPredicate.md) | Reference to an external (e.g. USDM) predicate/condition definition that this implements |
+| [expressions](slots/expressions.md) | Logical expression, resolving to a boolean, that implements this predicate in a specific context |
 | [operator](slots/operator.md) | Logical operator for combining child conditions or range checks. Defaults to ALL if not specified. |
 | [comparator](slots/comparator.md) | The type of comparison to be performed |
 | [checkValues](slots/checkValues.md) | Values to compare against |
 | [item](slots/item.md) | Reference to the Item element whose value is being checked. If not specified, check applies to the enclosing context |
 | [softHard](slots/softHard.md) | Indicates whether a validation check is an error ("Hard") or a warning ("Soft") |
+| [implementsCheck](slots/implementsCheck.md) | Optional reference (by OID) to a reusable Check (e.g. a published CORE rule) that this inline RangeCheck implements. |
+| [appliesTo](slots/appliesTo.md) | The metadata and/or data element(s) this check applies to, referenced by OID. Multivalued and non-inlined for many-to-many, loosely coupled linkage. |
+| [externalReference](slots/externalReference.md) | URI or CURIE of the published rule this check is sourced from (e.g. a CORE rule identifier), enabling reuse across metadata packages. |
+| [severity](slots/severity.md) | Whether a failure is an error ("Hard") or a warning ("Soft"). |
 | [expression](slots/expression.md) | The actual text of the formal expression (renamed from 'code' for disambiguation). |
 | [returnType](slots/returnType.md) | Return type of the expression |
 | [parameters](slots/parameters.md) | Parameters used in the expression |
@@ -1066,9 +1090,9 @@ IdentifiableElement ||--}o Coding : "coding"
 | [document](slots/document.md) | Reference to an external document |
 | [resource](slots/resource.md) | Path to a resource (e.g. File, FHIR datasource) that is the source of this item |
 | [defaultValue](slots/defaultValue.md) | A default value for the parameter. |
+| [validationPredicates](slots/validationPredicates.md) | Validation predicates that constrain this parameter's value beyond controlled terminology. All must be satisfied (AND logic). Distinct from applicableWhen which determines if the parameter is needed at all. |
 | [required](slots/required.md) | Indicates whether this parameter must be provided when the  containing expression is evaluated (technical constraint). |
 | [valueList](slots/valueList.md) | A list of possible return values. |
-| [source](slots/source.md) | The source of the data, such as Investigator, Sponsor, Subject, or Vendor. |
 | [sourceItems](slots/sourceItems.md) | Source items for this origin |
 | [sourceType](slots/sourceType.md) | who made the comment, such as Investigator, Sponsor. |
 | [userType](slots/userType.md) | User's role in the study. |
@@ -1079,7 +1103,6 @@ IdentifiableElement ||--}o Coding : "coding"
 | [address](slots/address.md) | The address of the organization. |
 | [partOfOrganization](slots/partOfOrganization.md) | Reference to a parent organization if this organization is part of a larger entity. |
 | [publishingSet](slots/publishingSet.md) | Publishing Set of a Controlled Terminology |
-| [status](slots/status.md) | Status of an Implementation Guide or of a Controlled Terminology |
 | [resourceType](slots/resourceType.md) | Type of resource (e.g.,  "ODM", "HL7-FHIR", "HL7-CDA", "HL7-v2", "OpenEHR-extract") |
 | [attribute](slots/attribute.md) | Field provided by the Name attribute where the data or information can be obtained. Examples are "valueQuantity.value" or "valueQuantity.unit". |
 | [selection](slots/selection.md) | Machine-executable instructions for selecting data from the resource. |
@@ -1088,23 +1111,19 @@ IdentifiableElement ||--}o Coding : "coding"
 | [pages](slots/pages.md) | Reference to specific pages in a PDF document |
 | [relationship](slots/relationship.md) | Relationship to the referencing entity |
 | [isNominal](slots/isNominal.md) | Indicates whether the timing is nominal (event-based) or not. |
-| [relativeTo](slots/relativeTo.md) | Reference to the event or occurrence that this timing is relative to. |
-| [relativeFrom](slots/relativeFrom.md) | Reference to the event or occurrence that this timing is relative to. |
+| [relativeTo](slots/relativeTo.md) | The protocol anchor this timing is relative to. Either a TimingLandmark (well-known protocol event such as RANDOMIZATION or FIRST_DOSE) or a free-form OID/identifier referencing a USDM ScheduledActivityInstance. |
+| [relativeFrom](slots/relativeFrom.md) | The protocol anchor from which this timing is measured. Either a TimingLandmark or a USDM ScheduledActivityInstance OID reference. |
 | [windowLower](slots/windowLower.md) | Start date/time of the timing |
 | [windowUpper](slots/windowUpper.md) | End date/time of the timing |
 | [recalled](slots/recalled.md) | Indicates whether the timing is recalled or not (recalled timings are less reliable). |
 | [frequency](slots/frequency.md) | Frequency. Use dose frequency terminology e.g. "BID" if applicable. |
 | [imputation](slots/imputation.md) | The imputation method used for the Timing. |
-| [timing](slots/timing.md) | A named event reference, that can nest further named timing references. |
-| [event](slots/event.md) | The ID of the event in a Schedule. |
-| [condition](slots/condition.md) | A condition that must be met for this occurrence to be valid. |
 | [dimensions](slots/dimensions.md) |  |
 | [measures](slots/measures.md) |  |
 | [attributes](slots/attributes.md) |  |
 | [grouping](slots/grouping.md) | An association to a set of metadata concepts that have an identified structural role in a Data Structure Definition. |
 | [evolvingStructure](slots/evolvingStructure.md) |  |
 | [dimensionConstraint](slots/dimensionConstraint.md) | Subset of dimensions that are agreed upon by the dataflow and must be included. |
-| [analysisMethod](slots/analysisMethod.md) | Metadata about the analysis method used to produce the data in this dataflow. |
 | [deliverySchedule](slots/deliverySchedule.md) | Recurring transfer/delivery schedule agreed for this flow. The domain-neutral default is an ISO-8601 repeating interval string (e.g. "R/2025-01-01/P1M"); use a Timing object only when delivery must be anchored to a clinical occurrence. Agreement-level schedule; concrete reporting periods of each delivered Dataset are carried by IsSdmxDataset.reportingBegin/reportingEnd/dataExtractionDate. |
 | [action](slots/action.md) | Defines the action to be taken by the recipient system (information, append, replace, delete) |
 | [reportingBegin](slots/reportingBegin.md) | A specific time period in a known system of time periods that identifies the start period of a report. |
@@ -1162,7 +1181,9 @@ IdentifiableElement ||--}o Coding : "coding"
 | [unit](slots/unit.md) | Unit of the rightOperand, where applicable |
 | [analysisReason](slots/analysisReason.md) | The reason this analysis was performed. |
 | [analysisPurpose](slots/analysisPurpose.md) | The purpose or role of this analysis in the study. |
+| [analysisMethod](slots/analysisMethod.md) | Generic method used to perform this analysis. |
 | [inputData](slots/inputData.md) | Datasets or slices/subsets of datasets asked for by this analysis. If a Item is referenced by a Parameter e.g. Analysis Variable, make sure to include its parent ItemGroup here. |
+| [inputDataflows](slots/inputDataflows.md) | Dataflows that supply input data for this analysis. Replaces Dataflow.analysisMethod (which had the dependency backwards — a data contract should not know which analyses consume it). |
 | [analysis](slots/analysis.md) | Analysis result this display represents. |
 | [displayType](slots/displayType.md) | The type of display this result represents. e.g. table, listing, figure, dashboard. |
 
@@ -1178,11 +1199,13 @@ IdentifiableElement ||--}o Coding : "coding"
 | [PolicyType](enums/PolicyType.md) | ODRL policy subtypes. |
 | [ConstraintOperator](enums/ConstraintOperator.md) | ODRL constraint operators. |
 | [SoftHard](enums/SoftHard.md) | An enumeration that indicates whether a validation check should be treated as an error or a warning |
+| [QueryType](enums/QueryType.md) | Whether a Query originates inside the organization (internal) or from an external party such as a site or sponsor (external). |
 | [MethodType](enums/MethodType.md) | An enumeration that defines the types of computational methods available for data processing |
 | [DataType](enums/DataType.md) | An enumeration that defines the fundamental data types available for items |
-| [OriginType](enums/OriginType.md) | An enumeration that defines the types of origins for data items. |
-| [OriginSource](enums/OriginSource.md) | An enumeration that defines the sources of data origin |
+| [OriginType](enums/OriginType.md) | An enumeration that defines the types of origins for data items. Values sourced from NCI Thesaurus subset C170449. |
+| [OriginSource](enums/OriginSource.md) | An enumeration that defines the sources of data origin. Values sourced from NCI Thesaurus subset C170450. |
 | [ItemGroupType](enums/ItemGroupType.md) | An enumeration that defines the roles of an item group within a specific context |
+| [TimingLandmark](enums/TimingLandmark.md) | Well-known protocol reference points that a Timing can be expressed relative to. Corresponds to USDM TimingRelativeToLandmark. For visit-specific anchors not covered by this enum, use a USDM ScheduledActivityInstance OID reference in Timing.relativeTo as a free string. |
 | [TimingType](enums/TimingType.md) | An enumeration that defines CDISC timing type values indicating the temporal relationship of an observation to a reference point |
 | [LinkingPhraseEnum](enums/LinkingPhraseEnum.md) | An enumeration that defines variable relationship descriptive linking phrases from the COSMoS SDTM BC model |
 | [PredicateTermEnum](enums/PredicateTermEnum.md) | An enumeration that defines short variable relationship linking phrases for programming purposes from the COSMoS SDTM BC model |

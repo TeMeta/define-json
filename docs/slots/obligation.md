@@ -9,7 +9,7 @@ _Duties that must be fulfilled (odrl:obligation)_
 
 
 
-URI: [odm:slot/obligation](https://cdisc.org/odm2/slot/obligation)
+URI: [dds:slot/obligation](https://w3id.org/dds/slot/obligation)
 Alias: obligation
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: obligation
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: obligation
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:obligation |
-| native | odm:obligation |
+| self | dds:obligation |
+| native | dds:obligation |
 | exact | odrl:obligation |
 
 
@@ -70,7 +70,7 @@ Alias: obligation
 ```yaml
 name: obligation
 description: Duties that must be fulfilled (odrl:obligation)
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - odrl:obligation
 rank: 1000

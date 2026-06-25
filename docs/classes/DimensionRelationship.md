@@ -9,7 +9,7 @@ _A relationship element that associates a DataAttribute with a specific Dimensio
 
 
 
-URI: [odm:class/DimensionRelationship](https://cdisc.org/odm2/class/DimensionRelationship)
+URI: [dds:class/DimensionRelationship](https://w3id.org/dds/class/DimensionRelationship)
 
 
 ```mermaid
@@ -85,12 +85,6 @@ Method {
 Item {
     DataType dataType  
     integer length  
-    string role  
-    boolean hasNoData  
-    string crfCompletionInstructions  
-    string cdiscNotes  
-    string implementationNotes  
-    string preSpecifiedValue  
     integer decimalDigits  
     string displayFormat  
     integer significantDigits  
@@ -148,18 +142,16 @@ Comment ||--}o Comment : "comments"
 Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Method ||--}o FormalExpression : "expressions"
 Method ||--}o DocumentReference : "documents"
-Method ||--|o ReifiedConcept : "implementsConcept"
+Method ||--|o Concept : "implementsConcept"
 Method ||--}o Coding : "coding"
 Method ||--}o Comment : "comments"
 Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--}o WhereClause : "applicableWhen"
+Item ||--}o ApplicabilityCondition : "applicableWhen"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
-Item ||--|o CodeList : "roleCodeList"
-Item ||--|o Condition : "collectionExceptionCondition"
 Item ||--}o Coding : "coding"
 Item ||--}o Comment : "comments"
 Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -205,7 +197,7 @@ Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -214,8 +206,8 @@ Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:DimensionRelationship |
-| native | odm:DimensionRelationship |
+| self | dds:DimensionRelationship |
+| native | dds:DimensionRelationship |
 | exact | sdmx:DimensionRelationship |
 
 
@@ -234,13 +226,13 @@ Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 name: DimensionRelationship
 description: A relationship element that associates a DataAttribute with a specific
   Dimension at a specific level
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - sdmx:DimensionRelationship
 attributes:
   dimensions:
     name: dimensions
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - sdmx:DimensionDescriptor
     domain_of:
@@ -251,7 +243,7 @@ attributes:
   groupKey:
     name: groupKey
     description: Set of dimensions that this definition depends on
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - sdmx:GroupDimensionDescriptor
     domain_of:
@@ -260,7 +252,7 @@ attributes:
     range: ComponentList
   attribute:
     name: attribute
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     domain_of:
     - Resource
     - MeasureRelationship
@@ -280,13 +272,13 @@ attributes:
 name: DimensionRelationship
 description: A relationship element that associates a DataAttribute with a specific
   Dimension at a specific level
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - sdmx:DimensionRelationship
 attributes:
   dimensions:
     name: dimensions
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - sdmx:DimensionDescriptor
     alias: dimensions
@@ -299,7 +291,7 @@ attributes:
   groupKey:
     name: groupKey
     description: Set of dimensions that this definition depends on
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - sdmx:GroupDimensionDescriptor
     alias: groupKey
@@ -310,7 +302,7 @@ attributes:
     range: ComponentList
   attribute:
     name: attribute
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     alias: attribute
     owner: DimensionRelationship
     domain_of:

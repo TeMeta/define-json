@@ -4,7 +4,7 @@
 
 
 
-URI: [odm:slot/subClasses](https://cdisc.org/odm2/slot/subClasses)
+URI: [dds:slot/subClasses](https://w3id.org/dds/slot/subClasses)
 Alias: subClasses
 
 <!-- no inheritance hierarchy -->
@@ -44,8 +44,8 @@ Alias: subClasses
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:subClasses |
-| native | odm:subClasses |
+| self | dds:subClasses |
+| native | dds:subClasses |
 
 
 

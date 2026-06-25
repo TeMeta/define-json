@@ -9,7 +9,7 @@ _Terms in this dictionary - leave this empty in most cases to keep the file smal
 
 
 
-URI: [odm:slot/terms](https://cdisc.org/odm2/slot/terms)
+URI: [dds:slot/terms](https://w3id.org/dds/slot/terms)
 Alias: terms
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: terms
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: terms
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:terms |
-| native | odm:terms |
+| self | dds:terms |
+| native | dds:terms |
 
 
 
@@ -70,7 +70,7 @@ Alias: terms
 name: terms
 description: Terms in this dictionary - leave this empty in most cases to keep the
   file small
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: terms
 owner: Dictionary

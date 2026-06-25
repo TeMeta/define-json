@@ -9,7 +9,7 @@ _ODRL policy subtype (Set, Offer, Agreement)_
 
 
 
-URI: [odm:slot/policyType](https://cdisc.org/odm2/slot/policyType)
+URI: [dds:slot/policyType](https://w3id.org/dds/slot/policyType)
 Alias: policyType
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: policyType
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: policyType
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:policyType |
-| native | odm:policyType |
+| self | dds:policyType |
+| native | dds:policyType |
 
 
 
@@ -67,7 +67,7 @@ Alias: policyType
 ```yaml
 name: policyType
 description: ODRL policy subtype (Set, Offer, Agreement)
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 ifabsent: PolicyType(Agreement)
 alias: policyType

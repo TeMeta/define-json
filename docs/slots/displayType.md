@@ -9,7 +9,7 @@ _The type of display this result represents. e.g. table, listing, figure, dashbo
 
 
 
-URI: [odm:slot/displayType](https://cdisc.org/odm2/slot/displayType)
+URI: [dds:slot/displayType](https://w3id.org/dds/slot/displayType)
 Alias: displayType
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: displayType
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: displayType
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:displayType |
-| native | odm:displayType |
+| self | dds:displayType |
+| native | dds:displayType |
 
 
 
@@ -68,7 +68,7 @@ Alias: displayType
 name: displayType
 description: The type of display this result represents. e.g. table, listing, figure,
   dashboard.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: displayType
 owner: Display

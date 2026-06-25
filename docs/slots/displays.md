@@ -9,7 +9,7 @@ _Displays defined in this version of the metadata._
 
 
 
-URI: [odm:slot/displays](https://cdisc.org/odm2/slot/displays)
+URI: [dds:slot/displays](https://w3id.org/dds/slot/displays)
 Alias: displays
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: displays
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | A container element that represents a given version of a specification, linking to a particular usage context such as a study, dataset, or data collection instrument. |  no  |
+| [Specification](../classes/Specification.md) | The root specification container: a versioned, governed definition of the data model for a study or data product. Links items, item groups, methods, code lists, concepts, and study design references. Projects to Define-XML MetaDataVersion, FHIR ImplementationGuide, and OMOP CDM metadata. ODMSerializationMetadata is applied by the ODM output generator, not here. |  no  |
 
 
 
@@ -48,7 +48,7 @@ Alias: displays
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: displays
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:displays |
-| native | odm:displays |
+| self | dds:displays |
+| native | dds:displays |
 
 
 
@@ -69,12 +69,12 @@ Alias: displays
 ```yaml
 name: displays
 description: Displays defined in this version of the metadata.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: displays
-owner: MetaDataVersion
+owner: Specification
 domain_of:
-- MetaDataVersion
+- Specification
 range: Display
 multivalued: true
 inlined: true

@@ -9,7 +9,7 @@ _An abstract representation that defines data provision for different reference 
 
 
 
-URI: [odm:class/Dataflow](https://cdisc.org/odm2/class/Dataflow)
+URI: [dds:class/Dataflow](https://w3id.org/dds/class/Dataflow)
 
 
 ```mermaid
@@ -67,66 +67,8 @@ Coding {
     string codeSystemVersion  
     AliasPredicate aliasType  
 }
-Analysis {
-    string analysisReason  
-    string analysisPurpose  
-    stringList inputData  
-    string version  
-    string href  
-    MethodType type  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-ReifiedConcept {
-    string version  
-    string href  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-DocumentReference {
-    string title  
-    string leafID  
-    integerList pages  
-    string relationship  
-    string version  
-    string href  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
-FormalExpression {
-    string context  
-    string expression  
-    string returnType  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
-WhereClause {
+Dimension {
+    string role  
     string OID  
     string uuid  
     string name  
@@ -153,29 +95,9 @@ Method {
     string owner  
     string wasDerivedFrom  
 }
-Dimension {
-    string role  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
 Item {
     DataType dataType  
     integer length  
-    string role  
-    boolean hasNoData  
-    string crfCompletionInstructions  
-    string cdiscNotes  
-    string implementationNotes  
-    string preSpecifiedValue  
     integer decimalDigits  
     string displayFormat  
     integer significantDigits  
@@ -231,6 +153,8 @@ Timing {
     TimingType type  
     boolean isNominal  
     string value  
+    string relativeTo  
+    string relativeFrom  
     datetime windowLower  
     datetime windowUpper  
     boolean recalled  
@@ -244,6 +168,34 @@ Timing {
 }
 DefClass {
     string name  
+}
+ApplicabilityCondition {
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+Concept {
+    string version  
+    string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
 }
 ItemGroup {
     string domain  
@@ -308,7 +260,6 @@ Measure {
 
 Dataflow ||--|| DataStructureDefinition : "structure"
 Dataflow ||--}o Dimension : "dimensionConstraint"
-Dataflow ||--|o Analysis : "analysisMethod"
 Dataflow ||--}o Coding : "coding"
 Dataflow ||--}o Comment : "comments"
 Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -319,47 +270,24 @@ Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 Comment ||--}o Comment : "comments"
 Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-Analysis ||--|o Method : "analysisMethod"
-Analysis ||--}o WhereClause : "applicableWhen"
-Analysis ||--}o FormalExpression : "expressions"
-Analysis ||--}o DocumentReference : "documents"
-Analysis ||--|o ReifiedConcept : "implementsConcept"
-Analysis ||--}o Coding : "coding"
-Analysis ||--}o Comment : "comments"
-Analysis ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-ReifiedConcept ||--}o ConceptProperty : "properties"
-ReifiedConcept ||--}o Coding : "coding"
-ReifiedConcept ||--}o Comment : "comments"
-ReifiedConcept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-DocumentReference ||--}o Coding : "coding"
-FormalExpression ||--}o Parameter : "parameters"
-FormalExpression ||--|o ReturnValue : "returnValue"
-FormalExpression ||--}o Resource : "externalCodeLibs"
-FormalExpression ||--}o Coding : "coding"
-WhereClause ||--}o Condition : "conditions"
-WhereClause ||--}o Coding : "coding"
-WhereClause ||--}o Comment : "comments"
-WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-Method ||--}o FormalExpression : "expressions"
-Method ||--}o DocumentReference : "documents"
-Method ||--|o ReifiedConcept : "implementsConcept"
-Method ||--}o Coding : "coding"
-Method ||--}o Comment : "comments"
-Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Dimension ||--|| Item : "item"
 Dimension ||--|o Method : "missingHandling"
 Dimension ||--|o Method : "imputation"
 Dimension ||--}o Coding : "coding"
 Dimension ||--}o Comment : "comments"
 Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Method ||--}o FormalExpression : "expressions"
+Method ||--}o DocumentReference : "documents"
+Method ||--|o Concept : "implementsConcept"
+Method ||--}o Coding : "coding"
+Method ||--}o Comment : "comments"
+Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--}o WhereClause : "applicableWhen"
+Item ||--}o ApplicabilityCondition : "applicableWhen"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
-Item ||--|o CodeList : "roleCodeList"
-Item ||--|o Condition : "collectionExceptionCondition"
 Item ||--}o Coding : "coding"
 Item ||--}o Comment : "comments"
 Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -368,10 +296,11 @@ DataStructureDefinition ||--}o Measure : "measures"
 DataStructureDefinition ||--}o DataAttribute : "attributes"
 DataStructureDefinition ||--|o ComponentList : "grouping"
 DataStructureDefinition ||--}o Item : "items"
+DataStructureDefinition ||--}o Item : "uniqueKey"
 DataStructureDefinition ||--}o Item : "keySequence"
 DataStructureDefinition ||--}o ItemGroup : "slices"
-DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
-DataStructureDefinition ||--}o WhereClause : "applicableWhen"
+DataStructureDefinition ||--|o Concept : "implementsConcept"
+DataStructureDefinition ||--}o ApplicabilityCondition : "applicableWhen"
 DataStructureDefinition ||--|o DefClass : "observationClass"
 DataStructureDefinition ||--}o Coding : "security"
 DataStructureDefinition ||--|o Timing : "validityPeriod"
@@ -380,16 +309,23 @@ DataStructureDefinition ||--}o Coding : "coding"
 DataStructureDefinition ||--}o Comment : "comments"
 DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Standard ||--}o Coding : "coding"
-Timing ||--|o NominalOccurrence : "relativeTo"
-Timing ||--|o NominalOccurrence : "relativeFrom"
 Timing ||--|o Method : "imputation"
 Timing ||--}o Coding : "coding"
 DefClass ||--}o SubClass : "subClasses"
+ApplicabilityCondition ||--}o LogicalPredicate : "predicates"
+ApplicabilityCondition ||--}o Coding : "coding"
+ApplicabilityCondition ||--}o Comment : "comments"
+ApplicabilityCondition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Concept ||--}o ConceptProperty : "properties"
+Concept ||--}o Coding : "coding"
+Concept ||--}o Comment : "comments"
+Concept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ItemGroup ||--}o Item : "items"
+ItemGroup ||--}o Item : "uniqueKey"
 ItemGroup ||--}o Item : "keySequence"
 ItemGroup ||--}o ItemGroup : "slices"
-ItemGroup ||--|o ReifiedConcept : "implementsConcept"
-ItemGroup ||--}o WhereClause : "applicableWhen"
+ItemGroup ||--|o Concept : "implementsConcept"
+ItemGroup ||--}o ApplicabilityCondition : "applicableWhen"
 ItemGroup ||--|o DefClass : "observationClass"
 ItemGroup ||--}o Coding : "security"
 ItemGroup ||--|o Timing : "validityPeriod"
@@ -428,7 +364,6 @@ Measure ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | ---  | --- | --- | --- |
 | [structure](../slots/structure.md) | 1 <br/> [DataStructureDefinition](../classes/DataStructureDefinition.md) | Structured component specification for this flow. Inlined so a standalone DTA carries its agreed structure. | direct |
 | [dimensionConstraint](../slots/dimensionConstraint.md) | * <br/> [Dimension](../classes/Dimension.md) | Subset of dimensions that are agreed upon by the dataflow and must be included. | direct |
-| [analysisMethod](../slots/analysisMethod.md) | 0..1 <br/> [Analysis](../classes/Analysis.md) | Metadata about the analysis method used to produce the data in this dataflow. | direct |
 | [deliverySchedule](../slots/deliverySchedule.md) | * <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[Timing](../classes/Timing.md) | Recurring transfer/delivery schedule agreed for this flow. The domain-neutral default is an ISO-8601 repeating interval string (e.g. "R/2025-01-01/P1M"); use a Timing object only when delivery must be anchored to a clinical occurrence. Agreement-level schedule; concrete reporting periods of each delivered Dataset are carried by IsSdmxDataset.reportingBegin/reportingEnd/dataExtractionDate. | direct |
 | [version](../slots/version.md) | 0..1 <br/> [String](../types/String.md) | The version of the external resources | [Versioned](../classes/Versioned.md) |
 | [href](../slots/href.md) | 0..1 <br/> [String](../types/String.md) | Machine-readable instructions to obtain the resource e.g. FHIR path, URL | [Versioned](../classes/Versioned.md) |
@@ -445,7 +380,7 @@ Measure ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | [purpose](../slots/purpose.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Purpose or rationale for this data element | [Governed](../classes/Governed.md) |
 | [lastUpdated](../slots/lastUpdated.md) | 0..1 <br/> [Datetime](../types/Datetime.md) | When the resource was last updated | [Governed](../classes/Governed.md) |
 | [owner](../slots/owner.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Party responsible for this element | [Governed](../classes/Governed.md) |
-| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[MetaDataVersion](../classes/MetaDataVersion.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[ReifiedConcept](../classes/ReifiedConcept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[Condition](../classes/Condition.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[NominalOccurrence](../classes/NominalOccurrence.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
+| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[Specification](../classes/Specification.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[Concept](../classes/Concept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[LogicalPredicate](../classes/LogicalPredicate.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
 
 
 
@@ -457,18 +392,19 @@ Measure ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | ---  | --- | --- | --- |
 | [GovernedElement](../classes/GovernedElement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
 | [Governed](../classes/Governed.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
+| [Specification](../classes/Specification.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
 | [Item](../classes/Item.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
 | [ItemGroup](../classes/ItemGroup.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
+| [Query](../classes/Query.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
 | [CodeList](../classes/CodeList.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
 | [Comment](../classes/Comment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
-| [ReifiedConcept](../classes/ReifiedConcept.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
+| [Concept](../classes/Concept.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
 | [ConceptProperty](../classes/ConceptProperty.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
-| [WhereClause](../classes/WhereClause.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
-| [Condition](../classes/Condition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
+| [ApplicabilityCondition](../classes/ApplicabilityCondition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
+| [LogicalPredicate](../classes/LogicalPredicate.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
+| [Check](../classes/Check.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
 | [Method](../classes/Method.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
 | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
-| [NominalOccurrence](../classes/NominalOccurrence.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
 | [Dataflow](../classes/Dataflow.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
 | [Dataset](../classes/Dataset.md) | [describedBy](../slots/describedBy.md) | range | [Dataflow](../classes/Dataflow.md) |
@@ -485,6 +421,7 @@ Measure ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
 | [DataConsumer](../classes/DataConsumer.md) | [consumesDataFrom](../slots/consumesDataFrom.md) | range | [Dataflow](../classes/Dataflow.md) |
 | [Policy](../classes/Policy.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
+| [Analysis](../classes/Analysis.md) | [inputDataflows](../slots/inputDataflows.md) | range | [Dataflow](../classes/Dataflow.md) |
 | [Analysis](../classes/Analysis.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
 | [Display](../classes/Display.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
 
@@ -504,7 +441,7 @@ Measure ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -513,8 +450,8 @@ Measure ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:Dataflow |
-| native | odm:Dataflow |
+| self | dds:Dataflow |
+| native | dds:Dataflow |
 | related | dprod:Distribution, dcat:Distribution, dprod:DataService, dcat:DataService |
 | close | sdmx:Dataflow |
 
@@ -534,7 +471,7 @@ Measure ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 name: Dataflow
 description: An abstract representation that defines data provision for different
   reference periods, where a Distribution and its Dataset are instances
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 close_mappings:
 - sdmx:Dataflow
 related_mappings:
@@ -550,7 +487,7 @@ attributes:
     name: structure
     description: Structured component specification for this flow. Inlined so a standalone
       DTA carries its agreed structure.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     domain_of:
     - ItemGroup
     - Dataflow
@@ -561,22 +498,12 @@ attributes:
     name: dimensionConstraint
     description: Subset of dimensions that are agreed upon by the dataflow and must
       be included.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Dataflow
     range: Dimension
     multivalued: true
-  analysisMethod:
-    name: analysisMethod
-    description: Metadata about the analysis method used to produce the data in this
-      dataflow.
-    from_schema: https://cdisc.org/data-definition-spec
-    rank: 1000
-    domain_of:
-    - Dataflow
-    - Analysis
-    range: Analysis
   deliverySchedule:
     name: deliverySchedule
     description: Recurring transfer/delivery schedule agreed for this flow. The domain-neutral
@@ -584,7 +511,7 @@ attributes:
       use a Timing object only when delivery must be anchored to a clinical occurrence.
       Agreement-level schedule; concrete reporting periods of each delivered Dataset
       are carried by IsSdmxDataset.reportingBegin/reportingEnd/dataExtractionDate.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Dataflow
@@ -605,7 +532,7 @@ attributes:
 name: Dataflow
 description: An abstract representation that defines data provision for different
   reference periods, where a Distribution and its Dataset are instances
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 close_mappings:
 - sdmx:Dataflow
 related_mappings:
@@ -621,7 +548,7 @@ attributes:
     name: structure
     description: Structured component specification for this flow. Inlined so a standalone
       DTA carries its agreed structure.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     alias: structure
     owner: Dataflow
     domain_of:
@@ -634,7 +561,7 @@ attributes:
     name: dimensionConstraint
     description: Subset of dimensions that are agreed upon by the dataflow and must
       be included.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: dimensionConstraint
     owner: Dataflow
@@ -642,18 +569,6 @@ attributes:
     - Dataflow
     range: Dimension
     multivalued: true
-  analysisMethod:
-    name: analysisMethod
-    description: Metadata about the analysis method used to produce the data in this
-      dataflow.
-    from_schema: https://cdisc.org/data-definition-spec
-    rank: 1000
-    alias: analysisMethod
-    owner: Dataflow
-    domain_of:
-    - Dataflow
-    - Analysis
-    range: Analysis
   deliverySchedule:
     name: deliverySchedule
     description: Recurring transfer/delivery schedule agreed for this flow. The domain-neutral
@@ -661,7 +576,7 @@ attributes:
       use a Timing object only when delivery must be anchored to a clinical occurrence.
       Agreement-level schedule; concrete reporting periods of each delivered Dataset
       are carried by IsSdmxDataset.reportingBegin/reportingEnd/dataExtractionDate.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: deliverySchedule
     owner: Dataflow
@@ -677,7 +592,7 @@ attributes:
   version:
     name: version
     description: The version of the external resources
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: version
     owner: Dataflow
@@ -689,7 +604,7 @@ attributes:
     name: href
     description: Machine-readable instructions to obtain the resource e.g. FHIR path,
       URL
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: href
     owner: Dataflow
@@ -701,7 +616,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     identifier: true
     alias: OID
@@ -713,7 +628,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: uuid
     owner: Dataflow
@@ -723,7 +638,7 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: name
     owner: Dataflow
@@ -736,7 +651,7 @@ attributes:
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: description
     owner: Dataflow
@@ -750,7 +665,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: coding
     owner: Dataflow
@@ -765,7 +680,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -780,7 +695,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:altLabel
     rank: 1000
@@ -799,7 +714,7 @@ attributes:
   mandatory:
     name: mandatory
     description: Is this element required?
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: mandatory
     owner: Dataflow
@@ -810,7 +725,7 @@ attributes:
     name: comments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: comments
     owner: Dataflow
@@ -823,7 +738,7 @@ attributes:
     name: siteOrSponsorComments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: siteOrSponsorComments
     owner: Dataflow
@@ -835,7 +750,7 @@ attributes:
   purpose:
     name: purpose
     description: Purpose or rationale for this data element
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: purpose
     owner: Dataflow
@@ -848,7 +763,7 @@ attributes:
   lastUpdated:
     name: lastUpdated
     description: When the resource was last updated
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: lastUpdated
     owner: Dataflow
@@ -858,7 +773,7 @@ attributes:
   owner:
     name: owner
     description: Party responsible for this element
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     narrow_mappings:
     - prov:wasAttributedTo
     - prov:wasAssociatedBy
@@ -876,7 +791,7 @@ attributes:
     name: wasDerivedFrom
     description: Reference to another item that this item implements or extends, e.g.
       a template Item definition.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - prov:wasDerivedFrom
     rank: 1000
@@ -888,13 +803,12 @@ attributes:
     any_of:
     - range: Item
     - range: ItemGroup
-    - range: MetaDataVersion
+    - range: Specification
     - range: CodeList
-    - range: ReifiedConcept
+    - range: Concept
     - range: ConceptProperty
-    - range: Condition
+    - range: LogicalPredicate
     - range: Method
-    - range: NominalOccurrence
     - range: Dataflow
     - range: CubeComponent
     - range: DataProduct

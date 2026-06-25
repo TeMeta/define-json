@@ -9,7 +9,7 @@ _Current lifecycle status of the data product_
 
 
 
-URI: [odm:slot/lifecycleStatus](https://cdisc.org/odm2/slot/lifecycleStatus)
+URI: [dds:slot/lifecycleStatus](https://w3id.org/dds/slot/lifecycleStatus)
 Alias: lifecycleStatus
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: lifecycleStatus
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: lifecycleStatus
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:lifecycleStatus |
-| native | odm:lifecycleStatus |
+| self | dds:lifecycleStatus |
+| native | dds:lifecycleStatus |
 
 
 
@@ -67,7 +67,7 @@ Alias: lifecycleStatus
 ```yaml
 name: lifecycleStatus
 description: Current lifecycle status of the data product
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: lifecycleStatus
 owner: DataProduct

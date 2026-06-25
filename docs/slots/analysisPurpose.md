@@ -9,7 +9,7 @@ _The purpose or role of this analysis in the study._
 
 
 
-URI: [odm:slot/analysisPurpose](https://cdisc.org/odm2/slot/analysisPurpose)
+URI: [dds:slot/analysisPurpose](https://w3id.org/dds/slot/analysisPurpose)
 Alias: analysisPurpose
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: analysisPurpose
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: analysisPurpose
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:analysisPurpose |
-| native | odm:analysisPurpose |
+| self | dds:analysisPurpose |
+| native | dds:analysisPurpose |
 
 
 
@@ -67,7 +67,7 @@ Alias: analysisPurpose
 ```yaml
 name: analysisPurpose
 description: The purpose or role of this analysis in the study.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: analysisPurpose
 owner: Analysis

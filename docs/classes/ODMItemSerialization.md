@@ -1,20 +1,20 @@
 
 
-# Class: IsODMItem 
+# Class: ODMItemSerialization 
 
 
-_A mixin that provides additional attributes for CDISC Operational Data Model items, including roles, completion instructions, and implementation notes_
+_A mixin providing ODM/CDISC-specific item attributes meaningful only in ODM/Define-XML serialization: CRF completion instructions, CDISC notes, implementation notes, collection exception predicates, and pre-specified values. Applied by the ODM output generator. Not part of the canonical Item._
 
 
 
 
 
-URI: [odm:class/IsODMItem](https://cdisc.org/odm2/class/IsODMItem)
+URI: [dds:class/ODMItemSerialization](https://w3id.org/dds/class/ODMItemSerialization)
 
 
 ```mermaid
 erDiagram
-IsODMItem {
+ODMItemSerialization {
     string role  
     boolean hasNoData  
     string crfCompletionInstructions  
@@ -22,8 +22,8 @@ IsODMItem {
     string implementationNotes  
     string preSpecifiedValue  
 }
-Condition {
-    string implementsCondition  
+LogicalPredicate {
+    string implementsPredicate  
     LogicalOperator operator  
     string OID  
     string uuid  
@@ -143,14 +143,14 @@ CodeListItem {
     boolean other  
 }
 
-IsODMItem ||--|o CodeList : "roleCodeList"
-IsODMItem ||--|o Condition : "collectionExceptionCondition"
-Condition ||--}o RangeCheck : "rangeChecks"
-Condition ||--}o FormalExpression : "expressions"
-Condition ||--}o Condition : "conditions"
-Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comments"
-Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+ODMItemSerialization ||--|o CodeList : "roleCodeList"
+ODMItemSerialization ||--|o LogicalPredicate : "collectionExceptionPredicate"
+LogicalPredicate ||--}o RangeCheck : "rangeChecks"
+LogicalPredicate ||--}o FormalExpression : "expressions"
+LogicalPredicate ||--}o LogicalPredicate : "predicates"
+LogicalPredicate ||--}o Coding : "coding"
+LogicalPredicate ||--}o Comment : "comments"
+LogicalPredicate ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 SiteOrSponsorComment ||--}o Coding : "coding"
 SiteOrSponsorComment ||--}o Comment : "comments"
 SiteOrSponsorComment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -163,6 +163,7 @@ FormalExpression ||--|o ReturnValue : "returnValue"
 FormalExpression ||--}o Resource : "externalCodeLibs"
 FormalExpression ||--}o Coding : "coding"
 RangeCheck ||--}o FormalExpression : "expressions"
+RangeCheck ||--|o Check : "implementsCheck"
 CodeList ||--}o CodeListItem : "codeListItems"
 CodeList ||--|o Resource : "externalCodeList"
 CodeList ||--|o Standard : "standard"
@@ -191,7 +192,7 @@ CodeListItem ||--|o Coding : "coding"
 | [crfCompletionInstructions](../slots/crfCompletionInstructions.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | CRFCompletionInstructions reference: Instructions for the clinical site on how to enter collected information on the CRF | direct |
 | [cdiscNotes](../slots/cdiscNotes.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | CDISCNotes reference: Explanatory text for the variable | direct |
 | [implementationNotes](../slots/implementationNotes.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | ImplementationNotes reference: Further information, such as rationale and implementation instructions, on how to implement the CRF data collection fields | direct |
-| [collectionExceptionCondition](../slots/collectionExceptionCondition.md) | 0..1 <br/> [Condition](../classes/Condition.md) | Condition that defines when collection may be exempted | direct |
+| [collectionExceptionPredicate](../slots/collectionExceptionPredicate.md) | 0..1 <br/> [LogicalPredicate](../classes/LogicalPredicate.md) | Logical predicate defining when data collection for this item may be exempted. | direct |
 | [preSpecifiedValue](../slots/preSpecifiedValue.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Prefill value or a default value for a field that is automatically populated. | direct |
 
 
@@ -200,7 +201,6 @@ CodeListItem ||--|o Coding : "coding"
 
 | mixed into | description |
 | --- | --- |
-| [Item](../classes/Item.md) | A data element that represents a specific piece of information within a defined context, with data type, constraints, and derivation methods |
 
 
 
@@ -220,7 +220,7 @@ CodeListItem ||--|o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -229,8 +229,8 @@ CodeListItem ||--|o Coding : "coding"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:IsODMItem |
-| native | odm:IsODMItem |
+| self | dds:ODMItemSerialization |
+| native | dds:ODMItemSerialization |
 
 
 
@@ -245,20 +245,22 @@ CodeListItem ||--|o Coding : "coding"
 
 <details>
 ```yaml
-name: IsODMItem
-description: A mixin that provides additional attributes for CDISC Operational Data
-  Model items, including roles, completion instructions, and implementation notes
-from_schema: https://cdisc.org/data-definition-spec
+name: ODMItemSerialization
+description: 'A mixin providing ODM/CDISC-specific item attributes meaningful only
+  in ODM/Define-XML serialization: CRF completion instructions, CDISC notes, implementation
+  notes, collection exception predicates, and pre-specified values. Applied by the
+  ODM output generator. Not part of the canonical Item.'
+from_schema: https://w3id.org/dds
 mixin: true
 attributes:
   role:
     name: role
     description: Identifies the role of the item within the containing context, taken
       from the roleCodeList
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - IsODMItem
+    - ODMItemSerialization
     - Organization
     - CubeComponent
     any_of:
@@ -267,38 +269,38 @@ attributes:
   roleCodeList:
     name: roleCodeList
     description: Reference to the CodeList that defines the roles for this item
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - IsODMItem
+    - ODMItemSerialization
     range: CodeList
   hasNoData:
     name: hasNoData
     description: True if this is a manifest and there is no data for this item
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - IsODMItem
+    - ODMItemSerialization
     - ItemGroup
     range: boolean
   crfCompletionInstructions:
     name: crfCompletionInstructions
     description: 'CRFCompletionInstructions reference: Instructions for the clinical
       site on how to enter collected information on the CRF'
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - IsODMItem
+    - ODMItemSerialization
     any_of:
     - range: string
     - range: TranslatedText
   cdiscNotes:
     name: cdiscNotes
     description: 'CDISCNotes reference: Explanatory text for the variable'
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - IsODMItem
+    - ODMItemSerialization
     any_of:
     - range: string
     - range: TranslatedText
@@ -307,29 +309,30 @@ attributes:
     description: 'ImplementationNotes reference: Further information, such as rationale
       and implementation instructions, on how to implement the CRF data collection
       fields'
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - IsODMItem
+    - ODMItemSerialization
     any_of:
     - range: string
     - range: TranslatedText
-  collectionExceptionCondition:
-    name: collectionExceptionCondition
-    description: Condition that defines when collection may be exempted
-    from_schema: https://cdisc.org/data-definition-spec
+  collectionExceptionPredicate:
+    name: collectionExceptionPredicate
+    description: Logical predicate defining when data collection for this item may
+      be exempted.
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - IsODMItem
-    range: Condition
+    - ODMItemSerialization
+    range: LogicalPredicate
   preSpecifiedValue:
     name: preSpecifiedValue
     description: Prefill value or a default value for a field that is automatically
       populated.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - IsODMItem
+    - ODMItemSerialization
     any_of:
     - range: string
     - range: TranslatedText
@@ -341,22 +344,24 @@ attributes:
 
 <details>
 ```yaml
-name: IsODMItem
-description: A mixin that provides additional attributes for CDISC Operational Data
-  Model items, including roles, completion instructions, and implementation notes
-from_schema: https://cdisc.org/data-definition-spec
+name: ODMItemSerialization
+description: 'A mixin providing ODM/CDISC-specific item attributes meaningful only
+  in ODM/Define-XML serialization: CRF completion instructions, CDISC notes, implementation
+  notes, collection exception predicates, and pre-specified values. Applied by the
+  ODM output generator. Not part of the canonical Item.'
+from_schema: https://w3id.org/dds
 mixin: true
 attributes:
   role:
     name: role
     description: Identifies the role of the item within the containing context, taken
       from the roleCodeList
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: role
-    owner: IsODMItem
+    owner: ODMItemSerialization
     domain_of:
-    - IsODMItem
+    - ODMItemSerialization
     - Organization
     - CubeComponent
     range: string
@@ -366,34 +371,34 @@ attributes:
   roleCodeList:
     name: roleCodeList
     description: Reference to the CodeList that defines the roles for this item
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: roleCodeList
-    owner: IsODMItem
+    owner: ODMItemSerialization
     domain_of:
-    - IsODMItem
+    - ODMItemSerialization
     range: CodeList
   hasNoData:
     name: hasNoData
     description: True if this is a manifest and there is no data for this item
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: hasNoData
-    owner: IsODMItem
+    owner: ODMItemSerialization
     domain_of:
-    - IsODMItem
+    - ODMItemSerialization
     - ItemGroup
     range: boolean
   crfCompletionInstructions:
     name: crfCompletionInstructions
     description: 'CRFCompletionInstructions reference: Instructions for the clinical
       site on how to enter collected information on the CRF'
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: crfCompletionInstructions
-    owner: IsODMItem
+    owner: ODMItemSerialization
     domain_of:
-    - IsODMItem
+    - ODMItemSerialization
     range: string
     any_of:
     - range: string
@@ -401,12 +406,12 @@ attributes:
   cdiscNotes:
     name: cdiscNotes
     description: 'CDISCNotes reference: Explanatory text for the variable'
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: cdiscNotes
-    owner: IsODMItem
+    owner: ODMItemSerialization
     domain_of:
-    - IsODMItem
+    - ODMItemSerialization
     range: string
     any_of:
     - range: string
@@ -416,36 +421,37 @@ attributes:
     description: 'ImplementationNotes reference: Further information, such as rationale
       and implementation instructions, on how to implement the CRF data collection
       fields'
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: implementationNotes
-    owner: IsODMItem
+    owner: ODMItemSerialization
     domain_of:
-    - IsODMItem
+    - ODMItemSerialization
     range: string
     any_of:
     - range: string
     - range: TranslatedText
-  collectionExceptionCondition:
-    name: collectionExceptionCondition
-    description: Condition that defines when collection may be exempted
-    from_schema: https://cdisc.org/data-definition-spec
+  collectionExceptionPredicate:
+    name: collectionExceptionPredicate
+    description: Logical predicate defining when data collection for this item may
+      be exempted.
+    from_schema: https://w3id.org/dds
     rank: 1000
-    alias: collectionExceptionCondition
-    owner: IsODMItem
+    alias: collectionExceptionPredicate
+    owner: ODMItemSerialization
     domain_of:
-    - IsODMItem
-    range: Condition
+    - ODMItemSerialization
+    range: LogicalPredicate
   preSpecifiedValue:
     name: preSpecifiedValue
     description: Prefill value or a default value for a field that is automatically
       populated.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: preSpecifiedValue
-    owner: IsODMItem
+    owner: ODMItemSerialization
     domain_of:
-    - IsODMItem
+    - ODMItemSerialization
     range: string
     any_of:
     - range: string

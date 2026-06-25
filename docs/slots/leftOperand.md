@@ -9,7 +9,7 @@ _The subject of the constraint (odrl:leftOperand), e.g. "purpose", "recipient", 
 
 
 
-URI: [odm:slot/leftOperand](https://cdisc.org/odm2/slot/leftOperand)
+URI: [dds:slot/leftOperand](https://w3id.org/dds/slot/leftOperand)
 Alias: leftOperand
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: leftOperand
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: leftOperand
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:leftOperand |
-| native | odm:leftOperand |
+| self | dds:leftOperand |
+| native | dds:leftOperand |
 | exact | odrl:leftOperand |
 
 
@@ -71,7 +71,7 @@ Alias: leftOperand
 name: leftOperand
 description: The subject of the constraint (odrl:leftOperand), e.g. "purpose", "recipient",
   "dateTime"
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - odrl:leftOperand
 rank: 1000

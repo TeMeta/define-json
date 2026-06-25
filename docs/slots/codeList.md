@@ -4,7 +4,7 @@
 
 
 
-URI: [odm:slot/codeList](https://cdisc.org/odm2/slot/codeList)
+URI: [dds:slot/codeList](https://w3id.org/dds/slot/codeList)
 Alias: codeList
 
 <!-- no inheritance hierarchy -->
@@ -17,9 +17,9 @@ Alias: codeList
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Item](../classes/Item.md) | A data element that represents a specific piece of information within a defined context, with data type, constraints, and derivation methods |  no  |
 | [ConceptProperty](../classes/ConceptProperty.md) | A reified property concept that exists within the context of its containing topic concept |  no  |
 | [Parameter](../classes/Parameter.md) | A variable element that describes an input used in a formal expression |  no  |
+| [Item](../classes/Item.md) | A data element that represents a specific piece of information within a defined context, with data type, constraints, and derivation methods |  no  |
 
 
 
@@ -45,8 +45,8 @@ Alias: codeList
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:codeList |
-| native | odm:codeList |
+| self | dds:codeList |
+| native | dds:codeList |
 
 
 

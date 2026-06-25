@@ -9,7 +9,7 @@ _Indicates whether the timing is nominal (event-based) or not._
 
 
 
-URI: [odm:slot/isNominal](https://cdisc.org/odm2/slot/isNominal)
+URI: [dds:slot/isNominal](https://w3id.org/dds/slot/isNominal)
 Alias: isNominal
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: isNominal
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: isNominal
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:isNominal |
-| native | odm:isNominal |
+| self | dds:isNominal |
+| native | dds:isNominal |
 
 
 
@@ -67,7 +67,7 @@ Alias: isNominal
 ```yaml
 name: isNominal
 description: Indicates whether the timing is nominal (event-based) or not.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: isNominal
 owner: Timing

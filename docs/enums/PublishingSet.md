@@ -7,7 +7,7 @@ _An enumeration that defines permissible values for publishing sets_
 
 
 
-URI: [odm:enum/PublishingSet](https://cdisc.org/odm2/enum/PublishingSet)
+URI: [dds:enum/PublishingSet](https://w3id.org/dds/enum/PublishingSet)
 
 ## Permissible Values
 
@@ -42,7 +42,7 @@ URI: [odm:enum/PublishingSet](https://cdisc.org/odm2/enum/PublishingSet)
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,7 +55,7 @@ URI: [odm:enum/PublishingSet](https://cdisc.org/odm2/enum/PublishingSet)
 ```yaml
 name: PublishingSet
 description: An enumeration that defines permissible values for publishing sets
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 permissible_values:
   ADaM:

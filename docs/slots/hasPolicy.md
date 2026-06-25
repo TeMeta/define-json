@@ -4,7 +4,7 @@
 
 
 
-URI: [odm:slot/hasPolicy](https://cdisc.org/odm2/slot/hasPolicy)
+URI: [dds:slot/hasPolicy](https://w3id.org/dds/slot/hasPolicy)
 Alias: hasPolicy
 
 <!-- no inheritance hierarchy -->
@@ -45,8 +45,8 @@ Alias: hasPolicy
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:hasPolicy |
-| native | odm:hasPolicy |
+| self | dds:hasPolicy |
+| native | dds:hasPolicy |
 
 
 

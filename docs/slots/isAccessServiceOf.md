@@ -9,7 +9,7 @@ _Distribution(s) for which this service provides access_
 
 
 
-URI: [odm:slot/isAccessServiceOf](https://cdisc.org/odm2/slot/isAccessServiceOf)
+URI: [dds:slot/isAccessServiceOf](https://w3id.org/dds/slot/isAccessServiceOf)
 Alias: isAccessServiceOf
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: isAccessServiceOf
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: isAccessServiceOf
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:isAccessServiceOf |
-| native | odm:isAccessServiceOf |
+| self | dds:isAccessServiceOf |
+| native | dds:isAccessServiceOf |
 
 
 
@@ -67,7 +67,7 @@ Alias: isAccessServiceOf
 ```yaml
 name: isAccessServiceOf
 description: Distribution(s) for which this service provides access
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: isAccessServiceOf
 owner: DataService

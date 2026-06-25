@@ -9,7 +9,7 @@ _The person or team accountable for this data product_
 
 
 
-URI: [odm:slot/dataProductOwner](https://cdisc.org/odm2/slot/dataProductOwner)
+URI: [dds:slot/dataProductOwner](https://w3id.org/dds/slot/dataProductOwner)
 Alias: dataProductOwner
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: dataProductOwner
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: dataProductOwner
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:dataProductOwner |
-| native | odm:dataProductOwner |
+| self | dds:dataProductOwner |
+| native | dds:dataProductOwner |
 | exact | prov:wasAttributedTo |
 
 
@@ -68,7 +68,7 @@ Alias: dataProductOwner
 ```yaml
 name: dataProductOwner
 description: The person or team accountable for this data product
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - prov:wasAttributedTo
 rank: 1000

@@ -9,7 +9,7 @@ _The username of the user._
 
 
 
-URI: [odm:slot/userName](https://cdisc.org/odm2/slot/userName)
+URI: [dds:slot/userName](https://w3id.org/dds/slot/userName)
 Alias: userName
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: userName
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: userName
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:userName |
-| native | odm:userName |
+| self | dds:userName |
+| native | dds:userName |
 
 
 
@@ -67,7 +67,7 @@ Alias: userName
 ```yaml
 name: userName
 description: The username of the user.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: userName
 owner: User

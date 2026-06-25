@@ -9,7 +9,7 @@ _Description of the input interface before concrete Datasets exist. Dataflows re
 
 
 
-URI: [odm:slot/inputDataflow](https://cdisc.org/odm2/slot/inputDataflow)
+URI: [dds:slot/inputDataflow](https://w3id.org/dds/slot/inputDataflow)
 Alias: inputDataflow
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: inputDataflow
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: inputDataflow
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:inputDataflow |
-| native | odm:inputDataflow |
+| self | dds:inputDataflow |
+| native | dds:inputDataflow |
 | close | dcat:distribution |
 
 
@@ -71,7 +71,7 @@ Alias: inputDataflow
 name: inputDataflow
 description: Description of the input interface before concrete Datasets exist. Dataflows
   referenced here represent the demand side of a ProvisionAgreement.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 close_mappings:
 - dcat:distribution
 rank: 1000

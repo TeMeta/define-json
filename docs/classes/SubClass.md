@@ -9,7 +9,7 @@ _A specific SubClass within a CDISC model Class._
 
 
 
-URI: [odm:class/SubClass](https://cdisc.org/odm2/class/SubClass)
+URI: [dds:class/SubClass](https://w3id.org/dds/class/SubClass)
 
 
 ```mermaid
@@ -63,7 +63,7 @@ SubClass ||--}o SubClass : "subClasses"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -72,8 +72,8 @@ SubClass ||--}o SubClass : "subClasses"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:SubClass |
-| native | odm:SubClass |
+| self | dds:SubClass |
+| native | dds:SubClass |
 
 
 
@@ -90,12 +90,12 @@ SubClass ||--}o SubClass : "subClasses"
 ```yaml
 name: SubClass
 description: A specific SubClass within a CDISC model Class.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 attributes:
   name:
     name: name
     description: Name of the SubClass following CDISC Controlled Terminology for SubClass.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     domain_of:
     - Labelled
     - DefClass
@@ -105,7 +105,7 @@ attributes:
   parentClass:
     name: parentClass
     description: Name of the parent Class or SubClass following CDISC Controlled Terminology.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - SubClass
@@ -113,7 +113,7 @@ attributes:
   subClasses:
     name: subClasses
     description: Nested SubClass(es) for multi-level SubClass hierarchy.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     domain_of:
     - DefClass
     - SubClass
@@ -132,12 +132,12 @@ attributes:
 ```yaml
 name: SubClass
 description: A specific SubClass within a CDISC model Class.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 attributes:
   name:
     name: name
     description: Name of the SubClass following CDISC Controlled Terminology for SubClass.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     alias: name
     owner: SubClass
     domain_of:
@@ -150,7 +150,7 @@ attributes:
   parentClass:
     name: parentClass
     description: Name of the parent Class or SubClass following CDISC Controlled Terminology.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: parentClass
     owner: SubClass
@@ -161,7 +161,7 @@ attributes:
   subClasses:
     name: subClasses
     description: Nested SubClass(es) for multi-level SubClass hierarchy.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     alias: subClasses
     owner: SubClass
     domain_of:

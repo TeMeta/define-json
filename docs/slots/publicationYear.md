@@ -9,7 +9,7 @@ _Specifies the year of publication of the data or metadata in terms of whatever 
 
 
 
-URI: [odm:slot/publicationYear](https://cdisc.org/odm2/slot/publicationYear)
+URI: [dds:slot/publicationYear](https://w3id.org/dds/slot/publicationYear)
 Alias: publicationYear
 
 <!-- no inheritance hierarchy -->
@@ -47,7 +47,7 @@ Alias: publicationYear
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -56,8 +56,8 @@ Alias: publicationYear
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:publicationYear |
-| native | odm:publicationYear |
+| self | dds:publicationYear |
+| native | dds:publicationYear |
 
 
 
@@ -69,7 +69,7 @@ Alias: publicationYear
 name: publicationYear
 description: Specifies the year of publication of the data or metadata in terms of
   whatever provisioning agreements might be in force.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: publicationYear
 owner: IsSdmxDataset

@@ -9,7 +9,7 @@ _A mixin that provides additional metadata specific to SDMX Datasets_
 
 
 
-URI: [odm:class/IsSdmxDataset](https://cdisc.org/odm2/class/IsSdmxDataset)
+URI: [dds:class/IsSdmxDataset](https://w3id.org/dds/class/IsSdmxDataset)
 
 
 ```mermaid
@@ -73,7 +73,7 @@ IsSdmxDataset {
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -82,8 +82,8 @@ IsSdmxDataset {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:IsSdmxDataset |
-| native | odm:IsSdmxDataset |
+| self | dds:IsSdmxDataset |
+| native | dds:IsSdmxDataset |
 
 
 
@@ -100,14 +100,14 @@ IsSdmxDataset {
 ```yaml
 name: IsSdmxDataset
 description: A mixin that provides additional metadata specific to SDMX Datasets
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 mixin: true
 attributes:
   action:
     name: action
     description: Defines the action to be taken by the recipient system (information,
       append, replace, delete)
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - IsSdmxDataset
@@ -116,7 +116,7 @@ attributes:
     name: reportingBegin
     description: A specific time period in a known system of time periods that identifies
       the start period of a report.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - IsSdmxDataset
@@ -124,7 +124,7 @@ attributes:
     name: reportingEnd
     description: A specific time period in a known system of time periods that identifies
       the end period of a report.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - IsSdmxDataset
@@ -132,7 +132,7 @@ attributes:
     name: dataExtractionDate
     description: A specific time period that identifies the date and time that the
       data are extracted from a data source.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - IsSdmxDataset
@@ -140,7 +140,7 @@ attributes:
     name: validFrom
     description: Indicates the inclusive start time indicating the validity of the
       information in the data set.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - IsSdmxDataset
@@ -148,7 +148,7 @@ attributes:
     name: validTo
     description: Indicates the inclusive end time indicating the validity of the information
       in the data set.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - IsSdmxDataset
@@ -156,7 +156,7 @@ attributes:
     name: publicationYear
     description: Specifies the year of publication of the data or metadata in terms
       of whatever provisioning agreements might be in force.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - IsSdmxDataset
@@ -164,7 +164,7 @@ attributes:
     name: publicationPeriod
     description: Specifies the period of publication of the data or metadata in terms
       of whatever provisioning agreements might be in force.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - IsSdmxDataset
@@ -178,14 +178,14 @@ attributes:
 ```yaml
 name: IsSdmxDataset
 description: A mixin that provides additional metadata specific to SDMX Datasets
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 mixin: true
 attributes:
   action:
     name: action
     description: Defines the action to be taken by the recipient system (information,
       append, replace, delete)
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: action
     owner: IsSdmxDataset
@@ -197,7 +197,7 @@ attributes:
     name: reportingBegin
     description: A specific time period in a known system of time periods that identifies
       the start period of a report.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: reportingBegin
     owner: IsSdmxDataset
@@ -208,7 +208,7 @@ attributes:
     name: reportingEnd
     description: A specific time period in a known system of time periods that identifies
       the end period of a report.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: reportingEnd
     owner: IsSdmxDataset
@@ -219,7 +219,7 @@ attributes:
     name: dataExtractionDate
     description: A specific time period that identifies the date and time that the
       data are extracted from a data source.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: dataExtractionDate
     owner: IsSdmxDataset
@@ -230,7 +230,7 @@ attributes:
     name: validFrom
     description: Indicates the inclusive start time indicating the validity of the
       information in the data set.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: validFrom
     owner: IsSdmxDataset
@@ -241,7 +241,7 @@ attributes:
     name: validTo
     description: Indicates the inclusive end time indicating the validity of the information
       in the data set.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: validTo
     owner: IsSdmxDataset
@@ -252,7 +252,7 @@ attributes:
     name: publicationYear
     description: Specifies the year of publication of the data or metadata in terms
       of whatever provisioning agreements might be in force.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: publicationYear
     owner: IsSdmxDataset
@@ -263,7 +263,7 @@ attributes:
     name: publicationPeriod
     description: Specifies the period of publication of the data or metadata in terms
       of whatever provisioning agreements might be in force.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: publicationPeriod
     owner: IsSdmxDataset

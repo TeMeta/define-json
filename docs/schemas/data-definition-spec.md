@@ -1,5 +1,5 @@
 # data-definition-spec 
 
-Data model for supply and demand data contracts to complement CDISC USDM, ODM, and Dataset-JSON. This LinkML version includes semantics to act as Rosetta Stone for SDMX, FHIR, OMOP, RDF, and CDISC.
+Standards-agnostic canonical model for clinical data meaning, structure, and governance. Projects to CDISC (SDTM/ADaM/Define-XML), FHIR, OMOP, and SDMX. ODM/Define-XML is one serialization facet applied by the output generator; the canonical model is not ODM-derived.
 
-URI: https://cdisc.org/data-definition-spec
+URI: https://w3id.org/dds

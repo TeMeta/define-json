@@ -9,7 +9,7 @@ _Numeric significance of the code (e.g., for scoring)_
 
 
 
-URI: [odm:slot/weight](https://cdisc.org/odm2/slot/weight)
+URI: [dds:slot/weight](https://w3id.org/dds/slot/weight)
 Alias: weight
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: weight
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: weight
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:weight |
-| native | odm:weight |
+| self | dds:weight |
+| native | dds:weight |
 
 
 
@@ -67,7 +67,7 @@ Alias: weight
 ```yaml
 name: weight
 description: Numeric significance of the code (e.g., for scoring)
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: weight
 owner: CodeListItem

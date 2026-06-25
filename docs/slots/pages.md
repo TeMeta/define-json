@@ -9,7 +9,7 @@ _Reference to specific pages in a PDF document_
 
 
 
-URI: [odm:slot/pages](https://cdisc.org/odm2/slot/pages)
+URI: [dds:slot/pages](https://w3id.org/dds/slot/pages)
 Alias: pages
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: pages
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: pages
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:pages |
-| native | odm:pages |
+| self | dds:pages |
+| native | dds:pages |
 
 
 
@@ -69,7 +69,7 @@ Alias: pages
 ```yaml
 name: pages
 description: Reference to specific pages in a PDF document
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: pages
 owner: DocumentReference

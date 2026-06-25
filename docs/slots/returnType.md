@@ -9,7 +9,7 @@ _Return type of the expression_
 
 
 
-URI: [odm:slot/returnType](https://cdisc.org/odm2/slot/returnType)
+URI: [dds:slot/returnType](https://w3id.org/dds/slot/returnType)
 Alias: returnType
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: returnType
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: returnType
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:returnType |
-| native | odm:returnType |
+| self | dds:returnType |
+| native | dds:returnType |
 
 
 
@@ -67,7 +67,7 @@ Alias: returnType
 ```yaml
 name: returnType
 description: Return type of the expression
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: returnType
 owner: FormalExpression

@@ -9,7 +9,7 @@ _A list of possible return values._
 
 
 
-URI: [odm:slot/valueList](https://cdisc.org/odm2/slot/valueList)
+URI: [dds:slot/valueList](https://w3id.org/dds/slot/valueList)
 Alias: valueList
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: valueList
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: valueList
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:valueList |
-| native | odm:valueList |
+| self | dds:valueList |
+| native | dds:valueList |
 
 
 
@@ -69,7 +69,7 @@ Alias: valueList
 ```yaml
 name: valueList
 description: A list of possible return values.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: valueList
 owner: ReturnValue

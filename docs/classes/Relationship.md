@@ -9,7 +9,7 @@ _A semantic link that defines connections between elements such as Items or Item
 
 
 
-URI: [odm:class/Relationship](https://cdisc.org/odm2/class/Relationship)
+URI: [dds:class/Relationship](https://w3id.org/dds/class/Relationship)
 
 
 ```mermaid
@@ -80,7 +80,7 @@ IdentifiableElement ||--}o Coding : "coding"
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | [relationships](../slots/relationships.md) | range | [Relationship](../classes/Relationship.md) |
+| [Specification](../classes/Specification.md) | [relationships](../slots/relationships.md) | range | [Relationship](../classes/Relationship.md) |
 
 
 
@@ -98,7 +98,7 @@ IdentifiableElement ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -107,8 +107,8 @@ IdentifiableElement ||--}o Coding : "coding"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:Relationship |
-| native | odm:Relationship |
+| self | dds:Relationship |
+| native | dds:Relationship |
 | related | sdmx:ConceptSchemeMap |
 
 
@@ -128,7 +128,7 @@ name: Relationship
 description: A semantic link that defines connections between elements such as Items
   or ItemGroups, capturing relationships like "is the unit for" or "assesses seriousness
   of"
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 related_mappings:
 - sdmx:ConceptSchemeMap
 is_a: IdentifiableElement
@@ -136,7 +136,7 @@ attributes:
   subject:
     name: subject
     description: The starting element of the relationship (e.g., an Item or ItemGroup).
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Relationship
@@ -145,7 +145,7 @@ attributes:
   object:
     name: object
     description: The ending element of the relationship.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Relationship
@@ -154,7 +154,7 @@ attributes:
   predicateTerm:
     name: predicateTerm
     description: Short variable relationship linking phrase for programming purposes.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Relationship
@@ -163,7 +163,7 @@ attributes:
   linkingPhrase:
     name: linkingPhrase
     description: Variable relationship descriptive linking phrase.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Relationship
@@ -181,7 +181,7 @@ name: Relationship
 description: A semantic link that defines connections between elements such as Items
   or ItemGroups, capturing relationships like "is the unit for" or "assesses seriousness
   of"
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 related_mappings:
 - sdmx:ConceptSchemeMap
 is_a: IdentifiableElement
@@ -189,7 +189,7 @@ attributes:
   subject:
     name: subject
     description: The starting element of the relationship (e.g., an Item or ItemGroup).
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: subject
     owner: Relationship
@@ -200,7 +200,7 @@ attributes:
   object:
     name: object
     description: The ending element of the relationship.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: object
     owner: Relationship
@@ -211,7 +211,7 @@ attributes:
   predicateTerm:
     name: predicateTerm
     description: Short variable relationship linking phrase for programming purposes.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: predicateTerm
     owner: Relationship
@@ -222,7 +222,7 @@ attributes:
   linkingPhrase:
     name: linkingPhrase
     description: Variable relationship descriptive linking phrase.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: linkingPhrase
     owner: Relationship
@@ -234,7 +234,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     identifier: true
     alias: OID
@@ -246,7 +246,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: uuid
     owner: Relationship
@@ -256,7 +256,7 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: name
     owner: Relationship
@@ -269,7 +269,7 @@ attributes:
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: description
     owner: Relationship
@@ -283,7 +283,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: coding
     owner: Relationship
@@ -298,7 +298,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -313,7 +313,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:altLabel
     rank: 1000

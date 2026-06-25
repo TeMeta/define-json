@@ -9,7 +9,7 @@ _Reference to a code list that is defined externally to this study_
 
 
 
-URI: [odm:slot/externalCodeList](https://cdisc.org/odm2/slot/externalCodeList)
+URI: [dds:slot/externalCodeList](https://w3id.org/dds/slot/externalCodeList)
 Alias: externalCodeList
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: externalCodeList
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: externalCodeList
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:externalCodeList |
-| native | odm:externalCodeList |
+| self | dds:externalCodeList |
+| native | dds:externalCodeList |
 
 
 
@@ -67,7 +67,7 @@ Alias: externalCodeList
 ```yaml
 name: externalCodeList
 description: Reference to a code list that is defined externally to this study
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: externalCodeList
 owner: CodeList

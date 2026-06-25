@@ -7,7 +7,7 @@ _ODRL policy subtypes._
 
 
 
-URI: [odm:enum/PolicyType](https://cdisc.org/odm2/enum/PolicyType)
+URI: [dds:enum/PolicyType](https://w3id.org/dds/enum/PolicyType)
 
 ## Permissible Values
 
@@ -40,7 +40,7 @@ URI: [odm:enum/PolicyType](https://cdisc.org/odm2/enum/PolicyType)
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -53,7 +53,7 @@ URI: [odm:enum/PolicyType](https://cdisc.org/odm2/enum/PolicyType)
 ```yaml
 name: PolicyType
 description: ODRL policy subtypes.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 permissible_values:
   Set:

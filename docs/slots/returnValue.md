@@ -9,7 +9,7 @@ _Return value details_
 
 
 
-URI: [odm:slot/returnValue](https://cdisc.org/odm2/slot/returnValue)
+URI: [dds:slot/returnValue](https://w3id.org/dds/slot/returnValue)
 Alias: returnValue
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: returnValue
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: returnValue
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:returnValue |
-| native | odm:returnValue |
+| self | dds:returnValue |
+| native | dds:returnValue |
 
 
 
@@ -67,7 +67,7 @@ Alias: returnValue
 ```yaml
 name: returnValue
 description: Return value details
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: returnValue
 owner: FormalExpression

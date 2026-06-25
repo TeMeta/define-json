@@ -9,7 +9,7 @@ _Description of the study_
 
 
 
-URI: [odm:slot/studyDescription](https://cdisc.org/odm2/slot/studyDescription)
+URI: [dds:slot/studyDescription](https://w3id.org/dds/slot/studyDescription)
 Alias: studyDescription
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: studyDescription
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | A container element that represents a given version of a specification, linking to a particular usage context such as a study, dataset, or data collection instrument. |  no  |
+| [Specification](../classes/Specification.md) | The root specification container: a versioned, governed definition of the data model for a study or data product. Links items, item groups, methods, code lists, concepts, and study design references. Projects to Define-XML MetaDataVersion, FHIR ImplementationGuide, and OMOP CDM metadata. ODMSerializationMetadata is applied by the ODM output generator, not here. |  no  |
 | [StudyMetadata](../classes/StudyMetadata.md) | A mixin that provides study-level metadata attributes including study identification and protocol information |  no  |
 
 
@@ -47,7 +47,7 @@ Alias: studyDescription
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -56,8 +56,8 @@ Alias: studyDescription
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:studyDescription |
-| native | odm:studyDescription |
+| self | dds:studyDescription |
+| native | dds:studyDescription |
 
 
 
@@ -68,7 +68,7 @@ Alias: studyDescription
 ```yaml
 name: studyDescription
 description: Description of the study
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: studyDescription
 owner: StudyMetadata

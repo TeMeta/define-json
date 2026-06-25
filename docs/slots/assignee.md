@@ -4,7 +4,7 @@
 
 
 
-URI: [odm:slot/assignee](https://cdisc.org/odm2/slot/assignee)
+URI: [dds:slot/assignee](https://w3id.org/dds/slot/assignee)
 Alias: assignee
 
 <!-- no inheritance hierarchy -->
@@ -17,8 +17,8 @@ Alias: assignee
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Policy](../classes/Policy.md) | A set of usage and access rules (ODRL) governing data. For a DTA this is typically an ODRL Agreement between an assigner (provider) and assignee (consumer), composed of permissions, prohibitions and obligations. |  no  |
 | [Rule](../classes/Rule.md) | An ODRL rule asserting that an action is permitted, prohibited, or required on a target asset, optionally restricted by constraints. |  no  |
+| [Policy](../classes/Policy.md) | A set of usage and access rules (ODRL) governing data. For a DTA this is typically an ODRL Agreement between an assigner (provider) and assignee (consumer), composed of permissions, prohibitions and obligations. |  no  |
 
 
 
@@ -44,8 +44,8 @@ Alias: assignee
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:assignee |
-| native | odm:assignee |
+| self | dds:assignee |
+| native | dds:assignee |
 
 
 

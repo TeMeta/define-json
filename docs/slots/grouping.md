@@ -9,7 +9,7 @@ _An association to a set of metadata concepts that have an identified structural
 
 
 
-URI: [odm:slot/grouping](https://cdisc.org/odm2/slot/grouping)
+URI: [dds:slot/grouping](https://w3id.org/dds/slot/grouping)
 Alias: grouping
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: grouping
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: grouping
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:grouping |
-| native | odm:grouping |
+| self | dds:grouping |
+| native | dds:grouping |
 
 
 
@@ -68,7 +68,7 @@ Alias: grouping
 name: grouping
 description: An association to a set of metadata concepts that have an identified
   structural role in a Data Structure Definition.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: grouping
 owner: DataStructureDefinition

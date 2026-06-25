@@ -9,7 +9,7 @@ _A mixin that provides slots for detailing meanings and multilingual description
 
 
 
-URI: [odm:class/Labelled](https://cdisc.org/odm2/class/Labelled)
+URI: [dds:class/Labelled](https://w3id.org/dds/class/Labelled)
 
 
 ```mermaid
@@ -74,7 +74,7 @@ Labelled ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -83,8 +83,8 @@ Labelled ||--}o Coding : "coding"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:Labelled |
-| native | odm:Labelled |
+| self | dds:Labelled |
+| native | dds:Labelled |
 
 
 
@@ -101,13 +101,13 @@ Labelled ||--}o Coding : "coding"
 ```yaml
 name: Labelled
 description: A mixin that provides slots for detailing meanings and multilingual descriptions
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 mixin: true
 attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Labelled
@@ -117,7 +117,7 @@ attributes:
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Labelled
@@ -128,7 +128,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Labelled
@@ -141,7 +141,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -153,7 +153,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:altLabel
     rank: 1000
@@ -176,13 +176,13 @@ attributes:
 ```yaml
 name: Labelled
 description: A mixin that provides slots for detailing meanings and multilingual descriptions
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 mixin: true
 attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: name
     owner: Labelled
@@ -195,7 +195,7 @@ attributes:
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: description
     owner: Labelled
@@ -209,7 +209,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: coding
     owner: Labelled
@@ -224,7 +224,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -239,7 +239,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:altLabel
     rank: 1000

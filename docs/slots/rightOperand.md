@@ -9,7 +9,7 @@ _The value compared against (odrl:rightOperand)_
 
 
 
-URI: [odm:slot/rightOperand](https://cdisc.org/odm2/slot/rightOperand)
+URI: [dds:slot/rightOperand](https://w3id.org/dds/slot/rightOperand)
 Alias: rightOperand
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: rightOperand
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: rightOperand
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:rightOperand |
-| native | odm:rightOperand |
+| self | dds:rightOperand |
+| native | dds:rightOperand |
 | exact | odrl:rightOperand |
 
 
@@ -70,7 +70,7 @@ Alias: rightOperand
 ```yaml
 name: rightOperand
 description: The value compared against (odrl:rightOperand)
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - odrl:rightOperand
 rank: 1000

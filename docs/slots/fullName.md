@@ -9,7 +9,7 @@ _The full name of the user._
 
 
 
-URI: [odm:slot/fullName](https://cdisc.org/odm2/slot/fullName)
+URI: [dds:slot/fullName](https://w3id.org/dds/slot/fullName)
 Alias: fullName
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: fullName
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: fullName
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:fullName |
-| native | odm:fullName |
+| self | dds:fullName |
+| native | dds:fullName |
 
 
 
@@ -67,7 +67,7 @@ Alias: fullName
 ```yaml
 name: fullName
 description: The full name of the user.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: fullName
 owner: User

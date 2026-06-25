@@ -9,7 +9,7 @@ _For numeric values, the number of significant digits_
 
 
 
-URI: [odm:slot/significantDigits](https://cdisc.org/odm2/slot/significantDigits)
+URI: [dds:slot/significantDigits](https://w3id.org/dds/slot/significantDigits)
 Alias: significantDigits
 
 <!-- no inheritance hierarchy -->
@@ -47,7 +47,7 @@ Alias: significantDigits
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -56,8 +56,8 @@ Alias: significantDigits
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:significantDigits |
-| native | odm:significantDigits |
+| self | dds:significantDigits |
+| native | dds:significantDigits |
 
 
 
@@ -68,7 +68,7 @@ Alias: significantDigits
 ```yaml
 name: significantDigits
 description: For numeric values, the number of significant digits
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: significantDigits
 owner: Formatted

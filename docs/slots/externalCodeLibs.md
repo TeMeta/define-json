@@ -9,7 +9,7 @@ _External code libraries referenced_
 
 
 
-URI: [odm:slot/externalCodeLibs](https://cdisc.org/odm2/slot/externalCodeLibs)
+URI: [dds:slot/externalCodeLibs](https://w3id.org/dds/slot/externalCodeLibs)
 Alias: externalCodeLibs
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: externalCodeLibs
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: externalCodeLibs
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:externalCodeLibs |
-| native | odm:externalCodeLibs |
+| self | dds:externalCodeLibs |
+| native | dds:externalCodeLibs |
 
 
 
@@ -69,7 +69,7 @@ Alias: externalCodeLibs
 ```yaml
 name: externalCodeLibs
 description: External code libraries referenced
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: externalCodeLibs
 owner: FormalExpression

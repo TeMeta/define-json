@@ -9,7 +9,7 @@ _The reason this analysis was performed.  _
 
 
 
-URI: [odm:slot/analysisReason](https://cdisc.org/odm2/slot/analysisReason)
+URI: [dds:slot/analysisReason](https://w3id.org/dds/slot/analysisReason)
 Alias: analysisReason
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: analysisReason
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: analysisReason
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:analysisReason |
-| native | odm:analysisReason |
+| self | dds:analysisReason |
+| native | dds:analysisReason |
 
 
 
@@ -67,7 +67,7 @@ Alias: analysisReason
 ```yaml
 name: analysisReason
 description: 'The reason this analysis was performed.  '
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: analysisReason
 owner: Analysis

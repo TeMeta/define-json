@@ -9,7 +9,7 @@ _A dimension subset that represents collections of dimensions that are subsets o
 
 
 
-URI: [odm:class/GroupKey](https://cdisc.org/odm2/class/GroupKey)
+URI: [dds:class/GroupKey](https://w3id.org/dds/class/GroupKey)
 
 
 ```mermaid
@@ -67,7 +67,7 @@ GroupKey {
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -76,8 +76,8 @@ GroupKey {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:GroupKey |
-| native | odm:GroupKey |
+| self | dds:GroupKey |
+| native | dds:GroupKey |
 | exact | sdmx:GroupKey |
 
 
@@ -96,7 +96,7 @@ GroupKey {
 name: GroupKey
 description: A dimension subset that represents collections of dimensions that are
   subsets of the full dimension set, distinct from SeriesKey which includes Time dimensions
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - sdmx:GroupKey
 is_a: DatasetKey
@@ -111,7 +111,7 @@ is_a: DatasetKey
 name: GroupKey
 description: A dimension subset that represents collections of dimensions that are
   subsets of the full dimension set, distinct from SeriesKey which includes Time dimensions
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - sdmx:GroupKey
 is_a: DatasetKey
@@ -120,7 +120,7 @@ attributes:
     name: describedBy
     description: Associates the Dimension Descriptor defined in the Data Structure
       Definition
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     alias: describedBy
     owner: GroupKey
     domain_of:
@@ -134,7 +134,7 @@ attributes:
     name: keyValues
     description: List of Key Values that comprise each key, separated by a dot e.g.
       SUBJ001.VISIT2.BMI
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: keyValues
     owner: GroupKey
@@ -144,7 +144,7 @@ attributes:
   attributeValues:
     name: attributeValues
     description: Association to the Attribute Values relating to Key
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: attributeValues
     owner: GroupKey

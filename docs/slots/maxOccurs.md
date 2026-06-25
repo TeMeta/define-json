@@ -9,7 +9,7 @@ _Maximum number of occurrences of this property in the context. Leave empty for 
 
 
 
-URI: [odm:slot/maxOccurs](https://cdisc.org/odm2/slot/maxOccurs)
+URI: [dds:slot/maxOccurs](https://w3id.org/dds/slot/maxOccurs)
 Alias: maxOccurs
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: maxOccurs
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: maxOccurs
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:maxOccurs |
-| native | odm:maxOccurs |
+| self | dds:maxOccurs |
+| native | dds:maxOccurs |
 
 
 
@@ -68,7 +68,7 @@ Alias: maxOccurs
 name: maxOccurs
 description: Maximum number of occurrences of this property in the context. Leave
   empty for unbounded. Set to 0 to disable property
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: maxOccurs
 owner: ConceptProperty

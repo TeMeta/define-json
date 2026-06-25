@@ -9,7 +9,7 @@ _Subset of dimensions that are agreed upon by the dataflow and must be included.
 
 
 
-URI: [odm:slot/dimensionConstraint](https://cdisc.org/odm2/slot/dimensionConstraint)
+URI: [dds:slot/dimensionConstraint](https://w3id.org/dds/slot/dimensionConstraint)
 Alias: dimensionConstraint
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: dimensionConstraint
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: dimensionConstraint
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:dimensionConstraint |
-| native | odm:dimensionConstraint |
+| self | dds:dimensionConstraint |
+| native | dds:dimensionConstraint |
 
 
 
@@ -70,7 +70,7 @@ Alias: dimensionConstraint
 name: dimensionConstraint
 description: Subset of dimensions that are agreed upon by the dataflow and must be
   included.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: dimensionConstraint
 owner: Dataflow

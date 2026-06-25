@@ -9,7 +9,7 @@ _The Data Consumer that is part of this agreement_
 
 
 
-URI: [odm:slot/consumer](https://cdisc.org/odm2/slot/consumer)
+URI: [dds:slot/consumer](https://w3id.org/dds/slot/consumer)
 Alias: consumer
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: consumer
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: consumer
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:consumer |
-| native | odm:consumer |
+| self | dds:consumer |
+| native | dds:consumer |
 
 
 
@@ -67,7 +67,7 @@ Alias: consumer
 ```yaml
 name: consumer
 description: The Data Consumer that is part of this agreement
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: consumer
 owner: ProvisionAgreement

@@ -7,7 +7,7 @@ _ODRL constraint operators._
 
 
 
-URI: [odm:enum/ConstraintOperator](https://cdisc.org/odm2/enum/ConstraintOperator)
+URI: [dds:enum/ConstraintOperator](https://w3id.org/dds/enum/ConstraintOperator)
 
 ## Permissible Values
 
@@ -41,7 +41,7 @@ URI: [odm:enum/ConstraintOperator](https://cdisc.org/odm2/enum/ConstraintOperato
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -54,7 +54,7 @@ URI: [odm:enum/ConstraintOperator](https://cdisc.org/odm2/enum/ConstraintOperato
 ```yaml
 name: ConstraintOperator
 description: ODRL constraint operators.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 permissible_values:
   eq:

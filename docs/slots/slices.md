@@ -9,7 +9,7 @@ _Slices are specific subset ItemGroups that belong to, or are used by this ItemG
 
 
 
-URI: [odm:slot/slices](https://cdisc.org/odm2/slot/slices)
+URI: [dds:slot/slices](https://w3id.org/dds/slot/slices)
 Alias: slices
 
 <!-- no inheritance hierarchy -->
@@ -22,8 +22,8 @@ Alias: slices
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ItemGroup](../classes/ItemGroup.md) | A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections |  no  |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures |  no  |
+| [ItemGroup](../classes/ItemGroup.md) | A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections |  no  |
 
 
 
@@ -49,7 +49,7 @@ Alias: slices
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -58,8 +58,8 @@ Alias: slices
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:slices |
-| native | odm:slices |
+| self | dds:slices |
+| native | dds:slices |
 
 
 
@@ -71,7 +71,7 @@ Alias: slices
 name: slices
 description: Slices are specific subset ItemGroups that belong to, or are used by
   this ItemGroup
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: slices
 owner: ItemGroup

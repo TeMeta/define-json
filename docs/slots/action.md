@@ -4,7 +4,7 @@
 
 
 
-URI: [odm:slot/action](https://cdisc.org/odm2/slot/action)
+URI: [dds:slot/action](https://w3id.org/dds/slot/action)
 Alias: action
 
 <!-- no inheritance hierarchy -->
@@ -17,9 +17,9 @@ Alias: action
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
+| [Rule](../classes/Rule.md) | An ODRL rule asserting that an action is permitted, prohibited, or required on a target asset, optionally restricted by constraints. |  no  |
 | [IsSdmxDataset](../classes/IsSdmxDataset.md) | A mixin that provides additional metadata specific to SDMX Datasets |  no  |
 | [Dataset](../classes/Dataset.md) | A collection element that groups observations sharing the same dimensionality, expressed as a set of unique dimensions within a Data Product context |  no  |
-| [Rule](../classes/Rule.md) | An ODRL rule asserting that an action is permitted, prohibited, or required on a target asset, optionally restricted by constraints. |  no  |
 
 
 
@@ -45,8 +45,8 @@ Alias: action
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:action |
-| native | odm:action |
+| self | dds:action |
+| native | dds:action |
 
 
 

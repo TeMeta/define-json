@@ -9,7 +9,7 @@ _A collection element that groups observations sharing the same dimensionality, 
 
 
 
-URI: [odm:class/Dataset](https://cdisc.org/odm2/class/Dataset)
+URI: [dds:class/Dataset](https://w3id.org/dds/class/Dataset)
 
 
 ```mermaid
@@ -50,6 +50,8 @@ Timing {
     TimingType type  
     boolean isNominal  
     string value  
+    string relativeTo  
+    string relativeFrom  
     datetime windowLower  
     datetime windowUpper  
     boolean recalled  
@@ -63,20 +65,6 @@ Timing {
 }
 Method {
     MethodType type  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-NominalOccurrence {
-    string event  
     string OID  
     string uuid  
     string name  
@@ -205,7 +193,7 @@ Standard {
 DefClass {
     string name  
 }
-WhereClause {
+ApplicabilityCondition {
     string OID  
     string uuid  
     string name  
@@ -218,7 +206,7 @@ WhereClause {
     string owner  
     string wasDerivedFrom  
 }
-ReifiedConcept {
+Concept {
     string version  
     string href  
     string OID  
@@ -259,12 +247,6 @@ ItemGroup {
 Item {
     DataType dataType  
     integer length  
-    string role  
-    boolean hasNoData  
-    string crfCompletionInstructions  
-    string cdiscNotes  
-    string implementationNotes  
-    string preSpecifiedValue  
     integer decimalDigits  
     string displayFormat  
     integer significantDigits  
@@ -347,25 +329,6 @@ Dataflow {
     string owner  
     string wasDerivedFrom  
 }
-Analysis {
-    string analysisReason  
-    string analysisPurpose  
-    stringList inputData  
-    string version  
-    string href  
-    MethodType type  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
 
 Dataset ||--|o Dataflow : "describedBy"
 Dataset ||--|o DataStructureDefinition : "structuredBy"
@@ -374,21 +337,14 @@ Dataset ||--}o Policy : "hasPolicy"
 Dataset ||--}o Coding : "security"
 Dataset ||--|o Timing : "validityPeriod"
 Dataset ||--}o Coding : "coding"
-Timing ||--|o NominalOccurrence : "relativeTo"
-Timing ||--|o NominalOccurrence : "relativeFrom"
 Timing ||--|o Method : "imputation"
 Timing ||--}o Coding : "coding"
 Method ||--}o FormalExpression : "expressions"
 Method ||--}o DocumentReference : "documents"
-Method ||--|o ReifiedConcept : "implementsConcept"
+Method ||--|o Concept : "implementsConcept"
 Method ||--}o Coding : "coding"
 Method ||--}o Comment : "comments"
 Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-NominalOccurrence ||--|| Timing : "timing"
-NominalOccurrence ||--}o Condition : "condition"
-NominalOccurrence ||--}o Coding : "coding"
-NominalOccurrence ||--}o Comment : "comments"
-NominalOccurrence ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Policy ||--}o Rule : "permission"
 Policy ||--}o Rule : "prohibition"
 Policy ||--}o Rule : "obligation"
@@ -414,10 +370,11 @@ DataStructureDefinition ||--}o Measure : "measures"
 DataStructureDefinition ||--}o DataAttribute : "attributes"
 DataStructureDefinition ||--|o ComponentList : "grouping"
 DataStructureDefinition ||--}o Item : "items"
+DataStructureDefinition ||--}o Item : "uniqueKey"
 DataStructureDefinition ||--}o Item : "keySequence"
 DataStructureDefinition ||--}o ItemGroup : "slices"
-DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
-DataStructureDefinition ||--}o WhereClause : "applicableWhen"
+DataStructureDefinition ||--|o Concept : "implementsConcept"
+DataStructureDefinition ||--}o ApplicabilityCondition : "applicableWhen"
 DataStructureDefinition ||--|o DefClass : "observationClass"
 DataStructureDefinition ||--}o Coding : "security"
 DataStructureDefinition ||--|o Timing : "validityPeriod"
@@ -427,19 +384,20 @@ DataStructureDefinition ||--}o Comment : "comments"
 DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Standard ||--}o Coding : "coding"
 DefClass ||--}o SubClass : "subClasses"
-WhereClause ||--}o Condition : "conditions"
-WhereClause ||--}o Coding : "coding"
-WhereClause ||--}o Comment : "comments"
-WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-ReifiedConcept ||--}o ConceptProperty : "properties"
-ReifiedConcept ||--}o Coding : "coding"
-ReifiedConcept ||--}o Comment : "comments"
-ReifiedConcept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+ApplicabilityCondition ||--}o LogicalPredicate : "predicates"
+ApplicabilityCondition ||--}o Coding : "coding"
+ApplicabilityCondition ||--}o Comment : "comments"
+ApplicabilityCondition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Concept ||--}o ConceptProperty : "properties"
+Concept ||--}o Coding : "coding"
+Concept ||--}o Comment : "comments"
+Concept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ItemGroup ||--}o Item : "items"
+ItemGroup ||--}o Item : "uniqueKey"
 ItemGroup ||--}o Item : "keySequence"
 ItemGroup ||--}o ItemGroup : "slices"
-ItemGroup ||--|o ReifiedConcept : "implementsConcept"
-ItemGroup ||--}o WhereClause : "applicableWhen"
+ItemGroup ||--|o Concept : "implementsConcept"
+ItemGroup ||--}o ApplicabilityCondition : "applicableWhen"
 ItemGroup ||--|o DefClass : "observationClass"
 ItemGroup ||--}o Coding : "security"
 ItemGroup ||--|o Timing : "validityPeriod"
@@ -450,11 +408,9 @@ ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--}o WhereClause : "applicableWhen"
+Item ||--}o ApplicabilityCondition : "applicableWhen"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
-Item ||--|o CodeList : "roleCodeList"
-Item ||--|o Condition : "collectionExceptionCondition"
 Item ||--}o Coding : "coding"
 Item ||--}o Comment : "comments"
 Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -479,18 +435,9 @@ Dimension ||--}o Comment : "comments"
 Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Dataflow ||--|| DataStructureDefinition : "structure"
 Dataflow ||--}o Dimension : "dimensionConstraint"
-Dataflow ||--|o Analysis : "analysisMethod"
 Dataflow ||--}o Coding : "coding"
 Dataflow ||--}o Comment : "comments"
 Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-Analysis ||--|o Method : "analysisMethod"
-Analysis ||--}o WhereClause : "applicableWhen"
-Analysis ||--}o FormalExpression : "expressions"
-Analysis ||--}o DocumentReference : "documents"
-Analysis ||--|o ReifiedConcept : "implementsConcept"
-Analysis ||--}o Coding : "coding"
-Analysis ||--}o Comment : "comments"
-Analysis ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 ```
 
@@ -567,7 +514,7 @@ Analysis ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -576,8 +523,8 @@ Analysis ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:Dataset |
-| native | odm:Dataset |
+| self | dds:Dataset |
+| native | dds:Dataset |
 | narrow | sdmx:JsonDataset, sdmx:CsvDataset, sdmx:StructureSpecificDataset |
 | close | qb:Dataset, sdmx:Dataset, dprod:Dataset, dcat:Dataset |
 
@@ -597,7 +544,7 @@ Analysis ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 name: Dataset
 description: A collection element that groups observations sharing the same dimensionality,
   expressed as a set of unique dimensions within a Data Product context
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 close_mappings:
 - qb:Dataset
 - sdmx:Dataset
@@ -617,7 +564,7 @@ attributes:
     name: describedBy
     description: Associates a Dataflow and thereby a Data Structure Definition to
       the data set.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Dataset
@@ -628,7 +575,7 @@ attributes:
     description: Associates the Data Structure Definition that defines the structure
       of the Data Set. Note that the Data Structure Definition is the same as that
       associated (non-mandatory) to the Dataflow.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Dataset
@@ -636,9 +583,10 @@ attributes:
   publishedBy:
     name: publishedBy
     description: Associates the Data Provider that reports/publishes the data.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     domain_of:
     - Dictionary
+    - Check
     - Dataset
     any_of:
     - range: Organization
@@ -647,7 +595,7 @@ attributes:
     name: keys
     description: Series and Group keys in the data that are associated with dimensions
       in this structure
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Dataset
@@ -661,14 +609,14 @@ attributes:
   datasetType:
     name: datasetType
     description: Type or classification of the dataset
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Dataset
   distribution:
     name: distribution
     description: Representations of this dataset in various formats or access methods
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - dcat:distribution
     rank: 1000
@@ -681,7 +629,7 @@ attributes:
   conformsTo:
     name: conformsTo
     description: Specification or standard that this dataset conforms to
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     close_mappings:
     - dcterms:conformsTo
     rank: 1000
@@ -691,7 +639,7 @@ attributes:
   hasPolicy:
     name: hasPolicy
     description: Access or usage policy applied to this dataset
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Dataset
@@ -704,7 +652,7 @@ attributes:
   informationSensitivityClassification:
     name: informationSensitivityClassification
     description: Classification of the dataset's sensitivity or confidentiality
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Dataset
@@ -719,7 +667,7 @@ attributes:
 name: Dataset
 description: A collection element that groups observations sharing the same dimensionality,
   expressed as a set of unique dimensions within a Data Product context
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 close_mappings:
 - qb:Dataset
 - sdmx:Dataset
@@ -739,7 +687,7 @@ attributes:
     name: describedBy
     description: Associates a Dataflow and thereby a Data Structure Definition to
       the data set.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: describedBy
     owner: Dataset
@@ -752,7 +700,7 @@ attributes:
     description: Associates the Data Structure Definition that defines the structure
       of the Data Set. Note that the Data Structure Definition is the same as that
       associated (non-mandatory) to the Dataflow.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: structuredBy
     owner: Dataset
@@ -762,11 +710,12 @@ attributes:
   publishedBy:
     name: publishedBy
     description: Associates the Data Provider that reports/publishes the data.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     alias: publishedBy
     owner: Dataset
     domain_of:
     - Dictionary
+    - Check
     - Dataset
     range: string
     any_of:
@@ -776,7 +725,7 @@ attributes:
     name: keys
     description: Series and Group keys in the data that are associated with dimensions
       in this structure
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: keys
     owner: Dataset
@@ -793,7 +742,7 @@ attributes:
   datasetType:
     name: datasetType
     description: Type or classification of the dataset
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: datasetType
     owner: Dataset
@@ -803,7 +752,7 @@ attributes:
   distribution:
     name: distribution
     description: Representations of this dataset in various formats or access methods
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - dcat:distribution
     rank: 1000
@@ -818,7 +767,7 @@ attributes:
   conformsTo:
     name: conformsTo
     description: Specification or standard that this dataset conforms to
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     close_mappings:
     - dcterms:conformsTo
     rank: 1000
@@ -831,7 +780,7 @@ attributes:
   hasPolicy:
     name: hasPolicy
     description: Access or usage policy applied to this dataset
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: hasPolicy
     owner: Dataset
@@ -846,7 +795,7 @@ attributes:
   informationSensitivityClassification:
     name: informationSensitivityClassification
     description: Classification of the dataset's sensitivity or confidentiality
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: informationSensitivityClassification
     owner: Dataset
@@ -856,7 +805,7 @@ attributes:
   version:
     name: version
     description: The version of the external resources
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: version
     owner: Dataset
@@ -868,7 +817,7 @@ attributes:
     name: href
     description: Machine-readable instructions to obtain the resource e.g. FHIR path,
       URL
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: href
     owner: Dataset
@@ -879,7 +828,7 @@ attributes:
   profile:
     name: profile
     description: Profiles this resource claims to conform to
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: profile
     owner: Dataset
@@ -891,7 +840,7 @@ attributes:
   security:
     name: security
     description: Security tags applied to this resource
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: security
     owner: Dataset
@@ -904,7 +853,7 @@ attributes:
   authenticator:
     name: authenticator
     description: Who/what authenticated the resource
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: authenticator
     owner: Dataset
@@ -919,7 +868,7 @@ attributes:
   validityPeriod:
     name: validityPeriod
     description: Time period during which the resource is valid
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: validityPeriod
     owner: Dataset
@@ -931,7 +880,7 @@ attributes:
     name: action
     description: Defines the action to be taken by the recipient system (information,
       append, replace, delete)
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: action
     owner: Dataset
@@ -943,7 +892,7 @@ attributes:
     name: reportingBegin
     description: A specific time period in a known system of time periods that identifies
       the start period of a report.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: reportingBegin
     owner: Dataset
@@ -954,7 +903,7 @@ attributes:
     name: reportingEnd
     description: A specific time period in a known system of time periods that identifies
       the end period of a report.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: reportingEnd
     owner: Dataset
@@ -965,7 +914,7 @@ attributes:
     name: dataExtractionDate
     description: A specific time period that identifies the date and time that the
       data are extracted from a data source.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: dataExtractionDate
     owner: Dataset
@@ -976,7 +925,7 @@ attributes:
     name: validFrom
     description: Indicates the inclusive start time indicating the validity of the
       information in the data set.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: validFrom
     owner: Dataset
@@ -987,7 +936,7 @@ attributes:
     name: validTo
     description: Indicates the inclusive end time indicating the validity of the information
       in the data set.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: validTo
     owner: Dataset
@@ -998,7 +947,7 @@ attributes:
     name: publicationYear
     description: Specifies the year of publication of the data or metadata in terms
       of whatever provisioning agreements might be in force.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: publicationYear
     owner: Dataset
@@ -1009,7 +958,7 @@ attributes:
     name: publicationPeriod
     description: Specifies the period of publication of the data or metadata in terms
       of whatever provisioning agreements might be in force.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: publicationPeriod
     owner: Dataset
@@ -1020,7 +969,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     identifier: true
     alias: OID
@@ -1032,7 +981,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: uuid
     owner: Dataset
@@ -1042,7 +991,7 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: name
     owner: Dataset
@@ -1055,7 +1004,7 @@ attributes:
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: description
     owner: Dataset
@@ -1069,7 +1018,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: coding
     owner: Dataset
@@ -1084,7 +1033,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -1099,7 +1048,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:altLabel
     rank: 1000

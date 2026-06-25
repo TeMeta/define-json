@@ -1,31 +1,22 @@
 
 
-# Class: MetaDataVersion 
+# Class: Specification 
 
 
-_A container element that represents a given version of a specification, linking to a particular usage context such as a study, dataset, or data collection instrument._
+_The root specification container: a versioned, governed definition of the data model for a study or data product. Links items, item groups, methods, code lists, concepts, and study design references. Projects to Define-XML MetaDataVersion, FHIR ImplementationGuide, and OMOP CDM metadata. ODMSerializationMetadata is applied by the ODM output generator, not here._
 
 
 
 
 
-URI: [odm:class/MetaDataVersion](https://cdisc.org/odm2/class/MetaDataVersion)
+URI: [dds:class/Specification](https://w3id.org/dds/class/Specification)
 
 
 ```mermaid
 erDiagram
-MetaDataVersion {
+Specification {
     stringList resources  
-    string fileOID  
-    datetime asOfDateTime  
-    datetime creationDateTime  
-    string odmVersion  
-    string fileType  
-    string originator  
-    string sourceSystem  
-    string sourceSystemVersion  
-    string context  
-    string defineVersion  
+    string usdmStudyDesignId  
     string studyOID  
     string studyName  
     string studyDescription  
@@ -257,9 +248,26 @@ Dictionary {
     string label  
     stringList aliases  
 }
-Relationship {
-    PredicateTermEnum predicateTerm  
-    LinkingPhraseEnum linkingPhrase  
+Check {
+    string publishedBy  
+    uriorcurie externalReference  
+    SoftHard severity  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+FormalExpression {
+    string context  
+    string expression  
+    string returnType  
     string OID  
     string uuid  
     string name  
@@ -275,7 +283,34 @@ IdentifiableElement {
     string label  
     stringList aliases  
 }
-ReifiedConcept {
+Query {
+    QueryType queryType  
+    string text  
+    string status  
+    string source  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+Relationship {
+    PredicateTermEnum predicateTerm  
+    LinkingPhraseEnum linkingPhrase  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
+Concept {
     string version  
     string href  
     string OID  
@@ -357,18 +392,7 @@ Method {
     string owner  
     string wasDerivedFrom  
 }
-FormalExpression {
-    string context  
-    string expression  
-    string returnType  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-}
-WhereClause {
+ApplicabilityCondition {
     string OID  
     string uuid  
     string name  
@@ -381,8 +405,8 @@ WhereClause {
     string owner  
     string wasDerivedFrom  
 }
-Condition {
-    string implementsCondition  
+LogicalPredicate {
+    string implementsPredicate  
     LogicalOperator operator  
     string OID  
     string uuid  
@@ -399,12 +423,6 @@ Condition {
 Item {
     DataType dataType  
     integer length  
-    string role  
-    boolean hasNoData  
-    string crfCompletionInstructions  
-    string cdiscNotes  
-    string implementationNotes  
-    string preSpecifiedValue  
     integer decimalDigits  
     string displayFormat  
     integer significantDigits  
@@ -458,6 +476,8 @@ Timing {
     TimingType type  
     boolean isNominal  
     string value  
+    string relativeTo  
+    string relativeFrom  
     datetime windowLower  
     datetime windowUpper  
     boolean recalled  
@@ -473,24 +493,26 @@ DefClass {
     string name  
 }
 
-MetaDataVersion ||--}o ItemGroup : "itemGroups"
-MetaDataVersion ||--}o Item : "items"
-MetaDataVersion ||--}o Condition : "conditions"
-MetaDataVersion ||--}o WhereClause : "whereClauses"
-MetaDataVersion ||--}o Method : "methods"
-MetaDataVersion ||--}o Analysis : "analyses"
-MetaDataVersion ||--}o CodeList : "codeLists"
-MetaDataVersion ||--}o Coding : "codings"
-MetaDataVersion ||--}o ReifiedConcept : "concepts"
-MetaDataVersion ||--}o Relationship : "relationships"
-MetaDataVersion ||--}o Dictionary : "dictionaries"
-MetaDataVersion ||--}o Standard : "standards"
-MetaDataVersion ||--}o DocumentReference : "annotatedCRFs"
-MetaDataVersion ||--}o DataProduct : "dataProducts"
-MetaDataVersion ||--}o Display : "displays"
-MetaDataVersion ||--}o Coding : "coding"
-MetaDataVersion ||--}o Comment : "comments"
-MetaDataVersion ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Specification ||--}o ItemGroup : "itemGroups"
+Specification ||--}o Item : "items"
+Specification ||--}o LogicalPredicate : "predicates"
+Specification ||--}o ApplicabilityCondition : "applicabilityConditions"
+Specification ||--}o Method : "methods"
+Specification ||--}o Analysis : "analyses"
+Specification ||--}o CodeList : "codeLists"
+Specification ||--}o Coding : "codings"
+Specification ||--}o Concept : "concepts"
+Specification ||--}o Relationship : "relationships"
+Specification ||--}o Query : "queries"
+Specification ||--}o Check : "checks"
+Specification ||--}o Dictionary : "dictionaries"
+Specification ||--}o Standard : "standards"
+Specification ||--}o DocumentReference : "annotatedCRFs"
+Specification ||--}o DataProduct : "dataProducts"
+Specification ||--}o Display : "displays"
+Specification ||--}o Coding : "coding"
+Specification ||--}o Comment : "comments"
+Specification ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 SiteOrSponsorComment ||--}o Coding : "coding"
 SiteOrSponsorComment ||--}o Comment : "comments"
 SiteOrSponsorComment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -505,10 +527,11 @@ Display ||--}o Comment : "comments"
 Display ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 DocumentReference ||--}o Coding : "coding"
 Analysis ||--|o Method : "analysisMethod"
-Analysis ||--}o WhereClause : "applicableWhen"
+Analysis ||--}o ApplicabilityCondition : "applicableWhen"
+Analysis ||--}o Dataflow : "inputDataflows"
 Analysis ||--}o FormalExpression : "expressions"
 Analysis ||--}o DocumentReference : "documents"
-Analysis ||--|o ReifiedConcept : "implementsConcept"
+Analysis ||--|o Concept : "implementsConcept"
 Analysis ||--}o Coding : "coding"
 Analysis ||--}o Comment : "comments"
 Analysis ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -545,7 +568,6 @@ Dataset ||--|o Timing : "validityPeriod"
 Dataset ||--}o Coding : "coding"
 Dataflow ||--|| DataStructureDefinition : "structure"
 Dataflow ||--}o Dimension : "dimensionConstraint"
-Dataflow ||--|o Analysis : "analysisMethod"
 Dataflow ||--}o Coding : "coding"
 Dataflow ||--}o Comment : "comments"
 Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -555,14 +577,27 @@ DataService ||--}o Coding : "coding"
 Standard ||--}o Coding : "coding"
 Dictionary ||--}o Coding : "terms"
 Dictionary ||--}o Coding : "coding"
+Check ||--}o IdentifiableElement : "appliesTo"
+Check ||--}o FormalExpression : "expressions"
+Check ||--}o Coding : "coding"
+Check ||--}o Comment : "comments"
+Check ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+FormalExpression ||--}o Parameter : "parameters"
+FormalExpression ||--|o ReturnValue : "returnValue"
+FormalExpression ||--}o Resource : "externalCodeLibs"
+FormalExpression ||--}o Coding : "coding"
+IdentifiableElement ||--}o Coding : "coding"
+Query ||--}| IdentifiableElement : "about"
+Query ||--}o Coding : "coding"
+Query ||--}o Comment : "comments"
+Query ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Relationship ||--|| IdentifiableElement : "subject"
 Relationship ||--|| IdentifiableElement : "object"
 Relationship ||--}o Coding : "coding"
-IdentifiableElement ||--}o Coding : "coding"
-ReifiedConcept ||--}o ConceptProperty : "properties"
-ReifiedConcept ||--}o Coding : "coding"
-ReifiedConcept ||--}o Comment : "comments"
-ReifiedConcept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Concept ||--}o ConceptProperty : "properties"
+Concept ||--}o Coding : "coding"
+Concept ||--}o Comment : "comments"
+Concept ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ConceptProperty ||--|o CodeList : "codeList"
 ConceptProperty ||--}o Coding : "coding"
 ConceptProperty ||--}o Comment : "comments"
@@ -578,43 +613,39 @@ Resource ||--}o Coding : "coding"
 CodeListItem ||--|o Coding : "coding"
 Method ||--}o FormalExpression : "expressions"
 Method ||--}o DocumentReference : "documents"
-Method ||--|o ReifiedConcept : "implementsConcept"
+Method ||--|o Concept : "implementsConcept"
 Method ||--}o Coding : "coding"
 Method ||--}o Comment : "comments"
 Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-FormalExpression ||--}o Parameter : "parameters"
-FormalExpression ||--|o ReturnValue : "returnValue"
-FormalExpression ||--}o Resource : "externalCodeLibs"
-FormalExpression ||--}o Coding : "coding"
-WhereClause ||--}o Condition : "conditions"
-WhereClause ||--}o Coding : "coding"
-WhereClause ||--}o Comment : "comments"
-WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-Condition ||--}o RangeCheck : "rangeChecks"
-Condition ||--}o FormalExpression : "expressions"
-Condition ||--}o Condition : "conditions"
-Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comments"
-Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+ApplicabilityCondition ||--}o LogicalPredicate : "predicates"
+ApplicabilityCondition ||--}o Coding : "coding"
+ApplicabilityCondition ||--}o Comment : "comments"
+ApplicabilityCondition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+LogicalPredicate ||--}o RangeCheck : "rangeChecks"
+LogicalPredicate ||--}o FormalExpression : "expressions"
+LogicalPredicate ||--}o LogicalPredicate : "predicates"
+LogicalPredicate ||--}o Coding : "coding"
+LogicalPredicate ||--}o Comment : "comments"
+LogicalPredicate ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--}o WhereClause : "applicableWhen"
+Item ||--}o ApplicabilityCondition : "applicableWhen"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
-Item ||--|o CodeList : "roleCodeList"
-Item ||--|o Condition : "collectionExceptionCondition"
 Item ||--}o Coding : "coding"
 Item ||--}o Comment : "comments"
 Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Origin ||--}o SourceItem : "sourceItems"
 Origin ||--}o DocumentReference : "documents"
 RangeCheck ||--}o FormalExpression : "expressions"
+RangeCheck ||--|o Check : "implementsCheck"
 ItemGroup ||--}o Item : "items"
+ItemGroup ||--}o Item : "uniqueKey"
 ItemGroup ||--}o Item : "keySequence"
 ItemGroup ||--}o ItemGroup : "slices"
-ItemGroup ||--|o ReifiedConcept : "implementsConcept"
-ItemGroup ||--}o WhereClause : "applicableWhen"
+ItemGroup ||--|o Concept : "implementsConcept"
+ItemGroup ||--}o ApplicabilityCondition : "applicableWhen"
 ItemGroup ||--|o DefClass : "observationClass"
 ItemGroup ||--}o Coding : "security"
 ItemGroup ||--|o Timing : "validityPeriod"
@@ -622,8 +653,6 @@ ItemGroup ||--|o Standard : "standard"
 ItemGroup ||--}o Coding : "coding"
 ItemGroup ||--}o Comment : "comments"
 ItemGroup ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-Timing ||--|o NominalOccurrence : "relativeTo"
-Timing ||--|o NominalOccurrence : "relativeFrom"
 Timing ||--|o Method : "imputation"
 Timing ||--}o Coding : "coding"
 DefClass ||--}o SubClass : "subClasses"
@@ -635,7 +664,7 @@ DefClass ||--}o SubClass : "subClasses"
 
 ## Inheritance
 * [GovernedElement](../classes/GovernedElement.md) [ [Identifiable](../classes/Identifiable.md) [Labelled](../classes/Labelled.md) [Governed](../classes/Governed.md)]
-    * **MetaDataVersion** [ [ODMFileMetadata](../classes/ODMFileMetadata.md) [StudyMetadata](../classes/StudyMetadata.md)]
+    * **Specification** [ [StudyMetadata](../classes/StudyMetadata.md)]
 
 
 
@@ -645,30 +674,23 @@ DefClass ||--}o SubClass : "subClasses"
 | ---  | --- | --- | --- |
 | [itemGroups](../slots/itemGroups.md) | * <br/> [ItemGroup](../classes/ItemGroup.md) | Item groups, containing items, defined in this version of the metadata | direct |
 | [items](../slots/items.md) | * <br/> [Item](../classes/Item.md) | Template or top-level items (not belonging to any item group) defined in this version of the metadata | direct |
-| [conditions](../slots/conditions.md) | * <br/> [Condition](../classes/Condition.md) | Logical conditions that apply to this version of the metadata. | direct |
-| [whereClauses](../slots/whereClauses.md) | * <br/> [WhereClause](../classes/WhereClause.md) | Data contexts that apply to this version of the metadata. | direct |
+| [predicates](../slots/predicates.md) | * <br/> [LogicalPredicate](../classes/LogicalPredicate.md) | Reusable logical predicates defined in this specification. | direct |
+| [applicabilityConditions](../slots/applicabilityConditions.md) | * <br/> [ApplicabilityCondition](../classes/ApplicabilityCondition.md) | Named applicability conditions defined in this specification. | direct |
 | [methods](../slots/methods.md) | * <br/> [Method](../classes/Method.md) | Methods defined in this version of the metadata. | direct |
 | [analyses](../slots/analyses.md) | * <br/> [Analysis](../classes/Analysis.md) | Analyses defined in this version of the metadata. | direct |
 | [codeLists](../slots/codeLists.md) | * <br/> [CodeList](../classes/CodeList.md) | Code lists defined in this version of the metadata. | direct |
 | [codings](../slots/codings.md) | * <br/> [Coding](../classes/Coding.md) | Codings defined in this version of the metadata | direct |
-| [concepts](../slots/concepts.md) | * <br/> [ReifiedConcept](../classes/ReifiedConcept.md) | Structured Concepts defined in this version of the metadata | direct |
+| [concepts](../slots/concepts.md) | * <br/> [Concept](../classes/Concept.md) | Structured Concepts defined in this version of the metadata | direct |
 | [relationships](../slots/relationships.md) | * <br/> [Relationship](../classes/Relationship.md) | Relationships between items, item groups, and other elements in this version of the metadata. | direct |
+| [queries](../slots/queries.md) | * <br/> [Query](../classes/Query.md) | Queries raised against metadata and/or data elements in this specification. Each Query references its target element(s) by OID, so the same query can relate to many metadata and data elements (many-to-many). | direct |
+| [checks](../slots/checks.md) | * <br/> [Check](../classes/Check.md) | Reusable validation checks (e.g. published CORE rules) included in this metadata package. Each Check references the elements it applies to by OID and may cite an external published rule, enabling reuse and loose coupling. | direct |
 | [dictionaries](../slots/dictionaries.md) | * <br/> [Dictionary](../classes/Dictionary.md) | Dictionaries defined in this version of the metadata | direct |
 | [standards](../slots/standards.md) | * <br/> [Standard](../classes/Standard.md) | Standards defined in this version of the metadata | direct |
 | [annotatedCRFs](../slots/annotatedCRFs.md) | * <br/> [DocumentReference](../classes/DocumentReference.md) | Reference to annotated case report forms | direct |
 | [resources](../slots/resources.md) | * <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[DocumentReference](../classes/DocumentReference.md)&nbsp;or&nbsp;<br />[Resource](../classes/Resource.md) | References to resources and documents that describe this version of the metadata. | direct |
 | [dataProducts](../slots/dataProducts.md) | * <br/> [DataProduct](../classes/DataProduct.md) | Indexed data flows with clear ownership | direct |
 | [displays](../slots/displays.md) | * <br/> [Display](../classes/Display.md) | Displays defined in this version of the metadata. | direct |
-| [fileOID](../slots/fileOID.md) | 1 <br/> [String](../types/String.md) | Unique identifier for the ODM file | [ODMFileMetadata](../classes/ODMFileMetadata.md) |
-| [asOfDateTime](../slots/asOfDateTime.md) | 0..1 <br/> [Datetime](../types/Datetime.md) | Date and time when the data snapshot was taken | [ODMFileMetadata](../classes/ODMFileMetadata.md) |
-| [creationDateTime](../slots/creationDateTime.md) | 1 <br/> [Datetime](../types/Datetime.md) | Date and time when the ODM file was created | [ODMFileMetadata](../classes/ODMFileMetadata.md) |
-| [odmVersion](../slots/odmVersion.md) | 1 <br/> [String](../types/String.md) | Version of the ODM standard used | [ODMFileMetadata](../classes/ODMFileMetadata.md) |
-| [fileType](../slots/fileType.md) | 1 <br/> [String](../types/String.md) | Type of ODM file (e.g., Snapshot, Transactional) | [ODMFileMetadata](../classes/ODMFileMetadata.md) |
-| [originator](../slots/originator.md) | 0..1 <br/> [String](../types/String.md) | Organization or system that created the ODM file | [ODMFileMetadata](../classes/ODMFileMetadata.md) |
-| [sourceSystem](../slots/sourceSystem.md) | 0..1 <br/> [String](../types/String.md) | Source system that generated the data | [ODMFileMetadata](../classes/ODMFileMetadata.md) |
-| [sourceSystemVersion](../slots/sourceSystemVersion.md) | 0..1 <br/> [String](../types/String.md) | Version of the source system | [ODMFileMetadata](../classes/ODMFileMetadata.md) |
-| [context](../slots/context.md) | 0..1 <br/> [String](../types/String.md) | Define-XML context (usually "Other" for Define-XML) | [ODMFileMetadata](../classes/ODMFileMetadata.md) |
-| [defineVersion](../slots/defineVersion.md) | 0..1 <br/> [String](../types/String.md) | Version of Define-XML specification used | [ODMFileMetadata](../classes/ODMFileMetadata.md) |
+| [usdmStudyDesignId](../slots/usdmStudyDesignId.md) | 0..1 <br/> [String](../types/String.md) | OID or URI reference to the USDM StudyDesign that this specification implements. When present, arms, epochs, and scheduled visit slots are resolved from the referenced USDM instance. The USDM study design is the authoritative source for EPOCH, VISITNUM, ARM, and timing anchors; DDS does not redeclare them. | direct |
 | [studyOID](../slots/studyOID.md) | 1 <br/> [String](../types/String.md) | Unique identifier for the study | [StudyMetadata](../classes/StudyMetadata.md) |
 | [studyName](../slots/studyName.md) | 0..1 <br/> [String](../types/String.md) | Name of the study | [StudyMetadata](../classes/StudyMetadata.md) |
 | [studyDescription](../slots/studyDescription.md) | 0..1 <br/> [String](../types/String.md) | Description of the study | [StudyMetadata](../classes/StudyMetadata.md) |
@@ -686,7 +708,7 @@ DefClass ||--}o SubClass : "subClasses"
 | [purpose](../slots/purpose.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Purpose or rationale for this data element | [Governed](../classes/Governed.md) |
 | [lastUpdated](../slots/lastUpdated.md) | 0..1 <br/> [Datetime](../types/Datetime.md) | When the resource was last updated | [Governed](../classes/Governed.md) |
 | [owner](../slots/owner.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Party responsible for this element | [Governed](../classes/Governed.md) |
-| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[MetaDataVersion](../classes/MetaDataVersion.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[ReifiedConcept](../classes/ReifiedConcept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[Condition](../classes/Condition.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[NominalOccurrence](../classes/NominalOccurrence.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
+| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[Specification](../classes/Specification.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[Concept](../classes/Concept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[LogicalPredicate](../classes/LogicalPredicate.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
 
 
 
@@ -696,31 +718,32 @@ DefClass ||--}o SubClass : "subClasses"
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
-| [GovernedElement](../classes/GovernedElement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
-| [Governed](../classes/Governed.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
-| [Item](../classes/Item.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
-| [ItemGroup](../classes/ItemGroup.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
-| [CodeList](../classes/CodeList.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
-| [Comment](../classes/Comment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
-| [ReifiedConcept](../classes/ReifiedConcept.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
-| [ConceptProperty](../classes/ConceptProperty.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
-| [WhereClause](../classes/WhereClause.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
-| [Condition](../classes/Condition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
-| [Method](../classes/Method.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
-| [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
-| [NominalOccurrence](../classes/NominalOccurrence.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
-| [DataStructureDefinition](../classes/DataStructureDefinition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
-| [Dataflow](../classes/Dataflow.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
-| [CubeComponent](../classes/CubeComponent.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
-| [Measure](../classes/Measure.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
-| [Dimension](../classes/Dimension.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
-| [DataAttribute](../classes/DataAttribute.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
-| [DataProduct](../classes/DataProduct.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
-| [ProvisionAgreement](../classes/ProvisionAgreement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
-| [Policy](../classes/Policy.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
-| [Analysis](../classes/Analysis.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
-| [Display](../classes/Display.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
+| [GovernedElement](../classes/GovernedElement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Specification](../classes/Specification.md) |
+| [Governed](../classes/Governed.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Specification](../classes/Specification.md) |
+| [Specification](../classes/Specification.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Specification](../classes/Specification.md) |
+| [Item](../classes/Item.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Specification](../classes/Specification.md) |
+| [ItemGroup](../classes/ItemGroup.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Specification](../classes/Specification.md) |
+| [Query](../classes/Query.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Specification](../classes/Specification.md) |
+| [CodeList](../classes/CodeList.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Specification](../classes/Specification.md) |
+| [Comment](../classes/Comment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Specification](../classes/Specification.md) |
+| [Concept](../classes/Concept.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Specification](../classes/Specification.md) |
+| [ConceptProperty](../classes/ConceptProperty.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Specification](../classes/Specification.md) |
+| [ApplicabilityCondition](../classes/ApplicabilityCondition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Specification](../classes/Specification.md) |
+| [LogicalPredicate](../classes/LogicalPredicate.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Specification](../classes/Specification.md) |
+| [Check](../classes/Check.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Specification](../classes/Specification.md) |
+| [Method](../classes/Method.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Specification](../classes/Specification.md) |
+| [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Specification](../classes/Specification.md) |
+| [DataStructureDefinition](../classes/DataStructureDefinition.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Specification](../classes/Specification.md) |
+| [Dataflow](../classes/Dataflow.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Specification](../classes/Specification.md) |
+| [CubeComponent](../classes/CubeComponent.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Specification](../classes/Specification.md) |
+| [Measure](../classes/Measure.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Specification](../classes/Specification.md) |
+| [Dimension](../classes/Dimension.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Specification](../classes/Specification.md) |
+| [DataAttribute](../classes/DataAttribute.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Specification](../classes/Specification.md) |
+| [DataProduct](../classes/DataProduct.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Specification](../classes/Specification.md) |
+| [ProvisionAgreement](../classes/ProvisionAgreement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Specification](../classes/Specification.md) |
+| [Policy](../classes/Policy.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Specification](../classes/Specification.md) |
+| [Analysis](../classes/Analysis.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Specification](../classes/Specification.md) |
+| [Display](../classes/Display.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Specification](../classes/Specification.md) |
 
 
 
@@ -738,7 +761,7 @@ DefClass ||--}o SubClass : "subClasses"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -747,8 +770,9 @@ DefClass ||--}o SubClass : "subClasses"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:MetaDataVersion |
-| native | odm:MetaDataVersion |
+| self | dds:Specification |
+| native | dds:Specification |
+| related | fhir:ImplementationGuide, omop:cdm_source |
 | close | usdm:StudyDesign |
 
 
@@ -764,25 +788,29 @@ DefClass ||--}o SubClass : "subClasses"
 
 <details>
 ```yaml
-name: MetaDataVersion
-description: A container element that represents a given version of a specification,
-  linking to a particular usage context such as a study, dataset, or data collection
-  instrument.
-from_schema: https://cdisc.org/data-definition-spec
+name: Specification
+description: 'The root specification container: a versioned, governed definition of
+  the data model for a study or data product. Links items, item groups, methods, code
+  lists, concepts, and study design references. Projects to Define-XML MetaDataVersion,
+  FHIR ImplementationGuide, and OMOP CDM metadata. ODMSerializationMetadata is applied
+  by the ODM output generator, not here.'
+from_schema: https://w3id.org/dds
 close_mappings:
 - usdm:StudyDesign
+related_mappings:
+- fhir:ImplementationGuide
+- omop:cdm_source
 is_a: GovernedElement
 mixins:
-- ODMFileMetadata
 - StudyMetadata
 attributes:
   itemGroups:
     name: itemGroups
     description: Item groups, containing items, defined in this version of the metadata
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - MetaDataVersion
+    - Specification
     range: ItemGroup
     multivalued: true
     inlined: true
@@ -791,48 +819,47 @@ attributes:
     name: items
     description: Template or top-level items (not belonging to any item group) defined
       in this version of the metadata
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - MetaDataVersion
+    - Specification
     - ItemGroup
     - Parameter
     range: Item
     multivalued: true
     inlined: true
     inlined_as_list: true
-  conditions:
-    name: conditions
-    description: Logical conditions that apply to this version of the metadata.
-    from_schema: https://cdisc.org/data-definition-spec
+  predicates:
+    name: predicates
+    description: Reusable logical predicates defined in this specification.
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - MetaDataVersion
-    - WhereClause
-    - Condition
-    - Parameter
-    range: Condition
+    - Specification
+    - ApplicabilityCondition
+    - LogicalPredicate
+    range: LogicalPredicate
     multivalued: true
     inlined: true
     inlined_as_list: true
-  whereClauses:
-    name: whereClauses
-    description: Data contexts that apply to this version of the metadata.
-    from_schema: https://cdisc.org/data-definition-spec
+  applicabilityConditions:
+    name: applicabilityConditions
+    description: Named applicability conditions defined in this specification.
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - MetaDataVersion
-    range: WhereClause
+    - Specification
+    range: ApplicabilityCondition
     multivalued: true
     inlined: true
     inlined_as_list: true
   methods:
     name: methods
     description: Methods defined in this version of the metadata.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - MetaDataVersion
+    - Specification
     range: Method
     multivalued: true
     inlined: true
@@ -840,10 +867,10 @@ attributes:
   analyses:
     name: analyses
     description: Analyses defined in this version of the metadata.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - MetaDataVersion
+    - Specification
     range: Analysis
     multivalued: true
     inlined: true
@@ -851,10 +878,10 @@ attributes:
   codeLists:
     name: codeLists
     description: Code lists defined in this version of the metadata.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - MetaDataVersion
+    - Specification
     range: CodeList
     multivalued: true
     inlined: true
@@ -862,10 +889,10 @@ attributes:
   codings:
     name: codings
     description: Codings defined in this version of the metadata
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - MetaDataVersion
+    - Specification
     range: Coding
     multivalued: true
     inlined: true
@@ -873,31 +900,57 @@ attributes:
   concepts:
     name: concepts
     description: Structured Concepts defined in this version of the metadata
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - MetaDataVersion
-    range: ReifiedConcept
+    - Specification
+    range: Concept
     multivalued: true
   relationships:
     name: relationships
     description: Relationships between items, item groups, and other elements in this
       version of the metadata.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - MetaDataVersion
+    - Specification
     range: Relationship
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  queries:
+    name: queries
+    description: Queries raised against metadata and/or data elements in this specification.
+      Each Query references its target element(s) by OID, so the same query can relate
+      to many metadata and data elements (many-to-many).
+    from_schema: https://w3id.org/dds
+    rank: 1000
+    domain_of:
+    - Specification
+    range: Query
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  checks:
+    name: checks
+    description: Reusable validation checks (e.g. published CORE rules) included in
+      this metadata package. Each Check references the elements it applies to by OID
+      and may cite an external published rule, enabling reuse and loose coupling.
+    from_schema: https://w3id.org/dds
+    rank: 1000
+    domain_of:
+    - Specification
+    range: Check
     multivalued: true
     inlined: true
     inlined_as_list: true
   dictionaries:
     name: dictionaries
     description: Dictionaries defined in this version of the metadata
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - MetaDataVersion
+    - Specification
     range: Dictionary
     multivalued: true
     inlined: true
@@ -905,10 +958,10 @@ attributes:
   standards:
     name: standards
     description: Standards defined in this version of the metadata
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - MetaDataVersion
+    - Specification
     range: Standard
     multivalued: true
     inlined: true
@@ -916,10 +969,10 @@ attributes:
   annotatedCRFs:
     name: annotatedCRFs
     description: Reference to annotated case report forms
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - MetaDataVersion
+    - Specification
     range: DocumentReference
     multivalued: true
     inlined: true
@@ -928,10 +981,10 @@ attributes:
     name: resources
     description: References to resources and documents that describe this version
       of the metadata.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - MetaDataVersion
+    - Specification
     multivalued: true
     inlined: true
     inlined_as_list: true
@@ -941,10 +994,10 @@ attributes:
   dataProducts:
     name: dataProducts
     description: Indexed data flows with clear ownership
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - MetaDataVersion
+    - Specification
     range: DataProduct
     multivalued: true
     inlined: true
@@ -952,14 +1005,26 @@ attributes:
   displays:
     name: displays
     description: Displays defined in this version of the metadata.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - MetaDataVersion
+    - Specification
     range: Display
     multivalued: true
     inlined: true
     inlined_as_list: true
+  usdmStudyDesignId:
+    name: usdmStudyDesignId
+    description: OID or URI reference to the USDM StudyDesign that this specification
+      implements. When present, arms, epochs, and scheduled visit slots are resolved
+      from the referenced USDM instance. The USDM study design is the authoritative
+      source for EPOCH, VISITNUM, ARM, and timing anchors; DDS does not redeclare
+      them.
+    from_schema: https://w3id.org/dds
+    rank: 1000
+    domain_of:
+    - Specification
+    required: false
 tree_root: true
 
 ```
@@ -969,27 +1034,31 @@ tree_root: true
 
 <details>
 ```yaml
-name: MetaDataVersion
-description: A container element that represents a given version of a specification,
-  linking to a particular usage context such as a study, dataset, or data collection
-  instrument.
-from_schema: https://cdisc.org/data-definition-spec
+name: Specification
+description: 'The root specification container: a versioned, governed definition of
+  the data model for a study or data product. Links items, item groups, methods, code
+  lists, concepts, and study design references. Projects to Define-XML MetaDataVersion,
+  FHIR ImplementationGuide, and OMOP CDM metadata. ODMSerializationMetadata is applied
+  by the ODM output generator, not here.'
+from_schema: https://w3id.org/dds
 close_mappings:
 - usdm:StudyDesign
+related_mappings:
+- fhir:ImplementationGuide
+- omop:cdm_source
 is_a: GovernedElement
 mixins:
-- ODMFileMetadata
 - StudyMetadata
 attributes:
   itemGroups:
     name: itemGroups
     description: Item groups, containing items, defined in this version of the metadata
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: itemGroups
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
-    - MetaDataVersion
+    - Specification
     range: ItemGroup
     multivalued: true
     inlined: true
@@ -998,56 +1067,55 @@ attributes:
     name: items
     description: Template or top-level items (not belonging to any item group) defined
       in this version of the metadata
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: items
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
-    - MetaDataVersion
+    - Specification
     - ItemGroup
     - Parameter
     range: Item
     multivalued: true
     inlined: true
     inlined_as_list: true
-  conditions:
-    name: conditions
-    description: Logical conditions that apply to this version of the metadata.
-    from_schema: https://cdisc.org/data-definition-spec
+  predicates:
+    name: predicates
+    description: Reusable logical predicates defined in this specification.
+    from_schema: https://w3id.org/dds
     rank: 1000
-    alias: conditions
-    owner: MetaDataVersion
+    alias: predicates
+    owner: Specification
     domain_of:
-    - MetaDataVersion
-    - WhereClause
-    - Condition
-    - Parameter
-    range: Condition
+    - Specification
+    - ApplicabilityCondition
+    - LogicalPredicate
+    range: LogicalPredicate
     multivalued: true
     inlined: true
     inlined_as_list: true
-  whereClauses:
-    name: whereClauses
-    description: Data contexts that apply to this version of the metadata.
-    from_schema: https://cdisc.org/data-definition-spec
+  applicabilityConditions:
+    name: applicabilityConditions
+    description: Named applicability conditions defined in this specification.
+    from_schema: https://w3id.org/dds
     rank: 1000
-    alias: whereClauses
-    owner: MetaDataVersion
+    alias: applicabilityConditions
+    owner: Specification
     domain_of:
-    - MetaDataVersion
-    range: WhereClause
+    - Specification
+    range: ApplicabilityCondition
     multivalued: true
     inlined: true
     inlined_as_list: true
   methods:
     name: methods
     description: Methods defined in this version of the metadata.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: methods
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
-    - MetaDataVersion
+    - Specification
     range: Method
     multivalued: true
     inlined: true
@@ -1055,12 +1123,12 @@ attributes:
   analyses:
     name: analyses
     description: Analyses defined in this version of the metadata.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: analyses
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
-    - MetaDataVersion
+    - Specification
     range: Analysis
     multivalued: true
     inlined: true
@@ -1068,12 +1136,12 @@ attributes:
   codeLists:
     name: codeLists
     description: Code lists defined in this version of the metadata.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: codeLists
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
-    - MetaDataVersion
+    - Specification
     range: CodeList
     multivalued: true
     inlined: true
@@ -1081,12 +1149,12 @@ attributes:
   codings:
     name: codings
     description: Codings defined in this version of the metadata
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: codings
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
-    - MetaDataVersion
+    - Specification
     range: Coding
     multivalued: true
     inlined: true
@@ -1094,37 +1162,67 @@ attributes:
   concepts:
     name: concepts
     description: Structured Concepts defined in this version of the metadata
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: concepts
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
-    - MetaDataVersion
-    range: ReifiedConcept
+    - Specification
+    range: Concept
     multivalued: true
   relationships:
     name: relationships
     description: Relationships between items, item groups, and other elements in this
       version of the metadata.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: relationships
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
-    - MetaDataVersion
+    - Specification
     range: Relationship
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  queries:
+    name: queries
+    description: Queries raised against metadata and/or data elements in this specification.
+      Each Query references its target element(s) by OID, so the same query can relate
+      to many metadata and data elements (many-to-many).
+    from_schema: https://w3id.org/dds
+    rank: 1000
+    alias: queries
+    owner: Specification
+    domain_of:
+    - Specification
+    range: Query
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  checks:
+    name: checks
+    description: Reusable validation checks (e.g. published CORE rules) included in
+      this metadata package. Each Check references the elements it applies to by OID
+      and may cite an external published rule, enabling reuse and loose coupling.
+    from_schema: https://w3id.org/dds
+    rank: 1000
+    alias: checks
+    owner: Specification
+    domain_of:
+    - Specification
+    range: Check
     multivalued: true
     inlined: true
     inlined_as_list: true
   dictionaries:
     name: dictionaries
     description: Dictionaries defined in this version of the metadata
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: dictionaries
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
-    - MetaDataVersion
+    - Specification
     range: Dictionary
     multivalued: true
     inlined: true
@@ -1132,12 +1230,12 @@ attributes:
   standards:
     name: standards
     description: Standards defined in this version of the metadata
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: standards
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
-    - MetaDataVersion
+    - Specification
     range: Standard
     multivalued: true
     inlined: true
@@ -1145,12 +1243,12 @@ attributes:
   annotatedCRFs:
     name: annotatedCRFs
     description: Reference to annotated case report forms
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: annotatedCRFs
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
-    - MetaDataVersion
+    - Specification
     range: DocumentReference
     multivalued: true
     inlined: true
@@ -1159,12 +1257,12 @@ attributes:
     name: resources
     description: References to resources and documents that describe this version
       of the metadata.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: resources
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
-    - MetaDataVersion
+    - Specification
     range: string
     multivalued: true
     inlined: true
@@ -1175,12 +1273,12 @@ attributes:
   dataProducts:
     name: dataProducts
     description: Indexed data flows with clear ownership
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: dataProducts
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
-    - MetaDataVersion
+    - Specification
     range: DataProduct
     multivalued: true
     inlined: true
@@ -1188,128 +1286,38 @@ attributes:
   displays:
     name: displays
     description: Displays defined in this version of the metadata.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: displays
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
-    - MetaDataVersion
+    - Specification
     range: Display
     multivalued: true
     inlined: true
     inlined_as_list: true
-  fileOID:
-    name: fileOID
-    description: Unique identifier for the ODM file
-    from_schema: https://cdisc.org/data-definition-spec
+  usdmStudyDesignId:
+    name: usdmStudyDesignId
+    description: OID or URI reference to the USDM StudyDesign that this specification
+      implements. When present, arms, epochs, and scheduled visit slots are resolved
+      from the referenced USDM instance. The USDM study design is the authoritative
+      source for EPOCH, VISITNUM, ARM, and timing anchors; DDS does not redeclare
+      them.
+    from_schema: https://w3id.org/dds
     rank: 1000
-    alias: fileOID
-    owner: MetaDataVersion
+    alias: usdmStudyDesignId
+    owner: Specification
     domain_of:
-    - ODMFileMetadata
+    - Specification
     range: string
-    required: true
-  asOfDateTime:
-    name: asOfDateTime
-    description: Date and time when the data snapshot was taken
-    from_schema: https://cdisc.org/data-definition-spec
-    rank: 1000
-    alias: asOfDateTime
-    owner: MetaDataVersion
-    domain_of:
-    - ODMFileMetadata
-    range: datetime
-  creationDateTime:
-    name: creationDateTime
-    description: Date and time when the ODM file was created
-    from_schema: https://cdisc.org/data-definition-spec
-    rank: 1000
-    alias: creationDateTime
-    owner: MetaDataVersion
-    domain_of:
-    - ODMFileMetadata
-    range: datetime
-    required: true
-  odmVersion:
-    name: odmVersion
-    description: Version of the ODM standard used
-    from_schema: https://cdisc.org/data-definition-spec
-    rank: 1000
-    alias: odmVersion
-    owner: MetaDataVersion
-    domain_of:
-    - ODMFileMetadata
-    range: string
-    required: true
-  fileType:
-    name: fileType
-    description: Type of ODM file (e.g., Snapshot, Transactional)
-    from_schema: https://cdisc.org/data-definition-spec
-    rank: 1000
-    alias: fileType
-    owner: MetaDataVersion
-    domain_of:
-    - ODMFileMetadata
-    range: string
-    required: true
-  originator:
-    name: originator
-    description: Organization or system that created the ODM file
-    from_schema: https://cdisc.org/data-definition-spec
-    rank: 1000
-    alias: originator
-    owner: MetaDataVersion
-    domain_of:
-    - ODMFileMetadata
-    range: string
-  sourceSystem:
-    name: sourceSystem
-    description: Source system that generated the data
-    from_schema: https://cdisc.org/data-definition-spec
-    rank: 1000
-    alias: sourceSystem
-    owner: MetaDataVersion
-    domain_of:
-    - ODMFileMetadata
-    range: string
-  sourceSystemVersion:
-    name: sourceSystemVersion
-    description: Version of the source system
-    from_schema: https://cdisc.org/data-definition-spec
-    rank: 1000
-    alias: sourceSystemVersion
-    owner: MetaDataVersion
-    domain_of:
-    - ODMFileMetadata
-    range: string
-  context:
-    name: context
-    description: Define-XML context (usually "Other" for Define-XML)
-    from_schema: https://cdisc.org/data-definition-spec
-    rank: 1000
-    alias: context
-    owner: MetaDataVersion
-    domain_of:
-    - ODMFileMetadata
-    - FormalExpression
-    range: string
-  defineVersion:
-    name: defineVersion
-    description: Version of Define-XML specification used
-    from_schema: https://cdisc.org/data-definition-spec
-    rank: 1000
-    alias: defineVersion
-    owner: MetaDataVersion
-    domain_of:
-    - ODMFileMetadata
-    range: string
+    required: false
   studyOID:
     name: studyOID
     description: Unique identifier for the study
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: studyOID
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
     - StudyMetadata
     range: string
@@ -1317,30 +1325,30 @@ attributes:
   studyName:
     name: studyName
     description: Name of the study
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: studyName
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
     - StudyMetadata
     range: string
   studyDescription:
     name: studyDescription
     description: Description of the study
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: studyDescription
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
     - StudyMetadata
     range: string
   protocolName:
     name: protocolName
     description: Protocol name for the study
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: protocolName
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
     - StudyMetadata
     range: string
@@ -1348,11 +1356,11 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     identifier: true
     alias: OID
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
     - Identifiable
     range: string
@@ -1360,20 +1368,20 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: uuid
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
     - Identifiable
     range: string
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: name
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
     - Labelled
     - DefClass
@@ -1383,10 +1391,10 @@ attributes:
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: description
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
     - Labelled
     - CodeListItem
@@ -1397,10 +1405,10 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: coding
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
     - Labelled
     - CodeListItem
@@ -1412,12 +1420,12 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:prefLabel
     rank: 1000
     alias: label
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
     - Labelled
     range: string
@@ -1427,12 +1435,12 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:altLabel
     rank: 1000
     alias: aliases
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
     - Labelled
     - CodeListItem
@@ -1446,10 +1454,10 @@ attributes:
   mandatory:
     name: mandatory
     description: Is this element required?
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: mandatory
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
     - Governed
     range: boolean
@@ -1457,10 +1465,10 @@ attributes:
     name: comments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: comments
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
     - Governed
     range: Comment
@@ -1470,10 +1478,10 @@ attributes:
     name: siteOrSponsorComments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: siteOrSponsorComments
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
     - Governed
     range: SiteOrSponsorComment
@@ -1482,10 +1490,10 @@ attributes:
   purpose:
     name: purpose
     description: Purpose or rationale for this data element
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: purpose
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
     - Governed
     range: string
@@ -1495,23 +1503,23 @@ attributes:
   lastUpdated:
     name: lastUpdated
     description: When the resource was last updated
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: lastUpdated
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
     - Governed
     range: datetime
   owner:
     name: owner
     description: Party responsible for this element
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     narrow_mappings:
     - prov:wasAttributedTo
     - prov:wasAssociatedBy
     rank: 1000
     alias: owner
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
     - Governed
     range: string
@@ -1523,25 +1531,24 @@ attributes:
     name: wasDerivedFrom
     description: Reference to another item that this item implements or extends, e.g.
       a template Item definition.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - prov:wasDerivedFrom
     rank: 1000
     alias: wasDerivedFrom
-    owner: MetaDataVersion
+    owner: Specification
     domain_of:
     - Governed
     range: string
     any_of:
     - range: Item
     - range: ItemGroup
-    - range: MetaDataVersion
+    - range: Specification
     - range: CodeList
-    - range: ReifiedConcept
+    - range: Concept
     - range: ConceptProperty
-    - range: Condition
+    - range: LogicalPredicate
     - range: Method
-    - range: NominalOccurrence
     - range: Dataflow
     - range: CubeComponent
     - range: DataProduct

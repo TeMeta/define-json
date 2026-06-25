@@ -9,7 +9,7 @@ _Recurring transfer/delivery schedule agreed for this flow. The domain-neutral d
 
 
 
-URI: [odm:slot/deliverySchedule](https://cdisc.org/odm2/slot/deliverySchedule)
+URI: [dds:slot/deliverySchedule](https://w3id.org/dds/slot/deliverySchedule)
 Alias: deliverySchedule
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: deliverySchedule
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: deliverySchedule
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:deliverySchedule |
-| native | odm:deliverySchedule |
+| self | dds:deliverySchedule |
+| native | dds:deliverySchedule |
 
 
 
@@ -72,7 +72,7 @@ description: Recurring transfer/delivery schedule agreed for this flow. The doma
   default is an ISO-8601 repeating interval string (e.g. "R/2025-01-01/P1M"); use
   a Timing object only when delivery must be anchored to a clinical occurrence. Agreement-level
   schedule; concrete reporting periods of each delivered Dataset are carried by IsSdmxDataset.reportingBegin/reportingEnd/dataExtractionDate.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: deliverySchedule
 owner: Dataflow

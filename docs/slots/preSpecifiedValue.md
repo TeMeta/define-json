@@ -9,7 +9,7 @@ _Prefill value or a default value for a field that is automatically populated._
 
 
 
-URI: [odm:slot/preSpecifiedValue](https://cdisc.org/odm2/slot/preSpecifiedValue)
+URI: [dds:slot/preSpecifiedValue](https://w3id.org/dds/slot/preSpecifiedValue)
 Alias: preSpecifiedValue
 
 <!-- no inheritance hierarchy -->
@@ -22,8 +22,7 @@ Alias: preSpecifiedValue
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [IsODMItem](../classes/IsODMItem.md) | A mixin that provides additional attributes for CDISC Operational Data Model items, including roles, completion instructions, and implementation notes |  no  |
-| [Item](../classes/Item.md) | A data element that represents a specific piece of information within a defined context, with data type, constraints, and derivation methods |  no  |
+| [ODMItemSerialization](../classes/ODMItemSerialization.md) | A mixin providing ODM/CDISC-specific item attributes meaningful only in ODM/Define-XML serialization: CRF completion instructions, CDISC notes, implementation notes, collection exception predicates, and pre-specified values. Applied by the ODM output generator. Not part of the canonical Item. |  no  |
 
 
 
@@ -47,7 +46,7 @@ Alias: preSpecifiedValue
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -56,8 +55,8 @@ Alias: preSpecifiedValue
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:preSpecifiedValue |
-| native | odm:preSpecifiedValue |
+| self | dds:preSpecifiedValue |
+| native | dds:preSpecifiedValue |
 
 
 
@@ -68,12 +67,12 @@ Alias: preSpecifiedValue
 ```yaml
 name: preSpecifiedValue
 description: Prefill value or a default value for a field that is automatically populated.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: preSpecifiedValue
-owner: IsODMItem
+owner: ODMItemSerialization
 domain_of:
-- IsODMItem
+- ODMItemSerialization
 range: string
 any_of:
 - range: string

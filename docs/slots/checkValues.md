@@ -9,7 +9,7 @@ _Values to compare against_
 
 
 
-URI: [odm:slot/checkValues](https://cdisc.org/odm2/slot/checkValues)
+URI: [dds:slot/checkValues](https://w3id.org/dds/slot/checkValues)
 Alias: checkValues
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: checkValues
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: checkValues
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:checkValues |
-| native | odm:checkValues |
+| self | dds:checkValues |
+| native | dds:checkValues |
 
 
 
@@ -69,7 +69,7 @@ Alias: checkValues
 ```yaml
 name: checkValues
 description: Values to compare against
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: checkValues
 owner: RangeCheck

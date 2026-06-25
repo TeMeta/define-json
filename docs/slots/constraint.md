@@ -9,7 +9,7 @@ _Conditions that narrow when/how the rule applies (odrl:constraint)_
 
 
 
-URI: [odm:slot/constraint](https://cdisc.org/odm2/slot/constraint)
+URI: [dds:slot/constraint](https://w3id.org/dds/slot/constraint)
 Alias: constraint
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: constraint
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: constraint
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:constraint |
-| native | odm:constraint |
+| self | dds:constraint |
+| native | dds:constraint |
 | exact | odrl:constraint |
 
 
@@ -70,7 +70,7 @@ Alias: constraint
 ```yaml
 name: constraint
 description: Conditions that narrow when/how the rule applies (odrl:constraint)
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - odrl:constraint
 rank: 1000

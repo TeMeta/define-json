@@ -4,7 +4,7 @@
 
 
 
-URI: [odm:slot/dataFlow](https://cdisc.org/odm2/slot/dataFlow)
+URI: [dds:slot/dataFlow](https://w3id.org/dds/slot/dataFlow)
 Alias: dataFlow
 
 <!-- no inheritance hierarchy -->
@@ -17,8 +17,8 @@ Alias: dataFlow
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [DataflowRelationship](../classes/DataflowRelationship.md) | A relationship element that associates a DataAttribute with a Dataflow, reported at the Dataset level |  no  |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | An agreement element that describes the contractual relationship between a Data Provider and a Data Consumer regarding data provision |  no  |
+| [DataflowRelationship](../classes/DataflowRelationship.md) | A relationship element that associates a DataAttribute with a Dataflow, reported at the Dataset level |  no  |
 
 
 
@@ -44,8 +44,8 @@ Alias: dataFlow
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:dataFlow |
-| native | odm:dataFlow |
+| self | dds:dataFlow |
+| native | dds:dataFlow |
 
 
 

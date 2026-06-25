@@ -9,7 +9,7 @@ _Source datasets used by the data product_
 
 
 
-URI: [odm:slot/inputDataset](https://cdisc.org/odm2/slot/inputDataset)
+URI: [dds:slot/inputDataset](https://w3id.org/dds/slot/inputDataset)
 Alias: inputDataset
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: inputDataset
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: inputDataset
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:inputDataset |
-| native | odm:inputDataset |
+| self | dds:inputDataset |
+| native | dds:inputDataset |
 
 
 
@@ -69,7 +69,7 @@ Alias: inputDataset
 ```yaml
 name: inputDataset
 description: Source datasets used by the data product
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: inputDataset
 owner: DataProduct

@@ -7,7 +7,7 @@ _An enumeration that defines the fundamental data types available for items_
 
 
 
-URI: [odm:enum/DataType](https://cdisc.org/odm2/enum/DataType)
+URI: [dds:enum/DataType](https://w3id.org/dds/enum/DataType)
 
 ## Permissible Values
 
@@ -49,7 +49,7 @@ URI: [odm:enum/DataType](https://cdisc.org/odm2/enum/DataType)
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -63,7 +63,7 @@ URI: [odm:enum/DataType](https://cdisc.org/odm2/enum/DataType)
 name: DataType
 description: An enumeration that defines the fundamental data types available for
   items
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 permissible_values:
   text:

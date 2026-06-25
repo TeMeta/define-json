@@ -1,20 +1,20 @@
 
 
-# Class: ODMFileMetadata 
+# Class: ODMSerializationMetadata 
 
 
-_A mixin that provides ODM file-level metadata attributes including file identifiers, timestamps, and system information_
+_A mixin providing ODM/Define-XML file-level attributes required only when serializing to ODM or Define-XML format. Applied by the ODM output generator, not by the canonical model itself. These attributes (fileOID, odmVersion, defineVersion, etc.) have no meaning in FHIR, OMOP, or SDMX projections._
 
 
 
 
 
-URI: [odm:class/ODMFileMetadata](https://cdisc.org/odm2/class/ODMFileMetadata)
+URI: [dds:class/ODMSerializationMetadata](https://w3id.org/dds/class/ODMSerializationMetadata)
 
 
 ```mermaid
 erDiagram
-ODMFileMetadata {
+ODMSerializationMetadata {
     string fileOID  
     datetime asOfDateTime  
     datetime creationDateTime  
@@ -57,7 +57,6 @@ ODMFileMetadata {
 
 | mixed into | description |
 | --- | --- |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | A container element that represents a given version of a specification, linking to a particular usage context such as a study, dataset, or data collection instrument. |
 
 
 
@@ -77,7 +76,7 @@ ODMFileMetadata {
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -86,8 +85,8 @@ ODMFileMetadata {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:ODMFileMetadata |
-| native | odm:ODMFileMetadata |
+| self | dds:ODMSerializationMetadata |
+| native | dds:ODMSerializationMetadata |
 
 
 
@@ -102,89 +101,91 @@ ODMFileMetadata {
 
 <details>
 ```yaml
-name: ODMFileMetadata
-description: A mixin that provides ODM file-level metadata attributes including file
-  identifiers, timestamps, and system information
-from_schema: https://cdisc.org/data-definition-spec
+name: ODMSerializationMetadata
+description: A mixin providing ODM/Define-XML file-level attributes required only
+  when serializing to ODM or Define-XML format. Applied by the ODM output generator,
+  not by the canonical model itself. These attributes (fileOID, odmVersion, defineVersion,
+  etc.) have no meaning in FHIR, OMOP, or SDMX projections.
+from_schema: https://w3id.org/dds
 mixin: true
 attributes:
   fileOID:
     name: fileOID
     description: Unique identifier for the ODM file
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - ODMFileMetadata
+    - ODMSerializationMetadata
     required: true
   asOfDateTime:
     name: asOfDateTime
     description: Date and time when the data snapshot was taken
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - ODMFileMetadata
+    - ODMSerializationMetadata
     range: datetime
   creationDateTime:
     name: creationDateTime
     description: Date and time when the ODM file was created
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - ODMFileMetadata
+    - ODMSerializationMetadata
     range: datetime
     required: true
   odmVersion:
     name: odmVersion
     description: Version of the ODM standard used
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - ODMFileMetadata
+    - ODMSerializationMetadata
     required: true
   fileType:
     name: fileType
     description: Type of ODM file (e.g., Snapshot, Transactional)
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - ODMFileMetadata
+    - ODMSerializationMetadata
     required: true
   originator:
     name: originator
     description: Organization or system that created the ODM file
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - ODMFileMetadata
+    - ODMSerializationMetadata
   sourceSystem:
     name: sourceSystem
     description: Source system that generated the data
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - ODMFileMetadata
+    - ODMSerializationMetadata
   sourceSystemVersion:
     name: sourceSystemVersion
     description: Version of the source system
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - ODMFileMetadata
+    - ODMSerializationMetadata
   context:
     name: context
     description: Define-XML context (usually "Other" for Define-XML)
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - ODMFileMetadata
+    - ODMSerializationMetadata
     - FormalExpression
   defineVersion:
     name: defineVersion
     description: Version of Define-XML specification used
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - ODMFileMetadata
+    - ODMSerializationMetadata
 
 ```
 </details>
@@ -193,116 +194,118 @@ attributes:
 
 <details>
 ```yaml
-name: ODMFileMetadata
-description: A mixin that provides ODM file-level metadata attributes including file
-  identifiers, timestamps, and system information
-from_schema: https://cdisc.org/data-definition-spec
+name: ODMSerializationMetadata
+description: A mixin providing ODM/Define-XML file-level attributes required only
+  when serializing to ODM or Define-XML format. Applied by the ODM output generator,
+  not by the canonical model itself. These attributes (fileOID, odmVersion, defineVersion,
+  etc.) have no meaning in FHIR, OMOP, or SDMX projections.
+from_schema: https://w3id.org/dds
 mixin: true
 attributes:
   fileOID:
     name: fileOID
     description: Unique identifier for the ODM file
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: fileOID
-    owner: ODMFileMetadata
+    owner: ODMSerializationMetadata
     domain_of:
-    - ODMFileMetadata
+    - ODMSerializationMetadata
     range: string
     required: true
   asOfDateTime:
     name: asOfDateTime
     description: Date and time when the data snapshot was taken
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: asOfDateTime
-    owner: ODMFileMetadata
+    owner: ODMSerializationMetadata
     domain_of:
-    - ODMFileMetadata
+    - ODMSerializationMetadata
     range: datetime
   creationDateTime:
     name: creationDateTime
     description: Date and time when the ODM file was created
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: creationDateTime
-    owner: ODMFileMetadata
+    owner: ODMSerializationMetadata
     domain_of:
-    - ODMFileMetadata
+    - ODMSerializationMetadata
     range: datetime
     required: true
   odmVersion:
     name: odmVersion
     description: Version of the ODM standard used
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: odmVersion
-    owner: ODMFileMetadata
+    owner: ODMSerializationMetadata
     domain_of:
-    - ODMFileMetadata
+    - ODMSerializationMetadata
     range: string
     required: true
   fileType:
     name: fileType
     description: Type of ODM file (e.g., Snapshot, Transactional)
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: fileType
-    owner: ODMFileMetadata
+    owner: ODMSerializationMetadata
     domain_of:
-    - ODMFileMetadata
+    - ODMSerializationMetadata
     range: string
     required: true
   originator:
     name: originator
     description: Organization or system that created the ODM file
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: originator
-    owner: ODMFileMetadata
+    owner: ODMSerializationMetadata
     domain_of:
-    - ODMFileMetadata
+    - ODMSerializationMetadata
     range: string
   sourceSystem:
     name: sourceSystem
     description: Source system that generated the data
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: sourceSystem
-    owner: ODMFileMetadata
+    owner: ODMSerializationMetadata
     domain_of:
-    - ODMFileMetadata
+    - ODMSerializationMetadata
     range: string
   sourceSystemVersion:
     name: sourceSystemVersion
     description: Version of the source system
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: sourceSystemVersion
-    owner: ODMFileMetadata
+    owner: ODMSerializationMetadata
     domain_of:
-    - ODMFileMetadata
+    - ODMSerializationMetadata
     range: string
   context:
     name: context
     description: Define-XML context (usually "Other" for Define-XML)
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: context
-    owner: ODMFileMetadata
+    owner: ODMSerializationMetadata
     domain_of:
-    - ODMFileMetadata
+    - ODMSerializationMetadata
     - FormalExpression
     range: string
   defineVersion:
     name: defineVersion
     description: Version of Define-XML specification used
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: defineVersion
-    owner: ODMFileMetadata
+    owner: ODMSerializationMetadata
     domain_of:
-    - ODMFileMetadata
+    - ODMSerializationMetadata
     range: string
 
 ```

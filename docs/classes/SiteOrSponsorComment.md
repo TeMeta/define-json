@@ -9,7 +9,7 @@ _A feedback element that contains comments from a site or sponsor, distinct from
 
 
 
-URI: [odm:class/SiteOrSponsorComment](https://cdisc.org/odm2/class/SiteOrSponsorComment)
+URI: [dds:class/SiteOrSponsorComment](https://w3id.org/dds/class/SiteOrSponsorComment)
 
 
 ```mermaid
@@ -106,7 +106,7 @@ DocumentReference ||--}o Coding : "coding"
 | [purpose](../slots/purpose.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Purpose or rationale for this data element | [Governed](../classes/Governed.md) |
 | [lastUpdated](../slots/lastUpdated.md) | 0..1 <br/> [Datetime](../types/Datetime.md) | When the resource was last updated | [Governed](../classes/Governed.md) |
 | [owner](../slots/owner.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Party responsible for this element | [Governed](../classes/Governed.md) |
-| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[MetaDataVersion](../classes/MetaDataVersion.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[ReifiedConcept](../classes/ReifiedConcept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[Condition](../classes/Condition.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[NominalOccurrence](../classes/NominalOccurrence.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
+| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[Specification](../classes/Specification.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[Concept](../classes/Concept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[LogicalPredicate](../classes/LogicalPredicate.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
 
 
 
@@ -118,18 +118,19 @@ DocumentReference ||--}o Coding : "coding"
 | ---  | --- | --- | --- |
 | [GovernedElement](../classes/GovernedElement.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
 | [Governed](../classes/Governed.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [Specification](../classes/Specification.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
 | [Item](../classes/Item.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
 | [ItemGroup](../classes/ItemGroup.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [Query](../classes/Query.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
 | [CodeList](../classes/CodeList.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
 | [Comment](../classes/Comment.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
-| [ReifiedConcept](../classes/ReifiedConcept.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [Concept](../classes/Concept.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
 | [ConceptProperty](../classes/ConceptProperty.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
-| [WhereClause](../classes/WhereClause.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
-| [Condition](../classes/Condition.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [ApplicabilityCondition](../classes/ApplicabilityCondition.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [LogicalPredicate](../classes/LogicalPredicate.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
+| [Check](../classes/Check.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
 | [Method](../classes/Method.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
 | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
-| [NominalOccurrence](../classes/NominalOccurrence.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
 | [Dataflow](../classes/Dataflow.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
 | [CubeComponent](../classes/CubeComponent.md) | [siteOrSponsorComments](../slots/siteOrSponsorComments.md) | range | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) |
@@ -158,7 +159,7 @@ DocumentReference ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -167,8 +168,8 @@ DocumentReference ||--}o Coding : "coding"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:SiteOrSponsorComment |
-| native | odm:SiteOrSponsorComment |
+| self | dds:SiteOrSponsorComment |
+| native | dds:SiteOrSponsorComment |
 
 
 
@@ -186,14 +187,15 @@ DocumentReference ||--}o Coding : "coding"
 name: SiteOrSponsorComment
 description: A feedback element that contains comments from a site or sponsor, distinct
   from the general Comment class
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 is_a: GovernedElement
 attributes:
   text:
     name: text
     description: The comment text.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     domain_of:
+    - Query
     - Comment
     - SiteOrSponsorComment
     required: true
@@ -203,7 +205,7 @@ attributes:
   sourceType:
     name: sourceType
     description: who made the comment, such as Investigator, Sponsor.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - SiteOrSponsorComment
@@ -211,8 +213,9 @@ attributes:
   source:
     name: source
     description: ID of the comment provider
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     domain_of:
+    - Query
     - Origin
     - SiteOrSponsorComment
     - DataProvider
@@ -232,16 +235,17 @@ attributes:
 name: SiteOrSponsorComment
 description: A feedback element that contains comments from a site or sponsor, distinct
   from the general Comment class
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 is_a: GovernedElement
 attributes:
   text:
     name: text
     description: The comment text.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     alias: text
     owner: SiteOrSponsorComment
     domain_of:
+    - Query
     - Comment
     - SiteOrSponsorComment
     range: string
@@ -252,7 +256,7 @@ attributes:
   sourceType:
     name: sourceType
     description: who made the comment, such as Investigator, Sponsor.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: sourceType
     owner: SiteOrSponsorComment
@@ -262,10 +266,11 @@ attributes:
   source:
     name: source
     description: ID of the comment provider
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     alias: source
     owner: SiteOrSponsorComment
     domain_of:
+    - Query
     - Origin
     - SiteOrSponsorComment
     - DataProvider
@@ -279,7 +284,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     identifier: true
     alias: OID
@@ -291,7 +296,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: uuid
     owner: SiteOrSponsorComment
@@ -301,7 +306,7 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: name
     owner: SiteOrSponsorComment
@@ -314,7 +319,7 @@ attributes:
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: description
     owner: SiteOrSponsorComment
@@ -328,7 +333,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: coding
     owner: SiteOrSponsorComment
@@ -343,7 +348,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -358,7 +363,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:altLabel
     rank: 1000
@@ -377,7 +382,7 @@ attributes:
   mandatory:
     name: mandatory
     description: Is this element required?
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: mandatory
     owner: SiteOrSponsorComment
@@ -388,7 +393,7 @@ attributes:
     name: comments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: comments
     owner: SiteOrSponsorComment
@@ -401,7 +406,7 @@ attributes:
     name: siteOrSponsorComments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: siteOrSponsorComments
     owner: SiteOrSponsorComment
@@ -413,7 +418,7 @@ attributes:
   purpose:
     name: purpose
     description: Purpose or rationale for this data element
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: purpose
     owner: SiteOrSponsorComment
@@ -426,7 +431,7 @@ attributes:
   lastUpdated:
     name: lastUpdated
     description: When the resource was last updated
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: lastUpdated
     owner: SiteOrSponsorComment
@@ -436,7 +441,7 @@ attributes:
   owner:
     name: owner
     description: Party responsible for this element
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     narrow_mappings:
     - prov:wasAttributedTo
     - prov:wasAssociatedBy
@@ -454,7 +459,7 @@ attributes:
     name: wasDerivedFrom
     description: Reference to another item that this item implements or extends, e.g.
       a template Item definition.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - prov:wasDerivedFrom
     rank: 1000
@@ -466,13 +471,12 @@ attributes:
     any_of:
     - range: Item
     - range: ItemGroup
-    - range: MetaDataVersion
+    - range: Specification
     - range: CodeList
-    - range: ReifiedConcept
+    - range: Concept
     - range: ConceptProperty
-    - range: Condition
+    - range: LogicalPredicate
     - range: Method
-    - range: NominalOccurrence
     - range: Dataflow
     - range: CubeComponent
     - range: DataProduct

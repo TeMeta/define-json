@@ -9,7 +9,7 @@ _A mixin that provides study-level metadata attributes including study identific
 
 
 
-URI: [odm:class/StudyMetadata](https://cdisc.org/odm2/class/StudyMetadata)
+URI: [dds:class/StudyMetadata](https://w3id.org/dds/class/StudyMetadata)
 
 
 ```mermaid
@@ -45,7 +45,7 @@ StudyMetadata {
 
 | mixed into | description |
 | --- | --- |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | A container element that represents a given version of a specification, linking to a particular usage context such as a study, dataset, or data collection instrument. |
+| [Specification](../classes/Specification.md) | The root specification container: a versioned, governed definition of the data model for a study or data product. Links items, item groups, methods, code lists, concepts, and study design references. Projects to Define-XML MetaDataVersion, FHIR ImplementationGuide, and OMOP CDM metadata. ODMSerializationMetadata is applied by the ODM output generator, not here. |
 
 
 
@@ -65,7 +65,7 @@ StudyMetadata {
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -74,8 +74,8 @@ StudyMetadata {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:StudyMetadata |
-| native | odm:StudyMetadata |
+| self | dds:StudyMetadata |
+| native | dds:StudyMetadata |
 
 
 
@@ -93,13 +93,13 @@ StudyMetadata {
 name: StudyMetadata
 description: A mixin that provides study-level metadata attributes including study
   identification and protocol information
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 mixin: true
 attributes:
   studyOID:
     name: studyOID
     description: Unique identifier for the study
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - StudyMetadata
@@ -107,21 +107,21 @@ attributes:
   studyName:
     name: studyName
     description: Name of the study
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - StudyMetadata
   studyDescription:
     name: studyDescription
     description: Description of the study
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - StudyMetadata
   protocolName:
     name: protocolName
     description: Protocol name for the study
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - StudyMetadata
@@ -136,13 +136,13 @@ attributes:
 name: StudyMetadata
 description: A mixin that provides study-level metadata attributes including study
   identification and protocol information
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 mixin: true
 attributes:
   studyOID:
     name: studyOID
     description: Unique identifier for the study
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: studyOID
     owner: StudyMetadata
@@ -153,7 +153,7 @@ attributes:
   studyName:
     name: studyName
     description: Name of the study
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: studyName
     owner: StudyMetadata
@@ -163,7 +163,7 @@ attributes:
   studyDescription:
     name: studyDescription
     description: Description of the study
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: studyDescription
     owner: StudyMetadata
@@ -173,7 +173,7 @@ attributes:
   protocolName:
     name: protocolName
     description: Protocol name for the study
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: protocolName
     owner: StudyMetadata

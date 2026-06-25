@@ -9,7 +9,7 @@ _A unique identifier that comprises the cross-product of dimension values includ
 
 
 
-URI: [odm:class/SeriesKey](https://cdisc.org/odm2/class/SeriesKey)
+URI: [dds:class/SeriesKey](https://w3id.org/dds/class/SeriesKey)
 
 
 ```mermaid
@@ -67,7 +67,7 @@ SeriesKey {
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -76,8 +76,8 @@ SeriesKey {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:SeriesKey |
-| native | odm:SeriesKey |
+| self | dds:SeriesKey |
+| native | dds:SeriesKey |
 | exact | sdmx:SeriesKey |
 
 
@@ -97,7 +97,7 @@ name: SeriesKey
 description: A unique identifier that comprises the cross-product of dimension values
   including Time to identify observations, representing dimensions shared by all observations
   in a conceptual series
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - sdmx:SeriesKey
 is_a: DatasetKey
@@ -113,7 +113,7 @@ name: SeriesKey
 description: A unique identifier that comprises the cross-product of dimension values
   including Time to identify observations, representing dimensions shared by all observations
   in a conceptual series
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - sdmx:SeriesKey
 is_a: DatasetKey
@@ -122,7 +122,7 @@ attributes:
     name: describedBy
     description: Associates the Dimension Descriptor defined in the Data Structure
       Definition
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     alias: describedBy
     owner: SeriesKey
     domain_of:
@@ -136,7 +136,7 @@ attributes:
     name: keyValues
     description: List of Key Values that comprise each key, separated by a dot e.g.
       SUBJ001.VISIT2.BMI
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: keyValues
     owner: SeriesKey
@@ -146,7 +146,7 @@ attributes:
   attributeValues:
     name: attributeValues
     description: Association to the Attribute Values relating to Key
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: attributeValues
     owner: SeriesKey

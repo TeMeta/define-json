@@ -9,7 +9,7 @@ _An output specification that defines the details of what a formal expression re
 
 
 
-URI: [odm:class/ReturnValue](https://cdisc.org/odm2/class/ReturnValue)
+URI: [dds:class/ReturnValue](https://w3id.org/dds/class/ReturnValue)
 
 
 ```mermaid
@@ -85,7 +85,7 @@ ReturnValue ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -94,8 +94,8 @@ ReturnValue ||--}o Coding : "coding"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:ReturnValue |
-| native | odm:ReturnValue |
+| self | dds:ReturnValue |
+| native | dds:ReturnValue |
 
 
 
@@ -113,13 +113,13 @@ ReturnValue ||--}o Coding : "coding"
 name: ReturnValue
 description: An output specification that defines the details of what a formal expression
   returns
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 is_a: IdentifiableElement
 attributes:
   dataType:
     name: dataType
     description: The data type of the return value.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     domain_of:
     - Item
     - CodeList
@@ -129,7 +129,7 @@ attributes:
   valueList:
     name: valueList
     description: A list of possible return values.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - ReturnValue
@@ -145,13 +145,13 @@ attributes:
 name: ReturnValue
 description: An output specification that defines the details of what a formal expression
   returns
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 is_a: IdentifiableElement
 attributes:
   dataType:
     name: dataType
     description: The data type of the return value.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     alias: dataType
     owner: ReturnValue
     domain_of:
@@ -163,7 +163,7 @@ attributes:
   valueList:
     name: valueList
     description: A list of possible return values.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: valueList
     owner: ReturnValue
@@ -175,7 +175,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     identifier: true
     alias: OID
@@ -187,7 +187,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: uuid
     owner: ReturnValue
@@ -197,7 +197,7 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: name
     owner: ReturnValue
@@ -210,7 +210,7 @@ attributes:
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: description
     owner: ReturnValue
@@ -224,7 +224,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: coding
     owner: ReturnValue
@@ -239,7 +239,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -254,7 +254,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:altLabel
     rank: 1000

@@ -9,7 +9,7 @@ _A collection element that groups related standards within a specific context, u
 
 
 
-URI: [odm:class/Standard](https://cdisc.org/odm2/class/Standard)
+URI: [dds:class/Standard](https://w3id.org/dds/class/Standard)
 
 
 ```mermaid
@@ -71,10 +71,11 @@ Standard ||--}o Coding : "coding"
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
-| [IsODMStandard](../classes/IsODMStandard.md) | [standard](../slots/standard.md) | range | [Standard](../classes/Standard.md) |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | [standards](../slots/standards.md) | range | [Standard](../classes/Standard.md) |
+| [ODMStandardReference](../classes/ODMStandardReference.md) | [standard](../slots/standard.md) | range | [Standard](../classes/Standard.md) |
+| [Specification](../classes/Specification.md) | [standards](../slots/standards.md) | range | [Standard](../classes/Standard.md) |
 | [ItemGroup](../classes/ItemGroup.md) | [standard](../slots/standard.md) | range | [Standard](../classes/Standard.md) |
 | [CodeList](../classes/CodeList.md) | [standard](../slots/standard.md) | range | [Standard](../classes/Standard.md) |
+| [Check](../classes/Check.md) | [publishedBy](../slots/publishedBy.md) | any_of[range] | [Standard](../classes/Standard.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [standard](../slots/standard.md) | range | [Standard](../classes/Standard.md) |
 
 
@@ -93,7 +94,7 @@ Standard ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -102,8 +103,8 @@ Standard ||--}o Coding : "coding"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:Standard |
-| native | odm:Standard |
+| self | dds:Standard |
+| native | dds:Standard |
 | exact | odm:Standard |
 
 
@@ -122,7 +123,7 @@ Standard ||--}o Coding : "coding"
 name: Standard
 description: A collection element that groups related standards within a specific
   context, used for defining CDISC implementation guides and controlled terminologies
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - odm:Standard
 is_a: IdentifiableElement
@@ -130,7 +131,7 @@ attributes:
   name:
     name: name
     description: Name of a standard
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     domain_of:
     - Labelled
     - DefClass
@@ -140,7 +141,7 @@ attributes:
   type:
     name: type
     description: Type of a standard
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     domain_of:
     - ItemGroup
     - Method
@@ -152,7 +153,7 @@ attributes:
   publishingSet:
     name: publishingSet
     description: Publishing Set of a Controlled Terminology
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Standard
@@ -160,16 +161,16 @@ attributes:
   version:
     name: version
     description: Version of an Implementation Guide or of a Controlled Terminology
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     domain_of:
     - Versioned
     - Standard
   status:
     name: status
     description: Status of an Implementation Guide or of a Controlled Terminology
-    from_schema: https://cdisc.org/data-definition-spec
-    rank: 1000
+    from_schema: https://w3id.org/dds
     domain_of:
+    - Query
     - Standard
     range: StandardStatus
 
@@ -183,7 +184,7 @@ attributes:
 name: Standard
 description: A collection element that groups related standards within a specific
   context, used for defining CDISC implementation guides and controlled terminologies
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - odm:Standard
 is_a: IdentifiableElement
@@ -191,7 +192,7 @@ attributes:
   name:
     name: name
     description: Name of a standard
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     alias: name
     owner: Standard
     domain_of:
@@ -203,7 +204,7 @@ attributes:
   type:
     name: type
     description: Type of a standard
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     alias: type
     owner: Standard
     domain_of:
@@ -217,7 +218,7 @@ attributes:
   publishingSet:
     name: publishingSet
     description: Publishing Set of a Controlled Terminology
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: publishingSet
     owner: Standard
@@ -227,7 +228,7 @@ attributes:
   version:
     name: version
     description: Version of an Implementation Guide or of a Controlled Terminology
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     alias: version
     owner: Standard
     domain_of:
@@ -237,18 +238,18 @@ attributes:
   status:
     name: status
     description: Status of an Implementation Guide or of a Controlled Terminology
-    from_schema: https://cdisc.org/data-definition-spec
-    rank: 1000
+    from_schema: https://w3id.org/dds
     alias: status
     owner: Standard
     domain_of:
+    - Query
     - Standard
     range: StandardStatus
   OID:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     identifier: true
     alias: OID
@@ -260,7 +261,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: uuid
     owner: Standard
@@ -270,7 +271,7 @@ attributes:
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: description
     owner: Standard
@@ -284,7 +285,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: coding
     owner: Standard
@@ -299,7 +300,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -314,7 +315,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:altLabel
     rank: 1000

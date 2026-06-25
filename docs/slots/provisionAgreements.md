@@ -4,7 +4,7 @@
 
 
 
-URI: [odm:slot/provisionAgreements](https://cdisc.org/odm2/slot/provisionAgreements)
+URI: [dds:slot/provisionAgreements](https://w3id.org/dds/slot/provisionAgreements)
 Alias: provisionAgreements
 
 <!-- no inheritance hierarchy -->
@@ -17,8 +17,8 @@ Alias: provisionAgreements
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [DataConsumer](../classes/DataConsumer.md) | An organization element that receives data from a Data Provider under a ProvisionAgreement; the demand-side counterpart of DataProvider. |  no  |
 | [DataProvider](../classes/DataProvider.md) | An organization element that provides data to a Data Consumer, which can be a sponsor, site, or any other entity that supplies data |  no  |
+| [DataConsumer](../classes/DataConsumer.md) | An organization element that receives data from a Data Provider under a ProvisionAgreement; the demand-side counterpart of DataProvider. |  no  |
 
 
 
@@ -44,8 +44,8 @@ Alias: provisionAgreements
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:provisionAgreements |
-| native | odm:provisionAgreements |
+| self | dds:provisionAgreements |
+| native | dds:provisionAgreements |
 
 
 

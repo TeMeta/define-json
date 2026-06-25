@@ -9,7 +9,7 @@ _The code system version_
 
 
 
-URI: [odm:slot/codeSystemVersion](https://cdisc.org/odm2/slot/codeSystemVersion)
+URI: [dds:slot/codeSystemVersion](https://w3id.org/dds/slot/codeSystemVersion)
 Alias: codeSystemVersion
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: codeSystemVersion
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: codeSystemVersion
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:codeSystemVersion |
-| native | odm:codeSystemVersion |
+| self | dds:codeSystemVersion |
+| native | dds:codeSystemVersion |
 
 
 
@@ -67,7 +67,7 @@ Alias: codeSystemVersion
 ```yaml
 name: codeSystemVersion
 description: The code system version
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: codeSystemVersion
 owner: Coding

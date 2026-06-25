@@ -1,20 +1,20 @@
 
 
-# Class: WhereClause 
+# Class: ApplicabilityCondition 
 
 
-_A conditional element that describes the circumstances under which a containing context applies, linking conditions to structures where they are used_
+_A reusable, named applicability condition describing the circumstances under which a containing context applies. References one or more LogicalPredicates combined with AND. Distinct from LogicalPredicate (the expression itself): ApplicabilityCondition is the named, governed wrapper referenced from Items, ItemGroups, Parameters, and Analyses._
 
 
 
 
 
-URI: [odm:class/WhereClause](https://cdisc.org/odm2/class/WhereClause)
+URI: [dds:class/ApplicabilityCondition](https://w3id.org/dds/class/ApplicabilityCondition)
 
 
 ```mermaid
 erDiagram
-WhereClause {
+ApplicabilityCondition {
     string OID  
     string uuid  
     string name  
@@ -64,8 +64,8 @@ Coding {
     string codeSystemVersion  
     AliasPredicate aliasType  
 }
-Condition {
-    string implementsCondition  
+LogicalPredicate {
+    string implementsPredicate  
     LogicalOperator operator  
     string OID  
     string uuid  
@@ -98,10 +98,10 @@ RangeCheck {
     LogicalOperator operator  
 }
 
-WhereClause ||--}o Condition : "conditions"
-WhereClause ||--}o Coding : "coding"
-WhereClause ||--}o Comment : "comments"
-WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+ApplicabilityCondition ||--}o LogicalPredicate : "predicates"
+ApplicabilityCondition ||--}o Coding : "coding"
+ApplicabilityCondition ||--}o Comment : "comments"
+ApplicabilityCondition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 SiteOrSponsorComment ||--}o Coding : "coding"
 SiteOrSponsorComment ||--}o Comment : "comments"
 SiteOrSponsorComment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -109,17 +109,18 @@ Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 Comment ||--}o Comment : "comments"
 Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-Condition ||--}o RangeCheck : "rangeChecks"
-Condition ||--}o FormalExpression : "expressions"
-Condition ||--}o Condition : "conditions"
-Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comments"
-Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+LogicalPredicate ||--}o RangeCheck : "rangeChecks"
+LogicalPredicate ||--}o FormalExpression : "expressions"
+LogicalPredicate ||--}o LogicalPredicate : "predicates"
+LogicalPredicate ||--}o Coding : "coding"
+LogicalPredicate ||--}o Comment : "comments"
+LogicalPredicate ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 FormalExpression ||--}o Parameter : "parameters"
 FormalExpression ||--|o ReturnValue : "returnValue"
 FormalExpression ||--}o Resource : "externalCodeLibs"
 FormalExpression ||--}o Coding : "coding"
 RangeCheck ||--}o FormalExpression : "expressions"
+RangeCheck ||--|o Check : "implementsCheck"
 
 ```
 
@@ -128,7 +129,7 @@ RangeCheck ||--}o FormalExpression : "expressions"
 
 ## Inheritance
 * [GovernedElement](../classes/GovernedElement.md) [ [Identifiable](../classes/Identifiable.md) [Labelled](../classes/Labelled.md) [Governed](../classes/Governed.md)]
-    * **WhereClause**
+    * **ApplicabilityCondition**
 
 
 
@@ -136,7 +137,7 @@ RangeCheck ||--}o FormalExpression : "expressions"
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [conditions](../slots/conditions.md) | * <br/> [Condition](../classes/Condition.md) | Logical conditions that apply in this context (combined with AND) | direct |
+| [predicates](../slots/predicates.md) | * <br/> [LogicalPredicate](../classes/LogicalPredicate.md) | Logical predicates that apply in this context (combined with AND) | direct |
 | [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
 | [uuid](../slots/uuid.md) | 0..1 <br/> [String](../types/String.md) | Universal unique identifier | [Identifiable](../classes/Identifiable.md) |
 | [name](../slots/name.md) | 0..1 <br/> [String](../types/String.md) | Short name or identifier, used for field names | [Labelled](../classes/Labelled.md) |
@@ -150,7 +151,7 @@ RangeCheck ||--}o FormalExpression : "expressions"
 | [purpose](../slots/purpose.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md) | Purpose or rationale for this data element | [Governed](../classes/Governed.md) |
 | [lastUpdated](../slots/lastUpdated.md) | 0..1 <br/> [Datetime](../types/Datetime.md) | When the resource was last updated | [Governed](../classes/Governed.md) |
 | [owner](../slots/owner.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Party responsible for this element | [Governed](../classes/Governed.md) |
-| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[MetaDataVersion](../classes/MetaDataVersion.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[ReifiedConcept](../classes/ReifiedConcept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[Condition](../classes/Condition.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[NominalOccurrence](../classes/NominalOccurrence.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
+| [wasDerivedFrom](../slots/wasDerivedFrom.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[Item](../classes/Item.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[Specification](../classes/Specification.md)&nbsp;or&nbsp;<br />[CodeList](../classes/CodeList.md)&nbsp;or&nbsp;<br />[Concept](../classes/Concept.md)&nbsp;or&nbsp;<br />[ConceptProperty](../classes/ConceptProperty.md)&nbsp;or&nbsp;<br />[LogicalPredicate](../classes/LogicalPredicate.md)&nbsp;or&nbsp;<br />[Method](../classes/Method.md)&nbsp;or&nbsp;<br />[Dataflow](../classes/Dataflow.md)&nbsp;or&nbsp;<br />[CubeComponent](../classes/CubeComponent.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[ProvisionAgreement](../classes/ProvisionAgreement.md) | Reference to another item that this item implements or extends, e.g. a template Item definition. | [Governed](../classes/Governed.md) |
 
 
 
@@ -160,12 +161,12 @@ RangeCheck ||--}o FormalExpression : "expressions"
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | [whereClauses](../slots/whereClauses.md) | range | [WhereClause](../classes/WhereClause.md) |
-| [Item](../classes/Item.md) | [applicableWhen](../slots/applicableWhen.md) | range | [WhereClause](../classes/WhereClause.md) |
-| [ItemGroup](../classes/ItemGroup.md) | [applicableWhen](../slots/applicableWhen.md) | range | [WhereClause](../classes/WhereClause.md) |
-| [Parameter](../classes/Parameter.md) | [applicableWhen](../slots/applicableWhen.md) | range | [WhereClause](../classes/WhereClause.md) |
-| [DataStructureDefinition](../classes/DataStructureDefinition.md) | [applicableWhen](../slots/applicableWhen.md) | range | [WhereClause](../classes/WhereClause.md) |
-| [Analysis](../classes/Analysis.md) | [applicableWhen](../slots/applicableWhen.md) | range | [WhereClause](../classes/WhereClause.md) |
+| [Specification](../classes/Specification.md) | [applicabilityConditions](../slots/applicabilityConditions.md) | range | [ApplicabilityCondition](../classes/ApplicabilityCondition.md) |
+| [Item](../classes/Item.md) | [applicableWhen](../slots/applicableWhen.md) | range | [ApplicabilityCondition](../classes/ApplicabilityCondition.md) |
+| [ItemGroup](../classes/ItemGroup.md) | [applicableWhen](../slots/applicableWhen.md) | range | [ApplicabilityCondition](../classes/ApplicabilityCondition.md) |
+| [Parameter](../classes/Parameter.md) | [applicableWhen](../slots/applicableWhen.md) | range | [ApplicabilityCondition](../classes/ApplicabilityCondition.md) |
+| [DataStructureDefinition](../classes/DataStructureDefinition.md) | [applicableWhen](../slots/applicableWhen.md) | range | [ApplicabilityCondition](../classes/ApplicabilityCondition.md) |
+| [Analysis](../classes/Analysis.md) | [applicableWhen](../slots/applicableWhen.md) | range | [ApplicabilityCondition](../classes/ApplicabilityCondition.md) |
 
 
 
@@ -183,7 +184,7 @@ RangeCheck ||--}o FormalExpression : "expressions"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -192,10 +193,10 @@ RangeCheck ||--}o FormalExpression : "expressions"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:WhereClause |
-| native | odm:WhereClause |
+| self | dds:ApplicabilityCondition |
+| native | dds:ApplicabilityCondition |
 | related | fhir:StructureDefinition/context, qb:ObservationGroup, qb:Slice, sdmx:CubeRegion, sdmx:MetadataTargetRegion |
-| close | sdmx:AttachmentConstraint |
+| close | sdmx:AttachmentConstraint, usdm:TransitionRule |
 
 
 
@@ -210,12 +211,16 @@ RangeCheck ||--}o FormalExpression : "expressions"
 
 <details>
 ```yaml
-name: WhereClause
-description: A conditional element that describes the circumstances under which a
-  containing context applies, linking conditions to structures where they are used
-from_schema: https://cdisc.org/data-definition-spec
+name: ApplicabilityCondition
+description: 'A reusable, named applicability condition describing the circumstances
+  under which a containing context applies. References one or more LogicalPredicates
+  combined with AND. Distinct from LogicalPredicate (the expression itself): ApplicabilityCondition
+  is the named, governed wrapper referenced from Items, ItemGroups, Parameters, and
+  Analyses.'
+from_schema: https://w3id.org/dds
 close_mappings:
 - sdmx:AttachmentConstraint
+- usdm:TransitionRule
 related_mappings:
 - fhir:StructureDefinition/context
 - qb:ObservationGroup
@@ -224,16 +229,15 @@ related_mappings:
 - sdmx:MetadataTargetRegion
 is_a: GovernedElement
 attributes:
-  conditions:
-    name: conditions
-    description: Logical conditions that apply in this context (combined with AND)
-    from_schema: https://cdisc.org/data-definition-spec
+  predicates:
+    name: predicates
+    description: Logical predicates that apply in this context (combined with AND)
+    from_schema: https://w3id.org/dds
     domain_of:
-    - MetaDataVersion
-    - WhereClause
-    - Condition
-    - Parameter
-    range: Condition
+    - Specification
+    - ApplicabilityCondition
+    - LogicalPredicate
+    range: LogicalPredicate
     multivalued: true
     inlined: false
 
@@ -244,12 +248,16 @@ attributes:
 
 <details>
 ```yaml
-name: WhereClause
-description: A conditional element that describes the circumstances under which a
-  containing context applies, linking conditions to structures where they are used
-from_schema: https://cdisc.org/data-definition-spec
+name: ApplicabilityCondition
+description: 'A reusable, named applicability condition describing the circumstances
+  under which a containing context applies. References one or more LogicalPredicates
+  combined with AND. Distinct from LogicalPredicate (the expression itself): ApplicabilityCondition
+  is the named, governed wrapper referenced from Items, ItemGroups, Parameters, and
+  Analyses.'
+from_schema: https://w3id.org/dds
 close_mappings:
 - sdmx:AttachmentConstraint
+- usdm:TransitionRule
 related_mappings:
 - fhir:StructureDefinition/context
 - qb:ObservationGroup
@@ -258,29 +266,28 @@ related_mappings:
 - sdmx:MetadataTargetRegion
 is_a: GovernedElement
 attributes:
-  conditions:
-    name: conditions
-    description: Logical conditions that apply in this context (combined with AND)
-    from_schema: https://cdisc.org/data-definition-spec
-    alias: conditions
-    owner: WhereClause
+  predicates:
+    name: predicates
+    description: Logical predicates that apply in this context (combined with AND)
+    from_schema: https://w3id.org/dds
+    alias: predicates
+    owner: ApplicabilityCondition
     domain_of:
-    - MetaDataVersion
-    - WhereClause
-    - Condition
-    - Parameter
-    range: Condition
+    - Specification
+    - ApplicabilityCondition
+    - LogicalPredicate
+    range: LogicalPredicate
     multivalued: true
     inlined: false
   OID:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     identifier: true
     alias: OID
-    owner: WhereClause
+    owner: ApplicabilityCondition
     domain_of:
     - Identifiable
     range: string
@@ -288,20 +295,20 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: uuid
-    owner: WhereClause
+    owner: ApplicabilityCondition
     domain_of:
     - Identifiable
     range: string
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: name
-    owner: WhereClause
+    owner: ApplicabilityCondition
     domain_of:
     - Labelled
     - DefClass
@@ -311,10 +318,10 @@ attributes:
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: description
-    owner: WhereClause
+    owner: ApplicabilityCondition
     domain_of:
     - Labelled
     - CodeListItem
@@ -325,10 +332,10 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: coding
-    owner: WhereClause
+    owner: ApplicabilityCondition
     domain_of:
     - Labelled
     - CodeListItem
@@ -340,12 +347,12 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:prefLabel
     rank: 1000
     alias: label
-    owner: WhereClause
+    owner: ApplicabilityCondition
     domain_of:
     - Labelled
     range: string
@@ -355,12 +362,12 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:altLabel
     rank: 1000
     alias: aliases
-    owner: WhereClause
+    owner: ApplicabilityCondition
     domain_of:
     - Labelled
     - CodeListItem
@@ -374,10 +381,10 @@ attributes:
   mandatory:
     name: mandatory
     description: Is this element required?
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: mandatory
-    owner: WhereClause
+    owner: ApplicabilityCondition
     domain_of:
     - Governed
     range: boolean
@@ -385,10 +392,10 @@ attributes:
     name: comments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: comments
-    owner: WhereClause
+    owner: ApplicabilityCondition
     domain_of:
     - Governed
     range: Comment
@@ -398,10 +405,10 @@ attributes:
     name: siteOrSponsorComments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: siteOrSponsorComments
-    owner: WhereClause
+    owner: ApplicabilityCondition
     domain_of:
     - Governed
     range: SiteOrSponsorComment
@@ -410,10 +417,10 @@ attributes:
   purpose:
     name: purpose
     description: Purpose or rationale for this data element
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: purpose
-    owner: WhereClause
+    owner: ApplicabilityCondition
     domain_of:
     - Governed
     range: string
@@ -423,23 +430,23 @@ attributes:
   lastUpdated:
     name: lastUpdated
     description: When the resource was last updated
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: lastUpdated
-    owner: WhereClause
+    owner: ApplicabilityCondition
     domain_of:
     - Governed
     range: datetime
   owner:
     name: owner
     description: Party responsible for this element
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     narrow_mappings:
     - prov:wasAttributedTo
     - prov:wasAssociatedBy
     rank: 1000
     alias: owner
-    owner: WhereClause
+    owner: ApplicabilityCondition
     domain_of:
     - Governed
     range: string
@@ -451,25 +458,24 @@ attributes:
     name: wasDerivedFrom
     description: Reference to another item that this item implements or extends, e.g.
       a template Item definition.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - prov:wasDerivedFrom
     rank: 1000
     alias: wasDerivedFrom
-    owner: WhereClause
+    owner: ApplicabilityCondition
     domain_of:
     - Governed
     range: string
     any_of:
     - range: Item
     - range: ItemGroup
-    - range: MetaDataVersion
+    - range: Specification
     - range: CodeList
-    - range: ReifiedConcept
+    - range: Concept
     - range: ConceptProperty
-    - range: Condition
+    - range: LogicalPredicate
     - range: Method
-    - range: NominalOccurrence
     - range: Dataflow
     - range: CubeComponent
     - range: DataProduct

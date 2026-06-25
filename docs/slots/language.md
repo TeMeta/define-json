@@ -9,7 +9,7 @@ _The language of the translation_
 
 
 
-URI: [odm:slot/language](https://cdisc.org/odm2/slot/language)
+URI: [dds:slot/language](https://w3id.org/dds/slot/language)
 Alias: language
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: language
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: language
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:language |
-| native | odm:language |
+| self | dds:language |
+| native | dds:language |
 
 
 
@@ -69,7 +69,7 @@ Alias: language
 ```yaml
 name: language
 description: The language of the translation
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: language
 owner: Translation

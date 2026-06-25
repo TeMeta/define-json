@@ -9,7 +9,7 @@ _A default value for the parameter._
 
 
 
-URI: [odm:slot/defaultValue](https://cdisc.org/odm2/slot/defaultValue)
+URI: [dds:slot/defaultValue](https://w3id.org/dds/slot/defaultValue)
 Alias: defaultValue
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: defaultValue
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: defaultValue
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:defaultValue |
-| native | odm:defaultValue |
+| self | dds:defaultValue |
+| native | dds:defaultValue |
 
 
 
@@ -67,7 +67,7 @@ Alias: defaultValue
 ```yaml
 name: defaultValue
 description: A default value for the parameter.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: defaultValue
 owner: Parameter

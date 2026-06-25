@@ -9,7 +9,7 @@ _A dictionary that defines a set of codes and their meanings_
 
 
 
-URI: [odm:class/Dictionary](https://cdisc.org/odm2/class/Dictionary)
+URI: [dds:class/Dictionary](https://w3id.org/dds/class/Dictionary)
 
 
 ```mermaid
@@ -71,7 +71,7 @@ Dictionary ||--}o Coding : "coding"
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | [dictionaries](../slots/dictionaries.md) | range | [Dictionary](../classes/Dictionary.md) |
+| [Specification](../classes/Specification.md) | [dictionaries](../slots/dictionaries.md) | range | [Dictionary](../classes/Dictionary.md) |
 
 
 
@@ -89,7 +89,7 @@ Dictionary ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -98,8 +98,8 @@ Dictionary ||--}o Coding : "coding"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:Dictionary |
-| native | odm:Dictionary |
+| self | dds:Dictionary |
+| native | dds:Dictionary |
 
 
 
@@ -116,7 +116,7 @@ Dictionary ||--}o Coding : "coding"
 ```yaml
 name: Dictionary
 description: A dictionary that defines a set of codes and their meanings
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 is_a: IdentifiableElement
 mixins:
 - Versioned
@@ -125,7 +125,7 @@ attributes:
     name: terms
     description: Terms in this dictionary - leave this empty in most cases to keep
       the file small
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Dictionary
@@ -136,10 +136,11 @@ attributes:
   publishedBy:
     name: publishedBy
     description: Associates the Data Provider that reports/publishes the data.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Dictionary
+    - Check
     - Dataset
     any_of:
     - range: Organization
@@ -154,7 +155,7 @@ attributes:
 ```yaml
 name: Dictionary
 description: A dictionary that defines a set of codes and their meanings
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 is_a: IdentifiableElement
 mixins:
 - Versioned
@@ -163,7 +164,7 @@ attributes:
     name: terms
     description: Terms in this dictionary - leave this empty in most cases to keep
       the file small
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: terms
     owner: Dictionary
@@ -176,12 +177,13 @@ attributes:
   publishedBy:
     name: publishedBy
     description: Associates the Data Provider that reports/publishes the data.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: publishedBy
     owner: Dictionary
     domain_of:
     - Dictionary
+    - Check
     - Dataset
     range: string
     any_of:
@@ -190,7 +192,7 @@ attributes:
   version:
     name: version
     description: The version of the external resources
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: version
     owner: Dictionary
@@ -202,7 +204,7 @@ attributes:
     name: href
     description: Machine-readable instructions to obtain the resource e.g. FHIR path,
       URL
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: href
     owner: Dictionary
@@ -214,7 +216,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     identifier: true
     alias: OID
@@ -226,7 +228,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: uuid
     owner: Dictionary
@@ -236,7 +238,7 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: name
     owner: Dictionary
@@ -249,7 +251,7 @@ attributes:
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: description
     owner: Dictionary
@@ -263,7 +265,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: coding
     owner: Dictionary
@@ -278,7 +280,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -293,7 +295,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:altLabel
     rank: 1000

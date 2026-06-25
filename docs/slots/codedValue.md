@@ -9,7 +9,7 @@ _The value of the CodeListItem before decoding_
 
 
 
-URI: [odm:slot/codedValue](https://cdisc.org/odm2/slot/codedValue)
+URI: [dds:slot/codedValue](https://w3id.org/dds/slot/codedValue)
 Alias: codedValue
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: codedValue
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: codedValue
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:codedValue |
-| native | odm:codedValue |
+| self | dds:codedValue |
+| native | dds:codedValue |
 
 
 
@@ -69,7 +69,7 @@ Alias: codedValue
 ```yaml
 name: codedValue
 description: The value of the CodeListItem before decoding
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: codedValue
 owner: CodeListItem

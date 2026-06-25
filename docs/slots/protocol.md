@@ -9,7 +9,7 @@ _Protocol used by the service (e.g., HTTPS, FTP)_
 
 
 
-URI: [odm:slot/protocol](https://cdisc.org/odm2/slot/protocol)
+URI: [dds:slot/protocol](https://w3id.org/dds/slot/protocol)
 Alias: protocol
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: protocol
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: protocol
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:protocol |
-| native | odm:protocol |
+| self | dds:protocol |
+| native | dds:protocol |
 
 
 
@@ -67,7 +67,7 @@ Alias: protocol
 ```yaml
 name: protocol
 description: Protocol used by the service (e.g., HTTPS, FTP)
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: protocol
 owner: DataService

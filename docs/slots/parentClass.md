@@ -9,7 +9,7 @@ _Name of the parent Class or SubClass following CDISC Controlled Terminology._
 
 
 
-URI: [odm:slot/parentClass](https://cdisc.org/odm2/slot/parentClass)
+URI: [dds:slot/parentClass](https://w3id.org/dds/slot/parentClass)
 Alias: parentClass
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: parentClass
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: parentClass
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:parentClass |
-| native | odm:parentClass |
+| self | dds:parentClass |
+| native | dds:parentClass |
 
 
 
@@ -67,7 +67,7 @@ Alias: parentClass
 ```yaml
 name: parentClass
 description: Name of the parent Class or SubClass following CDISC Controlled Terminology.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: parentClass
 owner: SubClass

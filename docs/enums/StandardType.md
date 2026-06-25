@@ -7,7 +7,7 @@ _An enumeration that defines permissible values for standard types_
 
 
 
-URI: [odm:enum/StandardType](https://cdisc.org/odm2/enum/StandardType)
+URI: [dds:enum/StandardType](https://w3id.org/dds/enum/StandardType)
 
 ## Permissible Values
 
@@ -33,7 +33,7 @@ URI: [odm:enum/StandardType](https://cdisc.org/odm2/enum/StandardType)
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -46,7 +46,7 @@ URI: [odm:enum/StandardType](https://cdisc.org/odm2/enum/StandardType)
 ```yaml
 name: StandardType
 description: An enumeration that defines permissible values for standard types
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 permissible_values:
   CT:

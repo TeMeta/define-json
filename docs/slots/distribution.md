@@ -9,7 +9,7 @@ _Representations of this dataset in various formats or access methods_
 
 
 
-URI: [odm:slot/distribution](https://cdisc.org/odm2/slot/distribution)
+URI: [dds:slot/distribution](https://w3id.org/dds/slot/distribution)
 Alias: distribution
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: distribution
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: distribution
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:distribution |
-| native | odm:distribution |
+| self | dds:distribution |
+| native | dds:distribution |
 | exact | dcat:distribution |
 
 
@@ -70,7 +70,7 @@ Alias: distribution
 ```yaml
 name: distribution
 description: Representations of this dataset in various formats or access methods
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - dcat:distribution
 rank: 1000

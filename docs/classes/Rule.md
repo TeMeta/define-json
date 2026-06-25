@@ -9,7 +9,7 @@ _An ODRL rule asserting that an action is permitted, prohibited, or required on 
 
 
 
-URI: [odm:class/Rule](https://cdisc.org/odm2/class/Rule)
+URI: [dds:class/Rule](https://w3id.org/dds/class/Rule)
 
 
 ```mermaid
@@ -106,7 +106,7 @@ Constraint ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -115,8 +115,8 @@ Constraint ||--}o Coding : "coding"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:Rule |
-| native | odm:Rule |
+| self | dds:Rule |
+| native | dds:Rule |
 | exact | odrl:Rule |
 
 
@@ -135,7 +135,7 @@ Constraint ||--}o Coding : "coding"
 name: Rule
 description: An ODRL rule asserting that an action is permitted, prohibited, or required
   on a target asset, optionally restricted by constraints.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - odrl:Rule
 is_a: IdentifiableElement
@@ -144,7 +144,7 @@ attributes:
     name: action
     description: The operation the rule governs (odrl:action), e.g. "use", "distribute",
       "anonymize", "delete". Semantics may be tagged via coding.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - odrl:action
     domain_of:
@@ -155,7 +155,7 @@ attributes:
     name: target
     description: The asset the rule applies to (odrl:target), e.g. the Dataflow or
       Dataset OID/IRI under agreement.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - odrl:target
     rank: 1000
@@ -164,7 +164,7 @@ attributes:
   assigner:
     name: assigner
     description: Party issuing the rule, if overriding the policy-level assigner
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     domain_of:
     - Policy
     - Rule
@@ -174,7 +174,7 @@ attributes:
   assignee:
     name: assignee
     description: Party the rule is granted to, if overriding the policy-level assignee
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     domain_of:
     - Policy
     - Rule
@@ -184,7 +184,7 @@ attributes:
   constraint:
     name: constraint
     description: Conditions that narrow when/how the rule applies (odrl:constraint)
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - odrl:constraint
     rank: 1000
@@ -205,7 +205,7 @@ attributes:
 name: Rule
 description: An ODRL rule asserting that an action is permitted, prohibited, or required
   on a target asset, optionally restricted by constraints.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - odrl:Rule
 is_a: IdentifiableElement
@@ -214,7 +214,7 @@ attributes:
     name: action
     description: The operation the rule governs (odrl:action), e.g. "use", "distribute",
       "anonymize", "delete". Semantics may be tagged via coding.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - odrl:action
     alias: action
@@ -228,7 +228,7 @@ attributes:
     name: target
     description: The asset the rule applies to (odrl:target), e.g. the Dataflow or
       Dataset OID/IRI under agreement.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - odrl:target
     rank: 1000
@@ -240,7 +240,7 @@ attributes:
   assigner:
     name: assigner
     description: Party issuing the rule, if overriding the policy-level assigner
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     alias: assigner
     owner: Rule
     domain_of:
@@ -253,7 +253,7 @@ attributes:
   assignee:
     name: assignee
     description: Party the rule is granted to, if overriding the policy-level assignee
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     alias: assignee
     owner: Rule
     domain_of:
@@ -266,7 +266,7 @@ attributes:
   constraint:
     name: constraint
     description: Conditions that narrow when/how the rule applies (odrl:constraint)
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - odrl:constraint
     rank: 1000
@@ -282,7 +282,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     identifier: true
     alias: OID
@@ -294,7 +294,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: uuid
     owner: Rule
@@ -304,7 +304,7 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: name
     owner: Rule
@@ -317,7 +317,7 @@ attributes:
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: description
     owner: Rule
@@ -331,7 +331,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: coding
     owner: Rule
@@ -346,7 +346,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -361,7 +361,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:altLabel
     rank: 1000

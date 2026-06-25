@@ -9,7 +9,7 @@ _An organization element that receives data from a Data Provider under a Provisi
 
 
 
-URI: [odm:class/DataConsumer](https://cdisc.org/odm2/class/DataConsumer)
+URI: [dds:class/DataConsumer](https://w3id.org/dds/class/DataConsumer)
 
 
 ```mermaid
@@ -179,7 +179,6 @@ Resource ||--}o FormalExpression : "selection"
 Resource ||--}o Coding : "coding"
 Dataflow ||--|| DataStructureDefinition : "structure"
 Dataflow ||--}o Dimension : "dimensionConstraint"
-Dataflow ||--|o Analysis : "analysisMethod"
 Dataflow ||--}o Coding : "coding"
 Dataflow ||--}o Comment : "comments"
 Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -247,7 +246,7 @@ DataProvider ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -256,8 +255,8 @@ DataProvider ||--}o Coding : "coding"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:DataConsumer |
-| native | odm:DataConsumer |
+| self | dds:DataConsumer |
+| native | dds:DataConsumer |
 | close | sdmx:DataConsumer |
 
 
@@ -276,7 +275,7 @@ DataProvider ||--}o Coding : "coding"
 name: DataConsumer
 description: An organization element that receives data from a Data Provider under
   a ProvisionAgreement; the demand-side counterpart of DataProvider.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 close_mappings:
 - sdmx:DataConsumer
 is_a: Organization
@@ -284,7 +283,7 @@ attributes:
   consumesDataFrom:
     name: consumesDataFrom
     description: The Dataflows that this consumer receives data from
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - DataConsumer
@@ -293,7 +292,7 @@ attributes:
   provisionAgreements:
     name: provisionAgreements
     description: The ProvisionAgreements that this consumer has with Data Providers
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     domain_of:
     - DataProvider
     - DataConsumer
@@ -310,7 +309,7 @@ attributes:
 name: DataConsumer
 description: An organization element that receives data from a Data Provider under
   a ProvisionAgreement; the demand-side counterpart of DataProvider.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 close_mappings:
 - sdmx:DataConsumer
 is_a: Organization
@@ -318,7 +317,7 @@ attributes:
   consumesDataFrom:
     name: consumesDataFrom
     description: The Dataflows that this consumer receives data from
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: consumesDataFrom
     owner: DataConsumer
@@ -329,7 +328,7 @@ attributes:
   provisionAgreements:
     name: provisionAgreements
     description: The ProvisionAgreements that this consumer has with Data Providers
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     alias: provisionAgreements
     owner: DataConsumer
     domain_of:
@@ -340,18 +339,18 @@ attributes:
   role:
     name: role
     description: The role of the organization in the study.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     alias: role
     owner: DataConsumer
     domain_of:
-    - IsODMItem
+    - ODMItemSerialization
     - Organization
     - CubeComponent
     range: string
   type:
     name: type
     description: The type of organization (e.g., site, sponsor, vendor).
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     alias: type
     owner: DataConsumer
     domain_of:
@@ -365,7 +364,7 @@ attributes:
   location:
     name: location
     description: The physical location of the organization.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: location
     owner: DataConsumer
@@ -376,7 +375,7 @@ attributes:
   address:
     name: address
     description: The address of the organization.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: address
     owner: DataConsumer
@@ -387,7 +386,7 @@ attributes:
     name: partOfOrganization
     description: Reference to a parent organization if this organization is part of
       a larger entity.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: partOfOrganization
     owner: DataConsumer
@@ -398,7 +397,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     identifier: true
     alias: OID
@@ -410,7 +409,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: uuid
     owner: DataConsumer
@@ -420,7 +419,7 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: name
     owner: DataConsumer
@@ -433,7 +432,7 @@ attributes:
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: description
     owner: DataConsumer
@@ -447,7 +446,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: coding
     owner: DataConsumer
@@ -462,7 +461,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -477,7 +476,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:altLabel
     rank: 1000

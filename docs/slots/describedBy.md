@@ -4,7 +4,7 @@
 
 
 
-URI: [odm:slot/describedBy](https://cdisc.org/odm2/slot/describedBy)
+URI: [dds:slot/describedBy](https://w3id.org/dds/slot/describedBy)
 Alias: describedBy
 
 <!-- no inheritance hierarchy -->
@@ -18,9 +18,9 @@ Alias: describedBy
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
 | [GroupKey](../classes/GroupKey.md) | A dimension subset that represents collections of dimensions that are subsets of the full dimension set, distinct from SeriesKey which includes Time dimensions |  no  |
-| [DatasetKey](../classes/DatasetKey.md) | An abstract identifier that comprises the cross-product of dimension values to identify a specific cross-section |  no  |
 | [SeriesKey](../classes/SeriesKey.md) | A unique identifier that comprises the cross-product of dimension values including Time to identify observations, representing dimensions shared by all observations in a conceptual series |  no  |
 | [Dataset](../classes/Dataset.md) | A collection element that groups observations sharing the same dimensionality, expressed as a set of unique dimensions within a Data Product context |  no  |
+| [DatasetKey](../classes/DatasetKey.md) | An abstract identifier that comprises the cross-product of dimension values to identify a specific cross-section |  no  |
 
 
 
@@ -46,8 +46,8 @@ Alias: describedBy
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:describedBy |
-| native | odm:describedBy |
+| self | dds:describedBy |
+| native | dds:describedBy |
 
 
 

@@ -9,7 +9,7 @@ _For decimal values, the number of digits after the decimal point_
 
 
 
-URI: [odm:slot/decimalDigits](https://cdisc.org/odm2/slot/decimalDigits)
+URI: [dds:slot/decimalDigits](https://w3id.org/dds/slot/decimalDigits)
 Alias: decimalDigits
 
 <!-- no inheritance hierarchy -->
@@ -47,7 +47,7 @@ Alias: decimalDigits
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -56,8 +56,8 @@ Alias: decimalDigits
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:decimalDigits |
-| native | odm:decimalDigits |
+| self | dds:decimalDigits |
+| native | dds:decimalDigits |
 
 
 
@@ -68,7 +68,7 @@ Alias: decimalDigits
 ```yaml
 name: decimalDigits
 description: For decimal values, the number of digits after the decimal point
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: decimalDigits
 owner: Formatted

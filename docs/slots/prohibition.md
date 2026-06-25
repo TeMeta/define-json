@@ -9,7 +9,7 @@ _Rules forbidding an action (odrl:prohibition)_
 
 
 
-URI: [odm:slot/prohibition](https://cdisc.org/odm2/slot/prohibition)
+URI: [dds:slot/prohibition](https://w3id.org/dds/slot/prohibition)
 Alias: prohibition
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: prohibition
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: prohibition
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:prohibition |
-| native | odm:prohibition |
+| self | dds:prohibition |
+| native | dds:prohibition |
 | exact | odrl:prohibition |
 
 
@@ -70,7 +70,7 @@ Alias: prohibition
 ```yaml
 name: prohibition
 description: Rules forbidding an action (odrl:prohibition)
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - odrl:prohibition
 rank: 1000

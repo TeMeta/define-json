@@ -9,7 +9,7 @@ _Service that provides access to this distribution_
 
 
 
-URI: [odm:slot/accessService](https://cdisc.org/odm2/slot/accessService)
+URI: [dds:slot/accessService](https://w3id.org/dds/slot/accessService)
 Alias: accessService
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: accessService
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: accessService
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:accessService |
-| native | odm:accessService |
+| self | dds:accessService |
+| native | dds:accessService |
 
 
 
@@ -67,7 +67,7 @@ Alias: accessService
 ```yaml
 name: accessService
 description: Service that provides access to this distribution
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: accessService
 owner: Distribution

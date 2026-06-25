@@ -9,7 +9,7 @@ _A relationship element that associates a DataAttribute with a set of Dimensions
 
 
 
-URI: [odm:class/GroupRelationship](https://cdisc.org/odm2/class/GroupRelationship)
+URI: [dds:class/GroupRelationship](https://w3id.org/dds/class/GroupRelationship)
 
 
 ```mermaid
@@ -85,12 +85,6 @@ Method {
 Item {
     DataType dataType  
     integer length  
-    string role  
-    boolean hasNoData  
-    string crfCompletionInstructions  
-    string cdiscNotes  
-    string implementationNotes  
-    string preSpecifiedValue  
     integer decimalDigits  
     string displayFormat  
     integer significantDigits  
@@ -133,18 +127,16 @@ Comment ||--}o Comment : "comments"
 Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Method ||--}o FormalExpression : "expressions"
 Method ||--}o DocumentReference : "documents"
-Method ||--|o ReifiedConcept : "implementsConcept"
+Method ||--|o Concept : "implementsConcept"
 Method ||--}o Coding : "coding"
 Method ||--}o Comment : "comments"
 Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
-Item ||--}o WhereClause : "applicableWhen"
+Item ||--}o ApplicabilityCondition : "applicableWhen"
 Item ||--|o Origin : "origin"
 Item ||--|o ConceptProperty : "conceptProperty"
-Item ||--|o CodeList : "roleCodeList"
-Item ||--|o Condition : "collectionExceptionCondition"
 Item ||--}o Coding : "coding"
 Item ||--}o Comment : "comments"
 Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -183,7 +175,7 @@ ComponentList ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -192,8 +184,8 @@ ComponentList ||--}o Coding : "coding"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:GroupRelationship |
-| native | odm:GroupRelationship |
+| self | dds:GroupRelationship |
+| native | dds:GroupRelationship |
 | exact | sdmx:GroupRelationship |
 
 
@@ -212,14 +204,14 @@ ComponentList ||--}o Coding : "coding"
 name: GroupRelationship
 description: A relationship element that associates a DataAttribute with a set of
   Dimensions, used when attribute values vary based on all group dimension values
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - sdmx:GroupRelationship
 attributes:
   groupKey:
     name: groupKey
     description: Set of dimensions that this definition depends on
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - sdmx:GroupDimensionDescriptor
     rank: 1000
@@ -229,7 +221,7 @@ attributes:
     range: ComponentList
   attribute:
     name: attribute
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     domain_of:
     - Resource
     - MeasureRelationship
@@ -249,14 +241,14 @@ attributes:
 name: GroupRelationship
 description: A relationship element that associates a DataAttribute with a set of
   Dimensions, used when attribute values vary based on all group dimension values
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - sdmx:GroupRelationship
 attributes:
   groupKey:
     name: groupKey
     description: Set of dimensions that this definition depends on
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - sdmx:GroupDimensionDescriptor
     rank: 1000
@@ -268,7 +260,7 @@ attributes:
     range: ComponentList
   attribute:
     name: attribute
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     alias: attribute
     owner: GroupRelationship
     domain_of:

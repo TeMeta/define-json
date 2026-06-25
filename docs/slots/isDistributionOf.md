@@ -9,7 +9,7 @@ _Dataset this distribution represents_
 
 
 
-URI: [odm:slot/isDistributionOf](https://cdisc.org/odm2/slot/isDistributionOf)
+URI: [dds:slot/isDistributionOf](https://w3id.org/dds/slot/isDistributionOf)
 Alias: isDistributionOf
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: isDistributionOf
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: isDistributionOf
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:isDistributionOf |
-| native | odm:isDistributionOf |
+| self | dds:isDistributionOf |
+| native | dds:isDistributionOf |
 
 
 
@@ -67,7 +67,7 @@ Alias: isDistributionOf
 ```yaml
 name: isDistributionOf
 description: Dataset this distribution represents
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: isDistributionOf
 owner: Distribution

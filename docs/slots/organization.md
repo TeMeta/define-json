@@ -9,7 +9,7 @@ _The organization the user belongs to._
 
 
 
-URI: [odm:slot/organization](https://cdisc.org/odm2/slot/organization)
+URI: [dds:slot/organization](https://w3id.org/dds/slot/organization)
 Alias: organization
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: organization
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: organization
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:organization |
-| native | odm:organization |
+| self | dds:organization |
+| native | dds:organization |
 | close | prov:actedOnBehalfOf |
 
 
@@ -68,7 +68,7 @@ Alias: organization
 ```yaml
 name: organization
 description: The organization the user belongs to.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 close_mappings:
 - prov:actedOnBehalfOf
 rank: 1000

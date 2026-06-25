@@ -3,11 +3,11 @@
 
 
 
-_An enumeration that defines the types of origins for data items._
+_An enumeration that defines the types of origins for data items. Values sourced from NCI Thesaurus subset C170449._
 
 
 
-URI: [odm:enum/OriginType](https://cdisc.org/odm2/enum/OriginType)
+URI: [dds:enum/OriginType](https://w3id.org/dds/enum/OriginType)
 
 ## Permissible Values
 
@@ -38,7 +38,7 @@ URI: [odm:enum/OriginType](https://cdisc.org/odm2/enum/OriginType)
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -50,8 +50,9 @@ URI: [odm:enum/OriginType](https://cdisc.org/odm2/enum/OriginType)
 <details>
 ```yaml
 name: OriginType
-description: An enumeration that defines the types of origins for data items.
-from_schema: https://cdisc.org/data-definition-spec
+description: An enumeration that defines the types of origins for data items. Values
+  sourced from NCI Thesaurus subset C170449.
+from_schema: https://w3id.org/dds
 rank: 1000
 permissible_values:
   Assigned:

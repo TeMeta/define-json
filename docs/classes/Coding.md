@@ -9,7 +9,7 @@ _A semantic reference that provides standardized codes and their meanings from c
 
 
 
-URI: [odm:class/Coding](https://cdisc.org/odm2/class/Coding)
+URI: [dds:class/Coding](https://w3id.org/dds/class/Coding)
 
 
 ```mermaid
@@ -53,21 +53,23 @@ Coding {
 | [GovernedElement](../classes/GovernedElement.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
 | [Labelled](../classes/Labelled.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
 | [IsProfile](../classes/IsProfile.md) | [security](../slots/security.md) | range | [Coding](../classes/Coding.md) |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | [codings](../slots/codings.md) | range | [Coding](../classes/Coding.md) |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
+| [Specification](../classes/Specification.md) | [codings](../slots/codings.md) | range | [Coding](../classes/Coding.md) |
+| [Specification](../classes/Specification.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
 | [Item](../classes/Item.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
 | [ItemGroup](../classes/ItemGroup.md) | [security](../slots/security.md) | range | [Coding](../classes/Coding.md) |
 | [ItemGroup](../classes/ItemGroup.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
 | [Relationship](../classes/Relationship.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
+| [Query](../classes/Query.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
 | [CodeList](../classes/CodeList.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
 | [CodeListItem](../classes/CodeListItem.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
 | [Comment](../classes/Comment.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
 | [Dictionary](../classes/Dictionary.md) | [terms](../slots/terms.md) | range | [Coding](../classes/Coding.md) |
 | [Dictionary](../classes/Dictionary.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
-| [ReifiedConcept](../classes/ReifiedConcept.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
+| [Concept](../classes/Concept.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
 | [ConceptProperty](../classes/ConceptProperty.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
-| [WhereClause](../classes/WhereClause.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
-| [Condition](../classes/Condition.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
+| [ApplicabilityCondition](../classes/ApplicabilityCondition.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
+| [LogicalPredicate](../classes/LogicalPredicate.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
+| [Check](../classes/Check.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
 | [FormalExpression](../classes/FormalExpression.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
 | [Method](../classes/Method.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
 | [SourceItem](../classes/SourceItem.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
@@ -80,7 +82,6 @@ Coding {
 | [Resource](../classes/Resource.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
 | [DocumentReference](../classes/DocumentReference.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
 | [Timing](../classes/Timing.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
-| [NominalOccurrence](../classes/NominalOccurrence.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [security](../slots/security.md) | range | [Coding](../classes/Coding.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
 | [Dataflow](../classes/Dataflow.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
@@ -118,7 +119,7 @@ Coding {
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -127,8 +128,8 @@ Coding {
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:Coding |
-| native | odm:Coding |
+| self | dds:Coding |
+| native | dds:Coding |
 | exact | odm:Coding, usdm:Code, fhir:Coding |
 | close | omop:Concept, skos:Concept, skos:Label, sdmx:Code, sdmx:Concept, sdmx:ISOConceptReference |
 
@@ -148,7 +149,7 @@ Coding {
 name: Coding
 description: A semantic reference that provides standardized codes and their meanings
   from controlled vocabularies
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - odm:Coding
 - usdm:Code
@@ -164,7 +165,7 @@ attributes:
   code:
     name: code
     description: The code value
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Coding
@@ -172,7 +173,7 @@ attributes:
   decode:
     name: decode
     description: Human-readable meaning
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:prefLabel
     domain_of:
@@ -184,7 +185,7 @@ attributes:
   codeSystem:
     name: codeSystem
     description: The code system identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Coding
@@ -192,14 +193,14 @@ attributes:
   codeSystemVersion:
     name: codeSystemVersion
     description: The code system version
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Coding
   aliasType:
     name: aliasType
     description: How this coding is related in the context of its parent element
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Coding
@@ -215,7 +216,7 @@ attributes:
 name: Coding
 description: A semantic reference that provides standardized codes and their meanings
   from controlled vocabularies
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - odm:Coding
 - usdm:Code
@@ -231,7 +232,7 @@ attributes:
   code:
     name: code
     description: The code value
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: code
     owner: Coding
@@ -242,7 +243,7 @@ attributes:
   decode:
     name: decode
     description: Human-readable meaning
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:prefLabel
     alias: decode
@@ -257,7 +258,7 @@ attributes:
   codeSystem:
     name: codeSystem
     description: The code system identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: codeSystem
     owner: Coding
@@ -268,7 +269,7 @@ attributes:
   codeSystemVersion:
     name: codeSystemVersion
     description: The code system version
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: codeSystemVersion
     owner: Coding
@@ -278,7 +279,7 @@ attributes:
   aliasType:
     name: aliasType
     description: How this coding is related in the context of its parent element
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: aliasType
     owner: Coding

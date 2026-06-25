@@ -4,7 +4,7 @@
 
 
 
-URI: [odm:slot/translations](https://cdisc.org/odm2/slot/translations)
+URI: [dds:slot/translations](https://w3id.org/dds/slot/translations)
 Alias: translations
 
 <!-- no inheritance hierarchy -->
@@ -43,7 +43,7 @@ Alias: translations
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -52,8 +52,8 @@ Alias: translations
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:translations |
-| native | odm:translations |
+| self | dds:translations |
+| native | dds:translations |
 
 
 
@@ -63,7 +63,7 @@ Alias: translations
 <details>
 ```yaml
 name: translations
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: translations
 owner: TranslatedText

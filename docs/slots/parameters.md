@@ -9,7 +9,7 @@ _Parameters used in the expression_
 
 
 
-URI: [odm:slot/parameters](https://cdisc.org/odm2/slot/parameters)
+URI: [dds:slot/parameters](https://w3id.org/dds/slot/parameters)
 Alias: parameters
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: parameters
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: parameters
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:parameters |
-| native | odm:parameters |
+| self | dds:parameters |
+| native | dds:parameters |
 
 
 
@@ -69,7 +69,7 @@ Alias: parameters
 ```yaml
 name: parameters
 description: Parameters used in the expression
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: parameters
 owner: FormalExpression

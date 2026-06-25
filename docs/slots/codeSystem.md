@@ -9,7 +9,7 @@ _The code system identifier_
 
 
 
-URI: [odm:slot/codeSystem](https://cdisc.org/odm2/slot/codeSystem)
+URI: [dds:slot/codeSystem](https://w3id.org/dds/slot/codeSystem)
 Alias: codeSystem
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: codeSystem
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: codeSystem
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:codeSystem |
-| native | odm:codeSystem |
+| self | dds:codeSystem |
+| native | dds:codeSystem |
 
 
 
@@ -69,7 +69,7 @@ Alias: codeSystem
 ```yaml
 name: codeSystem
 description: The code system identifier
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: codeSystem
 owner: Coding

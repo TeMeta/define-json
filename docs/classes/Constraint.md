@@ -9,7 +9,7 @@ _An ODRL constraint expressed as leftOperand operator rightOperand, e.g. purpose
 
 
 
-URI: [odm:class/Constraint](https://cdisc.org/odm2/class/Constraint)
+URI: [dds:class/Constraint](https://w3id.org/dds/class/Constraint)
 
 
 ```mermaid
@@ -89,7 +89,7 @@ Constraint ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -98,8 +98,8 @@ Constraint ||--}o Coding : "coding"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:Constraint |
-| native | odm:Constraint |
+| self | dds:Constraint |
+| native | dds:Constraint |
 | exact | odrl:Constraint |
 
 
@@ -118,7 +118,7 @@ Constraint ||--}o Coding : "coding"
 name: Constraint
 description: An ODRL constraint expressed as leftOperand operator rightOperand, e.g.
   purpose eq "safety-reporting", or dateTime lt "2026-01-01".
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - odrl:Constraint
 is_a: IdentifiableElement
@@ -127,7 +127,7 @@ attributes:
     name: leftOperand
     description: The subject of the constraint (odrl:leftOperand), e.g. "purpose",
       "recipient", "dateTime"
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - odrl:leftOperand
     rank: 1000
@@ -137,11 +137,11 @@ attributes:
   operator:
     name: operator
     description: The comparison operator (odrl:operator)
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - odrl:operator
     domain_of:
-    - Condition
+    - LogicalPredicate
     - RangeCheck
     - Constraint
     range: ConstraintOperator
@@ -149,7 +149,7 @@ attributes:
   rightOperand:
     name: rightOperand
     description: The value compared against (odrl:rightOperand)
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - odrl:rightOperand
     rank: 1000
@@ -159,7 +159,7 @@ attributes:
   unit:
     name: unit
     description: Unit of the rightOperand, where applicable
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - Constraint
@@ -174,7 +174,7 @@ attributes:
 name: Constraint
 description: An ODRL constraint expressed as leftOperand operator rightOperand, e.g.
   purpose eq "safety-reporting", or dateTime lt "2026-01-01".
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - odrl:Constraint
 is_a: IdentifiableElement
@@ -183,7 +183,7 @@ attributes:
     name: leftOperand
     description: The subject of the constraint (odrl:leftOperand), e.g. "purpose",
       "recipient", "dateTime"
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - odrl:leftOperand
     rank: 1000
@@ -196,13 +196,13 @@ attributes:
   operator:
     name: operator
     description: The comparison operator (odrl:operator)
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - odrl:operator
     alias: operator
     owner: Constraint
     domain_of:
-    - Condition
+    - LogicalPredicate
     - RangeCheck
     - Constraint
     range: ConstraintOperator
@@ -210,7 +210,7 @@ attributes:
   rightOperand:
     name: rightOperand
     description: The value compared against (odrl:rightOperand)
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - odrl:rightOperand
     rank: 1000
@@ -223,7 +223,7 @@ attributes:
   unit:
     name: unit
     description: Unit of the rightOperand, where applicable
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: unit
     owner: Constraint
@@ -234,7 +234,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     identifier: true
     alias: OID
@@ -246,7 +246,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: uuid
     owner: Constraint
@@ -256,7 +256,7 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: name
     owner: Constraint
@@ -269,7 +269,7 @@ attributes:
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: description
     owner: Constraint
@@ -283,7 +283,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: coding
     owner: Constraint
@@ -298,7 +298,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -313,7 +313,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:altLabel
     rank: 1000

@@ -9,7 +9,7 @@ _The ending element of the relationship._
 
 
 
-URI: [odm:slot/object](https://cdisc.org/odm2/slot/object)
+URI: [dds:slot/object](https://w3id.org/dds/slot/object)
 Alias: object
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: object
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: object
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:object |
-| native | odm:object |
+| self | dds:object |
+| native | dds:object |
 
 
 
@@ -69,7 +69,7 @@ Alias: object
 ```yaml
 name: object
 description: The ending element of the relationship.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: object
 owner: Relationship

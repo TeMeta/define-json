@@ -9,7 +9,7 @@ _The asset the rule applies to (odrl:target), e.g. the Dataflow or Dataset OID/I
 
 
 
-URI: [odm:slot/target](https://cdisc.org/odm2/slot/target)
+URI: [dds:slot/target](https://w3id.org/dds/slot/target)
 Alias: target
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: target
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: target
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:target |
-| native | odm:target |
+| self | dds:target |
+| native | dds:target |
 | exact | odrl:target |
 
 
@@ -69,7 +69,7 @@ Alias: target
 name: target
 description: The asset the rule applies to (odrl:target), e.g. the Dataflow or Dataset
   OID/IRI under agreement.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - odrl:target
 rank: 1000

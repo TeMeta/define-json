@@ -9,7 +9,7 @@ _A computational element that defines the execution of a data derivation within 
 
 
 
-URI: [odm:class/FormalExpression](https://cdisc.org/odm2/class/FormalExpression)
+URI: [dds:class/FormalExpression](https://w3id.org/dds/class/FormalExpression)
 
 
 ```mermaid
@@ -67,8 +67,8 @@ Parameter {
     string label  
     stringList aliases  
 }
-Condition {
-    string implementsCondition  
+LogicalPredicate {
+    string implementsPredicate  
     LogicalOperator operator  
     string OID  
     string uuid  
@@ -82,7 +82,7 @@ Condition {
     string owner  
     string wasDerivedFrom  
 }
-WhereClause {
+ApplicabilityCondition {
     string OID  
     string uuid  
     string name  
@@ -138,19 +138,19 @@ Resource ||--}o Coding : "coding"
 ReturnValue ||--}o Coding : "coding"
 Parameter ||--}o CodeList : "codeList"
 Parameter ||--}o ConceptProperty : "conceptProperty"
-Parameter ||--}o WhereClause : "applicableWhen"
-Parameter ||--}o Condition : "conditions"
+Parameter ||--}o ApplicabilityCondition : "applicableWhen"
+Parameter ||--}o LogicalPredicate : "validationPredicates"
 Parameter ||--}o Coding : "coding"
-Condition ||--}o RangeCheck : "rangeChecks"
-Condition ||--}o FormalExpression : "expressions"
-Condition ||--}o Condition : "conditions"
-Condition ||--}o Coding : "coding"
-Condition ||--}o Comment : "comments"
-Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-WhereClause ||--}o Condition : "conditions"
-WhereClause ||--}o Coding : "coding"
-WhereClause ||--}o Comment : "comments"
-WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+LogicalPredicate ||--}o RangeCheck : "rangeChecks"
+LogicalPredicate ||--}o FormalExpression : "expressions"
+LogicalPredicate ||--}o LogicalPredicate : "predicates"
+LogicalPredicate ||--}o Coding : "coding"
+LogicalPredicate ||--}o Comment : "comments"
+LogicalPredicate ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+ApplicabilityCondition ||--}o LogicalPredicate : "predicates"
+ApplicabilityCondition ||--}o Coding : "coding"
+ApplicabilityCondition ||--}o Comment : "comments"
+ApplicabilityCondition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ConceptProperty ||--|o CodeList : "codeList"
 ConceptProperty ||--}o Coding : "coding"
 ConceptProperty ||--}o Comment : "comments"
@@ -199,8 +199,9 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
-| [Condition](../classes/Condition.md) | [expressions](../slots/expressions.md) | range | [FormalExpression](../classes/FormalExpression.md) |
+| [LogicalPredicate](../classes/LogicalPredicate.md) | [expressions](../slots/expressions.md) | range | [FormalExpression](../classes/FormalExpression.md) |
 | [RangeCheck](../classes/RangeCheck.md) | [expressions](../slots/expressions.md) | range | [FormalExpression](../classes/FormalExpression.md) |
+| [Check](../classes/Check.md) | [expressions](../slots/expressions.md) | range | [FormalExpression](../classes/FormalExpression.md) |
 | [Method](../classes/Method.md) | [expressions](../slots/expressions.md) | range | [FormalExpression](../classes/FormalExpression.md) |
 | [Resource](../classes/Resource.md) | [selection](../slots/selection.md) | range | [FormalExpression](../classes/FormalExpression.md) |
 | [DataService](../classes/DataService.md) | [selection](../slots/selection.md) | range | [FormalExpression](../classes/FormalExpression.md) |
@@ -222,7 +223,7 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -231,8 +232,8 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:FormalExpression |
-| native | odm:FormalExpression |
+| self | dds:FormalExpression |
+| native | dds:FormalExpression |
 | exact | odm:FormalExpression, odm:FormalExpressionRef, fhir:Expression |
 
 
@@ -251,7 +252,7 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 name: FormalExpression
 description: A computational element that defines the execution of a data derivation
   within a specific context
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - odm:FormalExpression
 - odm:FormalExpressionRef
@@ -262,17 +263,17 @@ attributes:
     name: context
     description: The specific context within the containing element to which this
       formal expression applies.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - fhir:Expression/language
     domain_of:
-    - ODMFileMetadata
+    - ODMSerializationMetadata
     - FormalExpression
   expression:
     name: expression
     description: The actual text of the formal expression (renamed from 'code' for
       disambiguation).
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     aliases:
     - code
     rank: 1000
@@ -282,14 +283,14 @@ attributes:
   returnType:
     name: returnType
     description: Return type of the expression
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - FormalExpression
   parameters:
     name: parameters
     description: Parameters used in the expression
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - FormalExpression
@@ -300,7 +301,7 @@ attributes:
   returnValue:
     name: returnValue
     description: Return value details
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - FormalExpression
@@ -308,7 +309,7 @@ attributes:
   externalCodeLibs:
     name: externalCodeLibs
     description: External code libraries referenced
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - FormalExpression
@@ -325,7 +326,7 @@ attributes:
 name: FormalExpression
 description: A computational element that defines the execution of a data derivation
   within a specific context
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - odm:FormalExpression
 - odm:FormalExpressionRef
@@ -336,20 +337,20 @@ attributes:
     name: context
     description: The specific context within the containing element to which this
       formal expression applies.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - fhir:Expression/language
     alias: context
     owner: FormalExpression
     domain_of:
-    - ODMFileMetadata
+    - ODMSerializationMetadata
     - FormalExpression
     range: string
   expression:
     name: expression
     description: The actual text of the formal expression (renamed from 'code' for
       disambiguation).
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     aliases:
     - code
     rank: 1000
@@ -362,7 +363,7 @@ attributes:
   returnType:
     name: returnType
     description: Return type of the expression
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: returnType
     owner: FormalExpression
@@ -372,7 +373,7 @@ attributes:
   parameters:
     name: parameters
     description: Parameters used in the expression
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: parameters
     owner: FormalExpression
@@ -385,7 +386,7 @@ attributes:
   returnValue:
     name: returnValue
     description: Return value details
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: returnValue
     owner: FormalExpression
@@ -395,7 +396,7 @@ attributes:
   externalCodeLibs:
     name: externalCodeLibs
     description: External code libraries referenced
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: externalCodeLibs
     owner: FormalExpression
@@ -407,7 +408,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     identifier: true
     alias: OID
@@ -419,7 +420,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: uuid
     owner: FormalExpression
@@ -429,7 +430,7 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: name
     owner: FormalExpression
@@ -442,7 +443,7 @@ attributes:
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: description
     owner: FormalExpression
@@ -456,7 +457,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: coding
     owner: FormalExpression
@@ -471,7 +472,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -486,7 +487,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     exact_mappings:
     - skos:altLabel
     rank: 1000

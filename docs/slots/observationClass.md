@@ -9,7 +9,7 @@ _Identifies the predefined CDISC model Class._
 
 
 
-URI: [odm:slot/observationClass](https://cdisc.org/odm2/slot/observationClass)
+URI: [dds:slot/observationClass](https://w3id.org/dds/slot/observationClass)
 Alias: observationClass
 
 <!-- no inheritance hierarchy -->
@@ -22,8 +22,8 @@ Alias: observationClass
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ItemGroup](../classes/ItemGroup.md) | A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections |  no  |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures |  no  |
+| [ItemGroup](../classes/ItemGroup.md) | A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections |  no  |
 
 
 
@@ -47,7 +47,7 @@ Alias: observationClass
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -56,8 +56,8 @@ Alias: observationClass
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:observationClass |
-| native | odm:observationClass |
+| self | dds:observationClass |
+| native | dds:observationClass |
 
 
 
@@ -68,7 +68,7 @@ Alias: observationClass
 ```yaml
 name: observationClass
 description: Identifies the predefined CDISC model Class.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: observationClass
 owner: ItemGroup

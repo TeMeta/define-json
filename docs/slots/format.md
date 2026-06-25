@@ -9,7 +9,7 @@ _File format or serialization used in the distribution_
 
 
 
-URI: [odm:slot/format](https://cdisc.org/odm2/slot/format)
+URI: [dds:slot/format](https://w3id.org/dds/slot/format)
 Alias: format
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: format
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: format
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:format |
-| native | odm:format |
+| self | dds:format |
+| native | dds:format |
 
 
 
@@ -67,7 +67,7 @@ Alias: format
 ```yaml
 name: format
 description: File format or serialization used in the distribution
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: format
 owner: Distribution

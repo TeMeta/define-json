@@ -9,7 +9,7 @@ _Output datasets produced by the data product_
 
 
 
-URI: [odm:slot/outputDataset](https://cdisc.org/odm2/slot/outputDataset)
+URI: [dds:slot/outputDataset](https://w3id.org/dds/slot/outputDataset)
 Alias: outputDataset
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: outputDataset
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: outputDataset
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:outputDataset |
-| native | odm:outputDataset |
+| self | dds:outputDataset |
+| native | dds:outputDataset |
 
 
 
@@ -69,7 +69,7 @@ Alias: outputDataset
 ```yaml
 name: outputDataset
 description: Output datasets produced by the data product
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: outputDataset
 owner: DataProduct

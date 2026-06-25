@@ -9,7 +9,7 @@ _The type of comparison to be performed_
 
 
 
-URI: [odm:slot/comparator](https://cdisc.org/odm2/slot/comparator)
+URI: [dds:slot/comparator](https://w3id.org/dds/slot/comparator)
 Alias: comparator
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: comparator
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: comparator
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:comparator |
-| native | odm:comparator |
+| self | dds:comparator |
+| native | dds:comparator |
 
 
 
@@ -67,7 +67,7 @@ Alias: comparator
 ```yaml
 name: comparator
 description: The type of comparison to be performed
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: comparator
 owner: RangeCheck

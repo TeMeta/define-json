@@ -9,7 +9,7 @@ _Reference to an external document_
 
 
 
-URI: [odm:slot/document](https://cdisc.org/odm2/slot/document)
+URI: [dds:slot/document](https://w3id.org/dds/slot/document)
 Alias: document
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: document
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: document
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:document |
-| native | odm:document |
+| self | dds:document |
+| native | dds:document |
 
 
 
@@ -69,7 +69,7 @@ Alias: document
 ```yaml
 name: document
 description: Reference to an external document
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: document
 owner: SourceItem

@@ -9,7 +9,7 @@ _Date and time when the data snapshot was taken_
 
 
 
-URI: [odm:slot/asOfDateTime](https://cdisc.org/odm2/slot/asOfDateTime)
+URI: [dds:slot/asOfDateTime](https://w3id.org/dds/slot/asOfDateTime)
 Alias: asOfDateTime
 
 <!-- no inheritance hierarchy -->
@@ -22,8 +22,7 @@ Alias: asOfDateTime
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ODMFileMetadata](../classes/ODMFileMetadata.md) | A mixin that provides ODM file-level metadata attributes including file identifiers, timestamps, and system information |  no  |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | A container element that represents a given version of a specification, linking to a particular usage context such as a study, dataset, or data collection instrument. |  no  |
+| [ODMSerializationMetadata](../classes/ODMSerializationMetadata.md) | A mixin providing ODM/Define-XML file-level attributes required only when serializing to ODM or Define-XML format. Applied by the ODM output generator, not by the canonical model itself. These attributes (fileOID, odmVersion, defineVersion, etc.) have no meaning in FHIR, OMOP, or SDMX projections. |  no  |
 
 
 
@@ -47,7 +46,7 @@ Alias: asOfDateTime
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -56,8 +55,8 @@ Alias: asOfDateTime
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:asOfDateTime |
-| native | odm:asOfDateTime |
+| self | dds:asOfDateTime |
+| native | dds:asOfDateTime |
 
 
 
@@ -68,12 +67,12 @@ Alias: asOfDateTime
 ```yaml
 name: asOfDateTime
 description: Date and time when the data snapshot was taken
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: asOfDateTime
-owner: ODMFileMetadata
+owner: ODMSerializationMetadata
 domain_of:
-- ODMFileMetadata
+- ODMSerializationMetadata
 range: datetime
 
 ```

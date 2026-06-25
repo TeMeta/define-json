@@ -9,7 +9,7 @@ _Reference to the Method element that describes how to derive this item's value.
 
 
 
-URI: [odm:slot/method](https://cdisc.org/odm2/slot/method)
+URI: [dds:slot/method](https://w3id.org/dds/slot/method)
 Alias: method
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: method
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: method
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:method |
-| native | odm:method |
+| self | dds:method |
+| native | dds:method |
 
 
 
@@ -68,7 +68,7 @@ Alias: method
 name: method
 description: Reference to the Method element that describes how to derive this item's
   value.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: method
 owner: Item

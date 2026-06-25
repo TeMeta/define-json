@@ -9,7 +9,7 @@ _Analysis result this display represents._
 
 
 
-URI: [odm:slot/analysis](https://cdisc.org/odm2/slot/analysis)
+URI: [dds:slot/analysis](https://w3id.org/dds/slot/analysis)
 Alias: analysis
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: analysis
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: analysis
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:analysis |
-| native | odm:analysis |
+| self | dds:analysis |
+| native | dds:analysis |
 
 
 
@@ -67,7 +67,7 @@ Alias: analysis
 ```yaml
 name: analysis
 description: Analysis result this display represents.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: analysis
 owner: Display

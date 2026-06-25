@@ -9,7 +9,7 @@ _References to resources and documents that describe this version of the metadat
 
 
 
-URI: [odm:slot/resources](https://cdisc.org/odm2/slot/resources)
+URI: [dds:slot/resources](https://w3id.org/dds/slot/resources)
 Alias: resources
 
 <!-- no inheritance hierarchy -->
@@ -22,7 +22,7 @@ Alias: resources
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | A container element that represents a given version of a specification, linking to a particular usage context such as a study, dataset, or data collection instrument. |  no  |
+| [Specification](../classes/Specification.md) | The root specification container: a versioned, governed definition of the data model for a study or data product. Links items, item groups, methods, code lists, concepts, and study design references. Projects to Define-XML MetaDataVersion, FHIR ImplementationGuide, and OMOP CDM metadata. ODMSerializationMetadata is applied by the ODM output generator, not here. |  no  |
 
 
 
@@ -48,7 +48,7 @@ Alias: resources
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: resources
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:resources |
-| native | odm:resources |
+| self | dds:resources |
+| native | dds:resources |
 
 
 
@@ -70,12 +70,12 @@ Alias: resources
 name: resources
 description: References to resources and documents that describe this version of the
   metadata.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: resources
-owner: MetaDataVersion
+owner: Specification
 domain_of:
-- MetaDataVersion
+- Specification
 range: string
 multivalued: true
 inlined: true

@@ -4,7 +4,7 @@
 
 
 
-URI: [odm:slot/assigner](https://cdisc.org/odm2/slot/assigner)
+URI: [dds:slot/assigner](https://w3id.org/dds/slot/assigner)
 Alias: assigner
 
 <!-- no inheritance hierarchy -->
@@ -17,8 +17,8 @@ Alias: assigner
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Policy](../classes/Policy.md) | A set of usage and access rules (ODRL) governing data. For a DTA this is typically an ODRL Agreement between an assigner (provider) and assignee (consumer), composed of permissions, prohibitions and obligations. |  no  |
 | [Rule](../classes/Rule.md) | An ODRL rule asserting that an action is permitted, prohibited, or required on a target asset, optionally restricted by constraints. |  no  |
+| [Policy](../classes/Policy.md) | A set of usage and access rules (ODRL) governing data. For a DTA this is typically an ODRL Agreement between an assigner (provider) and assignee (consumer), composed of permissions, prohibitions and obligations. |  no  |
 
 
 
@@ -44,8 +44,8 @@ Alias: assigner
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:assigner |
-| native | odm:assigner |
+| self | dds:assigner |
+| native | dds:assigner |
 
 
 

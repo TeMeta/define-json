@@ -4,7 +4,7 @@
 
 
 
-URI: [odm:slot/rangeChecks](https://cdisc.org/odm2/slot/rangeChecks)
+URI: [dds:slot/rangeChecks](https://w3id.org/dds/slot/rangeChecks)
 Alias: rangeChecks
 
 <!-- no inheritance hierarchy -->
@@ -17,8 +17,8 @@ Alias: rangeChecks
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
+| [LogicalPredicate](../classes/LogicalPredicate.md) | A reusable, composable, and nestable logical expression resolving to a boolean. Used for applicability conditions, validation rules, eligibility criteria, and skip logic. This is a data-model predicate — not a clinical condition (diagnosis). Implements usdm:Condition (the study-design predicate, distinct from the clinical FHIR Condition resource). |  no  |
 | [Item](../classes/Item.md) | A data element that represents a specific piece of information within a defined context, with data type, constraints, and derivation methods |  no  |
-| [Condition](../classes/Condition.md) | A reusable, composable, and nestable logical construct allowing for complex expressions. Conditions are most useful when given a meaningful name and linked to Study Definitions. |  no  |
 
 
 
@@ -44,8 +44,8 @@ Alias: rangeChecks
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:rangeChecks |
-| native | odm:rangeChecks |
+| self | dds:rangeChecks |
+| native | dds:rangeChecks |
 
 
 
@@ -58,7 +58,7 @@ name: rangeChecks
 alias: rangeChecks
 domain_of:
 - Item
-- Condition
+- LogicalPredicate
 range: string
 
 ```

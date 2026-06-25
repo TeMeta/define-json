@@ -9,7 +9,7 @@ _The actual text of the formal expression (renamed from 'code' for disambiguatio
 
 
 
-URI: [odm:slot/expression](https://cdisc.org/odm2/slot/expression)
+URI: [dds:slot/expression](https://w3id.org/dds/slot/expression)
 Alias: expression
 
 <!-- no inheritance hierarchy -->
@@ -53,7 +53,7 @@ Alias: expression
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -62,8 +62,8 @@ Alias: expression
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:expression |
-| native | odm:expression |
+| self | dds:expression |
+| native | dds:expression |
 
 
 
@@ -74,7 +74,7 @@ Alias: expression
 ```yaml
 name: expression
 description: The actual text of the formal expression (renamed from 'code' for disambiguation).
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 aliases:
 - code
 rank: 1000

@@ -9,7 +9,7 @@ _Name of a standard format definition_
 
 
 
-URI: [odm:slot/formatName](https://cdisc.org/odm2/slot/formatName)
+URI: [dds:slot/formatName](https://w3id.org/dds/slot/formatName)
 Alias: formatName
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: formatName
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: formatName
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:formatName |
-| native | odm:formatName |
+| self | dds:formatName |
+| native | dds:formatName |
 
 
 
@@ -67,7 +67,7 @@ Alias: formatName
 ```yaml
 name: formatName
 description: Name of a standard format definition
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: formatName
 owner: CodeList

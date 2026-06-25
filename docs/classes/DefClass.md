@@ -9,7 +9,7 @@ _The predefined CDISC model Class that applies to an ItemGroupDef._
 
 
 
-URI: [odm:class/DefClass](https://cdisc.org/odm2/class/DefClass)
+URI: [dds:class/DefClass](https://w3id.org/dds/class/DefClass)
 
 
 ```mermaid
@@ -66,7 +66,7 @@ SubClass ||--}o SubClass : "subClasses"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -75,8 +75,8 @@ SubClass ||--}o SubClass : "subClasses"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:DefClass |
-| native | odm:DefClass |
+| self | dds:DefClass |
+| native | dds:DefClass |
 
 
 
@@ -93,13 +93,13 @@ SubClass ||--}o SubClass : "subClasses"
 ```yaml
 name: DefClass
 description: The predefined CDISC model Class that applies to an ItemGroupDef.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 attributes:
   name:
     name: name
     description: Name of the General Observation Class following CDISC Controlled
       Terminology.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     domain_of:
     - Labelled
     - DefClass
@@ -110,7 +110,7 @@ attributes:
     name: subClasses
     description: One or more SubClasses that further identify the specific SubClass
       within a Class.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
     - DefClass
@@ -130,13 +130,13 @@ attributes:
 ```yaml
 name: DefClass
 description: The predefined CDISC model Class that applies to an ItemGroupDef.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 attributes:
   name:
     name: name
     description: Name of the General Observation Class following CDISC Controlled
       Terminology.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     alias: name
     owner: DefClass
     domain_of:
@@ -150,7 +150,7 @@ attributes:
     name: subClasses
     description: One or more SubClasses that further identify the specific SubClass
       within a Class.
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: subClasses
     owner: DefClass

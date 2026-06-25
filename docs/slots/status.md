@@ -3,13 +3,8 @@
 # Slot: status 
 
 
-_Status of an Implementation Guide or of a Controlled Terminology_
 
-
-
-
-
-URI: [odm:slot/status](https://cdisc.org/odm2/slot/status)
+URI: [dds:slot/status](https://w3id.org/dds/slot/status)
 Alias: status
 
 <!-- no inheritance hierarchy -->
@@ -23,6 +18,7 @@ Alias: status
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
 | [Standard](../classes/Standard.md) | A collection element that groups related standards within a specific context, used for defining CDISC implementation guides and controlled terminologies |  no  |
+| [Query](../classes/Query.md) | A reified query (discrepancy, request for clarification, or annotation) raised against one or more metadata and/or data elements. Modelled as an intermediate relationship node so a single query can relate to many elements (many-to-many) and be referenced rather than embedded. Internal queries originate within the organization; external queries (e.g. site or sponsor) carry their source. |  no  |
 
 
 
@@ -31,7 +27,7 @@ Alias: status
 
 ## Properties
 
-* Range: [StandardStatus](../enums/StandardStatus.md)
+* Range: [String](../types/String.md)
 
 
 
@@ -43,20 +39,13 @@ Alias: status
 
 
 
-### Schema Source
-
-
-* from schema: https://cdisc.org/data-definition-spec
-
-
-
 
 ## Mappings
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:status |
-| native | odm:status |
+| self | dds:status |
+| native | dds:status |
 
 
 
@@ -66,14 +55,11 @@ Alias: status
 <details>
 ```yaml
 name: status
-description: Status of an Implementation Guide or of a Controlled Terminology
-from_schema: https://cdisc.org/data-definition-spec
-rank: 1000
 alias: status
-owner: Standard
 domain_of:
+- Query
 - Standard
-range: StandardStatus
+range: string
 
 ```
 </details>

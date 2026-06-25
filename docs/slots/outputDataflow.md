@@ -9,7 +9,7 @@ _Description of the output interface before concrete Datasets exist. Dataflows r
 
 
 
-URI: [odm:slot/outputDataflow](https://cdisc.org/odm2/slot/outputDataflow)
+URI: [dds:slot/outputDataflow](https://w3id.org/dds/slot/outputDataflow)
 Alias: outputDataflow
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: outputDataflow
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: outputDataflow
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:outputDataflow |
-| native | odm:outputDataflow |
+| self | dds:outputDataflow |
+| native | dds:outputDataflow |
 | close | dcat:distribution |
 
 
@@ -71,7 +71,7 @@ Alias: outputDataflow
 name: outputDataflow
 description: Description of the output interface before concrete Datasets exist. Dataflows
   referenced here represent the supply side of a ProvisionAgreement.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 close_mappings:
 - dcat:distribution
 rank: 1000

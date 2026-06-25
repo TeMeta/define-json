@@ -9,7 +9,7 @@ _Reference(s) to standalone Data Transfer Agreements (ProvisionAgreement) that g
 
 
 
-URI: [odm:slot/provisionAgreement](https://cdisc.org/odm2/slot/provisionAgreement)
+URI: [dds:slot/provisionAgreement](https://w3id.org/dds/slot/provisionAgreement)
 Alias: provisionAgreement
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: provisionAgreement
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: provisionAgreement
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:provisionAgreement |
-| native | odm:provisionAgreement |
+| self | dds:provisionAgreement |
+| native | dds:provisionAgreement |
 
 
 
@@ -71,7 +71,7 @@ name: provisionAgreement
 description: Reference(s) to standalone Data Transfer Agreements (ProvisionAgreement)
   that govern this product's flows. Referenced by OID/URI, not embedded, so the agreement
   remains an independently maintained artifact.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: provisionAgreement
 owner: DataProduct

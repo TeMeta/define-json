@@ -9,7 +9,7 @@ _Date and time when the ODM file was created_
 
 
 
-URI: [odm:slot/creationDateTime](https://cdisc.org/odm2/slot/creationDateTime)
+URI: [dds:slot/creationDateTime](https://w3id.org/dds/slot/creationDateTime)
 Alias: creationDateTime
 
 <!-- no inheritance hierarchy -->
@@ -22,8 +22,7 @@ Alias: creationDateTime
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ODMFileMetadata](../classes/ODMFileMetadata.md) | A mixin that provides ODM file-level metadata attributes including file identifiers, timestamps, and system information |  no  |
-| [MetaDataVersion](../classes/MetaDataVersion.md) | A container element that represents a given version of a specification, linking to a particular usage context such as a study, dataset, or data collection instrument. |  no  |
+| [ODMSerializationMetadata](../classes/ODMSerializationMetadata.md) | A mixin providing ODM/Define-XML file-level attributes required only when serializing to ODM or Define-XML format. Applied by the ODM output generator, not by the canonical model itself. These attributes (fileOID, odmVersion, defineVersion, etc.) have no meaning in FHIR, OMOP, or SDMX projections. |  no  |
 
 
 
@@ -49,7 +48,7 @@ Alias: creationDateTime
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -58,8 +57,8 @@ Alias: creationDateTime
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:creationDateTime |
-| native | odm:creationDateTime |
+| self | dds:creationDateTime |
+| native | dds:creationDateTime |
 
 
 
@@ -70,12 +69,12 @@ Alias: creationDateTime
 ```yaml
 name: creationDateTime
 description: Date and time when the ODM file was created
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: creationDateTime
-owner: ODMFileMetadata
+owner: ODMSerializationMetadata
 domain_of:
-- ODMFileMetadata
+- ODMSerializationMetadata
 range: datetime
 required: true
 

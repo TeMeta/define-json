@@ -9,7 +9,7 @@ _Associates the Data Structure Definition that defines the structure of the Data
 
 
 
-URI: [odm:slot/structuredBy](https://cdisc.org/odm2/slot/structuredBy)
+URI: [dds:slot/structuredBy](https://w3id.org/dds/slot/structuredBy)
 Alias: structuredBy
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: structuredBy
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: structuredBy
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:structuredBy |
-| native | odm:structuredBy |
+| self | dds:structuredBy |
+| native | dds:structuredBy |
 
 
 
@@ -69,7 +69,7 @@ name: structuredBy
 description: Associates the Data Structure Definition that defines the structure of
   the Data Set. Note that the Data Structure Definition is the same as that associated
   (non-mandatory) to the Dataflow.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: structuredBy
 owner: Dataset

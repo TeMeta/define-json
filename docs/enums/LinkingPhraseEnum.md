@@ -7,7 +7,7 @@ _An enumeration that defines variable relationship descriptive linking phrases f
 
 
 
-URI: [odm:enum/LinkingPhraseEnum](https://cdisc.org/odm2/enum/LinkingPhraseEnum)
+URI: [dds:enum/LinkingPhraseEnum](https://w3id.org/dds/enum/LinkingPhraseEnum)
 
 ## Permissible Values
 
@@ -122,7 +122,7 @@ URI: [odm:enum/LinkingPhraseEnum](https://cdisc.org/odm2/enum/LinkingPhraseEnum)
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -136,7 +136,7 @@ URI: [odm:enum/LinkingPhraseEnum](https://cdisc.org/odm2/enum/LinkingPhraseEnum)
 name: LinkingPhraseEnum
 description: An enumeration that defines variable relationship descriptive linking
   phrases from the COSMoS SDTM BC model
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 permissible_values:
   assesses seriousness of:

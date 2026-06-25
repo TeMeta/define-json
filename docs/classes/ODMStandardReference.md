@@ -1,20 +1,20 @@
 
 
-# Class: IsODMStandard 
+# Class: ODMStandardReference 
 
 
-_A mixin that provides properties to indicate standards compliance_
+_A mixin providing attributes for CDISC standards compliance indication. Applied when serializing to Define-XML context. Not canonical._
 
 
 
 
 
-URI: [odm:class/IsODMStandard](https://cdisc.org/odm2/class/IsODMStandard)
+URI: [dds:class/ODMStandardReference](https://w3id.org/dds/class/ODMStandardReference)
 
 
 ```mermaid
 erDiagram
-IsODMStandard {
+ODMStandardReference {
     boolean isNonStandard  
 }
 Standard {
@@ -37,7 +37,7 @@ Coding {
     AliasPredicate aliasType  
 }
 
-IsODMStandard ||--|o Standard : "standard"
+ODMStandardReference ||--|o Standard : "standard"
 Standard ||--}o Coding : "coding"
 
 ```
@@ -81,7 +81,7 @@ Standard ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -90,8 +90,8 @@ Standard ||--}o Coding : "coding"
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:IsODMStandard |
-| native | odm:IsODMStandard |
+| self | dds:ODMStandardReference |
+| native | dds:ODMStandardReference |
 
 
 
@@ -106,26 +106,27 @@ Standard ||--}o Coding : "coding"
 
 <details>
 ```yaml
-name: IsODMStandard
-description: A mixin that provides properties to indicate standards compliance
-from_schema: https://cdisc.org/data-definition-spec
+name: ODMStandardReference
+description: A mixin providing attributes for CDISC standards compliance indication.
+  Applied when serializing to Define-XML context. Not canonical.
+from_schema: https://w3id.org/dds
 mixin: true
 attributes:
   standard:
     name: standard
     description: Reference to the standard being implemented
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - IsODMStandard
+    - ODMStandardReference
     range: Standard
   isNonStandard:
     name: isNonStandard
     description: One or more members of this set are non-standard extensions
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     domain_of:
-    - IsODMStandard
+    - ODMStandardReference
     range: boolean
 
 ```
@@ -135,30 +136,31 @@ attributes:
 
 <details>
 ```yaml
-name: IsODMStandard
-description: A mixin that provides properties to indicate standards compliance
-from_schema: https://cdisc.org/data-definition-spec
+name: ODMStandardReference
+description: A mixin providing attributes for CDISC standards compliance indication.
+  Applied when serializing to Define-XML context. Not canonical.
+from_schema: https://w3id.org/dds
 mixin: true
 attributes:
   standard:
     name: standard
     description: Reference to the standard being implemented
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: standard
-    owner: IsODMStandard
+    owner: ODMStandardReference
     domain_of:
-    - IsODMStandard
+    - ODMStandardReference
     range: Standard
   isNonStandard:
     name: isNonStandard
     description: One or more members of this set are non-standard extensions
-    from_schema: https://cdisc.org/data-definition-spec
+    from_schema: https://w3id.org/dds
     rank: 1000
     alias: isNonStandard
-    owner: IsODMStandard
+    owner: ODMStandardReference
     domain_of:
-    - IsODMStandard
+    - ODMStandardReference
     range: boolean
 
 ```

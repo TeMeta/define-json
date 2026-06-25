@@ -9,7 +9,7 @@ _Security or authentication method used (e.g., OAuth2)_
 
 
 
-URI: [odm:slot/securitySchemaType](https://cdisc.org/odm2/slot/securitySchemaType)
+URI: [dds:slot/securitySchemaType](https://w3id.org/dds/slot/securitySchemaType)
 Alias: securitySchemaType
 
 <!-- no inheritance hierarchy -->
@@ -46,7 +46,7 @@ Alias: securitySchemaType
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -55,8 +55,8 @@ Alias: securitySchemaType
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:securitySchemaType |
-| native | odm:securitySchemaType |
+| self | dds:securitySchemaType |
+| native | dds:securitySchemaType |
 
 
 
@@ -67,7 +67,7 @@ Alias: securitySchemaType
 ```yaml
 name: securitySchemaType
 description: Security or authentication method used (e.g., OAuth2)
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: securitySchemaType
 owner: DataService

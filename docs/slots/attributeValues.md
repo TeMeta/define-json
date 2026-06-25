@@ -9,7 +9,7 @@ _Association to the Attribute Values relating to Key_
 
 
 
-URI: [odm:slot/attributeValues](https://cdisc.org/odm2/slot/attributeValues)
+URI: [dds:slot/attributeValues](https://w3id.org/dds/slot/attributeValues)
 Alias: attributeValues
 
 <!-- no inheritance hierarchy -->
@@ -22,9 +22,9 @@ Alias: attributeValues
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [DatasetKey](../classes/DatasetKey.md) | An abstract identifier that comprises the cross-product of dimension values to identify a specific cross-section |  no  |
-| [SeriesKey](../classes/SeriesKey.md) | A unique identifier that comprises the cross-product of dimension values including Time to identify observations, representing dimensions shared by all observations in a conceptual series |  no  |
 | [GroupKey](../classes/GroupKey.md) | A dimension subset that represents collections of dimensions that are subsets of the full dimension set, distinct from SeriesKey which includes Time dimensions |  no  |
+| [SeriesKey](../classes/SeriesKey.md) | A unique identifier that comprises the cross-product of dimension values including Time to identify observations, representing dimensions shared by all observations in a conceptual series |  no  |
+| [DatasetKey](../classes/DatasetKey.md) | An abstract identifier that comprises the cross-product of dimension values to identify a specific cross-section |  no  |
 
 
 
@@ -48,7 +48,7 @@ Alias: attributeValues
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: attributeValues
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:attributeValues |
-| native | odm:attributeValues |
+| self | dds:attributeValues |
+| native | dds:attributeValues |
 
 
 
@@ -69,7 +69,7 @@ Alias: attributeValues
 ```yaml
 name: attributeValues
 description: Association to the Attribute Values relating to Key
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: attributeValues
 owner: DatasetKey

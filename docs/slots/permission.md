@@ -9,7 +9,7 @@ _Rules granting the ability to perform an action (odrl:permission)_
 
 
 
-URI: [odm:slot/permission](https://cdisc.org/odm2/slot/permission)
+URI: [dds:slot/permission](https://w3id.org/dds/slot/permission)
 Alias: permission
 
 <!-- no inheritance hierarchy -->
@@ -48,7 +48,7 @@ Alias: permission
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -57,8 +57,8 @@ Alias: permission
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:permission |
-| native | odm:permission |
+| self | dds:permission |
+| native | dds:permission |
 | exact | odrl:permission |
 
 
@@ -70,7 +70,7 @@ Alias: permission
 ```yaml
 name: permission
 description: Rules granting the ability to perform an action (odrl:permission)
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 exact_mappings:
 - odrl:permission
 rank: 1000

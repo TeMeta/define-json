@@ -9,7 +9,7 @@ _Indicates the inclusive start time indicating the validity of the information i
 
 
 
-URI: [odm:slot/validFrom](https://cdisc.org/odm2/slot/validFrom)
+URI: [dds:slot/validFrom](https://w3id.org/dds/slot/validFrom)
 Alias: validFrom
 
 <!-- no inheritance hierarchy -->
@@ -47,7 +47,7 @@ Alias: validFrom
 ### Schema Source
 
 
-* from schema: https://cdisc.org/data-definition-spec
+* from schema: https://w3id.org/dds
 
 
 
@@ -56,8 +56,8 @@ Alias: validFrom
 
 | Mapping Type | Mapped Value |
 | ---  | ---  |
-| self | odm:validFrom |
-| native | odm:validFrom |
+| self | dds:validFrom |
+| native | dds:validFrom |
 
 
 
@@ -69,7 +69,7 @@ Alias: validFrom
 name: validFrom
 description: Indicates the inclusive start time indicating the validity of the information
   in the data set.
-from_schema: https://cdisc.org/data-definition-spec
+from_schema: https://w3id.org/dds
 rank: 1000
 alias: validFrom
 owner: IsSdmxDataset
