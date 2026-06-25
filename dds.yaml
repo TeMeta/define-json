@@ -94,9 +94,8 @@ classes:
         range: datetime
       owner:
         description: Party responsible for this element
-        narrow_mappings:
+        exact_mappings:
           - prov:wasAttributedTo
-          - prov:wasAssociatedBy
         any_of:
           - range: User
           - range: Organization
@@ -504,8 +503,8 @@ classes:
       - usdm:DerivationConceptProperty
       - usdm:AnalysisConceptProperty
       - fhir:ElementDefinition
-      - qb:Measure
-      - qb:Attribute
+      - qb:MeasureProperty
+      - qb:AttributeProperty
       - sdmx:Concept
       - sdmx:Component
       - sdmx:Representation
@@ -579,7 +578,7 @@ classes:
       - qb:DataStructureDefinition
       - sdmx:DataStructureDefinition
     related_mappings:
-      - qb:Dataset
+      - qb:DataSet
       - qb:Observation
       - qb:ObservationGroup
       - qb:Slice
@@ -1746,7 +1745,7 @@ classes:
     description: >-
       A collection element that groups observations sharing the same dimensionality, expressed as a set of unique dimensions within a Data Product context
     close_mappings:
-      - qb:Dataset
+      - qb:DataSet
       - sdmx:Dataset
       - dprod:Dataset
       - dcat:Dataset
