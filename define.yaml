@@ -109,7 +109,7 @@ classes:
         any_of:
           - range: Item
           - range: ItemGroup
-          - range: MetaDataVersion
+          - range: Specification
           - range: CodeList
           - range: Concept
           - range: ConceptProperty
@@ -325,12 +325,18 @@ classes:
       protocolName:
         description: Protocol name for the study
 
-  MetaDataVersion:
+  Specification:
     tree_root: true
     description: >-
-      A container element that represents a given version of a specification, linking to a particular usage context such as a study, dataset, or data collection instrument.
+      The root specification container: a versioned, governed definition of the
+      data model for a study or data product. Links items, item groups, methods,
+      code lists, concepts, and study design references. Projects to Define-XML
+      MetaDataVersion, FHIR ImplementationGuide, and OMOP CDM metadata.
     close_mappings:
       - usdm:StudyDesign
+    related_mappings:
+      - fhir:ImplementationGuide
+      - omop:cdm_source
     is_a: GovernedElement
     mixins:
       - ODMFileMetadata
