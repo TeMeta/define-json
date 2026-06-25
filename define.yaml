@@ -475,7 +475,15 @@ classes:
         multivalued: true
         inlined: true
         inlined_as_list: true
-        
+      usdmStudyDesignId:
+        description: >-
+          OID or URI reference to the USDM StudyDesign that this specification
+          implements. When present, arms, epochs, and scheduled visit slots are
+          resolved from the referenced USDM instance. The USDM study design is the
+          authoritative source for EPOCH, VISITNUM, ARM, and timing anchors; DDS
+          does not redeclare them.
+        required: false
+
   Item:
     description: >-
       A data element that represents a specific piece of information within a defined context, with data type, constraints, and derivation methods
