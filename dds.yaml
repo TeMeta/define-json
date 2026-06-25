@@ -2204,7 +2204,7 @@ classes:
     exact_mappings:
       - odrl:Policy
     close_mappings:
-      - dcat:hasPolicy
+      - odrl:hasPolicy
     is_a: GovernedElement
     attributes:
       policyType:
