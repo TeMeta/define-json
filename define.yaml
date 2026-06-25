@@ -1,9 +1,11 @@
-id: https://cdisc.org/data-definition-spec
+id: https://w3id.org/dds
 name: data-definition-spec
-title: Data Definition Specification
+title: Data Definition Specification (DDS)
 description: >-
-  Data model for supply and demand data contracts to complement CDISC USDM, ODM, and Dataset-JSON.
-  This LinkML version includes semantics to act as Rosetta Stone for SDMX, FHIR, OMOP, RDF, and CDISC.
+  Standards-agnostic canonical model for clinical data meaning, structure, and
+  governance. Projects to CDISC (SDTM/ADaM/Define-XML), FHIR, OMOP, and SDMX.
+  ODM/Define-XML is one serialization facet applied by the output generator;
+  the canonical model is not ODM-derived.
 license: MIT
 prefixes:
   linkml: https://w3id.org/linkml/
@@ -22,7 +24,8 @@ prefixes:
   odrl: http://www.w3.org/ns/odrl/2/
   osb: https://openstudybuilder.com/
   dcterms: http://purl.org/dc/terms/
-default_prefix: odm
+  dds: https://w3id.org/dds/
+default_prefix: dds
 default_range: string
 
 imports:
