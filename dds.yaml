@@ -980,15 +980,20 @@ classes:
       data shape. Multiple ItemGroups or Items can implement the same Concept,
       allowing standard biomedical concepts to be implemented differently across
       studies while remaining semantically aligned.
+
+      This is a structural concept definition (an SDMX MetadataStructureDefinition-style
+      shape that implementations conform to), not an ItemScheme/SKOS concept item. It
+      references a concept (sdmx:Concept / skos:Concept) but is not itself one; see
+      Coding for the vocabulary-item mapping.
     close_mappings:
       - sdmx:MetaDataStructureDefinition
-      - sdmx:Concept
       - osb:Activity
     narrow_mappings:
       - usdm:BiomedicalConcept
       - usdm:AnalysisConcept
       - usdm:DerivationConcept
     related_mappings:
+      - sdmx:Concept
       - osb:ActivityInstance
       - osb:assm_group
       - osb:assm_subgroup
@@ -1006,15 +1011,17 @@ classes:
 
   ConceptProperty:
     description: >-
-      A reified property concept that exists within the context of its containing topic concept
+      A reified property concept that exists within the context of its containing
+      topic concept. Structurally an SDMX MetadataAttribute (a component with
+      cardinality); it references a concept (sdmx:Concept) but is not itself one.
     close_mappings:
       - sdmx:MetaDataAttribute
-      - sdmx:Concept
     narrow_mappings:
       - usdm:BiomedicalConceptProperty
       - usdm:DerivationConceptProperty
       - usdm:AnalysisConceptProperty
     related_mappings:
+      - sdmx:Concept
       - osb:sdtm_variable
       - osb:specimen
       - osb:unit_dimension
