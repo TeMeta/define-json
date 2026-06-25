@@ -1996,6 +1996,7 @@ classes:
       The DataProduct defines the boundary of accountability between data producers and consumers.
     exact_mappings:
       - dprod:DataProduct
+    related_mappings:
       - dcat:DataService
     is_a: GovernedElement
     mixins:
