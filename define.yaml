@@ -2535,7 +2535,7 @@ enums:
   OriginType:
     description: >-
       An enumeration that defines the types of origins for data items.
-    from_schema: ncit:C170449
+      Values sourced from NCI Thesaurus subset C170449.
     permissible_values:
       Assigned:
         description: >-
@@ -2567,8 +2567,8 @@ enums:
 
   OriginSource:
     description: >-
-      An enumeration that defines the sources of data origin
-    from_schema: ncit:C170450
+      An enumeration that defines the sources of data origin.
+      Values sourced from NCI Thesaurus subset C170450.
     permissible_values:
       Investigator:
         text: Investigator
