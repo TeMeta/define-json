@@ -2609,7 +2609,11 @@ enums:
           A data specialization of a concept.
       ValueList:
         description: >-
-          A list of topic-specific items for a specific column (from Define-XML).
+          SERIALIZATION HINT for the ODM/Define-XML output generator only.
+          Signals that this ItemGroup should render as a Define-XML ValueList
+          element. Has no structural meaning in the canonical model hierarchy.
+          Consider handling this as a generator-side convention rather than a
+          canonical type in future revisions.
       Section:
         description: >-
           A section of a form.
