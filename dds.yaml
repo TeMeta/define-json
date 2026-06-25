@@ -578,7 +578,6 @@ classes:
       - omop:Table
       - qb:DataStructureDefinition
       - sdmx:DataStructureDefinition
-      - sdmx:MetaDataStructureDefinition
     related_mappings:
       - qb:Dataset
       - qb:Observation
