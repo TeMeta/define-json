@@ -4,6 +4,34 @@ Notable changes to `define.yaml` (the Data Definition Specification LinkML schem
 follows [Keep a Changelog](https://keepachangelog.com). The schema is not yet
 semver-versioned, so entries are dated.
 
+## [Unreleased] — Queries, reusable checks, key split — 2026-06-25
+
+**Backward-compatible / additive.** New classes/slots/enum only; one slot
+repurposed (`keySequence`) with a new sibling added. No existing instances populate
+the affected slots. Verified: `gen-linkml` and `linkml-lint` pass.
+
+### Added
+
+- **Class `Query`** (`is_a GovernedElement`, `close_mappings: odm:Query`): a reified,
+  externally referenced query linked many-to-many to metadata and/or data elements via
+  `about` (non-inlined OID references), with `queryType`, `text`, `status`, `source`.
+  Catalogued in the new `MetaDataVersion.queries` collection (#2).
+- **Class `Check`** (`is_a GovernedElement`): a reusable validation check (e.g. a
+  published CORE rule) linked many-to-many via `appliesTo` (non-inlined), with
+  `publishedBy`, `externalReference` (uri/curie), `severity`, and optional
+  `expressions`. Catalogued in the new `MetaDataVersion.checks` collection.
+  `RangeCheck.implementsCheck` references a `Check` to connect inline checks to the
+  reusable rule they implement (#1).
+- **Enum `QueryType`** (`Internal`/`External`) for `Query.queryType` (#2).
+- **`ItemGroup.uniqueKey`**: unordered set of Items establishing record uniqueness
+  (carries the `odm:ItemRef.KeySequence` mapping) (#12).
+
+### Changed
+
+- **`ItemGroup.keySequence`** repurposed to mean *sort order only* (ordered, may
+  include non-key Items); uniqueness moved to the new `uniqueKey`. Resolves the prior
+  overloading of one slot for sorting + uniqueness + merge (#12).
+
 ## [Unreleased] — DTA enablement — 2026-06-24
 
 **Backward-compatible / additive only.** No classes or slots were removed, no new

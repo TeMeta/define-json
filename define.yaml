@@ -399,6 +399,24 @@ classes:
         multivalued: true
         inlined: true
         inlined_as_list: true
+      queries:
+        description: >-
+          Queries raised against metadata and/or data elements in this specification.
+          Each Query references its target element(s) by OID, so the same query can
+          relate to many metadata and data elements (many-to-many).
+        range: Query
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      checks:
+        description: >-
+          Reusable validation checks (e.g. published CORE rules) included in this
+          metadata package. Each Check references the elements it applies to by OID
+          and may cite an external published rule, enabling reuse and loose coupling.
+        range: Check
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
       dictionaries:
         description: Dictionaries defined in this version of the metadata
         range: Dictionary
@@ -577,16 +595,27 @@ classes:
           - fhir:StructureDefinition/differential
         inlined: true
         inlined_as_list: true
-      keySequence:
+      uniqueKey:
         description: >-
-          Ordered list of Items that define the dataset key structure for sorting and uniqueness.
-          Each entry is an OID reference to an Item in the items array.
-          Order determines sorting precedence, merge operations, and record uniqueness.
-          These are allowed to be null, unlike stricter dataset dimensions or primary keys.
+          Unordered set of Items whose combined values uniquely identify a record in
+          this dataset (the record key). Each entry is an OID reference to an Item in
+          the items array. Order is not significant for uniqueness — use keySequence
+          for sort order. Splitting uniqueness from sorting resolves the previous
+          overloading of keySequence.
         range: Item
         multivalued: true
         close_mappings:
           - odm:ItemRef.KeySequence
+      keySequence:
+        description: >-
+          Ordered list of Items defining the default sort order for this dataset.
+          Each entry is an OID reference to an Item in the items array; order
+          determines sorting precedence and merge operations. May reference Items
+          that are not part of uniqueKey. Distinct from uniqueKey, which establishes
+          record uniqueness.
+        range: Item
+        multivalued: true
+        close_mappings:
           - sdmx:DimensionDescriptor
       slices:
         description: >-
@@ -688,6 +717,45 @@ classes:
           Variable relationship descriptive linking phrase.
         range: LinkingPhraseEnum
         required: true
+
+  Query:
+    description: >-
+      A reified query (discrepancy, request for clarification, or annotation) raised
+      against one or more metadata and/or data elements. Modelled as an intermediate
+      relationship node so a single query can relate to many elements (many-to-many)
+      and be referenced rather than embedded. Internal queries originate within the
+      organization; external queries (e.g. site or sponsor) carry their source.
+    close_mappings:
+      - odm:Query
+    is_a: GovernedElement
+    attributes:
+      about:
+        description: >-
+          The metadata and/or data element(s) this query concerns, referenced by OID.
+          Multivalued and non-inlined to support many-to-many linkage across both
+          metadata (e.g. Item, ItemGroup) and data (e.g. Dataset) elements.
+        range: IdentifiableElement
+        multivalued: true
+        inlined: false
+        required: true
+      queryType:
+        description: >-
+          Whether the query is internal or external (e.g. site or sponsor originated).
+        range: QueryType
+      text:
+        description: The query content.
+        any_of:
+          - range: string
+          - range: TranslatedText
+        required: true
+      status:
+        description: Workflow status of the query (e.g. open, answered, closed).
+      source:
+        description: The party that raised the query.
+        any_of:
+          - range: User
+          - range: Organization
+          - range: string
 
   Translation:
     description: >-
@@ -1053,6 +1121,52 @@ classes:
         range: LogicalOperator
         required: false
         ifabsent: LogicalOperator(AND)
+      implementsCheck:
+        description: >-
+          Optional reference (by OID) to a reusable Check (e.g. a published CORE rule)
+          that this inline RangeCheck implements.
+        range: Check
+        inlined: false
+
+  Check:
+    description: >-
+      A reusable validation check included in the metadata package, such as a
+      published CORE rule. Linked many-to-many by reference to the metadata and/or
+      data elements it applies to, and optionally citing an external published rule
+      so checks stay reusable and loosely coupled. Distinct from RangeCheck, which is
+      an inline executable comparison; a RangeCheck may implement a Check.
+    close_mappings:
+      - odm:RangeCheck
+    is_a: GovernedElement
+    attributes:
+      appliesTo:
+        description: >-
+          The metadata and/or data element(s) this check applies to, referenced by
+          OID. Multivalued and non-inlined for many-to-many, loosely coupled linkage.
+        range: IdentifiableElement
+        multivalued: true
+        inlined: false
+      publishedBy:
+        description: >-
+          The standard or authority that published this check (e.g. CDISC CORE).
+        any_of:
+          - range: Standard
+          - range: Organization
+          - range: string
+      externalReference:
+        description: >-
+          URI or CURIE of the published rule this check is sourced from (e.g. a CORE
+          rule identifier), enabling reuse across metadata packages.
+        range: uriorcurie
+      severity:
+        description: Whether a failure is an error ("Hard") or a warning ("Soft").
+        range: SoftHard
+      expressions:
+        description: Optional formal/executable expression(s) implementing the check.
+        range: FormalExpression
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
 
   FormalExpression:
     description: >-
@@ -2345,6 +2459,16 @@ enums:
         description: Warning
       Hard:
         description: Error
+
+  QueryType:
+    description: >-
+      Whether a Query originates inside the organization (internal) or from an
+      external party such as a site or sponsor (external).
+    permissible_values:
+      Internal:
+        description: Query raised within the organization.
+      External:
+        description: Query raised by an external party (e.g. site or sponsor).
 
   MethodType:
     description: >-
