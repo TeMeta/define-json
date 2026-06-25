@@ -811,7 +811,6 @@ classes:
       A value set that defines a discrete collection of permissible values for an item, corresponding to the ODM CodeList construct
     exact_mappings:
       - odm:CodeList
-      - omop:Vocabulary
       - fhir:ValueSet
     close_mappings:
       - skos:Collection
@@ -822,7 +821,6 @@ classes:
     narrow_mappings:
       - sdmx:Codelist
       - sdmx:ValueList
-      - sdmx:ConceptScheme
     is_a: GovernedElement
     mixins:
       - Versioned
@@ -960,6 +958,11 @@ classes:
   Dictionary:
     description: >-
       A dictionary that defines a set of codes and their meanings
+    close_mappings:
+      - omop:Vocabulary
+      - fhir:CodeSystem
+      - skos:ConceptScheme
+      - sdmx:ConceptScheme
     is_a: IdentifiableElement
     mixins:
       - Versioned
