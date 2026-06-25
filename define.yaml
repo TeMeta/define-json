@@ -363,10 +363,10 @@ classes:
         multivalued: true
         inlined: true
         inlined_as_list: true
-      whereClauses:
+      applicabilityConditions:
         description: >-
-          Data contexts that apply to this version of the metadata.
-        range: WhereClause
+          Named applicability conditions defined in this specification.
+        range: ApplicabilityCondition
         multivalued: true
         inlined: true
         inlined_as_list: true
@@ -530,12 +530,12 @@ classes:
       applicableWhen:
         description: |
           References to different situations that define when this item applies.
-          Multiple whereClauses are combined with OR logic: the item applies if ANY referenced WhereClause matches.
-          Within each WhereClause, conditions are combined with AND logic: all conditions must be true.
+          Multiple applicabilityConditions are combined with OR logic: the item applies if ANY referenced ApplicabilityCondition matches.
+          Within each ApplicabilityCondition, conditions are combined with AND logic: all conditions must be true.
           
           Example: whereClause: ["WC.SYSBP", "WC.DIABP"] means the item applies when
           (all conditions in WC.SYSBP are true) OR (all conditions in WC.DIABP are true).
-        range: WhereClause
+        range: ApplicabilityCondition
         multivalued: true
         inlined: false
         close_mappings:
@@ -640,12 +640,12 @@ classes:
       applicableWhen:
         description: |
           References to different situations that define when this item applies.
-          Multiple whereClauses are combined with OR logic: the item applies if ANY referenced WhereClause matches.
-          Within each WhereClause, conditions are combined with AND logic: all conditions must be true.
+          Multiple applicabilityConditions are combined with OR logic: the item applies if ANY referenced ApplicabilityCondition matches.
+          Within each ApplicabilityCondition, conditions are combined with AND logic: all conditions must be true.
           
           Example: whereClause: ["WC.SYSBP", "WC.DIABP"] means the item applies when
           (all conditions in WC.SYSBP are true) OR (all conditions in WC.DIABP are true).
-        range: WhereClause
+        range: ApplicabilityCondition
         multivalued: true
         inlined: false
         close_mappings:
@@ -1025,11 +1025,16 @@ classes:
           Reference to a CodeList that constrains the values of this property
         range: CodeList
 
-  WhereClause:
+  ApplicabilityCondition:
     description: >-
-      A conditional element that describes the circumstances under which a containing context applies, linking conditions to structures where they are used
+      A reusable, named applicability condition describing the circumstances under
+      which a containing context applies. References one or more LogicalPredicates
+      combined with AND. Distinct from LogicalPredicate (the expression itself):
+      ApplicabilityCondition is the named, governed wrapper referenced from Items,
+      ItemGroups, Parameters, and Analyses.
     close_mappings:
       - sdmx:AttachmentConstraint
+      - usdm:TransitionRule
     related_mappings:
       - fhir:StructureDefinition/context
       - qb:ObservationGroup
@@ -1323,14 +1328,14 @@ classes:
         description: >-
           References to different situations that define when this parameter 
           is applicable or required in the containing expression.
-          Multiple whereClauses are combined with OR logic: the parameter applies 
-          if ANY referenced WhereClause matches.
+          Multiple applicabilityConditions are combined with OR logic: the parameter applies 
+          if ANY referenced ApplicabilityCondition matches.
 
-          Within each WhereClause, conditions are combined with AND logic.
+          Within each ApplicabilityCondition, conditions are combined with AND logic.
           Example: applicableWhen: ["WC.ADULT", "WC.PEDIATRIC"] means the parameter 
           is needed when (all conditions in WC.ADULT are true) OR 
           (all conditions in WC.PEDIATRIC are true).
-        range: WhereClause
+        range: ApplicabilityCondition
         multivalued: true
         inlined: false
       conditions:
@@ -2341,7 +2346,7 @@ classes:
       applicableWhen:
         description: >-
           The conditions (e.g. population, time period etc.) that must be met for this analysis to be applicable.
-        range: WhereClause
+        range: ApplicabilityCondition
         multivalued: true
         inlined: false
       inputData:
