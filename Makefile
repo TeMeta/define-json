@@ -92,7 +92,10 @@ convert:
 test: check-syntax validate linkml-lint
 	@echo "Running unit tests..."
 	poetry run python -m unittest discover tests/ -v
-roundtrip; from pathlib import Path; result = validate_true_roundtrip(Path('data/define-360i.xml'), Path('data/define-360i-recreated.xml')); print('Roundtrip test passed' if result.get('passed') else 'Roundtrip test failed')"
+
+test-roundtrip:
+	@echo "Testing roundtrip functionality..."
+	poetry run python -c "from src.define_json.validation.roundtrip import validate_true_roundtrip; from pathlib import Path; result = validate_true_roundtrip(Path('data/define-360i.xml'), Path('data/define-360i-recreated.xml')); print('Roundtrip test passed' if result.get('passed') else 'Roundtrip test failed')"
 
 test-xml-roundtrip-LZZT:
 	@echo "Testing XML→JSON→XML roundtrip conversion for define_LZZT_ADaM..."

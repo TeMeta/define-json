@@ -11,15 +11,18 @@ prefixes:
   usdm: https://cdisc.org/usdm/
   sdtm: https://cdisc.org/cosmos/sdtm_v1.0#
   fhir: http://hl7.org/fhir/
+  ncit: http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#
   omop: https://omop.org/omop-cdm/
   qb: http://purl.org/linked-data/cube#
   sdmx: http://purl.org/linked-data/sdmx#
   dprod: https://ekgf.github.io/dprod/
   prov: http://www.w3.org/ns/prov#
   dcat: http://www.w3.org/ns/dcat#
+  odrl: http://www.w3.org/ns/odrl/2/
   osb: https://openstudybuilder.com/
   dcterms: http://purl.org/dc/terms/
 default_prefix: odm
+default_range: string
 
 imports:
   - linkml:types
@@ -50,10 +53,8 @@ classes:
           or simple strings for internal use.
         identifier: true
         required: false
-        range: string
       uuid:
         description: Universal unique identifier
-        range: string
 
   Governed:
     description: >-
@@ -123,7 +124,6 @@ classes:
     attributes:
       name:
         description: Short name or identifier, used for field names
-        range: string
       description:
         description: Detailed description, shown in tooltips
         any_of:
@@ -169,7 +169,6 @@ classes:
       displayFormat:
         description: >-
           A display format for the item
-        range: string
       significantDigits:
         description: >-
           For numeric values, the number of significant digits
@@ -183,10 +182,8 @@ classes:
       version:
         description: >-
           The version of the external resources
-        range: string
       href:
         description: Machine-readable instructions to obtain the resource e.g. FHIR path, URL
-        range: string
         required: false
 
   IsProfile:
@@ -198,7 +195,6 @@ classes:
     attributes:
       profile:
         description: Profiles this resource claims to conform to
-        range: string
         multivalued: true
       security:
         description: Security tags applied to this resource
@@ -285,7 +281,6 @@ classes:
     attributes:
       fileOID:
         description: Unique identifier for the ODM file
-        range: string
         required: true
       asOfDateTime:
         description: Date and time when the data snapshot was taken
@@ -296,27 +291,20 @@ classes:
         required: true
       odmVersion:
         description: Version of the ODM standard used
-        range: string
         required: true
       fileType:
         description: Type of ODM file (e.g., Snapshot, Transactional)
-        range: string
         required: true
       originator:
         description: Organization or system that created the ODM file
-        range: string
       sourceSystem:
         description: Source system that generated the data
-        range: string
       sourceSystemVersion:
         description: Version of the source system
-        range: string
       context:
         description: Define-XML context (usually "Other" for Define-XML)
-        range: string
       defineVersion:
         description: Version of Define-XML specification used
-        range: string
 
   StudyMetadata:
     description: >-
@@ -325,17 +313,13 @@ classes:
     attributes:
       studyOID:
         description: Unique identifier for the study
-        range: string
         required: true
       studyName:
         description: Name of the study
-        range: string
       studyDescription:
         description: Description of the study
-        range: string
       protocolName:
         description: Protocol name for the study
-        range: string
 
   MetaDataVersion:
     tree_root: true
@@ -567,7 +551,6 @@ classes:
       domain:
         description: >-
           Domain abbreviation for the dataset.
-        range: string
       structure:
         description: >-
           Data structure of the item group, indicating how the records are organized.
@@ -645,7 +628,6 @@ classes:
       name:
         description: >-
           Name of the General Observation Class following CDISC Controlled Terminology.
-        range: string
         required: true
       subClasses:
         description: >-
@@ -663,12 +645,10 @@ classes:
       name:
         description: >-
           Name of the SubClass following CDISC Controlled Terminology for SubClass.
-        range: string
         required: true
       parentClass:
         description: >-
           Name of the parent Class or SubClass following CDISC Controlled Terminology.
-        range: string
         required: false
       subClasses:
         description: >-
@@ -717,11 +697,9 @@ classes:
     attributes:
       "language":
         description: The language of the translation
-        range: string
         required: true
       "value":
         description: The translated text
-        range: string
         required: true
 
   TranslatedText:
@@ -761,7 +739,6 @@ classes:
       formatName:
         description: >-
           Name of a standard format definition
-        range: string
       codeListItems:
         description: >-
           The individual values that make up this CodeList.
@@ -792,12 +769,10 @@ classes:
       codedValue:
         description: >-
           The value of the CodeListItem before decoding
-        range: string
         required: true
       decode:
         description: >-
           The decoded value of the CodeListItem
-        range: string
       description:
         description: >-
           A detailed description of the code (e.g., for documentation purposes)
@@ -866,7 +841,6 @@ classes:
       code:
         description: >-
           The code value
-        range: string
         required: true
       decode:
         description: Human-readable meaning
@@ -878,12 +852,10 @@ classes:
       codeSystem:
         description: >-
           The code system identifier
-        range: string
         required: true
       codeSystemVersion:
         description: >-
           The code system version
-        range: string
       aliasType:
         description: >-
           How this coding is related in the context of its parent element
@@ -1051,7 +1023,6 @@ classes:
         range: Comparator
       checkValues:
         description: Values to compare against
-        range: string
         multivalued: true
         inlined: true
         inlined_as_list: true
@@ -1096,16 +1067,13 @@ classes:
           The specific context within the containing element to which this formal expression applies.
         exact_mappings:
           - fhir:Expression/language
-        range: string
       expression:
         description: >-
           The actual text of the formal expression (renamed from 'code' for disambiguation).
-        range: string
         aliases: [code]
         required: true
       returnType:
         description: Return type of the expression
-        range: string
       parameters:
         description: Parameters used in the expression
         range: Parameter
@@ -1204,11 +1172,9 @@ classes:
       value:
         description: >-
           A specific bound value for the parameter.
-        range: string
       defaultValue:
         description: >-
           A default value for the parameter.
-        range: string
       items:
         description: >-
           A list of item dependencies for the parameter.
@@ -1256,7 +1222,7 @@ classes:
           Indicates whether this parameter must be provided when the 
           containing expression is evaluated (technical constraint).
         range: boolean
-        ifabsent: false
+        ifabsent: 'False'
 
   ReturnValue:
     description: >-
@@ -1270,7 +1236,6 @@ classes:
       valueList:
         description: >-
           A list of possible return values.
-        range: string
         multivalued: true
 
   Origin:
@@ -1340,11 +1305,9 @@ classes:
       userName:
         description: >-
           The username of the user.
-        range: string
       fullName:
         description: >-
           The full name of the user.
-        range: string
       organization:
         description: >-
           The organization the user belongs to.
@@ -1366,7 +1329,6 @@ classes:
       role:
         description: >-
           The role of the organization in the study.
-        range: string
       type:
         description: >-
           The type of organization (e.g., site, sponsor, vendor).
@@ -1374,11 +1336,9 @@ classes:
       location:
         description: >-
           The physical location of the organization.
-        range: string
       address:
         description: >-
           The address of the organization.
-        range: string
       partOfOrganization:
         description: >-
           Reference to a parent organization if this organization is part of a larger entity.
@@ -1406,7 +1366,6 @@ classes:
       version:
         description: >-
           Version of an Implementation Guide or of a Controlled Terminology
-        range: string
       status:
         description: >-
           Status of an Implementation Guide or of a Controlled Terminology
@@ -1424,13 +1383,11 @@ classes:
       resourceType:
         description: >-
           Type of resource (e.g.,  "ODM", "HL7-FHIR", "HL7-CDA", "HL7-v2", "OpenEHR-extract")
-        range: string
         required: false
       attribute:
         description: >-
           Field provided by the Name attribute where the data or information can be obtained.
           Examples are "valueQuantity.value" or "valueQuantity.unit".
-        range: string
       selection:
         description: >-
           Machine-executable instructions for selecting data from the resource.
@@ -1448,10 +1405,8 @@ classes:
     attributes:
       title:
         description: Document title
-        range: string
       leafID:
         description: Leaf identifier for document reference in Define-XML
-        range: string
       pages:
         description: Reference to specific pages in a PDF document
         range: integer
@@ -1459,7 +1414,6 @@ classes:
         required: false
       relationship:
         description: Relationship to the referencing entity
-        range: string
         required: false
 
   Timing:
@@ -1491,7 +1445,6 @@ classes:
       value:
         description: >-
           The value of the timing, which can be a date/time, duration, or event reference.
-        range: string
         required: true
       relativeTo:
         description: >-
@@ -1514,7 +1467,6 @@ classes:
       frequency:
         description: >-
           Frequency. Use dose frequency terminology e.g. "BID" if applicable.
-        range: string
       imputation:
         description: >-
           The imputation method used for the Timing.
@@ -1545,7 +1497,6 @@ classes:
       event:
         description: >-
           The ID of the event in a Schedule.
-        range: string
         required: false
       condition:
         description: >-
@@ -1578,7 +1529,7 @@ classes:
         range: ComponentList
       evolvingStructure:
         range: boolean
-        ifabsent: false
+        ifabsent: 'False'
 
   Dataflow:
     description: >-
@@ -1596,9 +1547,11 @@ classes:
     attributes:
       structure:
         description: >-
-         Structured component specification for this flow
+         Structured component specification for this flow.
+         Inlined so a standalone DTA carries its agreed structure.
         range: DataStructureDefinition
         required: true
+        inlined: true
       dimensionConstraint:
         description: >-
           Subset of dimensions that are agreed upon by the dataflow and must be included.
@@ -1608,6 +1561,20 @@ classes:
         description: >-
           Metadata about the analysis method used to produce the data in this dataflow.
         range: Analysis
+      deliverySchedule:
+        description: >-
+          Recurring transfer/delivery schedule agreed for this flow. The
+          domain-neutral default is an ISO-8601 repeating interval string
+          (e.g. "R/2025-01-01/P1M"); use a Timing object only when delivery must
+          be anchored to a clinical occurrence. Agreement-level schedule;
+          concrete reporting periods of each delivered Dataset are carried by
+          IsSdmxDataset.reportingBegin/reportingEnd/dataExtractionDate.
+        any_of:
+          - range: string
+          - range: Timing
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
 
   IsSdmxDataset:
     mixin: true
@@ -1704,6 +1671,7 @@ classes:
           - dcterms:conformsTo
       hasPolicy:
         description: Access or usage policy applied to this dataset
+        range: Policy
         multivalued: true
         inlined: true
         inlined_as_list: true
@@ -1962,9 +1930,18 @@ classes:
         inlined_as_list: true
       hasPolicy:
         description: Policies governing the use and access of the data product
+        range: Policy
         multivalued: true
         inlined: true
         inlined_as_list: true
+      provisionAgreement:
+        description: >-
+          Reference(s) to standalone Data Transfer Agreements (ProvisionAgreement)
+          that govern this product's flows. Referenced by OID/URI, not embedded,
+          so the agreement remains an independently maintained artifact.
+        range: ProvisionAgreement
+        multivalued: true
+        inlined: false
 
   Distribution:
     description: >-
@@ -2041,23 +2018,175 @@ classes:
     attributes:
       provider:
         description: >-
-          The Data Provider that is part of this agreement
+          The Data Provider that is part of this agreement.
+          Inlined so a standalone DTA is a self-contained snapshot.
         range: DataProvider
+        inlined: true
       consumer:
         description: >-
           The Data Consumer that is part of this agreement
         any_of:
+          - range: DataConsumer
           - range: DataProduct
           - range: Organization
           - range: string
       dataFlow:
         description: >-
-          The Dataflow that is covered by this agreement
+          The Dataflow that is covered by this agreement.
+          Inlined so a standalone DTA is a self-contained snapshot.
         range: Dataflow
+        inlined: true
       source:
         description: >-
           The source of the data provided under this agreement
         range: Resource
+        inlined: true
+      hasPolicy:
+        description: >-
+          The usage/access policies (ODRL) that constitute the legal terms of
+          this agreement, e.g. permitted purpose, confidentiality, retention.
+        range: Policy
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+
+  DataConsumer:
+    description: >-
+      An organization element that receives data from a Data Provider under a
+      ProvisionAgreement; the demand-side counterpart of DataProvider.
+    close_mappings:
+      - sdmx:DataConsumer
+    is_a: Organization
+    attributes:
+      consumesDataFrom:
+        description: The Dataflows that this consumer receives data from
+        range: Dataflow
+        multivalued: true
+      provisionAgreements:
+        description: The ProvisionAgreements that this consumer has with Data Providers
+        range: ProvisionAgreement
+        multivalued: true
+
+  Policy:
+    description: >-
+      A set of usage and access rules (ODRL) governing data. For a DTA this is
+      typically an ODRL Agreement between an assigner (provider) and assignee
+      (consumer), composed of permissions, prohibitions and obligations.
+    exact_mappings:
+      - odrl:Policy
+    close_mappings:
+      - dcat:hasPolicy
+    is_a: GovernedElement
+    attributes:
+      policyType:
+        description: ODRL policy subtype (Set, Offer, Agreement)
+        range: PolicyType
+        ifabsent: PolicyType(Agreement)
+      profile:
+        description: IRI of the ODRL profile this policy conforms to
+      assigner:
+        description: The party issuing/granting the policy (typically the provider)
+        any_of:
+          - range: DataProvider
+          - range: Organization
+          - range: string
+      assignee:
+        description: The party the policy is granted to (typically the consumer)
+        any_of:
+          - range: DataConsumer
+          - range: Organization
+          - range: string
+      permission:
+        description: Rules granting the ability to perform an action (odrl:permission)
+        range: Rule
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+        exact_mappings:
+          - odrl:permission
+      prohibition:
+        description: Rules forbidding an action (odrl:prohibition)
+        range: Rule
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+        exact_mappings:
+          - odrl:prohibition
+      obligation:
+        description: Duties that must be fulfilled (odrl:obligation)
+        range: Rule
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+        exact_mappings:
+          - odrl:obligation
+
+  Rule:
+    description: >-
+      An ODRL rule asserting that an action is permitted, prohibited, or required
+      on a target asset, optionally restricted by constraints.
+    exact_mappings:
+      - odrl:Rule
+    is_a: IdentifiableElement
+    attributes:
+      action:
+        description: >-
+          The operation the rule governs (odrl:action), e.g. "use", "distribute",
+          "anonymize", "delete". Semantics may be tagged via coding.
+        required: true
+        exact_mappings:
+          - odrl:action
+      target:
+        description: >-
+          The asset the rule applies to (odrl:target), e.g. the Dataflow or
+          Dataset OID/IRI under agreement.
+        exact_mappings:
+          - odrl:target
+      assigner:
+        description: Party issuing the rule, if overriding the policy-level assigner
+        any_of:
+          - range: Organization
+          - range: string
+      assignee:
+        description: Party the rule is granted to, if overriding the policy-level assignee
+        any_of:
+          - range: Organization
+          - range: string
+      constraint:
+        description: Conditions that narrow when/how the rule applies (odrl:constraint)
+        range: Constraint
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+        exact_mappings:
+          - odrl:constraint
+
+  Constraint:
+    description: >-
+      An ODRL constraint expressed as leftOperand operator rightOperand,
+      e.g. purpose eq "safety-reporting", or dateTime lt "2026-01-01".
+    exact_mappings:
+      - odrl:Constraint
+    is_a: IdentifiableElement
+    attributes:
+      leftOperand:
+        description: The subject of the constraint (odrl:leftOperand), e.g. "purpose", "recipient", "dateTime"
+        required: true
+        exact_mappings:
+          - odrl:leftOperand
+      operator:
+        description: The comparison operator (odrl:operator)
+        range: ConstraintOperator
+        required: true
+        exact_mappings:
+          - odrl:operator
+      rightOperand:
+        description: The value compared against (odrl:rightOperand)
+        required: true
+        exact_mappings:
+          - odrl:rightOperand
+      unit:
+        description: Unit of the rightOperand, where applicable
 
   Analysis:
     description: >-
@@ -2079,9 +2208,7 @@ classes:
       analysisMethod:
         description: >-
           Generic method used to perform this analysis.
-          any_of:
-            - range: Method
-            - range: AnalysisMethod
+        range: Method
       applicableWhen:
         description: >-
           The conditions (e.g. population, time period etc.) that must be met for this analysis to be applicable.
@@ -2184,6 +2311,30 @@ enums:
       Lab:
       TechnologyProvider:
       Other:
+
+  PolicyType:
+    description: ODRL policy subtypes.
+    permissible_values:
+      Set:
+        meaning: odrl:Set
+      Offer:
+        meaning: odrl:Offer
+      Agreement:
+        meaning: odrl:Agreement
+
+  ConstraintOperator:
+    description: ODRL constraint operators.
+    permissible_values:
+      eq: { meaning: odrl:eq }
+      neq: { meaning: odrl:neq }
+      lt: { meaning: odrl:lt }
+      lteq: { meaning: odrl:lteq }
+      gt: { meaning: odrl:gt }
+      gteq: { meaning: odrl:gteq }
+      isPartOf: { meaning: odrl:isPartOf }
+      isA: { meaning: odrl:isA }
+      isAnyOf: { meaning: odrl:isAnyOf }
+      isNoneOf: { meaning: odrl:isNoneOf }
 
   SoftHard:
     description: >-

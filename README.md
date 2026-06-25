@@ -102,7 +102,18 @@ Any gaps that emerged during the project (e.g. linking abstract analysis concept
 
 **Regulatory Submissions**: Metadata manifest accompanying Dataset-JSON, specifying what was provided, its origins, and derivations.
 
-**Data Transfer Agreements**: Bilateral agreements between research organizations and suppliers, specifying data structure, timing, and content.
+**Data Transfer Agreements**: Bilateral agreements between research organizations and suppliers, specifying data structure, timing, and content. A DTA is a standalone `ProvisionAgreement` (provider, consumer, `dataFlow`) that embeds an agreed snapshot of the dataset spec and references the live spec for provenance. Delivery cadence is carried by `Dataflow.deliverySchedule` (ISO-8601 recurrence string by default, or a `Timing` object for clinical anchoring), and legal terms by `hasPolicy` (ODRL `Policy`/`Rule`/`Constraint`). The agreement/governance layer (`ProvisionAgreement`, `DataProvider`/`DataConsumer`, ODRL `Policy`) is domain-neutral; the transferred structure can be ODM `Item`s (CDISC) or, for non-clinical payloads, SDMX components / an `IsProfile.profile` URI with PROV-O `wasDerivedFrom` provenance. Generate a draft from any spec:
+
+```bash
+python scripts/dataset_spec_to_dta.py data/defineV21-SDTM.json LB \
+  --provider-type Lab --cadence "R/2025-01-01/P1M" --permitted-purpose safety-reporting \
+  --mappings examples/dta_mappings_LB.yaml \
+  --out generated/dta_LB.provisionagreement.json
+python scripts/render_dta_docx.py generated/dta_LB.provisionagreement.json \
+  --source data/defineV21-SDTM.json --out generated/DTA_LB_draft.docx
+```
+
+`--mappings` merges multi-standard codings onto each variable (the same element carries CDISC + FHIR `Observation` + OMOP `MEASUREMENT` representations) and references a canonical `ReifiedConcept` (`examples/concept_LABRESULT.reifiedconcept.json`) that bridges the three — the "model fabric" horizontal. `Coding` maps to `fhir:Coding`/`omop:Concept`, so no schema change is needed.
 
 **Demand Data Contracts**: Analysis requests specifying how target datasets are derived from sources and expected structure.
 

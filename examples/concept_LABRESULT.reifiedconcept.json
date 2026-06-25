@@ -1,0 +1,81 @@
+{
+  "OID": "RC.LABRESULT",
+  "name": "LaboratoryTestResult",
+  "label": "Laboratory test result (canonical)",
+  "description": "Canonical concept bridging SDTM LB, HL7 FHIR R4 Observation (laboratory), and OMOP CDM 5.4 MEASUREMENT. Each property records how the same meaning is represented in each standard. Shared Registry artifact; DTAs reference it by OID via implementsConcept.",
+  "version": "0.1",
+  "properties": [
+    {
+      "OID": "PROP.LABRESULT.TEST",
+      "name": "test",
+      "description": "The analyte / laboratory test being measured",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "coding": [
+        { "codeSystem": "CDISC-SDTM", "code": "LBTESTCD", "decode": "Lab Test Code" },
+        { "codeSystem": "HL7-FHIR-R4", "code": "Observation.code", "decode": "LOINC-bound test code" },
+        { "codeSystem": "OMOP-CDM-5.4", "code": "measurement.measurement_concept_id", "decode": "Standard measurement concept (Athena-resolved)" }
+      ]
+    },
+    {
+      "OID": "PROP.LABRESULT.VALUE",
+      "name": "value",
+      "description": "Quantitative standardized result",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "coding": [
+        { "codeSystem": "CDISC-SDTM", "code": "LBSTRESN", "decode": "Numeric result in standard units" },
+        { "codeSystem": "HL7-FHIR-R4", "code": "Observation.valueQuantity.value", "decode": "Result value" },
+        { "codeSystem": "OMOP-CDM-5.4", "code": "measurement.value_as_number", "decode": "Numeric value" }
+      ]
+    },
+    {
+      "OID": "PROP.LABRESULT.UNIT",
+      "name": "unit",
+      "description": "Unit of the standardized result",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "coding": [
+        { "codeSystem": "CDISC-SDTM", "code": "LBSTRESU", "decode": "Standard units" },
+        { "codeSystem": "HL7-FHIR-R4", "code": "Observation.valueQuantity.unit", "decode": "Unit (UCUM)" },
+        { "codeSystem": "OMOP-CDM-5.4", "code": "measurement.unit_concept_id", "decode": "Unit concept (Athena-resolved)" }
+      ]
+    },
+    {
+      "OID": "PROP.LABRESULT.SUBJECT",
+      "name": "subject",
+      "description": "The subject the result pertains to",
+      "minOccurs": 1,
+      "maxOccurs": 1,
+      "coding": [
+        { "codeSystem": "CDISC-SDTM", "code": "USUBJID", "decode": "Unique Subject Identifier" },
+        { "codeSystem": "HL7-FHIR-R4", "code": "Observation.subject", "decode": "Subject reference" },
+        { "codeSystem": "OMOP-CDM-5.4", "code": "measurement.person_id", "decode": "Person key" }
+      ]
+    },
+    {
+      "OID": "PROP.LABRESULT.DATETIME",
+      "name": "datetime",
+      "description": "Date/time of specimen collection / measurement",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "coding": [
+        { "codeSystem": "CDISC-SDTM", "code": "LBDTC", "decode": "Date/Time of Specimen Collection" },
+        { "codeSystem": "HL7-FHIR-R4", "code": "Observation.effectiveDateTime", "decode": "Effective date/time" },
+        { "codeSystem": "OMOP-CDM-5.4", "code": "measurement.measurement_datetime", "decode": "Measurement date/time" }
+      ]
+    },
+    {
+      "OID": "PROP.LABRESULT.SPECIMEN",
+      "name": "specimen",
+      "description": "Specimen type",
+      "minOccurs": 0,
+      "maxOccurs": 1,
+      "coding": [
+        { "codeSystem": "CDISC-SDTM", "code": "LBSPEC", "decode": "Specimen Type" },
+        { "codeSystem": "HL7-FHIR-R4", "code": "Observation.specimen", "decode": "Specimen reference" },
+        { "codeSystem": "OMOP-CDM-5.4", "code": "measurement.specimen_source_value", "decode": "Specimen (no standard concept in 5.4)" }
+      ]
+    }
+  ]
+}
