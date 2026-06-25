@@ -926,7 +926,6 @@ classes:
     close_mappings:
       - omop:Concept
       - skos:Concept
-      - skos:Label
       - sdmx:Code
       - sdmx:Concept
       - sdmx:ISOConceptReference
@@ -2399,10 +2398,10 @@ enums:
         meaning: skos:relatedMatch
       BROAD_SYNONYM:
         description: Target is broader than source e.g. "diabetes" is broader than "type 2 diabetes"
-        meaning: skos:broaderMatch
+        meaning: skos:broadMatch
       NARROW_SYNONYM:
         description: Target is narrower than source e.g. "type 2 diabetes" is narrower than "diabetes"
-        meaning: skos:narrowerMatch
+        meaning: skos:narrowMatch
 
   Comparator:
     description: >-
