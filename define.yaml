@@ -113,7 +113,7 @@ classes:
           - range: CodeList
           - range: Concept
           - range: ConceptProperty
-          - range: Condition
+          - range: LogicalPredicate
           - range: Method
           - range: NominalOccurrence
           - range: Dataflow
@@ -255,10 +255,10 @@ classes:
         any_of:
           - range: string
           - range: TranslatedText
-      collectionExceptionCondition:
+      collectionExceptionPredicate:
         description: >-
-          Condition that defines when collection may be exempted
-        range: Condition
+          Logical predicate defining when data collection for this item may be exempted.
+        range: LogicalPredicate
       preSpecifiedValue:
         description: >-
           Prefill value or a default value for a field that is automatically populated.
@@ -356,10 +356,10 @@ classes:
         multivalued: true
         inlined: true
         inlined_as_list: true
-      conditions:
+      predicates:
         description: >-
-          Logical conditions that apply to this version of the metadata.
-        range: Condition
+          Reusable logical predicates defined in this specification.
+        range: LogicalPredicate
         multivalued: true
         inlined: true
         inlined_as_list: true
@@ -1043,16 +1043,19 @@ classes:
       - sdmx:MetadataTargetRegion
     is_a: GovernedElement
     attributes:
-      conditions:
-        description: Logical conditions that apply in this context (combined with AND)
-        range: Condition
+      predicates:
+        description: Logical predicates that apply in this context (combined with AND)
+        range: LogicalPredicate
         multivalued: true
         inlined: false
 
-  Condition:
+  LogicalPredicate:
     description: >-
-      A reusable, composable, and nestable logical construct allowing for complex expressions.
-      Conditions are most useful when given a meaningful name and linked to Study Definitions.
+      A reusable, composable, and nestable logical expression resolving to a boolean.
+      Used for applicability conditions, validation rules, eligibility criteria, and
+      skip logic. This is a data-model predicate — not a clinical condition (diagnosis).
+      Implements usdm:Condition (the study-design predicate, distinct from the clinical
+      FHIR Condition resource).
     close_mappings:
       - odm:ConditionDef
       - usdm:Condition
@@ -1065,16 +1068,16 @@ classes:
     is_a: GovernedElement
     attributes:
       rangeChecks:
-        description: Range checks that compose this condition
+        description: Range checks that compose this predicate
         range: RangeCheck
         multivalued: true
         inlined: true
         inlined_as_list: true
-      implementsCondition:
-        description: Reference to a external (e.g. USDM) condition definition that this implements
+      implementsPredicate:
+        description: Reference to an external (e.g. USDM) predicate/condition definition that this implements
       expressions:
         description: >-
-          Logical expression, resolving to a boolean, that implements this condition in a specific context
+          Logical expression, resolving to a boolean, that implements this predicate in a specific context
         range: FormalExpression
         multivalued: true
         inlined: true
@@ -1086,14 +1089,12 @@ classes:
         range: LogicalOperator
         required: false
         ifabsent: LogicalOperator(AND)
-      conditions:
+      predicates:
         description: >-
-          Child conditions to combine using the operator.
-          Multiple conditions are composed according to the operator (AND/OR/NOT).
-          Rearrange and nest to compose XOR, or combinations of AND and OR.
-          Unless the operator is EXPRESSION, in which case the formalExpression is used instead.
-          Use OID references to reuse conditions defined elsewhere.
-        range: Condition
+          Child predicates to combine using the operator (AND/OR/NOT/EXPRESSION).
+          Rearrange and nest to compose XOR or mixed AND/OR.
+          Use OID references to reuse predicates defined elsewhere.
+        range: LogicalPredicate
         multivalued: true
         inlined: false
 
@@ -1338,16 +1339,12 @@ classes:
         range: ApplicabilityCondition
         multivalued: true
         inlined: false
-      conditions:
+      validationPredicates:
         description: >-
-          Validation conditions that constrain this parameter's value beyond controlled terminology.
-          Multiple conditions are combined with AND logic: all must be satisfied.
-          Use these for parameter validation rules, distinct from applicableWhen 
+          Validation predicates that constrain this parameter's value beyond controlled
+          terminology. All must be satisfied (AND logic). Distinct from applicableWhen
           which determines if the parameter is needed at all.
-          
-          Example: A parameter AGE might have conditions ensuring it's >= 0 and <= 120.
-          or conditions might make up part of a componsed expression.
-        range: Condition
+        range: LogicalPredicate
         multivalued: true
         inlined: false    
       required:
@@ -1635,7 +1632,7 @@ classes:
       condition:
         description: >-
           A condition that must be met for this occurrence to be valid.
-        range: Condition
+        range: LogicalPredicate
         multivalued: true
 
   # New classes for Data Cube, Analysis Concept, and DTA governance
