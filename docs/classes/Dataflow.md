@@ -15,6 +15,7 @@ URI: [odm:class/Dataflow](https://cdisc.org/odm2/class/Dataflow)
 ```mermaid
 erDiagram
 Dataflow {
+    stringList deliverySchedule  
     string version  
     string href  
     string OID  
@@ -69,7 +70,6 @@ Coding {
 Analysis {
     string analysisReason  
     string analysisPurpose  
-    string analysisMethod  
     stringList inputData  
     string version  
     string href  
@@ -139,8 +139,8 @@ WhereClause {
     string owner  
     string wasDerivedFrom  
 }
-Dimension {
-    string role  
+Method {
+    MethodType type  
     string OID  
     string uuid  
     string name  
@@ -153,8 +153,8 @@ Dimension {
     string owner  
     string wasDerivedFrom  
 }
-Method {
-    MethodType type  
+Dimension {
+    string role  
     string OID  
     string uuid  
     string name  
@@ -242,6 +242,9 @@ Timing {
     string label  
     stringList aliases  
 }
+DefClass {
+    string name  
+}
 ItemGroup {
     string domain  
     string structure  
@@ -316,6 +319,7 @@ Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 Comment ||--}o Comment : "comments"
 Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Analysis ||--|o Method : "analysisMethod"
 Analysis ||--}o WhereClause : "applicableWhen"
 Analysis ||--}o FormalExpression : "expressions"
 Analysis ||--}o DocumentReference : "documents"
@@ -336,18 +340,18 @@ WhereClause ||--}o Condition : "conditions"
 WhereClause ||--}o Coding : "coding"
 WhereClause ||--}o Comment : "comments"
 WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-Dimension ||--|| Item : "item"
-Dimension ||--|o Method : "missingHandling"
-Dimension ||--|o Method : "imputation"
-Dimension ||--}o Coding : "coding"
-Dimension ||--}o Comment : "comments"
-Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Method ||--}o FormalExpression : "expressions"
 Method ||--}o DocumentReference : "documents"
 Method ||--|o ReifiedConcept : "implementsConcept"
 Method ||--}o Coding : "coding"
 Method ||--}o Comment : "comments"
 Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Dimension ||--|| Item : "item"
+Dimension ||--|o Method : "missingHandling"
+Dimension ||--|o Method : "imputation"
+Dimension ||--}o Coding : "coding"
+Dimension ||--}o Comment : "comments"
+Dimension ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Item ||--|o CodeList : "codeList"
 Item ||--|o Method : "method"
 Item ||--}o RangeCheck : "rangeChecks"
@@ -368,6 +372,7 @@ DataStructureDefinition ||--}o Item : "keySequence"
 DataStructureDefinition ||--}o ItemGroup : "slices"
 DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
 DataStructureDefinition ||--}o WhereClause : "applicableWhen"
+DataStructureDefinition ||--|o DefClass : "observationClass"
 DataStructureDefinition ||--}o Coding : "security"
 DataStructureDefinition ||--|o Timing : "validityPeriod"
 DataStructureDefinition ||--|o Standard : "standard"
@@ -379,11 +384,13 @@ Timing ||--|o NominalOccurrence : "relativeTo"
 Timing ||--|o NominalOccurrence : "relativeFrom"
 Timing ||--|o Method : "imputation"
 Timing ||--}o Coding : "coding"
+DefClass ||--}o SubClass : "subClasses"
 ItemGroup ||--}o Item : "items"
 ItemGroup ||--}o Item : "keySequence"
 ItemGroup ||--}o ItemGroup : "slices"
 ItemGroup ||--|o ReifiedConcept : "implementsConcept"
 ItemGroup ||--}o WhereClause : "applicableWhen"
+ItemGroup ||--|o DefClass : "observationClass"
 ItemGroup ||--}o Coding : "security"
 ItemGroup ||--|o Timing : "validityPeriod"
 ItemGroup ||--|o Standard : "standard"
@@ -419,9 +426,10 @@ Measure ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [structure](../slots/structure.md) | 1 <br/> [DataStructureDefinition](../classes/DataStructureDefinition.md) | Structured component specification for this flow | direct |
+| [structure](../slots/structure.md) | 1 <br/> [DataStructureDefinition](../classes/DataStructureDefinition.md) | Structured component specification for this flow. Inlined so a standalone DTA carries its agreed structure. | direct |
 | [dimensionConstraint](../slots/dimensionConstraint.md) | * <br/> [Dimension](../classes/Dimension.md) | Subset of dimensions that are agreed upon by the dataflow and must be included. | direct |
 | [analysisMethod](../slots/analysisMethod.md) | 0..1 <br/> [Analysis](../classes/Analysis.md) | Metadata about the analysis method used to produce the data in this dataflow. | direct |
+| [deliverySchedule](../slots/deliverySchedule.md) | * <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[Timing](../classes/Timing.md) | Recurring transfer/delivery schedule agreed for this flow. The domain-neutral default is an ISO-8601 repeating interval string (e.g. "R/2025-01-01/P1M"); use a Timing object only when delivery must be anchored to a clinical occurrence. Agreement-level schedule; concrete reporting periods of each delivered Dataset are carried by IsSdmxDataset.reportingBegin/reportingEnd/dataExtractionDate. | direct |
 | [version](../slots/version.md) | 0..1 <br/> [String](../types/String.md) | The version of the external resources | [Versioned](../classes/Versioned.md) |
 | [href](../slots/href.md) | 0..1 <br/> [String](../types/String.md) | Machine-readable instructions to obtain the resource e.g. FHIR path, URL | [Versioned](../classes/Versioned.md) |
 | [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
@@ -475,6 +483,8 @@ Measure ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | [DataProvider](../classes/DataProvider.md) | [providesDataFor](../slots/providesDataFor.md) | range | [Dataflow](../classes/Dataflow.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [dataFlow](../slots/dataFlow.md) | range | [Dataflow](../classes/Dataflow.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
+| [DataConsumer](../classes/DataConsumer.md) | [consumesDataFrom](../slots/consumesDataFrom.md) | range | [Dataflow](../classes/Dataflow.md) |
+| [Policy](../classes/Policy.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
 | [Analysis](../classes/Analysis.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
 | [Display](../classes/Display.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [Dataflow](../classes/Dataflow.md) |
 
@@ -494,7 +504,7 @@ Measure ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -524,7 +534,7 @@ Measure ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 name: Dataflow
 description: An abstract representation that defines data provision for different
   reference periods, where a Distribution and its Dataset are instances
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 close_mappings:
 - sdmx:Dataflow
 related_mappings:
@@ -538,18 +548,20 @@ mixins:
 attributes:
   structure:
     name: structure
-    description: Structured component specification for this flow
-    from_schema: https://cdisc.org/define-json
+    description: Structured component specification for this flow. Inlined so a standalone
+      DTA carries its agreed structure.
+    from_schema: https://cdisc.org/data-definition-spec
     domain_of:
     - ItemGroup
     - Dataflow
     range: DataStructureDefinition
     required: true
+    inlined: true
   dimensionConstraint:
     name: dimensionConstraint
     description: Subset of dimensions that are agreed upon by the dataflow and must
       be included.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Dataflow
@@ -559,12 +571,29 @@ attributes:
     name: analysisMethod
     description: Metadata about the analysis method used to produce the data in this
       dataflow.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Dataflow
     - Analysis
     range: Analysis
+  deliverySchedule:
+    name: deliverySchedule
+    description: Recurring transfer/delivery schedule agreed for this flow. The domain-neutral
+      default is an ISO-8601 repeating interval string (e.g. "R/2025-01-01/P1M");
+      use a Timing object only when delivery must be anchored to a clinical occurrence.
+      Agreement-level schedule; concrete reporting periods of each delivered Dataset
+      are carried by IsSdmxDataset.reportingBegin/reportingEnd/dataExtractionDate.
+    from_schema: https://cdisc.org/data-definition-spec
+    rank: 1000
+    domain_of:
+    - Dataflow
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    any_of:
+    - range: string
+    - range: Timing
 
 ```
 </details>
@@ -576,7 +605,7 @@ attributes:
 name: Dataflow
 description: An abstract representation that defines data provision for different
   reference periods, where a Distribution and its Dataset are instances
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 close_mappings:
 - sdmx:Dataflow
 related_mappings:
@@ -590,8 +619,9 @@ mixins:
 attributes:
   structure:
     name: structure
-    description: Structured component specification for this flow
-    from_schema: https://cdisc.org/define-json
+    description: Structured component specification for this flow. Inlined so a standalone
+      DTA carries its agreed structure.
+    from_schema: https://cdisc.org/data-definition-spec
     alias: structure
     owner: Dataflow
     domain_of:
@@ -599,11 +629,12 @@ attributes:
     - Dataflow
     range: DataStructureDefinition
     required: true
+    inlined: true
   dimensionConstraint:
     name: dimensionConstraint
     description: Subset of dimensions that are agreed upon by the dataflow and must
       be included.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: dimensionConstraint
     owner: Dataflow
@@ -615,7 +646,7 @@ attributes:
     name: analysisMethod
     description: Metadata about the analysis method used to produce the data in this
       dataflow.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: analysisMethod
     owner: Dataflow
@@ -623,10 +654,30 @@ attributes:
     - Dataflow
     - Analysis
     range: Analysis
+  deliverySchedule:
+    name: deliverySchedule
+    description: Recurring transfer/delivery schedule agreed for this flow. The domain-neutral
+      default is an ISO-8601 repeating interval string (e.g. "R/2025-01-01/P1M");
+      use a Timing object only when delivery must be anchored to a clinical occurrence.
+      Agreement-level schedule; concrete reporting periods of each delivered Dataset
+      are carried by IsSdmxDataset.reportingBegin/reportingEnd/dataExtractionDate.
+    from_schema: https://cdisc.org/data-definition-spec
+    rank: 1000
+    alias: deliverySchedule
+    owner: Dataflow
+    domain_of:
+    - Dataflow
+    range: string
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    any_of:
+    - range: string
+    - range: Timing
   version:
     name: version
     description: The version of the external resources
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: version
     owner: Dataflow
@@ -638,7 +689,7 @@ attributes:
     name: href
     description: Machine-readable instructions to obtain the resource e.g. FHIR path,
       URL
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: href
     owner: Dataflow
@@ -650,7 +701,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     identifier: true
     alias: OID
@@ -662,7 +713,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: uuid
     owner: Dataflow
@@ -672,18 +723,20 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: name
     owner: Dataflow
     domain_of:
     - Labelled
+    - DefClass
+    - SubClass
     - Standard
     range: string
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: description
     owner: Dataflow
@@ -697,7 +750,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: coding
     owner: Dataflow
@@ -712,7 +765,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -727,7 +780,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:altLabel
     rank: 1000
@@ -746,7 +799,7 @@ attributes:
   mandatory:
     name: mandatory
     description: Is this element required?
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: mandatory
     owner: Dataflow
@@ -757,7 +810,7 @@ attributes:
     name: comments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: comments
     owner: Dataflow
@@ -770,7 +823,7 @@ attributes:
     name: siteOrSponsorComments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: siteOrSponsorComments
     owner: Dataflow
@@ -782,7 +835,7 @@ attributes:
   purpose:
     name: purpose
     description: Purpose or rationale for this data element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: purpose
     owner: Dataflow
@@ -795,7 +848,7 @@ attributes:
   lastUpdated:
     name: lastUpdated
     description: When the resource was last updated
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: lastUpdated
     owner: Dataflow
@@ -805,7 +858,7 @@ attributes:
   owner:
     name: owner
     description: Party responsible for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     narrow_mappings:
     - prov:wasAttributedTo
     - prov:wasAssociatedBy
@@ -823,7 +876,7 @@ attributes:
     name: wasDerivedFrom
     description: Reference to another item that this item implements or extends, e.g.
       a template Item definition.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - prov:wasDerivedFrom
     rank: 1000

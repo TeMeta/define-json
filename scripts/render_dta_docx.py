@@ -192,7 +192,7 @@ def build_doc(dta: dict[str, Any], source_path: str) -> Document:
         p.add_run(f"{SHOWN} — {hint}").italic = True
 
     footer = doc.sections[0].footer.paragraphs[0]
-    footer.text = f"Draft generated from {Path(source_path).name} · define-json model"
+    footer.text = f"Draft generated from {Path(source_path).name} · data-definition-spec model"
     return doc
 
 

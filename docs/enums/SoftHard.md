@@ -39,7 +39,7 @@ URI: [odm:enum/SoftHard](https://cdisc.org/odm2/enum/SoftHard)
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -53,7 +53,7 @@ URI: [odm:enum/SoftHard](https://cdisc.org/odm2/enum/SoftHard)
 name: SoftHard
 description: An enumeration that indicates whether a validation check should be treated
   as an error or a warning
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 permissible_values:
   Soft:

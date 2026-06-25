@@ -47,7 +47,7 @@ Alias: originator
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -68,7 +68,7 @@ Alias: originator
 ```yaml
 name: originator
 description: Organization or system that created the ODM file
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: originator
 owner: ODMFileMetadata

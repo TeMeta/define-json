@@ -22,10 +22,10 @@ Alias: security
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [DataStructureDefinition](../classes/DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures |  no  |
 | [ItemGroup](../classes/ItemGroup.md) | A collection element that groups related items or subgroups within a specific context, used for tables, FHIR resource profiles, biomedical concept specializations, or form sections |  no  |
-| [Dataset](../classes/Dataset.md) | A collection element that groups observations sharing the same dimensionality, expressed as a set of unique dimensions within a Data Product context |  no  |
 | [IsProfile](../classes/IsProfile.md) | A mixin that provides additional metadata for FHIR resources and Data Products, including profiles, security tags, and validity periods |  no  |
+| [DataStructureDefinition](../classes/DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures |  no  |
+| [Dataset](../classes/Dataset.md) | A collection element that groups observations sharing the same dimensionality, expressed as a set of unique dimensions within a Data Product context |  no  |
 
 
 
@@ -51,7 +51,7 @@ Alias: security
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -72,7 +72,7 @@ Alias: security
 ```yaml
 name: security
 description: Security tags applied to this resource
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: security
 owner: IsProfile

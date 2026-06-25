@@ -32,7 +32,7 @@ Alias: preSpecifiedValue
 
 ## Properties
 
-* Range: NONE&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md)
+* Range: [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md)
 
 
 
@@ -47,7 +47,7 @@ Alias: preSpecifiedValue
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -68,12 +68,13 @@ Alias: preSpecifiedValue
 ```yaml
 name: preSpecifiedValue
 description: Prefill value or a default value for a field that is automatically populated.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: preSpecifiedValue
 owner: IsODMItem
 domain_of:
 - IsODMItem
+range: string
 any_of:
 - range: string
 - range: TranslatedText

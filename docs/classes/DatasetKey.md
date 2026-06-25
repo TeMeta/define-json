@@ -63,7 +63,7 @@ DatasetKey {
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -92,7 +92,7 @@ DatasetKey {
 name: DatasetKey
 description: An abstract identifier that comprises the cross-product of dimension
   values to identify a specific cross-section
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - sdmx:Key
 abstract: true
@@ -101,7 +101,7 @@ attributes:
     name: describedBy
     description: Associates the Dimension Descriptor defined in the Data Structure
       Definition
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     domain_of:
     - Dataset
     - DatasetKey
@@ -112,14 +112,14 @@ attributes:
     name: keyValues
     description: List of Key Values that comprise each key, separated by a dot e.g.
       SUBJ001.VISIT2.BMI
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - DatasetKey
   attributeValues:
     name: attributeValues
     description: Association to the Attribute Values relating to Key
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - DatasetKey
@@ -134,7 +134,7 @@ attributes:
 name: DatasetKey
 description: An abstract identifier that comprises the cross-product of dimension
   values to identify a specific cross-section
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - sdmx:Key
 abstract: true
@@ -143,12 +143,13 @@ attributes:
     name: describedBy
     description: Associates the Dimension Descriptor defined in the Data Structure
       Definition
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: describedBy
     owner: DatasetKey
     domain_of:
     - Dataset
     - DatasetKey
+    range: string
     any_of:
     - range: Dimension
     - range: ComponentList
@@ -156,21 +157,23 @@ attributes:
     name: keyValues
     description: List of Key Values that comprise each key, separated by a dot e.g.
       SUBJ001.VISIT2.BMI
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: keyValues
     owner: DatasetKey
     domain_of:
     - DatasetKey
+    range: string
   attributeValues:
     name: attributeValues
     description: Association to the Attribute Values relating to Key
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: attributeValues
     owner: DatasetKey
     domain_of:
     - DatasetKey
+    range: string
 
 ```
 </details>

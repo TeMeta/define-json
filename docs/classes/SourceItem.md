@@ -273,7 +273,7 @@ Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -300,12 +300,12 @@ Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ```yaml
 name: SourceItem
 description: A data source that provides the origin of information for an item
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 attributes:
   item:
     name: item
     description: Reference to an item
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     domain_of:
     - RangeCheck
     - SourceItem
@@ -316,7 +316,7 @@ attributes:
   document:
     name: document
     description: Reference to an external document
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - SourceItem
@@ -328,7 +328,7 @@ attributes:
     name: resource
     description: Path to a resource (e.g. File, FHIR datasource) that is the source
       of this item
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - SourceItem
@@ -340,7 +340,7 @@ attributes:
   coding:
     name: coding
     description: A coding that describes the source of the item
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     domain_of:
     - Labelled
     - CodeListItem
@@ -359,12 +359,12 @@ attributes:
 ```yaml
 name: SourceItem
 description: A data source that provides the origin of information for an item
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 attributes:
   item:
     name: item
     description: Reference to an item
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: item
     owner: SourceItem
     domain_of:
@@ -377,7 +377,7 @@ attributes:
   document:
     name: document
     description: Reference to an external document
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: document
     owner: SourceItem
@@ -391,12 +391,13 @@ attributes:
     name: resource
     description: Path to a resource (e.g. File, FHIR datasource) that is the source
       of this item
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: resource
     owner: SourceItem
     domain_of:
     - SourceItem
+    range: string
     multivalued: true
     inlined: false
     any_of:
@@ -405,7 +406,7 @@ attributes:
   coding:
     name: coding
     description: A coding that describes the source of the item
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: coding
     owner: SourceItem
     domain_of:

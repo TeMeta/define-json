@@ -17,8 +17,8 @@ Alias: text
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Comment](../classes/Comment.md) | A descriptive element that contains explanatory text provided by a data or metadata handler |  no  |
 | [SiteOrSponsorComment](../classes/SiteOrSponsorComment.md) | A feedback element that contains comments from a site or sponsor, distinct from the general Comment class |  no  |
+| [Comment](../classes/Comment.md) | A descriptive element that contains explanatory text provided by a data or metadata handler |  no  |
 
 
 
@@ -27,7 +27,7 @@ Alias: text
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -59,6 +59,7 @@ alias: text
 domain_of:
 - Comment
 - SiteOrSponsorComment
+range: string
 
 ```
 </details>

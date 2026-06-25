@@ -46,7 +46,7 @@ Alias: leafID
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -67,7 +67,7 @@ Alias: leafID
 ```yaml
 name: leafID
 description: Leaf identifier for document reference in Define-XML
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: leafID
 owner: DocumentReference

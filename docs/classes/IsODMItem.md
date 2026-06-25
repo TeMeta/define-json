@@ -220,7 +220,7 @@ CodeListItem ||--|o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -248,14 +248,14 @@ CodeListItem ||--|o Coding : "coding"
 name: IsODMItem
 description: A mixin that provides additional attributes for CDISC Operational Data
   Model items, including roles, completion instructions, and implementation notes
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 mixin: true
 attributes:
   role:
     name: role
     description: Identifies the role of the item within the containing context, taken
       from the roleCodeList
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - IsODMItem
@@ -267,7 +267,7 @@ attributes:
   roleCodeList:
     name: roleCodeList
     description: Reference to the CodeList that defines the roles for this item
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - IsODMItem
@@ -275,7 +275,7 @@ attributes:
   hasNoData:
     name: hasNoData
     description: True if this is a manifest and there is no data for this item
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - IsODMItem
@@ -285,7 +285,7 @@ attributes:
     name: crfCompletionInstructions
     description: 'CRFCompletionInstructions reference: Instructions for the clinical
       site on how to enter collected information on the CRF'
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - IsODMItem
@@ -295,7 +295,7 @@ attributes:
   cdiscNotes:
     name: cdiscNotes
     description: 'CDISCNotes reference: Explanatory text for the variable'
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - IsODMItem
@@ -307,7 +307,7 @@ attributes:
     description: 'ImplementationNotes reference: Further information, such as rationale
       and implementation instructions, on how to implement the CRF data collection
       fields'
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - IsODMItem
@@ -317,7 +317,7 @@ attributes:
   collectionExceptionCondition:
     name: collectionExceptionCondition
     description: Condition that defines when collection may be exempted
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - IsODMItem
@@ -326,7 +326,7 @@ attributes:
     name: preSpecifiedValue
     description: Prefill value or a default value for a field that is automatically
       populated.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - IsODMItem
@@ -344,14 +344,14 @@ attributes:
 name: IsODMItem
 description: A mixin that provides additional attributes for CDISC Operational Data
   Model items, including roles, completion instructions, and implementation notes
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 mixin: true
 attributes:
   role:
     name: role
     description: Identifies the role of the item within the containing context, taken
       from the roleCodeList
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: role
     owner: IsODMItem
@@ -359,13 +359,14 @@ attributes:
     - IsODMItem
     - Organization
     - CubeComponent
+    range: string
     any_of:
     - range: string
     - range: TranslatedText
   roleCodeList:
     name: roleCodeList
     description: Reference to the CodeList that defines the roles for this item
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: roleCodeList
     owner: IsODMItem
@@ -375,7 +376,7 @@ attributes:
   hasNoData:
     name: hasNoData
     description: True if this is a manifest and there is no data for this item
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: hasNoData
     owner: IsODMItem
@@ -387,24 +388,26 @@ attributes:
     name: crfCompletionInstructions
     description: 'CRFCompletionInstructions reference: Instructions for the clinical
       site on how to enter collected information on the CRF'
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: crfCompletionInstructions
     owner: IsODMItem
     domain_of:
     - IsODMItem
+    range: string
     any_of:
     - range: string
     - range: TranslatedText
   cdiscNotes:
     name: cdiscNotes
     description: 'CDISCNotes reference: Explanatory text for the variable'
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: cdiscNotes
     owner: IsODMItem
     domain_of:
     - IsODMItem
+    range: string
     any_of:
     - range: string
     - range: TranslatedText
@@ -413,19 +416,20 @@ attributes:
     description: 'ImplementationNotes reference: Further information, such as rationale
       and implementation instructions, on how to implement the CRF data collection
       fields'
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: implementationNotes
     owner: IsODMItem
     domain_of:
     - IsODMItem
+    range: string
     any_of:
     - range: string
     - range: TranslatedText
   collectionExceptionCondition:
     name: collectionExceptionCondition
     description: Condition that defines when collection may be exempted
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: collectionExceptionCondition
     owner: IsODMItem
@@ -436,12 +440,13 @@ attributes:
     name: preSpecifiedValue
     description: Prefill value or a default value for a field that is automatically
       populated.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: preSpecifiedValue
     owner: IsODMItem
     domain_of:
     - IsODMItem
+    range: string
     any_of:
     - range: string
     - range: TranslatedText

@@ -65,7 +65,7 @@ StudyMetadata {
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -93,42 +93,38 @@ StudyMetadata {
 name: StudyMetadata
 description: A mixin that provides study-level metadata attributes including study
   identification and protocol information
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 mixin: true
 attributes:
   studyOID:
     name: studyOID
     description: Unique identifier for the study
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - StudyMetadata
-    range: string
     required: true
   studyName:
     name: studyName
     description: Name of the study
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - StudyMetadata
-    range: string
   studyDescription:
     name: studyDescription
     description: Description of the study
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - StudyMetadata
-    range: string
   protocolName:
     name: protocolName
     description: Protocol name for the study
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - StudyMetadata
-    range: string
 
 ```
 </details>
@@ -140,13 +136,13 @@ attributes:
 name: StudyMetadata
 description: A mixin that provides study-level metadata attributes including study
   identification and protocol information
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 mixin: true
 attributes:
   studyOID:
     name: studyOID
     description: Unique identifier for the study
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: studyOID
     owner: StudyMetadata
@@ -157,7 +153,7 @@ attributes:
   studyName:
     name: studyName
     description: Name of the study
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: studyName
     owner: StudyMetadata
@@ -167,7 +163,7 @@ attributes:
   studyDescription:
     name: studyDescription
     description: Description of the study
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: studyDescription
     owner: StudyMetadata
@@ -177,7 +173,7 @@ attributes:
   protocolName:
     name: protocolName
     description: Protocol name for the study
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: protocolName
     owner: StudyMetadata

@@ -47,7 +47,7 @@ Alias: defineVersion
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -68,7 +68,7 @@ Alias: defineVersion
 ```yaml
 name: defineVersion
 description: Version of Define-XML specification used
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: defineVersion
 owner: ODMFileMetadata

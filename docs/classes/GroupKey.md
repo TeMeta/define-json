@@ -67,7 +67,7 @@ GroupKey {
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -96,7 +96,7 @@ GroupKey {
 name: GroupKey
 description: A dimension subset that represents collections of dimensions that are
   subsets of the full dimension set, distinct from SeriesKey which includes Time dimensions
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - sdmx:GroupKey
 is_a: DatasetKey
@@ -111,7 +111,7 @@ is_a: DatasetKey
 name: GroupKey
 description: A dimension subset that represents collections of dimensions that are
   subsets of the full dimension set, distinct from SeriesKey which includes Time dimensions
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - sdmx:GroupKey
 is_a: DatasetKey
@@ -120,7 +120,7 @@ attributes:
     name: describedBy
     description: Associates the Dimension Descriptor defined in the Data Structure
       Definition
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: describedBy
     owner: GroupKey
     domain_of:
@@ -134,7 +134,7 @@ attributes:
     name: keyValues
     description: List of Key Values that comprise each key, separated by a dot e.g.
       SUBJ001.VISIT2.BMI
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: keyValues
     owner: GroupKey
@@ -144,7 +144,7 @@ attributes:
   attributeValues:
     name: attributeValues
     description: Association to the Attribute Values relating to Key
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: attributeValues
     owner: GroupKey

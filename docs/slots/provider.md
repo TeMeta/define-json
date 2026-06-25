@@ -3,7 +3,7 @@
 # Slot: provider 
 
 
-_The Data Provider that is part of this agreement_
+_The Data Provider that is part of this agreement. Inlined so a standalone DTA is a self-contained snapshot._
 
 
 
@@ -46,7 +46,7 @@ Alias: provider
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -66,14 +66,16 @@ Alias: provider
 <details>
 ```yaml
 name: provider
-description: The Data Provider that is part of this agreement
-from_schema: https://cdisc.org/define-json
+description: The Data Provider that is part of this agreement. Inlined so a standalone
+  DTA is a self-contained snapshot.
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: provider
 owner: ProvisionAgreement
 domain_of:
 - ProvisionAgreement
 range: DataProvider
+inlined: true
 
 ```
 </details>

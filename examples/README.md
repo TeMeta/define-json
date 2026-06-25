@@ -1,11 +1,11 @@
 # Examples Directory
 
-This directory contains example files demonstrating different aspects of Define-JSON.
+This directory contains example files demonstrating different aspects of Data Definition Specification.
 
-## Define-JSON Examples
+## Data Definition Specification Examples
 
 ### `minimal_define.json`
-**Purpose**: Minimal, readable example showing core Define-JSON concepts
+**Purpose**: Minimal, readable example showing core Data Definition Specification concepts
 
 **Demonstrates**:
 - ✅ **Conditions** as separate objects with RangeChecks
@@ -23,7 +23,7 @@ This directory contains example files demonstrating different aspects of Define-
 
 **Usage**:
 ```python
-from define_json.utils.ir import load_mdv
+from data_definition_spec.utils.ir import load_mdv
 from pathlib import Path
 
 mdv = load_mdv(Path('examples/minimal_define.json'))
@@ -52,7 +52,7 @@ print(f"Loaded {len(mdv.itemGroups)} ItemGroup(s)")
 
 **Usage**:
 ```python
-from define_json.utils.ir import load_mdv
+from data_definition_spec.utils.ir import load_mdv
 from pathlib import Path
 
 mdv = load_mdv(Path('examples/concept_method_example.json'))
@@ -98,8 +98,8 @@ python scripts/reverse_engineer_define.py examples/sample_dataset_vs.json
 
 ## Full Examples
 
-For complete, real-world Define-JSON examples, see the `data/` directory:
-- `data/defineV21-SDTM.json` - Full SDTM Define-JSON
-- `data/defineV21-ADaM.json` - Full ADaM Define-JSON
-- `data/define-360i.json` - 360i Define-JSON example
+For complete, real-world Data Definition Specification examples, see the `data/` directory:
+- `data/defineV21-SDTM.json` - Full SDTM Data Definition Specification
+- `data/defineV21-ADaM.json` - Full ADaM Data Definition Specification
+- `data/define-360i.json` - 360i Data Definition Specification example
 

@@ -24,6 +24,7 @@ URI: [odm:enum/DataType](https://cdisc.org/odm2/enum/DataType)
 | hex | None | Hexadecimal number. |
 | base64 | None | Base-64 encoded binary data. |
 | hexBinary | None | Hexadecimal encoded binary data. |
+| durationDatetime | None | ISO 8601 duration value representing a span of time (e.g., P1Y2M3DT4H5M6S). |
 
 
 
@@ -48,7 +49,7 @@ URI: [odm:enum/DataType](https://cdisc.org/odm2/enum/DataType)
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -62,7 +63,7 @@ URI: [odm:enum/DataType](https://cdisc.org/odm2/enum/DataType)
 name: DataType
 description: An enumeration that defines the fundamental data types available for
   items
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 permissible_values:
   text:
@@ -98,6 +99,9 @@ permissible_values:
   hexBinary:
     text: hexBinary
     description: Hexadecimal encoded binary data.
+  durationDatetime:
+    text: durationDatetime
+    description: ISO 8601 duration value representing a span of time (e.g., P1Y2M3DT4H5M6S).
 
 ```
 </details>

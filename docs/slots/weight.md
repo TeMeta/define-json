@@ -46,7 +46,7 @@ Alias: weight
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -67,7 +67,7 @@ Alias: weight
 ```yaml
 name: weight
 description: Numeric significance of the code (e.g., for scoring)
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: weight
 owner: CodeListItem

@@ -46,7 +46,7 @@ Alias: status
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -67,7 +67,7 @@ Alias: status
 ```yaml
 name: status
 description: Status of an Implementation Guide or of a Controlled Terminology
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: status
 owner: Standard

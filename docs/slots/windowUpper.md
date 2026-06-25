@@ -46,7 +46,7 @@ Alias: windowUpper
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -67,7 +67,7 @@ Alias: windowUpper
 ```yaml
 name: windowUpper
 description: End date/time of the timing
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: windowUpper
 owner: Timing

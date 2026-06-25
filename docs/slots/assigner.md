@@ -1,0 +1,65 @@
+
+
+# Slot: assigner 
+
+
+
+URI: [odm:slot/assigner](https://cdisc.org/odm2/slot/assigner)
+Alias: assigner
+
+<!-- no inheritance hierarchy -->
+
+
+
+
+
+## Applicable Classes
+
+| Name | Description | Modifies Slot |
+| --- | --- | --- |
+| [Policy](../classes/Policy.md) | A set of usage and access rules (ODRL) governing data. For a DTA this is typically an ODRL Agreement between an assigner (provider) and assignee (consumer), composed of permissions, prohibitions and obligations. |  no  |
+| [Rule](../classes/Rule.md) | An ODRL rule asserting that an action is permitted, prohibited, or required on a target asset, optionally restricted by constraints. |  no  |
+
+
+
+
+
+
+## Properties
+
+* Range: [String](../types/String.md)
+
+
+
+
+## Identifier and Mapping Information
+
+
+
+
+
+
+
+## Mappings
+
+| Mapping Type | Mapped Value |
+| ---  | ---  |
+| self | odm:assigner |
+| native | odm:assigner |
+
+
+
+
+## LinkML Source
+
+<details>
+```yaml
+name: assigner
+alias: assigner
+domain_of:
+- Policy
+- Rule
+range: string
+
+```
+</details>

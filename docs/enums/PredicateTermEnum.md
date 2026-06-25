@@ -68,7 +68,7 @@ URI: [odm:enum/PredicateTermEnum](https://cdisc.org/odm2/enum/PredicateTermEnum)
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -82,7 +82,7 @@ URI: [odm:enum/PredicateTermEnum](https://cdisc.org/odm2/enum/PredicateTermEnum)
 name: PredicateTermEnum
 description: An enumeration that defines short variable relationship linking phrases
   for programming purposes from the COSMoS SDTM BC model
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 permissible_values:
   ASSESSES:

@@ -27,7 +27,7 @@ Alias: conformsTo
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -59,6 +59,7 @@ alias: conformsTo
 domain_of:
 - Dataset
 - Distribution
+range: string
 
 ```
 </details>

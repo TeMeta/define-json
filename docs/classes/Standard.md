@@ -93,7 +93,7 @@ Standard ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -122,7 +122,7 @@ Standard ||--}o Coding : "coding"
 name: Standard
 description: A collection element that groups related standards within a specific
   context, used for defining CDISC implementation guides and controlled terminologies
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - odm:Standard
 is_a: IdentifiableElement
@@ -130,15 +130,17 @@ attributes:
   name:
     name: name
     description: Name of a standard
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     domain_of:
     - Labelled
+    - DefClass
+    - SubClass
     - Standard
     range: StandardName
   type:
     name: type
     description: Type of a standard
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     domain_of:
     - ItemGroup
     - Method
@@ -150,7 +152,7 @@ attributes:
   publishingSet:
     name: publishingSet
     description: Publishing Set of a Controlled Terminology
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Standard
@@ -158,15 +160,14 @@ attributes:
   version:
     name: version
     description: Version of an Implementation Guide or of a Controlled Terminology
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     domain_of:
     - Versioned
     - Standard
-    range: string
   status:
     name: status
     description: Status of an Implementation Guide or of a Controlled Terminology
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Standard
@@ -182,7 +183,7 @@ attributes:
 name: Standard
 description: A collection element that groups related standards within a specific
   context, used for defining CDISC implementation guides and controlled terminologies
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - odm:Standard
 is_a: IdentifiableElement
@@ -190,17 +191,19 @@ attributes:
   name:
     name: name
     description: Name of a standard
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: name
     owner: Standard
     domain_of:
     - Labelled
+    - DefClass
+    - SubClass
     - Standard
     range: StandardName
   type:
     name: type
     description: Type of a standard
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: type
     owner: Standard
     domain_of:
@@ -214,7 +217,7 @@ attributes:
   publishingSet:
     name: publishingSet
     description: Publishing Set of a Controlled Terminology
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: publishingSet
     owner: Standard
@@ -224,7 +227,7 @@ attributes:
   version:
     name: version
     description: Version of an Implementation Guide or of a Controlled Terminology
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: version
     owner: Standard
     domain_of:
@@ -234,7 +237,7 @@ attributes:
   status:
     name: status
     description: Status of an Implementation Guide or of a Controlled Terminology
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: status
     owner: Standard
@@ -245,7 +248,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     identifier: true
     alias: OID
@@ -257,7 +260,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: uuid
     owner: Standard
@@ -267,7 +270,7 @@ attributes:
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: description
     owner: Standard
@@ -281,7 +284,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: coding
     owner: Standard
@@ -296,7 +299,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -311,7 +314,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:altLabel
     rank: 1000

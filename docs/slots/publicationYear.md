@@ -32,7 +32,7 @@ Alias: publicationYear
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -47,7 +47,7 @@ Alias: publicationYear
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -69,12 +69,13 @@ Alias: publicationYear
 name: publicationYear
 description: Specifies the year of publication of the data or metadata in terms of
   whatever provisioning agreements might be in force.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: publicationYear
 owner: IsSdmxDataset
 domain_of:
 - IsSdmxDataset
+range: string
 
 ```
 </details>

@@ -46,7 +46,7 @@ Alias: fullName
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -67,7 +67,7 @@ Alias: fullName
 ```yaml
 name: fullName
 description: The full name of the user.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: fullName
 owner: User

@@ -113,6 +113,7 @@ Organization ||--}o Coding : "coding"
 | [DataProduct](../classes/DataProduct.md) | [dataProductOwner](../slots/dataProductOwner.md) | any_of[range] | [User](../classes/User.md) |
 | [DataProduct](../classes/DataProduct.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
+| [Policy](../classes/Policy.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 | [Analysis](../classes/Analysis.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 | [Display](../classes/Display.md) | [owner](../slots/owner.md) | any_of[range] | [User](../classes/User.md) |
 
@@ -132,7 +133,7 @@ Organization ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -162,7 +163,7 @@ Organization ||--}o Coding : "coding"
 name: User
 description: An entity that represents information about a specific user of a clinical
   data collection or data management system
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - odm:User
 broad_mappings:
@@ -172,7 +173,7 @@ attributes:
   userType:
     name: userType
     description: User's role in the study.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - User
@@ -180,23 +181,21 @@ attributes:
   userName:
     name: userName
     description: The username of the user.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - User
-    range: string
   fullName:
     name: fullName
     description: The full name of the user.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - User
-    range: string
   organization:
     name: organization
     description: The organization the user belongs to.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     close_mappings:
     - prov:actedOnBehalfOf
     rank: 1000
@@ -214,7 +213,7 @@ attributes:
 name: User
 description: An entity that represents information about a specific user of a clinical
   data collection or data management system
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - odm:User
 broad_mappings:
@@ -224,7 +223,7 @@ attributes:
   userType:
     name: userType
     description: User's role in the study.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: userType
     owner: User
@@ -234,7 +233,7 @@ attributes:
   userName:
     name: userName
     description: The username of the user.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: userName
     owner: User
@@ -244,7 +243,7 @@ attributes:
   fullName:
     name: fullName
     description: The full name of the user.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: fullName
     owner: User
@@ -254,7 +253,7 @@ attributes:
   organization:
     name: organization
     description: The organization the user belongs to.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     close_mappings:
     - prov:actedOnBehalfOf
     rank: 1000
@@ -267,7 +266,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     identifier: true
     alias: OID
@@ -279,7 +278,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: uuid
     owner: User
@@ -289,18 +288,20 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: name
     owner: User
     domain_of:
     - Labelled
+    - DefClass
+    - SubClass
     - Standard
     range: string
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: description
     owner: User
@@ -314,7 +315,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: coding
     owner: User
@@ -329,7 +330,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -344,7 +345,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:altLabel
     rank: 1000

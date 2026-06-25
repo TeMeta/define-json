@@ -46,7 +46,7 @@ Alias: relativeTo
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -67,7 +67,7 @@ Alias: relativeTo
 ```yaml
 name: relativeTo
 description: Reference to the event or occurrence that this timing is relative to.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: relativeTo
 owner: Timing

@@ -77,7 +77,7 @@ ODMFileMetadata {
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -105,22 +105,21 @@ ODMFileMetadata {
 name: ODMFileMetadata
 description: A mixin that provides ODM file-level metadata attributes including file
   identifiers, timestamps, and system information
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 mixin: true
 attributes:
   fileOID:
     name: fileOID
     description: Unique identifier for the ODM file
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - ODMFileMetadata
-    range: string
     required: true
   asOfDateTime:
     name: asOfDateTime
     description: Date and time when the data snapshot was taken
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - ODMFileMetadata
@@ -128,7 +127,7 @@ attributes:
   creationDateTime:
     name: creationDateTime
     description: Date and time when the ODM file was created
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - ODMFileMetadata
@@ -137,62 +136,55 @@ attributes:
   odmVersion:
     name: odmVersion
     description: Version of the ODM standard used
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - ODMFileMetadata
-    range: string
     required: true
   fileType:
     name: fileType
     description: Type of ODM file (e.g., Snapshot, Transactional)
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - ODMFileMetadata
-    range: string
     required: true
   originator:
     name: originator
     description: Organization or system that created the ODM file
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - ODMFileMetadata
-    range: string
   sourceSystem:
     name: sourceSystem
     description: Source system that generated the data
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - ODMFileMetadata
-    range: string
   sourceSystemVersion:
     name: sourceSystemVersion
     description: Version of the source system
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - ODMFileMetadata
-    range: string
   context:
     name: context
     description: Define-XML context (usually "Other" for Define-XML)
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - ODMFileMetadata
     - FormalExpression
-    range: string
   defineVersion:
     name: defineVersion
     description: Version of Define-XML specification used
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - ODMFileMetadata
-    range: string
 
 ```
 </details>
@@ -204,13 +196,13 @@ attributes:
 name: ODMFileMetadata
 description: A mixin that provides ODM file-level metadata attributes including file
   identifiers, timestamps, and system information
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 mixin: true
 attributes:
   fileOID:
     name: fileOID
     description: Unique identifier for the ODM file
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: fileOID
     owner: ODMFileMetadata
@@ -221,7 +213,7 @@ attributes:
   asOfDateTime:
     name: asOfDateTime
     description: Date and time when the data snapshot was taken
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: asOfDateTime
     owner: ODMFileMetadata
@@ -231,7 +223,7 @@ attributes:
   creationDateTime:
     name: creationDateTime
     description: Date and time when the ODM file was created
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: creationDateTime
     owner: ODMFileMetadata
@@ -242,7 +234,7 @@ attributes:
   odmVersion:
     name: odmVersion
     description: Version of the ODM standard used
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: odmVersion
     owner: ODMFileMetadata
@@ -253,7 +245,7 @@ attributes:
   fileType:
     name: fileType
     description: Type of ODM file (e.g., Snapshot, Transactional)
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: fileType
     owner: ODMFileMetadata
@@ -264,7 +256,7 @@ attributes:
   originator:
     name: originator
     description: Organization or system that created the ODM file
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: originator
     owner: ODMFileMetadata
@@ -274,7 +266,7 @@ attributes:
   sourceSystem:
     name: sourceSystem
     description: Source system that generated the data
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: sourceSystem
     owner: ODMFileMetadata
@@ -284,7 +276,7 @@ attributes:
   sourceSystemVersion:
     name: sourceSystemVersion
     description: Version of the source system
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: sourceSystemVersion
     owner: ODMFileMetadata
@@ -294,7 +286,7 @@ attributes:
   context:
     name: context
     description: Define-XML context (usually "Other" for Define-XML)
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: context
     owner: ODMFileMetadata
@@ -305,7 +297,7 @@ attributes:
   defineVersion:
     name: defineVersion
     description: Version of Define-XML specification used
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: defineVersion
     owner: ODMFileMetadata

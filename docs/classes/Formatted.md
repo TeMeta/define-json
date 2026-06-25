@@ -63,7 +63,7 @@ Formatted {
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -91,7 +91,7 @@ Formatted {
 ```yaml
 name: Formatted
 description: A mixin that provides slots for reporting, exchange, or storage formatting
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 related_mappings:
 - sdmx:Facet
 - sdmx:Representation
@@ -100,7 +100,7 @@ attributes:
   decimalDigits:
     name: decimalDigits
     description: For decimal values, the number of digits after the decimal point
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Formatted
@@ -108,15 +108,14 @@ attributes:
   displayFormat:
     name: displayFormat
     description: A display format for the item
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Formatted
-    range: string
   significantDigits:
     name: significantDigits
     description: For numeric values, the number of significant digits
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Formatted
@@ -131,7 +130,7 @@ attributes:
 ```yaml
 name: Formatted
 description: A mixin that provides slots for reporting, exchange, or storage formatting
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 related_mappings:
 - sdmx:Facet
 - sdmx:Representation
@@ -140,7 +139,7 @@ attributes:
   decimalDigits:
     name: decimalDigits
     description: For decimal values, the number of digits after the decimal point
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: decimalDigits
     owner: Formatted
@@ -150,7 +149,7 @@ attributes:
   displayFormat:
     name: displayFormat
     description: A display format for the item
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: displayFormat
     owner: Formatted
@@ -160,7 +159,7 @@ attributes:
   significantDigits:
     name: significantDigits
     description: For numeric values, the number of significant digits
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: significantDigits
     owner: Formatted

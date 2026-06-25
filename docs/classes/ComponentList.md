@@ -88,7 +88,7 @@ ComponentList ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -117,7 +117,7 @@ ComponentList ||--}o Coding : "coding"
 name: ComponentList
 description: An abstract definition that specifies a list of components within a data
   structure definition, including various descriptor types
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - sdmx:ComponentList
 is_a: IdentifiableElement
@@ -125,7 +125,7 @@ attributes:
   components:
     name: components
     description: The components that make up this component list
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - ComponentList
@@ -147,7 +147,7 @@ attributes:
 name: ComponentList
 description: An abstract definition that specifies a list of components within a data
   structure definition, including various descriptor types
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - sdmx:ComponentList
 is_a: IdentifiableElement
@@ -155,12 +155,13 @@ attributes:
   components:
     name: components
     description: The components that make up this component list
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: components
     owner: ComponentList
     domain_of:
     - ComponentList
+    range: string
     multivalued: true
     inlined: true
     inlined_as_list: true
@@ -172,7 +173,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     identifier: true
     alias: OID
@@ -184,7 +185,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: uuid
     owner: ComponentList
@@ -194,18 +195,20 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: name
     owner: ComponentList
     domain_of:
     - Labelled
+    - DefClass
+    - SubClass
     - Standard
     range: string
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: description
     owner: ComponentList
@@ -219,7 +222,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: coding
     owner: ComponentList
@@ -234,7 +237,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -249,7 +252,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:altLabel
     rank: 1000

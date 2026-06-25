@@ -48,7 +48,7 @@ Alias: inputPort
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -69,7 +69,7 @@ Alias: inputPort
 ```yaml
 name: inputPort
 description: Services that provide input into this data product
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: inputPort
 owner: DataProduct

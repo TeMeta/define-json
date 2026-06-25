@@ -84,7 +84,6 @@ DocumentReference {
 Analysis {
     string analysisReason  
     string analysisPurpose  
-    string analysisMethod  
     stringList inputData  
     string version  
     string href  
@@ -140,6 +139,20 @@ WhereClause {
     string owner  
     string wasDerivedFrom  
 }
+Method {
+    MethodType type  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
 
 Display ||--|o Analysis : "analysis"
 Display ||--}o DocumentReference : "location"
@@ -154,6 +167,7 @@ Comment ||--}o Coding : "coding"
 Comment ||--}o Comment : "comments"
 Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 DocumentReference ||--}o Coding : "coding"
+Analysis ||--|o Method : "analysisMethod"
 Analysis ||--}o WhereClause : "applicableWhen"
 Analysis ||--}o FormalExpression : "expressions"
 Analysis ||--}o DocumentReference : "documents"
@@ -173,6 +187,12 @@ WhereClause ||--}o Condition : "conditions"
 WhereClause ||--}o Coding : "coding"
 WhereClause ||--}o Comment : "comments"
 WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Method ||--}o FormalExpression : "expressions"
+Method ||--}o DocumentReference : "documents"
+Method ||--|o ReifiedConcept : "implementsConcept"
+Method ||--}o Coding : "coding"
+Method ||--}o Comment : "comments"
+Method ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 
 ```
 
@@ -235,7 +255,7 @@ WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -262,7 +282,7 @@ WhereClause ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ```yaml
 name: Display
 description: A rendered output of an analysis result.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 is_a: GovernedElement
 mixins:
 - Versioned
@@ -270,7 +290,7 @@ attributes:
   analysis:
     name: analysis
     description: Analysis result this display represents.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Display
@@ -279,14 +299,14 @@ attributes:
     name: displayType
     description: The type of display this result represents. e.g. table, listing,
       figure, dashboard.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Display
   location:
     name: location
     description: Reference to documents / location containing the display.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     domain_of:
     - Organization
     - Display
@@ -304,7 +324,7 @@ attributes:
 ```yaml
 name: Display
 description: A rendered output of an analysis result.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 is_a: GovernedElement
 mixins:
 - Versioned
@@ -312,7 +332,7 @@ attributes:
   analysis:
     name: analysis
     description: Analysis result this display represents.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: analysis
     owner: Display
@@ -323,16 +343,17 @@ attributes:
     name: displayType
     description: The type of display this result represents. e.g. table, listing,
       figure, dashboard.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: displayType
     owner: Display
     domain_of:
     - Display
+    range: string
   location:
     name: location
     description: Reference to documents / location containing the display.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: location
     owner: Display
     domain_of:
@@ -345,7 +366,7 @@ attributes:
   version:
     name: version
     description: The version of the external resources
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: version
     owner: Display
@@ -357,7 +378,7 @@ attributes:
     name: href
     description: Machine-readable instructions to obtain the resource e.g. FHIR path,
       URL
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: href
     owner: Display
@@ -369,7 +390,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     identifier: true
     alias: OID
@@ -381,7 +402,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: uuid
     owner: Display
@@ -391,18 +412,20 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: name
     owner: Display
     domain_of:
     - Labelled
+    - DefClass
+    - SubClass
     - Standard
     range: string
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: description
     owner: Display
@@ -416,7 +439,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: coding
     owner: Display
@@ -431,7 +454,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -446,7 +469,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:altLabel
     rank: 1000
@@ -465,7 +488,7 @@ attributes:
   mandatory:
     name: mandatory
     description: Is this element required?
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: mandatory
     owner: Display
@@ -476,7 +499,7 @@ attributes:
     name: comments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: comments
     owner: Display
@@ -489,7 +512,7 @@ attributes:
     name: siteOrSponsorComments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: siteOrSponsorComments
     owner: Display
@@ -501,7 +524,7 @@ attributes:
   purpose:
     name: purpose
     description: Purpose or rationale for this data element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: purpose
     owner: Display
@@ -514,7 +537,7 @@ attributes:
   lastUpdated:
     name: lastUpdated
     description: When the resource was last updated
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: lastUpdated
     owner: Display
@@ -524,7 +547,7 @@ attributes:
   owner:
     name: owner
     description: Party responsible for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     narrow_mappings:
     - prov:wasAttributedTo
     - prov:wasAssociatedBy
@@ -542,7 +565,7 @@ attributes:
     name: wasDerivedFrom
     description: Reference to another item that this item implements or extends, e.g.
       a template Item definition.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - prov:wasDerivedFrom
     rank: 1000

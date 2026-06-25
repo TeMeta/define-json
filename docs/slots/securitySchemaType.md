@@ -31,7 +31,7 @@ Alias: securitySchemaType
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -46,7 +46,7 @@ Alias: securitySchemaType
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -67,12 +67,13 @@ Alias: securitySchemaType
 ```yaml
 name: securitySchemaType
 description: Security or authentication method used (e.g., OAuth2)
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: securitySchemaType
 owner: DataService
 domain_of:
 - DataService
+range: string
 
 ```
 </details>

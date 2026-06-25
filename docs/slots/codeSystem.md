@@ -48,7 +48,7 @@ Alias: codeSystem
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -69,7 +69,7 @@ Alias: codeSystem
 ```yaml
 name: codeSystem
 description: The code system identifier
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: codeSystem
 owner: Coding

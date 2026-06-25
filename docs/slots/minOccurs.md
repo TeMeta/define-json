@@ -46,7 +46,7 @@ Alias: minOccurs
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -68,7 +68,7 @@ Alias: minOccurs
 name: minOccurs
 description: Minimum number of occurrences of this property in the context. Set to
   >0 to mandate some number of occurrences
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: minOccurs
 owner: ConceptProperty

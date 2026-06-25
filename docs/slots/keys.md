@@ -31,7 +31,7 @@ Alias: keys
 
 ## Properties
 
-* Range: NONE&nbsp;or&nbsp;<br />[SeriesKey](../classes/SeriesKey.md)&nbsp;or&nbsp;<br />[GroupKey](../classes/GroupKey.md)
+* Range: [String](../types/String.md)&nbsp;or&nbsp;<br />[SeriesKey](../classes/SeriesKey.md)&nbsp;or&nbsp;<br />[GroupKey](../classes/GroupKey.md)
 
 * Multivalued: True
 
@@ -50,7 +50,7 @@ Alias: keys
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -72,12 +72,13 @@ Alias: keys
 name: keys
 description: Series and Group keys in the data that are associated with dimensions
   in this structure
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: keys
 owner: Dataset
 domain_of:
 - Dataset
+range: string
 required: true
 multivalued: true
 inlined: true

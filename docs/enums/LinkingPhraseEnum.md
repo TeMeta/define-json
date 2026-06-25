@@ -77,7 +77,7 @@ URI: [odm:enum/LinkingPhraseEnum](https://cdisc.org/odm2/enum/LinkingPhraseEnum)
 | identifies the reference used in the genomic test in | None |  |
 | indicates heritability of the genetic variant in | None |  |
 | is an identifier for a published reference for the genetic variant in | None |  |
-| is an identifier for the copy, on one of two homologous chromosones, of the genetic variant in | None |  |
+| is an identifier for the copy, on one of two homologous chromosomes, of the genetic variant in | None |  |
 | is an identifier for the genetic sequence of the genetic entity represented by | None |  |
 | is the chromosome that is the position of the result in | None |  |
 | is the clinical trial or treatment setting for | None |  |
@@ -85,7 +85,7 @@ URI: [odm:enum/LinkingPhraseEnum](https://cdisc.org/odm2/enum/LinkingPhraseEnum)
 | is the date of occurrence for | None |  |
 | is the intended disease outcome for | None |  |
 | is the method of secondary analysis of results in | None |  |
-| is the numeric location, within a chromosone, genetic entity, or genetic sub-region, of the result in | None |  |
+| is the numeric location, within a chromosome, genetic entity, or genetic sub-region, of the result in | None |  |
 | is the symbol for the genomic entity that is the position of the result in | None |  |
 | is the type of genomic entity that is the position of the result in | None |  |
 | is the genetic sub-location of the result in | None |  |
@@ -122,7 +122,7 @@ URI: [odm:enum/LinkingPhraseEnum](https://cdisc.org/odm2/enum/LinkingPhraseEnum)
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -136,7 +136,7 @@ URI: [odm:enum/LinkingPhraseEnum](https://cdisc.org/odm2/enum/LinkingPhraseEnum)
 name: LinkingPhraseEnum
 description: An enumeration that defines variable relationship descriptive linking
   phrases from the COSMoS SDTM BC model
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 permissible_values:
   assesses seriousness of:
@@ -269,8 +269,8 @@ permissible_values:
     text: indicates heritability of the genetic variant in
   is an identifier for a published reference for the genetic variant in:
     text: is an identifier for a published reference for the genetic variant in
-  is an identifier for the copy, on one of two homologous chromosones, of the genetic variant in:
-    text: is an identifier for the copy, on one of two homologous chromosones, of
+  is an identifier for the copy, on one of two homologous chromosomes, of the genetic variant in:
+    text: is an identifier for the copy, on one of two homologous chromosomes, of
       the genetic variant in
   is an identifier for the genetic sequence of the genetic entity represented by:
     text: is an identifier for the genetic sequence of the genetic entity represented
@@ -287,8 +287,8 @@ permissible_values:
     text: is the intended disease outcome for
   is the method of secondary analysis of results in:
     text: is the method of secondary analysis of results in
-  is the numeric location, within a chromosone, genetic entity, or genetic sub-region, of the result in:
-    text: is the numeric location, within a chromosone, genetic entity, or genetic
+  is the numeric location, within a chromosome, genetic entity, or genetic sub-region, of the result in:
+    text: is the numeric location, within a chromosome, genetic entity, or genetic
       sub-region, of the result in
   is the symbol for the genomic entity that is the position of the result in:
     text: is the symbol for the genomic entity that is the position of the result

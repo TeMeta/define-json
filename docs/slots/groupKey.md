@@ -27,7 +27,7 @@ Alias: groupKey
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -59,6 +59,7 @@ alias: groupKey
 domain_of:
 - GroupRelationship
 - DimensionRelationship
+range: string
 
 ```
 </details>

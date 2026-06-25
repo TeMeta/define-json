@@ -33,7 +33,7 @@ Alias: attributeValues
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -48,7 +48,7 @@ Alias: attributeValues
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -69,12 +69,13 @@ Alias: attributeValues
 ```yaml
 name: attributeValues
 description: Association to the Attribute Values relating to Key
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: attributeValues
 owner: DatasetKey
 domain_of:
 - DatasetKey
+range: string
 
 ```
 </details>

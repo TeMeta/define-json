@@ -32,7 +32,7 @@ Alias: validFrom
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -47,7 +47,7 @@ Alias: validFrom
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -69,12 +69,13 @@ Alias: validFrom
 name: validFrom
 description: Indicates the inclusive start time indicating the validity of the information
   in the data set.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: validFrom
 owner: IsSdmxDataset
 domain_of:
 - IsSdmxDataset
+range: string
 
 ```
 </details>

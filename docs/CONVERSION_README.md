@@ -1,4 +1,4 @@
-# Define-XML ↔ Define-JSON Bidirectional Converter
+# Define-XML ↔ Data Definition Specification Bidirectional Converter
 
 ## Table of Contents
 - [Overview](#overview)
@@ -13,7 +13,7 @@
 
 ## Overview
 
-Complete bidirectional conversion system between Define-XML (CDISC ODM 1.2/1.3 + Define 1.0/2.1) and Define-JSON with perfect roundtrip fidelity. Supports both legacy Define-XML v1.0 and modern Define-XML v2.1 formats with automatic namespace detection.
+Complete bidirectional conversion system between Define-XML (CDISC ODM 1.2/1.3 + Define 1.0/2.1) and Data Definition Specification with perfect roundtrip fidelity. Supports both legacy Define-XML v1.0 and modern Define-XML v2.1 formats with automatic namespace detection.
 
 ## Features
 
@@ -30,7 +30,7 @@ Complete bidirectional conversion system between Define-XML (CDISC ODM 1.2/1.3 +
 
 ### XML → JSON Conversion
 ```python
-from src.define_json.converters.xml_to_json import PortableDefineXMLToJSONConverter
+from src.data_definition_spec.converters.xml_to_json import PortableDefineXMLToJSONConverter
 from pathlib import Path
 
 converter = PortableDefineXMLToJSONConverter()
@@ -42,7 +42,7 @@ json_data = converter.convert_file(
 
 ### JSON → XML Conversion
 ```python
-from src.define_json.converters.json_to_xml import DefineJSONToXMLConverter
+from src.data_definition_spec.converters.json_to_xml import DefineJSONToXMLConverter
 from pathlib import Path
 
 converter = DefineJSONToXMLConverter()
@@ -54,7 +54,7 @@ xml_root = converter.convert_file(
 
 ### Complete Roundtrip Validation
 ```python
-from src.define_json.validation.roundtrip import validate_true_roundtrip
+from src.data_definition_spec.validation.roundtrip import validate_true_roundtrip
 from pathlib import Path
 
 result = validate_true_roundtrip(
@@ -127,7 +127,7 @@ These changes are **intentional improvements**, not errors:
 ## File Structure
 
 ```
-src/define_json/
+src/data_definition_spec/
 ├── converters/
 │   ├── xml_to_json.py          # XML → JSON conversion
 │   └── json_to_xml.py          # JSON → XML conversion
@@ -143,16 +143,16 @@ src/define_json/
 ### From Project Directory
 ```bash
 # XML → JSON conversion
-python -m define_json xml2json data/define-360i.xml data/output.json
+python -m data_definition_spec xml2json data/define-360i.xml data/output.json
 
 # JSON → XML conversion  
-python -m define_json json2xml data/input.json data/output.xml
+python -m data_definition_spec json2xml data/input.json data/output.xml
 
 # Complete roundtrip test
-python -m define_json roundtrip data/input.json
+python -m data_definition_spec roundtrip data/input.json
 
 # Schema validation
-python -m define_json validate data/input.json
+python -m data_definition_spec validate data/input.json
 ```
 
 ### From Any Other Directory
@@ -160,8 +160,8 @@ python -m define_json validate data/input.json
 #### Option 1: Using PYTHONPATH (Recommended)
 ```bash
 cd /path/to/your/folder
-PYTHONPATH=/Users/jeremyteoh/Projects/define-json python -c "
-from src.define_json.converters.json_to_xml import DefineJSONToXMLConverter
+PYTHONPATH=/Users/jeremyteoh/Projects/data-definition-spec python -c "
+from src.data_definition_spec.converters.json_to_xml import DefineJSONToXMLConverter
 from pathlib import Path
 converter = DefineJSONToXMLConverter()
 converter.convert_file(Path('input.json'), Path('output.xml'))
@@ -174,8 +174,8 @@ print('Conversion complete!')
 cd /path/to/your/folder
 python -c "
 import sys
-sys.path.append('/Users/jeremyteoh/Projects/define-json')
-from src.define_json.converters.json_to_xml import DefineJSONToXMLConverter
+sys.path.append('/Users/jeremyteoh/Projects/data-definition-spec')
+from src.data_definition_spec.converters.json_to_xml import DefineJSONToXMLConverter
 from pathlib import Path
 converter = DefineJSONToXMLConverter()
 converter.convert_file(Path('input.json'), Path('output.xml'))
@@ -185,8 +185,8 @@ print('Conversion complete!')
 
 #### For XML → JSON (reverse direction):
 ```bash
-PYTHONPATH=/Users/jeremyteoh/Projects/define-json python -c "
-from src.define_json.converters.xml_to_json import PortableDefineXMLToJSONConverter
+PYTHONPATH=/Users/jeremyteoh/Projects/data-definition-spec python -c "
+from src.data_definition_spec.converters.xml_to_json import PortableDefineXMLToJSONConverter
 from pathlib import Path
 converter = PortableDefineXMLToJSONConverter()
 converter.convert_file(Path('input.xml'), Path('output.json'))
@@ -203,7 +203,7 @@ print('Conversion complete!')
 
 ### Development Workflows
 - **Schema Evolution**: Test schema changes with existing Define-XML files
-- **API Development**: Use Define-JSON as API payload format
+- **API Development**: Use Data Definition Specification as API payload format
 - **Data Validation**: Ensure Define-XML compliance through conversion testing
 
 ## Advanced Features

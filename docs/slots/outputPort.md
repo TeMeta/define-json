@@ -48,7 +48,7 @@ Alias: outputPort
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -69,7 +69,7 @@ Alias: outputPort
 ```yaml
 name: outputPort
 description: Services that expose output from this data product
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: outputPort
 owner: DataProduct

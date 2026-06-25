@@ -38,7 +38,7 @@ URI: [odm:enum/OriginType](https://cdisc.org/odm2/enum/OriginType)
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -51,7 +51,7 @@ URI: [odm:enum/OriginType](https://cdisc.org/odm2/enum/OriginType)
 ```yaml
 name: OriginType
 description: An enumeration that defines the types of origins for data items.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 permissible_values:
   Assigned:

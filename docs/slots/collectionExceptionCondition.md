@@ -47,7 +47,7 @@ Alias: collectionExceptionCondition
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -68,7 +68,7 @@ Alias: collectionExceptionCondition
 ```yaml
 name: collectionExceptionCondition
 description: Condition that defines when collection may be exempted
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: collectionExceptionCondition
 owner: IsODMItem

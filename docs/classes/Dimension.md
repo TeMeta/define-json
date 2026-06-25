@@ -348,7 +348,7 @@ RangeCheck ||--}o FormalExpression : "expressions"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -378,7 +378,7 @@ RangeCheck ||--}o FormalExpression : "expressions"
 ```yaml
 name: Dimension
 description: A data cube property that describes a categorical or hierarchical dimension
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - qb:DimensionProperty
 - sdmx:Dimension
@@ -398,7 +398,7 @@ is_a: CubeComponent
 ```yaml
 name: Dimension
 description: A data cube property that describes a categorical or hierarchical dimension
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - qb:DimensionProperty
 - sdmx:Dimension
@@ -413,7 +413,7 @@ attributes:
     name: item
     description: Reference to the Item that defines this component's data structure
       and properties
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: item
     owner: Dimension
     domain_of:
@@ -426,7 +426,7 @@ attributes:
   role:
     name: role
     description: The role this component plays in its Structure Definition
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: role
     owner: Dimension
     domain_of:
@@ -437,7 +437,7 @@ attributes:
   missingHandling:
     name: missingHandling
     description: The method for handling missing values in the measure property
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: missingHandling
     owner: Dimension
@@ -447,7 +447,7 @@ attributes:
   imputation:
     name: imputation
     description: The imputation method used for the measure property
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: imputation
     owner: Dimension
     domain_of:
@@ -458,7 +458,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     identifier: true
     alias: OID
@@ -470,7 +470,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: uuid
     owner: Dimension
@@ -480,18 +480,20 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: name
     owner: Dimension
     domain_of:
     - Labelled
+    - DefClass
+    - SubClass
     - Standard
     range: string
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: description
     owner: Dimension
@@ -505,7 +507,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: coding
     owner: Dimension
@@ -520,7 +522,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -535,7 +537,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:altLabel
     rank: 1000
@@ -554,7 +556,7 @@ attributes:
   mandatory:
     name: mandatory
     description: Is this element required?
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: mandatory
     owner: Dimension
@@ -565,7 +567,7 @@ attributes:
     name: comments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: comments
     owner: Dimension
@@ -578,7 +580,7 @@ attributes:
     name: siteOrSponsorComments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: siteOrSponsorComments
     owner: Dimension
@@ -590,7 +592,7 @@ attributes:
   purpose:
     name: purpose
     description: Purpose or rationale for this data element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: purpose
     owner: Dimension
@@ -603,7 +605,7 @@ attributes:
   lastUpdated:
     name: lastUpdated
     description: When the resource was last updated
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: lastUpdated
     owner: Dimension
@@ -613,7 +615,7 @@ attributes:
   owner:
     name: owner
     description: Party responsible for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     narrow_mappings:
     - prov:wasAttributedTo
     - prov:wasAssociatedBy
@@ -631,7 +633,7 @@ attributes:
     name: wasDerivedFrom
     description: Reference to another item that this item implements or extends, e.g.
       a template Item definition.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - prov:wasDerivedFrom
     rank: 1000

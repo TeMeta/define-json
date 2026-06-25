@@ -31,7 +31,7 @@ Alias: analysisReason
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -46,7 +46,7 @@ Alias: analysisReason
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -67,12 +67,13 @@ Alias: analysisReason
 ```yaml
 name: analysisReason
 description: 'The reason this analysis was performed.  '
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: analysisReason
 owner: Analysis
 domain_of:
 - Analysis
+range: string
 
 ```
 </details>

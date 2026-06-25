@@ -31,7 +31,7 @@ Alias: datasetType
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -46,7 +46,7 @@ Alias: datasetType
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -67,12 +67,13 @@ Alias: datasetType
 ```yaml
 name: datasetType
 description: Type or classification of the dataset
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: datasetType
 owner: Dataset
 domain_of:
 - Dataset
+range: string
 
 ```
 </details>

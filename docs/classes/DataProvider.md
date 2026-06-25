@@ -114,7 +114,25 @@ Comment {
     string owner  
     string wasDerivedFrom  
 }
+Policy {
+    PolicyType policyType  
+    string profile  
+    string assigner  
+    string assignee  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
 Dataflow {
+    stringList deliverySchedule  
     string version  
     string href  
     string OID  
@@ -146,6 +164,7 @@ FormalExpression ||--}o Coding : "coding"
 ProvisionAgreement ||--|o DataProvider : "provider"
 ProvisionAgreement ||--|o Dataflow : "dataFlow"
 ProvisionAgreement ||--|o Resource : "source"
+ProvisionAgreement ||--}o Policy : "hasPolicy"
 ProvisionAgreement ||--}o Coding : "coding"
 ProvisionAgreement ||--}o Comment : "comments"
 ProvisionAgreement ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -156,6 +175,12 @@ Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 Comment ||--}o Comment : "comments"
 Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Policy ||--}o Rule : "permission"
+Policy ||--}o Rule : "prohibition"
+Policy ||--}o Rule : "obligation"
+Policy ||--}o Coding : "coding"
+Policy ||--}o Comment : "comments"
+Policy ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Dataflow ||--|| DataStructureDefinition : "structure"
 Dataflow ||--}o Dimension : "dimensionConstraint"
 Dataflow ||--|o Analysis : "analysisMethod"
@@ -204,6 +229,7 @@ Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | used by | used in | type | used |
 | ---  | --- | --- | --- |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [provider](../slots/provider.md) | range | [DataProvider](../classes/DataProvider.md) |
+| [Policy](../classes/Policy.md) | [assigner](../slots/assigner.md) | any_of[range] | [DataProvider](../classes/DataProvider.md) |
 
 
 
@@ -221,7 +247,7 @@ Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -250,7 +276,7 @@ Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 name: DataProvider
 description: An organization element that provides data to a Data Consumer, which
   can be a sponsor, site, or any other entity that supplies data
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 close_mappings:
 - sdmx:DataProvider
 is_a: Organization
@@ -258,7 +284,7 @@ attributes:
   providesDataFor:
     name: providesDataFor
     description: The Dataflows that this provider supplies data for
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - DataProvider
@@ -267,16 +293,17 @@ attributes:
   provisionAgreements:
     name: provisionAgreements
     description: The ProvisionAgreements that this provider has with Data Consumers
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - DataProvider
+    - DataConsumer
     range: ProvisionAgreement
     multivalued: true
   source:
     name: source
     description: Association to a data source
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     domain_of:
     - Origin
     - SiteOrSponsorComment
@@ -295,7 +322,7 @@ attributes:
 name: DataProvider
 description: An organization element that provides data to a Data Consumer, which
   can be a sponsor, site, or any other entity that supplies data
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 close_mappings:
 - sdmx:DataProvider
 is_a: Organization
@@ -303,7 +330,7 @@ attributes:
   providesDataFor:
     name: providesDataFor
     description: The Dataflows that this provider supplies data for
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: providesDataFor
     owner: DataProvider
@@ -314,18 +341,19 @@ attributes:
   provisionAgreements:
     name: provisionAgreements
     description: The ProvisionAgreements that this provider has with Data Consumers
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: provisionAgreements
     owner: DataProvider
     domain_of:
     - DataProvider
+    - DataConsumer
     range: ProvisionAgreement
     multivalued: true
   source:
     name: source
     description: Association to a data source
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: source
     owner: DataProvider
     domain_of:
@@ -338,7 +366,7 @@ attributes:
   role:
     name: role
     description: The role of the organization in the study.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: role
     owner: DataProvider
     domain_of:
@@ -349,7 +377,7 @@ attributes:
   type:
     name: type
     description: The type of organization (e.g., site, sponsor, vendor).
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: type
     owner: DataProvider
     domain_of:
@@ -363,7 +391,7 @@ attributes:
   location:
     name: location
     description: The physical location of the organization.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: location
     owner: DataProvider
@@ -374,7 +402,7 @@ attributes:
   address:
     name: address
     description: The address of the organization.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: address
     owner: DataProvider
@@ -385,7 +413,7 @@ attributes:
     name: partOfOrganization
     description: Reference to a parent organization if this organization is part of
       a larger entity.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: partOfOrganization
     owner: DataProvider
@@ -396,7 +424,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     identifier: true
     alias: OID
@@ -408,7 +436,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: uuid
     owner: DataProvider
@@ -418,18 +446,20 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: name
     owner: DataProvider
     domain_of:
     - Labelled
+    - DefClass
+    - SubClass
     - Standard
     range: string
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: description
     owner: DataProvider
@@ -443,7 +473,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: coding
     owner: DataProvider
@@ -458,7 +488,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -473,7 +503,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:altLabel
     rank: 1000

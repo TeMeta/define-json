@@ -46,7 +46,7 @@ Alias: length
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -67,7 +67,7 @@ Alias: length
 ```yaml
 name: length
 description: The maximum length of the data item in characters.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: length
 owner: Item

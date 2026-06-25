@@ -49,6 +49,8 @@ IdentifiableElement ||--}o Coding : "coding"
     * [Timing](../classes/Timing.md)
     * [Dataset](../classes/Dataset.md) [ [Versioned](../classes/Versioned.md) [IsProfile](../classes/IsProfile.md) [IsSdmxDataset](../classes/IsSdmxDataset.md)]
     * [ComponentList](../classes/ComponentList.md)
+    * [Rule](../classes/Rule.md)
+    * [Constraint](../classes/Constraint.md)
 
 
 
@@ -91,7 +93,7 @@ IdentifiableElement ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -117,7 +119,7 @@ IdentifiableElement ||--}o Coding : "coding"
 <details>
 ```yaml
 name: IdentifiableElement
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 abstract: true
 mixins:
 - Identifiable
@@ -131,7 +133,7 @@ mixins:
 <details>
 ```yaml
 name: IdentifiableElement
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 abstract: true
 mixins:
 - Identifiable
@@ -141,7 +143,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     identifier: true
     alias: OID
@@ -153,7 +155,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: uuid
     owner: IdentifiableElement
@@ -163,18 +165,20 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: name
     owner: IdentifiableElement
     domain_of:
     - Labelled
+    - DefClass
+    - SubClass
     - Standard
     range: string
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: description
     owner: IdentifiableElement
@@ -188,7 +192,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: coding
     owner: IdentifiableElement
@@ -203,7 +207,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -218,7 +222,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:altLabel
     rank: 1000

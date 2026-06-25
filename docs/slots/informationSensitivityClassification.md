@@ -31,7 +31,7 @@ Alias: informationSensitivityClassification
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -46,7 +46,7 @@ Alias: informationSensitivityClassification
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -67,12 +67,13 @@ Alias: informationSensitivityClassification
 ```yaml
 name: informationSensitivityClassification
 description: Classification of the dataset's sensitivity or confidentiality
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: informationSensitivityClassification
 owner: Dataset
 domain_of:
 - Dataset
+range: string
 
 ```
 </details>

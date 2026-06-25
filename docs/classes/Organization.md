@@ -46,6 +46,7 @@ Organization ||--}o Coding : "coding"
 * [IdentifiableElement](../classes/IdentifiableElement.md) [ [Identifiable](../classes/Identifiable.md) [Labelled](../classes/Labelled.md)]
     * **Organization**
         * [DataProvider](../classes/DataProvider.md)
+        * [DataConsumer](../classes/DataConsumer.md)
 
 
 
@@ -108,6 +109,12 @@ Organization ||--}o Coding : "coding"
 | [DataProvider](../classes/DataProvider.md) | [partOfOrganization](../slots/partOfOrganization.md) | range | [Organization](../classes/Organization.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [consumer](../slots/consumer.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
+| [DataConsumer](../classes/DataConsumer.md) | [partOfOrganization](../slots/partOfOrganization.md) | range | [Organization](../classes/Organization.md) |
+| [Policy](../classes/Policy.md) | [assigner](../slots/assigner.md) | any_of[range] | [Organization](../classes/Organization.md) |
+| [Policy](../classes/Policy.md) | [assignee](../slots/assignee.md) | any_of[range] | [Organization](../classes/Organization.md) |
+| [Policy](../classes/Policy.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
+| [Rule](../classes/Rule.md) | [assigner](../slots/assigner.md) | any_of[range] | [Organization](../classes/Organization.md) |
+| [Rule](../classes/Rule.md) | [assignee](../slots/assignee.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [Analysis](../classes/Analysis.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
 | [Display](../classes/Display.md) | [owner](../slots/owner.md) | any_of[range] | [Organization](../classes/Organization.md) |
 
@@ -127,7 +134,7 @@ Organization ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -157,7 +164,7 @@ Organization ||--}o Coding : "coding"
 name: Organization
 description: An entity that represents organizational information, such as a site
   or sponsor
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - odm:Organization
 - usdm:Organization
@@ -169,16 +176,15 @@ attributes:
   role:
     name: role
     description: The role of the organization in the study.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     domain_of:
     - IsODMItem
     - Organization
     - CubeComponent
-    range: string
   type:
     name: type
     description: The type of organization (e.g., site, sponsor, vendor).
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     domain_of:
     - ItemGroup
     - Method
@@ -190,25 +196,23 @@ attributes:
   location:
     name: location
     description: The physical location of the organization.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Organization
     - Display
-    range: string
   address:
     name: address
     description: The address of the organization.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Organization
-    range: string
   partOfOrganization:
     name: partOfOrganization
     description: Reference to a parent organization if this organization is part of
       a larger entity.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Organization
@@ -224,7 +228,7 @@ attributes:
 name: Organization
 description: An entity that represents organizational information, such as a site
   or sponsor
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - odm:Organization
 - usdm:Organization
@@ -236,7 +240,7 @@ attributes:
   role:
     name: role
     description: The role of the organization in the study.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: role
     owner: Organization
     domain_of:
@@ -247,7 +251,7 @@ attributes:
   type:
     name: type
     description: The type of organization (e.g., site, sponsor, vendor).
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: type
     owner: Organization
     domain_of:
@@ -261,7 +265,7 @@ attributes:
   location:
     name: location
     description: The physical location of the organization.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: location
     owner: Organization
@@ -272,7 +276,7 @@ attributes:
   address:
     name: address
     description: The address of the organization.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: address
     owner: Organization
@@ -283,7 +287,7 @@ attributes:
     name: partOfOrganization
     description: Reference to a parent organization if this organization is part of
       a larger entity.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: partOfOrganization
     owner: Organization
@@ -294,7 +298,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     identifier: true
     alias: OID
@@ -306,7 +310,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: uuid
     owner: Organization
@@ -316,18 +320,20 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: name
     owner: Organization
     domain_of:
     - Labelled
+    - DefClass
+    - SubClass
     - Standard
     range: string
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: description
     owner: Organization
@@ -341,7 +347,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: coding
     owner: Organization
@@ -356,7 +362,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -371,7 +377,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:altLabel
     rank: 1000

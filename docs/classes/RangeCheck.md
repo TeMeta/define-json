@@ -134,7 +134,7 @@ Parameter ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -163,7 +163,7 @@ Parameter ||--}o Coding : "coding"
 name: RangeCheck
 description: A validation element that performs a simple comparison check between
   a referenced item's value and specified values, resolving to a boolean result
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 related_mappings:
 - qb:SliceKey
 - sdmx:DataKey
@@ -171,7 +171,7 @@ attributes:
   comparator:
     name: comparator
     description: The type of comparison to be performed
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - RangeCheck
@@ -179,11 +179,10 @@ attributes:
   checkValues:
     name: checkValues
     description: Values to compare against
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - RangeCheck
-    range: string
     multivalued: true
     inlined: true
     inlined_as_list: true
@@ -191,7 +190,7 @@ attributes:
     name: item
     description: Reference to the Item element whose value is being checked. If not
       specified, check applies to the enclosing context
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - RangeCheck
@@ -207,7 +206,7 @@ attributes:
     name: softHard
     description: Indicates whether a validation check is an error ("Hard") or a warning
       ("Soft")
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - RangeCheck
@@ -215,7 +214,7 @@ attributes:
   expressions:
     name: expressions
     description: A formal expression for complex checks
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     domain_of:
     - Condition
     - RangeCheck
@@ -228,10 +227,12 @@ attributes:
     name: operator
     description: Logical operator for combining child conditions or range checks.
       Defaults to ALL if not specified.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
+    ifabsent: LogicalOperator(AND)
     domain_of:
     - Condition
     - RangeCheck
+    - Constraint
     range: LogicalOperator
     required: false
 
@@ -245,7 +246,7 @@ attributes:
 name: RangeCheck
 description: A validation element that performs a simple comparison check between
   a referenced item's value and specified values, resolving to a boolean result
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 related_mappings:
 - qb:SliceKey
 - sdmx:DataKey
@@ -253,7 +254,7 @@ attributes:
   comparator:
     name: comparator
     description: The type of comparison to be performed
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: comparator
     owner: RangeCheck
@@ -263,7 +264,7 @@ attributes:
   checkValues:
     name: checkValues
     description: Values to compare against
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: checkValues
     owner: RangeCheck
@@ -277,7 +278,7 @@ attributes:
     name: item
     description: Reference to the Item element whose value is being checked. If not
       specified, check applies to the enclosing context
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: item
     owner: RangeCheck
@@ -286,6 +287,7 @@ attributes:
     - SourceItem
     - CubeComponent
     - ObservationRelationship
+    range: string
     any_of:
     - range: Item
     - range: Dimension
@@ -295,7 +297,7 @@ attributes:
     name: softHard
     description: Indicates whether a validation check is an error ("Hard") or a warning
       ("Soft")
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: softHard
     owner: RangeCheck
@@ -305,7 +307,7 @@ attributes:
   expressions:
     name: expressions
     description: A formal expression for complex checks
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: expressions
     owner: RangeCheck
     domain_of:
@@ -320,12 +322,14 @@ attributes:
     name: operator
     description: Logical operator for combining child conditions or range checks.
       Defaults to ALL if not specified.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
+    ifabsent: LogicalOperator(AND)
     alias: operator
     owner: RangeCheck
     domain_of:
     - Condition
     - RangeCheck
+    - Constraint
     range: LogicalOperator
     required: false
 

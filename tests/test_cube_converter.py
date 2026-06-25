@@ -5,8 +5,8 @@ Tests for CubeConfigConverter
 import pytest
 from pathlib import Path
 
-from define_json.utils.cube_config_converter import CubeConfigConverter
-from define_json.schema.define import (
+from data_definition_spec.utils.cube_config_converter import CubeConfigConverter
+from data_definition_spec.schema.define import (
     Item,
     DataStructureDefinition,
     Dimension,

@@ -114,7 +114,7 @@ Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -142,7 +142,7 @@ Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 name: Governed
 description: A mixin that provides slots for audit trail and standards governance,
   including mandatory status, comments, and attribution
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 mixin: true
 slot_usage:
   OID:
@@ -152,7 +152,7 @@ attributes:
   mandatory:
     name: mandatory
     description: Is this element required?
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Governed
@@ -161,7 +161,7 @@ attributes:
     name: comments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Governed
@@ -172,7 +172,7 @@ attributes:
     name: siteOrSponsorComments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Governed
@@ -182,7 +182,7 @@ attributes:
   purpose:
     name: purpose
     description: Purpose or rationale for this data element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Governed
@@ -192,7 +192,7 @@ attributes:
   lastUpdated:
     name: lastUpdated
     description: When the resource was last updated
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Governed
@@ -200,7 +200,7 @@ attributes:
   owner:
     name: owner
     description: Party responsible for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     narrow_mappings:
     - prov:wasAttributedTo
     - prov:wasAssociatedBy
@@ -215,7 +215,7 @@ attributes:
     name: wasDerivedFrom
     description: Reference to another item that this item implements or extends, e.g.
       a template Item definition.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - prov:wasDerivedFrom
     rank: 1000
@@ -246,7 +246,7 @@ attributes:
 name: Governed
 description: A mixin that provides slots for audit trail and standards governance,
   including mandatory status, comments, and attribution
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 mixin: true
 slot_usage:
   OID:
@@ -256,7 +256,7 @@ attributes:
   mandatory:
     name: mandatory
     description: Is this element required?
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: mandatory
     owner: Governed
@@ -267,7 +267,7 @@ attributes:
     name: comments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: comments
     owner: Governed
@@ -280,7 +280,7 @@ attributes:
     name: siteOrSponsorComments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: siteOrSponsorComments
     owner: Governed
@@ -292,19 +292,20 @@ attributes:
   purpose:
     name: purpose
     description: Purpose or rationale for this data element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: purpose
     owner: Governed
     domain_of:
     - Governed
+    range: string
     any_of:
     - range: string
     - range: TranslatedText
   lastUpdated:
     name: lastUpdated
     description: When the resource was last updated
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: lastUpdated
     owner: Governed
@@ -314,7 +315,7 @@ attributes:
   owner:
     name: owner
     description: Party responsible for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     narrow_mappings:
     - prov:wasAttributedTo
     - prov:wasAssociatedBy
@@ -323,6 +324,7 @@ attributes:
     owner: Governed
     domain_of:
     - Governed
+    range: string
     any_of:
     - range: User
     - range: Organization
@@ -331,7 +333,7 @@ attributes:
     name: wasDerivedFrom
     description: Reference to another item that this item implements or extends, e.g.
       a template Item definition.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - prov:wasDerivedFrom
     rank: 1000
@@ -339,6 +341,7 @@ attributes:
     owner: Governed
     domain_of:
     - Governed
+    range: string
     any_of:
     - range: Item
     - range: ItemGroup

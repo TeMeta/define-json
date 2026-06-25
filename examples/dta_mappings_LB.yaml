@@ -1,6 +1,6 @@
 # ILLUSTRATIVE multi-standard mappings for the LB (laboratory) domain.
 #
-# Purpose: demonstrate that a define-json DTA can carry CDISC + FHIR + OMOP
+# Purpose: demonstrate that a data-definition-spec DTA can carry CDISC + FHIR + OMOP
 # semantics on the same structure (horizontal "model fabric" use case).
 #
 # Provenance of codes:

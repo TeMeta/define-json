@@ -46,7 +46,7 @@ Alias: formatName
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -67,7 +67,7 @@ Alias: formatName
 ```yaml
 name: formatName
 description: Name of a standard format definition
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: formatName
 owner: CodeList

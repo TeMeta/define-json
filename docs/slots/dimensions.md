@@ -17,8 +17,8 @@ Alias: dimensions
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [DataStructureDefinition](../classes/DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures |  no  |
 | [DimensionRelationship](../classes/DimensionRelationship.md) | A relationship element that associates a DataAttribute with a specific Dimension at a specific level |  no  |
+| [DataStructureDefinition](../classes/DataStructureDefinition.md) | A structural element that defines the organization of a data cube for analysis, including dimensions, attributes, and measures |  no  |
 
 
 
@@ -27,7 +27,7 @@ Alias: dimensions
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -59,6 +59,7 @@ alias: dimensions
 domain_of:
 - DataStructureDefinition
 - DimensionRelationship
+range: string
 
 ```
 </details>

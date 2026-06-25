@@ -31,7 +31,7 @@ Alias: consumer
 
 ## Properties
 
-* Range: NONE&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md)
+* Range: [String](../types/String.md)&nbsp;or&nbsp;<br />[DataConsumer](../classes/DataConsumer.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md)
 
 
 
@@ -46,7 +46,7 @@ Alias: consumer
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -67,13 +67,15 @@ Alias: consumer
 ```yaml
 name: consumer
 description: The Data Consumer that is part of this agreement
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: consumer
 owner: ProvisionAgreement
 domain_of:
 - ProvisionAgreement
+range: string
 any_of:
+- range: DataConsumer
 - range: DataProduct
 - range: Organization
 - range: string

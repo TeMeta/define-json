@@ -193,6 +193,19 @@ TranslatedText ||--}o Translation : "translations"
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [DataConsumer](../classes/DataConsumer.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [DataConsumer](../classes/DataConsumer.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [DataConsumer](../classes/DataConsumer.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Policy](../classes/Policy.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Policy](../classes/Policy.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Policy](../classes/Policy.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Policy](../classes/Policy.md) | [purpose](../slots/purpose.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Rule](../classes/Rule.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Rule](../classes/Rule.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Rule](../classes/Rule.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Constraint](../classes/Constraint.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Constraint](../classes/Constraint.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
+| [Constraint](../classes/Constraint.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [Analysis](../classes/Analysis.md) | [description](../slots/description.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [Analysis](../classes/Analysis.md) | [label](../slots/label.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
 | [Analysis](../classes/Analysis.md) | [aliases](../slots/aliases.md) | any_of[range] | [TranslatedText](../classes/TranslatedText.md) |
@@ -218,7 +231,7 @@ TranslatedText ||--}o Translation : "translations"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -244,11 +257,11 @@ TranslatedText ||--}o Translation : "translations"
 <details>
 ```yaml
 name: TranslatedText
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 attributes:
   translations:
     name: translations
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - TranslatedText
@@ -265,11 +278,11 @@ attributes:
 <details>
 ```yaml
 name: TranslatedText
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 attributes:
   translations:
     name: translations
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: translations
     owner: TranslatedText

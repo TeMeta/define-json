@@ -17,8 +17,8 @@ Alias: dataFlow
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [ProvisionAgreement](../classes/ProvisionAgreement.md) | An agreement element that describes the contractual relationship between a Data Provider and a Data Consumer regarding data provision |  no  |
 | [DataflowRelationship](../classes/DataflowRelationship.md) | A relationship element that associates a DataAttribute with a Dataflow, reported at the Dataset level |  no  |
+| [ProvisionAgreement](../classes/ProvisionAgreement.md) | An agreement element that describes the contractual relationship between a Data Provider and a Data Consumer regarding data provision |  no  |
 
 
 
@@ -27,7 +27,7 @@ Alias: dataFlow
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -59,6 +59,7 @@ alias: dataFlow
 domain_of:
 - DataflowRelationship
 - ProvisionAgreement
+range: string
 
 ```
 </details>

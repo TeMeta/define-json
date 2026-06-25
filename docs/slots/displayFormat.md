@@ -47,7 +47,7 @@ Alias: displayFormat
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -68,7 +68,7 @@ Alias: displayFormat
 ```yaml
 name: displayFormat
 description: A display format for the item
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: displayFormat
 owner: Formatted

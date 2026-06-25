@@ -53,7 +53,7 @@ Alias: expression
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -74,7 +74,7 @@ Alias: expression
 ```yaml
 name: expression
 description: The actual text of the formal expression (renamed from 'code' for disambiguation).
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 aliases:
 - code
 rank: 1000

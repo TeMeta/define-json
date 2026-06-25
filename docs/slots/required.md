@@ -46,7 +46,7 @@ Alias: required
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -68,7 +68,7 @@ Alias: required
 name: required
 description: Indicates whether this parameter must be provided when the  containing
   expression is evaluated (technical constraint).
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 ifabsent: 'False'
 alias: required

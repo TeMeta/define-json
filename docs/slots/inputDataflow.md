@@ -48,7 +48,7 @@ Alias: inputDataflow
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -71,7 +71,7 @@ Alias: inputDataflow
 name: inputDataflow
 description: Description of the input interface before concrete Datasets exist. Dataflows
   referenced here represent the demand side of a ProvisionAgreement.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 close_mappings:
 - dcat:distribution
 rank: 1000

@@ -46,7 +46,7 @@ Alias: frequency
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -67,7 +67,7 @@ Alias: frequency
 ```yaml
 name: frequency
 description: Frequency. Use dose frequency terminology e.g. "BID" if applicable.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: frequency
 owner: Timing

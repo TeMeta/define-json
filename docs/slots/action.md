@@ -3,11 +3,6 @@
 # Slot: action 
 
 
-_Defines the action to be taken by the recipient system (information, append, replace, delete)_
-
-
-
-
 
 URI: [odm:slot/action](https://cdisc.org/odm2/slot/action)
 Alias: action
@@ -24,6 +19,7 @@ Alias: action
 | --- | --- | --- |
 | [IsSdmxDataset](../classes/IsSdmxDataset.md) | A mixin that provides additional metadata specific to SDMX Datasets |  no  |
 | [Dataset](../classes/Dataset.md) | A collection element that groups observations sharing the same dimensionality, expressed as a set of unique dimensions within a Data Product context |  no  |
+| [Rule](../classes/Rule.md) | An ODRL rule asserting that an action is permitted, prohibited, or required on a target asset, optionally restricted by constraints. |  no  |
 
 
 
@@ -32,7 +28,7 @@ Alias: action
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -41,13 +37,6 @@ Alias: action
 
 
 
-
-
-
-### Schema Source
-
-
-* from schema: https://cdisc.org/define-json
 
 
 
@@ -67,14 +56,11 @@ Alias: action
 <details>
 ```yaml
 name: action
-description: Defines the action to be taken by the recipient system (information,
-  append, replace, delete)
-from_schema: https://cdisc.org/define-json
-rank: 1000
 alias: action
-owner: IsSdmxDataset
 domain_of:
 - IsSdmxDataset
+- Rule
+range: string
 
 ```
 </details>

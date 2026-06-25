@@ -23,7 +23,6 @@ Dataset {
     stringList keys  
     string datasetType  
     string conformsTo  
-    stringList hasPolicy  
     string informationSensitivityClassification  
     string version  
     string href  
@@ -66,6 +65,23 @@ Timing {
     string label  
     stringList aliases  
 }
+Policy {
+    PolicyType policyType  
+    string profile  
+    string assigner  
+    string assignee  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
 DataStructureDefinition {
     boolean evolvingStructure  
     string domain  
@@ -91,6 +107,7 @@ DataStructureDefinition {
     string href  
 }
 Dataflow {
+    stringList deliverySchedule  
     string version  
     string href  
     string OID  
@@ -136,6 +153,7 @@ Distribution ||--|o Dataset : "isDistributionOf"
 Dataset ||--|o Dataflow : "describedBy"
 Dataset ||--|o DataStructureDefinition : "structuredBy"
 Dataset ||--}o Distribution : "distribution"
+Dataset ||--}o Policy : "hasPolicy"
 Dataset ||--}o Coding : "security"
 Dataset ||--|o Timing : "validityPeriod"
 Dataset ||--}o Coding : "coding"
@@ -143,6 +161,12 @@ Timing ||--|o NominalOccurrence : "relativeTo"
 Timing ||--|o NominalOccurrence : "relativeFrom"
 Timing ||--|o Method : "imputation"
 Timing ||--}o Coding : "coding"
+Policy ||--}o Rule : "permission"
+Policy ||--}o Rule : "prohibition"
+Policy ||--}o Rule : "obligation"
+Policy ||--}o Coding : "coding"
+Policy ||--}o Comment : "comments"
+Policy ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 DataStructureDefinition ||--}o Dimension : "dimensions"
 DataStructureDefinition ||--}o Measure : "measures"
 DataStructureDefinition ||--}o DataAttribute : "attributes"
@@ -152,6 +176,7 @@ DataStructureDefinition ||--}o Item : "keySequence"
 DataStructureDefinition ||--}o ItemGroup : "slices"
 DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
 DataStructureDefinition ||--}o WhereClause : "applicableWhen"
+DataStructureDefinition ||--|o DefClass : "observationClass"
 DataStructureDefinition ||--}o Coding : "security"
 DataStructureDefinition ||--|o Timing : "validityPeriod"
 DataStructureDefinition ||--|o Standard : "standard"
@@ -215,7 +240,7 @@ FormalExpression ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -245,7 +270,7 @@ FormalExpression ||--}o Coding : "coding"
 name: Distribution
 description: A technical representation that provides a specific format or access
   method for a dataset
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - dprod:Distribution
 - dcat:Distribution
@@ -257,7 +282,7 @@ attributes:
   accessService:
     name: accessService
     description: Service that provides access to this distribution
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Distribution
@@ -265,7 +290,7 @@ attributes:
   conformsTo:
     name: conformsTo
     description: The standard or specification the distribution conforms to
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     domain_of:
     - Dataset
     - Distribution
@@ -275,7 +300,7 @@ attributes:
   isDistributionOf:
     name: isDistributionOf
     description: Dataset this distribution represents
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Distribution
@@ -283,7 +308,7 @@ attributes:
   format:
     name: format
     description: File format or serialization used in the distribution
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Distribution
@@ -298,7 +323,7 @@ attributes:
 name: Distribution
 description: A technical representation that provides a specific format or access
   method for a dataset
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - dprod:Distribution
 - dcat:Distribution
@@ -310,7 +335,7 @@ attributes:
   accessService:
     name: accessService
     description: Service that provides access to this distribution
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: accessService
     owner: Distribution
@@ -320,19 +345,20 @@ attributes:
   conformsTo:
     name: conformsTo
     description: The standard or specification the distribution conforms to
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: conformsTo
     owner: Distribution
     domain_of:
     - Dataset
     - Distribution
+    range: string
     any_of:
     - range: string
     - range: DataStructureDefinition
   isDistributionOf:
     name: isDistributionOf
     description: Dataset this distribution represents
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: isDistributionOf
     owner: Distribution
@@ -342,12 +368,13 @@ attributes:
   format:
     name: format
     description: File format or serialization used in the distribution
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: format
     owner: Distribution
     domain_of:
     - Distribution
+    range: string
 
 ```
 </details>

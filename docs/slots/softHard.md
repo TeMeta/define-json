@@ -46,7 +46,7 @@ Alias: softHard
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -68,7 +68,7 @@ Alias: softHard
 name: softHard
 description: Indicates whether a validation check is an error ("Hard") or a warning
   ("Soft")
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: softHard
 owner: RangeCheck

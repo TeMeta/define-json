@@ -27,7 +27,7 @@ Alias: rangeChecks
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -59,6 +59,7 @@ alias: rangeChecks
 domain_of:
 - Item
 - Condition
+range: string
 
 ```
 </details>

@@ -48,7 +48,7 @@ Alias: document
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -69,7 +69,7 @@ Alias: document
 ```yaml
 name: document
 description: Reference to an external document
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: document
 owner: SourceItem

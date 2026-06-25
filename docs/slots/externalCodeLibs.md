@@ -48,7 +48,7 @@ Alias: externalCodeLibs
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -69,7 +69,7 @@ Alias: externalCodeLibs
 ```yaml
 name: externalCodeLibs
 description: External code libraries referenced
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: externalCodeLibs
 owner: FormalExpression

@@ -32,7 +32,7 @@ Alias: reportingBegin
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -47,7 +47,7 @@ Alias: reportingBegin
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -69,12 +69,13 @@ Alias: reportingBegin
 name: reportingBegin
 description: A specific time period in a known system of time periods that identifies
   the start period of a report.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: reportingBegin
 owner: IsSdmxDataset
 domain_of:
 - IsSdmxDataset
+range: string
 
 ```
 </details>

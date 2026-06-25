@@ -46,7 +46,7 @@ Alias: codeSystemVersion
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -67,7 +67,7 @@ Alias: codeSystemVersion
 ```yaml
 name: codeSystemVersion
 description: The code system version
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: codeSystemVersion
 owner: Coding

@@ -31,7 +31,7 @@ Alias: format
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -46,7 +46,7 @@ Alias: format
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -67,12 +67,13 @@ Alias: format
 ```yaml
 name: format
 description: File format or serialization used in the distribution
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: format
 owner: Distribution
 domain_of:
 - Distribution
+range: string
 
 ```
 </details>

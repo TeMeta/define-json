@@ -1,5 +1,5 @@
 """
-Comprehensive tests for Define-XML ↔ Define-JSON conversion and roundtrip validation.
+Comprehensive tests for Define-XML ↔ Data Definition Specification conversion and roundtrip validation.
 
 Tests both conversion directions and validates semantic equivalence.
 """
@@ -12,17 +12,17 @@ import xml.etree.ElementTree as ET
 
 # Import our converters and validators
 try:
-    from define_json.converters.xml_to_json import DefineXMLToJSONConverter
-    from define_json.converters.json_to_xml import DefineJSONToXMLConverter
-    from define_json.validation.roundtrip import run_roundtrip_test, validate_true_roundtrip
-    from define_json.validation.schema import validate_define_json
+    from data_definition_spec.converters.xml_to_json import DefineXMLToJSONConverter
+    from data_definition_spec.converters.json_to_xml import DefineJSONToXMLConverter
+    from data_definition_spec.validation.roundtrip import run_roundtrip_test, validate_true_roundtrip
+    from data_definition_spec.validation.schema import validate_data_definition_spec
     CONVERTERS_AVAILABLE = True
 except ImportError:
     CONVERTERS_AVAILABLE = False
 
 
 class TestDefineConversion(unittest.TestCase):
-    """Test Define-XML ↔ Define-JSON conversion functionality."""
+    """Test Define-XML ↔ Data Definition Specification conversion functionality."""
     
     @classmethod
     def setUpClass(cls):
@@ -292,7 +292,7 @@ class TestDefineConversion(unittest.TestCase):
         
         # Validate against schema
         try:
-            result = validate_define_json(json_data)
+            result = validate_data_definition_spec(json_data)
             self.assertTrue(result.get('valid', False), f"JSON should be schema compliant: {result.get('errors', [])}")
         except Exception as e:
             # If schema validation isn't available, just check basic structure

@@ -48,7 +48,7 @@ Alias: terms
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -70,7 +70,7 @@ Alias: terms
 name: terms
 description: Terms in this dictionary - leave this empty in most cases to keep the
   file small
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: terms
 owner: Dictionary

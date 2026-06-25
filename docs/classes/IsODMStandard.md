@@ -81,7 +81,7 @@ Standard ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -108,13 +108,13 @@ Standard ||--}o Coding : "coding"
 ```yaml
 name: IsODMStandard
 description: A mixin that provides properties to indicate standards compliance
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 mixin: true
 attributes:
   standard:
     name: standard
     description: Reference to the standard being implemented
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - IsODMStandard
@@ -122,7 +122,7 @@ attributes:
   isNonStandard:
     name: isNonStandard
     description: One or more members of this set are non-standard extensions
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - IsODMStandard
@@ -137,13 +137,13 @@ attributes:
 ```yaml
 name: IsODMStandard
 description: A mixin that provides properties to indicate standards compliance
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 mixin: true
 attributes:
   standard:
     name: standard
     description: Reference to the standard being implemented
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: standard
     owner: IsODMStandard
@@ -153,7 +153,7 @@ attributes:
   isNonStandard:
     name: isNonStandard
     description: One or more members of this set are non-standard extensions
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: isNonStandard
     owner: IsODMStandard

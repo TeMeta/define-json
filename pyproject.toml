@@ -1,11 +1,11 @@
 [tool.poetry]
-name = "define-json"
+name = "data-definition-spec"
 version = "0.1.0"
-description = "Define-JSON CDISC standard for data contracts"
+description = "Data Definition Specification CDISC standard for data contracts"
 authors = ["Jeremy Teoh"]
 readme = "README.md"
 package-mode = true
-packages = [{include = "define_json", from = "src"}]
+packages = [{include = "data_definition_spec", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"

@@ -22,8 +22,8 @@ Alias: selection
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [DataService](../classes/DataService.md) | A service element that provides an API or endpoint for serving or receiving data |  no  |
 | [Resource](../classes/Resource.md) | An external reference that serves as the source for a Dataset, ItemGroup, or Item |  no  |
+| [DataService](../classes/DataService.md) | A service element that provides an API or endpoint for serving or receiving data |  no  |
 
 
 
@@ -49,7 +49,7 @@ Alias: selection
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -70,7 +70,7 @@ Alias: selection
 ```yaml
 name: selection
 description: Machine-executable instructions for selecting data from the resource.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: selection
 owner: Resource

@@ -31,7 +31,7 @@ Alias: analysisPurpose
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -46,7 +46,7 @@ Alias: analysisPurpose
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -67,12 +67,13 @@ Alias: analysisPurpose
 ```yaml
 name: analysisPurpose
 description: The purpose or role of this analysis in the study.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: analysisPurpose
 owner: Analysis
 domain_of:
 - Analysis
+range: string
 
 ```
 </details>

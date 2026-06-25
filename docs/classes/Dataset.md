@@ -19,7 +19,6 @@ Dataset {
     stringList keys  
     string datasetType  
     string conformsTo  
-    stringList hasPolicy  
     string informationSensitivityClassification  
     string version  
     string href  
@@ -90,6 +89,65 @@ NominalOccurrence {
     string owner  
     string wasDerivedFrom  
 }
+Policy {
+    PolicyType policyType  
+    string profile  
+    string assigner  
+    string assignee  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+SiteOrSponsorComment {
+    string text  
+    OriginSource sourceType  
+    string source  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+Comment {
+    string text  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+Rule {
+    string action  
+    string target  
+    string assigner  
+    string assignee  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
 Distribution {
     string conformsTo  
     string format  
@@ -132,36 +190,6 @@ DataStructureDefinition {
     string version  
     string href  
 }
-SiteOrSponsorComment {
-    string text  
-    OriginSource sourceType  
-    string source  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
-Comment {
-    string text  
-    string OID  
-    string uuid  
-    string name  
-    string description  
-    string label  
-    stringList aliases  
-    boolean mandatory  
-    string purpose  
-    datetime lastUpdated  
-    string owner  
-    string wasDerivedFrom  
-}
 Standard {
     StandardName name  
     StandardType type  
@@ -173,6 +201,9 @@ Standard {
     string description  
     string label  
     stringList aliases  
+}
+DefClass {
+    string name  
 }
 WhereClause {
     string OID  
@@ -301,6 +332,7 @@ Dimension {
     string wasDerivedFrom  
 }
 Dataflow {
+    stringList deliverySchedule  
     string version  
     string href  
     string OID  
@@ -318,7 +350,6 @@ Dataflow {
 Analysis {
     string analysisReason  
     string analysisPurpose  
-    string analysisMethod  
     stringList inputData  
     string version  
     string href  
@@ -339,6 +370,7 @@ Analysis {
 Dataset ||--|o Dataflow : "describedBy"
 Dataset ||--|o DataStructureDefinition : "structuredBy"
 Dataset ||--}o Distribution : "distribution"
+Dataset ||--}o Policy : "hasPolicy"
 Dataset ||--}o Coding : "security"
 Dataset ||--|o Timing : "validityPeriod"
 Dataset ||--}o Coding : "coding"
@@ -357,6 +389,21 @@ NominalOccurrence ||--}o Condition : "condition"
 NominalOccurrence ||--}o Coding : "coding"
 NominalOccurrence ||--}o Comment : "comments"
 NominalOccurrence ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Policy ||--}o Rule : "permission"
+Policy ||--}o Rule : "prohibition"
+Policy ||--}o Rule : "obligation"
+Policy ||--}o Coding : "coding"
+Policy ||--}o Comment : "comments"
+Policy ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+SiteOrSponsorComment ||--}o Coding : "coding"
+SiteOrSponsorComment ||--}o Comment : "comments"
+SiteOrSponsorComment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Comment ||--}o DocumentReference : "documents"
+Comment ||--}o Coding : "coding"
+Comment ||--}o Comment : "comments"
+Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Rule ||--}o Constraint : "constraint"
+Rule ||--}o Coding : "coding"
 Distribution ||--|o DataService : "accessService"
 Distribution ||--|o Dataset : "isDistributionOf"
 DataService ||--|o Distribution : "isAccessServiceOf"
@@ -371,20 +418,15 @@ DataStructureDefinition ||--}o Item : "keySequence"
 DataStructureDefinition ||--}o ItemGroup : "slices"
 DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
 DataStructureDefinition ||--}o WhereClause : "applicableWhen"
+DataStructureDefinition ||--|o DefClass : "observationClass"
 DataStructureDefinition ||--}o Coding : "security"
 DataStructureDefinition ||--|o Timing : "validityPeriod"
 DataStructureDefinition ||--|o Standard : "standard"
 DataStructureDefinition ||--}o Coding : "coding"
 DataStructureDefinition ||--}o Comment : "comments"
 DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-SiteOrSponsorComment ||--}o Coding : "coding"
-SiteOrSponsorComment ||--}o Comment : "comments"
-SiteOrSponsorComment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
-Comment ||--}o DocumentReference : "documents"
-Comment ||--}o Coding : "coding"
-Comment ||--}o Comment : "comments"
-Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Standard ||--}o Coding : "coding"
+DefClass ||--}o SubClass : "subClasses"
 WhereClause ||--}o Condition : "conditions"
 WhereClause ||--}o Coding : "coding"
 WhereClause ||--}o Comment : "comments"
@@ -398,6 +440,7 @@ ItemGroup ||--}o Item : "keySequence"
 ItemGroup ||--}o ItemGroup : "slices"
 ItemGroup ||--|o ReifiedConcept : "implementsConcept"
 ItemGroup ||--}o WhereClause : "applicableWhen"
+ItemGroup ||--|o DefClass : "observationClass"
 ItemGroup ||--}o Coding : "security"
 ItemGroup ||--|o Timing : "validityPeriod"
 ItemGroup ||--|o Standard : "standard"
@@ -440,6 +483,7 @@ Dataflow ||--|o Analysis : "analysisMethod"
 Dataflow ||--}o Coding : "coding"
 Dataflow ||--}o Comment : "comments"
 Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Analysis ||--|o Method : "analysisMethod"
 Analysis ||--}o WhereClause : "applicableWhen"
 Analysis ||--}o FormalExpression : "expressions"
 Analysis ||--}o DocumentReference : "documents"
@@ -470,14 +514,14 @@ Analysis ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | [datasetType](../slots/datasetType.md) | 0..1 <br/> [String](../types/String.md) | Type or classification of the dataset | direct |
 | [distribution](../slots/distribution.md) | * <br/> [Distribution](../classes/Distribution.md) | Representations of this dataset in various formats or access methods | direct |
 | [conformsTo](../slots/conformsTo.md) | 0..1 <br/> [String](../types/String.md) | Specification or standard that this dataset conforms to | direct |
-| [hasPolicy](../slots/hasPolicy.md) | * <br/> [String](../types/String.md) | Access or usage policy applied to this dataset | direct |
+| [hasPolicy](../slots/hasPolicy.md) | * <br/> [Policy](../classes/Policy.md) | Access or usage policy applied to this dataset | direct |
 | [informationSensitivityClassification](../slots/informationSensitivityClassification.md) | 0..1 <br/> [String](../types/String.md) | Classification of the dataset's sensitivity or confidentiality | direct |
 | [version](../slots/version.md) | 0..1 <br/> [String](../types/String.md) | The version of the external resources | [Versioned](../classes/Versioned.md) |
 | [href](../slots/href.md) | 0..1 <br/> [String](../types/String.md) | Machine-readable instructions to obtain the resource e.g. FHIR path, URL | [Versioned](../classes/Versioned.md) |
 | [profile](../slots/profile.md) | * <br/> [String](../types/String.md) | Profiles this resource claims to conform to | [IsProfile](../classes/IsProfile.md) |
 | [security](../slots/security.md) | * <br/> [Coding](../classes/Coding.md) | Security tags applied to this resource | [IsProfile](../classes/IsProfile.md) |
 | [authenticator](../slots/authenticator.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Who/what authenticated the resource | [IsProfile](../classes/IsProfile.md) |
-| [validityPeriod](../slots/validityPeriod.md) | 0..1 <br/> [Timing](../classes/Timing.md) | Time period during which the resouce is valid | [IsProfile](../classes/IsProfile.md) |
+| [validityPeriod](../slots/validityPeriod.md) | 0..1 <br/> [Timing](../classes/Timing.md) | Time period during which the resource is valid | [IsProfile](../classes/IsProfile.md) |
 | [action](../slots/action.md) | 0..1 <br/> [String](../types/String.md) | Defines the action to be taken by the recipient system (information, append, replace, delete) | [IsSdmxDataset](../classes/IsSdmxDataset.md) |
 | [reportingBegin](../slots/reportingBegin.md) | 0..1 <br/> [String](../types/String.md) | A specific time period in a known system of time periods that identifies the start period of a report. | [IsSdmxDataset](../classes/IsSdmxDataset.md) |
 | [reportingEnd](../slots/reportingEnd.md) | 0..1 <br/> [String](../types/String.md) | A specific time period in a known system of time periods that identifies the end period of a report. | [IsSdmxDataset](../classes/IsSdmxDataset.md) |
@@ -523,7 +567,7 @@ Analysis ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -553,7 +597,7 @@ Analysis ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 name: Dataset
 description: A collection element that groups observations sharing the same dimensionality,
   expressed as a set of unique dimensions within a Data Product context
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 close_mappings:
 - qb:Dataset
 - sdmx:Dataset
@@ -573,7 +617,7 @@ attributes:
     name: describedBy
     description: Associates a Dataflow and thereby a Data Structure Definition to
       the data set.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Dataset
@@ -584,7 +628,7 @@ attributes:
     description: Associates the Data Structure Definition that defines the structure
       of the Data Set. Note that the Data Structure Definition is the same as that
       associated (non-mandatory) to the Dataflow.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Dataset
@@ -592,7 +636,7 @@ attributes:
   publishedBy:
     name: publishedBy
     description: Associates the Data Provider that reports/publishes the data.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     domain_of:
     - Dictionary
     - Dataset
@@ -603,7 +647,7 @@ attributes:
     name: keys
     description: Series and Group keys in the data that are associated with dimensions
       in this structure
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Dataset
@@ -617,14 +661,14 @@ attributes:
   datasetType:
     name: datasetType
     description: Type or classification of the dataset
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Dataset
   distribution:
     name: distribution
     description: Representations of this dataset in various formats or access methods
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - dcat:distribution
     rank: 1000
@@ -637,7 +681,7 @@ attributes:
   conformsTo:
     name: conformsTo
     description: Specification or standard that this dataset conforms to
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     close_mappings:
     - dcterms:conformsTo
     rank: 1000
@@ -647,18 +691,20 @@ attributes:
   hasPolicy:
     name: hasPolicy
     description: Access or usage policy applied to this dataset
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Dataset
     - DataProduct
+    - ProvisionAgreement
+    range: Policy
     multivalued: true
     inlined: true
     inlined_as_list: true
   informationSensitivityClassification:
     name: informationSensitivityClassification
     description: Classification of the dataset's sensitivity or confidentiality
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Dataset
@@ -673,7 +719,7 @@ attributes:
 name: Dataset
 description: A collection element that groups observations sharing the same dimensionality,
   expressed as a set of unique dimensions within a Data Product context
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 close_mappings:
 - qb:Dataset
 - sdmx:Dataset
@@ -693,7 +739,7 @@ attributes:
     name: describedBy
     description: Associates a Dataflow and thereby a Data Structure Definition to
       the data set.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: describedBy
     owner: Dataset
@@ -706,7 +752,7 @@ attributes:
     description: Associates the Data Structure Definition that defines the structure
       of the Data Set. Note that the Data Structure Definition is the same as that
       associated (non-mandatory) to the Dataflow.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: structuredBy
     owner: Dataset
@@ -716,12 +762,13 @@ attributes:
   publishedBy:
     name: publishedBy
     description: Associates the Data Provider that reports/publishes the data.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: publishedBy
     owner: Dataset
     domain_of:
     - Dictionary
     - Dataset
+    range: string
     any_of:
     - range: Organization
     - range: string
@@ -729,12 +776,13 @@ attributes:
     name: keys
     description: Series and Group keys in the data that are associated with dimensions
       in this structure
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: keys
     owner: Dataset
     domain_of:
     - Dataset
+    range: string
     required: true
     multivalued: true
     inlined: true
@@ -745,16 +793,17 @@ attributes:
   datasetType:
     name: datasetType
     description: Type or classification of the dataset
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: datasetType
     owner: Dataset
     domain_of:
     - Dataset
+    range: string
   distribution:
     name: distribution
     description: Representations of this dataset in various formats or access methods
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - dcat:distribution
     rank: 1000
@@ -769,7 +818,7 @@ attributes:
   conformsTo:
     name: conformsTo
     description: Specification or standard that this dataset conforms to
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     close_mappings:
     - dcterms:conformsTo
     rank: 1000
@@ -778,32 +827,36 @@ attributes:
     domain_of:
     - Dataset
     - Distribution
+    range: string
   hasPolicy:
     name: hasPolicy
     description: Access or usage policy applied to this dataset
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: hasPolicy
     owner: Dataset
     domain_of:
     - Dataset
     - DataProduct
+    - ProvisionAgreement
+    range: Policy
     multivalued: true
     inlined: true
     inlined_as_list: true
   informationSensitivityClassification:
     name: informationSensitivityClassification
     description: Classification of the dataset's sensitivity or confidentiality
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: informationSensitivityClassification
     owner: Dataset
     domain_of:
     - Dataset
+    range: string
   version:
     name: version
     description: The version of the external resources
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: version
     owner: Dataset
@@ -815,7 +868,7 @@ attributes:
     name: href
     description: Machine-readable instructions to obtain the resource e.g. FHIR path,
       URL
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: href
     owner: Dataset
@@ -826,18 +879,19 @@ attributes:
   profile:
     name: profile
     description: Profiles this resource claims to conform to
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: profile
     owner: Dataset
     domain_of:
     - IsProfile
+    - Policy
     range: string
     multivalued: true
   security:
     name: security
     description: Security tags applied to this resource
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: security
     owner: Dataset
@@ -850,7 +904,7 @@ attributes:
   authenticator:
     name: authenticator
     description: Who/what authenticated the resource
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: authenticator
     owner: Dataset
@@ -864,8 +918,8 @@ attributes:
     - range: string
   validityPeriod:
     name: validityPeriod
-    description: Time period during which the resouce is valid
-    from_schema: https://cdisc.org/define-json
+    description: Time period during which the resource is valid
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: validityPeriod
     owner: Dataset
@@ -877,18 +931,19 @@ attributes:
     name: action
     description: Defines the action to be taken by the recipient system (information,
       append, replace, delete)
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: action
     owner: Dataset
     domain_of:
     - IsSdmxDataset
+    - Rule
     range: string
   reportingBegin:
     name: reportingBegin
     description: A specific time period in a known system of time periods that identifies
       the start period of a report.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: reportingBegin
     owner: Dataset
@@ -899,7 +954,7 @@ attributes:
     name: reportingEnd
     description: A specific time period in a known system of time periods that identifies
       the end period of a report.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: reportingEnd
     owner: Dataset
@@ -910,7 +965,7 @@ attributes:
     name: dataExtractionDate
     description: A specific time period that identifies the date and time that the
       data are extracted from a data source.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: dataExtractionDate
     owner: Dataset
@@ -921,7 +976,7 @@ attributes:
     name: validFrom
     description: Indicates the inclusive start time indicating the validity of the
       information in the data set.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: validFrom
     owner: Dataset
@@ -932,7 +987,7 @@ attributes:
     name: validTo
     description: Indicates the inclusive end time indicating the validity of the information
       in the data set.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: validTo
     owner: Dataset
@@ -943,7 +998,7 @@ attributes:
     name: publicationYear
     description: Specifies the year of publication of the data or metadata in terms
       of whatever provisioning agreements might be in force.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: publicationYear
     owner: Dataset
@@ -954,7 +1009,7 @@ attributes:
     name: publicationPeriod
     description: Specifies the period of publication of the data or metadata in terms
       of whatever provisioning agreements might be in force.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: publicationPeriod
     owner: Dataset
@@ -965,7 +1020,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     identifier: true
     alias: OID
@@ -977,7 +1032,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: uuid
     owner: Dataset
@@ -987,18 +1042,20 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: name
     owner: Dataset
     domain_of:
     - Labelled
+    - DefClass
+    - SubClass
     - Standard
     range: string
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: description
     owner: Dataset
@@ -1012,7 +1069,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: coding
     owner: Dataset
@@ -1027,7 +1084,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -1042,7 +1099,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:altLabel
     rank: 1000

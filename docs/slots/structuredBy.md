@@ -46,7 +46,7 @@ Alias: structuredBy
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -69,7 +69,7 @@ name: structuredBy
 description: Associates the Data Structure Definition that defines the structure of
   the Data Set. Note that the Data Structure Definition is the same as that associated
   (non-mandatory) to the Dataflow.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: structuredBy
 owner: Dataset

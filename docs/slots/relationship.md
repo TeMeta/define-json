@@ -46,7 +46,7 @@ Alias: relationship
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -67,7 +67,7 @@ Alias: relationship
 ```yaml
 name: relationship
 description: Relationship to the referencing entity
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: relationship
 owner: DocumentReference

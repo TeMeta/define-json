@@ -5,7 +5,7 @@ These YAML files define data cube structures using **SDMX conventions** for anal
 ## Quick Start
 
 ```python
-from define_json.utils.cube_config_converter import CubeConfigConverter
+from data_definition_spec.utils.cube_config_converter import CubeConfigConverter
 
 # Load and validate a cube config
 items, components, dsd = CubeConfigConverter.validate_and_convert(
@@ -93,7 +93,7 @@ data_mapping:
 ## Using with DataCubeEngine
 
 ```python
-from define_json.utils.datacube_engine import DataCubeEngine
+from data_definition_spec.utils.datacube_engine import DataCubeEngine
 
 # Load config and data
 engine = DataCubeEngine()
@@ -110,7 +110,7 @@ print(f"Total observations: {summary['total_observations']}")
 
 ## Schema Validation
 
-The converter automatically validates configs against the define-json schema:
+The converter automatically validates configs against the data-definition-spec schema:
 
 ```python
 # This will raise ValidationError if config is invalid

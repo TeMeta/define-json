@@ -48,7 +48,7 @@ Alias: distribution
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -70,7 +70,7 @@ Alias: distribution
 ```yaml
 name: distribution
 description: Representations of this dataset in various formats or access methods
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - dcat:distribution
 rank: 1000

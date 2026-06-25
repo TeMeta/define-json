@@ -193,7 +193,7 @@ Measure ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -221,20 +221,20 @@ Measure ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ```yaml
 name: MeasureRelationship
 description: A relationship element that associates a DataAttribute with a Measure
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - sdmx:MeasureRelationship
 attributes:
   measure:
     name: measure
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - MeasureRelationship
     range: Measure
   attribute:
     name: attribute
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     domain_of:
     - Resource
     - MeasureRelationship
@@ -253,13 +253,13 @@ attributes:
 ```yaml
 name: MeasureRelationship
 description: A relationship element that associates a DataAttribute with a Measure
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - sdmx:MeasureRelationship
 attributes:
   measure:
     name: measure
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: measure
     owner: MeasureRelationship
@@ -268,7 +268,7 @@ attributes:
     range: Measure
   attribute:
     name: attribute
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: attribute
     owner: MeasureRelationship
     domain_of:

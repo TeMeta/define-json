@@ -67,7 +67,7 @@ SeriesKey {
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -97,7 +97,7 @@ name: SeriesKey
 description: A unique identifier that comprises the cross-product of dimension values
   including Time to identify observations, representing dimensions shared by all observations
   in a conceptual series
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - sdmx:SeriesKey
 is_a: DatasetKey
@@ -113,7 +113,7 @@ name: SeriesKey
 description: A unique identifier that comprises the cross-product of dimension values
   including Time to identify observations, representing dimensions shared by all observations
   in a conceptual series
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - sdmx:SeriesKey
 is_a: DatasetKey
@@ -122,7 +122,7 @@ attributes:
     name: describedBy
     description: Associates the Dimension Descriptor defined in the Data Structure
       Definition
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: describedBy
     owner: SeriesKey
     domain_of:
@@ -136,7 +136,7 @@ attributes:
     name: keyValues
     description: List of Key Values that comprise each key, separated by a dot e.g.
       SUBJ001.VISIT2.BMI
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: keyValues
     owner: SeriesKey
@@ -146,7 +146,7 @@ attributes:
   attributeValues:
     name: attributeValues
     description: Association to the Attribute Values relating to Key
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: attributeValues
     owner: SeriesKey

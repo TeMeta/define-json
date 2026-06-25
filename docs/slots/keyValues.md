@@ -33,7 +33,7 @@ Alias: keyValues
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -48,7 +48,7 @@ Alias: keyValues
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -69,12 +69,13 @@ Alias: keyValues
 ```yaml
 name: keyValues
 description: List of Key Values that comprise each key, separated by a dot e.g. SUBJ001.VISIT2.BMI
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: keyValues
 owner: DatasetKey
 domain_of:
 - DatasetKey
+range: string
 
 ```
 </details>

@@ -48,7 +48,7 @@ Alias: pages
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -69,7 +69,7 @@ Alias: pages
 ```yaml
 name: pages
 description: Reference to specific pages in a PDF document
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: pages
 owner: DocumentReference

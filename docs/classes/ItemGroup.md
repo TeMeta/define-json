@@ -129,6 +129,13 @@ NominalOccurrence {
     string owner  
     string wasDerivedFrom  
 }
+DefClass {
+    string name  
+}
+SubClass {
+    string name  
+    string parentClass  
+}
 WhereClause {
     string OID  
     string uuid  
@@ -246,6 +253,7 @@ ItemGroup ||--}o Item : "keySequence"
 ItemGroup ||--}o ItemGroup : "slices"
 ItemGroup ||--|o ReifiedConcept : "implementsConcept"
 ItemGroup ||--}o WhereClause : "applicableWhen"
+ItemGroup ||--|o DefClass : "observationClass"
 ItemGroup ||--}o Coding : "security"
 ItemGroup ||--|o Timing : "validityPeriod"
 ItemGroup ||--|o Standard : "standard"
@@ -275,6 +283,8 @@ NominalOccurrence ||--}o Condition : "condition"
 NominalOccurrence ||--}o Coding : "coding"
 NominalOccurrence ||--}o Comment : "comments"
 NominalOccurrence ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+DefClass ||--}o SubClass : "subClasses"
+SubClass ||--}o SubClass : "subClasses"
 WhereClause ||--}o Condition : "conditions"
 WhereClause ||--}o Coding : "coding"
 WhereClause ||--}o Comment : "comments"
@@ -340,10 +350,11 @@ RangeCheck ||--}o FormalExpression : "expressions"
 | [implementsConcept](../slots/implementsConcept.md) | 0..1 <br/> [ReifiedConcept](../classes/ReifiedConcept.md) | Reference to a abstract concept topic that this item group is a specialization of | direct |
 | [applicableWhen](../slots/applicableWhen.md) | * <br/> [WhereClause](../classes/WhereClause.md) | References to different situations that define when this item applies.<br>Multiple whereClauses are combined with OR logic: the item applies if ANY referenced WhereClause matches.<br>Within each WhereClause, conditions are combined with AND logic: all conditions must be true.<br><br>Example: whereClause: ["WC.SYSBP", "WC.DIABP"] means the item applies when<br>(all conditions in WC.SYSBP are true) OR (all conditions in WC.DIABP are true). | direct |
 | [hasNoData](../slots/hasNoData.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | Used to indicate that this ItemGroup has no data, e.g. for a manifest. | direct |
+| [observationClass](../slots/observationClass.md) | 0..1 <br/> [DefClass](../classes/DefClass.md) | Identifies the predefined CDISC model Class. | direct |
 | [profile](../slots/profile.md) | * <br/> [String](../types/String.md) | Profiles this resource claims to conform to | [IsProfile](../classes/IsProfile.md) |
 | [security](../slots/security.md) | * <br/> [Coding](../classes/Coding.md) | Security tags applied to this resource | [IsProfile](../classes/IsProfile.md) |
 | [authenticator](../slots/authenticator.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | Who/what authenticated the resource | [IsProfile](../classes/IsProfile.md) |
-| [validityPeriod](../slots/validityPeriod.md) | 0..1 <br/> [Timing](../classes/Timing.md) | Time period during which the resouce is valid | [IsProfile](../classes/IsProfile.md) |
+| [validityPeriod](../slots/validityPeriod.md) | 0..1 <br/> [Timing](../classes/Timing.md) | Time period during which the resource is valid | [IsProfile](../classes/IsProfile.md) |
 | [standard](../slots/standard.md) | 0..1 <br/> [Standard](../classes/Standard.md) | Reference to the standard being implemented | [IsODMStandard](../classes/IsODMStandard.md) |
 | [isNonStandard](../slots/isNonStandard.md) | 0..1 <br/> [Boolean](../types/Boolean.md) | One or more members of this set are non-standard extensions | [IsODMStandard](../classes/IsODMStandard.md) |
 | [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
@@ -396,6 +407,7 @@ RangeCheck ||--}o FormalExpression : "expressions"
 | [DataAttribute](../classes/DataAttribute.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [DataProduct](../classes/DataProduct.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
+| [Policy](../classes/Policy.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [Analysis](../classes/Analysis.md) | [inputData](../slots/inputData.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [Analysis](../classes/Analysis.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
 | [Display](../classes/Display.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ItemGroup](../classes/ItemGroup.md) |
@@ -416,7 +428,7 @@ RangeCheck ||--}o FormalExpression : "expressions"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -448,7 +460,7 @@ name: ItemGroup
 description: A collection element that groups related items or subgroups within a
   specific context, used for tables, FHIR resource profiles, biomedical concept specializations,
   or form sections
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 close_mappings:
 - odm:ItemGroupDef
 - odm:ItemGroupRef
@@ -475,18 +487,17 @@ attributes:
   domain:
     name: domain
     description: Domain abbreviation for the dataset.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - ItemGroup
     - DataProduct
-    range: string
   structure:
     name: structure
     description: Data structure of the item group, indicating how the records are
       organized. If this is a FHIR Resource, is it nested or flattened? If this is
       a structured concept, is it a Biomedical/Derivation/Analysis concept?
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - ItemGroup
@@ -497,7 +508,7 @@ attributes:
   isReferenceData:
     name: isReferenceData
     description: Set to Yes if this is a reference item group.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - ItemGroup
@@ -505,7 +516,7 @@ attributes:
   type:
     name: type
     description: Type of item group
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - ItemGroup
@@ -518,7 +529,7 @@ attributes:
   items:
     name: items
     description: Items in this group
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     close_mappings:
     - fhir:StructureDefinition/snapshot
     - fhir:StructureDefinition/differential
@@ -537,7 +548,7 @@ attributes:
       Order determines sorting precedence, merge operations, and record uniqueness.
       These are allowed to be null, unlike stricter dataset dimensions or primary
       keys.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     close_mappings:
     - odm:ItemRef.KeySequence
     - sdmx:DimensionDescriptor
@@ -546,13 +557,11 @@ attributes:
     - ItemGroup
     range: Item
     multivalued: true
-    inlined: true
-    inlined_as_list: true
   slices:
     name: slices
     description: Slices are specific subset ItemGroups that belong to, or are used
       by this ItemGroup
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - ItemGroup
@@ -564,7 +573,7 @@ attributes:
     name: implementsConcept
     description: Reference to a abstract concept topic that this item group is a specialization
       of
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - ItemGroup
@@ -586,7 +595,7 @@ attributes:
       (all conditions in WC.SYSBP are true) OR (all conditions in WC.DIABP are true).
 
       '
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     close_mappings:
     - fhir:StructureDefinition/context
     domain_of:
@@ -600,11 +609,20 @@ attributes:
   hasNoData:
     name: hasNoData
     description: Used to indicate that this ItemGroup has no data, e.g. for a manifest.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     domain_of:
     - IsODMItem
     - ItemGroup
     range: boolean
+  observationClass:
+    name: observationClass
+    description: Identifies the predefined CDISC model Class.
+    from_schema: https://cdisc.org/data-definition-spec
+    rank: 1000
+    domain_of:
+    - ItemGroup
+    range: DefClass
+    required: false
 
 ```
 </details>
@@ -617,7 +635,7 @@ name: ItemGroup
 description: A collection element that groups related items or subgroups within a
   specific context, used for tables, FHIR resource profiles, biomedical concept specializations,
   or form sections
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 close_mappings:
 - odm:ItemGroupDef
 - odm:ItemGroupRef
@@ -644,7 +662,7 @@ attributes:
   domain:
     name: domain
     description: Domain abbreviation for the dataset.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: domain
     owner: ItemGroup
@@ -657,20 +675,21 @@ attributes:
     description: Data structure of the item group, indicating how the records are
       organized. If this is a FHIR Resource, is it nested or flattened? If this is
       a structured concept, is it a Biomedical/Derivation/Analysis concept?
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: structure
     owner: ItemGroup
     domain_of:
     - ItemGroup
     - Dataflow
+    range: string
     any_of:
     - range: string
     - range: TranslatedText
   isReferenceData:
     name: isReferenceData
     description: Set to Yes if this is a reference item group.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: isReferenceData
     owner: ItemGroup
@@ -680,7 +699,7 @@ attributes:
   type:
     name: type
     description: Type of item group
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: type
     owner: ItemGroup
@@ -695,7 +714,7 @@ attributes:
   items:
     name: items
     description: Items in this group
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     close_mappings:
     - fhir:StructureDefinition/snapshot
     - fhir:StructureDefinition/differential
@@ -716,7 +735,7 @@ attributes:
       Order determines sorting precedence, merge operations, and record uniqueness.
       These are allowed to be null, unlike stricter dataset dimensions or primary
       keys.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     close_mappings:
     - odm:ItemRef.KeySequence
     - sdmx:DimensionDescriptor
@@ -727,13 +746,11 @@ attributes:
     - ItemGroup
     range: Item
     multivalued: true
-    inlined: true
-    inlined_as_list: true
   slices:
     name: slices
     description: Slices are specific subset ItemGroups that belong to, or are used
       by this ItemGroup
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: slices
     owner: ItemGroup
@@ -747,7 +764,7 @@ attributes:
     name: implementsConcept
     description: Reference to a abstract concept topic that this item group is a specialization
       of
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: implementsConcept
     owner: ItemGroup
@@ -771,7 +788,7 @@ attributes:
       (all conditions in WC.SYSBP are true) OR (all conditions in WC.DIABP are true).
 
       '
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     close_mappings:
     - fhir:StructureDefinition/context
     alias: applicableWhen
@@ -787,28 +804,40 @@ attributes:
   hasNoData:
     name: hasNoData
     description: Used to indicate that this ItemGroup has no data, e.g. for a manifest.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: hasNoData
     owner: ItemGroup
     domain_of:
     - IsODMItem
     - ItemGroup
     range: boolean
+  observationClass:
+    name: observationClass
+    description: Identifies the predefined CDISC model Class.
+    from_schema: https://cdisc.org/data-definition-spec
+    rank: 1000
+    alias: observationClass
+    owner: ItemGroup
+    domain_of:
+    - ItemGroup
+    range: DefClass
+    required: false
   profile:
     name: profile
     description: Profiles this resource claims to conform to
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: profile
     owner: ItemGroup
     domain_of:
     - IsProfile
+    - Policy
     range: string
     multivalued: true
   security:
     name: security
     description: Security tags applied to this resource
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: security
     owner: ItemGroup
@@ -821,7 +850,7 @@ attributes:
   authenticator:
     name: authenticator
     description: Who/what authenticated the resource
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: authenticator
     owner: ItemGroup
@@ -835,8 +864,8 @@ attributes:
     - range: string
   validityPeriod:
     name: validityPeriod
-    description: Time period during which the resouce is valid
-    from_schema: https://cdisc.org/define-json
+    description: Time period during which the resource is valid
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: validityPeriod
     owner: ItemGroup
@@ -847,7 +876,7 @@ attributes:
   standard:
     name: standard
     description: Reference to the standard being implemented
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: standard
     owner: ItemGroup
@@ -857,7 +886,7 @@ attributes:
   isNonStandard:
     name: isNonStandard
     description: One or more members of this set are non-standard extensions
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: isNonStandard
     owner: ItemGroup
@@ -868,7 +897,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     identifier: true
     alias: OID
@@ -880,7 +909,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: uuid
     owner: ItemGroup
@@ -890,18 +919,20 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: name
     owner: ItemGroup
     domain_of:
     - Labelled
+    - DefClass
+    - SubClass
     - Standard
     range: string
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: description
     owner: ItemGroup
@@ -915,7 +946,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: coding
     owner: ItemGroup
@@ -930,7 +961,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -945,7 +976,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:altLabel
     rank: 1000
@@ -964,7 +995,7 @@ attributes:
   mandatory:
     name: mandatory
     description: Is this element required?
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: mandatory
     owner: ItemGroup
@@ -975,7 +1006,7 @@ attributes:
     name: comments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: comments
     owner: ItemGroup
@@ -988,7 +1019,7 @@ attributes:
     name: siteOrSponsorComments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: siteOrSponsorComments
     owner: ItemGroup
@@ -1000,7 +1031,7 @@ attributes:
   purpose:
     name: purpose
     description: Purpose or rationale for this data element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: purpose
     owner: ItemGroup
@@ -1013,7 +1044,7 @@ attributes:
   lastUpdated:
     name: lastUpdated
     description: When the resource was last updated
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: lastUpdated
     owner: ItemGroup
@@ -1023,7 +1054,7 @@ attributes:
   owner:
     name: owner
     description: Party responsible for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     narrow_mappings:
     - prov:wasAttributedTo
     - prov:wasAssociatedBy
@@ -1041,7 +1072,7 @@ attributes:
     name: wasDerivedFrom
     description: Reference to another item that this item implements or extends, e.g.
       a template Item definition.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - prov:wasDerivedFrom
     rank: 1000
@@ -1067,7 +1098,7 @@ attributes:
   version:
     name: version
     description: The version of the external resources
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: version
     owner: ItemGroup
@@ -1079,7 +1110,7 @@ attributes:
     name: href
     description: Machine-readable instructions to obtain the resource e.g. FHIR path,
       URL
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: href
     owner: ItemGroup

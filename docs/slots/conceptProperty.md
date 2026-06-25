@@ -27,7 +27,7 @@ Alias: conceptProperty
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -59,6 +59,7 @@ alias: conceptProperty
 domain_of:
 - Item
 - Parameter
+range: string
 
 ```
 </details>

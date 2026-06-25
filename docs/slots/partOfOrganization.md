@@ -22,8 +22,9 @@ Alias: partOfOrganization
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Organization](../classes/Organization.md) | An entity that represents organizational information, such as a site or sponsor |  no  |
+| [DataConsumer](../classes/DataConsumer.md) | An organization element that receives data from a Data Provider under a ProvisionAgreement; the demand-side counterpart of DataProvider. |  no  |
 | [DataProvider](../classes/DataProvider.md) | An organization element that provides data to a Data Consumer, which can be a sponsor, site, or any other entity that supplies data |  no  |
+| [Organization](../classes/Organization.md) | An entity that represents organizational information, such as a site or sponsor |  no  |
 
 
 
@@ -47,7 +48,7 @@ Alias: partOfOrganization
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -69,7 +70,7 @@ Alias: partOfOrganization
 name: partOfOrganization
 description: Reference to a parent organization if this organization is part of a
   larger entity.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: partOfOrganization
 owner: Organization

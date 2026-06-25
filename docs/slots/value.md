@@ -17,8 +17,8 @@ Alias: value
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Timing](../classes/Timing.md) | A temporal element that describes the timing of an event or occurrence, which can be absolute, relative, or nominal |  no  |
 | [Translation](../classes/Translation.md) | A text representation that provides content in a specific language, used for multilingual support |  no  |
+| [Timing](../classes/Timing.md) | A temporal element that describes the timing of an event or occurrence, which can be absolute, relative, or nominal |  no  |
 | [Parameter](../classes/Parameter.md) | A variable element that describes an input used in a formal expression |  no  |
 
 
@@ -28,7 +28,7 @@ Alias: value
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -61,6 +61,7 @@ domain_of:
 - Translation
 - Parameter
 - Timing
+range: string
 
 ```
 </details>

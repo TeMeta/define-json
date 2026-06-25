@@ -31,7 +31,7 @@ Alias: resources
 
 ## Properties
 
-* Range: NONE&nbsp;or&nbsp;<br />[DocumentReference](../classes/DocumentReference.md)&nbsp;or&nbsp;<br />[Resource](../classes/Resource.md)
+* Range: [String](../types/String.md)&nbsp;or&nbsp;<br />[DocumentReference](../classes/DocumentReference.md)&nbsp;or&nbsp;<br />[Resource](../classes/Resource.md)
 
 * Multivalued: True
 
@@ -48,7 +48,7 @@ Alias: resources
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -70,12 +70,13 @@ Alias: resources
 name: resources
 description: References to resources and documents that describe this version of the
   metadata.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: resources
 owner: MetaDataVersion
 domain_of:
 - MetaDataVersion
+range: string
 multivalued: true
 inlined: true
 inlined_as_list: true

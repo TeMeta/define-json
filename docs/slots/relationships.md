@@ -48,7 +48,7 @@ Alias: relationships
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -70,7 +70,7 @@ Alias: relationships
 name: relationships
 description: Relationships between items, item groups, and other elements in this
   version of the metadata.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: relationships
 owner: MetaDataVersion

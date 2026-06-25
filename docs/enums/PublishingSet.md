@@ -42,7 +42,7 @@ URI: [odm:enum/PublishingSet](https://cdisc.org/odm2/enum/PublishingSet)
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -55,7 +55,7 @@ URI: [odm:enum/PublishingSet](https://cdisc.org/odm2/enum/PublishingSet)
 ```yaml
 name: PublishingSet
 description: An enumeration that defines permissible values for publishing sets
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 permissible_values:
   ADaM:

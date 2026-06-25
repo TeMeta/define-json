@@ -37,7 +37,7 @@ import yaml
 # Valid DataType enum members used when inferring types from raw data.
 _ISO_DATE = re.compile(r"^\d{4}-\d{2}-\d{2}([T ].*)?$")
 
-# Map common source dataType aliases (ODM/Dataset-JSON) onto define-json DataType.
+# Map common source dataType aliases (ODM/Dataset-JSON) onto data-definition-spec DataType.
 _DTYPE_ALIAS = {"string": "text", "char": "text", "decimal": "float",
                 "number": "float", "int": "integer"}
 
@@ -58,7 +58,7 @@ ITEM_SLOTS = (
 
 
 def _infer_type(values: list[str]) -> str:
-    """Infer a define-json DataType from sampled string values."""
+    """Infer a data-definition-spec DataType from sampled string values."""
     vals = [v for v in values if v not in ("", None)]
     if not vals:
         return "text"
@@ -89,7 +89,7 @@ def _infer_type(values: list[str]) -> str:
 
 
 def _spec_from_csv(path: Path) -> dict[str, Any]:
-    """Build a minimal define-json spec from a CSV: one ItemGroup, inferred types."""
+    """Build a minimal data-definition-spec spec from a CSV: one ItemGroup, inferred types."""
     with path.open(newline="") as fh:
         rows = list(csv.reader(fh))
     if not rows:
@@ -112,7 +112,7 @@ def _spec_from_csv(path: Path) -> dict[str, Any]:
 
 
 def _spec_from_dataset_json(data: dict[str, Any]) -> dict[str, Any]:
-    """Build a define-json spec from a Dataset-JSON file (clinicalData.itemGroupData)."""
+    """Build a data-definition-spec spec from a Dataset-JSON file (clinicalData.itemGroupData)."""
     cd = data["clinicalData"]
     groups = []
     for ig_oid, ig in cd.get("itemGroupData", {}).items():
@@ -135,10 +135,10 @@ def _spec_from_dataset_json(data: dict[str, Any]) -> dict[str, Any]:
 
 
 def load_spec(path: Path) -> dict[str, Any]:
-    """Load any supported spec/dataset and normalise to a define-json dict.
+    """Load any supported spec/dataset and normalise to a data-definition-spec dict.
 
-    Supported: define-json (.json with 'itemGroups'), Dataset-JSON (.json with
-    'clinicalData'), CSV (.csv), and define-json-as-YAML (.yaml/.yml). Define-XML
+    Supported: data-definition-spec (.json with 'itemGroups'), Dataset-JSON (.json with
+    'clinicalData'), CSV (.csv), and data-definition-spec-as-YAML (.yaml/.yml). Define-XML
     must be converted first (the message says how).
     """
     if not path.exists():
@@ -150,29 +150,29 @@ def load_spec(path: Path) -> dict[str, Any]:
     if suffix == ".xml":
         raise SystemExit(
             "Define-XML detected. Convert it first, then pass the JSON:\n"
-            "  python -m define_json xml2json <input.xml> <output.json>"
+            "  python -m data_definition_spec xml2json <input.xml> <output.json>"
         )
     if suffix in (".yaml", ".yml"):
         data = yaml.safe_load(path.read_text())
         if isinstance(data, dict) and "itemGroups" in data:
             return data
-        raise SystemExit("YAML spec must be define-json shaped (contain 'itemGroups').")
+        raise SystemExit("YAML spec must be data-definition-spec shaped (contain 'itemGroups').")
     if suffix == ".json":
         try:
             data = json.loads(path.read_text())
         except json.JSONDecodeError as exc:
             raise SystemExit(f"Source is not valid JSON ({path}): {exc}")
         if "itemGroups" in data:
-            return data                          # define-json
+            return data                          # data-definition-spec
         if "clinicalData" in data:
             return _spec_from_dataset_json(data)  # Dataset-JSON
         raise SystemExit(
-            "Unrecognised JSON: expected define-json ('itemGroups') or "
+            "Unrecognised JSON: expected data-definition-spec ('itemGroups') or "
             "Dataset-JSON ('clinicalData')."
         )
     raise SystemExit(
-        f"Unsupported input type {suffix!r}. Use define-json/Dataset-JSON (.json), "
-        "CSV (.csv), or define-json YAML (.yaml)."
+        f"Unsupported input type {suffix!r}. Use data-definition-spec/Dataset-JSON (.json), "
+        "CSV (.csv), or data-definition-spec YAML (.yaml)."
     )
 
 
@@ -306,7 +306,7 @@ def build_dta(
     source = {
         "OID": f"RES.SRC.{domain}",
         "name": spec.get("fileOID") or spec.get("OID") or PLACEHOLDER,
-        "resourceType": spec.get("fileType", "Define-JSON"),
+        "resourceType": spec.get("fileType", "Data Definition Specification"),
         "version": spec.get("defineVersion") or spec.get("odmVersion"),
         "href": PLACEHOLDER,  # URI of the source define document
     }
@@ -363,8 +363,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("source", type=Path,
-                        help="Source spec/dataset: define-json or Dataset-JSON (.json), "
-                             "CSV (.csv), or define-json YAML (.yaml)")
+                        help="Source spec/dataset: data-definition-spec or Dataset-JSON (.json), "
+                             "CSV (.csv), or data-definition-spec YAML (.yaml)")
     parser.add_argument("domain", nargs="?", default=None,
                         help="Domain / ItemGroup to put under agreement (e.g. LB). "
                              "Optional when the source has a single group.")

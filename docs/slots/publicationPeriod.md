@@ -32,7 +32,7 @@ Alias: publicationPeriod
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -47,7 +47,7 @@ Alias: publicationPeriod
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -69,12 +69,13 @@ Alias: publicationPeriod
 name: publicationPeriod
 description: Specifies the period of publication of the data or metadata in terms
   of whatever provisioning agreements might be in force.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: publicationPeriod
 owner: IsSdmxDataset
 domain_of:
 - IsSdmxDataset
+range: string
 
 ```
 </details>

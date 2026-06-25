@@ -11,8 +11,8 @@ import pytest
 from pathlib import Path
 import yaml
 
-from define_json.utils.ir import load_mdv
-from define_json.utils.sdmx import (
+from data_definition_spec.utils.ir import load_mdv
+from data_definition_spec.utils.sdmx import (
     load_sdmx_policy,
     build_dsd_for_domain,
     validate_dsd_completeness,
@@ -22,7 +22,7 @@ from define_json.utils.sdmx import (
     infer_attribute_relationships,
     analyze_attribute_variance,
 )
-from define_json.schema.define import (
+from data_definition_spec.schema.define import (
     MetaDataVersion,
     ItemGroup,
     Dimension,

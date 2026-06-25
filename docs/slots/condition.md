@@ -48,7 +48,7 @@ Alias: condition
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -69,7 +69,7 @@ Alias: condition
 ```yaml
 name: condition
 description: A condition that must be met for this occurrence to be valid.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: condition
 owner: NominalOccurrence

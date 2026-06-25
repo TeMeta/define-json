@@ -31,7 +31,7 @@ Alias: displayType
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -46,7 +46,7 @@ Alias: displayType
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -68,12 +68,13 @@ Alias: displayType
 name: displayType
 description: The type of display this result represents. e.g. table, listing, figure,
   dashboard.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: displayType
 owner: Display
 domain_of:
 - Display
+range: string
 
 ```
 </details>

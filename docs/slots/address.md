@@ -22,8 +22,9 @@ Alias: address
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Organization](../classes/Organization.md) | An entity that represents organizational information, such as a site or sponsor |  no  |
+| [DataConsumer](../classes/DataConsumer.md) | An organization element that receives data from a Data Provider under a ProvisionAgreement; the demand-side counterpart of DataProvider. |  no  |
 | [DataProvider](../classes/DataProvider.md) | An organization element that provides data to a Data Consumer, which can be a sponsor, site, or any other entity that supplies data |  no  |
+| [Organization](../classes/Organization.md) | An entity that represents organizational information, such as a site or sponsor |  no  |
 
 
 
@@ -47,7 +48,7 @@ Alias: address
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -68,7 +69,7 @@ Alias: address
 ```yaml
 name: address
 description: The address of the organization.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: address
 owner: Organization

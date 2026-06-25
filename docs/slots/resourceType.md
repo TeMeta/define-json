@@ -22,8 +22,8 @@ Alias: resourceType
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [DataService](../classes/DataService.md) | A service element that provides an API or endpoint for serving or receiving data |  no  |
 | [Resource](../classes/Resource.md) | An external reference that serves as the source for a Dataset, ItemGroup, or Item |  no  |
+| [DataService](../classes/DataService.md) | A service element that provides an API or endpoint for serving or receiving data |  no  |
 
 
 
@@ -47,7 +47,7 @@ Alias: resourceType
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -68,7 +68,7 @@ Alias: resourceType
 ```yaml
 name: resourceType
 description: Type of resource (e.g.,  "ODM", "HL7-FHIR", "HL7-CDA", "HL7-v2", "OpenEHR-extract")
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: resourceType
 owner: Resource

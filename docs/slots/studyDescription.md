@@ -47,7 +47,7 @@ Alias: studyDescription
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -68,7 +68,7 @@ Alias: studyDescription
 ```yaml
 name: studyDescription
 description: Description of the study
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: studyDescription
 owner: StudyMetadata

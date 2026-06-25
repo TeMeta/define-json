@@ -31,7 +31,7 @@ Alias: inputData
 
 ## Properties
 
-* Range: NONE&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[Dataset](../classes/Dataset.md)
+* Range: [String](../types/String.md)&nbsp;or&nbsp;<br />[ItemGroup](../classes/ItemGroup.md)&nbsp;or&nbsp;<br />[Dataset](../classes/Dataset.md)
 
 * Multivalued: True
 
@@ -48,7 +48,7 @@ Alias: inputData
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -71,12 +71,13 @@ name: inputData
 description: Datasets or slices/subsets of datasets asked for by this analysis. If
   a Item is referenced by a Parameter e.g. Analysis Variable, make sure to include
   its parent ItemGroup here.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: inputData
 owner: Analysis
 domain_of:
 - Analysis
+range: string
 multivalued: true
 inlined: false
 any_of:

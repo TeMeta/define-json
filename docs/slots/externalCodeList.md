@@ -46,7 +46,7 @@ Alias: externalCodeList
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -67,7 +67,7 @@ Alias: externalCodeList
 ```yaml
 name: externalCodeList
 description: Reference to a code list that is defined externally to this study
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: externalCodeList
 owner: CodeList

@@ -48,7 +48,7 @@ Alias: codeListItems
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -70,7 +70,7 @@ Alias: codeListItems
 name: codeListItems
 description: The individual values that make up this CodeList. The type of CodeListItem
   included determines its behaviour
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: codeListItems
 owner: CodeList

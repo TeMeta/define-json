@@ -95,6 +95,10 @@ Coding {
 | [DataService](../classes/DataService.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
 | [DataProvider](../classes/DataProvider.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
+| [DataConsumer](../classes/DataConsumer.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
+| [Policy](../classes/Policy.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
+| [Rule](../classes/Rule.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
+| [Constraint](../classes/Constraint.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
 | [Analysis](../classes/Analysis.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
 | [Display](../classes/Display.md) | [coding](../slots/coding.md) | range | [Coding](../classes/Coding.md) |
 
@@ -114,7 +118,7 @@ Coding {
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -144,7 +148,7 @@ Coding {
 name: Coding
 description: A semantic reference that provides standardized codes and their meanings
   from controlled vocabularies
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - odm:Coding
 - usdm:Code
@@ -160,16 +164,15 @@ attributes:
   code:
     name: code
     description: The code value
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Coding
-    range: string
     required: true
   decode:
     name: decode
     description: Human-readable meaning
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:prefLabel
     domain_of:
@@ -181,24 +184,22 @@ attributes:
   codeSystem:
     name: codeSystem
     description: The code system identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Coding
-    range: string
     required: true
   codeSystemVersion:
     name: codeSystemVersion
     description: The code system version
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Coding
-    range: string
   aliasType:
     name: aliasType
     description: How this coding is related in the context of its parent element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Coding
@@ -214,7 +215,7 @@ attributes:
 name: Coding
 description: A semantic reference that provides standardized codes and their meanings
   from controlled vocabularies
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - odm:Coding
 - usdm:Code
@@ -230,7 +231,7 @@ attributes:
   code:
     name: code
     description: The code value
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: code
     owner: Coding
@@ -241,7 +242,7 @@ attributes:
   decode:
     name: decode
     description: Human-readable meaning
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:prefLabel
     alias: decode
@@ -249,13 +250,14 @@ attributes:
     domain_of:
     - CodeListItem
     - Coding
+    range: string
     any_of:
     - range: string
     - range: TranslatedText
   codeSystem:
     name: codeSystem
     description: The code system identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: codeSystem
     owner: Coding
@@ -266,7 +268,7 @@ attributes:
   codeSystemVersion:
     name: codeSystemVersion
     description: The code system version
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: codeSystemVersion
     owner: Coding
@@ -276,7 +278,7 @@ attributes:
   aliasType:
     name: aliasType
     description: How this coding is related in the context of its parent element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: aliasType
     owner: Coding

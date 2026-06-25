@@ -37,7 +37,7 @@ render = _load("render_dta_docx")
 
 def define_spec() -> dict:
     return {
-        "studyName": "S1", "protocolName": "P1", "fileType": "Define-JSON",
+        "studyName": "S1", "protocolName": "P1", "fileType": "Data Definition Specification",
         "itemGroups": [
             {"OID": "IG.LB", "name": "LB", "domain": "LB",
              "structure": "one per result",
@@ -54,7 +54,7 @@ def single_group_spec() -> dict:
 
 # --- format detection ---------------------------------------------------------
 
-def test_load_define_json_passthrough(tmp_path):
+def test_load_data_definition_spec_passthrough(tmp_path):
     p = tmp_path / "d.json"
     p.write_text(json.dumps(define_spec()))
     assert "itemGroups" in dta.load_spec(p)

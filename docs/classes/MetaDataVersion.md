@@ -112,7 +112,6 @@ DocumentReference {
 Analysis {
     string analysisReason  
     string analysisPurpose  
-    string analysisMethod  
     stringList inputData  
     string version  
     string href  
@@ -133,9 +132,41 @@ DataProduct {
     string dataProductOwner  
     string domain  
     DataProductLifecycleStatus lifecycleStatus  
-    stringList hasPolicy  
     string version  
     string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+ProvisionAgreement {
+    string consumer  
+    string version  
+    string href  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+Policy {
+    PolicyType policyType  
+    string profile  
+    string assigner  
+    string assignee  
     string OID  
     string uuid  
     string name  
@@ -153,7 +184,6 @@ Dataset {
     stringList keys  
     string datasetType  
     string conformsTo  
-    stringList hasPolicy  
     string informationSensitivityClassification  
     string version  
     string href  
@@ -175,6 +205,7 @@ Dataset {
     stringList aliases  
 }
 Dataflow {
+    stringList deliverySchedule  
     string version  
     string href  
     string OID  
@@ -438,6 +469,9 @@ Timing {
     string label  
     stringList aliases  
 }
+DefClass {
+    string name  
+}
 
 MetaDataVersion ||--}o ItemGroup : "itemGroups"
 MetaDataVersion ||--}o Item : "items"
@@ -470,6 +504,7 @@ Display ||--}o Coding : "coding"
 Display ||--}o Comment : "comments"
 Display ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 DocumentReference ||--}o Coding : "coding"
+Analysis ||--|o Method : "analysisMethod"
 Analysis ||--}o WhereClause : "applicableWhen"
 Analysis ||--}o FormalExpression : "expressions"
 Analysis ||--}o DocumentReference : "documents"
@@ -483,12 +518,28 @@ DataProduct ||--}o Dataflow : "inputDataflow"
 DataProduct ||--}o Dataflow : "outputDataflow"
 DataProduct ||--}o Dataset : "inputDataset"
 DataProduct ||--}o Dataset : "outputDataset"
+DataProduct ||--}o Policy : "hasPolicy"
+DataProduct ||--}o ProvisionAgreement : "provisionAgreement"
 DataProduct ||--}o Coding : "coding"
 DataProduct ||--}o Comment : "comments"
 DataProduct ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+ProvisionAgreement ||--|o DataProvider : "provider"
+ProvisionAgreement ||--|o Dataflow : "dataFlow"
+ProvisionAgreement ||--|o Resource : "source"
+ProvisionAgreement ||--}o Policy : "hasPolicy"
+ProvisionAgreement ||--}o Coding : "coding"
+ProvisionAgreement ||--}o Comment : "comments"
+ProvisionAgreement ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Policy ||--}o Rule : "permission"
+Policy ||--}o Rule : "prohibition"
+Policy ||--}o Rule : "obligation"
+Policy ||--}o Coding : "coding"
+Policy ||--}o Comment : "comments"
+Policy ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 Dataset ||--|o Dataflow : "describedBy"
 Dataset ||--|o DataStructureDefinition : "structuredBy"
 Dataset ||--}o Distribution : "distribution"
+Dataset ||--}o Policy : "hasPolicy"
 Dataset ||--}o Coding : "security"
 Dataset ||--|o Timing : "validityPeriod"
 Dataset ||--}o Coding : "coding"
@@ -564,6 +615,7 @@ ItemGroup ||--}o Item : "keySequence"
 ItemGroup ||--}o ItemGroup : "slices"
 ItemGroup ||--|o ReifiedConcept : "implementsConcept"
 ItemGroup ||--}o WhereClause : "applicableWhen"
+ItemGroup ||--|o DefClass : "observationClass"
 ItemGroup ||--}o Coding : "security"
 ItemGroup ||--|o Timing : "validityPeriod"
 ItemGroup ||--|o Standard : "standard"
@@ -574,6 +626,7 @@ Timing ||--|o NominalOccurrence : "relativeTo"
 Timing ||--|o NominalOccurrence : "relativeFrom"
 Timing ||--|o Method : "imputation"
 Timing ||--}o Coding : "coding"
+DefClass ||--}o SubClass : "subClasses"
 
 ```
 
@@ -665,6 +718,7 @@ Timing ||--}o Coding : "coding"
 | [DataAttribute](../classes/DataAttribute.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
 | [DataProduct](../classes/DataProduct.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
+| [Policy](../classes/Policy.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
 | [Analysis](../classes/Analysis.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
 | [Display](../classes/Display.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [MetaDataVersion](../classes/MetaDataVersion.md) |
 
@@ -684,7 +738,7 @@ Timing ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -714,7 +768,7 @@ name: MetaDataVersion
 description: A container element that represents a given version of a specification,
   linking to a particular usage context such as a study, dataset, or data collection
   instrument.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 close_mappings:
 - usdm:StudyDesign
 is_a: GovernedElement
@@ -725,7 +779,7 @@ attributes:
   itemGroups:
     name: itemGroups
     description: Item groups, containing items, defined in this version of the metadata
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - MetaDataVersion
@@ -737,7 +791,7 @@ attributes:
     name: items
     description: Template or top-level items (not belonging to any item group) defined
       in this version of the metadata
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - MetaDataVersion
@@ -750,7 +804,7 @@ attributes:
   conditions:
     name: conditions
     description: Logical conditions that apply to this version of the metadata.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - MetaDataVersion
@@ -764,7 +818,7 @@ attributes:
   whereClauses:
     name: whereClauses
     description: Data contexts that apply to this version of the metadata.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - MetaDataVersion
@@ -775,7 +829,7 @@ attributes:
   methods:
     name: methods
     description: Methods defined in this version of the metadata.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - MetaDataVersion
@@ -786,7 +840,7 @@ attributes:
   analyses:
     name: analyses
     description: Analyses defined in this version of the metadata.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - MetaDataVersion
@@ -797,7 +851,7 @@ attributes:
   codeLists:
     name: codeLists
     description: Code lists defined in this version of the metadata.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - MetaDataVersion
@@ -808,7 +862,7 @@ attributes:
   codings:
     name: codings
     description: Codings defined in this version of the metadata
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - MetaDataVersion
@@ -819,7 +873,7 @@ attributes:
   concepts:
     name: concepts
     description: Structured Concepts defined in this version of the metadata
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - MetaDataVersion
@@ -829,7 +883,7 @@ attributes:
     name: relationships
     description: Relationships between items, item groups, and other elements in this
       version of the metadata.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - MetaDataVersion
@@ -840,7 +894,7 @@ attributes:
   dictionaries:
     name: dictionaries
     description: Dictionaries defined in this version of the metadata
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - MetaDataVersion
@@ -851,7 +905,7 @@ attributes:
   standards:
     name: standards
     description: Standards defined in this version of the metadata
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - MetaDataVersion
@@ -862,7 +916,7 @@ attributes:
   annotatedCRFs:
     name: annotatedCRFs
     description: Reference to annotated case report forms
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - MetaDataVersion
@@ -874,7 +928,7 @@ attributes:
     name: resources
     description: References to resources and documents that describe this version
       of the metadata.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - MetaDataVersion
@@ -887,7 +941,7 @@ attributes:
   dataProducts:
     name: dataProducts
     description: Indexed data flows with clear ownership
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - MetaDataVersion
@@ -898,7 +952,7 @@ attributes:
   displays:
     name: displays
     description: Displays defined in this version of the metadata.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - MetaDataVersion
@@ -919,7 +973,7 @@ name: MetaDataVersion
 description: A container element that represents a given version of a specification,
   linking to a particular usage context such as a study, dataset, or data collection
   instrument.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 close_mappings:
 - usdm:StudyDesign
 is_a: GovernedElement
@@ -930,7 +984,7 @@ attributes:
   itemGroups:
     name: itemGroups
     description: Item groups, containing items, defined in this version of the metadata
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: itemGroups
     owner: MetaDataVersion
@@ -944,7 +998,7 @@ attributes:
     name: items
     description: Template or top-level items (not belonging to any item group) defined
       in this version of the metadata
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: items
     owner: MetaDataVersion
@@ -959,7 +1013,7 @@ attributes:
   conditions:
     name: conditions
     description: Logical conditions that apply to this version of the metadata.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: conditions
     owner: MetaDataVersion
@@ -975,7 +1029,7 @@ attributes:
   whereClauses:
     name: whereClauses
     description: Data contexts that apply to this version of the metadata.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: whereClauses
     owner: MetaDataVersion
@@ -988,7 +1042,7 @@ attributes:
   methods:
     name: methods
     description: Methods defined in this version of the metadata.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: methods
     owner: MetaDataVersion
@@ -1001,7 +1055,7 @@ attributes:
   analyses:
     name: analyses
     description: Analyses defined in this version of the metadata.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: analyses
     owner: MetaDataVersion
@@ -1014,7 +1068,7 @@ attributes:
   codeLists:
     name: codeLists
     description: Code lists defined in this version of the metadata.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: codeLists
     owner: MetaDataVersion
@@ -1027,7 +1081,7 @@ attributes:
   codings:
     name: codings
     description: Codings defined in this version of the metadata
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: codings
     owner: MetaDataVersion
@@ -1040,7 +1094,7 @@ attributes:
   concepts:
     name: concepts
     description: Structured Concepts defined in this version of the metadata
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: concepts
     owner: MetaDataVersion
@@ -1052,7 +1106,7 @@ attributes:
     name: relationships
     description: Relationships between items, item groups, and other elements in this
       version of the metadata.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: relationships
     owner: MetaDataVersion
@@ -1065,7 +1119,7 @@ attributes:
   dictionaries:
     name: dictionaries
     description: Dictionaries defined in this version of the metadata
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: dictionaries
     owner: MetaDataVersion
@@ -1078,7 +1132,7 @@ attributes:
   standards:
     name: standards
     description: Standards defined in this version of the metadata
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: standards
     owner: MetaDataVersion
@@ -1091,7 +1145,7 @@ attributes:
   annotatedCRFs:
     name: annotatedCRFs
     description: Reference to annotated case report forms
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: annotatedCRFs
     owner: MetaDataVersion
@@ -1105,12 +1159,13 @@ attributes:
     name: resources
     description: References to resources and documents that describe this version
       of the metadata.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: resources
     owner: MetaDataVersion
     domain_of:
     - MetaDataVersion
+    range: string
     multivalued: true
     inlined: true
     inlined_as_list: true
@@ -1120,7 +1175,7 @@ attributes:
   dataProducts:
     name: dataProducts
     description: Indexed data flows with clear ownership
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: dataProducts
     owner: MetaDataVersion
@@ -1133,7 +1188,7 @@ attributes:
   displays:
     name: displays
     description: Displays defined in this version of the metadata.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: displays
     owner: MetaDataVersion
@@ -1146,7 +1201,7 @@ attributes:
   fileOID:
     name: fileOID
     description: Unique identifier for the ODM file
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: fileOID
     owner: MetaDataVersion
@@ -1157,7 +1212,7 @@ attributes:
   asOfDateTime:
     name: asOfDateTime
     description: Date and time when the data snapshot was taken
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: asOfDateTime
     owner: MetaDataVersion
@@ -1167,7 +1222,7 @@ attributes:
   creationDateTime:
     name: creationDateTime
     description: Date and time when the ODM file was created
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: creationDateTime
     owner: MetaDataVersion
@@ -1178,7 +1233,7 @@ attributes:
   odmVersion:
     name: odmVersion
     description: Version of the ODM standard used
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: odmVersion
     owner: MetaDataVersion
@@ -1189,7 +1244,7 @@ attributes:
   fileType:
     name: fileType
     description: Type of ODM file (e.g., Snapshot, Transactional)
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: fileType
     owner: MetaDataVersion
@@ -1200,7 +1255,7 @@ attributes:
   originator:
     name: originator
     description: Organization or system that created the ODM file
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: originator
     owner: MetaDataVersion
@@ -1210,7 +1265,7 @@ attributes:
   sourceSystem:
     name: sourceSystem
     description: Source system that generated the data
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: sourceSystem
     owner: MetaDataVersion
@@ -1220,7 +1275,7 @@ attributes:
   sourceSystemVersion:
     name: sourceSystemVersion
     description: Version of the source system
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: sourceSystemVersion
     owner: MetaDataVersion
@@ -1230,7 +1285,7 @@ attributes:
   context:
     name: context
     description: Define-XML context (usually "Other" for Define-XML)
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: context
     owner: MetaDataVersion
@@ -1241,7 +1296,7 @@ attributes:
   defineVersion:
     name: defineVersion
     description: Version of Define-XML specification used
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: defineVersion
     owner: MetaDataVersion
@@ -1251,7 +1306,7 @@ attributes:
   studyOID:
     name: studyOID
     description: Unique identifier for the study
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: studyOID
     owner: MetaDataVersion
@@ -1262,7 +1317,7 @@ attributes:
   studyName:
     name: studyName
     description: Name of the study
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: studyName
     owner: MetaDataVersion
@@ -1272,7 +1327,7 @@ attributes:
   studyDescription:
     name: studyDescription
     description: Description of the study
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: studyDescription
     owner: MetaDataVersion
@@ -1282,7 +1337,7 @@ attributes:
   protocolName:
     name: protocolName
     description: Protocol name for the study
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: protocolName
     owner: MetaDataVersion
@@ -1293,7 +1348,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     identifier: true
     alias: OID
@@ -1305,7 +1360,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: uuid
     owner: MetaDataVersion
@@ -1315,18 +1370,20 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: name
     owner: MetaDataVersion
     domain_of:
     - Labelled
+    - DefClass
+    - SubClass
     - Standard
     range: string
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: description
     owner: MetaDataVersion
@@ -1340,7 +1397,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: coding
     owner: MetaDataVersion
@@ -1355,7 +1412,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -1370,7 +1427,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:altLabel
     rank: 1000
@@ -1389,7 +1446,7 @@ attributes:
   mandatory:
     name: mandatory
     description: Is this element required?
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: mandatory
     owner: MetaDataVersion
@@ -1400,7 +1457,7 @@ attributes:
     name: comments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: comments
     owner: MetaDataVersion
@@ -1413,7 +1470,7 @@ attributes:
     name: siteOrSponsorComments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: siteOrSponsorComments
     owner: MetaDataVersion
@@ -1425,7 +1482,7 @@ attributes:
   purpose:
     name: purpose
     description: Purpose or rationale for this data element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: purpose
     owner: MetaDataVersion
@@ -1438,7 +1495,7 @@ attributes:
   lastUpdated:
     name: lastUpdated
     description: When the resource was last updated
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: lastUpdated
     owner: MetaDataVersion
@@ -1448,7 +1505,7 @@ attributes:
   owner:
     name: owner
     description: Party responsible for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     narrow_mappings:
     - prov:wasAttributedTo
     - prov:wasAssociatedBy
@@ -1466,7 +1523,7 @@ attributes:
     name: wasDerivedFrom
     description: Reference to another item that this item implements or extends, e.g.
       a template Item definition.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - prov:wasDerivedFrom
     rank: 1000

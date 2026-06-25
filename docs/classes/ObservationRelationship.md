@@ -173,7 +173,7 @@ Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -202,7 +202,7 @@ Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 name: ObservationRelationship
 description: A relationship element that associates a DataAttribute with an Observation,
   allowing value-level Items to be reused across multiple different Views
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - sdmx:ObservationRelationship
 attributes:
@@ -211,7 +211,7 @@ attributes:
     description: Reference to the Item in an observation context that this definition
       applies to. e.g. the SDTM Variable Specialisation for a given Biomedical Concept
       Property.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - sdmx:ObservationDescriptor
     domain_of:
@@ -222,7 +222,7 @@ attributes:
     range: Item
   attribute:
     name: attribute
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     domain_of:
     - Resource
     - MeasureRelationship
@@ -242,7 +242,7 @@ attributes:
 name: ObservationRelationship
 description: A relationship element that associates a DataAttribute with an Observation,
   allowing value-level Items to be reused across multiple different Views
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - sdmx:ObservationRelationship
 attributes:
@@ -251,7 +251,7 @@ attributes:
     description: Reference to the Item in an observation context that this definition
       applies to. e.g. the SDTM Variable Specialisation for a given Biomedical Concept
       Property.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - sdmx:ObservationDescriptor
     alias: item
@@ -264,7 +264,7 @@ attributes:
     range: Item
   attribute:
     name: attribute
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: attribute
     owner: ObservationRelationship
     domain_of:

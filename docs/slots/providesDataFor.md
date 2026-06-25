@@ -48,7 +48,7 @@ Alias: providesDataFor
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -69,7 +69,7 @@ Alias: providesDataFor
 ```yaml
 name: providesDataFor
 description: The Dataflows that this provider supplies data for
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: providesDataFor
 owner: DataProvider

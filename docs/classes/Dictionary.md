@@ -89,7 +89,7 @@ Dictionary ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -116,7 +116,7 @@ Dictionary ||--}o Coding : "coding"
 ```yaml
 name: Dictionary
 description: A dictionary that defines a set of codes and their meanings
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 is_a: IdentifiableElement
 mixins:
 - Versioned
@@ -125,7 +125,7 @@ attributes:
     name: terms
     description: Terms in this dictionary - leave this empty in most cases to keep
       the file small
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Dictionary
@@ -136,7 +136,7 @@ attributes:
   publishedBy:
     name: publishedBy
     description: Associates the Data Provider that reports/publishes the data.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Dictionary
@@ -154,7 +154,7 @@ attributes:
 ```yaml
 name: Dictionary
 description: A dictionary that defines a set of codes and their meanings
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 is_a: IdentifiableElement
 mixins:
 - Versioned
@@ -163,7 +163,7 @@ attributes:
     name: terms
     description: Terms in this dictionary - leave this empty in most cases to keep
       the file small
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: terms
     owner: Dictionary
@@ -176,20 +176,21 @@ attributes:
   publishedBy:
     name: publishedBy
     description: Associates the Data Provider that reports/publishes the data.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: publishedBy
     owner: Dictionary
     domain_of:
     - Dictionary
     - Dataset
+    range: string
     any_of:
     - range: Organization
     - range: string
   version:
     name: version
     description: The version of the external resources
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: version
     owner: Dictionary
@@ -201,7 +202,7 @@ attributes:
     name: href
     description: Machine-readable instructions to obtain the resource e.g. FHIR path,
       URL
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: href
     owner: Dictionary
@@ -213,7 +214,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     identifier: true
     alias: OID
@@ -225,7 +226,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: uuid
     owner: Dictionary
@@ -235,18 +236,20 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: name
     owner: Dictionary
     domain_of:
     - Labelled
+    - DefClass
+    - SubClass
     - Standard
     range: string
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: description
     owner: Dictionary
@@ -260,7 +263,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: coding
     owner: Dictionary
@@ -275,7 +278,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -290,7 +293,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:altLabel
     rank: 1000

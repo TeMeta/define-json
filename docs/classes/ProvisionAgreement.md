@@ -67,6 +67,35 @@ Coding {
     string codeSystemVersion  
     AliasPredicate aliasType  
 }
+Policy {
+    PolicyType policyType  
+    string profile  
+    string assigner  
+    string assignee  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+    boolean mandatory  
+    string purpose  
+    datetime lastUpdated  
+    string owner  
+    string wasDerivedFrom  
+}
+Rule {
+    string action  
+    string target  
+    string assigner  
+    string assignee  
+    string OID  
+    string uuid  
+    string name  
+    string description  
+    string label  
+    stringList aliases  
+}
 Resource {
     string resourceType  
     string attribute  
@@ -91,6 +120,7 @@ FormalExpression {
     stringList aliases  
 }
 Dataflow {
+    stringList deliverySchedule  
     string version  
     string href  
     string OID  
@@ -108,7 +138,6 @@ Dataflow {
 Analysis {
     string analysisReason  
     string analysisPurpose  
-    string analysisMethod  
     stringList inputData  
     string version  
     string href  
@@ -191,6 +220,7 @@ Organization {
 ProvisionAgreement ||--|o DataProvider : "provider"
 ProvisionAgreement ||--|o Dataflow : "dataFlow"
 ProvisionAgreement ||--|o Resource : "source"
+ProvisionAgreement ||--}o Policy : "hasPolicy"
 ProvisionAgreement ||--}o Coding : "coding"
 ProvisionAgreement ||--}o Comment : "comments"
 ProvisionAgreement ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
@@ -201,6 +231,14 @@ Comment ||--}o DocumentReference : "documents"
 Comment ||--}o Coding : "coding"
 Comment ||--}o Comment : "comments"
 Comment ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Policy ||--}o Rule : "permission"
+Policy ||--}o Rule : "prohibition"
+Policy ||--}o Rule : "obligation"
+Policy ||--}o Coding : "coding"
+Policy ||--}o Comment : "comments"
+Policy ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Rule ||--}o Constraint : "constraint"
+Rule ||--}o Coding : "coding"
 Resource ||--}o FormalExpression : "selection"
 Resource ||--}o Coding : "coding"
 FormalExpression ||--}o Parameter : "parameters"
@@ -213,6 +251,7 @@ Dataflow ||--|o Analysis : "analysisMethod"
 Dataflow ||--}o Coding : "coding"
 Dataflow ||--}o Comment : "comments"
 Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Analysis ||--|o Method : "analysisMethod"
 Analysis ||--}o WhereClause : "applicableWhen"
 Analysis ||--}o FormalExpression : "expressions"
 Analysis ||--}o DocumentReference : "documents"
@@ -235,6 +274,7 @@ DataStructureDefinition ||--}o Item : "keySequence"
 DataStructureDefinition ||--}o ItemGroup : "slices"
 DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
 DataStructureDefinition ||--}o WhereClause : "applicableWhen"
+DataStructureDefinition ||--|o DefClass : "observationClass"
 DataStructureDefinition ||--}o Coding : "security"
 DataStructureDefinition ||--|o Timing : "validityPeriod"
 DataStructureDefinition ||--|o Standard : "standard"
@@ -264,10 +304,11 @@ Organization ||--}o Coding : "coding"
 
 | Name | Cardinality and Range | Description | Inheritance |
 | ---  | --- | --- | --- |
-| [provider](../slots/provider.md) | 0..1 <br/> [DataProvider](../classes/DataProvider.md) | The Data Provider that is part of this agreement | direct |
-| [consumer](../slots/consumer.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | The Data Consumer that is part of this agreement | direct |
-| [dataFlow](../slots/dataFlow.md) | 0..1 <br/> [Dataflow](../classes/Dataflow.md) | The Dataflow that is covered by this agreement | direct |
+| [provider](../slots/provider.md) | 0..1 <br/> [DataProvider](../classes/DataProvider.md) | The Data Provider that is part of this agreement. Inlined so a standalone DTA is a self-contained snapshot. | direct |
+| [consumer](../slots/consumer.md) | 0..1 <br/> [String](../types/String.md)&nbsp;or&nbsp;<br />[DataConsumer](../classes/DataConsumer.md)&nbsp;or&nbsp;<br />[DataProduct](../classes/DataProduct.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md) | The Data Consumer that is part of this agreement | direct |
+| [dataFlow](../slots/dataFlow.md) | 0..1 <br/> [Dataflow](../classes/Dataflow.md) | The Dataflow that is covered by this agreement. Inlined so a standalone DTA is a self-contained snapshot. | direct |
 | [source](../slots/source.md) | 0..1 <br/> [Resource](../classes/Resource.md) | The source of the data provided under this agreement | direct |
+| [hasPolicy](../slots/hasPolicy.md) | * <br/> [Policy](../classes/Policy.md) | The usage/access policies (ODRL) that constitute the legal terms of this agreement, e.g. permitted purpose, confidentiality, retention. | direct |
 | [version](../slots/version.md) | 0..1 <br/> [String](../types/String.md) | The version of the external resources | [Versioned](../classes/Versioned.md) |
 | [href](../slots/href.md) | 0..1 <br/> [String](../types/String.md) | Machine-readable instructions to obtain the resource e.g. FHIR path, URL | [Versioned](../classes/Versioned.md) |
 | [OID](../slots/OID.md) | 1 <br/> [String](../types/String.md) | Local identifier within this study/context. Use CDISC OID format for regulatory submissions, or simple strings for internal use. | [Identifiable](../classes/Identifiable.md) |
@@ -313,9 +354,12 @@ Organization ||--}o Coding : "coding"
 | [Measure](../classes/Measure.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ProvisionAgreement](../classes/ProvisionAgreement.md) |
 | [Dimension](../classes/Dimension.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ProvisionAgreement](../classes/ProvisionAgreement.md) |
 | [DataAttribute](../classes/DataAttribute.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ProvisionAgreement](../classes/ProvisionAgreement.md) |
+| [DataProduct](../classes/DataProduct.md) | [provisionAgreement](../slots/provisionAgreement.md) | range | [ProvisionAgreement](../classes/ProvisionAgreement.md) |
 | [DataProduct](../classes/DataProduct.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ProvisionAgreement](../classes/ProvisionAgreement.md) |
 | [DataProvider](../classes/DataProvider.md) | [provisionAgreements](../slots/provisionAgreements.md) | range | [ProvisionAgreement](../classes/ProvisionAgreement.md) |
 | [ProvisionAgreement](../classes/ProvisionAgreement.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ProvisionAgreement](../classes/ProvisionAgreement.md) |
+| [DataConsumer](../classes/DataConsumer.md) | [provisionAgreements](../slots/provisionAgreements.md) | range | [ProvisionAgreement](../classes/ProvisionAgreement.md) |
+| [Policy](../classes/Policy.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ProvisionAgreement](../classes/ProvisionAgreement.md) |
 | [Analysis](../classes/Analysis.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ProvisionAgreement](../classes/ProvisionAgreement.md) |
 | [Display](../classes/Display.md) | [wasDerivedFrom](../slots/wasDerivedFrom.md) | any_of[range] | [ProvisionAgreement](../classes/ProvisionAgreement.md) |
 
@@ -335,7 +379,7 @@ Organization ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -364,7 +408,7 @@ Organization ||--}o Coding : "coding"
 name: ProvisionAgreement
 description: An agreement element that describes the contractual relationship between
   a Data Provider and a Data Consumer regarding data provision
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 close_mappings:
 - sdmx:ProvisionAgreement
 is_a: GovernedElement
@@ -373,41 +417,60 @@ mixins:
 attributes:
   provider:
     name: provider
-    description: The Data Provider that is part of this agreement
-    from_schema: https://cdisc.org/define-json
+    description: The Data Provider that is part of this agreement. Inlined so a standalone
+      DTA is a self-contained snapshot.
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - ProvisionAgreement
     range: DataProvider
+    inlined: true
   consumer:
     name: consumer
     description: The Data Consumer that is part of this agreement
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - ProvisionAgreement
     any_of:
+    - range: DataConsumer
     - range: DataProduct
     - range: Organization
     - range: string
   dataFlow:
     name: dataFlow
-    description: The Dataflow that is covered by this agreement
-    from_schema: https://cdisc.org/define-json
+    description: The Dataflow that is covered by this agreement. Inlined so a standalone
+      DTA is a self-contained snapshot.
+    from_schema: https://cdisc.org/data-definition-spec
     domain_of:
     - DataflowRelationship
     - ProvisionAgreement
     range: Dataflow
+    inlined: true
   source:
     name: source
     description: The source of the data provided under this agreement
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     domain_of:
     - Origin
     - SiteOrSponsorComment
     - DataProvider
     - ProvisionAgreement
     range: Resource
+    inlined: true
+  hasPolicy:
+    name: hasPolicy
+    description: The usage/access policies (ODRL) that constitute the legal terms
+      of this agreement, e.g. permitted purpose, confidentiality, retention.
+    from_schema: https://cdisc.org/data-definition-spec
+    domain_of:
+    - Dataset
+    - DataProduct
+    - ProvisionAgreement
+    range: Policy
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
 
 ```
 </details>
@@ -419,7 +482,7 @@ attributes:
 name: ProvisionAgreement
 description: An agreement element that describes the contractual relationship between
   a Data Provider and a Data Consumer regarding data provision
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 close_mappings:
 - sdmx:ProvisionAgreement
 is_a: GovernedElement
@@ -428,41 +491,47 @@ mixins:
 attributes:
   provider:
     name: provider
-    description: The Data Provider that is part of this agreement
-    from_schema: https://cdisc.org/define-json
+    description: The Data Provider that is part of this agreement. Inlined so a standalone
+      DTA is a self-contained snapshot.
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: provider
     owner: ProvisionAgreement
     domain_of:
     - ProvisionAgreement
     range: DataProvider
+    inlined: true
   consumer:
     name: consumer
     description: The Data Consumer that is part of this agreement
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: consumer
     owner: ProvisionAgreement
     domain_of:
     - ProvisionAgreement
+    range: string
     any_of:
+    - range: DataConsumer
     - range: DataProduct
     - range: Organization
     - range: string
   dataFlow:
     name: dataFlow
-    description: The Dataflow that is covered by this agreement
-    from_schema: https://cdisc.org/define-json
+    description: The Dataflow that is covered by this agreement. Inlined so a standalone
+      DTA is a self-contained snapshot.
+    from_schema: https://cdisc.org/data-definition-spec
     alias: dataFlow
     owner: ProvisionAgreement
     domain_of:
     - DataflowRelationship
     - ProvisionAgreement
     range: Dataflow
+    inlined: true
   source:
     name: source
     description: The source of the data provided under this agreement
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: source
     owner: ProvisionAgreement
     domain_of:
@@ -471,10 +540,26 @@ attributes:
     - DataProvider
     - ProvisionAgreement
     range: Resource
+    inlined: true
+  hasPolicy:
+    name: hasPolicy
+    description: The usage/access policies (ODRL) that constitute the legal terms
+      of this agreement, e.g. permitted purpose, confidentiality, retention.
+    from_schema: https://cdisc.org/data-definition-spec
+    alias: hasPolicy
+    owner: ProvisionAgreement
+    domain_of:
+    - Dataset
+    - DataProduct
+    - ProvisionAgreement
+    range: Policy
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
   version:
     name: version
     description: The version of the external resources
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: version
     owner: ProvisionAgreement
@@ -486,7 +571,7 @@ attributes:
     name: href
     description: Machine-readable instructions to obtain the resource e.g. FHIR path,
       URL
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: href
     owner: ProvisionAgreement
@@ -498,7 +583,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     identifier: true
     alias: OID
@@ -510,7 +595,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: uuid
     owner: ProvisionAgreement
@@ -520,18 +605,20 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: name
     owner: ProvisionAgreement
     domain_of:
     - Labelled
+    - DefClass
+    - SubClass
     - Standard
     range: string
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: description
     owner: ProvisionAgreement
@@ -545,7 +632,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: coding
     owner: ProvisionAgreement
@@ -560,7 +647,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -575,7 +662,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:altLabel
     rank: 1000
@@ -594,7 +681,7 @@ attributes:
   mandatory:
     name: mandatory
     description: Is this element required?
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: mandatory
     owner: ProvisionAgreement
@@ -605,7 +692,7 @@ attributes:
     name: comments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: comments
     owner: ProvisionAgreement
@@ -618,7 +705,7 @@ attributes:
     name: siteOrSponsorComments
     description: Comment on the element, such as a rationale for its inclusion or
       exclusion
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: siteOrSponsorComments
     owner: ProvisionAgreement
@@ -630,7 +717,7 @@ attributes:
   purpose:
     name: purpose
     description: Purpose or rationale for this data element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: purpose
     owner: ProvisionAgreement
@@ -643,7 +730,7 @@ attributes:
   lastUpdated:
     name: lastUpdated
     description: When the resource was last updated
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: lastUpdated
     owner: ProvisionAgreement
@@ -653,7 +740,7 @@ attributes:
   owner:
     name: owner
     description: Party responsible for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     narrow_mappings:
     - prov:wasAttributedTo
     - prov:wasAssociatedBy
@@ -671,7 +758,7 @@ attributes:
     name: wasDerivedFrom
     description: Reference to another item that this item implements or extends, e.g.
       a template Item definition.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - prov:wasDerivedFrom
     rank: 1000

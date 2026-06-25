@@ -46,7 +46,7 @@ Alias: isAccessServiceOf
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -67,7 +67,7 @@ Alias: isAccessServiceOf
 ```yaml
 name: isAccessServiceOf
 description: Distribution(s) for which this service provides access
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: isAccessServiceOf
 owner: DataService

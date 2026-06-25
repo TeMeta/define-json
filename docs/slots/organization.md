@@ -46,7 +46,7 @@ Alias: organization
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -68,7 +68,7 @@ Alias: organization
 ```yaml
 name: organization
 description: The organization the user belongs to.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 close_mappings:
 - prov:actedOnBehalfOf
 rank: 1000

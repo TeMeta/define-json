@@ -17,9 +17,10 @@ Alias: location
 
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
-| [Organization](../classes/Organization.md) | An entity that represents organizational information, such as a site or sponsor |  no  |
+| [DataConsumer](../classes/DataConsumer.md) | An organization element that receives data from a Data Provider under a ProvisionAgreement; the demand-side counterpart of DataProvider. |  no  |
 | [DataProvider](../classes/DataProvider.md) | An organization element that provides data to a Data Consumer, which can be a sponsor, site, or any other entity that supplies data |  no  |
 | [Display](../classes/Display.md) | A rendered output of an analysis result. |  no  |
+| [Organization](../classes/Organization.md) | An entity that represents organizational information, such as a site or sponsor |  no  |
 
 
 
@@ -28,7 +29,7 @@ Alias: location
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -60,6 +61,7 @@ alias: location
 domain_of:
 - Organization
 - Display
+range: string
 
 ```
 </details>

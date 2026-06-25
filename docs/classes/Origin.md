@@ -127,7 +127,7 @@ Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -154,13 +154,13 @@ Item ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ```yaml
 name: Origin
 description: A provenance element that describes the source of data for an item
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 attributes:
   type:
     name: type
     description: 'The type of origin: Assigned, Collected, Derived, Protocol, Predecessor,
       Not Available, or Other.'
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     domain_of:
     - ItemGroup
     - Method
@@ -173,7 +173,7 @@ attributes:
     name: source
     description: The source of the data, such as Investigator, Sponsor, Subject, or
       Vendor.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Origin
@@ -184,7 +184,7 @@ attributes:
   sourceItems:
     name: sourceItems
     description: Source items for this origin
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Origin
@@ -195,7 +195,7 @@ attributes:
   documents:
     name: documents
     description: Reference to a document that describes this origin in detail.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     domain_of:
     - Comment
     - Method
@@ -214,13 +214,13 @@ attributes:
 ```yaml
 name: Origin
 description: A provenance element that describes the source of data for an item
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 attributes:
   type:
     name: type
     description: 'The type of origin: Assigned, Collected, Derived, Protocol, Predecessor,
       Not Available, or Other.'
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: type
     owner: Origin
     domain_of:
@@ -235,7 +235,7 @@ attributes:
     name: source
     description: The source of the data, such as Investigator, Sponsor, Subject, or
       Vendor.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: source
     owner: Origin
@@ -248,7 +248,7 @@ attributes:
   sourceItems:
     name: sourceItems
     description: Source items for this origin
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: sourceItems
     owner: Origin
@@ -261,7 +261,7 @@ attributes:
   documents:
     name: documents
     description: Reference to a document that describes this origin in detail.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: documents
     owner: Origin
     domain_of:

@@ -107,6 +107,7 @@ Item {
     string wasDerivedFrom  
 }
 Dataflow {
+    stringList deliverySchedule  
     string version  
     string href  
     string OID  
@@ -124,7 +125,6 @@ Dataflow {
 Analysis {
     string analysisReason  
     string analysisPurpose  
-    string analysisMethod  
     stringList inputData  
     string version  
     string href  
@@ -218,6 +218,7 @@ Dataflow ||--|o Analysis : "analysisMethod"
 Dataflow ||--}o Coding : "coding"
 Dataflow ||--}o Comment : "comments"
 Dataflow ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
+Analysis ||--|o Method : "analysisMethod"
 Analysis ||--}o WhereClause : "applicableWhen"
 Analysis ||--}o FormalExpression : "expressions"
 Analysis ||--}o DocumentReference : "documents"
@@ -240,6 +241,7 @@ DataStructureDefinition ||--}o Item : "keySequence"
 DataStructureDefinition ||--}o ItemGroup : "slices"
 DataStructureDefinition ||--|o ReifiedConcept : "implementsConcept"
 DataStructureDefinition ||--}o WhereClause : "applicableWhen"
+DataStructureDefinition ||--|o DefClass : "observationClass"
 DataStructureDefinition ||--}o Coding : "security"
 DataStructureDefinition ||--|o Timing : "validityPeriod"
 DataStructureDefinition ||--|o Standard : "standard"
@@ -280,7 +282,7 @@ DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -309,13 +311,13 @@ DataStructureDefinition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 name: DataflowRelationship
 description: A relationship element that associates a DataAttribute with a Dataflow,
   reported at the Dataset level
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - sdmx:DataflowRelationship
 attributes:
   dataFlow:
     name: dataFlow
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - DataflowRelationship
@@ -323,7 +325,7 @@ attributes:
     range: Dataflow
   attribute:
     name: attribute
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     domain_of:
     - Resource
     - MeasureRelationship
@@ -343,13 +345,13 @@ attributes:
 name: DataflowRelationship
 description: A relationship element that associates a DataAttribute with a Dataflow,
   reported at the Dataset level
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - sdmx:DataflowRelationship
 attributes:
   dataFlow:
     name: dataFlow
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: dataFlow
     owner: DataflowRelationship
@@ -359,7 +361,7 @@ attributes:
     range: Dataflow
   attribute:
     name: attribute
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: attribute
     owner: DataflowRelationship
     domain_of:

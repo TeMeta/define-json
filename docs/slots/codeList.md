@@ -28,7 +28,7 @@ Alias: codeList
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -61,6 +61,7 @@ domain_of:
 - Item
 - ConceptProperty
 - Parameter
+range: string
 
 ```
 </details>

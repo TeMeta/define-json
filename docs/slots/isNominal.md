@@ -46,7 +46,7 @@ Alias: isNominal
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -67,7 +67,7 @@ Alias: isNominal
 ```yaml
 name: isNominal
 description: Indicates whether the timing is nominal (event-based) or not.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: isNominal
 owner: Timing

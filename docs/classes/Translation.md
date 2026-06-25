@@ -61,7 +61,7 @@ Translation {
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -90,7 +90,7 @@ Translation {
 name: Translation
 description: A text representation that provides content in a specific language, used
   for multilingual support
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - odm:TranslatedText
 - sdmx:InternationalString
@@ -98,22 +98,20 @@ attributes:
   language:
     name: language
     description: The language of the translation
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Translation
-    range: string
     required: true
   value:
     name: value
     description: The translated text
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Translation
     - Parameter
     - Timing
-    range: string
     required: true
 
 ```
@@ -126,7 +124,7 @@ attributes:
 name: Translation
 description: A text representation that provides content in a specific language, used
   for multilingual support
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - odm:TranslatedText
 - sdmx:InternationalString
@@ -134,7 +132,7 @@ attributes:
   language:
     name: language
     description: The language of the translation
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: language
     owner: Translation
@@ -145,7 +143,7 @@ attributes:
   value:
     name: value
     description: The translated text
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: value
     owner: Translation

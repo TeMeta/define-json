@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Reverse Engineer Define-JSON from Dataset-JSON
+Reverse Engineer Data Definition Specification from Dataset-JSON
 
 Reads actual dataset data (Dataset-JSON format) and automatically generates
-Define-JSON metadata by analyzing the data structure and inferring:
+Data Definition Specification metadata by analyzing the data structure and inferring:
 - Variable classifications (IDENTIFIER, TIMING, TOPIC, RESULT, ATTRIBUTE)
 - Dataset structure (vertical vs horizontal)
 - SDMX roles (Dimension, Measure, Attribute)
@@ -33,7 +33,7 @@ from dataset_deconstructor import (
 from variable_classifier import CDISCVariableClassifier
 
 # Note: We don't actually use the generated classes for output, just plain dicts
-# from define_json.schema.define import (
+# from data_definition_spec.schema.define import (
 #     MetaDataVersion,
 #     ItemGroupDef,
 #     ItemDef,
@@ -61,7 +61,7 @@ class DataCubeConfigSuggestion:
 @dataclass
 class ReverseEngineeringResult:
     """Complete result of reverse engineering process."""
-    metadata_version: Dict[str, Any]  # Define-JSON structure
+    metadata_version: Dict[str, Any]  # Data Definition Specification structure
     data_cube_config_suggestion: DataCubeConfigSuggestion
     analysis_summary: Dict[str, Any]
 
@@ -185,7 +185,7 @@ class DataCubeConfigGenerator:
 
 
 class DefineJSONGenerator:
-    """Generates Define-JSON structure from deconstruction results."""
+    """Generates Data Definition Specification structure from deconstruction results."""
     
     def __init__(self):
         self.deconstructor = DatasetDeconstructor(
@@ -195,7 +195,7 @@ class DefineJSONGenerator:
     def generate(self, df: pd.DataFrame, domain: str, 
                  cube_config: DataCubeConfigSuggestion) -> Dict[str, Any]:
         """
-        Generate Define-JSON metadata from dataset analysis.
+        Generate Data Definition Specification metadata from dataset analysis.
         
         Returns:
             MetaDataVersion structure as dictionary
@@ -264,7 +264,7 @@ class DefineJSONGenerator:
         return metadata_version
     
     def _infer_data_type(self, series: pd.Series) -> str:
-        """Infer Define-JSON DataType from pandas dtype."""
+        """Infer Data Definition Specification DataType from pandas dtype."""
         dtype_map = {
             "int64": "integer",
             "float64": "float",
@@ -332,8 +332,8 @@ class ReverseEngineer:
         logger.info("📊 Generating data cube configuration suggestions...")
         cube_config = self.config_generator.generate_config(df, domain)
         
-        # Step 3: Generate Define-JSON metadata
-        logger.info("📝 Generating Define-JSON metadata...")
+        # Step 3: Generate Data Definition Specification metadata
+        logger.info("📝 Generating Data Definition Specification metadata...")
         metadata = self.define_generator.generate(df, domain, cube_config)
         
         # Step 4: Create analysis summary
@@ -366,11 +366,11 @@ class ReverseEngineer:
         """Write all outputs to files."""
         output_dir.mkdir(parents=True, exist_ok=True)
         
-        # 1. Define-JSON metadata
-        define_json_path = output_dir / "define_metadata.json"
-        with open(define_json_path, 'w') as f:
+        # 1. Data Definition Specification metadata
+        data_definition_spec_path = output_dir / "define_metadata.json"
+        with open(data_definition_spec_path, 'w') as f:
             json.dump(result.metadata_version, f, indent=2)
-        logger.info(f"📄 Wrote Define-JSON: {define_json_path}")
+        logger.info(f"📄 Wrote Data Definition Specification: {data_definition_spec_path}")
         
         # 2. Data cube configuration suggestion (YAML format)
         config_yaml_path = output_dir / "data_cube_config_suggestion.yaml"
@@ -462,7 +462,7 @@ Variables that define coordinates/axes of the data cube:
         report += "2. **Adjust Configuration**: Edit `data_cube_config_suggestion.yaml` if needed\n"
         report += "3. **Enhance Metadata**: Add descriptions, labels, CodeLists\n"
         report += "4. **Validate**: Run consistency checks against source data\n"
-        report += "5. **Integrate**: Incorporate into Define-JSON IR pipeline\n"
+        report += "5. **Integrate**: Incorporate into Data Definition Specification IR pipeline\n"
         
         with open(path, 'w') as f:
             f.write(report)
@@ -473,7 +473,7 @@ def main():
     import argparse
     
     parser = argparse.ArgumentParser(
-        description="Reverse engineer Define-JSON metadata from Dataset-JSON"
+        description="Reverse engineer Data Definition Specification metadata from Dataset-JSON"
     )
     parser.add_argument(
         "dataset_json",
@@ -521,7 +521,7 @@ def main():
         print(f"\n✅ Reverse engineering complete!")
         print(f"📁 Outputs written to: {args.output_dir}")
         print(f"\nGenerated files:")
-        print(f"  - define_metadata.json               (Define-JSON metadata)")
+        print(f"  - define_metadata.json               (Data Definition Specification metadata)")
         print(f"  - data_cube_config_suggestion.yaml   (Data cube configuration)")
         print(f"  - analysis_summary.json              (Analysis metrics)")
         print(f"  - reverse_engineering_report.md      (Human-readable report)")

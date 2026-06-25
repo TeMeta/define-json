@@ -32,7 +32,7 @@ Alias: implementationNotes
 
 ## Properties
 
-* Range: NONE&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md)
+* Range: [String](../types/String.md)&nbsp;or&nbsp;<br />[String](../types/String.md)&nbsp;or&nbsp;<br />[TranslatedText](../classes/TranslatedText.md)
 
 
 
@@ -47,7 +47,7 @@ Alias: implementationNotes
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -69,12 +69,13 @@ Alias: implementationNotes
 name: implementationNotes
 description: 'ImplementationNotes reference: Further information, such as rationale
   and implementation instructions, on how to implement the CRF data collection fields'
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: implementationNotes
 owner: IsODMItem
 domain_of:
 - IsODMItem
+range: string
 any_of:
 - range: string
 - range: TranslatedText

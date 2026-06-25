@@ -27,7 +27,7 @@ Alias: analysisMethod
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -59,6 +59,7 @@ alias: analysisMethod
 domain_of:
 - Dataflow
 - Analysis
+range: string
 
 ```
 </details>

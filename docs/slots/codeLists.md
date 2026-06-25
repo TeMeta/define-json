@@ -48,7 +48,7 @@ Alias: codeLists
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -69,7 +69,7 @@ Alias: codeLists
 ```yaml
 name: codeLists
 description: Code lists defined in this version of the metadata.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: codeLists
 owner: MetaDataVersion

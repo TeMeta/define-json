@@ -222,7 +222,7 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -251,7 +251,7 @@ CodeList ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 name: FormalExpression
 description: A computational element that defines the execution of a data derivation
   within a specific context
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - odm:FormalExpression
 - odm:FormalExpressionRef
@@ -262,37 +262,34 @@ attributes:
     name: context
     description: The specific context within the containing element to which this
       formal expression applies.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - fhir:Expression/language
     domain_of:
     - ODMFileMetadata
     - FormalExpression
-    range: string
   expression:
     name: expression
     description: The actual text of the formal expression (renamed from 'code' for
       disambiguation).
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     aliases:
     - code
     rank: 1000
     domain_of:
     - FormalExpression
-    range: string
     required: true
   returnType:
     name: returnType
     description: Return type of the expression
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - FormalExpression
-    range: string
   parameters:
     name: parameters
     description: Parameters used in the expression
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - FormalExpression
@@ -303,7 +300,7 @@ attributes:
   returnValue:
     name: returnValue
     description: Return value details
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - FormalExpression
@@ -311,7 +308,7 @@ attributes:
   externalCodeLibs:
     name: externalCodeLibs
     description: External code libraries referenced
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - FormalExpression
@@ -328,7 +325,7 @@ attributes:
 name: FormalExpression
 description: A computational element that defines the execution of a data derivation
   within a specific context
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - odm:FormalExpression
 - odm:FormalExpressionRef
@@ -339,7 +336,7 @@ attributes:
     name: context
     description: The specific context within the containing element to which this
       formal expression applies.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - fhir:Expression/language
     alias: context
@@ -352,7 +349,7 @@ attributes:
     name: expression
     description: The actual text of the formal expression (renamed from 'code' for
       disambiguation).
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     aliases:
     - code
     rank: 1000
@@ -365,7 +362,7 @@ attributes:
   returnType:
     name: returnType
     description: Return type of the expression
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: returnType
     owner: FormalExpression
@@ -375,7 +372,7 @@ attributes:
   parameters:
     name: parameters
     description: Parameters used in the expression
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: parameters
     owner: FormalExpression
@@ -388,7 +385,7 @@ attributes:
   returnValue:
     name: returnValue
     description: Return value details
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: returnValue
     owner: FormalExpression
@@ -398,7 +395,7 @@ attributes:
   externalCodeLibs:
     name: externalCodeLibs
     description: External code libraries referenced
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: externalCodeLibs
     owner: FormalExpression
@@ -410,7 +407,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     identifier: true
     alias: OID
@@ -422,7 +419,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: uuid
     owner: FormalExpression
@@ -432,18 +429,20 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: name
     owner: FormalExpression
     domain_of:
     - Labelled
+    - DefClass
+    - SubClass
     - Standard
     range: string
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: description
     owner: FormalExpression
@@ -457,7 +456,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: coding
     owner: FormalExpression
@@ -472,7 +471,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -487,7 +486,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:altLabel
     rank: 1000

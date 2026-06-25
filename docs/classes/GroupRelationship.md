@@ -183,7 +183,7 @@ ComponentList ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -212,14 +212,14 @@ ComponentList ||--}o Coding : "coding"
 name: GroupRelationship
 description: A relationship element that associates a DataAttribute with a set of
   Dimensions, used when attribute values vary based on all group dimension values
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - sdmx:GroupRelationship
 attributes:
   groupKey:
     name: groupKey
     description: Set of dimensions that this definition depends on
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - sdmx:GroupDimensionDescriptor
     rank: 1000
@@ -229,7 +229,7 @@ attributes:
     range: ComponentList
   attribute:
     name: attribute
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     domain_of:
     - Resource
     - MeasureRelationship
@@ -249,14 +249,14 @@ attributes:
 name: GroupRelationship
 description: A relationship element that associates a DataAttribute with a set of
   Dimensions, used when attribute values vary based on all group dimension values
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - sdmx:GroupRelationship
 attributes:
   groupKey:
     name: groupKey
     description: Set of dimensions that this definition depends on
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - sdmx:GroupDimensionDescriptor
     rank: 1000
@@ -268,7 +268,7 @@ attributes:
     range: ComponentList
   attribute:
     name: attribute
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: attribute
     owner: GroupRelationship
     domain_of:

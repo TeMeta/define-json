@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Test suite for Define-JSON schema validation.
+Test suite for Data Definition Specification schema validation.
 """
 
 import unittest
@@ -19,7 +19,7 @@ except ImportError:
     logger.warning("LinkML not available. Schema structure tests will be skipped.")
 
 class TestDefineJSONSchema(unittest.TestCase):
-    """Test suite for Define-JSON schema validation."""
+    """Test suite for Data Definition Specification schema validation."""
     
     def setUp(self):
         """Set up test fixtures."""

@@ -31,7 +31,7 @@ Alias: protocol
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -46,7 +46,7 @@ Alias: protocol
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -67,12 +67,13 @@ Alias: protocol
 ```yaml
 name: protocol
 description: Protocol used by the service (e.g., HTTPS, FTP)
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: protocol
 owner: DataService
 domain_of:
 - DataService
+range: string
 
 ```
 </details>

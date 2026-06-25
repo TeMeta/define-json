@@ -18,6 +18,7 @@ Alias: operator
 | Name | Description | Modifies Slot |
 | --- | --- | --- |
 | [RangeCheck](../classes/RangeCheck.md) | A validation element that performs a simple comparison check between a referenced item's value and specified values, resolving to a boolean result |  no  |
+| [Constraint](../classes/Constraint.md) | An ODRL constraint expressed as leftOperand operator rightOperand, e.g. purpose eq "safety-reporting", or dateTime lt "2026-01-01". |  no  |
 | [Condition](../classes/Condition.md) | A reusable, composable, and nestable logical construct allowing for complex expressions. Conditions are most useful when given a meaningful name and linked to Study Definitions. |  no  |
 
 
@@ -27,7 +28,7 @@ Alias: operator
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -59,6 +60,8 @@ alias: operator
 domain_of:
 - Condition
 - RangeCheck
+- Constraint
+range: string
 
 ```
 </details>

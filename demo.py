@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-Define-JSON Demo: Complete XML ↔ JSON conversion pipeline
+Data Definition Specification Demo: Complete XML ↔ JSON conversion pipeline
 
-Demonstrates the modular define_json package functionality.
+Demonstrates the modular data_definition_spec package functionality.
 """
 
 import sys
@@ -12,13 +12,13 @@ from pathlib import Path
 src_path = Path(__file__).parent / 'src'
 sys.path.insert(0, str(src_path))
 
-from define_json.converters import DefineXMLToJSONConverter, DefineJSONToXMLConverter
-from define_json.validation import run_roundtrip_test, validate_true_roundtrip, validate_define_json
+from data_definition_spec.converters import DefineXMLToJSONConverter, DefineJSONToXMLConverter
+from data_definition_spec.validation import run_roundtrip_test, validate_true_roundtrip, validate_data_definition_spec
 
 
 def main():
-    """Run the complete Define-JSON demo."""
-    print("🚀 Define-JSON Complete Demo")
+    """Run the complete Data Definition Specification demo."""
+    print("🚀 Data Definition Specification Complete Demo")
     print("=" * 60)
     
     # Define paths - use temp files to avoid cluttering data folder
@@ -72,7 +72,7 @@ def main():
         
         # Step 3: Schema Validation
         print(f"\n🔄 Step 3: Validating JSON schema...")
-        schema_results = validate_define_json(data)
+        schema_results = validate_data_definition_spec(data)
         
         if schema_results['valid']:
             print("✅ Schema validation: PASSED")

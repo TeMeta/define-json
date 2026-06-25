@@ -47,7 +47,7 @@ Alias: decimalDigits
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -68,7 +68,7 @@ Alias: decimalDigits
 ```yaml
 name: decimalDigits
 description: For decimal values, the number of digits after the decimal point
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: decimalDigits
 owner: Formatted

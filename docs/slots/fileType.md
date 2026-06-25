@@ -49,7 +49,7 @@ Alias: fileType
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -70,7 +70,7 @@ Alias: fileType
 ```yaml
 name: fileType
 description: Type of ODM file (e.g., Snapshot, Transactional)
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: fileType
 owner: ODMFileMetadata

@@ -46,7 +46,7 @@ Alias: returnType
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -67,7 +67,7 @@ Alias: returnType
 ```yaml
 name: returnType
 description: Return type of the expression
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: returnType
 owner: FormalExpression

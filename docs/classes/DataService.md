@@ -90,7 +90,6 @@ Dataset {
     stringList keys  
     string datasetType  
     string conformsTo  
-    stringList hasPolicy  
     string informationSensitivityClassification  
     string version  
     string href  
@@ -132,6 +131,7 @@ Distribution ||--|o Dataset : "isDistributionOf"
 Dataset ||--|o Dataflow : "describedBy"
 Dataset ||--|o DataStructureDefinition : "structuredBy"
 Dataset ||--}o Distribution : "distribution"
+Dataset ||--}o Policy : "hasPolicy"
 Dataset ||--}o Coding : "security"
 Dataset ||--|o Timing : "validityPeriod"
 Dataset ||--}o Coding : "coding"
@@ -196,7 +196,7 @@ Dataset ||--}o Coding : "coding"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -225,7 +225,7 @@ Dataset ||--}o Coding : "coding"
 name: DataService
 description: A service element that provides an API or endpoint for serving or receiving
   data
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - dprod:DataService
 - dcat:DataService
@@ -234,7 +234,7 @@ attributes:
   isAccessServiceOf:
     name: isAccessServiceOf
     description: Distribution(s) for which this service provides access
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - DataService
@@ -242,14 +242,14 @@ attributes:
   protocol:
     name: protocol
     description: Protocol used by the service (e.g., HTTPS, FTP)
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - DataService
   securitySchemaType:
     name: securitySchemaType
     description: Security or authentication method used (e.g., OAuth2)
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - DataService
@@ -264,7 +264,7 @@ attributes:
 name: DataService
 description: A service element that provides an API or endpoint for serving or receiving
   data
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - dprod:DataService
 - dcat:DataService
@@ -273,7 +273,7 @@ attributes:
   isAccessServiceOf:
     name: isAccessServiceOf
     description: Distribution(s) for which this service provides access
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: isAccessServiceOf
     owner: DataService
@@ -283,26 +283,28 @@ attributes:
   protocol:
     name: protocol
     description: Protocol used by the service (e.g., HTTPS, FTP)
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: protocol
     owner: DataService
     domain_of:
     - DataService
+    range: string
   securitySchemaType:
     name: securitySchemaType
     description: Security or authentication method used (e.g., OAuth2)
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: securitySchemaType
     owner: DataService
     domain_of:
     - DataService
+    range: string
   resourceType:
     name: resourceType
     description: Type of resource (e.g.,  "ODM", "HL7-FHIR", "HL7-CDA", "HL7-v2",
       "OpenEHR-extract")
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: resourceType
     owner: DataService
@@ -314,7 +316,7 @@ attributes:
     name: attribute
     description: Field provided by the Name attribute where the data or information
       can be obtained. Examples are "valueQuantity.value" or "valueQuantity.unit".
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: attribute
     owner: DataService
@@ -329,7 +331,7 @@ attributes:
   selection:
     name: selection
     description: Machine-executable instructions for selecting data from the resource.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: selection
     owner: DataService
@@ -342,7 +344,7 @@ attributes:
   version:
     name: version
     description: The version of the external resources
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: version
     owner: DataService
@@ -354,7 +356,7 @@ attributes:
     name: href
     description: Machine-readable instructions to obtain the resource e.g. FHIR path,
       URL
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: href
     owner: DataService
@@ -366,7 +368,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     identifier: true
     alias: OID
@@ -378,7 +380,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: uuid
     owner: DataService
@@ -388,18 +390,20 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: name
     owner: DataService
     domain_of:
     - Labelled
+    - DefClass
+    - SubClass
     - Standard
     range: string
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: description
     owner: DataService
@@ -413,7 +417,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: coding
     owner: DataService
@@ -428,7 +432,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -443,7 +447,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:altLabel
     rank: 1000

@@ -46,7 +46,7 @@ Alias: isDistributionOf
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -67,7 +67,7 @@ Alias: isDistributionOf
 ```yaml
 name: isDistributionOf
 description: Dataset this distribution represents
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: isDistributionOf
 owner: Distribution

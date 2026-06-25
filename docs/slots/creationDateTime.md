@@ -49,7 +49,7 @@ Alias: creationDateTime
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -70,7 +70,7 @@ Alias: creationDateTime
 ```yaml
 name: creationDateTime
 description: Date and time when the ODM file was created
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: creationDateTime
 owner: ODMFileMetadata

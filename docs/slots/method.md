@@ -46,7 +46,7 @@ Alias: method
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -68,7 +68,7 @@ Alias: method
 name: method
 description: Reference to the Method element that describes how to derive this item's
   value.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: method
 owner: Item

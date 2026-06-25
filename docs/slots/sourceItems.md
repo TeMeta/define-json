@@ -48,7 +48,7 @@ Alias: sourceItems
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -69,7 +69,7 @@ Alias: sourceItems
 ```yaml
 name: sourceItems
 description: Source items for this origin
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: sourceItems
 owner: Origin

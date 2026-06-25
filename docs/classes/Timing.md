@@ -233,6 +233,7 @@ Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 | [ItemGroup](../classes/ItemGroup.md) | [validityPeriod](../slots/validityPeriod.md) | range | [Timing](../classes/Timing.md) |
 | [NominalOccurrence](../classes/NominalOccurrence.md) | [timing](../slots/timing.md) | range | [Timing](../classes/Timing.md) |
 | [DataStructureDefinition](../classes/DataStructureDefinition.md) | [validityPeriod](../slots/validityPeriod.md) | range | [Timing](../classes/Timing.md) |
+| [Dataflow](../classes/Dataflow.md) | [deliverySchedule](../slots/deliverySchedule.md) | any_of[range] | [Timing](../classes/Timing.md) |
 | [Dataset](../classes/Dataset.md) | [validityPeriod](../slots/validityPeriod.md) | range | [Timing](../classes/Timing.md) |
 
 
@@ -251,7 +252,7 @@ Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -282,7 +283,7 @@ Condition ||--}o SiteOrSponsorComment : "siteOrSponsorComments"
 name: Timing
 description: A temporal element that describes the timing of an event or occurrence,
   which can be absolute, relative, or nominal
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - usdm:Timing
 narrow_mappings:
@@ -300,7 +301,7 @@ attributes:
   type:
     name: type
     description: 'The type of timing: Fixed, Before (Relative), or After (Relative).'
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     domain_of:
     - ItemGroup
     - Method
@@ -313,7 +314,7 @@ attributes:
   isNominal:
     name: isNominal
     description: Indicates whether the timing is nominal (event-based) or not.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Timing
@@ -322,18 +323,17 @@ attributes:
     name: value
     description: The value of the timing, which can be a date/time, duration, or event
       reference.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     domain_of:
     - Translation
     - Parameter
     - Timing
-    range: string
     required: true
   relativeTo:
     name: relativeTo
     description: Reference to the event or occurrence that this timing is relative
       to.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Timing
@@ -342,7 +342,7 @@ attributes:
     name: relativeFrom
     description: Reference to the event or occurrence that this timing is relative
       to.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Timing
@@ -350,7 +350,7 @@ attributes:
   windowLower:
     name: windowLower
     description: Start date/time of the timing
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Timing
@@ -358,7 +358,7 @@ attributes:
   windowUpper:
     name: windowUpper
     description: End date/time of the timing
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Timing
@@ -367,7 +367,7 @@ attributes:
     name: recalled
     description: Indicates whether the timing is recalled or not (recalled timings
       are less reliable).
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Timing
@@ -375,15 +375,14 @@ attributes:
   frequency:
     name: frequency
     description: Frequency. Use dose frequency terminology e.g. "BID" if applicable.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Timing
-    range: string
   imputation:
     name: imputation
     description: The imputation method used for the Timing.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     domain_of:
     - Timing
@@ -400,7 +399,7 @@ attributes:
 name: Timing
 description: A temporal element that describes the timing of an event or occurrence,
   which can be absolute, relative, or nominal
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - usdm:Timing
 narrow_mappings:
@@ -418,7 +417,7 @@ attributes:
   type:
     name: type
     description: 'The type of timing: Fixed, Before (Relative), or After (Relative).'
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: type
     owner: Timing
     domain_of:
@@ -433,7 +432,7 @@ attributes:
   isNominal:
     name: isNominal
     description: Indicates whether the timing is nominal (event-based) or not.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: isNominal
     owner: Timing
@@ -444,7 +443,7 @@ attributes:
     name: value
     description: The value of the timing, which can be a date/time, duration, or event
       reference.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     alias: value
     owner: Timing
     domain_of:
@@ -457,7 +456,7 @@ attributes:
     name: relativeTo
     description: Reference to the event or occurrence that this timing is relative
       to.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: relativeTo
     owner: Timing
@@ -468,7 +467,7 @@ attributes:
     name: relativeFrom
     description: Reference to the event or occurrence that this timing is relative
       to.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: relativeFrom
     owner: Timing
@@ -478,7 +477,7 @@ attributes:
   windowLower:
     name: windowLower
     description: Start date/time of the timing
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: windowLower
     owner: Timing
@@ -488,7 +487,7 @@ attributes:
   windowUpper:
     name: windowUpper
     description: End date/time of the timing
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: windowUpper
     owner: Timing
@@ -499,7 +498,7 @@ attributes:
     name: recalled
     description: Indicates whether the timing is recalled or not (recalled timings
       are less reliable).
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: recalled
     owner: Timing
@@ -509,7 +508,7 @@ attributes:
   frequency:
     name: frequency
     description: Frequency. Use dose frequency terminology e.g. "BID" if applicable.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: frequency
     owner: Timing
@@ -519,7 +518,7 @@ attributes:
   imputation:
     name: imputation
     description: The imputation method used for the Timing.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: imputation
     owner: Timing
@@ -531,7 +530,7 @@ attributes:
     name: OID
     description: Local identifier within this study/context. Use CDISC OID format
       for regulatory submissions, or simple strings for internal use.
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     identifier: true
     alias: OID
@@ -543,7 +542,7 @@ attributes:
   uuid:
     name: uuid
     description: Universal unique identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: uuid
     owner: Timing
@@ -553,18 +552,20 @@ attributes:
   name:
     name: name
     description: Short name or identifier, used for field names
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: name
     owner: Timing
     domain_of:
     - Labelled
+    - DefClass
+    - SubClass
     - Standard
     range: string
   description:
     name: description
     description: Detailed description, shown in tooltips
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: description
     owner: Timing
@@ -578,7 +579,7 @@ attributes:
   coding:
     name: coding
     description: Semantic tags for this element
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     rank: 1000
     alias: coding
     owner: Timing
@@ -593,7 +594,7 @@ attributes:
   label:
     name: label
     description: Human-readable label, shown in UIs
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:prefLabel
     rank: 1000
@@ -608,7 +609,7 @@ attributes:
   aliases:
     name: aliases
     description: Alternative name or identifier
-    from_schema: https://cdisc.org/define-json
+    from_schema: https://cdisc.org/data-definition-spec
     exact_mappings:
     - skos:altLabel
     rank: 1000

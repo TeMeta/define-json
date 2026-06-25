@@ -41,7 +41,7 @@ URI: [odm:enum/LogicalOperator](https://cdisc.org/odm2/enum/LogicalOperator)
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -55,7 +55,7 @@ URI: [odm:enum/LogicalOperator](https://cdisc.org/odm2/enum/LogicalOperator)
 name: LogicalOperator
 description: Logical operators for combining conditions in Boolean expressions. For
   complex expressions, use the EXPRESSION value.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 permissible_values:
   EXPRESSION:

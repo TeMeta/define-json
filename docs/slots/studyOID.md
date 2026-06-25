@@ -49,7 +49,7 @@ Alias: studyOID
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -70,7 +70,7 @@ Alias: studyOID
 ```yaml
 name: studyOID
 description: Unique identifier for the study
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: studyOID
 owner: StudyMetadata

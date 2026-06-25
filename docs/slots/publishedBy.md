@@ -27,7 +27,7 @@ Alias: publishedBy
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -59,6 +59,7 @@ alias: publishedBy
 domain_of:
 - Dictionary
 - Dataset
+range: string
 
 ```
 </details>

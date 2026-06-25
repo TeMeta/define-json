@@ -47,7 +47,7 @@ Alias: sourceSystem
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -68,7 +68,7 @@ Alias: sourceSystem
 ```yaml
 name: sourceSystem
 description: Source system that generated the data
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: sourceSystem
 owner: ODMFileMetadata

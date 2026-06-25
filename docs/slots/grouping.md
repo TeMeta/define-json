@@ -46,7 +46,7 @@ Alias: grouping
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -68,7 +68,7 @@ Alias: grouping
 name: grouping
 description: An association to a set of metadata concepts that have an identified
   structural role in a Data Structure Definition.
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: grouping
 owner: DataStructureDefinition

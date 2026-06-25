@@ -31,7 +31,7 @@ Alias: dataProductOwner
 
 ## Properties
 
-* Range: NONE&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md)
+* Range: [String](../types/String.md)&nbsp;or&nbsp;<br />[User](../classes/User.md)&nbsp;or&nbsp;<br />[Organization](../classes/Organization.md)&nbsp;or&nbsp;<br />[String](../types/String.md)
 
 
 
@@ -46,7 +46,7 @@ Alias: dataProductOwner
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -68,7 +68,7 @@ Alias: dataProductOwner
 ```yaml
 name: dataProductOwner
 description: The person or team accountable for this data product
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 exact_mappings:
 - prov:wasAttributedTo
 rank: 1000
@@ -76,6 +76,7 @@ alias: dataProductOwner
 owner: DataProduct
 domain_of:
 - DataProduct
+range: string
 any_of:
 - range: User
 - range: Organization

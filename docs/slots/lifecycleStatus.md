@@ -46,7 +46,7 @@ Alias: lifecycleStatus
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -67,7 +67,7 @@ Alias: lifecycleStatus
 ```yaml
 name: lifecycleStatus
 description: Current lifecycle status of the data product
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: lifecycleStatus
 owner: DataProduct

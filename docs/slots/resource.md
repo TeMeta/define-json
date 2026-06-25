@@ -31,7 +31,7 @@ Alias: resource
 
 ## Properties
 
-* Range: NONE&nbsp;or&nbsp;<br />[Resource](../classes/Resource.md)&nbsp;or&nbsp;<br />[String](../types/String.md)
+* Range: [String](../types/String.md)&nbsp;or&nbsp;<br />[Resource](../classes/Resource.md)&nbsp;or&nbsp;<br />[String](../types/String.md)
 
 * Multivalued: True
 
@@ -48,7 +48,7 @@ Alias: resource
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -70,12 +70,13 @@ Alias: resource
 name: resource
 description: Path to a resource (e.g. File, FHIR datasource) that is the source of
   this item
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: resource
 owner: SourceItem
 domain_of:
 - SourceItem
+range: string
 multivalued: true
 inlined: false
 any_of:

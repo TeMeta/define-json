@@ -31,7 +31,7 @@ Alias: implementsCondition
 
 ## Properties
 
-* Range: NONE
+* Range: [String](../types/String.md)
 
 
 
@@ -46,7 +46,7 @@ Alias: implementsCondition
 ### Schema Source
 
 
-* from schema: https://cdisc.org/define-json
+* from schema: https://cdisc.org/data-definition-spec
 
 
 
@@ -67,12 +67,13 @@ Alias: implementsCondition
 ```yaml
 name: implementsCondition
 description: Reference to a external (e.g. USDM) condition definition that this implements
-from_schema: https://cdisc.org/define-json
+from_schema: https://cdisc.org/data-definition-spec
 rank: 1000
 alias: implementsCondition
 owner: Condition
 domain_of:
 - Condition
+range: string
 
 ```
 </details>
