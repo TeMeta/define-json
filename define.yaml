@@ -1539,13 +1539,14 @@ classes:
     broad_mappings:
       - fhir:Timing
     narrow_mappings:
+      - fhir:Period
+      - fhir:Age
+      - fhir:Duration
+    related_mappings:
       - omop:Observation_period
       - omop:Drug_era
       - omop:Condition_era
       - omop:Procedure_era
-      - fhir:Period
-      - fhir:Age
-      - fhir:Duration
     is_a: IdentifiableElement
     attributes:
       type:
