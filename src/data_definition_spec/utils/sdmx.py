@@ -15,15 +15,15 @@ import yaml
 import logging
 
 from ..schema.define import (
-    MetaDataVersion,
+    Specification,
     ItemGroup,
     Item,
     Dimension,
     Measure,
     DataAttribute,
     ItemGroupType,
-    WhereClause,
-    Condition,
+    ApplicabilityCondition,
+    LogicalPredicate,
     RangeCheck,
     GroupKey,
     Comparator,
@@ -135,7 +135,7 @@ def classify_item_role(variable_name: str, config: Dict[str, Any]) -> str:
 
 
 def build_dsd_for_domain(
-    mdv: MetaDataVersion,
+    mdv: Specification,
     domain: str,
     config: Dict[str, Any]
 ) -> ItemGroup:
@@ -330,7 +330,7 @@ def build_dsd_for_domain(
 def validate_dsd_completeness(
     dsd: ItemGroup,
     all_variable_oids: Set[str],
-    mdv: MetaDataVersion
+    mdv: Specification
 ) -> Tuple[bool, List[str]]:
     """
     Validate that DSD classifies all variables in the domain.
@@ -372,9 +372,9 @@ def validate_dsd_completeness(
 # Phase 2: WhereClause → GroupKey Derivation
 
 def is_clean_whereclause(
-    where_clause: WhereClause,
+    where_clause: ApplicabilityCondition,
     dsd: ItemGroup,
-    mdv: MetaDataVersion
+    mdv: Specification
 ) -> bool:
     """
     Check if a WhereClause is "clean" (derivable to GroupKey).
@@ -393,19 +393,19 @@ def is_clean_whereclause(
     Returns:
         True if WhereClause is clean (derivable), False otherwise
     """
-    if not where_clause.conditions:
+    if not where_clause.predicates:
         return False
     
     # Must have exactly one condition (no OR logic between conditions)
-    if len(where_clause.conditions) > 1:
+    if len(where_clause.predicates) > 1:
         logger.debug(f"WhereClause {where_clause.OID} has multiple conditions (OR logic), not derivable")
         return False
     
     # Resolve condition if it's a string OID
-    cond_ref = where_clause.conditions[0]
+    cond_ref = where_clause.predicates[0]
     if isinstance(cond_ref, str):
-        if mdv.conditions:
-            condition = next((c for c in mdv.conditions if c.OID == cond_ref), None)
+        if mdv.predicates:
+            condition = next((c for c in mdv.predicates if c.OID == cond_ref), None)
             if not condition:
                 return False
         else:
@@ -414,7 +414,7 @@ def is_clean_whereclause(
         condition = cond_ref
     
     # Condition must not have nested conditions (no complex logic)
-    if condition.conditions and len(condition.conditions) > 0:
+    if condition.predicates and len(condition.predicates) > 0:
         logger.debug(f"WhereClause {where_clause.OID} has nested conditions, not derivable")
         return False
     
@@ -448,9 +448,9 @@ def is_clean_whereclause(
 
 
 def derive_groupkey_from_whereclause(
-    where_clause: WhereClause,
+    where_clause: ApplicabilityCondition,
     dsd: ItemGroup,
-    mdv: MetaDataVersion
+    mdv: Specification
 ) -> Optional[GroupKey]:
     """
     Convert a clean WhereClause to a GroupKey.
@@ -474,10 +474,10 @@ def derive_groupkey_from_whereclause(
         return None
     
     # Resolve condition if it's a string OID
-    cond_ref = where_clause.conditions[0]
+    cond_ref = where_clause.predicates[0]
     if isinstance(cond_ref, str):
-        if mdv.conditions:
-            condition = next((c for c in mdv.conditions if c.OID == cond_ref), None)
+        if mdv.predicates:
+            condition = next((c for c in mdv.predicates if c.OID == cond_ref), None)
             if not condition:
                 return None
         else:
@@ -539,7 +539,7 @@ def analyze_attribute_variance(
     slices: List[ItemGroup],
     slice_data: Dict[str, Dict[str, str]],
     dsd: ItemGroup,
-    mdv: MetaDataVersion
+    mdv: Specification
 ) -> Dict[str, Any]:
     """
     Analyze how an attribute varies across slices.
@@ -666,7 +666,7 @@ def infer_attribute_relationships(
     dsd: ItemGroup,
     slices: List[ItemGroup],
     slice_data: Dict[str, Dict[str, str]],
-    mdv: MetaDataVersion
+    mdv: Specification
 ) -> Dict[str, Dict[str, Any]]:
     """
     Infer attribute attachment levels by analyzing variance across slices.

@@ -120,7 +120,7 @@ def run_roundtrip_test(original_xml_path: Path, converted_json_path: Path) -> Di
     # Handle both field name formats
     items = json_data.get('items', []) or json_data.get('Variables', [])
     code_lists = json_data.get('codeLists', []) or json_data.get('CodeLists', [])
-    where_clauses = json_data.get('whereClauses', []) or json_data.get('WhereClauses', [])
+    where_clauses = json_data.get('applicabilityConditions', []) or json_data.get('WhereClauses', [])
     methods = json_data.get('methods', []) or json_data.get('Methods', [])
     standards = json_data.get('standards', []) or json_data.get('Standards', [])
     
@@ -185,7 +185,7 @@ def run_roundtrip_test(original_xml_path: Path, converted_json_path: Path) -> Di
         items = json_data.get('items', []) or json_data.get('Variables', [])
         value_lists = json_data.get('valueLists', []) or json_data.get('ValueLists', [])
         code_lists = json_data.get('codeLists', []) or json_data.get('CodeLists', [])
-        where_clauses = json_data.get('whereClauses', []) or json_data.get('WhereClauses', [])
+        where_clauses = json_data.get('applicabilityConditions', []) or json_data.get('WhereClauses', [])
         methods = json_data.get('methods', []) or json_data.get('Methods', [])
         
         # Collect all item OIDs (both top-level and within ItemGroups)

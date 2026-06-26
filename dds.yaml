@@ -94,9 +94,8 @@ classes:
         range: datetime
       owner:
         description: Party responsible for this element
-        narrow_mappings:
+        exact_mappings:
           - prov:wasAttributedTo
-          - prov:wasAssociatedBy
         any_of:
           - range: User
           - range: Organization
@@ -504,8 +503,8 @@ classes:
       - usdm:DerivationConceptProperty
       - usdm:AnalysisConceptProperty
       - fhir:ElementDefinition
-      - qb:Measure
-      - qb:Attribute
+      - qb:MeasureProperty
+      - qb:AttributeProperty
       - sdmx:Concept
       - sdmx:Component
       - sdmx:Representation
@@ -578,9 +577,8 @@ classes:
       - omop:Table
       - qb:DataStructureDefinition
       - sdmx:DataStructureDefinition
-      - sdmx:MetaDataStructureDefinition
     related_mappings:
-      - qb:Dataset
+      - qb:DataSet
       - qb:Observation
       - qb:ObservationGroup
       - qb:Slice
@@ -785,7 +783,7 @@ classes:
       A text representation that provides content in a specific language, used for multilingual support
     exact_mappings:
       - odm:TranslatedText
-      - sdmx:InternationalString
+      - sdmx:LocalisedString
     attributes:
       "language":
         description: The language of the translation
@@ -795,6 +793,11 @@ classes:
         required: true
 
   TranslatedText:
+    description: >-
+      A container of the language-specific translations of a single piece of text
+      (a set of localised strings), as opposed to one Translation.
+    exact_mappings:
+      - sdmx:InternationalString
     attributes:
       translations:
         range: Translation
@@ -807,7 +810,6 @@ classes:
       A value set that defines a discrete collection of permissible values for an item, corresponding to the ODM CodeList construct
     exact_mappings:
       - odm:CodeList
-      - omop:Vocabulary
       - fhir:ValueSet
     close_mappings:
       - skos:Collection
@@ -818,7 +820,6 @@ classes:
     narrow_mappings:
       - sdmx:Codelist
       - sdmx:ValueList
-      - sdmx:ConceptScheme
     is_a: GovernedElement
     mixins:
       - Versioned
@@ -925,7 +926,6 @@ classes:
     close_mappings:
       - omop:Concept
       - skos:Concept
-      - skos:Label
       - sdmx:Code
       - sdmx:Concept
       - sdmx:ISOConceptReference
@@ -956,6 +956,11 @@ classes:
   Dictionary:
     description: >-
       A dictionary that defines a set of codes and their meanings
+    close_mappings:
+      - omop:Vocabulary
+      - fhir:CodeSystem
+      - skos:ConceptScheme
+      - sdmx:ConceptScheme
     is_a: IdentifiableElement
     mixins:
       - Versioned
@@ -980,15 +985,20 @@ classes:
       data shape. Multiple ItemGroups or Items can implement the same Concept,
       allowing standard biomedical concepts to be implemented differently across
       studies while remaining semantically aligned.
+
+      This is a structural concept definition (an SDMX MetadataStructureDefinition-style
+      shape that implementations conform to), not an ItemScheme/SKOS concept item. It
+      references a concept (sdmx:Concept / skos:Concept) but is not itself one; see
+      Coding for the vocabulary-item mapping.
     close_mappings:
-      - sdmx:MetaDataStructureDefinition
-      - sdmx:Concept
+      - sdmx:MetadataStructureDefinition
       - osb:Activity
     narrow_mappings:
       - usdm:BiomedicalConcept
       - usdm:AnalysisConcept
       - usdm:DerivationConcept
     related_mappings:
+      - sdmx:Concept
       - osb:ActivityInstance
       - osb:assm_group
       - osb:assm_subgroup
@@ -1006,15 +1016,17 @@ classes:
 
   ConceptProperty:
     description: >-
-      A reified property concept that exists within the context of its containing topic concept
+      A reified property concept that exists within the context of its containing
+      topic concept. Structurally an SDMX MetadataAttribute (a component with
+      cardinality); it references a concept (sdmx:Concept) but is not itself one.
     close_mappings:
-      - sdmx:MetaDataAttribute
-      - sdmx:Concept
+      - sdmx:MetadataAttribute
     narrow_mappings:
       - usdm:BiomedicalConceptProperty
       - usdm:DerivationConceptProperty
       - usdm:AnalysisConceptProperty
     related_mappings:
+      - sdmx:Concept
       - osb:sdtm_variable
       - osb:specimen
       - osb:unit_dimension
@@ -1077,7 +1089,7 @@ classes:
       - fhir:Expression
       - qb:SliceKey
       - sdmx:DataConstraint
-      - sdmx:MetaDataConstraint
+      - sdmx:MetadataConstraint
       - sdmx:DataKeySet
     is_a: GovernedElement
     attributes:
@@ -1732,7 +1744,7 @@ classes:
     description: >-
       A collection element that groups observations sharing the same dimensionality, expressed as a set of unique dimensions within a Data Product context
     close_mappings:
-      - qb:Dataset
+      - qb:DataSet
       - sdmx:Dataset
       - dprod:Dataset
       - dcat:Dataset
@@ -1982,6 +1994,7 @@ classes:
       The DataProduct defines the boundary of accountability between data producers and consumers.
     exact_mappings:
       - dprod:DataProduct
+    related_mappings:
       - dcat:DataService
     is_a: GovernedElement
     mixins:
@@ -2191,7 +2204,7 @@ classes:
     exact_mappings:
       - odrl:Policy
     close_mappings:
-      - dcat:hasPolicy
+      - odrl:hasPolicy
     is_a: GovernedElement
     attributes:
       policyType:
@@ -2385,10 +2398,10 @@ enums:
         meaning: skos:relatedMatch
       BROAD_SYNONYM:
         description: Target is broader than source e.g. "diabetes" is broader than "type 2 diabetes"
-        meaning: skos:broaderMatch
+        meaning: skos:broadMatch
       NARROW_SYNONYM:
         description: Target is narrower than source e.g. "type 2 diabetes" is narrower than "diabetes"
-        meaning: skos:narrowerMatch
+        meaning: skos:narrowMatch
 
   Comparator:
     description: >-

@@ -1,7 +1,7 @@
 # Data Definition Specification
 
 > [!NOTE]
-> **CDISC has forked this project for the CDISC 360i project** — see
+> **CDISC has forked this project** — see
 > [cdisc-org/DataExchange-DDS](https://github.com/cdisc-org/DataExchange-DDS).
 >
 > This project began life as **Define-JSON**. The previous
@@ -10,30 +10,53 @@
 
 Fixing Clinical Data Contracts at the Root
 
-> “send us the Define too so we know what's going on”
+> “send us the DDS too so we know what's going on”
 
-`data-definition-spec` is a description of data implementation, it can be used for both:
+`data-definition-spec` (DDS) is a **standards-agnostic canonical model** for the meaning, structure, and governance of clinical data. The model is defined once (in LinkML) and **projects to** the standards you actually exchange in — CDISC (SDTM/ADaM/Define-XML), FHIR, OMOP, and SDMX — so no single standard owns it.
+
+It describes data implementation and serves as a Data Contract for both:
 
 1. **Demand**: Data Contract for what a particular analysis or data transfer requires (e.g. describe end-to-end transformations when planning a Clinical Trial)
 2. **Supply**: Data Contract for what a particular provider promises to deliver (e.g. Data Transfer Agreements with each supplier)
 
-It is being designed in a Clinical Trial context to supplement the CDISC Unified Study Definitions ([USDM](https://github.com/cdisc-org/DDF-RA)) and [Dataset-JSON](https://github.com/cdisc-org/DataExchange-DatasetJson), providing a way to describe datasets and how they link causally to their context
+In a clinical-trial context it complements the CDISC Unified Study Definitions ([USDM](https://github.com/cdisc-org/DDF-RA)) and [Dataset-JSON](https://github.com/cdisc-org/DataExchange-DatasetJson) — describing datasets and how they link causally to their context — but the model itself is not CDISC-derived.
 
 [Documentation Site](https://temeta.github.io/data-definition-spec)
 
-## 🔄 Quick Start: XML ↔ JSON Conversion
+## How It's Built
+
+DDS is a **single source of truth** with everything else generated from it:
+
+- **LinkML schema** (`dds.yaml`) — the canonical model: classes, slots, enums, and cross-standard mappings in one place.
+- **Neutral identity** — the `https://w3id.org/dds` namespace (`dds` prefix), independent of any single standards body.
+- **Linked-data foundations** — reuses established vocabularies instead of reinventing them: SKOS (semantics), PROV-O (provenance), DCAT/DPROD (data products), ODRL (governance/policy), RDF Data Cube + SDMX (statistical structure), plus FHIR/OMOP/CDISC mappings carried on each element.
+- **Generated artifacts** — JSON Schema, Pydantic models, and the documentation site are all produced from `dds.yaml` via LinkML generators; JSON-LD/OWL/SHACL are natural further outputs.
+
+Because the model is defined once and projected outward, adding a new target standard is a mapping exercise, not a re-modelling one.
+
+## 🚀 Quick Start
 
 ```bash
 # Install dependencies
 poetry install
+```
 
-# Convert Define-XML to Data Definition Specification
+The canonical model lives in **`dds.yaml`** (LinkML). Generate downstream artifacts from it:
+
+```bash
+make generate-json-schema     # -> generated/data-definition-spec-schema.json (JSON Schema)
+make generate-pydantic        # -> generated/define.py (Pydantic models)
+make docs                     # -> documentation site
+```
+
+**Define-XML is just one serialization facet** (alongside the FHIR/OMOP/SDMX projections), reached through the converter:
+
+```bash
+# Define-XML <-> DDS
 poetry run python -m data_definition_spec xml2json data/define.xml data/output.json
-
-# Convert Data Definition Specification to Define-XML
 poetry run python -m data_definition_spec json2xml data/input.json data/output.xml
 
-# Convert to HTML (no CORS issues)
+# Render DDS as HTML (no CORS issues)
 poetry run python -m data_definition_spec json2html input.json output.html
 ```
 
@@ -88,7 +111,7 @@ Demonstrates reverse engineering, schema validation, data cube construction, and
 - Regulatory submissions (Define-XML)
 - Dataset transformation specifications
 
-Data Definition Specification links to `Coding`, `ReifiedConcept` and `ConceptProperty` for structured semantic connections, enabling each data element to be mapped unambiguously to standard dictionaries/ontologies and abstract concepts.
+Data Definition Specification links to `Coding`, `Concept` and `ConceptProperty` for structured semantic connections, enabling each data element to be mapped unambiguously to standard dictionaries/ontologies and abstract concepts.
 
 > "Don't define derivation/origin for a field without knowing what the Biomedical Concept is being implemented"
 
@@ -121,7 +144,7 @@ python scripts/render_dta_docx.py generated/dta_LB.provisionagreement.json \
   --source data/defineV21-SDTM.json --out generated/DTA_LB_draft.docx
 ```
 
-`--mappings` merges multi-standard codings onto each variable (the same element carries CDISC + FHIR `Observation` + OMOP `MEASUREMENT` representations) and references a canonical `ReifiedConcept` (`examples/concept_LABRESULT.reifiedconcept.json`) that bridges the three — the "model fabric" horizontal. `Coding` maps to `fhir:Coding`/`omop:Concept`, so no schema change is needed.
+`--mappings` merges multi-standard codings onto each variable (the same element carries CDISC + FHIR `Observation` + OMOP `MEASUREMENT` representations) and references a canonical `Concept` (`examples/concept_LABRESULT.reifiedconcept.json`) that bridges the three — the "model fabric" horizontal. `Coding` maps to `fhir:Coding`/`omop:Concept`, so no schema change is needed.
 
 **Demand Data Contracts**: Analysis requests specifying how target datasets are derived from sources and expected structure.
 
@@ -137,7 +160,7 @@ python scripts/render_dta_docx.py generated/dta_LB.provisionagreement.json \
 Data Definition Specification bridges implementation and meaning through:
 
 - **`Coding`** - Semantic tags against known ontologies
-- **`ReifiedConcept`** - Links to abstract concepts (e.g., CDISC Biomedical Concepts)
+- **`Concept`** - Links to abstract concepts (e.g., CDISC Biomedical Concepts)
 - **`ConceptProperty`** - Properties of concepts in context
 
 This enables comparison across implementations and links disparate structures to shared meaning.

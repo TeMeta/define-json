@@ -18,7 +18,7 @@ import pytest
 
 REPO = Path(__file__).resolve().parent.parent
 SCRIPTS = REPO / "scripts"
-SCHEMA = REPO / "define.yaml"
+SCHEMA = REPO / "dds.yaml"
 
 
 def _load(module_name: str):
@@ -208,7 +208,7 @@ def test_render_docx_has_sections_and_table(tmp_path):
 # --- schema conformance (gated on linkml + schema presence) -------------------
 
 @pytest.mark.skipif(shutil.which("linkml-validate") is None or not SCHEMA.exists(),
-                    reason="linkml-validate or define.yaml not available")
+                    reason="linkml-validate or dds.yaml not available")
 def test_generated_dta_is_schema_valid(tmp_path):
     spec = define_spec()
     out = dta.build_dta(spec, spec["itemGroups"][0],

@@ -1,6 +1,6 @@
 # Changelog
 
-Notable changes to `define.yaml` (the Data Definition Specification LinkML schema). Format loosely
+Notable changes to `dds.yaml` (the Data Definition Specification LinkML schema). Format loosely
 follows [Keep a Changelog](https://keepachangelog.com). The schema is not yet
 semver-versioned, so entries are dated.
 

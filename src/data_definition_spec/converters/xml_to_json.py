@@ -57,15 +57,15 @@ import sys
 sys.path.insert(0, '/mnt/project')
 
 from ..schema.define import (
-    MetaDataVersion,
+    Specification,
     Item,
     ItemGroup,
     CodeList,
     CodeListItem,
     Dictionary,
     Method,
-    WhereClause,
-    Condition,
+    ApplicabilityCondition,
+    LogicalPredicate,
     Origin,
     RangeCheck,
     Coding,
@@ -198,39 +198,44 @@ class DefineXMLToJSONConverter:
         if study is None or mdv is None:
             raise ValueError("Could not find Study or MetaDataVersion in Define-XML")
         
-        # Build MetaDataVersion data for Pydantic model
-        mdv_data = {
-            # ODM File Metadata (required by schema)
+        # ODM serialization metadata is detached from the core model — it is applied
+        # by the ODM output generator, not stored on Specification. Capture it in the
+        # _xmlMetadata sidecar so the XML -> JSON -> XML roundtrip can restore it.
+        odm_serialization = {
             'fileOID': root.get('FileOID', 'FILE.001'),
-            'creationDateTime': self._parse_datetime(root.get('CreationDateTime')),
+            # isoformat() keeps the 'T' separator; the sidecar is a plain dict that is
+            # JSON-dumped with default=str, which would otherwise stringify with a space.
+            'creationDateTime': self._parse_datetime(root.get('CreationDateTime')).isoformat(),
             'odmVersion': root.get('ODMVersion', '1.3.2'),
             'fileType': root.get('FileType', 'Snapshot'),
-            
+        }
+
+        # Build Specification data for Pydantic model
+        mdv_data = {
             # Study Metadata
             'studyOID': study.get('OID', 'STUDY.001'),
-            
-            # MetaDataVersion attributes
+            # MetaDataVersion (Specification) attributes
             'OID': mdv.get('OID', 'MDV.001'),
         }
-        
-        # Optional ODM attributes
+
+        # Optional ODM serialization attributes (sidecar, not on Specification)
         if root.get('AsOfDateTime'):
-            mdv_data['asOfDateTime'] = self._parse_datetime(root.get('AsOfDateTime'))
+            odm_serialization['asOfDateTime'] = self._parse_datetime(root.get('AsOfDateTime')).isoformat()
         if root.get('Originator'):
-            mdv_data['originator'] = root.get('Originator')
+            odm_serialization['originator'] = root.get('Originator')
         if root.get('SourceSystem'):
-            mdv_data['sourceSystem'] = root.get('SourceSystem')
+            odm_serialization['sourceSystem'] = root.get('SourceSystem')
         if root.get('SourceSystemVersion'):
-            mdv_data['sourceSystemVersion'] = root.get('SourceSystemVersion')
-        
-        # Context and DefineVersion
+            odm_serialization['sourceSystemVersion'] = root.get('SourceSystemVersion')
+
+        # Context and DefineVersion (also sidecar)
         context = root.get('{%s}Context' % self.active_namespaces['def'])
         if context:
-            mdv_data['context'] = context
-        
+            odm_serialization['context'] = context
+
         define_version = mdv.get('{%s}DefineVersion' % self.active_namespaces['def'])
         if define_version:
-            mdv_data['defineVersion'] = define_version
+            odm_serialization['defineVersion'] = define_version
         
         # Study metadata
         study_name = self._get_study_name(study)
@@ -255,6 +260,8 @@ class DefineXMLToJSONConverter:
         xml_metadata = {
             'namespaces': self.active_namespaces,
         }
+        # Detached ODM serialization metadata round-trips via the sidecar, not the model
+        xml_metadata['odmSerializationMetadata'] = odm_serialization
         
         # Fix #1: Preserve ODM Root-Level Attributes
         odm_metadata = {}
@@ -580,16 +587,16 @@ class DefineXMLToJSONConverter:
         logger.info("Processing conditions and where clauses...")
         conditions, where_clauses, cond_supplemental = self._process_conditions_and_where_clauses(mdv)
         if conditions:
-            mdv_data['conditions'] = [c.model_dump(mode='json', exclude_none=True) if hasattr(c, 'model_dump') else c for c in conditions]
+            mdv_data['predicates'] = [c.model_dump(mode='json', exclude_none=True) if hasattr(c, 'model_dump') else c for c in conditions]
             logger.info(f"  - Created {len(conditions)} conditions")
         if where_clauses:
-            mdv_data['whereClauses'] = [wc.model_dump(mode='json', exclude_none=True) if hasattr(wc, 'model_dump') else wc for wc in where_clauses]
+            mdv_data['applicabilityConditions'] = [wc.model_dump(mode='json', exclude_none=True) if hasattr(wc, 'model_dump') else wc for wc in where_clauses]
             logger.info(f"  - Created {len(where_clauses)} where clauses")
         
         # Create MetaDataVersion Pydantic model to validate
         logger.info("Validating with Pydantic...")
         try:
-            mdv_model = MetaDataVersion(**mdv_data)
+            mdv_model = Specification(**mdv_data)
             # Convert to dict for JSON output
             result = mdv_model.model_dump(mode='json', exclude_none=True)
             logger.info("Pydantic validation successful")
@@ -1435,21 +1442,21 @@ class DefineXMLToJSONConverter:
             if mandatory:
                 item_data['mandatory'] = mandatory == 'Yes'
             
-            # Role
-            role = item_ref.get('Role')
-            if role:
-                item_data['role'] = role
-            
+            # Role is an ODM serialization detail (ODMItemSerialization), detached from
+            # the core Item model and applied by the ODM output generator, so it is not
+            # stored here.
+
             # MethodOID - preserve from XML for perfect roundtrip
             # Store in 'method' field (Item model uses 'method' not 'methodOID')
             method_oid = item_ref.get('MethodOID')
             if method_oid:
                 item_data['method'] = method_oid
             
-            # def:HasNoData - yesonly boolean
+            # def:HasNoData is an ODM serialization detail (ODMItemSerialization),
+            # detached from the core Item model. Keep it only in the supplemental
+            # sidecar for roundtrip; do not place it on the Item.
             has_no_data = item_ref.get('{%s}HasNoData' % self.active_namespaces['def'])
             if has_no_data:
-                item_data['hasNoData'] = has_no_data.upper() in ['YES', 'Y']
                 item_supp['hasNoDataXmlValue'] = has_no_data
             
             # KeySequence - now stored at ItemGroup level, not per-item
@@ -2090,7 +2097,7 @@ class DefineXMLToJSONConverter:
         
         return [], supplemental
     
-    def _process_conditions_and_where_clauses(self, mdv: ET.Element) -> Tuple[List[Condition], List[WhereClause], Dict]:
+    def _process_conditions_and_where_clauses(self, mdv: ET.Element) -> Tuple[List[LogicalPredicate], List[ApplicabilityCondition], Dict]:
         """
         Process WhereClauseDef elements into proper WhereClause and Condition objects.
         
@@ -2163,7 +2170,7 @@ class DefineXMLToJSONConverter:
                     cond_data['description'] = description
                 
                 try:
-                    condition_obj = Condition(**cond_data)
+                    condition_obj = LogicalPredicate(**cond_data)
                     conditions.append(condition_obj)
                 except Exception as e:
                     logger.warning(f"Failed to create Condition {cond_oid}: {e}")
@@ -2172,14 +2179,14 @@ class DefineXMLToJSONConverter:
                 # Create WhereClause object referencing the Condition
                 wc_data = {
                     'OID': wc_oid,
-                    'conditions': [cond_oid]  # Reference to Condition OID
+                    'predicates': [cond_oid]  # Reference to Condition OID
                 }
                 
                 if description:
                     wc_data['description'] = description
                 
                 try:
-                    where_clause_obj = WhereClause(**wc_data)
+                    where_clause_obj = ApplicabilityCondition(**wc_data)
                     where_clauses.append(where_clause_obj)
                     
                     # Store CommentOID in supplemental if present

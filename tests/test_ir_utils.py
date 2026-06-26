@@ -795,8 +795,8 @@ class TestMultipleClausesExamples:
             mdv_data["itemGroups"] = flattened_groups
         
         # Load as MetaDataVersion
-        from data_definition_spec.schema.define import MetaDataVersion
-        mdv = MetaDataVersion.model_validate(mdv_data)
+        from data_definition_spec.schema.define import Specification
+        mdv = Specification.model_validate(mdv_data)
         
         # Count ValueLists before transformation
         from data_definition_spec.schema.define import ItemGroupType
