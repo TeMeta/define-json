@@ -393,19 +393,19 @@ def is_clean_whereclause(
     Returns:
         True if WhereClause is clean (derivable), False otherwise
     """
-    if not where_clause.conditions:
+    if not where_clause.predicates:
         return False
     
     # Must have exactly one condition (no OR logic between conditions)
-    if len(where_clause.conditions) > 1:
+    if len(where_clause.predicates) > 1:
         logger.debug(f"WhereClause {where_clause.OID} has multiple conditions (OR logic), not derivable")
         return False
     
     # Resolve condition if it's a string OID
-    cond_ref = where_clause.conditions[0]
+    cond_ref = where_clause.predicates[0]
     if isinstance(cond_ref, str):
-        if mdv.conditions:
-            condition = next((c for c in mdv.conditions if c.OID == cond_ref), None)
+        if mdv.predicates:
+            condition = next((c for c in mdv.predicates if c.OID == cond_ref), None)
             if not condition:
                 return False
         else:
@@ -414,7 +414,7 @@ def is_clean_whereclause(
         condition = cond_ref
     
     # Condition must not have nested conditions (no complex logic)
-    if condition.conditions and len(condition.conditions) > 0:
+    if condition.predicates and len(condition.predicates) > 0:
         logger.debug(f"WhereClause {where_clause.OID} has nested conditions, not derivable")
         return False
     
@@ -474,10 +474,10 @@ def derive_groupkey_from_whereclause(
         return None
     
     # Resolve condition if it's a string OID
-    cond_ref = where_clause.conditions[0]
+    cond_ref = where_clause.predicates[0]
     if isinstance(cond_ref, str):
-        if mdv.conditions:
-            condition = next((c for c in mdv.conditions if c.OID == cond_ref), None)
+        if mdv.predicates:
+            condition = next((c for c in mdv.predicates if c.OID == cond_ref), None)
             if not condition:
                 return None
         else:

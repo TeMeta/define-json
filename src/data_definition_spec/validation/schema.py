@@ -56,12 +56,12 @@ def validate_data_definition_spec(data: Dict[str, Any]) -> Dict[str, Any]:
             validation['warnings'].append(f"Item OID should start with 'IT.': {item.get('OID')}")
     
     # Check Condition and WhereClause OID patterns
-    conditions = data.get('conditions', [])
+    conditions = data.get('predicates', [])
     for cond in conditions:
         if not cond.get('OID', '').startswith('COND.'):
             validation['warnings'].append(f"Condition OID should start with 'COND.': {cond.get('OID')}")
     
-    where_clauses = data.get('whereClauses', [])
+    where_clauses = data.get('applicabilityConditions', [])
     for wc in where_clauses:
         if not wc.get('OID', '').startswith('WC.'):
             validation['warnings'].append(f"WhereClause OID should start with 'WC.': {wc.get('OID')}")
@@ -85,7 +85,7 @@ def validate_data_definition_spec(data: Dict[str, Any]) -> Dict[str, Any]:
     # Check Condition references in WhereClauses
     all_condition_oids = {cond.get('OID') for cond in conditions}
     for wc in where_clauses:
-        for condition_oid in wc.get('conditions', []):
+        for condition_oid in wc.get('predicates', []):
             if condition_oid not in all_condition_oids:
                 validation['errors'].append(f"WhereClause references undefined condition: {condition_oid}")
                 validation['valid'] = False

@@ -101,10 +101,10 @@ def _canonical_condition_payload(cond: LogicalPredicate, mdv: Optional[Specifica
         payload["rangeChecks"] = canon_checks
     
     # Process nested conditions (OID references)
-    nested_conditions = cond.conditions or []
+    nested_conditions = cond.predicates or []
     if nested_conditions:
         # Sort condition OIDs for determinism
-        payload["conditions"] = sorted(nested_conditions)
+        payload["predicates"] = sorted(nested_conditions)
     
     # Include operator if present
     operator = getattr(cond, "operator", None)
@@ -124,14 +124,14 @@ def _canonical_where_payload(where: ApplicabilityCondition, mdv: Optional[Specif
     
     Handles both string OID references and Condition objects.
     """
-    conditions = where.conditions or []
+    conditions = where.predicates or []
     all_range_checks: List[Dict[str, Any]] = []
     
     for cond_ref in conditions:
         # Resolve condition if it's a string OID
         if isinstance(cond_ref, str):
-            if mdv and mdv.conditions:
-                cond = next((c for c in mdv.conditions if c.OID == cond_ref), None)
+            if mdv and mdv.predicates:
+                cond = next((c for c in mdv.predicates if c.OID == cond_ref), None)
                 if not cond:
                     # If condition not found, skip (or use empty)
                     continue
@@ -357,7 +357,7 @@ def build_condition_registry(mdv: Specification) -> Dict[str, LogicalPredicate]:
     old_to_canonical: Dict[str, str] = {}
     
     # Canonicalise all Conditions and build mapping from old OID -> canonical OID
-    for cond in (mdv.conditions or []):
+    for cond in (mdv.predicates or []):
         old_oid = cond.OID
         canonical_oid = _canonical_condition_oid(cond, mdv)
         
@@ -371,21 +371,21 @@ def build_condition_registry(mdv: Specification) -> Dict[str, LogicalPredicate]:
             old_to_canonical[old_oid] = canonical_oid
     
     # Remap all Condition references in WhereClauses
-    for wc in (mdv.whereClauses or []):
-        if wc.conditions:
-            wc.conditions = [
-                old_to_canonical.get(oid, oid) for oid in wc.conditions
+    for wc in (mdv.applicabilityConditions or []):
+        if wc.predicates:
+            wc.predicates = [
+                old_to_canonical.get(oid, oid) for oid in wc.predicates
             ]
     
     # Remap nested Condition references in other Conditions
-    for cond in (mdv.conditions or []):
-        if cond.conditions:
-            cond.conditions = [
-                old_to_canonical.get(oid, oid) for oid in cond.conditions
+    for cond in (mdv.predicates or []):
+        if cond.predicates:
+            cond.predicates = [
+                old_to_canonical.get(oid, oid) for oid in cond.predicates
             ]
     
     # Remove duplicate Conditions from the list
-    mdv.conditions = list(registry.values())
+    mdv.predicates = list(registry.values())
     
     return registry
 
@@ -403,7 +403,7 @@ def build_where_registry(mdv: Specification) -> Dict[str, ApplicabilityCondition
     whereclause_payloads: Dict[str, Dict[str, Any]] = {}
     old_to_payload: Dict[str, Dict[str, Any]] = {}
     
-    for wc in (mdv.whereClauses or []):
+    for wc in (mdv.applicabilityConditions or []):
         payload = _canonical_where_payload(wc, mdv)
         payload_key = json.dumps(payload, sort_keys=True)
         old_to_payload[wc.OID] = payload
@@ -415,7 +415,7 @@ def build_where_registry(mdv: Specification) -> Dict[str, ApplicabilityCondition
     old_to_canonical: Dict[str, str] = {}
     
     # Create consolidated WhereClauses and Conditions
-    for wc in (mdv.whereClauses or []):
+    for wc in (mdv.applicabilityConditions or []):
         old_oid = wc.OID
         payload = old_to_payload[old_oid]
         payload_key = json.dumps(payload, sort_keys=True)
@@ -432,7 +432,7 @@ def build_where_registry(mdv: Specification) -> Dict[str, ApplicabilityCondition
                 condition_oid = _canonical_condition_oid_from_range_checks(range_checks, mdv)
                 
                 # Check if Condition already exists, if not create it
-                existing_cond = next((c for c in (mdv.conditions or []) if c.OID == condition_oid), None)
+                existing_cond = next((c for c in (mdv.predicates or []) if c.OID == condition_oid), None)
                 if not existing_cond:
                     # Create new Condition with all RangeChecks
                     new_range_checks = []
@@ -449,9 +449,9 @@ def build_where_registry(mdv: Specification) -> Dict[str, ApplicabilityCondition
                         OID=condition_oid,
                         rangeChecks=new_range_checks,
                     )
-                    if mdv.conditions is None:
-                        mdv.conditions = []
-                    mdv.conditions.append(new_cond)
+                    if mdv.predicates is None:
+                        mdv.predicates = []
+                    mdv.predicates.append(new_cond)
                 
                 # Create consolidated WhereClause with single Condition reference
                 consolidated_wc = ApplicabilityCondition.model_construct(
@@ -485,7 +485,7 @@ def build_where_registry(mdv: Specification) -> Dict[str, ApplicabilityCondition
         _remap_oids(it)
     
     # Replace WhereClauses with consolidated ones
-    mdv.whereClauses = list(registry.values())
+    mdv.applicabilityConditions = list(registry.values())
     
     return registry
 
@@ -542,7 +542,7 @@ def transform_value_lists_to_specialisation(mdv: Specification) -> None:
         mdv: MetaDataVersion to transform in-place
         
     Modifies:
-        mdv.whereClauses - Duplicate WhereClauses consolidated, references updated
+        mdv.applicabilityConditions - Duplicate WhereClauses consolidated, references updated
         mdv.itemGroups - ValueLists are removed, replaced with canonical DatasetSpecialization slices
         Domain ItemGroup slices - ValueList references removed, slice OID references added
     
@@ -813,8 +813,8 @@ def _sort_itemgroup_items(ig: ItemGroup) -> None:
 
 
 def _sort_where_clauses(mdv: Specification) -> None:
-    if getattr(mdv, "whereClauses", None) is not None:
-        mdv.whereClauses.sort(key=lambda x: getattr(x, "OID", ""))
+    if getattr(mdv, "applicabilityConditions", None) is not None:
+        mdv.applicabilityConditions.sort(key=lambda x: getattr(x, "OID", ""))
 
 
 def serialize_canonical(mdv: Specification) -> bytes:
@@ -844,13 +844,13 @@ def export_define_xml_21(mdv: Specification, domains: Optional[List[str]] = None
     
     # Build condition lookup
     condition_lookup = {}
-    if mdv.conditions:
-        for cond in mdv.conditions:
+    if mdv.predicates:
+        for cond in mdv.predicates:
             condition_lookup[cond.OID] = cond
     
-    for wc in (mdv.whereClauses or []):
+    for wc in (mdv.applicabilityConditions or []):
         wc_el = ET.SubElement(wcd, "WhereClauseDef", {"OID": wc.OID or ""})
-        for cond_ref in (wc.conditions or []):
+        for cond_ref in (wc.predicates or []):
             # Resolve condition if it's a string OID
             if isinstance(cond_ref, str):
                 cond = condition_lookup.get(cond_ref)

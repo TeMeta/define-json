@@ -277,8 +277,8 @@ class DefineJSONToXMLConverter:
         skip_keys = {
             '_namespaces', '_xmlMetadata', '_translatedText_attributes',
             'description', 'label', 'title', 'items', 'itemRefs', 'aliases', 
-            'documentRef', 'coding', 'rangeChecks', 'checkValues', 'conditions',
-            'whereClauses', 'itemGroups', 'codeLists', 'methods', 'standards',
+            'documentRef', 'coding', 'rangeChecks', 'checkValues', 'predicates',
+            'applicabilityConditions', 'itemGroups', 'codeLists', 'methods', 'standards',
             'annotatedCRF', 'codeListItems', 'resultDisplays', 'analysisResults',
             'origin',  # origin is a nested object, handle separately
             'codeList',  # codeList is handled as CodeListRef child element
@@ -288,7 +288,7 @@ class DefineJSONToXMLConverter:
             'wasDerivedFrom',  # wasDerivedFrom is provenance, handled as ExternalCodeList, not XML attribute
             # Skip def: namespaced fields that are handled explicitly with correct casing
             'defClass', 'defDomainKeys', 'comment',
-            'standardOID', 'commentOID', 'isNonStandard', 'hasNoData',  # Handled explicitly to ensure correct namespace (def:StandardOID, def:CommentOID, def:IsNonStandard, def:HasNoData)
+            'standard', 'standardOID', 'commentOID', 'isNonStandard', 'hasNoData',  # Handled explicitly to ensure correct namespace (def:StandardOID, def:CommentOID, def:IsNonStandard, def:HasNoData). 'standard' is the ODMStandardReference field, emitted as def:StandardOID by _create_code_lists/_create_item_groups.
             'leaf', 'externalCodeList', 'sourceResourceOID', 'leafID',
             'displayFormat',  # displayFormat (def:DisplayFormat) is handled explicitly for ItemDefs
             'classIsAttribute',  # classIsAttribute is metadata to track attribute vs element form
@@ -301,12 +301,19 @@ class DefineJSONToXMLConverter:
         if element_type == 'ODM':
             skip_keys = skip_keys | {
                 'OID', 'studyOID', 'metadataVersionOID',
-                'name', 'studyName', 'studyDescription', 'protocolName', 'defineVersion'
+                'name', 'studyName', 'studyDescription', 'protocolName', 'defineVersion',
+                'context',  # handled explicitly as def:Context, not a bare ODM attribute
             }
         
         for field_name, value in data.items():
             # Skip metadata and nested structures
             if field_name.startswith('_') or field_name in skip_keys:
+                continue
+
+            # Skip supplemental roundtrip markers (e.g. hasNoDataXmlValue,
+            # isNonStandardXmlValue) merged in from _xmlMetadata — they drive explicit
+            # def: attribute emission and must never be written as bare attributes.
+            if field_name.endswith('XmlValue'):
                 continue
             
             # Skip None values
@@ -406,6 +413,13 @@ class DefineJSONToXMLConverter:
         self.namespace_map = xml_metadata.get('namespaces', {})
         self._current_xml_metadata = xml_metadata  # Store for access in methods
         self._current_json_data = json_data  # Store JSON data for Dictionary lookup
+        # Detached ODM serialization metadata round-trips via the sidecar; surface it at
+        # top level so the existing attribute mapping / Context / DefineVersion logic can
+        # restore the ODM root + MetaDataVersion attributes.
+        odm_serialization = xml_metadata.get('odmSerializationMetadata', {})
+        if odm_serialization:
+            json_data = {**odm_serialization, **json_data}
+            self._current_json_data = json_data
         self.supplemental_data = {
             'itemGroup': xml_metadata.get('itemGroupSupplemental', {}),
             'codeList': xml_metadata.get('codeListSupplemental', {}),
@@ -538,8 +552,8 @@ class DefineJSONToXMLConverter:
         existing_item_oids = self._collect_item_oids(json_data)
         self._create_conditions_and_where_clauses(
             mdv,
-            json_data.get('conditions', []),
-            json_data.get('whereClauses', []),
+            json_data.get('predicates', []),
+            json_data.get('applicabilityConditions', []),
             existing_item_oids
         )
         
@@ -855,7 +869,7 @@ class DefineJSONToXMLConverter:
                 self._create_translated_text(desc, f'Condition for {variable} {parameter}')
                 
                 # Add RangeChecks from conditions
-                for condition_oid in wc.get('conditions', []):
+                for condition_oid in wc.get('predicates', []):
                     condition = conditions_by_oid.get(condition_oid)
                     if condition:
                         self._add_range_checks(wc_elem, condition)
@@ -887,7 +901,7 @@ class DefineJSONToXMLConverter:
             self._create_translated_text(desc, wc['description'])
         
         # Add RangeChecks from conditions
-        for condition_oid in wc.get('conditions', []):
+        for condition_oid in wc.get('predicates', []):
             condition = conditions_by_oid.get(condition_oid)
             if condition:
                 self._add_range_checks(wc_elem, condition)
