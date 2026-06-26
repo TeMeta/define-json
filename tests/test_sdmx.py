@@ -23,12 +23,12 @@ from data_definition_spec.utils.sdmx import (
     analyze_attribute_variance,
 )
 from data_definition_spec.schema.define import (
-    MetaDataVersion,
+    Specification,
     ItemGroup,
     Dimension,
     Measure,
     DataAttribute,
-    WhereClause,
+    ApplicabilityCondition,
     GroupKey,
 )
 

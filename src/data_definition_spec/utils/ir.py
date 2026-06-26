@@ -13,11 +13,11 @@ from xml.etree import ElementTree as ET
 
 try:
     from ..schema.define import (
-        MetaDataVersion,
+        Specification,
         ItemGroup,
         Item,
-        WhereClause,
-        Condition,
+        ApplicabilityCondition,
+        LogicalPredicate,
         RangeCheck,
         CodeList,
         CodeListItem,
@@ -27,7 +27,7 @@ except Exception as exc:  # pragma: no cover
     raise ImportError("data_definition_spec.schema.define not available") from exc
 
 
-def load_mdv(json_path: Path) -> MetaDataVersion:
+def load_mdv(json_path: Path) -> Specification:
     """
     Load MetaDataVersion from JSON file.
     
@@ -44,13 +44,13 @@ def load_mdv(json_path: Path) -> MetaDataVersion:
     if isinstance(data, dict) and "metaDataVersion" in data:
         mdv_list = data["metaDataVersion"]
         if isinstance(mdv_list, list) and len(mdv_list) > 0:
-            return MetaDataVersion.model_validate(mdv_list[0])
+            return Specification.model_validate(mdv_list[0])
         elif isinstance(mdv_list, dict):
-            return MetaDataVersion.model_validate(mdv_list)
+            return Specification.model_validate(mdv_list)
     
     # Handle direct MetaDataVersion object
     if isinstance(data, dict):
-        return MetaDataVersion.model_validate(data)
+        return Specification.model_validate(data)
     
     raise ValueError(f"Unexpected JSON structure in {json_path}")
 
@@ -73,7 +73,7 @@ def _ref_to_string(ref: Any) -> str:
     return f"OBJ:{ref.__class__.__name__}:{id(ref)}"
 
 
-def _canonical_condition_payload(cond: Condition, mdv: Optional[MetaDataVersion] = None) -> Dict[str, Any]:
+def _canonical_condition_payload(cond: LogicalPredicate, mdv: Optional[Specification] = None) -> Dict[str, Any]:
     """
     Build canonical payload for Condition.
     
@@ -114,7 +114,7 @@ def _canonical_condition_payload(cond: Condition, mdv: Optional[MetaDataVersion]
     return payload
 
 
-def _canonical_where_payload(where: WhereClause, mdv: Optional[MetaDataVersion] = None) -> Dict[str, Any]:
+def _canonical_where_payload(where: ApplicabilityCondition, mdv: Optional[Specification] = None) -> Dict[str, Any]:
     """
     Build canonical payload for WhereClause based on actual RangeCheck content.
     
@@ -170,7 +170,7 @@ def _canonical_where_payload(where: WhereClause, mdv: Optional[MetaDataVersion] 
     return {"rangeChecks": all_range_checks}
 
 
-def _extract_meaningful_oid(where: WhereClause, mdv: Optional[MetaDataVersion] = None) -> Optional[str]:
+def _extract_meaningful_oid(where: ApplicabilityCondition, mdv: Optional[Specification] = None) -> Optional[str]:
     """
     Extract meaningful OID from WhereClause structure if possible.
     
@@ -231,7 +231,7 @@ def _extract_meaningful_oid(where: WhereClause, mdv: Optional[MetaDataVersion] =
         return f"WC.{domain}.{test_code}"
 
 
-def canonicalise_whereclause(where: WhereClause, mdv: Optional[MetaDataVersion] = None) -> str:
+def canonicalise_whereclause(where: ApplicabilityCondition, mdv: Optional[Specification] = None) -> str:
     """
     Create canonical ID for WhereClause.
     
@@ -256,7 +256,7 @@ def canonicalise_whereclause(where: WhereClause, mdv: Optional[MetaDataVersion] 
     return f"WC.{hashlib.sha256(data).hexdigest()[:16]}"
 
 
-def _canonical_condition_oid(cond: Condition, mdv: Optional[MetaDataVersion] = None) -> str:
+def _canonical_condition_oid(cond: LogicalPredicate, mdv: Optional[Specification] = None) -> str:
     """
     Create canonical OID for Condition based on its structure.
     
@@ -324,7 +324,7 @@ def _canonical_condition_oid_from_payload(payload: Dict[str, Any]) -> str:
         return f"COND.{domain}.{value_str}"
 
 
-def _canonical_condition_oid_from_range_checks(range_checks: List[Dict[str, Any]], mdv: Optional[MetaDataVersion] = None) -> str:
+def _canonical_condition_oid_from_range_checks(range_checks: List[Dict[str, Any]], mdv: Optional[Specification] = None) -> str:
     """
     Create canonical OID for Condition from a list of RangeCheck dictionaries.
     
@@ -347,13 +347,13 @@ def _canonical_condition_oid_from_range_checks(range_checks: List[Dict[str, Any]
     return _canonical_condition_oid_from_payload(payload)
 
 
-def build_condition_registry(mdv: MetaDataVersion) -> Dict[str, Condition]:
+def build_condition_registry(mdv: Specification) -> Dict[str, LogicalPredicate]:
     """
     Build canonical Condition registry and remap all references to canonical OIDs.
     
     This should be called BEFORE build_where_registry since WhereClauses reference Conditions.
     """
-    registry: Dict[str, Condition] = {}
+    registry: Dict[str, LogicalPredicate] = {}
     old_to_canonical: Dict[str, str] = {}
     
     # Canonicalise all Conditions and build mapping from old OID -> canonical OID
@@ -390,7 +390,7 @@ def build_condition_registry(mdv: MetaDataVersion) -> Dict[str, Condition]:
     return registry
 
 
-def build_where_registry(mdv: MetaDataVersion) -> Dict[str, WhereClause]:
+def build_where_registry(mdv: Specification) -> Dict[str, ApplicabilityCondition]:
     """
     Build canonical WhereClause registry and remap all references to canonical OIDs.
     
@@ -410,7 +410,7 @@ def build_where_registry(mdv: MetaDataVersion) -> Dict[str, WhereClause]:
         whereclause_payloads[payload_key] = payload
     
     # Build registry: one WhereClause per unique payload
-    registry: Dict[str, WhereClause] = {}
+    registry: Dict[str, ApplicabilityCondition] = {}
     payload_to_canonical_oid: Dict[str, str] = {}
     old_to_canonical: Dict[str, str] = {}
     
@@ -445,7 +445,7 @@ def build_where_registry(mdv: MetaDataVersion) -> Dict[str, WhereClause]:
                         )
                         new_range_checks.append(rc)
                     
-                    new_cond = Condition.model_construct(
+                    new_cond = LogicalPredicate.model_construct(
                         OID=condition_oid,
                         rangeChecks=new_range_checks,
                     )
@@ -454,7 +454,7 @@ def build_where_registry(mdv: MetaDataVersion) -> Dict[str, WhereClause]:
                     mdv.conditions.append(new_cond)
                 
                 # Create consolidated WhereClause with single Condition reference
-                consolidated_wc = WhereClause.model_construct(
+                consolidated_wc = ApplicabilityCondition.model_construct(
                     OID=canonical_wid,
                     conditions=[condition_oid],
                 )
@@ -508,7 +508,7 @@ def _is_value_list(ig: ItemGroup) -> bool:
     return str(ig_type) == "ValueList"
 
 
-def transform_value_lists_to_specialisation(mdv: MetaDataVersion) -> None:
+def transform_value_lists_to_specialisation(mdv: Specification) -> None:
     """
     Transform ValueList-based structure to Dataset Specialisation shape.
     
@@ -683,7 +683,7 @@ def transform_value_lists_to_specialisation(mdv: MetaDataVersion) -> None:
             domain_ig.slices = None
 
 
-def build_canonical_slices(mdv: MetaDataVersion) -> None:
+def build_canonical_slices(mdv: Specification) -> None:
     """Build canonical slices: one ItemGroup per (domain, whereId)."""
     key_to_slice: Dict[Tuple[str, str], ItemGroup] = {}
     slice_oids_to_remove: Set[str] = set()
@@ -735,7 +735,7 @@ def build_canonical_slices(mdv: MetaDataVersion) -> None:
                 key_to_slice[key].items.append(it)
 
 
-def enforce_slice_invariants(mdv: MetaDataVersion) -> None:
+def enforce_slice_invariants(mdv: Specification) -> None:
     """Validate slice invariants: non-empty, single WhereClause, no duplicates."""
     seen: Set[Tuple[str, str]] = set()
     for ig in (mdv.itemGroups or []):
@@ -759,7 +759,7 @@ def enforce_slice_invariants(mdv: MetaDataVersion) -> None:
             seen.add(key)
 
 
-def register_variables(mdv: MetaDataVersion) -> Dict[str, Set[str]]:
+def register_variables(mdv: Specification) -> Dict[str, Set[str]]:
     """Register all variables with their contexts (whereIds)."""
     mapping: Dict[str, Set[str]] = {}
     for ig in (mdv.itemGroups or []):
@@ -779,7 +779,7 @@ def register_variables(mdv: MetaDataVersion) -> Dict[str, Set[str]]:
     return mapping
 
 
-def project_valuelist_for_domain(mdv: MetaDataVersion, domain: str) -> Dict[str, List[Item]]:
+def project_valuelist_for_domain(mdv: Specification, domain: str) -> Dict[str, List[Item]]:
     """Project variable-first view: each variable with its contexts ordered by whereId."""
     parents: Dict[str, Item] = {}
     for ig in (mdv.itemGroups or []):
@@ -812,12 +812,12 @@ def _sort_itemgroup_items(ig: ItemGroup) -> None:
         ig.items.sort(key=lambda x: getattr(x, "name", ""))
 
 
-def _sort_where_clauses(mdv: MetaDataVersion) -> None:
+def _sort_where_clauses(mdv: Specification) -> None:
     if getattr(mdv, "whereClauses", None) is not None:
         mdv.whereClauses.sort(key=lambda x: getattr(x, "OID", ""))
 
 
-def serialize_canonical(mdv: MetaDataVersion) -> bytes:
+def serialize_canonical(mdv: Specification) -> bytes:
     for ig in (mdv.itemGroups or []):
         _sort_itemgroup_items(ig)
     if getattr(mdv, "itemGroups", None) is not None:
@@ -838,7 +838,7 @@ def serialize_canonical(mdv: MetaDataVersion) -> bytes:
     return json.dumps(mdv, default=_default, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
 
 
-def export_define_xml_21(mdv: MetaDataVersion, domains: Optional[List[str]] = None) -> str:
+def export_define_xml_21(mdv: Specification, domains: Optional[List[str]] = None) -> str:
     root = ET.Element("Define")
     wcd = ET.SubElement(root, "WhereClauseDefs")
     
@@ -905,7 +905,7 @@ def export_define_xml_21(mdv: MetaDataVersion, domains: Optional[List[str]] = No
     return ET.tostring(root, encoding="unicode")
 
 
-def export_define_xml_10(mdv: MetaDataVersion, domains: Optional[List[str]] = None) -> str:
+def export_define_xml_10(mdv: Specification, domains: Optional[List[str]] = None) -> str:
     root = ET.Element("Define10")
     cld = ET.SubElement(root, "CodeListDefs")
     for cl in (mdv.codeLists or []):

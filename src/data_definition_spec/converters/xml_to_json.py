@@ -57,15 +57,15 @@ import sys
 sys.path.insert(0, '/mnt/project')
 
 from ..schema.define import (
-    MetaDataVersion,
+    Specification,
     Item,
     ItemGroup,
     CodeList,
     CodeListItem,
     Dictionary,
     Method,
-    WhereClause,
-    Condition,
+    ApplicabilityCondition,
+    LogicalPredicate,
     Origin,
     RangeCheck,
     Coding,
@@ -589,7 +589,7 @@ class DefineXMLToJSONConverter:
         # Create MetaDataVersion Pydantic model to validate
         logger.info("Validating with Pydantic...")
         try:
-            mdv_model = MetaDataVersion(**mdv_data)
+            mdv_model = Specification(**mdv_data)
             # Convert to dict for JSON output
             result = mdv_model.model_dump(mode='json', exclude_none=True)
             logger.info("Pydantic validation successful")
@@ -2090,7 +2090,7 @@ class DefineXMLToJSONConverter:
         
         return [], supplemental
     
-    def _process_conditions_and_where_clauses(self, mdv: ET.Element) -> Tuple[List[Condition], List[WhereClause], Dict]:
+    def _process_conditions_and_where_clauses(self, mdv: ET.Element) -> Tuple[List[LogicalPredicate], List[ApplicabilityCondition], Dict]:
         """
         Process WhereClauseDef elements into proper WhereClause and Condition objects.
         
@@ -2163,7 +2163,7 @@ class DefineXMLToJSONConverter:
                     cond_data['description'] = description
                 
                 try:
-                    condition_obj = Condition(**cond_data)
+                    condition_obj = LogicalPredicate(**cond_data)
                     conditions.append(condition_obj)
                 except Exception as e:
                     logger.warning(f"Failed to create Condition {cond_oid}: {e}")
@@ -2179,7 +2179,7 @@ class DefineXMLToJSONConverter:
                     wc_data['description'] = description
                 
                 try:
-                    where_clause_obj = WhereClause(**wc_data)
+                    where_clause_obj = ApplicabilityCondition(**wc_data)
                     where_clauses.append(where_clause_obj)
                     
                     # Store CommentOID in supplemental if present

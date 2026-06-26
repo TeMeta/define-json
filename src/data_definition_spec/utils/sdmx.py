@@ -15,15 +15,15 @@ import yaml
 import logging
 
 from ..schema.define import (
-    MetaDataVersion,
+    Specification,
     ItemGroup,
     Item,
     Dimension,
     Measure,
     DataAttribute,
     ItemGroupType,
-    WhereClause,
-    Condition,
+    ApplicabilityCondition,
+    LogicalPredicate,
     RangeCheck,
     GroupKey,
     Comparator,
@@ -135,7 +135,7 @@ def classify_item_role(variable_name: str, config: Dict[str, Any]) -> str:
 
 
 def build_dsd_for_domain(
-    mdv: MetaDataVersion,
+    mdv: Specification,
     domain: str,
     config: Dict[str, Any]
 ) -> ItemGroup:
@@ -330,7 +330,7 @@ def build_dsd_for_domain(
 def validate_dsd_completeness(
     dsd: ItemGroup,
     all_variable_oids: Set[str],
-    mdv: MetaDataVersion
+    mdv: Specification
 ) -> Tuple[bool, List[str]]:
     """
     Validate that DSD classifies all variables in the domain.
@@ -372,9 +372,9 @@ def validate_dsd_completeness(
 # Phase 2: WhereClause → GroupKey Derivation
 
 def is_clean_whereclause(
-    where_clause: WhereClause,
+    where_clause: ApplicabilityCondition,
     dsd: ItemGroup,
-    mdv: MetaDataVersion
+    mdv: Specification
 ) -> bool:
     """
     Check if a WhereClause is "clean" (derivable to GroupKey).
@@ -448,9 +448,9 @@ def is_clean_whereclause(
 
 
 def derive_groupkey_from_whereclause(
-    where_clause: WhereClause,
+    where_clause: ApplicabilityCondition,
     dsd: ItemGroup,
-    mdv: MetaDataVersion
+    mdv: Specification
 ) -> Optional[GroupKey]:
     """
     Convert a clean WhereClause to a GroupKey.
@@ -539,7 +539,7 @@ def analyze_attribute_variance(
     slices: List[ItemGroup],
     slice_data: Dict[str, Dict[str, str]],
     dsd: ItemGroup,
-    mdv: MetaDataVersion
+    mdv: Specification
 ) -> Dict[str, Any]:
     """
     Analyze how an attribute varies across slices.
@@ -666,7 +666,7 @@ def infer_attribute_relationships(
     dsd: ItemGroup,
     slices: List[ItemGroup],
     slice_data: Dict[str, Dict[str, str]],
-    mdv: MetaDataVersion
+    mdv: Specification
 ) -> Dict[str, Dict[str, Any]]:
     """
     Infer attribute attachment levels by analyzing variance across slices.
