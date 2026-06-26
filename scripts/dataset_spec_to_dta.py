@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate a draft Data Transfer Agreement (DTA) from a dataset specification.
 
-A DTA is modelled as a standalone ``ProvisionAgreement`` (define.yaml): an
+A DTA is modelled as a standalone ``ProvisionAgreement`` (dds.yaml): an
 agreement between a ``DataProvider`` and a consumer covering a ``Dataflow``
 whose ``structure`` is a ``DataStructureDefinition`` carrying the variable-level
 ``Item`` specification.
