@@ -1,6 +1,6 @@
 site_name: Data Definition Specification Documentation
 site_description: Data model for supply and demand data contracts to complement CDISC USDM, ODM, and Dataset-JSON
-site_author: CDISC
+site_author: TeMeta
 site_url: https://TeMeta.github.io/data-definition-spec/
 
 # Repository
